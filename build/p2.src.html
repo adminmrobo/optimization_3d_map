@@ -40,7 +40,7 @@
   <h1>좌표축 위의 그릇 — 배치·학습률·에포크를 지도 위에서 고르기</h1>
   <p class="question">같은 그릇에서 공을 어떻게 굴려야 가장 싸고 빠르게 바닥에 닿을까?</p>
   <p class="lead">1편에서 오차를 땅의 높이로 놓고 기울기·굽음·휨을 봤습니다. 이번에는 그 땅에서 공을 직접 굴립니다. 신경망이 스스로 찾는 가중치와 달리, 학습 전에 사람이 정해 두는 숫자 — <b>하이퍼파라미터</b> — 를 하나씩 바꿔 보며 지도 위의 걸음이 어떻게 달라지는지 잽니다. 마지막에는 가중치가 4,416개라 3D로 다 그릴 수 없는 신경망의 지형을 <b>단면</b>으로 잘라 봅니다.</p>
-  <p class="byline">글 · 안상선 ((주)M-Robo 대표) · <a href="https://adminmrobo.github.io/who_am_i/who_am_i.html">저자 소개</a> · 2026-11-14 · v1.1 · 앞 편: <a href="1_math_map.html">1편 수학 편</a></p>
+  <p class="byline">글 · 안상선 ((주)M-Robo 대표) · <a href="https://adminmrobo.github.io/who_am_i/who_am_i.html">저자 소개</a> · 2026-11-14 · v1.2 · 앞 편: <a href="1_math_map.html">1편 수학 편</a></p>
   <div class="three"><b>세 줄로 먼저</b><ol>
     <li>배치가 작으면 걸음은 싸지만 흔들리고, 크면 정확하지만 비싸다. 같은 계산량이면 작은 배치가 훨씬 멀리 간다.</li>
     <li>학습률은 지형의 굽음이 정한 한계(2/λ<sub>max</sub>)를 넘으면 공이 튀어 나간다.</li>
@@ -341,8 +341,8 @@ var S1=new U.Surf3D($('#cvS1a'),{f:bowl,xr:WR,yr:BR,n:26,alpha:0.62,axes:['w','b
   onTick:function(dt){if(anim1>0&&dt>0){anim1+=dt*30;K1=Math.min(100,Math.floor(anim1));$('#r-k1').value=K1;upd1(true);if(K1>=100)anim1=0;}}});
 S1.ov.push(function(g,S){S.dot3(g,O.w,O.b,O.L,cssv('--ink'),4);[1000,100,10].forEach(function(s){var P=RUN[s].path.slice(0,kFor(s)+1);S.line3(g,P,COL[s],s===10?1.4:2.4);var q=P[P.length-1];S.dot3(g,q[0],q[1],q[2],COL[s],5.5);});});
 function draw1b(){var cardsX=xmode==='card',series=SZ.map(function(s){var P=RUN[s].path,pts=[];for(var k=0;k<=kFor(s);k++)pts.push([cardsX?Math.max(1,k*s):Math.max(0,k),P[k][2]]);return {pts:pts,color:COL[s],width:s===10?1.5:2.4,name:NM[s]};});
-  U.plot($('#cvS1b'),cardsX?{xr:[1,100000],logx:true,yr:[0.9,40],logy:true,series:series,xt:[1,10,100,1000,10000,100000],xf:function(v){return v>=1000?(v/1000)+'천':String(v);},yt:[1,3,10,30],xl:'본 카드 수(로그)',yl:'전체 오차(로그)',hlines:[{y:O.L,color:'rgba(27,29,43,.45)',label:'바닥 '+fmt(O.L,3)}],vlines:[{x:1000,color:cssv('--amber'),label:'카드 1,000장'}],stamp:'설명용 모형',aria:'본 카드 수에 따른 오차'}
-   :{xr:[0,100],yr:[0.9,40],logy:true,series:series,xt:[0,25,50,75,100],yt:[1,3,10,30],xl:'걸음',yl:'전체 오차(로그)',hlines:[{y:O.L,color:'rgba(27,29,43,.45)',label:'바닥 '+fmt(O.L,3)}],stamp:'설명용 모형',aria:'걸음에 따른 오차'});}
+  U.plot($('#cvS1b'),cardsX?{xr:[1,100000],logx:true,yr:[0.9,40],logy:true,series:series,xt:[1,10,100,1000,10000,100000],xf:function(v){return v>=1000?(v/1000)+'천':String(v);},yt:[1,3,10,30],xl:'본 카드 수(로그)',yl:'전체 오차(로그)',hlines:[{y:O.L,color:'rgba(22,33,43,.45)',label:'바닥 '+fmt(O.L,3)}],vlines:[{x:1000,color:cssv('--amber'),label:'카드 1,000장'}],stamp:'설명용 모형',aria:'본 카드 수에 따른 오차'}
+   :{xr:[0,100],yr:[0.9,40],logy:true,series:series,xt:[0,25,50,75,100],yt:[1,3,10,30],xl:'걸음',yl:'전체 오차(로그)',hlines:[{y:O.L,color:'rgba(22,33,43,.45)',label:'바닥 '+fmt(O.L,3)}],stamp:'설명용 모형',aria:'걸음에 따른 오차'});}
 function cards(){var host=$('#cards1');if(!host.children.length){var h='';for(var i=0;i<1000;i++)h+='<i></i>';host.innerHTML=h;}
   /* 배치 10의 k번째 걸음이 보는 카드: runBatch와 같은 시드로 섞은 순서를 다시 만든다 */
   var k=kFor(10),r=LM.rng(7),idx=[];for(var i=0;i<1000;i++)idx.push(i);var on={},done={};
@@ -369,7 +369,7 @@ var S2=new U.Surf3D($('#cvS2a'),{f:bowl,xr:WR,yr:BR,n:26,alpha:0.62,axes:['w','b
 S2.ov.push(function(g,S){if(!R2)return;var P=R2.path.filter(function(p){return p[0]>=WR[0]-0.3&&p[0]<=WR[1]+0.3&&p[1]>=BR[0]-0.3&&p[1]<=BR[1]+0.3;});if(P.length>1)S.line3(g,P.map(function(p){return [U.clamp(p[0],WR[0],WR[1]),U.clamp(p[1],BR[0],BR[1]),Math.min(p[2],S.zr[1])];}),cssv('--amber'),2);
   S.dot3(g,O.w,O.b,O.L,cssv('--ink'),4);if(P.length){var q=P[P.length-1];S.dot3(g,U.clamp(q[0],WR[0],WR[1]),U.clamp(q[1],BR[0],BR[1]),Math.min(q[2],S.zr[1]),cssv('--amber'),6);}});
 function draw2b(){if(!R2)return;var pts=R2.path.map(function(p,i){return [i,Math.min(p[2],1e6)];});
-  U.plot($('#cvS2b'),{xr:[0,100],yr:[0.9,1e4],logy:true,series:[{pts:pts,color:cssv('--amber'),width:2}],xt:[0,25,50,75,100],yt:[1,10,100,1000,10000],yf:function(v){return v>=1000?(v/1000)+'천':String(v);},xl:'걸음',yl:'전체 오차(로그)',hlines:[{y:O.L,color:'rgba(27,29,43,.45)',label:'바닥 '+fmt(O.L,3)},{y:LM.loss(D,-1,-1),color:'rgba(157,155,184,.6)',label:'출발'}],stamp:'설명용 모형',aria:'걸음마다 오차'});}
+  U.plot($('#cvS2b'),{xr:[0,100],yr:[0.9,1e4],logy:true,series:[{pts:pts,color:cssv('--amber'),width:2}],xt:[0,25,50,75,100],yt:[1,10,100,1000,10000],yf:function(v){return v>=1000?(v/1000)+'천':String(v);},xl:'걸음',yl:'전체 오차(로그)',hlines:[{y:O.L,color:'rgba(22,33,43,.45)',label:'바닥 '+fmt(O.L,3)},{y:LM.loss(D,-1,-1),color:'rgba(157,155,184,.6)',label:'출발'}],stamp:'설명용 모형',aria:'걸음마다 오차'});}
 U.reg($('#cvS2b'),function(dt){if(dt===0)draw2b();});
 function upd2(){R2=LM.runBatch(D,1000,{steps:100,lr:lr2});$('#v-lr').textContent=fmt(lr2,3);$('#m2-lr').textContent=fmt(lr2,3);$('#m2-lim').textContent=fmt(LIM,3);$('#m2-L').textContent=R2.blow?'발산':fmt(R2.last,3);$('#m2-bot').textContent=fmt(O.L,3);
   var a=1-lr2*HS.lmax,b=1-lr2*HS.lmin;$('#eq2').innerHTML='걸음마다 바닥과의 거리 배율 · 가파른 방향 1 − η·λ<sub>max</sub> = <i>'+fmt(a,3)+'</i> · 완만한 방향 1 − η·λ<sub>min</sub> = <b>'+fmt(b,3)+'</b>';
@@ -402,7 +402,7 @@ if(DEEP){var SL=DEEP.slice2d,n=SL.n;
 /* ── ④ 에포크 ── */
 if(DEEP){var OF=DEEP.overfit,best=DEEP.overfitBest,ep4=OF[OF.length-1][0];
   var draw4=function(){U.plot($('#cvS4'),{xr:[1,1500],logx:true,yr:[1e-4,0.6],logy:true,series:[{pts:OF.filter(function(r){return r[0]>0;}).map(function(r){return [r[0],r[1]];}),color:cssv('--amber'),width:2,name:'훈련',ndy:14},{pts:OF.filter(function(r){return r[0]>0;}).map(function(r){return [r[0],r[2]];}),color:cssv('--gfp'),width:2,name:'검증'}],
-    xt:[1,10,100,1000],yt:[1e-4,1e-3,1e-2,0.1],yf:function(v){return v>=0.01?String(v):v.toExponential(0);},xl:'에포크(로그)',yl:'오차(로그)',vlines:[{x:Math.max(1,best[0]),color:'rgba(27,29,43,.5)',label:'검증 최저 '+best[0]+' 에포크'},{x:Math.max(1,ep4),color:cssv('--info'),label:'여기서 멈춘다면',dy:18}],stamp:'설명용 모형',aria:'에포크에 따른 훈련 오차와 검증 오차'});};
+    xt:[1,10,100,1000],yt:[1e-4,1e-3,1e-2,0.1],yf:function(v){return v>=0.01?String(v):v.toExponential(0);},xl:'에포크(로그)',yl:'오차(로그)',vlines:[{x:Math.max(1,best[0]),color:'rgba(22,33,43,.5)',label:'검증 최저 '+best[0]+' 에포크'},{x:Math.max(1,ep4),color:cssv('--info'),label:'여기서 멈춘다면',dy:18}],stamp:'설명용 모형',aria:'에포크에 따른 훈련 오차와 검증 오차'});};
   U.reg($('#cvS4'),function(dt){if(dt===0)draw4();});
   var upd4=function(){var v=+$('#r-ep').value,e=Math.round(Math.pow(10,v*Math.log10(1500)));var row=OF[0];OF.forEach(function(r){if(r[0]<=e)row=r;});ep4=row[0];
     $('#v-ep').textContent=ep4+' 에포크';$('#m4-tr').textContent=fmt(row[1],4);$('#m4-va').textContent=fmt(row[2],4);

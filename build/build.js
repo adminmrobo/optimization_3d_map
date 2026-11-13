@@ -6,8 +6,7 @@ const fs=require('fs'),path=require('path'),vm=require('vm');
 const B=__dirname,R=path.join(B,'..');
 const rd=f=>fs.readFileSync(path.join(B,f),'utf8');
 const css=rd('common.css'),sprites=rd('sprites96.js'),labmath=rd('labmath.js'),common=rd('common.js');
-// 흰 배경: 지식 그래프 그림의 글자색만 어둡게 바꾼다 (원본 kgx.js는 그대로 둠)
-const kgx=rd('kgx.js').replace("c.fillStyle=p.id===sel?'#fff':'#d7d4e6'","c.fillStyle=p.id===sel?'#1b1d2b':'#5b5f75'").replace("c.strokeStyle='#eceaf3';c.lineWidth=2","c.strokeStyle='#1b1d2b';c.lineWidth=2").split('rgba(236,234,243,.55)').join('rgba(27,29,43,.35)').split('rgba(157,155,184,.22)').join('rgba(27,29,43,.15)');
+const kgx=rd('kgx.js');  // ai-lab-explainer v1.14 판 (흰 배경 기본색)
 const BB=JSON.parse(rd('backbone.json'));
 // KGX.toJsonLd를 쓰려고 브라우저 없이 모듈을 띄운다
 const ctx={document:{readyState:'loading',addEventListener(){},getElementById(){return null;}},window:{},navigator:{},console};

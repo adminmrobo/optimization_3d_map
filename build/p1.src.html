@@ -30,7 +30,7 @@
   <h1>좌표축 위의 그릇 — 기울기·굽음·휨으로 읽는 오차 지도</h1>
   <p class="question">모델은 눈을 가린 채 발밑의 기울기와 굽음만으로 어떻게 골짜기 바닥을 찾을까?</p>
   <p class="lead">신경망이 배우는 일은 <b>가중치</b>라는 숫자들을 고치는 일입니다. 가중치 두 개를 가로·세로 좌표축에 놓고, 그 자리에서 잰 <b>오차</b>를 높이로 세우면 땅 모양의 지도가 생깁니다. 이 페이지는 그 지도 위에서 수학 다섯 가지 — 자르기(단면), 기울기(그래디언트)와 깃대(법선), 굽음(헤시안), 고개(안장점), 휨(야코비안) — 를 하나씩 돌려 봅니다.</p>
-  <p class="byline">글 · 안상선 ((주)M-Robo 대표) · <a href="https://adminmrobo.github.io/who_am_i/who_am_i.html">저자 소개</a> · 2026-11-14 · v1.1</p>
+  <p class="byline">글 · 안상선 ((주)M-Robo 대표) · <a href="https://adminmrobo.github.io/who_am_i/who_am_i.html">저자 소개</a> · 2026-11-14 · v1.2</p>
   <div class="three"><b>세 줄로 먼저</b><ol>
     <li>가중치가 좌표축, 오차가 높이다. 학습은 이 지도에서 낮은 곳으로 걸어가는 일이다.</li>
     <li>한 걸음의 방향은 <b>기울기</b>(1차 미분)가 정하고, 얼마나 크게 디뎌도 되는지는 <b>굽음</b>(2차 미분)이 정한다.</li>
@@ -387,7 +387,7 @@ var spin=false;
 var Smap=new U.Surf3D($('#cvMap'),{f:bowl,xr:WR,yr:BR,n:30,views:false,axes:['w (가중치)','b (편향)','오차'],stamp:'설명용 모형 · 실제 데이터 아님',
   onTick:function(dt){if(spin&&dt>0){Smap.yaw+=dt*0.35;Smap.dirty=true;}}});
 Smap.ov.push(function(g,S){S.dot3(g,-1,-1,bowl(-1,-1),cssv('--amber'),6);U.label(g,S.P(-1,-1,bowl(-1,-1))[0]+10,S.P(-1,-1,bowl(-1,-1))[1],'출발점',cssv('--amber'));
-  var q=S.dot3(g,O.w,O.b,O.L,cssv('--gfp'),6);U.label(g,q[0]+10,q[1],'바닥',cssv('--gfp'));var q0=S.P(O.w,O.b,S.zr[0]);g.setLineDash([3,3]);g.strokeStyle='rgba(23,131,76,.7)';g.beginPath();g.moveTo(q[0],q[1]);g.lineTo(q0[0],q0[1]);g.stroke();g.setLineDash([]);});
+  var q=S.dot3(g,O.w,O.b,O.L,cssv('--gfp'),6);U.label(g,q[0]+10,q[1],'바닥',cssv('--gfp'));var q0=S.P(O.w,O.b,S.zr[0]);g.setLineDash([3,3]);g.strokeStyle='rgba(19,115,58,.7)';g.beginPath();g.moveTo(q[0],q[1]);g.lineTo(q0[0],q0[1]);g.stroke();g.setLineDash([]);});
 U.btns($('#g-view'),[['side','비스듬히'],['top','하늘에서 (초파리 시점)'],['low','낮게']],'side',function(v){if(v==='top')Smap.view(0,1.5);else if(v==='low')Smap.view(-0.9,0.25);else Smap.view(-0.75,0.62);
   U.ins($('#i-map'),[v==='top'?['m','하늘에서 내려다보면 3D 그릇이 바닥의 등고선 지도가 됩니다. 등고선이 촘촘한 곳이 가파른 곳이에요. 타원이 한쪽으로 길쭉한 것이 ③의 "길쭉함"입니다.']:['g','그릇의 바닥(초록 점)이 오차가 가장 작은 가중치입니다. 출발점(노란 점)에서 이곳까지 걸어가는 것이 학습이에요.']]);});
 $('#b-spin').onclick=function(){spin=!spin;this.setAttribute('aria-pressed',String(spin));};
@@ -402,9 +402,9 @@ var curv1=function(){return cut==='b'?2*M.xx:2;};
 var range1=function(){return cut==='b'?WR:BR;};
 var S1=new U.Surf3D($('#cvS1a'),{f:bowl,xr:WR,yr:BR,n:26,alpha:0.55,axes:['w','b','오차'],stamp:'설명용 모형'});
 S1.ov.push(function(g,S){var r=range1(),pts=[];for(var k=0;k<=60;k++){var t=r[0]+(r[1]-r[0])*k/60;pts.push(cut==='b'?[t,fix,bowl(t,fix)]:[fix,t,bowl(fix,t)]);}S.line3(g,pts,cssv('--eye'),3);
-  hist1.forEach(function(t,k){var p=cut==='b'?[t,fix]:[fix,t];S.dot3(g,p[0],p[1],f1(t),'rgba(168,106,0,.5)',3,false);});var p=cut==='b'?[pos1,fix]:[fix,pos1];S.dot3(g,p[0],p[1],f1(pos1),cssv('--amber'),6);});
+  hist1.forEach(function(t,k){var p=cut==='b'?[t,fix]:[fix,t];S.dot3(g,p[0],p[1],f1(t),'rgba(163,92,0,.5)',3,false);});var p=cut==='b'?[pos1,fix]:[fix,pos1];S.dot3(g,p[0],p[1],f1(pos1),cssv('--amber'),6);});
 function draw1(){var r=range1(),pts=[],mx=0;for(var k=0;k<=120;k++){var t=r[0]+(r[1]-r[0])*k/120,y=f1(t);pts.push([t,y]);mx=Math.max(mx,y);}
-  var P=U.plot($('#cvS1b'),{xr:r,yr:[0,mx*1.05],series:[{pts:pts,color:cssv('--eye'),width:2.5},{pts:hist1.map(function(t){return [t,f1(t)];}),color:'rgba(168,106,0,.65)',width:1,dots:3}],xt:[r[0],(r[0]+r[1])/2,r[1]].map(function(v){return Math.round(v*10)/10;}),yt:[0,Math.round(mx/2),Math.round(mx)],xl:cut==='b'?'w':'b',yl:'오차',stamp:'설명용 모형',aria:'단면 곡선과 공의 위치'});
+  var P=U.plot($('#cvS1b'),{xr:r,yr:[0,mx*1.05],series:[{pts:pts,color:cssv('--eye'),width:2.5},{pts:hist1.map(function(t){return [t,f1(t)];}),color:'rgba(163,92,0,.65)',width:1,dots:3}],xt:[r[0],(r[0]+r[1])/2,r[1]].map(function(v){return Math.round(v*10)/10;}),yt:[0,Math.round(mx/2),Math.round(mx)],xl:cut==='b'?'w':'b',yl:'오차',stamp:'설명용 모형',aria:'단면 곡선과 공의 위치'});
   var g=P.g,gr=g1(pos1),y0=f1(pos1),d=0.8;g.strokeStyle=cssv('--stain');g.lineWidth=1.5;g.setLineDash([5,4]);g.beginPath();g.moveTo(P.X(pos1-d),P.Y(y0-gr*d));g.lineTo(P.X(pos1+d),P.Y(y0+gr*d));g.stroke();g.setLineDash([]);
   g.beginPath();g.arc(P.X(pos1),P.Y(y0),6,0,7);g.fillStyle=cssv('--amber');g.fill();
   var nx=pos1-lr1*gr;U.arrow2(g,P.X(pos1),P.Y(y0)+14,P.X(nx),P.Y(y0)+14,cssv('--gfp'),2);}
@@ -437,18 +437,18 @@ S2.ov.push(function(g,S){var F=SURF2[surf2],z=F.f(u2,v2),G=F.g(u2,v2),k=disp(S),
   var p=[u2,v2,z];function add(a,b){return [a[0]+b[0],a[1]+b[1],a[2]+b[2]];}
   /* 바닥 그림자 = -∇f */
   var gn=Math.hypot(G[0],G[1]),fl=[u2,v2,S.zr[0]];
-  var q0=S.P(u2,v2,S.zr[0]),q1=S.P(u2,v2,z);g.setLineDash([3,3]);g.strokeStyle='rgba(27,29,43,.4)';g.beginPath();g.moveTo(q0[0],q0[1]);g.lineTo(q1[0],q1[1]);g.stroke();g.setLineDash([]);
+  var q0=S.P(u2,v2,S.zr[0]),q1=S.P(u2,v2,z);g.setLineDash([3,3]);g.strokeStyle='rgba(22,33,43,.4)';g.beginPath();g.moveTo(q0[0],q0[1]);g.lineTo(q1[0],q1[1]);g.stroke();g.setLineDash([]);
   if(gn>1e-6){var sh=back([-G[0]/gn*L*1.6*k.sx/Math.max(k.sx,k.sy),-G[1]/gn*L*1.6*k.sy/Math.max(k.sx,k.sy),0]);var e3=S.arrow3(g,fl,add(fl,sh),cssv('--gfp'),3.4);U.label(g,e3[0]+8,e3[1],'−∇f',cssv('--gfp'));
-    var gu=back([G[0]/gn*L*0.8*k.sx/Math.max(k.sx,k.sy),G[1]/gn*L*0.8*k.sy/Math.max(k.sx,k.sy),0]);g.setLineDash([4,3]);S.arrow3(g,fl,add(fl,gu),'rgba(23,131,76,.45)',2);g.setLineDash([]);}
+    var gu=back([G[0]/gn*L*0.8*k.sx/Math.max(k.sx,k.sy),G[1]/gn*L*0.8*k.sy/Math.max(k.sx,k.sy),0]);g.setLineDash([4,3]);S.arrow3(g,fl,add(fl,gu),'rgba(19,115,58,.45)',2);g.setLineDash([]);}
   var e1=S.arrow3(g,p,add(p,back(nrm(tu))),cssv('--eye'),3.2);var e2=S.arrow3(g,p,add(p,back(nrm(tv))),cssv('--terrain'),3.2);var tip=S.arrow3(g,p,add(p,back(nrm(n))),cssv('--ink'),3.2);U.label(g,e1[0]+8,e1[1],'t_u',cssv('--eye'));U.label(g,e2[0]+8,e2[1],'t_v',cssv('--terrain'));
   S.dot3(g,u2,v2,z,cssv('--amber'),5);U.label(g,tip[0]+8,tip[1],'n',  cssv('--ink'));});
 function draw2b(){var F=SURF2[surf2],cv=$('#cvS2b'),R=U.setup(cv),g=R.g,w=R.w,h=R.h,pad=26,sz=Math.min(w,h)-pad*2,x0=(w-sz)/2,y0=(h-sz)/2;U.grid24(g,w,h);
   var X=function(u){return x0+(u-F.xr[0])/(F.xr[1]-F.xr[0])*sz;},Y=function(v){return y0+sz-(v-F.yr[0])/(F.yr[1]-F.yr[0])*sz;},n=48,zs=[],mn=1e9,mx=-1e9,i,j;
   for(j=0;j<=n;j++){zs.push([]);for(i=0;i<=n;i++){var z=F.f(F.xr[0]+(F.xr[1]-F.xr[0])*i/n,F.yr[0]+(F.yr[1]-F.yr[0])*j/n);zs[j].push(z);mn=Math.min(mn,z);mx=Math.max(mx,z);}}
   var cs=sz/n;for(j=0;j<n;j++)for(i=0;i<n;i++){g.fillStyle=U.cmap((zs[j][i]-mn)/(mx-mn),.5);g.fillRect(x0+i*cs,y0+sz-(j+1)*cs,cs+.6,cs+.6);}
-  g.lineWidth=1;for(var L=1;L<12;L++){var zl=mn+(mx-mn)*(surf2==='bowl'?Math.pow(L/12,1.8):L/12);g.strokeStyle='rgba(27,29,43,.3)';g.beginPath();for(j=0;j<n;j++)for(i=0;i<n;i++){var q=[zs[j][i],zs[j][i+1],zs[j+1][i+1],zs[j+1][i]],P2=[[i,j],[i+1,j],[i+1,j+1],[i,j+1]],seg=[];for(var e=0;e<4;e++){var a=q[e],b=q[(e+1)%4];if((a-zl)*(b-zl)<0){var t=(zl-a)/(b-a),pa=P2[e],pb=P2[(e+1)%4];seg.push([pa[0]+(pb[0]-pa[0])*t,pa[1]+(pb[1]-pa[1])*t]);}}if(seg.length>=2){g.moveTo(x0+seg[0][0]*cs,y0+sz-seg[0][1]*cs);g.lineTo(x0+seg[1][0]*cs,y0+sz-seg[1][1]*cs);}}g.stroke();}
+  g.lineWidth=1;for(var L=1;L<12;L++){var zl=mn+(mx-mn)*(surf2==='bowl'?Math.pow(L/12,1.8):L/12);g.strokeStyle='rgba(22,33,43,.3)';g.beginPath();for(j=0;j<n;j++)for(i=0;i<n;i++){var q=[zs[j][i],zs[j][i+1],zs[j+1][i+1],zs[j+1][i]],P2=[[i,j],[i+1,j],[i+1,j+1],[i,j+1]],seg=[];for(var e=0;e<4;e++){var a=q[e],b=q[(e+1)%4];if((a-zl)*(b-zl)<0){var t=(zl-a)/(b-a),pa=P2[e],pb=P2[(e+1)%4];seg.push([pa[0]+(pb[0]-pa[0])*t,pa[1]+(pb[1]-pa[1])*t]);}}if(seg.length>=2){g.moveTo(x0+seg[0][0]*cs,y0+sz-seg[0][1]*cs);g.lineTo(x0+seg[1][0]*cs,y0+sz-seg[1][1]*cs);}}g.stroke();}
   var m=9,maxg=0,G2=[];for(j=0;j<m;j++)for(i=0;i<m;i++){var u=F.xr[0]+(F.xr[1]-F.xr[0])*(i+.5)/m,v=F.yr[0]+(F.yr[1]-F.yr[0])*(j+.5)/m,G=F.g(u,v);G2.push([u,v,G]);maxg=Math.max(maxg,Math.hypot(G[0],G[1]));}
-  G2.forEach(function(t){var gx=t[2][0]/maxg,gy=t[2][1]/maxg,len=sz/m*0.45;U.arrow2(g,X(t[0]),Y(t[1]),X(t[0])-gx*len*(F.xr[1]-F.xr[0])/(F.xr[1]-F.xr[0]),Y(t[1])+gy*len,'rgba(23,131,76,.75)',1.4);});
+  G2.forEach(function(t){var gx=t[2][0]/maxg,gy=t[2][1]/maxg,len=sz/m*0.45;U.arrow2(g,X(t[0]),Y(t[1]),X(t[0])-gx*len*(F.xr[1]-F.xr[0])/(F.xr[1]-F.xr[0]),Y(t[1])+gy*len,'rgba(19,115,58,.75)',1.4);});
   g.beginPath();g.arc(X(u2),Y(v2),6,0,7);g.fillStyle=cssv('--amber');g.fill();g.strokeStyle='#ffffff';g.stroke();
   U.label(g,x0+4,y0+10,'위에서 본 지도 · 화살표 = −∇f',cssv('--muted'));U.stamp(g,w,'설명용 모형');}
 U.reg($('#cvS2b'),function(dt){if(dt===0)draw2b();});
