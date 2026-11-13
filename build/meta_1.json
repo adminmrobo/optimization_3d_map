@@ -16,7 +16,7 @@
   }
  ],
  "date": "2026-11-14",
- "version": "1.2",
+ "version": "1.3",
  "language": [
   "ko"
  ],
@@ -46,5 +46,5 @@
  "educationalLevel": "입문~중급",
  "learningResourceType": "interactive explainer",
  "registry": "KG_00_registry 0.2",
- "suggestedCitation": "안상선 (2026). 좌표축 위의 그릇 ① 수학 편 — 기울기·굽음·휨으로 읽는 3D 오차 지도. 좌표축 위의 그릇 — 3D 지도로 본 모델 최적화 1, v1.2."
+ "suggestedCitation": "안상선 (2026). 좌표축 위의 그릇 ① 수학 편 — 기울기·굽음·휨으로 읽는 3D 오차 지도. 좌표축 위의 그릇 — 3D 지도로 본 모델 최적화 1, v1.3."
 }

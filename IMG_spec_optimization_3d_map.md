@@ -7,9 +7,9 @@
 
 | 키 | 판 | 쓰는 곳 | 상태 |
 |---|---|---|---|
-| `cover_index` | L | index.html 맨 위 | 새로 그림 — `COVER_PROMPTS_optimization_3d_map.md` 0번 |
-| `cover_01` | L | 1_math_map.html 맨 위 | 새로 그림 — 같은 파일 1번 |
-| `cover_02` | L | 2_experiment_lab.html 맨 위 | 새로 그림 — 같은 파일 2번 |
+| `cover_index` | L | index.html 맨 위 | 반영 완료 2026-11-14 (img/cover_index.webp 161 KB) |
+| `cover_01` | L | 1_math_map.html 맨 위 | 반영 완료 2026-11-14 (img/cover_01.webp 143 KB) |
+| `cover_02` | L | 2_experiment_lab.html 맨 위 | 반영 완료 2026-11-14 (img/cover_02.webp 152 KB) |
 | 말풍선·등장인물·대결 머리 표정 41종 | A~D | 세 페이지 | 기본 팩에 있음 (새로 그리지 않음) |
 
 페이지에 쓰는 표정 키: `doc_front` `doc_think` `doc_magic` `doc_judge` `doc_board` · `asst_smile` `asst_report` `asst_firm` `asst_spark` `asst_shock` `asst_proud` · `fly_point` `fly_magnify` `fly_arms` `fly_coffee` `fly_clip` `fly_type` · `robo_smile` `robo_coin` `robo_calc` `robo_happy` `robo_sigh` `robo_blush` `robo_wow` `robo_meh` · `sia_explain` `sia_signal` `sia_smile` `sia_doze` `sia_guide` `sia_think` · `moa_tea` `moa_cheer` `moa_report` `moa_smile` `moa_sparkle` `moa_ok` · `x1_hint` `x2_hint` `x3_hint`

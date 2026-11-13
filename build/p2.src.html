@@ -28,10 +28,12 @@
 </div></nav>
 
 <!-- lab-cover -->
-<div class="cover" data-img="cover_02"><div class="frame">
-  <canvas id="coverCv" aria-hidden="true"></canvas>
-  <span class="cap">같은 그릇, 공 세 개 — 연구실 실험의 날</span>
-  <div class="cast4"><img class="s" data-mood="sia_signal" alt="" aria-hidden="true"><img data-mood="fly_point" alt="" aria-hidden="true"><img data-mood="doc_front" alt="" aria-hidden="true"><img data-mood="asst_smile" alt="" aria-hidden="true"><img data-mood="robo_coin" alt="" aria-hidden="true"><img class="s" data-mood="moa_cheer" alt="" aria-hidden="true"></div>
+<div class="cover" id="cover" data-img="cover_02"><div class="frame">
+  <picture>
+    <source type="image/webp" srcset="img/cover_02_960.webp 960w, img/cover_02.webp 1600w" sizes="(max-width:1080px) 100vw, 1080px">
+    <img class="art" src="img/cover_02.webp" width="1600" height="900" alt="실험대 위 그릇 모형에 공 세 개가 굴러 내려가고 연구실 식구들이 결과를 기다리는 장면" fetchpriority="high" decoding="async">
+  </picture>
+  <span class="cover-chip">좌표축 위의 그릇 · ② 실험실 편</span>
 </div></div>
 <!-- /lab-cover -->
 
@@ -40,7 +42,7 @@
   <h1>좌표축 위의 그릇 — 배치·학습률·에포크를 지도 위에서 고르기</h1>
   <p class="question">같은 그릇에서 공을 어떻게 굴려야 가장 싸고 빠르게 바닥에 닿을까?</p>
   <p class="lead">1편에서 오차를 땅의 높이로 놓고 기울기·굽음·휨을 봤습니다. 이번에는 그 땅에서 공을 직접 굴립니다. 신경망이 스스로 찾는 가중치와 달리, 학습 전에 사람이 정해 두는 숫자 — <b>하이퍼파라미터</b> — 를 하나씩 바꿔 보며 지도 위의 걸음이 어떻게 달라지는지 잽니다. 마지막에는 가중치가 4,416개라 3D로 다 그릴 수 없는 신경망의 지형을 <b>단면</b>으로 잘라 봅니다.</p>
-  <p class="byline">글 · 안상선 ((주)M-Robo 대표) · <a href="https://adminmrobo.github.io/who_am_i/who_am_i.html">저자 소개</a> · 2026-11-14 · v1.2 · 앞 편: <a href="1_math_map.html">1편 수학 편</a></p>
+  <p class="byline">글 · 안상선 ((주)M-Robo 대표) · <a href="https://adminmrobo.github.io/who_am_i/who_am_i.html">저자 소개</a> · 2026-11-14 · v1.3 · 앞 편: <a href="1_math_map.html">1편 수학 편</a></p>
   <div class="three"><b>세 줄로 먼저</b><ol>
     <li>배치가 작으면 걸음은 싸지만 흔들리고, 크면 정확하지만 비싸다. 같은 계산량이면 작은 배치가 훨씬 멀리 간다.</li>
     <li>학습률은 지형의 굽음이 정한 한계(2/λ<sub>max</sub>)를 넘으면 공이 튀어 나간다.</li>
@@ -282,7 +284,7 @@
     <tr><td>[8]</td><td>Kingma, D. P., Ba, J. (2015). Adam: A Method for Stochastic Optimization. ICLR.</td><td>정리의 실무 상자(Adam)</td></tr>
   </tbody></table>
   <h3>예시값·설명용 모형인 것</h3>
-  <ul><li>①·② 그릇의 데이터(직선 y = 2x + 1 주변 점 1,000개, 시드 39)와 모든 경로·오차 값 — 페이지가 직접 계산</li><li>③·④ 신경망 실험의 모든 값 — code/deep_slices.py로 미리 계산(시드 2026)</li><li>표지 그림은 대체 표지(그림 준비 중)</li></ul>
+  <ul><li>①·② 그릇의 데이터(직선 y = 2x + 1 주변 점 1,000개, 시드 39)와 모든 경로·오차 값 — 페이지가 직접 계산</li><li>③·④ 신경망 실험의 모든 값 — code/deep_slices.py로 미리 계산(시드 2026)</li><li>표지 그림은 연구실 캐릭터로 새로 그린 삽화(실제 장면 아님)</li></ul>
   <p>저작권: 캐릭터 이름·설정·그림은 저작권자 안상선의 허락 없이 사용할 수 없습니다. 참고한 영상의 코드와 그림은 이 페이지에 넣지 않았습니다.</p>
   <p>글 · 안상선 ((주)M-Robo 대표) · <a href="index.html">목차</a> · <a href="1_math_map.html">1편 수학 편</a> · <a href="https://adminmrobo.github.io/ai_in_3d/">신경망 연구소</a></p>
 </div></footer>
@@ -331,7 +333,7 @@ U.fillImgs();
 $('#k-full').textContent=fmt(RUN[1000].afterEpoch,3);$('#k-ten').textContent=fmt(RUN[10].afterEpoch,3);$('#k-lim').textContent=fmt(2/HS.lmax,3);$('#k-np').textContent=DEEP?DEEP.nparam.toLocaleString('ko-KR'):'—';
 
 /* 표지 대체: 세 경로 */
-(function(){var cv=$('#coverCv');U.reg(cv,function(){var R=U.setup(cv),g=R.g,w=R.w,h=R.h;var cx=w*.6,cy=h*.42;for(var k=14;k>0;k--){g.beginPath();g.ellipse(cx,cy,w*.05*k,h*.022*k,-.35,0,7);g.strokeStyle=U.cmap(k/14,.3);g.lineWidth=2;g.stroke();}
+(function(){var cv=$('#coverCv');if(!cv)return;U.reg(cv,function(){var R=U.setup(cv),g=R.g,w=R.w,h=R.h;var cx=w*.6,cy=h*.42;for(var k=14;k>0;k--){g.beginPath();g.ellipse(cx,cy,w*.05*k,h*.022*k,-.35,0,7);g.strokeStyle=U.cmap(k/14,.3);g.lineWidth=2;g.stroke();}
   SZ.forEach(function(s){var P=RUN[s].path;g.strokeStyle=COL[s];g.lineWidth=2.5;g.beginPath();P.forEach(function(p,i){var x=cx+(p[0]-O.w)*w*.09,y=cy-(p[1]-O.b)*h*.07;i?g.lineTo(x,y):g.moveTo(x,y);});g.stroke();});});})();
 
 /* ── ① 배치 경주 ── */

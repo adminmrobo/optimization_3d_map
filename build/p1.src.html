@@ -18,10 +18,12 @@
 </div></nav>
 
 <!-- lab-cover -->
-<div class="cover" data-img="cover_01"><div class="frame">
-  <canvas id="coverCv" aria-hidden="true"></canvas>
-  <span class="cap">연구실 식구가 3D 오차 지도 위에 섰다</span>
-  <div class="cast4"><img data-mood="fly_point" alt="" aria-hidden="true"><img data-mood="doc_front" alt="" aria-hidden="true"><img data-mood="asst_smile" alt="" aria-hidden="true"><img data-mood="robo_coin" alt="" aria-hidden="true"></div>
+<div class="cover" id="cover" data-img="cover_01"><div class="frame">
+  <picture>
+    <source type="image/webp" srcset="img/cover_01_960.webp 960w, img/cover_01.webp 1600w" sizes="(max-width:1080px) 100vw, 1080px">
+    <img class="art" src="img/cover_01.webp" width="1600" height="900" alt="탁자 위 물결 모양 지형 모형에 꽂힌 깃대를 연구실 식구 넷이 살펴보는 장면" fetchpriority="high" decoding="async">
+  </picture>
+  <span class="cover-chip">좌표축 위의 그릇 · ① 수학 편</span>
 </div></div>
 <!-- /lab-cover -->
 
@@ -30,7 +32,7 @@
   <h1>좌표축 위의 그릇 — 기울기·굽음·휨으로 읽는 오차 지도</h1>
   <p class="question">모델은 눈을 가린 채 발밑의 기울기와 굽음만으로 어떻게 골짜기 바닥을 찾을까?</p>
   <p class="lead">신경망이 배우는 일은 <b>가중치</b>라는 숫자들을 고치는 일입니다. 가중치 두 개를 가로·세로 좌표축에 놓고, 그 자리에서 잰 <b>오차</b>를 높이로 세우면 땅 모양의 지도가 생깁니다. 이 페이지는 그 지도 위에서 수학 다섯 가지 — 자르기(단면), 기울기(그래디언트)와 깃대(법선), 굽음(헤시안), 고개(안장점), 휨(야코비안) — 를 하나씩 돌려 봅니다.</p>
-  <p class="byline">글 · 안상선 ((주)M-Robo 대표) · <a href="https://adminmrobo.github.io/who_am_i/who_am_i.html">저자 소개</a> · 2026-11-14 · v1.2</p>
+  <p class="byline">글 · 안상선 ((주)M-Robo 대표) · <a href="https://adminmrobo.github.io/who_am_i/who_am_i.html">저자 소개</a> · 2026-11-14 · v1.3</p>
   <div class="three"><b>세 줄로 먼저</b><ol>
     <li>가중치가 좌표축, 오차가 높이다. 학습은 이 지도에서 낮은 곳으로 걸어가는 일이다.</li>
     <li>한 걸음의 방향은 <b>기울기</b>(1차 미분)가 정하고, 얼마나 크게 디뎌도 되는지는 <b>굽음</b>(2차 미분)이 정한다.</li>
@@ -330,7 +332,7 @@
     <tr><td>[11]</td><td>Ioffe, S., Szegedy, C. (2015). Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift. ICML.</td><td>⑤ 생성 AI 상자의 정규화 층</td></tr>
   </tbody></table>
   <h3>예시값·설명용 모형인 것</h3>
-  <ul><li>모든 3D 지도와 그래프의 데이터(직선 주변 점 1,000개, 시드 39)와 그 결과 수치</li><li>③의 2차 곡면, ④의 감자칩 곡면, ⑤의 층 가중치 W, 대결의 땅 (w₁² − 1)² + w₂²</li><li>표지 그림은 대체 표지(그림 준비 중)</li></ul>
+  <ul><li>모든 3D 지도와 그래프의 데이터(직선 주변 점 1,000개, 시드 39)와 그 결과 수치</li><li>③의 2차 곡면, ④의 감자칩 곡면, ⑤의 층 가중치 W, 대결의 땅 (w₁² − 1)² + w₂²</li><li>표지 그림은 연구실 캐릭터로 새로 그린 삽화(실제 장면 아님)</li></ul>
   <p>저작권: 캐릭터 이름·설정·그림은 저작권자 안상선의 허락 없이 사용할 수 없습니다. 참고한 인포그래픽·영상의 그림은 이 페이지에 넣지 않았습니다.</p>
   <p>글 · 안상선 ((주)M-Robo 대표) · <a href="index.html">목차</a> · <a href="2_experiment_lab.html">2편 실험실 편</a> · <a href="https://adminmrobo.github.io/fish_market_learning_epoch_etc/">Fish Market 연구실(학습률·에포크)</a> · <a href="https://adminmrobo.github.io/ai_in_3d/">신경망 연구소</a></p>
 </div></footer>
@@ -379,7 +381,7 @@ U.fillImgs();
 $('#k-bot').textContent=fmt(O.L,3);$('#k-eig').textContent=fmt(HS.lmin,1)+' · '+fmt(HS.lmax,1);$('#k-lim').textContent=fmt(2/HS.lmax,3);
 
 /* ── 표지 대체 그림: 그릇 등고선 ── */
-(function(){var cv=$('#coverCv');U.reg(cv,function(){var R=U.setup(cv),g=R.g,w=R.w,h=R.h;for(var k=14;k>0;k--){g.beginPath();g.ellipse(w*.62,h*.42,w*.05*k,h*.022*k,-.35,0,7);g.strokeStyle=U.cmap(k/14,.35);g.lineWidth=2;g.stroke();}
+(function(){var cv=$('#coverCv');if(!cv)return;U.reg(cv,function(){var R=U.setup(cv),g=R.g,w=R.w,h=R.h;for(var k=14;k>0;k--){g.beginPath();g.ellipse(w*.62,h*.42,w*.05*k,h*.022*k,-.35,0,7);g.strokeStyle=U.cmap(k/14,.35);g.lineWidth=2;g.stroke();}
   g.beginPath();g.arc(w*.62,h*.42,6,0,7);g.fillStyle=cssv('--gfp');g.fill();});})();
 
 /* ── 큰 그림 지도 ── */

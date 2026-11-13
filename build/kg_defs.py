@@ -80,7 +80,7 @@ class G:
     def e(s, a, p, b, anchor, conf="high"): s.edges.append({"s": a, "p": "lab:" + p, "o": b, "anchor": anchor, "confidence": conf})
     def work(s, rid, ko, en): return s.n("lab:work/" + rid, "Work", ko, en, "#top", 1, family="optimization")
     def dump(s, n):
-        (B / f"kg_{n}.json").write_text(json.dumps({"version": "1.2", "page": s.page, "nodes": s.nodes, "edges": s.edges}, ensure_ascii=False, indent=1))
+        (B / f"kg_{n}.json").write_text(json.dumps({"version": "1.3", "page": s.page, "nodes": s.nodes, "edges": s.edges}, ensure_ascii=False, indent=1))
 
 T_CALC, T_GD, T_BP, T_LOSS, T_SGD = "lab:topic/calculus-optimization-math", "lab:topic/gradient-descent", "lab:topic/backpropagation", "lab:topic/loss-function", "lab:topic/sgd-minibatch"
 
@@ -282,9 +282,9 @@ used2 = {"goyal2017accurate": [sch], "polyak1964some": [mom], "kingma2015adam": 
 def meta(n, title, about, based, slug):
     return {"title": title, "series": "좌표축 위의 그릇 — 3D 지도로 본 모델 최적화", "number": str(n),
             "creator": [{"name": "안상선", "role": "author", "affiliation": "(주)M-Robo"}], "contributor": [{"name": "AI 보조 제작", "role": "assistant"}],
-            "date": TODAY, "version": "1.2", "language": ["ko"], "license": "", "url": BASE + slug, "about": about, "basedOn": based,
+            "date": TODAY, "version": "1.3", "language": ["ko"], "license": "", "url": BASE + slug, "about": about, "basedOn": based,
             "educationalLevel": "입문~중급", "learningResourceType": "interactive explainer", "registry": "KG_00_registry 0.2",
-            "suggestedCitation": f"안상선 (2026). {title}. 좌표축 위의 그릇 — 3D 지도로 본 모델 최적화 {n}, v1.2."}
+            "suggestedCitation": f"안상선 (2026). {title}. 좌표축 위의 그릇 — 3D 지도로 본 모델 최적화 {n}, v1.3."}
 (B / "meta_1.json").write_text(json.dumps(meta(1, "좌표축 위의 그릇 ① 수학 편 — 기울기·굽음·휨으로 읽는 3D 오차 지도",
     ["lab:concept/loss-landscape", "lab:concept/gradient", "lab:concept/hessian", "lab:concept/saddle-point", "lab:concept/jacobian"], list(used1), "1_math_map.html"), ensure_ascii=False, indent=1))
 (B / "meta_2.json").write_text(json.dumps(meta(2, "좌표축 위의 그릇 ② 실험실 편 — 배치·학습률·에포크를 3D 지도 위에서 고르기",
