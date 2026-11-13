@@ -41,13 +41,15 @@ function sf(p){var a=p[0]*p[0]-1;return a*a+p[1]*p[1];}
 function sg(p){return [4*p[0]*(p[0]*p[0]-1),2*p[1]];}
 function sh(p){return [[12*p[0]*p[0]-4,0],[0,2]];}
 /* checkCurv=false: 기울기만 본다 (주판봇) / true: 기울기가 0에 가까우면 헤시안 고유값을 보고, 음수면 그 방향으로 한 발 (초파리) */
+/* 2×2 대칭 행렬의 가장 작은 고유값과 그 고유벡터(단위) */
+function eig2(H){var a=H[0][0],b=H[0][1],d=H[1][1],tr=a+d,q=Math.sqrt((a-d)*(a-d)/4+b*b),lmin=tr/2-q,v=Math.abs(b)>1e-12?[lmin-d,b]:(a<=d?[1,0]:[0,1]),m=Math.hypot(v[0],v[1]);return {lmin:lmin,lmax:tr/2+q,v:[v[0]/m,v[1]/m]};}
 function saddleRun(checkCurv,o){o=o||{};var p=[o.x0==null?0:o.x0,o.y0==null?1.5:o.y0],lr=o.lr||0.05,steps=o.steps||200,path=[[p[0],p[1],sf(p)]],kicks=0;
   for(var k=0;k<steps;k++){var g=sg(p),gn=Math.hypot(g[0],g[1]);
     if(gn<1e-3){ if(!checkCurv)break;
-      var H=sh(p); if(H[0][0]<0&&kicks<3){p=[p[0]+0.05,p[1]];kicks++;path.push([p[0],p[1],sf(p)]);continue;} if(H[0][0]>=0&&H[1][1]>=0)break; }
+      var E=eig2(sh(p)); if(E.lmin<0&&kicks<3){p=[p[0]+0.05*E.v[0],p[1]+0.05*E.v[1]];kicks++;path.push([p[0],p[1],sf(p)]);continue;} break; }
     p=[p[0]-lr*g[0],p[1]-lr*g[1]];path.push([p[0],p[1],sf(p)]);}
   return {path:path,end:p,L:sf(p),kicks:kicks,steps:path.length-1};}
 
-return {rng:rng,gauss:gauss,makeLine:makeLine,loss:loss,gradOn:gradOn,hessian:hessian,ols:ols,runBatch:runBatch,sf:sf,sg:sg,sh:sh,saddleRun:saddleRun};
+return {eig2:eig2,rng:rng,gauss:gauss,makeLine:makeLine,loss:loss,gradOn:gradOn,hessian:hessian,ols:ols,runBatch:runBatch,sf:sf,sg:sg,sh:sh,saddleRun:saddleRun};
 })();
 if(typeof module!=='undefined')module.exports=LM;

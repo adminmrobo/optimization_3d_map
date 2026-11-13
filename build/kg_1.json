@@ -1,5 +1,5 @@
 {
- "version": "1.0",
+ "version": "1.1",
  "page": "1_math_map",
  "nodes": [
   {
@@ -1137,6 +1137,138 @@
    "match": []
   },
   {
+   "id": "lab:work/goyal2017accurate",
+   "type": "Work",
+   "label": {
+    "ko": "Goyal 외 2017",
+    "en": "Goyal et al. 2017"
+   },
+   "page": "1_math_map",
+   "anchor": "#top",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:work/he2016deep",
+   "type": "Work",
+   "label": {
+    "ko": "He 외 2016 ResNet",
+    "en": "He et al. 2016 ResNet"
+   },
+   "page": "1_math_map",
+   "anchor": "#top",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:work/ioffe2015batch",
+   "type": "Work",
+   "label": {
+    "ko": "Ioffe·Szegedy 2015",
+    "en": "Ioffe & Szegedy 2015"
+   },
+   "page": "1_math_map",
+   "anchor": "#top",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:claim/lr-warmup",
+   "type": "Claim",
+   "label": {
+    "ko": "학습 초기에 학습률을 천천히 올리는 워밍업이 큰 배치 학습의 초기 불안정을 줄인다",
+    "en": "Gradual warmup stabilizes early large-batch training"
+   },
+   "page": "1_math_map",
+   "anchor": "#s3",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "source": [
+    {
+     "ref": "goyal2017accurate",
+     "loc": "2.2절"
+    }
+   ]
+  },
+  {
+   "id": "lab:claim/residual-connections",
+   "type": "Claim",
+   "label": {
+    "ko": "잔차 연결이 매우 깊은 신경망의 학습을 가능하게 한다",
+    "en": "Residual connections ease training of very deep nets"
+   },
+   "page": "1_math_map",
+   "anchor": "#s5",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "source": [
+    {
+     "ref": "he2016deep",
+     "loc": "본문"
+    }
+   ]
+  },
+  {
+   "id": "lab:claim/batch-normalization",
+   "type": "Claim",
+   "label": {
+    "ko": "정규화 층이 깊은 신경망 학습을 빠르고 안정되게 한다",
+    "en": "Normalization layers speed up and stabilize training"
+   },
+   "page": "1_math_map",
+   "anchor": "#s5",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "source": [
+    {
+     "ref": "ioffe2015batch",
+     "loc": "본문"
+    }
+   ]
+  },
+  {
    "id": "lab:claim/normal-is-neg-gradient-lift",
    "type": "Claim",
    "label": {
@@ -2004,6 +2136,48 @@
    "p": "lab:raises",
    "o": "lab:question/p1-zero-gradient",
    "anchor": "#duel",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/lr-warmup",
+   "p": "lab:supports",
+   "o": "lab:concept/learning-rate",
+   "anchor": "#s3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/lr-warmup",
+   "p": "lab:assertedIn",
+   "o": "lab:work/goyal2017accurate",
+   "anchor": "#s3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/residual-connections",
+   "p": "lab:supports",
+   "o": "lab:method/backpropagation",
+   "anchor": "#s5",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/residual-connections",
+   "p": "lab:assertedIn",
+   "o": "lab:work/he2016deep",
+   "anchor": "#s5",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/batch-normalization",
+   "p": "lab:supports",
+   "o": "lab:method/backpropagation",
+   "anchor": "#s5",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/batch-normalization",
+   "p": "lab:assertedIn",
+   "o": "lab:work/ioffe2015batch",
+   "anchor": "#s5",
    "confidence": "high"
   },
   {

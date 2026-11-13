@@ -16,7 +16,7 @@
   }
  ],
  "date": "2026-11-14",
- "version": "1.0",
+ "version": "1.1",
  "language": [
   "ko"
  ],
@@ -30,6 +30,9 @@
   "lab:concept/overfitting"
  ],
  "basedOn": [
+  "goyal2017accurate",
+  "polyak1964some",
+  "kingma2015adam",
   "mlfs39",
   "mlfs43",
   "li2018visualizing",
@@ -39,5 +42,5 @@
  "educationalLevel": "입문~중급",
  "learningResourceType": "interactive explainer",
  "registry": "KG_00_registry 0.2",
- "suggestedCitation": "안상선 (2026). 좌표축 위의 그릇 ② 실험실 편 — 배치·학습률·에포크를 3D 지도 위에서 고르기. 좌표축 위의 그릇 — 3D 지도로 본 모델 최적화 2, v1.0."
+ "suggestedCitation": "안상선 (2026). 좌표축 위의 그릇 ② 실험실 편 — 배치·학습률·에포크를 3D 지도 위에서 고르기. 좌표축 위의 그릇 — 3D 지도로 본 모델 최적화 2, v1.1."
 }

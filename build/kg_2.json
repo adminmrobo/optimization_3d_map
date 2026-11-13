@@ -1,5 +1,5 @@
 {
- "version": "1.0",
+ "version": "1.1",
  "page": "2_experiment_lab",
  "nodes": [
   {
@@ -858,6 +858,204 @@
    "match": []
   },
   {
+   "id": "lab:work/goyal2017accurate",
+   "type": "Work",
+   "label": {
+    "ko": "Goyal 외 2017",
+    "en": "Goyal et al. 2017"
+   },
+   "page": "2_experiment_lab",
+   "anchor": "#top",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:work/polyak1964some",
+   "type": "Work",
+   "label": {
+    "ko": "Polyak 1964",
+    "en": "Polyak 1964"
+   },
+   "page": "2_experiment_lab",
+   "anchor": "#top",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:work/kingma2015adam",
+   "type": "Work",
+   "label": {
+    "ko": "Kingma·Ba 2015 Adam",
+    "en": "Kingma & Ba 2015 Adam"
+   },
+   "page": "2_experiment_lab",
+   "anchor": "#top",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:method/momentum",
+   "type": "Method",
+   "label": {
+    "ko": "모멘텀",
+    "en": "Momentum"
+   },
+   "page": "2_experiment_lab",
+   "anchor": "#sum",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "지난 걸음의 방향을 이어 받아 걷는 경사하강 변형."
+   }
+  },
+  {
+   "id": "lab:method/adam",
+   "type": "Method",
+   "label": {
+    "ko": "Adam",
+    "en": "Adam optimizer"
+   },
+   "page": "2_experiment_lab",
+   "anchor": "#sum",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "가중치마다 기울기 크기를 따로 기억해 보폭을 맞추는 최적화 방법."
+   }
+  },
+  {
+   "id": "lab:method/learning-rate-schedule",
+   "type": "Method",
+   "label": {
+    "ko": "학습률 일정(워밍업·감소)",
+    "en": "Learning-rate schedule"
+   },
+   "page": "2_experiment_lab",
+   "anchor": "#sum",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "학습 중에 학습률을 바꾸는 방법. 처음엔 올리고 나중엔 줄인다."
+   }
+  },
+  {
+   "id": "lab:claim/linear-scaling-warmup",
+   "type": "Claim",
+   "label": {
+    "ko": "배치를 키우면 학습률도 비례해 키우고 워밍업을 함께 쓰면 큰 배치로도 정확도를 지킬 수 있다",
+    "en": "Linear scaling rule with warmup for large minibatches"
+   },
+   "page": "2_experiment_lab",
+   "anchor": "#sum",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "source": [
+    {
+     "ref": "goyal2017accurate",
+     "loc": "2장"
+    }
+   ]
+  },
+  {
+   "id": "lab:claim/momentum-accelerates",
+   "type": "Claim",
+   "label": {
+    "ko": "모멘텀은 반복법의 수렴을 빠르게 한다",
+    "en": "Momentum accelerates convergence"
+   },
+   "page": "2_experiment_lab",
+   "anchor": "#sum",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "source": [
+    {
+     "ref": "polyak1964some",
+     "loc": "본문"
+    }
+   ]
+  },
+  {
+   "id": "lab:claim/adam-adaptive",
+   "type": "Claim",
+   "label": {
+    "ko": "Adam은 기울기의 1·2차 모멘트 추정으로 매개변수마다 보폭을 맞춘다",
+    "en": "Adam adapts per-parameter step sizes"
+   },
+   "page": "2_experiment_lab",
+   "anchor": "#sum",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "source": [
+    {
+     "ref": "kingma2015adam",
+     "loc": "1·2장"
+    }
+   ]
+  },
+  {
    "id": "lab:claim/mlfs39-numbers-reproduced",
    "type": "Claim",
    "label": {
@@ -1528,6 +1726,90 @@
    "p": "lab:raises",
    "o": "lab:question/p2-batch-duel",
    "anchor": "#duel",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/momentum",
+   "p": "lab:relatedTo",
+   "o": "lab:method/learning-rate-sweep",
+   "anchor": "#sum",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/momentum",
+   "p": "lab:broader",
+   "o": "lab:topic/gradient-descent",
+   "anchor": "#sum",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/adam",
+   "p": "lab:relatedTo",
+   "o": "lab:method/learning-rate-sweep",
+   "anchor": "#sum",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/adam",
+   "p": "lab:broader",
+   "o": "lab:topic/gradient-descent",
+   "anchor": "#sum",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/learning-rate-schedule",
+   "p": "lab:relatedTo",
+   "o": "lab:method/learning-rate-sweep",
+   "anchor": "#sum",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/learning-rate-schedule",
+   "p": "lab:broader",
+   "o": "lab:topic/gradient-descent",
+   "anchor": "#sum",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/linear-scaling-warmup",
+   "p": "lab:supports",
+   "o": "lab:method/learning-rate-schedule",
+   "anchor": "#sum",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/linear-scaling-warmup",
+   "p": "lab:assertedIn",
+   "o": "lab:work/goyal2017accurate",
+   "anchor": "#sum",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/momentum-accelerates",
+   "p": "lab:supports",
+   "o": "lab:method/momentum",
+   "anchor": "#sum",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/momentum-accelerates",
+   "p": "lab:assertedIn",
+   "o": "lab:work/polyak1964some",
+   "anchor": "#sum",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/adam-adaptive",
+   "p": "lab:supports",
+   "o": "lab:method/adam",
+   "anchor": "#sum",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/adam-adaptive",
+   "p": "lab:assertedIn",
+   "o": "lab:work/kingma2015adam",
+   "anchor": "#sum",
    "confidence": "high"
   },
   {

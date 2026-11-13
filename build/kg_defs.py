@@ -47,6 +47,23 @@ REFS = {
         [{"family": "Li", "given": "Hao"}, {"family": "Xu", "given": "Zheng"}, {"family": "Taylor", "given": "Gavin"}, {"family": "Studer", "given": "Christoph"}, {"family": "Goldstein", "given": "Tom"}],
         2018, "Advances in Neural Information Processing Systems 31", {"URL": "https://arxiv.org/abs/1712.09913"}, supports=s, locs=[{"claim": "lab:claim/random-direction-slices", "loc": "3장 (무작위 방향 단면, 필터 정규화)"}],
         verified={"title": True, "author": True, "year": True, "container": True, "pages": False, "doi": False}, checked="웹 검색 2026-11-14 (NeurIPS 논문 페이지, arXiv 1712.09913)"),
+ "goyal2017accurate": lambda s: ref("goyal2017accurate", "article", "Accurate, Large Minibatch SGD: Training ImageNet in 1 Hour",
+        [{"family": "Goyal", "given": "Priya"}, {"family": "Dollár", "given": "Piotr"}, {"family": "Girshick", "given": "Ross"}, {"family": "Noordhuis", "given": "Pieter"}, {"family": "Wesolowski", "given": "Lukasz"}, {"family": "Kyrola", "given": "Aapo"}, {"family": "Tulloch", "given": "Andrew"}, {"family": "Jia", "given": "Yangqing"}, {"family": "He", "given": "Kaiming"}],
+        2017, "arXiv", {"number": "1706.02677", "URL": "https://arxiv.org/abs/1706.02677"}, supports=s,
+        verified={"title": True, "author": True, "year": True, "container": True, "pages": False, "doi": False}, checked="제작자 지식 — 원문 대조 안 함"),
+ "he2016deep": lambda s: ref("he2016deep", "paper-conference", "Deep Residual Learning for Image Recognition",
+        [{"family": "He", "given": "Kaiming"}, {"family": "Zhang", "given": "Xiangyu"}, {"family": "Ren", "given": "Shaoqing"}, {"family": "Sun", "given": "Jian"}],
+        2016, "Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR)", {"page": "770-778"}, supports=s,
+        verified={"title": True, "author": True, "year": True, "container": True, "pages": False, "doi": False}, checked="제작자 지식 — 원문 대조 안 함"),
+ "ioffe2015batch": lambda s: ref("ioffe2015batch", "paper-conference", "Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift",
+        [{"family": "Ioffe", "given": "Sergey"}, {"family": "Szegedy", "given": "Christian"}], 2015, "Proceedings of the 32nd International Conference on Machine Learning (ICML)", None, supports=s,
+        verified={"title": True, "author": True, "year": True, "container": True, "pages": False, "doi": False}, checked="제작자 지식 — 원문 대조 안 함"),
+ "polyak1964some": lambda s: ref("polyak1964some", "article-journal", "Some methods of speeding up the convergence of iteration methods",
+        [{"family": "Polyak", "given": "Boris T."}], 1964, "USSR Computational Mathematics and Mathematical Physics", {"volume": "4", "issue": "5"}, supports=s,
+        verified={"title": True, "author": True, "year": True, "container": True, "pages": False, "doi": False}, checked="제작자 지식 — 원문 대조 안 함"),
+ "kingma2015adam": lambda s: ref("kingma2015adam", "paper-conference", "Adam: A Method for Stochastic Optimization",
+        [{"family": "Kingma", "given": "Diederik P."}, {"family": "Ba", "given": "Jimmy"}], 2015, "International Conference on Learning Representations (ICLR)", {"URL": "https://arxiv.org/abs/1412.6980"}, supports=s,
+        verified={"title": True, "author": True, "year": True, "container": True, "pages": False, "doi": False}, checked="제작자 지식 — 원문 대조 안 함"),
 }
 
 # ── 그래프 도우미 ──────────────────────────────────────────
@@ -63,7 +80,7 @@ class G:
     def e(s, a, p, b, anchor, conf="high"): s.edges.append({"s": a, "p": "lab:" + p, "o": b, "anchor": anchor, "confidence": conf})
     def work(s, rid, ko, en): return s.n("lab:work/" + rid, "Work", ko, en, "#top", 1, family="optimization")
     def dump(s, n):
-        (B / f"kg_{n}.json").write_text(json.dumps({"version": "1.0", "page": s.page, "nodes": s.nodes, "edges": s.edges}, ensure_ascii=False, indent=1))
+        (B / f"kg_{n}.json").write_text(json.dumps({"version": "1.1", "page": s.page, "nodes": s.nodes, "edges": s.edges}, ensure_ascii=False, indent=1))
 
 T_CALC, T_GD, T_BP, T_LOSS, T_SGD = "lab:topic/calculus-optimization-math", "lab:topic/gradient-descent", "lab:topic/backpropagation", "lab:topic/loss-function", "lab:topic/sgd-minibatch"
 
@@ -151,8 +168,12 @@ W = {k: g.work(k, ko, en) for k, ko, en in [
     ("mlfs43", "ML from Scratch 43 — 하이퍼파라미터", "ML from Scratch 43 — hyperparameters"),
     ("dauphin2014identifying", "Dauphin 외 2014", "Dauphin et al. 2014"),
     ("goodfellow2016deep", "Goodfellow 외 2016 Deep Learning", "Goodfellow et al. 2016 Deep Learning"),
-    ("rumelhart1986learning", "Rumelhart·Hinton·Williams 1986", "Rumelhart, Hinton & Williams 1986")]}
-C = [("lab:claim/normal-is-neg-gradient-lift", "그래프 곡면의 법선은 (−∂f/∂u, −∂f/∂v, 1)이다", "Normal of a graph surface is (−f_u, −f_v, 1)", "#s2", nrm, "matheorems_graph", "영상 수식"),
+    ("rumelhart1986learning", "Rumelhart·Hinton·Williams 1986", "Rumelhart, Hinton & Williams 1986"),
+    ("goyal2017accurate", "Goyal 외 2017", "Goyal et al. 2017"), ("he2016deep", "He 외 2016 ResNet", "He et al. 2016 ResNet"), ("ioffe2015batch", "Ioffe·Szegedy 2015", "Ioffe & Szegedy 2015")]}
+C = [("lab:claim/lr-warmup", "학습 초기에 학습률을 천천히 올리는 워밍업이 큰 배치 학습의 초기 불안정을 줄인다", "Gradual warmup stabilizes early large-batch training", "#s3", lr, "goyal2017accurate", "2.2절"),
+     ("lab:claim/residual-connections", "잔차 연결이 매우 깊은 신경망의 학습을 가능하게 한다", "Residual connections ease training of very deep nets", "#s5", bp, "he2016deep", "본문"),
+     ("lab:claim/batch-normalization", "정규화 층이 깊은 신경망 학습을 빠르고 안정되게 한다", "Normalization layers speed up and stabilize training", "#s5", bp, "ioffe2015batch", "본문"),
+     ("lab:claim/normal-is-neg-gradient-lift", "그래프 곡면의 법선은 (−∂f/∂u, −∂f/∂v, 1)이다", "Normal of a graph surface is (−f_u, −f_v, 1)", "#s2", nrm, "matheorems_graph", "영상 수식"),
      ("lab:claim/curl-grad-zero", "그래디언트의 회전과 회전의 발산은 늘 0이다", "Curl of gradient and divergence of curl vanish", "#s2", curl0, "matharium_vecops", "How they connect"),
      ("lab:claim/laplacian-examples", "∇²(x² + y²) = 4, ∇²(x² − y²) = 0", "Laplacian examples", "#s3", lap, "matharium_vecops", "Laplacian 칸"),
      ("lab:claim/crisp-doubly-ruled", "쌍곡포물면은 곧은 선 두 무리를 품는다", "A hyperbolic paraboloid is doubly ruled", "#s4", rul, "matharium_crisp", "아래 문구"),
@@ -170,7 +191,7 @@ QL = {"s1": "단면 위 한 걸음", "s2": "법선과 그래디언트", "s3": "�
 for sec, k, tgt in Q:
     qid = f"lab:quiz/p1-{sec}-{k}"; g.n(qid, "QuizItem", f"{QL[sec]} 문제 {k}", f"Quiz {sec}-{k}", "#" + sec, 2); g.e(qid, "assesses", tgt, "#" + sec)
 g.dump(1)
-used1 = {"matharium_crisp": [rul, hyp], "matharium_vecops": [curl0, lap], "matharium_gjh": [hes, jac, grad], "matheorems_graph": [nrm, tan],
+used1 = {"goyal2017accurate": [lr], "he2016deep": [bp], "ioffe2015batch": [bp], "matharium_crisp": [rul, hyp], "matharium_vecops": [curl0, lap], "matharium_gjh": [hes, jac, grad], "matheorems_graph": [nrm, tan],
          "mlfs39": [neuron], "mlfs43": [lr], "dauphin2014identifying": [sad], "goodfellow2016deep": [lim], "rumelhart1986learning": [bp]}
 (B / "refs_1.json").write_text(json.dumps([REFS[k](v) for k, v in used1.items()], ensure_ascii=False, indent=1))
 
@@ -232,8 +253,16 @@ W = {k: g.work(k, ko, en) for k, ko, en in [
     ("mlfs43", "ML from Scratch 43 — 하이퍼파라미터", "ML from Scratch 43 — hyperparameters"),
     ("li2018visualizing", "Li 외 2018", "Li et al. 2018"),
     ("goodfellow2016deep", "Goodfellow 외 2016 Deep Learning", "Goodfellow et al. 2016 Deep Learning"),
-    ("matharium_gjh", "matharium — Gradient, Jacobian and Hessian", "matharium — Gradient, Jacobian and Hessian")]}
-C = [("lab:claim/mlfs39-numbers-reproduced", "39편 설명글의 숫자(7.869, 0.993, 0.956, 오르막 41걸음)가 영상 코드로 그대로 재현된다", "Part 39 numbers reproduce", "#sum", mb, "mlfs39", "설명글, 영상 코드 minibatch.py"),
+    ("matharium_gjh", "matharium — Gradient, Jacobian and Hessian", "matharium — Gradient, Jacobian and Hessian"),
+    ("goyal2017accurate", "Goyal 외 2017", "Goyal et al. 2017"), ("polyak1964some", "Polyak 1964", "Polyak 1964"), ("kingma2015adam", "Kingma·Ba 2015 Adam", "Kingma & Ba 2015 Adam")]}
+mom = g.n("lab:method/momentum", "Method", "모멘텀", "Momentum", "#sum", 2, "지난 걸음의 방향을 이어 받아 걷는 경사하강 변형.")
+adam = g.n("lab:method/adam", "Method", "Adam", "Adam optimizer", "#sum", 2, "가중치마다 기울기 크기를 따로 기억해 보폭을 맞추는 최적화 방법.")
+sch = g.n("lab:method/learning-rate-schedule", "Method", "학습률 일정(워밍업·감소)", "Learning-rate schedule", "#sum", 2, "학습 중에 학습률을 바꾸는 방법. 처음엔 올리고 나중엔 줄인다.")
+for m_ in (mom, adam, sch): g.e(m_, "relatedTo", sweep, "#sum"); g.e(m_, "broader", T_GD, "#sum")
+C = [("lab:claim/linear-scaling-warmup", "배치를 키우면 학습률도 비례해 키우고 워밍업을 함께 쓰면 큰 배치로도 정확도를 지킬 수 있다", "Linear scaling rule with warmup for large minibatches", "#sum", sch, "goyal2017accurate", "2장"),
+     ("lab:claim/momentum-accelerates", "모멘텀은 반복법의 수렴을 빠르게 한다", "Momentum accelerates convergence", "#sum", mom, "polyak1964some", "본문"),
+     ("lab:claim/adam-adaptive", "Adam은 기울기의 1·2차 모멘트 추정으로 매개변수마다 보폭을 맞춘다", "Adam adapts per-parameter step sizes", "#sum", adam, "kingma2015adam", "1·2장"),
+     ("lab:claim/mlfs39-numbers-reproduced", "39편 설명글의 숫자(7.869, 0.993, 0.956, 오르막 41걸음)가 영상 코드로 그대로 재현된다", "Part 39 numbers reproduce", "#sum", mb, "mlfs39", "설명글, 영상 코드 minibatch.py"),
      ("lab:claim/mlfs43-numbers-reproduced", "43편의 학습률 0.1 검증 오차(목표 분산의 약 2%)가 영상 코드로 재현된다", "Part 43 number reproduces", "#sum", lr, "mlfs43", "설명글, 영상 코드 hyper.py"),
      ("lab:claim/random-direction-slices", "고차원 오차 지형은 무작위 방향으로 자른 1·2차원 단면으로 본다", "High-D landscapes are viewed through random-direction slices", "#s3", rd, "li2018visualizing", "3장"),
      ("lab:claim/lr-limit-quadratic", "2차 함수에서 경사하강은 학습률이 2/λmax보다 작을 때 줄어든다", "GD converges on a quadratic iff lr < 2/λmax", "#s2", lim, "goodfellow2016deep", "4장"),
@@ -246,16 +275,16 @@ QL = {"s1": "배치와 에포크", "s2": "학습률 한계", "s3": "단면", "s4
 for sec, k, tgt in Q:
     qid = f"lab:quiz/p2-{sec}-{k}"; g.n(qid, "QuizItem", f"{QL[sec]} 문제 {k}", f"Quiz {sec}-{k}", "#" + sec, 2); g.e(qid, "assesses", tgt, "#" + sec)
 g.dump(2)
-used2 = {"mlfs39": [mb], "mlfs43": [lr], "li2018visualizing": [rd], "goodfellow2016deep": [lim, es], "matharium_gjh": [hes]}
+used2 = {"goyal2017accurate": [sch], "polyak1964some": [mom], "kingma2015adam": [adam], "mlfs39": [mb], "mlfs43": [lr], "li2018visualizing": [rd], "goodfellow2016deep": [lim, es], "matharium_gjh": [hes]}
 (B / "refs_2.json").write_text(json.dumps([REFS[k](v) for k, v in used2.items()], ensure_ascii=False, indent=1))
 
 # ── 페이지 서지 ──
 def meta(n, title, about, based, slug):
     return {"title": title, "series": "좌표축 위의 그릇 — 3D 지도로 본 모델 최적화", "number": str(n),
             "creator": [{"name": "안상선", "role": "author", "affiliation": "(주)M-Robo"}], "contributor": [{"name": "AI 보조 제작", "role": "assistant"}],
-            "date": TODAY, "version": "1.0", "language": ["ko"], "license": "", "url": BASE + slug, "about": about, "basedOn": based,
+            "date": TODAY, "version": "1.1", "language": ["ko"], "license": "", "url": BASE + slug, "about": about, "basedOn": based,
             "educationalLevel": "입문~중급", "learningResourceType": "interactive explainer", "registry": "KG_00_registry 0.2",
-            "suggestedCitation": f"안상선 (2026). {title}. 좌표축 위의 그릇 — 3D 지도로 본 모델 최적화 {n}, v1.0."}
+            "suggestedCitation": f"안상선 (2026). {title}. 좌표축 위의 그릇 — 3D 지도로 본 모델 최적화 {n}, v1.1."}
 (B / "meta_1.json").write_text(json.dumps(meta(1, "좌표축 위의 그릇 ① 수학 편 — 기울기·굽음·휨으로 읽는 3D 오차 지도",
     ["lab:concept/loss-landscape", "lab:concept/gradient", "lab:concept/hessian", "lab:concept/saddle-point", "lab:concept/jacobian"], list(used1), "1_math_map.html"), ensure_ascii=False, indent=1))
 (B / "meta_2.json").write_text(json.dumps(meta(2, "좌표축 위의 그릇 ② 실험실 편 — 배치·학습률·에포크를 3D 지도 위에서 고르기",

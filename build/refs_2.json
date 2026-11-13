@@ -1,5 +1,181 @@
 [
  {
+  "id": "goyal2017accurate",
+  "type": "article",
+  "title": "Accurate, Large Minibatch SGD: Training ImageNet in 1 Hour",
+  "author": [
+   {
+    "family": "Goyal",
+    "given": "Priya"
+   },
+   {
+    "family": "Dollár",
+    "given": "Piotr"
+   },
+   {
+    "family": "Girshick",
+    "given": "Ross"
+   },
+   {
+    "family": "Noordhuis",
+    "given": "Pieter"
+   },
+   {
+    "family": "Wesolowski",
+    "given": "Lukasz"
+   },
+   {
+    "family": "Kyrola",
+    "given": "Aapo"
+   },
+   {
+    "family": "Tulloch",
+    "given": "Andrew"
+   },
+   {
+    "family": "Jia",
+    "given": "Yangqing"
+   },
+   {
+    "family": "He",
+    "given": "Kaiming"
+   }
+  ],
+  "issued": {
+   "date-parts": [
+    [
+     2017
+    ]
+   ]
+  },
+  "container-title": "arXiv",
+  "number": "1706.02677",
+  "URL": "https://arxiv.org/abs/1706.02677",
+  "accessed": {
+   "date-parts": [
+    [
+     2026,
+     11,
+     14
+    ]
+   ]
+  },
+  "lab": {
+   "work": "lab:work/goyal2017accurate",
+   "role": "background",
+   "supports": [
+    "lab:method/learning-rate-schedule"
+   ],
+   "locs": [],
+   "verified": {
+    "title": true,
+    "author": true,
+    "year": true,
+    "container": true,
+    "pages": false,
+    "doi": false
+   },
+   "checkedBy": "제작자 지식 — 원문 대조 안 함"
+  }
+ },
+ {
+  "id": "polyak1964some",
+  "type": "article-journal",
+  "title": "Some methods of speeding up the convergence of iteration methods",
+  "author": [
+   {
+    "family": "Polyak",
+    "given": "Boris T."
+   }
+  ],
+  "issued": {
+   "date-parts": [
+    [
+     1964
+    ]
+   ]
+  },
+  "container-title": "USSR Computational Mathematics and Mathematical Physics",
+  "volume": "4",
+  "issue": "5",
+  "accessed": {
+   "date-parts": [
+    [
+     2026,
+     11,
+     14
+    ]
+   ]
+  },
+  "lab": {
+   "work": "lab:work/polyak1964some",
+   "role": "background",
+   "supports": [
+    "lab:method/momentum"
+   ],
+   "locs": [],
+   "verified": {
+    "title": true,
+    "author": true,
+    "year": true,
+    "container": true,
+    "pages": false,
+    "doi": false
+   },
+   "checkedBy": "제작자 지식 — 원문 대조 안 함"
+  }
+ },
+ {
+  "id": "kingma2015adam",
+  "type": "paper-conference",
+  "title": "Adam: A Method for Stochastic Optimization",
+  "author": [
+   {
+    "family": "Kingma",
+    "given": "Diederik P."
+   },
+   {
+    "family": "Ba",
+    "given": "Jimmy"
+   }
+  ],
+  "issued": {
+   "date-parts": [
+    [
+     2015
+    ]
+   ]
+  },
+  "container-title": "International Conference on Learning Representations (ICLR)",
+  "URL": "https://arxiv.org/abs/1412.6980",
+  "accessed": {
+   "date-parts": [
+    [
+     2026,
+     11,
+     14
+    ]
+   ]
+  },
+  "lab": {
+   "work": "lab:work/kingma2015adam",
+   "role": "background",
+   "supports": [
+    "lab:method/adam"
+   ],
+   "locs": [],
+   "verified": {
+    "title": true,
+    "author": true,
+    "year": true,
+    "container": true,
+    "pages": false,
+    "doi": false
+   },
+   "checkedBy": "제작자 지식 — 원문 대조 안 함"
+  }
+ },
+ {
   "id": "mlfs39",
   "type": "motion_picture",
   "title": "Machine Learning from Scratch, part 39: mini batch gradient descent",

@@ -1,7 +1,7 @@
 {
  "version": "0.2+optimization_3d_map",
  "updated": "2026-11-14",
- "note": "KG_00_registry 0.2에 없던 ID. ahnboat_lab_explainer/data/KG_00_registry.json에 합칠 때 쓴다. 이미 있던 ID(경사하강, 학습률, 역전파, 과적합)는 그대로 썼다.",
+ "note": "KG_00_registry 0.2에 없던 ID. ahnboat_lab_explainer/data/KG_00_registry.json에 합칠 때 쓴다.",
  "reused": [
   "lab:concept/learning-rate",
   "lab:concept/overfitting",
@@ -369,6 +369,33 @@
    ]
   },
   {
+   "id": "lab:claim/lr-warmup",
+   "type": "Claim",
+   "label_ko": "학습 초기에 학습률을 천천히 올리는 워밍업이 큰 배치 학습의 초기 불안정을 줄인다",
+   "label_en": "Gradual warmup stabilizes early large-batch training",
+   "pages": [
+    "optimization_3d_map/1_math_map"
+   ]
+  },
+  {
+   "id": "lab:claim/residual-connections",
+   "type": "Claim",
+   "label_ko": "잔차 연결이 매우 깊은 신경망의 학습을 가능하게 한다",
+   "label_en": "Residual connections ease training of very deep nets",
+   "pages": [
+    "optimization_3d_map/1_math_map"
+   ]
+  },
+  {
+   "id": "lab:claim/batch-normalization",
+   "type": "Claim",
+   "label_ko": "정규화 층이 깊은 신경망 학습을 빠르고 안정되게 한다",
+   "label_en": "Normalization layers speed up and stabilize training",
+   "pages": [
+    "optimization_3d_map/1_math_map"
+   ]
+  },
+  {
    "id": "lab:claim/normal-is-neg-gradient-lift",
    "type": "Claim",
    "label_ko": "그래프 곡면의 법선은 (−∂f/∂u, −∂f/∂v, 1)이다",
@@ -653,6 +680,60 @@
    "type": "Question",
    "label_ko": "작은 배치냐, 풀배치냐 — 무엇을 같게 두고 견주나?",
    "label_en": "Small batch or full batch — equal steps or equal compute?",
+   "pages": [
+    "optimization_3d_map/2_experiment_lab"
+   ]
+  },
+  {
+   "id": "lab:method/momentum",
+   "type": "Method",
+   "label_ko": "모멘텀",
+   "label_en": "Momentum",
+   "pages": [
+    "optimization_3d_map/2_experiment_lab"
+   ]
+  },
+  {
+   "id": "lab:method/adam",
+   "type": "Method",
+   "label_ko": "Adam",
+   "label_en": "Adam optimizer",
+   "pages": [
+    "optimization_3d_map/2_experiment_lab"
+   ]
+  },
+  {
+   "id": "lab:method/learning-rate-schedule",
+   "type": "Method",
+   "label_ko": "학습률 일정(워밍업·감소)",
+   "label_en": "Learning-rate schedule",
+   "pages": [
+    "optimization_3d_map/2_experiment_lab"
+   ]
+  },
+  {
+   "id": "lab:claim/linear-scaling-warmup",
+   "type": "Claim",
+   "label_ko": "배치를 키우면 학습률도 비례해 키우고 워밍업을 함께 쓰면 큰 배치로도 정확도를 지킬 수 있다",
+   "label_en": "Linear scaling rule with warmup for large minibatches",
+   "pages": [
+    "optimization_3d_map/2_experiment_lab"
+   ]
+  },
+  {
+   "id": "lab:claim/momentum-accelerates",
+   "type": "Claim",
+   "label_ko": "모멘텀은 반복법의 수렴을 빠르게 한다",
+   "label_en": "Momentum accelerates convergence",
+   "pages": [
+    "optimization_3d_map/2_experiment_lab"
+   ]
+  },
+  {
+   "id": "lab:claim/adam-adaptive",
+   "type": "Claim",
+   "label_ko": "Adam은 기울기의 1·2차 모멘트 추정으로 매개변수마다 보폭을 맞춘다",
+   "label_en": "Adam adapts per-parameter step sizes",
    "pages": [
     "optimization_3d_map/2_experiment_lab"
    ]

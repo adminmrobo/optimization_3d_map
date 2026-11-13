@@ -1,5 +1,191 @@
 [
  {
+  "id": "goyal2017accurate",
+  "type": "article",
+  "title": "Accurate, Large Minibatch SGD: Training ImageNet in 1 Hour",
+  "author": [
+   {
+    "family": "Goyal",
+    "given": "Priya"
+   },
+   {
+    "family": "Dollár",
+    "given": "Piotr"
+   },
+   {
+    "family": "Girshick",
+    "given": "Ross"
+   },
+   {
+    "family": "Noordhuis",
+    "given": "Pieter"
+   },
+   {
+    "family": "Wesolowski",
+    "given": "Lukasz"
+   },
+   {
+    "family": "Kyrola",
+    "given": "Aapo"
+   },
+   {
+    "family": "Tulloch",
+    "given": "Andrew"
+   },
+   {
+    "family": "Jia",
+    "given": "Yangqing"
+   },
+   {
+    "family": "He",
+    "given": "Kaiming"
+   }
+  ],
+  "issued": {
+   "date-parts": [
+    [
+     2017
+    ]
+   ]
+  },
+  "container-title": "arXiv",
+  "number": "1706.02677",
+  "URL": "https://arxiv.org/abs/1706.02677",
+  "accessed": {
+   "date-parts": [
+    [
+     2026,
+     11,
+     14
+    ]
+   ]
+  },
+  "lab": {
+   "work": "lab:work/goyal2017accurate",
+   "role": "background",
+   "supports": [
+    "lab:concept/learning-rate"
+   ],
+   "locs": [],
+   "verified": {
+    "title": true,
+    "author": true,
+    "year": true,
+    "container": true,
+    "pages": false,
+    "doi": false
+   },
+   "checkedBy": "제작자 지식 — 원문 대조 안 함"
+  }
+ },
+ {
+  "id": "he2016deep",
+  "type": "paper-conference",
+  "title": "Deep Residual Learning for Image Recognition",
+  "author": [
+   {
+    "family": "He",
+    "given": "Kaiming"
+   },
+   {
+    "family": "Zhang",
+    "given": "Xiangyu"
+   },
+   {
+    "family": "Ren",
+    "given": "Shaoqing"
+   },
+   {
+    "family": "Sun",
+    "given": "Jian"
+   }
+  ],
+  "issued": {
+   "date-parts": [
+    [
+     2016
+    ]
+   ]
+  },
+  "container-title": "Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR)",
+  "page": "770-778",
+  "accessed": {
+   "date-parts": [
+    [
+     2026,
+     11,
+     14
+    ]
+   ]
+  },
+  "lab": {
+   "work": "lab:work/he2016deep",
+   "role": "background",
+   "supports": [
+    "lab:method/backpropagation"
+   ],
+   "locs": [],
+   "verified": {
+    "title": true,
+    "author": true,
+    "year": true,
+    "container": true,
+    "pages": false,
+    "doi": false
+   },
+   "checkedBy": "제작자 지식 — 원문 대조 안 함"
+  }
+ },
+ {
+  "id": "ioffe2015batch",
+  "type": "paper-conference",
+  "title": "Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift",
+  "author": [
+   {
+    "family": "Ioffe",
+    "given": "Sergey"
+   },
+   {
+    "family": "Szegedy",
+    "given": "Christian"
+   }
+  ],
+  "issued": {
+   "date-parts": [
+    [
+     2015
+    ]
+   ]
+  },
+  "container-title": "Proceedings of the 32nd International Conference on Machine Learning (ICML)",
+  "accessed": {
+   "date-parts": [
+    [
+     2026,
+     11,
+     14
+    ]
+   ]
+  },
+  "lab": {
+   "work": "lab:work/ioffe2015batch",
+   "role": "background",
+   "supports": [
+    "lab:method/backpropagation"
+   ],
+   "locs": [],
+   "verified": {
+    "title": true,
+    "author": true,
+    "year": true,
+    "container": true,
+    "pages": false,
+    "doi": false
+   },
+   "checkedBy": "제작자 지식 — 원문 대조 안 함"
+  }
+ },
+ {
   "id": "matharium_crisp",
   "type": "graphic",
   "title": "The geometry of a curved crisp",

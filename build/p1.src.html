@@ -20,7 +20,7 @@
 <!-- lab-cover -->
 <div class="cover" data-img="cover_01"><div class="frame">
   <canvas id="coverCv" aria-hidden="true"></canvas>
-  <span class="cap">연구실 식구가 3D 오차 지도 위에 섰다</span><span class="badge">대체 표지 · 그림 준비 중</span>
+  <span class="cap">연구실 식구가 3D 오차 지도 위에 섰다</span>
   <div class="cast4"><img data-mood="fly_point" alt="" aria-hidden="true"><img data-mood="doc_front" alt="" aria-hidden="true"><img data-mood="asst_smile" alt="" aria-hidden="true"><img data-mood="robo_coin" alt="" aria-hidden="true"></div>
 </div></div>
 <!-- /lab-cover -->
@@ -30,11 +30,12 @@
   <h1>좌표축 위의 그릇 — 기울기·굽음·휨으로 읽는 오차 지도</h1>
   <p class="question">모델은 눈을 가린 채 발밑의 기울기와 굽음만으로 어떻게 골짜기 바닥을 찾을까?</p>
   <p class="lead">신경망이 배우는 일은 <b>가중치</b>라는 숫자들을 고치는 일입니다. 가중치 두 개를 가로·세로 좌표축에 놓고, 그 자리에서 잰 <b>오차</b>를 높이로 세우면 땅 모양의 지도가 생깁니다. 이 페이지는 그 지도 위에서 수학 다섯 가지 — 자르기(단면), 기울기(그래디언트)와 깃대(법선), 굽음(헤시안), 고개(안장점), 휨(야코비안) — 를 하나씩 돌려 봅니다.</p>
-  <p class="byline">글 · 안상선 ((주)M-Robo 대표) · <a href="https://adminmrobo.github.io/who_am_i/who_am_i.html">저자 소개</a> · 2026-11-14 · v1.0</p>
+  <p class="byline">글 · 안상선 ((주)M-Robo 대표) · <a href="https://adminmrobo.github.io/who_am_i/who_am_i.html">저자 소개</a> · 2026-11-14 · v1.1</p>
   <div class="three"><b>세 줄로 먼저</b><ol>
     <li>가중치가 좌표축, 오차가 높이다. 학습은 이 지도에서 낮은 곳으로 걸어가는 일이다.</li>
     <li>한 걸음의 방향은 <b>기울기</b>(1차 미분)가 정하고, 얼마나 크게 디뎌도 되는지는 <b>굽음</b>(2차 미분)이 정한다.</li>
     <li>기울기가 0이어도 바닥이 아닐 수 있다(안장점). 층을 지날 때 지도가 휘는 정도(야코비안)를 곱해 가는 것이 역전파다.</li></ol></div>
+  <div class="start"><b>처음이라면</b> 큰 그림 → ① 자르기 → ② 깃대 → 대결 → 정리 순서로 먼저 보세요. ③ 굽음·⑤ 휨은 두 번째 읽을 때 봐도 됩니다. 수식은 "수식으로 보기"를 펼칠 때만 나옵니다.</div>
   <div class="kpis" aria-label="숫자 요약">
     <div class="kpi g"><b>2개</b><span>지도의 좌표축 (w, b)<sup>①</sup></span></div>
     <div class="kpi m"><b id="k-bot">—</b><span>그릇 바닥의 오차<sup>①</sup></span></div>
@@ -138,6 +139,7 @@
     <div class="minis"><div class="mini r"><span>∂f/∂u (빨강 접선의 경사)</span><b id="m2-fu">—</b></div><div class="mini m"><span>∂f/∂v (청록 접선의 경사)</span><b id="m2-fv">—</b></div><div class="mini g"><span>|∇f| 가장 가파른 경사</span><b id="m2-gn">—</b></div><div class="mini a"><span>법선 n</span><b id="m2-n">—</b></div></div>
     <div class="insight" id="i-s2" aria-live="polite"></div>
   </div>
+  <p class="gut">한 줄 직관: 땅에 직각으로 꽂은 깃대는 내리막 쪽으로 기울고, 그 그림자가 공이 굴러갈 방향이다.</p>
   <div class="explain"><h4>풀이</h4><ol>
     <li>곡면을 그래프 x = u, y = v, z = f(u, v)로 쓰면, u 격자선 방향의 접선은 t<sub>u</sub> = (1, 0, ∂f/∂u), v 격자선 방향은 t<sub>v</sub> = (0, 1, ∂f/∂v)입니다.</li>
     <li>두 접선의 외적이 법선입니다: t<sub>u</sub> × t<sub>v</sub> = (−∂f/∂u, −∂f/∂v, 1). 직접 곱해 보면 맞습니다.</li>
@@ -172,6 +174,7 @@
     <div class="minis"><div class="mini a"><span>헤시안 H</span><b id="m3-H" style="font-size:16px">—</b></div><div class="mini m"><span>라플라시안 λ₁ + λ₂</span><b id="m3-lap">—</b></div><div class="mini r"><span>보폭 한계 2/λ<sub>max</sub></span><b id="m3-lim">—</b></div><div class="mini g"><span>땅의 이름</span><b id="m3-kind">—</b></div></div>
     <div class="insight" id="i-s3" aria-live="polite"></div>
   </div>
+  <p class="gut">한 줄 직관: 그릇 벽이 가파를수록 한 걸음을 작게 디뎌야 반대쪽 벽으로 튀어 나가지 않는다.</p>
   <div class="explain"><h4>풀이</h4><ol>
     <li>헤시안은 "기울기가 얼마나 빨리 바뀌나"를 방향마다 적은 2×2 표입니다. 표를 돌려 놓고 봐도 변하지 않는 두 숫자가 고유값 λ₁, λ₂입니다.</li>
     <li>둘 다 양수면 <b>그릇</b>(바닥), 둘 다 음수면 <b>봉우리</b>, 부호가 다르면 <b>안장</b>(고개)입니다. 고유값의 합이 라플라시안입니다. 그릇 x² + y²는 4, 안장 x² − y²는 0입니다.</li>
@@ -181,7 +184,7 @@
   <details class="fold"><summary>수식으로 보기 — 왜 2/λ인가</summary>
     <p>2차 함수 f(θ) = ½ θᵀHθ에서 경사하강 θ ← θ − η Hθ = (I − ηH)θ. 고유 방향마다 거리가 (1 − ηλᵢ)배가 됩니다. 모든 방향에서 |1 − ηλᵢ| &lt; 1이어야 줄어들므로 0 &lt; η &lt; 2/λ<sub>max</sub>. λᵢ &lt; 0인 방향은 어떤 η에서도 거리가 커집니다(그쪽은 내리막이 계속됨).</p>
     <p style="margin:0"><math display="block" aria-label="헤시안 행렬은 2차 편미분 네 개를 모은 2행 2열 행렬"><mi>H</mi><mo>=</mo><mrow><mo>[</mo><mtable><mtr><mtd><mfrac><mrow><msup><mo>∂</mo><mn>2</mn></msup><mi>f</mi></mrow><mrow><mo>∂</mo><msubsup><mi>w</mi><mn>1</mn><mn>2</mn></msubsup></mrow></mfrac></mtd><mtd><mfrac><mrow><msup><mo>∂</mo><mn>2</mn></msup><mi>f</mi></mrow><mrow><mo>∂</mo><msub><mi>w</mi><mn>1</mn></msub><mo>∂</mo><msub><mi>w</mi><mn>2</mn></msub></mrow></mfrac></mtd></mtr><mtr><mtd><mfrac><mrow><msup><mo>∂</mo><mn>2</mn></msup><mi>f</mi></mrow><mrow><mo>∂</mo><msub><mi>w</mi><mn>2</mn></msub><mo>∂</mo><msub><mi>w</mi><mn>1</mn></msub></mrow></mfrac></mtd><mtd><mfrac><mrow><msup><mo>∂</mo><mn>2</mn></msup><mi>f</mi></mrow><mrow><mo>∂</mo><msubsup><mi>w</mi><mn>2</mn><mn>2</mn></msubsup></mrow></mfrac></mtd></mtr></mtable><mo>]</mo></mrow></math></p></details>
-  <div class="bridge gen"><b>생성 AI로 치면</b> 큰 언어 모델을 학습할 때 처음 몇천 걸음은 학습률을 0에서 천천히 올리는 "워밍업"을 흔히 씁니다. 학습 초기에는 지형이 가팔라(λ가 커서) 큰 보폭이 위험하다는 설명이 많이 쓰입니다.<div class="lim">비유의 한계: 실제 대형 모델에서 헤시안을 다 계산하지는 않습니다. 가중치가 수십억 개라 표 자체가 너무 큽니다.</div></div>
+  <div class="bridge gen"><b>생성 AI로 치면</b> 큰 모델을 학습할 때는 처음 일정 걸음 동안 학습률을 작은 값에서 천천히 올리는 "워밍업"을 씁니다. 큰 배치로 학습할 때 초기 불안정을 줄이려고 도입된 방법으로 알려져 있습니다[9]. 이 페이지의 말로 옮기면, 출발 지점의 지형이 가팔라도(λ가 커도) 첫 걸음이 튀지 않게 보폭을 늦게 키우는 셈입니다. 다만 워밍업이 왜 효과가 있는지는 아직 연구가 이어지는 주제입니다.<div class="lim">비유의 한계: 실제 대형 모델에서 헤시안을 다 계산하지는 않습니다. 가중치가 수십억 개라 표 자체가 너무 큽니다.</div></div>
   <div data-dlg="s3"></div>
   <div class="quiz" data-quiz="s3"></div>
 </div></section>
@@ -226,8 +229,10 @@
   </div>
   <div class="panel">
     <div class="ptitle">고무판 실험 — 원이 타원이 되는 모습</div>
-    <div class="cwrap tall"><canvas id="cvS5" aria-label="왼쪽 입력 평면의 모눈과 작은 원이 오른쪽 출력 평면에서 휘어진 모눈과 타원이 되는 그림"></canvas><span class="hint">왼쪽 판을 눌러 점 옮기기</span></div>
+    <div class="cwrap tall"><canvas id="cvS5" aria-label="왼쪽 입력 평면의 모눈과 작은 원이 오른쪽 출력 평면에서 휘어진 모눈과 타원이 되는 그림"></canvas><span class="hint">왼쪽 판을 누르거나 아래 슬라이더로 점 옮기기</span></div>
     <div class="ctrl">
+      <div class="group"><label class="glabel" for="r-x1">점 x₁</label><input type="range" id="r-x1" min="-2" max="2" step="0.05" value="0.35"><span class="val" id="v-x1">0.35</span></div>
+      <div class="group"><label class="glabel" for="r-x2">점 x₂</label><input type="range" id="r-x2" min="-2" max="2" step="0.05" value="0.25"><span class="val" id="v-x2">0.25</span></div>
       <div class="group"><span class="glabel">층의 가중치 W</span><span id="g-W"></span></div>
       <div class="group"><button class="bt" id="t-l2" type="button" aria-pressed="false">층 하나 더 (연쇄)</button></div>
     </div>
@@ -235,16 +240,17 @@
     <div class="minis"><div class="mini a"><span>야코비안 J</span><b id="m5-J" style="font-size:16px">—</b></div><div class="mini m"><span>넓이 배율 |det J|</span><b id="m5-det">—</b></div><div class="mini g"><span>점 x</span><b id="m5-x">—</b></div><div class="mini r"><span>tanh 기울기 (1 − tanh²)</span><b id="m5-s">—</b></div></div>
     <div class="insight" id="i-s5" aria-live="polite"></div>
   </div>
+  <p class="gut">한 줄 직관: 층 하나는 고무판을 당기는 손이고, 야코비안은 작은 동그라미가 어떤 타원이 되는지 적은 표다.</p>
   <div class="explain"><h4>풀이</h4><ol>
     <li>J의 (i, j) 칸 = ∂F<sub>i</sub>/∂x<sub>j</sub>: "입력 j를 조금 움직이면 출력 i가 얼마나 움직이나". tanh 층에서는 J = diag(1 − tanh²(Wx))·W입니다.</li>
     <li>|det J|는 작은 넓이가 몇 배가 되는지입니다. 0에 가까우면 평면이 납작하게 눌려 정보가 뭉개집니다. tanh가 포화된 곳(|Wx|가 큰 곳)에서는 1 − tanh²가 0에 가까워 J가 작아집니다.</li>
     <li>"층 하나 더"를 켜면 두 층을 이어 붙인 지도의 야코비안이 J₂·J₁로 곱해집니다(연쇄 법칙). 역전파는 오차의 기울기에 이 표들을 <b>뒤에서부터</b> 곱해 앞 층까지 전하는 계산입니다.</li>
     <li>곡면 z = f(u, v)를 x = u, y = v, z = f로 보는 지도의 야코비안은 3×2 표이고, 두 열이 ②의 접선 t<sub>u</sub>, t<sub>v</sub>입니다. 참고한 영상은 같은 표를 눕혀(2×3, 행이 접선) 썼습니다. 이 페이지는 행 = 출력, 열 = 입력인 표준 표기로 통일했습니다.</li></ol>
-    <div class="lim">이 칸의 한계: 야코비안은 1차(직선) 근사라 원이 클수록 실제 모양(주황)과 타원(초록 점선)이 어긋납니다. 그래도 학습의 한 걸음은 작기 때문에 이 근사로 충분합니다.</div></div>
+    <div class="lim">이 칸의 한계: 야코비안은 1차(직선) 근사라 원이 클수록 실제 모양(주황)과 타원(초록 점선)이 어긋납니다. 학습률이 작아 한 걸음이 작을 때는 대체로 잘 맞지만, 걸음이 크면 어긋남이 커집니다.</div></div>
   <details class="fold"><summary>수식으로 보기 — 역전파는 야코비안의 곱</summary>
     <p>오차 L이 출력 h₂ = F₂(h₁), h₁ = F₁(x)를 거쳐 나올 때 ∂L/∂x = (∂L/∂h₂)·J₂·J₁. 가중치에 대한 기울기도 같은 사슬에 마지막 고리만 바꿔 얻습니다. 실제 계산은 큰 J를 만들지 않고 "벡터 × J"만 차례로 구해(벡터-야코비안 곱) 비용을 줄입니다.</p>
     <p style="margin:0"><math display="block" aria-label="야코비안 J는 출력 F i를 입력 x j로 편미분한 값을 모은 m행 n열 행렬"><msub><mi>J</mi><mi>F</mi></msub><mo>(</mo><mi mathvariant="bold">x</mi><mo>)</mo><mo>=</mo><msub><mrow><mo>[</mo><mfrac><mrow><mo>∂</mo><msub><mi>F</mi><mi>i</mi></msub></mrow><mrow><mo>∂</mo><msub><mi>x</mi><mi>j</mi></msub></mrow></mfrac><mo>]</mo></mrow><mrow><mi>m</mi><mo>×</mo><mi>n</mi></mrow></msub></math></p></details>
-  <div class="bridge gen"><b>생성 AI로 치면</b> 트랜스포머처럼 층이 수십~백여 개인 모델에서는 야코비안을 수십 번 곱합니다. 곱할수록 아주 작아지거나(기울기 소실) 커질(기울기 폭발) 수 있어, 잔차 연결·정규화 층처럼 J를 1 근처로 붙잡는 장치가 들어갑니다.<div class="lim">비유의 한계: 고무판은 2차원이지만 실제 층은 수천 차원이라 "타원"은 수천 개의 축을 가진 타원체입니다.</div></div>
+  <div class="bridge gen"><b>생성 AI로 치면</b> 트랜스포머처럼 층이 많은 모델에서는 야코비안을 여러 번 곱합니다. 곱할수록 기울기가 아주 작아지거나(기울기 소실) 커질(기울기 폭발) 수 있습니다. 그래서 층을 건너뛰는 잔차 연결[10]과 정규화 층[11] 같은 장치를 넣어 깊은 신경망이 잘 학습되게 합니다. 이 장치들이 기울기 흐름을 어떻게 돕는지는 이 페이지 범위 밖이라 자세히 다루지 않습니다.<div class="lim">비유의 한계: 고무판은 2차원이지만 실제 층은 수천 차원이라 "타원"은 수천 개의 축을 가진 타원체입니다.</div></div>
   <div data-dlg="s5"></div>
   <div class="quiz" data-quiz="s5"></div>
 </div></section>
@@ -254,7 +260,7 @@
   <h2 id="h-duel">대결 — 기울기 0이면 바닥인가?</h2>
   <p class="lead">땅: f(w₁, w₂) = (w₁² − 1)² + w₂². 바닥은 (±1, 0) 두 곳(오차 0), 가운데 (0, 0)은 고개(오차 1)입니다. 공은 능선 위 (0, 1.5)에서 출발하고 학습률 0.05로 내려갑니다. 판정 기준은 <b>멈춘 곳의 오차</b>(낮을수록 좋음)입니다.</p>
   <div class="duel">
-    <div class="side l"><div class="head"><img id="d-fly" data-mood="fly_point" alt="" aria-hidden="true"><div><b style="color:var(--c-fly)">초파리 연구원</b><br><span class="muted">기울기가 0에 가까우면 헤시안 고유값을 본다. 음수가 있으면 그 방향으로 한 발 비켜 선다.</span></div></div><div data-dlg="dfly"></div></div>
+    <div class="side l"><div class="head"><img id="d-fly" data-mood="fly_point" alt="" aria-hidden="true"><div><b style="color:var(--c-fly)">초파리 연구원</b><br><span class="muted">기울기가 0에 가까우면 헤시안 고유값을 본다. 음수가 있으면 가장 작은 고유값의 고유벡터 방향으로 한 발 비켜 선다.</span></div></div><div data-dlg="dfly"></div></div>
     <div class="vs">VS</div>
     <div class="side r"><div class="head"><img id="d-robo" data-mood="robo_coin" alt="" aria-hidden="true"><div><b style="color:var(--c-robo)">주판봇</b><br><span class="muted">기울기만 본다. 기울기가 0이 되면 그곳이 바닥이라고 보고 멈춘다.</span></div></div><div data-dlg="drobo"></div></div>
   </div>
@@ -311,14 +317,17 @@
 <footer><div class="wrap">
   <h3>출처</h3>
   <table><thead><tr><th>#</th><th>자료</th><th>이 페이지에서 쓴 곳</th></tr></thead><tbody>
-    <tr><td>[1]</td><td>matharium, 「The geometry of a curved crisp」 인포그래픽 (사용자 제공 이미지)</td><td>④ 쌍곡포물면, 두 단면, 곧은 선 두 무리. 그림은 쓰지 않고 새로 그렸음</td></tr>
-    <tr><td>[2]</td><td>matharium, 「The Vector Differential Operators」 인포그래픽 (사용자 제공 이미지)</td><td>② 회전 = 0 항등식, ③ 라플라시안 예 (∇²(x²+y²) = 4, ∇²(x²−y²) = 0)</td></tr>
-    <tr><td>[3]</td><td>matharium, 「Gradient, Jacobian and Hessian」 인포그래픽 (사용자 제공 이미지)</td><td>②·③·⑤ 정의와 쓰임</td></tr>
-    <tr><td>[4]</td><td>matheorems, 그래프 곡면의 야코비안·법선 영상 (사용자 제공 영상, z = sin u cos v)</td><td>② 접선 t<sub>u</sub>, t<sub>v</sub>와 법선, ⑤ 표기 차이 각주</td></tr>
-    <tr><td>[5]</td><td>Machine Learning from Scratch, part 39 (mini batch gradient descent), part 43 (hyperparameters) — Facebook 릴스 (사용자 제공 영상과 설명글)</td><td>뉴런 하나 (w, b) 그릇 아이디어, 학습률 공식. 수치는 이 페이지가 따로 계산함</td></tr>
+    <tr><td>[1]</td><td>matharium, 「The geometry of a curved crisp」 인포그래픽 (사용자 제공 이미지, 원 게시물 주소·게시일 미확인)</td><td>④ 쌍곡포물면, 두 단면, 곧은 선 두 무리. 그림은 쓰지 않고 새로 그렸음</td></tr>
+    <tr><td>[2]</td><td>matharium, 「The Vector Differential Operators」 인포그래픽 (사용자 제공 이미지, 원 게시물 주소·게시일 미확인)</td><td>② 회전 = 0 항등식, ③ 라플라시안 예 (∇²(x²+y²) = 4, ∇²(x²−y²) = 0)</td></tr>
+    <tr><td>[3]</td><td>matharium, 「Gradient, Jacobian and Hessian」 인포그래픽 (사용자 제공 이미지, 원 게시물 주소·게시일 미확인)</td><td>②·③·⑤ 정의와 쓰임</td></tr>
+    <tr><td>[4]</td><td>matheorems, 그래프 곡면의 야코비안·법선 영상 (사용자 제공 영상, z = sin u cos v · 제목은 내용을 보고 붙인 설명 제목 · 원 게시물 주소·게시일 미확인)</td><td>② 접선 t<sub>u</sub>, t<sub>v</sub>와 법선, ⑤ 표기 차이 각주</td></tr>
+    <tr><td>[5]</td><td>Machine Learning from Scratch, part 39 (mini batch gradient descent), part 43 (hyperparameters) — Facebook 릴스 (사용자 제공 영상과 설명글, 원 게시물 주소·게시일 미확인)</td><td>뉴런 하나 (w, b) 그릇 아이디어, 학습률 공식. 수치는 이 페이지가 따로 계산함</td></tr>
     <tr><td>[6]</td><td>Dauphin, Y. N. 외 (2014). Identifying and attacking the saddle point problem in high-dimensional non-convex optimization. NeurIPS 27.</td><td>④ 고차원 지형에 안장점이 많다는 주장</td></tr>
     <tr><td>[7]</td><td>Goodfellow, I., Bengio, Y., Courville, A. (2016). Deep Learning. MIT Press. 4장 수치 계산</td><td>③ 헤시안·고유값·학습률 한계의 배경</td></tr>
     <tr><td>[8]</td><td>Rumelhart, D. E., Hinton, G. E., Williams, R. J. (1986). Learning representations by back-propagating errors. Nature 323.</td><td>⑤ 역전파</td></tr>
+    <tr><td>[9]</td><td>Goyal, P. 외 (2017). Accurate, Large Minibatch SGD: Training ImageNet in 1 Hour. arXiv:1706.02677.</td><td>③ 생성 AI 상자의 학습률 워밍업</td></tr>
+    <tr><td>[10]</td><td>He, K., Zhang, X., Ren, S., Sun, J. (2016). Deep Residual Learning for Image Recognition. CVPR.</td><td>⑤ 생성 AI 상자의 잔차 연결</td></tr>
+    <tr><td>[11]</td><td>Ioffe, S., Szegedy, C. (2015). Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift. ICML.</td><td>⑤ 생성 AI 상자의 정규화 층</td></tr>
   </tbody></table>
   <h3>예시값·설명용 모형인 것</h3>
   <ul><li>모든 3D 지도와 그래프의 데이터(직선 주변 점 1,000개, 시드 39)와 그 결과 수치</li><li>③의 2차 곡면, ④의 감자칩 곡면, ⑤의 층 가중치 W, 대결의 땅 (w₁² − 1)² + w₂²</li><li>표지 그림은 대체 표지(그림 준비 중)</li></ul>
@@ -375,10 +384,10 @@ $('#k-bot').textContent=fmt(O.L,3);$('#k-eig').textContent=fmt(HS.lmin,1)+' · '
 
 /* ── 큰 그림 지도 ── */
 var spin=false;
-var Smap=new U.Surf3D($('#cvMap'),{f:bowl,xr:WR,yr:BR,n:30,axes:['w (가중치)','b (편향)','오차'],stamp:'설명용 모형 · 실제 데이터 아님',
+var Smap=new U.Surf3D($('#cvMap'),{f:bowl,xr:WR,yr:BR,n:30,views:false,axes:['w (가중치)','b (편향)','오차'],stamp:'설명용 모형 · 실제 데이터 아님',
   onTick:function(dt){if(spin&&dt>0){Smap.yaw+=dt*0.35;Smap.dirty=true;}}});
 Smap.ov.push(function(g,S){S.dot3(g,-1,-1,bowl(-1,-1),cssv('--amber'),6);U.label(g,S.P(-1,-1,bowl(-1,-1))[0]+10,S.P(-1,-1,bowl(-1,-1))[1],'출발점',cssv('--amber'));
-  var q=S.dot3(g,O.w,O.b,O.L,cssv('--gfp'),6);U.label(g,q[0]+10,q[1],'바닥',cssv('--gfp'));var q0=S.P(O.w,O.b,S.zr[0]);g.setLineDash([3,3]);g.strokeStyle='rgba(94,227,156,.7)';g.beginPath();g.moveTo(q[0],q[1]);g.lineTo(q0[0],q0[1]);g.stroke();g.setLineDash([]);});
+  var q=S.dot3(g,O.w,O.b,O.L,cssv('--gfp'),6);U.label(g,q[0]+10,q[1],'바닥',cssv('--gfp'));var q0=S.P(O.w,O.b,S.zr[0]);g.setLineDash([3,3]);g.strokeStyle='rgba(23,131,76,.7)';g.beginPath();g.moveTo(q[0],q[1]);g.lineTo(q0[0],q0[1]);g.stroke();g.setLineDash([]);});
 U.btns($('#g-view'),[['side','비스듬히'],['top','하늘에서 (초파리 시점)'],['low','낮게']],'side',function(v){if(v==='top')Smap.view(0,1.5);else if(v==='low')Smap.view(-0.9,0.25);else Smap.view(-0.75,0.62);
   U.ins($('#i-map'),[v==='top'?['m','하늘에서 내려다보면 3D 그릇이 바닥의 등고선 지도가 됩니다. 등고선이 촘촘한 곳이 가파른 곳이에요. 타원이 한쪽으로 길쭉한 것이 ③의 "길쭉함"입니다.']:['g','그릇의 바닥(초록 점)이 오차가 가장 작은 가중치입니다. 출발점(노란 점)에서 이곳까지 걸어가는 것이 학습이에요.']]);});
 $('#b-spin').onclick=function(){spin=!spin;this.setAttribute('aria-pressed',String(spin));};
@@ -393,9 +402,9 @@ var curv1=function(){return cut==='b'?2*M.xx:2;};
 var range1=function(){return cut==='b'?WR:BR;};
 var S1=new U.Surf3D($('#cvS1a'),{f:bowl,xr:WR,yr:BR,n:26,alpha:0.55,axes:['w','b','오차'],stamp:'설명용 모형'});
 S1.ov.push(function(g,S){var r=range1(),pts=[];for(var k=0;k<=60;k++){var t=r[0]+(r[1]-r[0])*k/60;pts.push(cut==='b'?[t,fix,bowl(t,fix)]:[fix,t,bowl(fix,t)]);}S.line3(g,pts,cssv('--eye'),3);
-  hist1.forEach(function(t,k){var p=cut==='b'?[t,fix]:[fix,t];S.dot3(g,p[0],p[1],f1(t),'rgba(241,182,70,.55)',3,false);});var p=cut==='b'?[pos1,fix]:[fix,pos1];S.dot3(g,p[0],p[1],f1(pos1),cssv('--amber'),6);});
+  hist1.forEach(function(t,k){var p=cut==='b'?[t,fix]:[fix,t];S.dot3(g,p[0],p[1],f1(t),'rgba(168,106,0,.5)',3,false);});var p=cut==='b'?[pos1,fix]:[fix,pos1];S.dot3(g,p[0],p[1],f1(pos1),cssv('--amber'),6);});
 function draw1(){var r=range1(),pts=[],mx=0;for(var k=0;k<=120;k++){var t=r[0]+(r[1]-r[0])*k/120,y=f1(t);pts.push([t,y]);mx=Math.max(mx,y);}
-  var P=U.plot($('#cvS1b'),{xr:r,yr:[0,mx*1.05],series:[{pts:pts,color:cssv('--eye'),width:2.5},{pts:hist1.map(function(t){return [t,f1(t)];}),color:'rgba(241,182,70,.7)',width:1,dots:3}],xt:[r[0],(r[0]+r[1])/2,r[1]].map(function(v){return Math.round(v*10)/10;}),yt:[0,Math.round(mx/2),Math.round(mx)],xl:cut==='b'?'w':'b',yl:'오차',stamp:'설명용 모형',aria:'단면 곡선과 공의 위치'});
+  var P=U.plot($('#cvS1b'),{xr:r,yr:[0,mx*1.05],series:[{pts:pts,color:cssv('--eye'),width:2.5},{pts:hist1.map(function(t){return [t,f1(t)];}),color:'rgba(168,106,0,.65)',width:1,dots:3}],xt:[r[0],(r[0]+r[1])/2,r[1]].map(function(v){return Math.round(v*10)/10;}),yt:[0,Math.round(mx/2),Math.round(mx)],xl:cut==='b'?'w':'b',yl:'오차',stamp:'설명용 모형',aria:'단면 곡선과 공의 위치'});
   var g=P.g,gr=g1(pos1),y0=f1(pos1),d=0.8;g.strokeStyle=cssv('--stain');g.lineWidth=1.5;g.setLineDash([5,4]);g.beginPath();g.moveTo(P.X(pos1-d),P.Y(y0-gr*d));g.lineTo(P.X(pos1+d),P.Y(y0+gr*d));g.stroke();g.setLineDash([]);
   g.beginPath();g.arc(P.X(pos1),P.Y(y0),6,0,7);g.fillStyle=cssv('--amber');g.fill();
   var nx=pos1-lr1*gr;U.arrow2(g,P.X(pos1),P.Y(y0)+14,P.X(nx),P.Y(y0)+14,cssv('--gfp'),2);}
@@ -428,19 +437,19 @@ S2.ov.push(function(g,S){var F=SURF2[surf2],z=F.f(u2,v2),G=F.g(u2,v2),k=disp(S),
   var p=[u2,v2,z];function add(a,b){return [a[0]+b[0],a[1]+b[1],a[2]+b[2]];}
   /* 바닥 그림자 = -∇f */
   var gn=Math.hypot(G[0],G[1]),fl=[u2,v2,S.zr[0]];
-  var q0=S.P(u2,v2,S.zr[0]),q1=S.P(u2,v2,z);g.setLineDash([3,3]);g.strokeStyle='rgba(236,234,243,.45)';g.beginPath();g.moveTo(q0[0],q0[1]);g.lineTo(q1[0],q1[1]);g.stroke();g.setLineDash([]);
+  var q0=S.P(u2,v2,S.zr[0]),q1=S.P(u2,v2,z);g.setLineDash([3,3]);g.strokeStyle='rgba(27,29,43,.4)';g.beginPath();g.moveTo(q0[0],q0[1]);g.lineTo(q1[0],q1[1]);g.stroke();g.setLineDash([]);
   if(gn>1e-6){var sh=back([-G[0]/gn*L*1.6*k.sx/Math.max(k.sx,k.sy),-G[1]/gn*L*1.6*k.sy/Math.max(k.sx,k.sy),0]);var e3=S.arrow3(g,fl,add(fl,sh),cssv('--gfp'),3.4);U.label(g,e3[0]+8,e3[1],'−∇f',cssv('--gfp'));
-    var gu=back([G[0]/gn*L*0.8*k.sx/Math.max(k.sx,k.sy),G[1]/gn*L*0.8*k.sy/Math.max(k.sx,k.sy),0]);g.setLineDash([4,3]);S.arrow3(g,fl,add(fl,gu),'rgba(94,227,156,.45)',2);g.setLineDash([]);}
-  var e1=S.arrow3(g,p,add(p,back(nrm(tu))),cssv('--eye'),3.2);var e2=S.arrow3(g,p,add(p,back(nrm(tv))),cssv('--terrain'),3.2);var tip=S.arrow3(g,p,add(p,back(nrm(n))),'#ffffff',3.2);U.label(g,e1[0]+8,e1[1],'t_u',cssv('--eye'));U.label(g,e2[0]+8,e2[1],'t_v',cssv('--terrain'));
-  S.dot3(g,u2,v2,z,cssv('--amber'),5);U.label(g,tip[0]+8,tip[1],'n',  '#ffffff');});
+    var gu=back([G[0]/gn*L*0.8*k.sx/Math.max(k.sx,k.sy),G[1]/gn*L*0.8*k.sy/Math.max(k.sx,k.sy),0]);g.setLineDash([4,3]);S.arrow3(g,fl,add(fl,gu),'rgba(23,131,76,.45)',2);g.setLineDash([]);}
+  var e1=S.arrow3(g,p,add(p,back(nrm(tu))),cssv('--eye'),3.2);var e2=S.arrow3(g,p,add(p,back(nrm(tv))),cssv('--terrain'),3.2);var tip=S.arrow3(g,p,add(p,back(nrm(n))),cssv('--ink'),3.2);U.label(g,e1[0]+8,e1[1],'t_u',cssv('--eye'));U.label(g,e2[0]+8,e2[1],'t_v',cssv('--terrain'));
+  S.dot3(g,u2,v2,z,cssv('--amber'),5);U.label(g,tip[0]+8,tip[1],'n',  cssv('--ink'));});
 function draw2b(){var F=SURF2[surf2],cv=$('#cvS2b'),R=U.setup(cv),g=R.g,w=R.w,h=R.h,pad=26,sz=Math.min(w,h)-pad*2,x0=(w-sz)/2,y0=(h-sz)/2;U.grid24(g,w,h);
   var X=function(u){return x0+(u-F.xr[0])/(F.xr[1]-F.xr[0])*sz;},Y=function(v){return y0+sz-(v-F.yr[0])/(F.yr[1]-F.yr[0])*sz;},n=48,zs=[],mn=1e9,mx=-1e9,i,j;
   for(j=0;j<=n;j++){zs.push([]);for(i=0;i<=n;i++){var z=F.f(F.xr[0]+(F.xr[1]-F.xr[0])*i/n,F.yr[0]+(F.yr[1]-F.yr[0])*j/n);zs[j].push(z);mn=Math.min(mn,z);mx=Math.max(mx,z);}}
   var cs=sz/n;for(j=0;j<n;j++)for(i=0;i<n;i++){g.fillStyle=U.cmap((zs[j][i]-mn)/(mx-mn),.5);g.fillRect(x0+i*cs,y0+sz-(j+1)*cs,cs+.6,cs+.6);}
-  g.lineWidth=1;for(var L=1;L<12;L++){var zl=mn+(mx-mn)*(surf2==='bowl'?Math.pow(L/12,1.8):L/12);g.strokeStyle='rgba(19,20,31,.55)';g.beginPath();for(j=0;j<n;j++)for(i=0;i<n;i++){var q=[zs[j][i],zs[j][i+1],zs[j+1][i+1],zs[j+1][i]],P2=[[i,j],[i+1,j],[i+1,j+1],[i,j+1]],seg=[];for(var e=0;e<4;e++){var a=q[e],b=q[(e+1)%4];if((a-zl)*(b-zl)<0){var t=(zl-a)/(b-a),pa=P2[e],pb=P2[(e+1)%4];seg.push([pa[0]+(pb[0]-pa[0])*t,pa[1]+(pb[1]-pa[1])*t]);}}if(seg.length>=2){g.moveTo(x0+seg[0][0]*cs,y0+sz-seg[0][1]*cs);g.lineTo(x0+seg[1][0]*cs,y0+sz-seg[1][1]*cs);}}g.stroke();}
+  g.lineWidth=1;for(var L=1;L<12;L++){var zl=mn+(mx-mn)*(surf2==='bowl'?Math.pow(L/12,1.8):L/12);g.strokeStyle='rgba(27,29,43,.3)';g.beginPath();for(j=0;j<n;j++)for(i=0;i<n;i++){var q=[zs[j][i],zs[j][i+1],zs[j+1][i+1],zs[j+1][i]],P2=[[i,j],[i+1,j],[i+1,j+1],[i,j+1]],seg=[];for(var e=0;e<4;e++){var a=q[e],b=q[(e+1)%4];if((a-zl)*(b-zl)<0){var t=(zl-a)/(b-a),pa=P2[e],pb=P2[(e+1)%4];seg.push([pa[0]+(pb[0]-pa[0])*t,pa[1]+(pb[1]-pa[1])*t]);}}if(seg.length>=2){g.moveTo(x0+seg[0][0]*cs,y0+sz-seg[0][1]*cs);g.lineTo(x0+seg[1][0]*cs,y0+sz-seg[1][1]*cs);}}g.stroke();}
   var m=9,maxg=0,G2=[];for(j=0;j<m;j++)for(i=0;i<m;i++){var u=F.xr[0]+(F.xr[1]-F.xr[0])*(i+.5)/m,v=F.yr[0]+(F.yr[1]-F.yr[0])*(j+.5)/m,G=F.g(u,v);G2.push([u,v,G]);maxg=Math.max(maxg,Math.hypot(G[0],G[1]));}
-  G2.forEach(function(t){var gx=t[2][0]/maxg,gy=t[2][1]/maxg,len=sz/m*0.45;U.arrow2(g,X(t[0]),Y(t[1]),X(t[0])-gx*len*(F.xr[1]-F.xr[0])/(F.xr[1]-F.xr[0]),Y(t[1])+gy*len,'rgba(94,227,156,.8)',1.4);});
-  g.beginPath();g.arc(X(u2),Y(v2),6,0,7);g.fillStyle=cssv('--amber');g.fill();g.strokeStyle='#13141f';g.stroke();
+  G2.forEach(function(t){var gx=t[2][0]/maxg,gy=t[2][1]/maxg,len=sz/m*0.45;U.arrow2(g,X(t[0]),Y(t[1]),X(t[0])-gx*len*(F.xr[1]-F.xr[0])/(F.xr[1]-F.xr[0]),Y(t[1])+gy*len,'rgba(23,131,76,.75)',1.4);});
+  g.beginPath();g.arc(X(u2),Y(v2),6,0,7);g.fillStyle=cssv('--amber');g.fill();g.strokeStyle='#ffffff';g.stroke();
   U.label(g,x0+4,y0+10,'위에서 본 지도 · 화살표 = −∇f',cssv('--muted'));U.stamp(g,w,'설명용 모형');}
 U.reg($('#cvS2b'),function(dt){if(dt===0)draw2b();});
 function setUV(u,v){var F=SURF2[surf2];u2=U.clamp(u,F.xr[0],F.xr[1]);v2=U.clamp(v,F.yr[0],F.yr[1]);$('#r-u').value=u2;$('#r-v').value=v2;upd2();}
@@ -493,7 +502,7 @@ S4.ov.push(function(g,S){var k,pts;
   if(tog.cx){pts=[];for(k=0;k<=50;k++){var x=-1.5+3*k/50;pts.push([x,0,f4(x,0)]);}S.line3(g,pts,cssv('--eye'),3.2);}
   if(tog.cy){pts=[];for(k=0;k<=50;k++){var y=-1.5+3*k/50;pts.push([0,y,f4(0,y)]);}S.line3(g,pts,cssv('--terrain'),3.2);}
   function rul(fam,col){for(var t=-1.4;t<=1.41;t+=0.35){var seg=[];for(var s=-3;s<=3.001;s+=0.1){var x=A4*(t+s)/2,y=fam==='A'?B4*(s-t)/2:B4*(t-s)/2;if(Math.abs(x)>1.5||Math.abs(y)>1.5){if(seg.length>1)S.line3(g,seg,col,1.8);seg=[];continue;}seg.push([x,y,f4(x,y)]);}if(seg.length>1)S.line3(g,seg,col,1.8);}}
-  if(tog.ra)rul('A','#ffffff');if(tog.rb)rul('B',cssv('--amber'));S.dot3(g,0,0,0,cssv('--gfp'),6);});
+  if(tog.ra)rul('A',cssv('--ink'));if(tog.rb)rul('B',cssv('--amber'));S.dot3(g,0,0,0,cssv('--gfp'),6);});
 function upd4(){$('#v-a').textContent=fmt(A4,2);$('#v-b').textContent=fmt(B4,2);var hx=2/(A4*A4),hy=-2/(B4*B4);$('#m4-hx').textContent=fmt(hx,2);$('#m4-hy').textContent=fmt(hy,2);$('#m4-lap').textContent=fmt(hx+hy,2);
   $('#eq4').innerHTML='z = x²/<i>'+fmt(A4,2)+'</i>² − y²/<i>'+fmt(B4,2)+'</i>² · y = 0이면 <em>z = x²/'+fmt(A4*A4,2)+'</em> (위로 열림) · x = 0이면 <b>z = −y²/'+fmt(B4*B4,2)+'</b> (아래로 열림)';
   var it=[['g','가운데 초록 점은 기울기가 (0, 0)인데도 바닥이 아닙니다. 빨강 단면에서는 최저점, 청록 단면에서는 최고점이에요.']];
@@ -514,7 +523,7 @@ function Jall(x){var j1=Jt(WS[Wk],x);if(!two)return {J:j1.J,s:j1.s,J1:j1.J};var 
 var cv5=$('#cvS5'),geo5=null;
 function draw5(){var R=U.setup(cv5),g=R.g,w=R.w,h=R.h;U.grid24(g,w,h);var gap=24,sz=Math.min((w-gap*3)/2,h-60),y0=30,xa=gap,xb=gap*2+sz;geo5={xa:xa,y0:y0,sz:sz};
   function Pa(p){return [xa+(p[0]+2)/4*sz,y0+sz-(p[1]+2)/4*sz];}function Pb(p){return [xb+(p[0]+1.05)/2.1*sz,y0+sz-(p[1]+1.05)/2.1*sz];}
-  [xa,xb].forEach(function(x){g.fillStyle='#171a2b';g.fillRect(x,y0,sz,sz);g.strokeStyle=cssv('--rule');g.strokeRect(x+.5,y0+.5,sz,sz);});
+  [xa,xb].forEach(function(x){g.fillStyle='#ffffff';g.fillRect(x,y0,sz,sz);g.strokeStyle=cssv('--rule');g.strokeRect(x+.5,y0+.5,sz,sz);});
   U.label(g,xa+4,y0-12,'입력 평면 x',cssv('--muted'));U.label(g,xb+4,y0-12,two?'두 층을 지난 출력 F₂(F₁(x))':'출력 평면 F(x) = tanh(Wx)',cssv('--muted'));
   for(var k=-4;k<=4;k++){var t=k/2;[0,1].forEach(function(dir){var A=[],B=[];for(var s=0;s<=40;s++){var u=-2+4*s/40,p=dir?[t,u]:[u,t];A.push(Pa(p));B.push(Pb(Fall(p)));}
     g.strokeStyle=dir?'rgba(79,195,201,.45)':'rgba(240,96,77,.45)';g.lineWidth=1;g.beginPath();A.forEach(function(q,i){i?g.lineTo(q[0],q[1]):g.moveTo(q[0],q[1]);});g.stroke();g.beginPath();B.forEach(function(q,i){i?g.lineTo(q[0],q[1]):g.moveTo(q[0],q[1]);});g.stroke();});}
@@ -522,12 +531,13 @@ function draw5(){var R=U.setup(cv5),g=R.g,w=R.w,h=R.h;U.grid24(g,w,h);var gap=24
   function poly(P,col,wd,dash){g.strokeStyle=col;g.lineWidth=wd;g.setLineDash(dash||[]);g.beginPath();P.forEach(function(q,i){i?g.lineTo(q[0],q[1]):g.moveTo(q[0],q[1]);});g.closePath();g.stroke();g.setLineDash([]);}
   poly(C,cssv('--amber'),2.5);poly(T,'#f0a04d',2.5);poly(E,cssv('--gfp'),2,[5,4]);
   var pa=Pa(px5),pb=Pb(o);g.fillStyle=cssv('--amber');g.beginPath();g.arc(pa[0],pa[1],4,0,7);g.fill();g.beginPath();g.arc(pb[0],pb[1],4,0,7);g.fill();
-  U.arrow2(g,xa+sz+4,y0+sz/2,xb-4,y0+sz/2,cssv('--stain'),2);U.label(g,(xa+sz+xb)/2,y0+sz/2-14,two?'J₂·J₁':'J','#e8a8e8','center');
+  U.arrow2(g,xa+sz+4,y0+sz/2,xb-4,y0+sz/2,cssv('--stain'),2);U.label(g,(xa+sz+xb)/2,y0+sz/2-14,two?'J₂·J₁':'J',cssv('--stain'),'center');
   U.label(g,xb+4,y0+sz+14,'주황 = 실제 모양 · 초록 점선 = 야코비안 타원',cssv('--muted'));U.stamp(g,w,'설명용 모형');}
 U.reg(cv5,function(dt){if(dt===0)draw5();});
-cv5.addEventListener('pointerdown',function(e){if(!geo5)return;var r=cv5.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;if(x<geo5.xa||x>geo5.xa+geo5.sz||y<geo5.y0||y>geo5.y0+geo5.sz)return;px5=[(x-geo5.xa)/geo5.sz*4-2,(geo5.y0+geo5.sz-y)/geo5.sz*4-2];upd5();});
+cv5.addEventListener('pointerdown',function(e){if(!geo5)return;var r=cv5.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;if(x<geo5.xa||x>geo5.xa+geo5.sz||y<geo5.y0||y>geo5.y0+geo5.sz)return;px5=[(x-geo5.xa)/geo5.sz*4-2,(geo5.y0+geo5.sz-y)/geo5.sz*4-2];$('#r-x1').value=px5[0];$('#r-x2').value=px5[1];upd5();});
+$('#r-x1').oninput=function(){px5[0]=+this.value;upd5();};$('#r-x2').oninput=function(){px5[1]=+this.value;upd5();};
 function m2s(A){return '['+fmt(A[0][0],2)+', '+fmt(A[0][1],2)+'; '+fmt(A[1][0],2)+', '+fmt(A[1][1],2)+']';}
-function upd5(){var r=Jall(px5),J=r.J,det=J[0][0]*J[1][1]-J[0][1]*J[1][0];$('#m5-J').textContent=m2s(J);$('#m5-det').textContent=fmt(Math.abs(det),3);$('#m5-x').textContent='('+fmt(px5[0],2)+', '+fmt(px5[1],2)+')';$('#m5-s').textContent=fmt(r.s[0],2)+', '+fmt(r.s[1],2);
+function upd5(){var r=Jall(px5),J=r.J,det=J[0][0]*J[1][1]-J[0][1]*J[1][0];$('#m5-J').textContent=m2s(J);$('#m5-det').textContent=fmt(Math.abs(det),3);$('#m5-x').textContent='('+fmt(px5[0],2)+', '+fmt(px5[1],2)+')';$('#v-x1').textContent=fmt(px5[0],2);$('#v-x2').textContent=fmt(px5[1],2);$('#m5-s').textContent=fmt(r.s[0],2)+', '+fmt(r.s[1],2);
   $('#eq5').innerHTML=two?'J<sub>전체</sub> = <em>J₂ '+m2s(r.J2)+'</em> · <i>J₁ '+m2s(r.J1)+'</i> = <b>'+m2s(J)+'</b>':'J = diag(1 − tanh²(Wx)) · W = <b>'+m2s(J)+'</b>';
   var it=[];if(Math.abs(det)<0.06)it.push(['r','|det J|가 '+fmt(Math.abs(det),3)+'로 0에 가까워요. 원이 거의 선으로 눌렸습니다. 이 방향으로 들어온 차이는 다음 층에 거의 전해지지 않아요.']);
   else it.push(['g','작은 원이 넓이 '+fmt(Math.abs(det),2)+'배의 기울어진 타원이 됐어요. 초록 점선(야코비안)이 주황(실제)과 거의 겹치면 직선 근사가 잘 맞는 것입니다.']);
@@ -540,14 +550,14 @@ $('#t-l2').onclick=function(){two=!two;this.setAttribute('aria-pressed',String(t
 var RF=null,RR=null,tD=0,playD=false;
 var SD=new U.Surf3D($('#cvDuel'),{f:function(x,y){return LM.sf([x,y]);},xr:[-1.6,1.6],yr:[-1.6,1.6],n:30,alpha:0.8,axes:['w₁','w₂','오차'],zr:[0,4],stamp:'설명용 모형',
   onTick:function(dt){if(playD&&dt>0){tD+=dt*40;SD.dirty=true;if(RF&&tD>Math.max(RF.path.length,RR.path.length)+5)playD=false;}}});
-SD.ov.push(function(g,S){S.dot3(g,1,0,0,cssv('--gfp'),4);S.dot3(g,-1,0,0,cssv('--gfp'),4);S.dot3(g,0,0,1,'#ffffff',4);U.label(g,S.P(0,0,1)[0]+8,S.P(0,0,1)[1]-10,'고개',  '#ffffff');
+SD.ov.push(function(g,S){S.dot3(g,1,0,0,cssv('--gfp'),4);S.dot3(g,-1,0,0,cssv('--gfp'),4);S.dot3(g,0,0,1,cssv('--ink'),4);U.label(g,S.P(0,0,1)[0]+8,S.P(0,0,1)[1]-10,'고개',  cssv('--ink'));
   S.dot3(g,0,1.5,LM.sf([0,1.5]),cssv('--amber'),5);
   [[RR,cssv('--c-robo')],[RF,cssv('--c-fly')]].forEach(function(a){var R=a[0];if(!R)return;var k=Math.min(R.path.length,Math.max(1,Math.floor(tD)));var pts=R.path.slice(0,k);S.line3(g,pts.map(function(p){return [p[0],p[1],p[2]];}),a[1],2.6);var q=pts[pts.length-1];S.dot3(g,q[0],q[1],q[2],a[1],6);});});
 U.Duel({el:'#duel',run:function(){RF=LM.saddleRun(true);RR=LM.saddleRun(false);tD=U.reduce?999:1;playD=!U.reduce;return {fly:RF.L,robo:RR.L};},
   show:function(r,pred){var mx=Math.max(r.fly,r.robo,1e-9);$('#d-bf').style.width=(r.fly/mx*100)+'%';$('#d-br').style.width=(r.robo/mx*100)+'%';
     $('#d-vf').textContent=fmt(r.fly,3);$('#d-vr').textContent=fmt(r.robo,3);$('#d-pf').textContent='멈춘 곳 ('+fmt(RF.end[0],2)+', '+fmt(RF.end[1],2)+') · '+RF.steps+'걸음';$('#d-pr').textContent='멈춘 곳 ('+fmt(RR.end[0],2)+', '+fmt(RR.end[1],2)+') · '+RR.steps+'걸음';
     var flyWin=r.fly<r.robo-1e-3;
-    $('#d-say').innerHTML=U.say('asst','asst_report','멈춘 곳의 오차는 초파리 쪽 '+fmt(r.fly,3)+', 주판봇 쪽 '+fmt(r.robo,3)+'이에요. 주판봇 공은 고개 (0, 0)에서 기울기 0을 보고 멈췄고, 초파리 공은 헤시안 고유값 −4를 보고 한 발 비켜 선 뒤 바닥 (1, 0)까지 갔어요.')+
+    $('#d-say').innerHTML=U.say('asst','asst_report','멈춘 곳의 오차는 초파리 쪽 '+fmt(r.fly,3)+', 주판봇 쪽 '+fmt(r.robo,3)+'이에요. 주판봇 공은 고개 (0, 0)에서 기울기 0을 보고 멈췄고, 초파리 공은 헤시안 고유값 −4를 보고 그 고유벡터(w₁ 축) 방향으로 한 발 비켜 선 뒤 바닥 (1, 0)까지 갔어요.')+
       U.say('doc','doc_judge',flyWin?'기울기 0은 바닥의 증거가 아니다. 굽음까지 봐야 안다. 초파리 승.':'이번 판은 나눠 갖는다.',true)+(U.say('sia','sia_signal','확인했습니다. 대결 종료 신호 드립니다.'));
     $('#d-score').textContent='이번 판: '+(flyWin?'초파리 연구원 승 (F)':'무승부');$('#d-pred').textContent=pred?('내 예상: '+(pred==='fly'?'초파리':'주판봇')+' → '+((pred==='fly')===flyWin?'맞힘':'빗나감')):'예상을 고르지 않았어요';
     U.setMood($('#d-fly'),flyWin?'fly_arms':'fly_coffee');U.setMood($('#d-robo'),flyWin?'robo_sigh':'robo_meh');},

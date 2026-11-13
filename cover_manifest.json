@@ -5,18 +5,98 @@
   "site_url": "https://adminmrobo.github.io/optimization_3d_map/",
   "ontology": {
     "pages": [
-      {"path": "index.html", "kg": true, "export": true},
-      {"path": "1_math_map.html", "kg": true, "export": true},
-      {"path": "2_experiment_lab.html", "kg": true, "export": true}
+      {
+        "path": "index.html",
+        "kg": true,
+        "export": true
+      },
+      {
+        "path": "1_math_map.html",
+        "kg": true,
+        "export": true
+      },
+      {
+        "path": "2_experiment_lab.html",
+        "kg": true,
+        "export": true
+      }
     ],
-    "files": ["KG_registry_additions.json"]
+    "files": [
+      "KG_registry_additions.json"
+    ]
   },
-  "i18n": {"langs": ["ko"], "pages": {"ko": 3}, "readme_langs": ["ko"]},
-  "languages": ["ko"],
+  "i18n": {
+    "langs": [
+      "ko"
+    ],
+    "pages": {
+      "ko": 3
+    },
+    "readme_langs": [
+      "ko"
+    ]
+  },
+  "languages": [
+    "ko"
+  ],
   "items": [
-    {"id": "cover_index", "role": "cover", "path": "img/cover_index.webp", "size": [1600, 900], "characters": ["doc", "asst", "fly", "jupanbot"], "robot": "jupanbot-v2", "prompt_en": "Website top cover illustration, wide 16:9 ... a translucent bowl-shaped terrain with a glowing grid rising from the floor ... No text (전체: COVER_PROMPTS_optimization_3d_map.md 0번)", "source_of": null, "status": "redraw"},
-    {"id": "cover_01", "role": "cover", "path": "img/cover_01.webp", "size": [1600, 900], "characters": ["doc", "asst", "fly", "jupanbot"], "robot": "jupanbot-v2", "prompt_en": "Website top cover illustration, wide 16:9 ... a saddle-shaped glowing surface model with a small white flagpole and its green shadow ... No text (전체: COVER_PROMPTS_optimization_3d_map.md 1번)", "source_of": null, "status": "redraw"},
-    {"id": "cover_02", "role": "cover", "path": "img/cover_02.webp", "size": [1600, 900], "characters": ["doc", "asst", "fly", "jupanbot"], "robot": "jupanbot-v2", "prompt_en": "Website top cover illustration, wide 16:9 ... three glowing balls rolling down into a bowl along three different paths ... No text (전체: COVER_PROMPTS_optimization_3d_map.md 2번)", "source_of": null, "status": "redraw"}
+    {
+      "id": "cover_index",
+      "role": "cover",
+      "path": "img/cover_index.webp",
+      "size": [
+        1600,
+        900
+      ],
+      "characters": [
+        "doc",
+        "asst",
+        "fly",
+        "jupanbot"
+      ],
+      "robot": "jupanbot-v2",
+      "prompt_en": "Website top cover illustration, wide 16:9 ... a translucent bowl-shaped terrain with a glowing grid rising from the floor ... No text (전체: COVER_PROMPTS_optimization_3d_map.md 0번)",
+      "source_of": null,
+      "status": "redraw"
+    },
+    {
+      "id": "cover_01",
+      "role": "cover",
+      "path": "img/cover_01.webp",
+      "size": [
+        1600,
+        900
+      ],
+      "characters": [
+        "doc",
+        "asst",
+        "fly",
+        "jupanbot"
+      ],
+      "robot": "jupanbot-v2",
+      "prompt_en": "Website top cover illustration, wide 16:9 ... a saddle-shaped glowing surface model with a small white flagpole and its green shadow ... No text (전체: COVER_PROMPTS_optimization_3d_map.md 1번)",
+      "source_of": null,
+      "status": "redraw"
+    },
+    {
+      "id": "cover_02",
+      "role": "cover",
+      "path": "img/cover_02.webp",
+      "size": [
+        1600,
+        900
+      ],
+      "characters": [
+        "doc",
+        "asst",
+        "fly",
+        "jupanbot"
+      ],
+      "robot": "jupanbot-v2",
+      "prompt_en": "Website top cover illustration, wide 16:9 ... three glowing balls rolling down into a bowl along three different paths ... No text (전체: COVER_PROMPTS_optimization_3d_map.md 2번)",
+      "source_of": null,
+      "status": "redraw"
+    }
   ],
   "updated": "2026-11-14"
 }

@@ -10,9 +10,10 @@
 <!--@@CSS@@-->
 <style>
 .cards{display:grid;grid-template-columns:repeat(100,1fr);gap:1px;margin:8px 0}
-.cards i{display:block;aspect-ratio:1;border-radius:1px;background:#2a2d44}
+.cards i{display:block;aspect-ratio:1;border-radius:1px;background:#e3e6ef}
 .cards i.on{background:var(--amber)}
-.cards i.done{background:#3b5b56}
+@media(max-width:520px){.cards{grid-template-columns:repeat(50,1fr)}}
+.cards i.done{background:#b9dcc8}
 .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:13.5px;color:var(--muted);margin:6px 0}
 .legend span::before{content:"";display:inline-block;width:12px;height:4px;border-radius:2px;margin-right:6px;vertical-align:middle;background:var(--lc)}
 .cond{display:inline-flex;gap:6px;flex-wrap:wrap}
@@ -29,7 +30,7 @@
 <!-- lab-cover -->
 <div class="cover" data-img="cover_02"><div class="frame">
   <canvas id="coverCv" aria-hidden="true"></canvas>
-  <span class="cap">같은 그릇, 공 세 개 — 연구실 실험의 날</span><span class="badge">대체 표지 · 그림 준비 중</span>
+  <span class="cap">같은 그릇, 공 세 개 — 연구실 실험의 날</span>
   <div class="cast4"><img class="s" data-mood="sia_signal" alt="" aria-hidden="true"><img data-mood="fly_point" alt="" aria-hidden="true"><img data-mood="doc_front" alt="" aria-hidden="true"><img data-mood="asst_smile" alt="" aria-hidden="true"><img data-mood="robo_coin" alt="" aria-hidden="true"><img class="s" data-mood="moa_cheer" alt="" aria-hidden="true"></div>
 </div></div>
 <!-- /lab-cover -->
@@ -39,18 +40,18 @@
   <h1>좌표축 위의 그릇 — 배치·학습률·에포크를 지도 위에서 고르기</h1>
   <p class="question">같은 그릇에서 공을 어떻게 굴려야 가장 싸고 빠르게 바닥에 닿을까?</p>
   <p class="lead">1편에서 오차를 땅의 높이로 놓고 기울기·굽음·휨을 봤습니다. 이번에는 그 땅에서 공을 직접 굴립니다. 신경망이 스스로 찾는 가중치와 달리, 학습 전에 사람이 정해 두는 숫자 — <b>하이퍼파라미터</b> — 를 하나씩 바꿔 보며 지도 위의 걸음이 어떻게 달라지는지 잽니다. 마지막에는 가중치가 4,416개라 3D로 다 그릴 수 없는 신경망의 지형을 <b>단면</b>으로 잘라 봅니다.</p>
-  <p class="byline">글 · 안상선 ((주)M-Robo 대표) · <a href="https://adminmrobo.github.io/who_am_i/who_am_i.html">저자 소개</a> · 2026-11-14 · v1.0 · 앞 편: <a href="1_math_map.html">1편 수학 편</a></p>
+  <p class="byline">글 · 안상선 ((주)M-Robo 대표) · <a href="https://adminmrobo.github.io/who_am_i/who_am_i.html">저자 소개</a> · 2026-11-14 · v1.1 · 앞 편: <a href="1_math_map.html">1편 수학 편</a></p>
   <div class="three"><b>세 줄로 먼저</b><ol>
     <li>배치가 작으면 걸음은 싸지만 흔들리고, 크면 정확하지만 비싸다. 같은 계산량이면 작은 배치가 훨씬 멀리 간다.</li>
     <li>학습률은 지형의 굽음이 정한 한계(2/λ<sub>max</sub>)를 넘으면 공이 튀어 나간다.</li>
     <li>오래 배울수록 훈련 오차는 계속 줄지만, 처음 보는 데이터의 오차는 어느 순간부터 다시 오른다. 멈출 때는 검증 데이터가 정한다.</li></ol></div>
   <div class="kpis" aria-label="숫자 요약">
-    <div class="kpi r"><b id="k-full">—</b><span>카드 1,000장 본 뒤 오차 · 풀배치<sup>①</sup></span></div>
-    <div class="kpi g"><b id="k-ten">—</b><span>카드 1,000장 본 뒤 오차 · 배치 10<sup>①</sup></span></div>
+    <div class="kpi r"><b id="k-full">—</b><span>풀배치 · 1걸음 뒤 (카드 1,000장)<sup>①</sup></span></div>
+    <div class="kpi g"><b id="k-ten">—</b><span>배치 10 · 100걸음 뒤 (카드 1,000장)<sup>①</sup></span></div>
     <div class="kpi a"><b id="k-lim">—</b><span>학습률 한계 2/λ<sub>max</sub><sup>①</sup></span></div>
     <div class="kpi m"><b id="k-np">—</b><span>③의 신경망 가중치 수<sup>②</sup></span></div>
   </div>
-  <p class="muted" style="font-size:13px">① 이 페이지가 직접 계산한 설명용 모형의 값(직선 주변 점 1,000개, 시드 39). ② 이 저장소의 code/deep_slices.py로 미리 계산해 넣은 값(시드 2026). 모두 실제 측정 데이터가 아닙니다.</p>
+  <p class="muted" style="font-size:13px">위 두 칸은 같은 계산량(카드 1,000장)에서 잰 오차입니다. 같은 걸음 수(100걸음)로 견주면 풀배치가 더 낮습니다(① 참고).<br>① 이 페이지가 직접 계산한 설명용 모형의 값(직선 주변 점 1,000개, 시드 39). ② 이 저장소의 code/deep_slices.py로 미리 계산해 넣은 값(시드 2026). 모두 실제 측정 데이터가 아닙니다.</p>
   <div data-dlg="hero"></div>
 </div></header>
 
@@ -120,7 +121,7 @@
     <li>배치 10은 걸음의 절반쯤이 전체 데이터 오차를 오히려 늘렸습니다(오르막 걸음). 그래도 평균적으로는 내리막이라 바닥 근처에 닿습니다.</li>
     <li>학습률을 그대로 두면 작은 배치는 바닥에 닿은 뒤에도 계속 떨립니다. 그래서 실제 학습에서는 학습률을 점점 줄이기도 합니다.</li></ol>
     <div class="lim">이 칸의 한계: 학습률을 0.1로 묶어 두었습니다. 걸음 크기 자체를 바꾸면 무슨 일이 생길까요? → ②</div></div>
-  <div class="bridge gen"><b>생성 AI로 치면</b> 대형 언어 모델은 한 걸음에 문장 수백만 토큰을 묶어 보지만, 그래도 전체 학습 데이터(수조 토큰)의 아주 작은 일부입니다. 전체 데이터로 정확한 기울기를 재는 풀배치는 현실적으로 쓰지 않습니다.<div class="lim">비유의 한계: 이 그릇은 바닥이 하나인 2차 함수라, 흔들림이 다른 골짜기로 옮겨 가게 하는 효과는 여기서 볼 수 없습니다.</div></div>
+  <div class="bridge gen"><b>생성 AI로 치면</b> 대형 언어 모델도 미니배치로 배웁니다. 한 걸음의 묶음이 아주 크더라도 전체 학습 데이터에 비하면 작은 일부라서, 전체 데이터로 정확한 기울기를 재는 풀배치는 쓰지 않습니다. 배치를 키울 때는 학습률도 함께 조정하는 방법이 알려져 있습니다[6].<div class="lim">비유의 한계: 이 그릇은 바닥이 하나인 2차 함수라, 흔들림이 다른 골짜기로 옮겨 가게 하는 효과는 여기서 볼 수 없습니다.</div></div>
   <div data-dlg="s1"></div>
   <div class="quiz" data-quiz="s1"></div>
 </div></section>
@@ -172,6 +173,7 @@
     <li>왼쪽 3D는 4,416차원 지형의 <b>한 장의 절편</b>입니다. 가운데(초록 점)가 학습률 0.1로 20 에포크 배운 가중치이고, 그 둘레가 그릇처럼 패여 있습니다.</li>
     <li>"학습률 세 가지"를 보면 1편과 같은 이야기가 큰 신경망에서도 나옵니다. 0.00001은 2,500걸음을 가도 많이 남고, 10은 오르내리며 자리를 잡지 못합니다. 0.1만 목표 분산의 약 <span id="t-ratio">—</span>까지 내려갑니다.</li>
     <li>"출발 → 도착 직선"은 처음 가중치와 학습이 끝난 가중치를 잇는 선 위의 오차입니다. 이 선 위에서는 거의 한 번에 내려가는 모양입니다.</li>
+    <li>방향의 길이는 층마다 그 층 가중치의 크기에 맞췄습니다. 참고한 논문은 필터(뉴런)마다 맞추는 방식을 썼는데, 이 신경망은 작아서 층 단위로 단순화했습니다.</li>
     <li>절편 두 방향은 시드로 고른 무작위 방향입니다. 다른 방향을 고르면 모양이 달라질 수 있어, 한 장의 절편으로 "지형 전체가 이렇다"고 말하지 않습니다.</li></ol>
     <div class="lim">이 칸의 한계: 여기서는 훈련 데이터가 4,000개로 넉넉했습니다. 데이터가 적고 잡음이 많으면, 오래 배울수록 오히려 나빠지는 일이 생깁니다 → ④</div></div>
   <div class="bridge field"><b>현장에 옮기면</b> 단면 그림은 두 모델이나 두 설정의 "바닥 모양"을 견줄 때 씁니다. 그림을 보고에 실을 때는 자른 방향을 어떻게 골랐는지(무작위·시드·크기 맞춤), 어느 데이터로 오차를 쟀는지를 함께 적습니다. 그렇지 않으면 같은 모델도 전혀 다른 그림이 나옵니다.<div class="lim">단면 그림만으로 일반화 성능을 단정하지 않습니다. 성능은 따로 떼어 둔 시험 데이터로 잽니다.</div></div>
@@ -231,6 +233,14 @@
 <!-- 정리 -->
 <section class="sec" id="sum" aria-labelledby="h-sum"><div class="wrap">
   <h2 id="h-sum">정리 — 다이얼 네 개</h2>
+  <div class="prac"><b>실무에서는 — 이 페이지가 다루지 않은 것</b>
+    <ul style="margin:6px 0 0;padding-left:20px">
+      <li><b>모멘텀</b>: 지난 걸음의 방향을 조금 이어 받아 걷습니다. 길쭉한 그릇에서 지그재그를 줄이는 데 씁니다[7].</li>
+      <li><b>Adam</b>: 가중치마다 기울기의 크기를 따로 기억해 보폭을 저절로 맞춥니다. 실무에서 기본값처럼 많이 씁니다[8].</li>
+      <li><b>학습률 일정(스케줄)</b>: 처음엔 작게 올리고(워밍업), 학습이 진행되면 줄입니다. ①에서 본 "바닥 근처에서 계속 떨림"을 줄이는 방법입니다[6].</li>
+      <li><b>배치와 학습률을 함께</b>: 배치를 k배로 키우면 학습률도 k배 가까이 키우는 규칙이 큰 배치 학습에서 쓰였습니다(워밍업과 함께)[6].</li>
+    </ul>
+    <div class="lim">이 상자는 소개만 합니다. 이 그릇 실험은 모두 학습률을 고정한 기본 경사하강입니다. 학습률·에포크를 다른 예제로 보려면 <a href="https://adminmrobo.github.io/fish_market_learning_epoch_etc/">Fish Market 연구실</a>로 가세요.</div></div>
   <div class="tblwrap"><table class="cmp"><thead><tr><th>다이얼</th><th>지도에서는</th><th>너무 작으면</th><th>너무 크면</th><th>고르는 법</th></tr></thead><tbody>
     <tr><td>학습률 η</td><td>보폭</td><td>거의 안 움직이고 끝남</td><td>골짜기를 넘나들다 튀어 나감(발산)</td><td>작은 값부터 늘려 가며 검증 오차 비교. 2차 근사로는 2/λ<sub>max</sub>가 상한</td></tr>
     <tr><td>배치 크기</td><td>기울기를 재는 카드 수</td><td>걸음이 흔들림</td><td>걸음 하나가 비쌈</td><td>메모리 안에서, 학습률과 함께 조정</td></tr>
@@ -241,6 +251,7 @@
     <ul style="margin:6px 0 0;padding-left:20px">
       <li>39편(미니배치) 영상의 코드를 화면에서 옮겨 그대로 실행(시드 39)하니, 설명글의 숫자 — 1 에포크 뒤 풀배치 7.869, 배치 10 0.993, 100걸음 뒤 풀배치 0.956, 배치 10의 오르막 걸음 41 — 가 모두 같게 나왔다. 0.956은 최소제곱 해(w ≈ 2.01, b ≈ 1.04)의 오차와 같고, 배치 10의 마지막 오차는 그보다 3.9% 높았다(설명글의 "약 4%").</li>
       <li>43편(하이퍼파라미터) 영상의 코드도 같은 방법으로 실행(시드 43)하니, 학습률 0.1에서 검증 오차가 목표 분산의 1.95%(설명글의 "2%")였다.</li>
+      <li>재현은 영상 화면에 보이는 코드를 옮겨 적어 실행한 것입니다. 저작권 때문에 그 코드는 이 저장소에 싣지 않았습니다.</li>
       <li>이 페이지의 실험은 그 코드를 옮긴 것이 아니라 같은 아이디어로 새로 짠 코드(시드 39·2026)라서 숫자가 조금 다르다. 이야기의 방향은 같다.</li>
     </ul></div>
   <h3>비유의 한계</h3>
@@ -261,11 +272,14 @@
 <footer><div class="wrap">
   <h3>출처</h3>
   <table><thead><tr><th>#</th><th>자료</th><th>이 페이지에서 쓴 곳</th></tr></thead><tbody>
-    <tr><td>[1]</td><td>Machine Learning from Scratch, part 39 (mini batch gradient descent) — Facebook 릴스 (사용자 제공 영상과 설명글)</td><td>① 배치 비교 실험의 설계(뉴런 하나, 점 1,000개, 배치 1,000·100·10, 학습률 0.1, 100걸음), 검증 상자의 숫자</td></tr>
-    <tr><td>[2]</td><td>Machine Learning from Scratch, part 43 (hyperparameters) — Facebook 릴스 (사용자 제공 영상과 설명글)</td><td>②·③·④ 실험 설계(4-64-64-1 신경망, sin 목표, 학습률 0.00001·0.1·10, 잡음 데이터 40개로 과적합), 검증 상자의 숫자</td></tr>
+    <tr><td>[1]</td><td>Machine Learning from Scratch, part 39 (mini batch gradient descent) — Facebook 릴스 (사용자 제공 영상과 설명글, 원 게시물 주소·게시일 미확인)</td><td>① 배치 비교 실험의 설계(뉴런 하나, 점 1,000개, 배치 1,000·100·10, 학습률 0.1, 100걸음), 검증 상자의 숫자</td></tr>
+    <tr><td>[2]</td><td>Machine Learning from Scratch, part 43 (hyperparameters) — Facebook 릴스 (사용자 제공 영상과 설명글, 원 게시물 주소·게시일 미확인)</td><td>②·③·④ 실험 설계(4-64-64-1 신경망, sin 목표, 학습률 0.00001·0.1·10, 잡음 데이터 40개로 과적합), 검증 상자의 숫자</td></tr>
     <tr><td>[3]</td><td>Li, H., Xu, Z., Taylor, G., Studer, C., Goldstein, T. (2018). Visualizing the Loss Landscape of Neural Nets. NeurIPS 31.</td><td>③ 무작위 방향 두 개로 자른 단면, 방향 크기 맞춤의 아이디어</td></tr>
     <tr><td>[4]</td><td>Goodfellow, I., Bengio, Y., Courville, A. (2016). Deep Learning. MIT Press. 4·8장</td><td>② 학습률 한계, ①·④ 미니배치·조기 종료의 배경</td></tr>
-    <tr><td>[5]</td><td>matharium, 「Gradient, Jacobian and Hessian」 인포그래픽 (사용자 제공 이미지)</td><td>② 헤시안과 굽음</td></tr>
+    <tr><td>[5]</td><td>matharium, 「Gradient, Jacobian and Hessian」 인포그래픽 (사용자 제공 이미지, 원 게시물 주소·게시일 미확인)</td><td>② 헤시안과 굽음</td></tr>
+    <tr><td>[6]</td><td>Goyal, P. 외 (2017). Accurate, Large Minibatch SGD: Training ImageNet in 1 Hour. arXiv:1706.02677.</td><td>① 생성 AI 상자, 정리의 실무 상자(워밍업, 배치와 학습률)</td></tr>
+    <tr><td>[7]</td><td>Polyak, B. T. (1964). Some methods of speeding up the convergence of iteration methods. USSR Computational Mathematics and Mathematical Physics 4(5).</td><td>정리의 실무 상자(모멘텀)</td></tr>
+    <tr><td>[8]</td><td>Kingma, D. P., Ba, J. (2015). Adam: A Method for Stochastic Optimization. ICLR.</td><td>정리의 실무 상자(Adam)</td></tr>
   </tbody></table>
   <h3>예시값·설명용 모형인 것</h3>
   <ul><li>①·② 그릇의 데이터(직선 y = 2x + 1 주변 점 1,000개, 시드 39)와 모든 경로·오차 값 — 페이지가 직접 계산</li><li>③·④ 신경망 실험의 모든 값 — code/deep_slices.py로 미리 계산(시드 2026)</li><li>표지 그림은 대체 표지(그림 준비 중)</li></ul>
@@ -325,10 +339,10 @@ var xmode='step',K1=100,anim1=0;
 function kFor(s){return xmode==='step'?K1:Math.min(100,Math.floor(K1*10/s));} /* card 모드에서 K1 = 카드 수/10 */
 var S1=new U.Surf3D($('#cvS1a'),{f:bowl,xr:WR,yr:BR,n:26,alpha:0.62,axes:['w','b','오차'],stamp:'설명용 모형',
   onTick:function(dt){if(anim1>0&&dt>0){anim1+=dt*30;K1=Math.min(100,Math.floor(anim1));$('#r-k1').value=K1;upd1(true);if(K1>=100)anim1=0;}}});
-S1.ov.push(function(g,S){S.dot3(g,O.w,O.b,O.L,'#ffffff',4);[1000,100,10].forEach(function(s){var P=RUN[s].path.slice(0,kFor(s)+1);S.line3(g,P,COL[s],s===10?1.4:2.4);var q=P[P.length-1];S.dot3(g,q[0],q[1],q[2],COL[s],5.5);});});
+S1.ov.push(function(g,S){S.dot3(g,O.w,O.b,O.L,cssv('--ink'),4);[1000,100,10].forEach(function(s){var P=RUN[s].path.slice(0,kFor(s)+1);S.line3(g,P,COL[s],s===10?1.4:2.4);var q=P[P.length-1];S.dot3(g,q[0],q[1],q[2],COL[s],5.5);});});
 function draw1b(){var cardsX=xmode==='card',series=SZ.map(function(s){var P=RUN[s].path,pts=[];for(var k=0;k<=kFor(s);k++)pts.push([cardsX?Math.max(1,k*s):Math.max(0,k),P[k][2]]);return {pts:pts,color:COL[s],width:s===10?1.5:2.4,name:NM[s]};});
-  U.plot($('#cvS1b'),cardsX?{xr:[1,100000],logx:true,yr:[0.9,40],logy:true,series:series,xt:[1,10,100,1000,10000,100000],xf:function(v){return v>=1000?(v/1000)+'천':String(v);},yt:[1,3,10,30],xl:'본 카드 수(로그)',yl:'전체 오차(로그)',hlines:[{y:O.L,color:'rgba(255,255,255,.5)',label:'바닥 '+fmt(O.L,3)}],vlines:[{x:1000,color:cssv('--amber'),label:'카드 1,000장'}],stamp:'설명용 모형',aria:'본 카드 수에 따른 오차'}
-   :{xr:[0,100],yr:[0.9,40],logy:true,series:series,xt:[0,25,50,75,100],yt:[1,3,10,30],xl:'걸음',yl:'전체 오차(로그)',hlines:[{y:O.L,color:'rgba(255,255,255,.5)',label:'바닥 '+fmt(O.L,3)}],stamp:'설명용 모형',aria:'걸음에 따른 오차'});}
+  U.plot($('#cvS1b'),cardsX?{xr:[1,100000],logx:true,yr:[0.9,40],logy:true,series:series,xt:[1,10,100,1000,10000,100000],xf:function(v){return v>=1000?(v/1000)+'천':String(v);},yt:[1,3,10,30],xl:'본 카드 수(로그)',yl:'전체 오차(로그)',hlines:[{y:O.L,color:'rgba(27,29,43,.45)',label:'바닥 '+fmt(O.L,3)}],vlines:[{x:1000,color:cssv('--amber'),label:'카드 1,000장'}],stamp:'설명용 모형',aria:'본 카드 수에 따른 오차'}
+   :{xr:[0,100],yr:[0.9,40],logy:true,series:series,xt:[0,25,50,75,100],yt:[1,3,10,30],xl:'걸음',yl:'전체 오차(로그)',hlines:[{y:O.L,color:'rgba(27,29,43,.45)',label:'바닥 '+fmt(O.L,3)}],stamp:'설명용 모형',aria:'걸음에 따른 오차'});}
 function cards(){var host=$('#cards1');if(!host.children.length){var h='';for(var i=0;i<1000;i++)h+='<i></i>';host.innerHTML=h;}
   /* 배치 10의 k번째 걸음이 보는 카드: runBatch와 같은 시드로 섞은 순서를 다시 만든다 */
   var k=kFor(10),r=LM.rng(7),idx=[];for(var i=0;i<1000;i++)idx.push(i);var on={},done={};
@@ -353,9 +367,9 @@ upd1();
 var lr2=0.1,R2=null,LIM=2/HS.lmax;
 var S2=new U.Surf3D($('#cvS2a'),{f:bowl,xr:WR,yr:BR,n:26,alpha:0.62,axes:['w','b','오차'],stamp:'설명용 모형'});
 S2.ov.push(function(g,S){if(!R2)return;var P=R2.path.filter(function(p){return p[0]>=WR[0]-0.3&&p[0]<=WR[1]+0.3&&p[1]>=BR[0]-0.3&&p[1]<=BR[1]+0.3;});if(P.length>1)S.line3(g,P.map(function(p){return [U.clamp(p[0],WR[0],WR[1]),U.clamp(p[1],BR[0],BR[1]),Math.min(p[2],S.zr[1])];}),cssv('--amber'),2);
-  S.dot3(g,O.w,O.b,O.L,'#ffffff',4);if(P.length){var q=P[P.length-1];S.dot3(g,U.clamp(q[0],WR[0],WR[1]),U.clamp(q[1],BR[0],BR[1]),Math.min(q[2],S.zr[1]),cssv('--amber'),6);}});
+  S.dot3(g,O.w,O.b,O.L,cssv('--ink'),4);if(P.length){var q=P[P.length-1];S.dot3(g,U.clamp(q[0],WR[0],WR[1]),U.clamp(q[1],BR[0],BR[1]),Math.min(q[2],S.zr[1]),cssv('--amber'),6);}});
 function draw2b(){if(!R2)return;var pts=R2.path.map(function(p,i){return [i,Math.min(p[2],1e6)];});
-  U.plot($('#cvS2b'),{xr:[0,100],yr:[0.9,1e4],logy:true,series:[{pts:pts,color:cssv('--amber'),width:2}],xt:[0,25,50,75,100],yt:[1,10,100,1000,10000],yf:function(v){return v>=1000?(v/1000)+'천':String(v);},xl:'걸음',yl:'전체 오차(로그)',hlines:[{y:O.L,color:'rgba(255,255,255,.5)',label:'바닥 '+fmt(O.L,3)},{y:LM.loss(D,-1,-1),color:'rgba(157,155,184,.6)',label:'출발'}],stamp:'설명용 모형',aria:'걸음마다 오차'});}
+  U.plot($('#cvS2b'),{xr:[0,100],yr:[0.9,1e4],logy:true,series:[{pts:pts,color:cssv('--amber'),width:2}],xt:[0,25,50,75,100],yt:[1,10,100,1000,10000],yf:function(v){return v>=1000?(v/1000)+'천':String(v);},xl:'걸음',yl:'전체 오차(로그)',hlines:[{y:O.L,color:'rgba(27,29,43,.45)',label:'바닥 '+fmt(O.L,3)},{y:LM.loss(D,-1,-1),color:'rgba(157,155,184,.6)',label:'출발'}],stamp:'설명용 모형',aria:'걸음마다 오차'});}
 U.reg($('#cvS2b'),function(dt){if(dt===0)draw2b();});
 function upd2(){R2=LM.runBatch(D,1000,{steps:100,lr:lr2});$('#v-lr').textContent=fmt(lr2,3);$('#m2-lr').textContent=fmt(lr2,3);$('#m2-lim').textContent=fmt(LIM,3);$('#m2-L').textContent=R2.blow?'발산':fmt(R2.last,3);$('#m2-bot').textContent=fmt(O.L,3);
   var a=1-lr2*HS.lmax,b=1-lr2*HS.lmin;$('#eq2').innerHTML='걸음마다 바닥과의 거리 배율 · 가파른 방향 1 − η·λ<sub>max</sub> = <i>'+fmt(a,3)+'</i> · 완만한 방향 1 − η·λ<sub>min</sub> = <b>'+fmt(b,3)+'</b>';
@@ -388,7 +402,7 @@ if(DEEP){var SL=DEEP.slice2d,n=SL.n;
 /* ── ④ 에포크 ── */
 if(DEEP){var OF=DEEP.overfit,best=DEEP.overfitBest,ep4=OF[OF.length-1][0];
   var draw4=function(){U.plot($('#cvS4'),{xr:[1,1500],logx:true,yr:[1e-4,0.6],logy:true,series:[{pts:OF.filter(function(r){return r[0]>0;}).map(function(r){return [r[0],r[1]];}),color:cssv('--amber'),width:2,name:'훈련',ndy:14},{pts:OF.filter(function(r){return r[0]>0;}).map(function(r){return [r[0],r[2]];}),color:cssv('--gfp'),width:2,name:'검증'}],
-    xt:[1,10,100,1000],yt:[1e-4,1e-3,1e-2,0.1],yf:function(v){return v>=0.01?String(v):v.toExponential(0);},xl:'에포크(로그)',yl:'오차(로그)',vlines:[{x:Math.max(1,best[0]),color:'rgba(255,255,255,.6)',label:'검증 최저 '+best[0]+' 에포크'},{x:Math.max(1,ep4),color:cssv('--info'),label:'여기서 멈춘다면',dy:18}],stamp:'설명용 모형',aria:'에포크에 따른 훈련 오차와 검증 오차'});};
+    xt:[1,10,100,1000],yt:[1e-4,1e-3,1e-2,0.1],yf:function(v){return v>=0.01?String(v):v.toExponential(0);},xl:'에포크(로그)',yl:'오차(로그)',vlines:[{x:Math.max(1,best[0]),color:'rgba(27,29,43,.5)',label:'검증 최저 '+best[0]+' 에포크'},{x:Math.max(1,ep4),color:cssv('--info'),label:'여기서 멈춘다면',dy:18}],stamp:'설명용 모형',aria:'에포크에 따른 훈련 오차와 검증 오차'});};
   U.reg($('#cvS4'),function(dt){if(dt===0)draw4();});
   var upd4=function(){var v=+$('#r-ep').value,e=Math.round(Math.pow(10,v*Math.log10(1500)));var row=OF[0];OF.forEach(function(r){if(r[0]<=e)row=r;});ep4=row[0];
     $('#v-ep').textContent=ep4+' 에포크';$('#m4-tr').textContent=fmt(row[1],4);$('#m4-va').textContent=fmt(row[2],4);
