@@ -1,0 +1,274 @@
+{
+ "version": "1.0",
+ "page": "index",
+ "nodes": [
+  {
+   "id": "lab:concept/loss-landscape",
+   "type": "Concept",
+   "label": {
+    "ko": "오차 지형",
+    "en": "Loss landscape"
+   },
+   "page": "index",
+   "anchor": "#top",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "가중치마다 잰 오차를 높이로 세운 땅."
+   }
+  },
+  {
+   "id": "lab:concept/parameter-axis",
+   "type": "Concept",
+   "label": {
+    "ko": "좌표축(가중치 축)",
+    "en": "Parameter axis"
+   },
+   "page": "index",
+   "anchor": "#top",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "가중치 하나가 지도의 축 하나."
+   }
+  },
+  {
+   "id": "lab:method/gradient-descent",
+   "type": "Method",
+   "label": {
+    "ko": "경사하강",
+    "en": "Gradient descent"
+   },
+   "page": "index",
+   "anchor": "#chapters",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "기울기의 반대 방향으로 조금씩 걸어 오차를 줄이는 방법."
+   }
+  },
+  {
+   "id": "lab:concept/hyperparameter",
+   "type": "Concept",
+   "label": {
+    "ko": "하이퍼파라미터",
+    "en": "Hyperparameter"
+   },
+   "page": "index",
+   "anchor": "#chapters",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "학습 전에 사람이 정하는 숫자."
+   }
+  },
+  {
+   "id": "lab:section/series-part-1",
+   "type": "Section",
+   "label": {
+    "ko": "1편 수학 편",
+    "en": "Part 1: mathematics"
+   },
+   "page": "index",
+   "anchor": "#chapters",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:section/series-part-2",
+   "type": "Section",
+   "label": {
+    "ko": "2편 실험실 편",
+    "en": "Part 2: experiments"
+   },
+   "page": "index",
+   "anchor": "#chapters",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:question/series",
+   "type": "Question",
+   "label": {
+    "ko": "학습을 오차 지도 위의 걷기로 볼 수 있을까?",
+    "en": "Can learning be read as walking on a loss map?"
+   },
+   "page": "index",
+   "anchor": "#top",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:work/goodfellow2016deep",
+   "type": "Work",
+   "label": {
+    "ko": "Goodfellow 외 2016 Deep Learning",
+    "en": "Goodfellow et al. 2016 Deep Learning"
+   },
+   "page": "index",
+   "anchor": "#top",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:claim/gd-on-loss",
+   "type": "Claim",
+   "label": {
+    "ko": "경사하강은 오차 함수의 기울기 반대 방향으로 가중치를 고친다",
+    "en": "Gradient descent moves weights against the loss gradient"
+   },
+   "page": "index",
+   "anchor": "#top",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "source": [
+    {
+     "ref": "goodfellow2016deep",
+     "loc": "4.3"
+    }
+   ]
+  }
+ ],
+ "edges": [
+  {
+   "s": "lab:concept/parameter-axis",
+   "p": "lab:partOf",
+   "o": "lab:concept/loss-landscape",
+   "anchor": "#top",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/loss-landscape",
+   "p": "lab:explainedIn",
+   "o": "lab:section/series-part-1",
+   "anchor": "#chapters",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/hyperparameter",
+   "p": "lab:explainedIn",
+   "o": "lab:section/series-part-2",
+   "anchor": "#chapters",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/gradient-descent",
+   "p": "lab:explainedIn",
+   "o": "lab:section/series-part-1",
+   "anchor": "#chapters",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:section/series-part-1",
+   "p": "lab:prerequisiteOf",
+   "o": "lab:section/series-part-2",
+   "anchor": "#chapters",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/loss-landscape",
+   "p": "lab:raises",
+   "o": "lab:question/series",
+   "anchor": "#top",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/gd-on-loss",
+   "p": "lab:supports",
+   "o": "lab:method/gradient-descent",
+   "anchor": "#top",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/gd-on-loss",
+   "p": "lab:assertedIn",
+   "o": "lab:work/goodfellow2016deep",
+   "anchor": "#top",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/gradient-descent",
+   "p": "lab:broader",
+   "o": "lab:topic/gradient-descent",
+   "anchor": "#top",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/loss-landscape",
+   "p": "lab:broader",
+   "o": "lab:topic/loss-function",
+   "anchor": "#top",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/hyperparameter",
+   "p": "lab:relatedTo",
+   "o": "lab:method/gradient-descent",
+   "anchor": "#chapters",
+   "confidence": "high"
+  }
+ ]
+}

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>좌표축 위의 그릇 — 3D 지도로 본 모델 최적화</title>
+<meta name="description" content="가중치를 좌표축으로, 오차를 높이로 놓은 3D 지도 위에서 기울기·굽음·안장점·야코비안과 배치·학습률·에포크를 연구실 식구와 함께 보는 두 편짜리 해설.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<!--@@CSS@@-->
+<style>
+.chap{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:18px 0}
+.chap a{display:block;background:var(--panel);border:1px solid var(--rule);border-radius:14px;overflow:hidden;text-decoration:none;color:var(--text)}
+.chap a:hover{border-color:var(--terrain)}
+.chap canvas{display:block;width:100%;height:220px;background:#151726}
+.chap .t{padding:12px 16px 16px}
+.chap .t b{display:block;font-size:19px;margin-bottom:4px}
+.chap .t span{color:var(--muted);font-size:14.5px}
+.chap ol{margin:8px 0 0;padding-left:20px;color:var(--muted);font-size:14.5px}
+@media(max-width:760px){.chap{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav class="top" aria-label="바로가기"><div class="row">
+  <a class="logo" href="index.html">좌표축 위의 <i>그릇</i></a>
+  <div class="links"><a href="#chapters">목차</a><a href="1_math_map.html">1편 수학</a><a href="2_experiment_lab.html">2편 실험실</a><a href="#kg">색인</a><a href="#export">꾸러미</a></div>
+</div></nav>
+
+<!-- lab-cover -->
+<div class="cover" data-img="cover_index"><div class="frame">
+  <canvas id="coverCv" aria-hidden="true"></canvas>
+  <span class="cap">좌표축 위의 그릇 · 3D 지도로 본 모델 최적화</span><span class="badge">대체 표지 · 그림 준비 중</span>
+  <div class="cast4"><img class="s" data-mood="sia_explain" alt="" aria-hidden="true"><img data-mood="fly_point" alt="" aria-hidden="true"><img data-mood="doc_front" alt="" aria-hidden="true"><img data-mood="asst_smile" alt="" aria-hidden="true"><img data-mood="robo_coin" alt="" aria-hidden="true"><img class="s" data-mood="moa_tea" alt="" aria-hidden="true"></div>
+</div></div>
+<!-- /lab-cover -->
+
+<header class="hero" id="top"><div class="wrap">
+  <div class="eyebrow">연구실 해설 · 두 편</div>
+  <h1>좌표축 위의 그릇 — 3D 지도로 본 모델 최적화</h1>
+  <p class="question">가중치를 좌표축으로, 오차를 높이로 세우면 학습은 지도 위의 걷기가 된다.</p>
+  <p class="lead">신경망이 배운다는 것은 가중치라는 숫자를 고쳐 오차를 줄이는 일입니다. 이 해설은 그 일을 <b>3D 지도</b>로 바꿔 봅니다. 1편은 지도를 읽는 수학 — 단면, 기울기와 법선, 굽음(헤시안), 안장점, 야코비안 — 이고, 2편은 그 지도 위에서 사람이 돌리는 다이얼 — 배치, 학습률, 에포크 — 을 실험으로 고르는 이야기입니다.</p>
+  <p class="byline">글 · 안상선 ((주)M-Robo 대표) · <a href="https://adminmrobo.github.io/who_am_i/who_am_i.html">저자 소개</a> · 2026-11-14 · v1.0</p>
+  <div data-dlg="hero"></div>
+</div></header>
+
+<main>
+<section class="sec" id="chapters" aria-labelledby="h-ch"><div class="wrap">
+  <h2 id="h-ch">목차</h2>
+  <div class="chap">
+    <a href="1_math_map.html"><canvas id="cv1" aria-label="1편 미리보기: 그릇 모양 오차 지도"></canvas><div class="t"><b>1편 · 수학 편</b><span>기울기·굽음·휨으로 읽는 3D 오차 지도</span>
+      <ol><li>칼로 자르기 — 단면과 한 걸음</li><li>깃대와 그림자 — 그래디언트와 법선</li><li>땅의 굽음 — 헤시안과 보폭 한계</li><li>감자칩 고개 — 안장점</li><li>휘는 지도 — 야코비안과 역전파</li><li>대결: 기울기 0이면 바닥인가?</li></ol></div></a>
+    <a href="2_experiment_lab.html"><canvas id="cv2" aria-label="2편 미리보기: 신경망 오차 지형의 단면"></canvas><div class="t"><b>2편 · 실험실 편</b><span>배치·학습률·에포크를 지도 위에서 고르기</span>
+      <ol><li>같은 그릇, 공 세 개 — 배치 크기</li><li>보폭의 한계 — 학습률</li><li>축이 4,416개일 때 — 단면</li><li>언제 멈출까 — 에포크와 과적합</li><li>대결: 작은 배치냐, 풀배치냐</li></ol></div></a>
+  </div>
+  <div class="steps">
+    <div class="step"><b>이런 분께</b>경사하강법은 들어 봤지만 그래디언트·헤시안·야코비안이 지도에서 무엇인지 그림으로 보고 싶은 분.</div>
+    <div class="step"><b>읽는 순서</b>1편 → 2편. 2편의 학습률 한계는 1편 ③의 굽음에서 나옵니다.</div>
+    <div class="step"><b>함께 보면 좋은 곳</b><a href="https://adminmrobo.github.io/fish_market_learning_epoch_etc/">Fish Market 연구실</a>(학습률·에포크), <a href="https://adminmrobo.github.io/ai_in_3d/">신경망 연구소</a>(3D로 보는 신경망 27종).</div>
+  </div>
+  <h3>바탕 자료</h3>
+  <ul>
+    <li>matharium 인포그래픽 세 장 — 곡면 감자칩의 기하, 벡터 미분 연산자, 그래디언트·야코비안·헤시안 (그림은 쓰지 않고 새로 그렸습니다)</li>
+    <li>matheorems 영상 — 그래프 곡면의 야코비안과 법선</li>
+    <li>Machine Learning from Scratch 39편(미니배치)·43편(하이퍼파라미터) — 실험 설계를 빌리고, 숫자는 다시 계산했습니다</li>
+    <li>Dauphin 외(2014), Li 외(2018), Rumelhart·Hinton·Williams(1986), Goodfellow·Bengio·Courville(2016)</li>
+  </ul>
+</div></section>
+</main>
+
+<footer><div class="wrap">
+  <p>저작권: 캐릭터 이름·설정·그림은 저작권자 안상선의 허락 없이 사용할 수 없습니다.</p>
+  <p>글 · 안상선 ((주)M-Robo 대표) · <a href="https://github.com/adminmrobo/optimization_3d_map">저장소</a></p>
+</div></footer>
+<script>
+/*@@SPRITES@@*/
+/*@@LABMATH@@*/
+/*@@COMMON@@*/
+var DEEP=/*@@DEEP@@*/;
+(function(){
+'use strict';
+var $=U.$;
+U.dialogues({hero:[["doc","doc_front","오늘의 지도는 땅이 아니라 오차로 그립니다. 가로·세로축은 가중치예요."],["asst","asst_smile","1편에서 지도 읽는 법을, 2편에서 그 위를 걷는 법을 배워요."],["fly","fly_point","평평한 곳이 다 바닥인지는 1편 대결에서 확인해 봐."],["robo","robo_coin","2편에선 큰 배치에 건다. 정확한 게 이기는 법이지."]]});
+U.fillImgs();
+var D=LM.makeLine(39,1000),O=LM.ols(D);
+(function(){var cv=$('#coverCv');U.reg(cv,function(){var R=U.setup(cv),g=R.g,w=R.w,h=R.h;for(var k=16;k>0;k--){g.beginPath();g.ellipse(w*.5,h*.38,w*.045*k,h*.02*k,-.3,0,7);g.strokeStyle=U.cmap(k/16,.32);g.lineWidth=2;g.stroke();}g.beginPath();g.arc(w*.5,h*.38,6,0,7);g.fillStyle=U.cssv('--gfp');g.fill();});})();
+new U.Surf3D($('#cv1'),{f:function(w,b){return LM.loss(D,w,b);},xr:[-1.5,5.5],yr:[-2.5,4.5],n:20,axes:['w','b','오차'],contours:false,yaw:-0.9,pitch:0.55,zoom:0.85,stamp:'설명용 모형'});
+var SL=DEEP.slice2d,n=SL.n;new U.Surf3D($('#cv2'),{f:function(a,b){var i=Math.round((a+1)/2*(n-1)),j=Math.round((b+1)/2*(n-1));return SL.z[j][i];},xr:[-1,1],yr:[-1,1],n:30,axes:['방향 1','방향 2','검증 오차'],contours:false,yaw:-0.6,pitch:0.55,zoom:0.85,stamp:'단면 · 설명용 모형'});
+U.start();
+})();
+</script>
+</body>
+</html>

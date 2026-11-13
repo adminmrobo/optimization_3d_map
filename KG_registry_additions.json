@@ -1,0 +1,706 @@
+{
+ "version": "0.2+optimization_3d_map",
+ "updated": "2026-11-14",
+ "note": "KG_00_registry 0.2에 없던 ID. ahnboat_lab_explainer/data/KG_00_registry.json에 합칠 때 쓴다. 이미 있던 ID(경사하강, 학습률, 역전파, 과적합)는 그대로 썼다.",
+ "reused": [
+  "lab:concept/learning-rate",
+  "lab:concept/overfitting",
+  "lab:method/backpropagation",
+  "lab:method/early-stopping",
+  "lab:method/gradient-descent"
+ ],
+ "entries": [
+  {
+   "id": "lab:concept/loss-landscape",
+   "type": "Concept",
+   "label_ko": "오차 지형",
+   "label_en": "Loss landscape",
+   "pages": [
+    "optimization_3d_map/index",
+    "optimization_3d_map/1_math_map",
+    "optimization_3d_map/2_experiment_lab"
+   ]
+  },
+  {
+   "id": "lab:concept/parameter-axis",
+   "type": "Concept",
+   "label_ko": "좌표축(가중치 축)",
+   "label_en": "Parameter axis",
+   "pages": [
+    "optimization_3d_map/index",
+    "optimization_3d_map/1_math_map"
+   ]
+  },
+  {
+   "id": "lab:concept/hyperparameter",
+   "type": "Concept",
+   "label_ko": "하이퍼파라미터",
+   "label_en": "Hyperparameter",
+   "pages": [
+    "optimization_3d_map/index",
+    "optimization_3d_map/2_experiment_lab"
+   ]
+  },
+  {
+   "id": "lab:question/series",
+   "type": "Question",
+   "label_ko": "학습을 오차 지도 위의 걷기로 볼 수 있을까?",
+   "label_en": "Can learning be read as walking on a loss map?",
+   "pages": [
+    "optimization_3d_map/index"
+   ]
+  },
+  {
+   "id": "lab:claim/gd-on-loss",
+   "type": "Claim",
+   "label_ko": "경사하강은 오차 함수의 기울기 반대 방향으로 가중치를 고친다",
+   "label_en": "Gradient descent moves weights against the loss gradient",
+   "pages": [
+    "optimization_3d_map/index"
+   ]
+  },
+  {
+   "id": "lab:concept/loss-slice",
+   "type": "Concept",
+   "label_ko": "단면",
+   "label_en": "Loss-landscape slice",
+   "pages": [
+    "optimization_3d_map/1_math_map",
+    "optimization_3d_map/2_experiment_lab"
+   ]
+  },
+  {
+   "id": "lab:concept/gradient",
+   "type": "Concept",
+   "label_ko": "그래디언트",
+   "label_en": "Gradient",
+   "pages": [
+    "optimization_3d_map/1_math_map"
+   ]
+  },
+  {
+   "id": "lab:concept/surface-normal",
+   "type": "Concept",
+   "label_ko": "법선",
+   "label_en": "Surface normal",
+   "pages": [
+    "optimization_3d_map/1_math_map"
+   ]
+  },
+  {
+   "id": "lab:concept/tangent-vector",
+   "type": "Concept",
+   "label_ko": "접선 벡터",
+   "label_en": "Tangent vector",
+   "pages": [
+    "optimization_3d_map/1_math_map"
+   ]
+  },
+  {
+   "id": "lab:concept/curl-free-gradient",
+   "type": "Concept",
+   "label_ko": "그래디언트의 회전은 0",
+   "label_en": "Curl of a gradient is zero",
+   "pages": [
+    "optimization_3d_map/1_math_map"
+   ]
+  },
+  {
+   "id": "lab:concept/hessian",
+   "type": "Concept",
+   "label_ko": "헤시안",
+   "label_en": "Hessian matrix",
+   "pages": [
+    "optimization_3d_map/1_math_map",
+    "optimization_3d_map/2_experiment_lab"
+   ]
+  },
+  {
+   "id": "lab:concept/curvature-eigenvalue",
+   "type": "Concept",
+   "label_ko": "고유값(굽음)",
+   "label_en": "Curvature eigenvalue",
+   "pages": [
+    "optimization_3d_map/1_math_map"
+   ]
+  },
+  {
+   "id": "lab:concept/laplacian",
+   "type": "Concept",
+   "label_ko": "라플라시안",
+   "label_en": "Laplacian",
+   "pages": [
+    "optimization_3d_map/1_math_map"
+   ]
+  },
+  {
+   "id": "lab:concept/step-size-limit",
+   "type": "Concept",
+   "label_ko": "보폭 한계 2/λmax",
+   "label_en": "Step-size stability limit",
+   "pages": [
+    "optimization_3d_map/1_math_map",
+    "optimization_3d_map/2_experiment_lab"
+   ]
+  },
+  {
+   "id": "lab:concept/ill-conditioning",
+   "type": "Concept",
+   "label_ko": "길쭉함(조건수)",
+   "label_en": "Ill-conditioning",
+   "pages": [
+    "optimization_3d_map/1_math_map"
+   ]
+  },
+  {
+   "id": "lab:concept/saddle-point",
+   "type": "Concept",
+   "label_ko": "안장점",
+   "label_en": "Saddle point",
+   "pages": [
+    "optimization_3d_map/1_math_map"
+   ]
+  },
+  {
+   "id": "lab:concept/hyperbolic-paraboloid",
+   "type": "Concept",
+   "label_ko": "쌍곡포물면",
+   "label_en": "Hyperbolic paraboloid",
+   "pages": [
+    "optimization_3d_map/1_math_map"
+   ]
+  },
+  {
+   "id": "lab:concept/doubly-ruled-surface",
+   "type": "Concept",
+   "label_ko": "이중 선직면",
+   "label_en": "Doubly ruled surface",
+   "pages": [
+    "optimization_3d_map/1_math_map"
+   ]
+  },
+  {
+   "id": "lab:concept/jacobian",
+   "type": "Concept",
+   "label_ko": "야코비안",
+   "label_en": "Jacobian matrix",
+   "pages": [
+    "optimization_3d_map/1_math_map"
+   ]
+  },
+  {
+   "id": "lab:concept/chain-rule",
+   "type": "Concept",
+   "label_ko": "연쇄 법칙",
+   "label_en": "Chain rule",
+   "pages": [
+    "optimization_3d_map/1_math_map"
+   ]
+  },
+  {
+   "id": "lab:method/single-neuron-regression",
+   "type": "Method",
+   "label_ko": "뉴런 하나 (w, b)",
+   "label_en": "Single linear neuron",
+   "pages": [
+    "optimization_3d_map/1_math_map"
+   ]
+  },
+  {
+   "id": "lab:limitation/one-axis-at-a-time",
+   "type": "Limitation",
+   "label_ko": "축 하나씩만 움직임",
+   "label_en": "Moves one axis at a time",
+   "pages": [
+    "optimization_3d_map/1_math_map"
+   ]
+  },
+  {
+   "id": "lab:limitation/gradient-no-step-size",
+   "type": "Limitation",
+   "label_ko": "기울기만으로는 보폭을 모름",
+   "label_en": "Gradient gives no step size",
+   "pages": [
+    "optimization_3d_map/1_math_map"
+   ]
+  },
+  {
+   "id": "lab:limitation/quadratic-local",
+   "type": "Limitation",
+   "label_ko": "2차 근사는 그 점 둘레에서만 맞음",
+   "label_en": "Quadratic model is local",
+   "pages": [
+    "optimization_3d_map/1_math_map"
+   ]
+  },
+  {
+   "id": "lab:limitation/single-map-only",
+   "type": "Limitation",
+   "label_ko": "층을 지나는 변화는 모름",
+   "label_en": "Ignores layer-to-layer mapping",
+   "pages": [
+    "optimization_3d_map/1_math_map"
+   ]
+  },
+  {
+   "id": "lab:limitation/linear-approx",
+   "type": "Limitation",
+   "label_ko": "야코비안은 작은 범위의 직선 근사",
+   "label_en": "Jacobian is a local linear approximation",
+   "pages": [
+    "optimization_3d_map/1_math_map"
+   ]
+  },
+  {
+   "id": "lab:method/slice-descent",
+   "type": "Method",
+   "label_ko": "① 단면 위 한 걸음",
+   "label_en": "Step on a 1D slice",
+   "pages": [
+    "optimization_3d_map/1_math_map"
+   ]
+  },
+  {
+   "id": "lab:method/curvature-step-limit",
+   "type": "Method",
+   "label_ko": "③ 굽음으로 보폭 한계 정하기",
+   "label_en": "Curvature-based step limit",
+   "pages": [
+    "optimization_3d_map/1_math_map"
+   ]
+  },
+  {
+   "id": "lab:method/second-order-critical-test",
+   "type": "Method",
+   "label_ko": "④ 헤시안 부호로 임계점 판별",
+   "label_en": "Second-order critical-point test",
+   "pages": [
+    "optimization_3d_map/1_math_map"
+   ]
+  },
+  {
+   "id": "lab:analogy/hill-slice",
+   "type": "Analogy",
+   "label_ko": "산을 칼로 자른 단면",
+   "label_en": "Hill cross-section",
+   "pages": [
+    "optimization_3d_map/1_math_map"
+   ]
+  },
+  {
+   "id": "lab:analogy/flagpole-shadow",
+   "type": "Analogy",
+   "label_ko": "비탈에 꽂은 깃대의 그림자",
+   "label_en": "Flagpole shadow on a slope",
+   "pages": [
+    "optimization_3d_map/1_math_map"
+   ]
+  },
+  {
+   "id": "lab:analogy/elongated-bowl",
+   "type": "Analogy",
+   "label_ko": "길쭉한 그릇",
+   "label_en": "Elongated bowl",
+   "pages": [
+    "optimization_3d_map/1_math_map"
+   ]
+  },
+  {
+   "id": "lab:analogy/stacked-crisp",
+   "type": "Analogy",
+   "label_ko": "통에 포개 담는 곡면 감자칩",
+   "label_en": "Stacked curved crisp",
+   "pages": [
+    "optimization_3d_map/1_math_map"
+   ]
+  },
+  {
+   "id": "lab:analogy/rubber-sheet",
+   "type": "Analogy",
+   "label_ko": "당겨진 고무판의 모눈",
+   "label_en": "Stretched rubber sheet",
+   "pages": [
+    "optimization_3d_map/1_math_map"
+   ]
+  },
+  {
+   "id": "lab:method/curvature-check-escape",
+   "type": "Method",
+   "label_ko": "굽음 확인 후 비켜 서기",
+   "label_en": "Curvature check and escape",
+   "pages": [
+    "optimization_3d_map/1_math_map"
+   ]
+  },
+  {
+   "id": "lab:method/gradient-only-stop",
+   "type": "Method",
+   "label_ko": "기울기 0이면 멈추기",
+   "label_en": "Stop at zero gradient",
+   "pages": [
+    "optimization_3d_map/1_math_map"
+   ]
+  },
+  {
+   "id": "lab:metric/final-loss",
+   "type": "Metric",
+   "label_ko": "멈춘 곳의 오차",
+   "label_en": "Final loss",
+   "pages": [
+    "optimization_3d_map/1_math_map"
+   ]
+  },
+  {
+   "id": "lab:question/p1-blindfold",
+   "type": "Question",
+   "label_ko": "눈을 가린 채 기울기와 굽음만으로 바닥을 찾을 수 있을까?",
+   "label_en": "Can a blindfolded walker find the bottom from slope and curvature?",
+   "pages": [
+    "optimization_3d_map/1_math_map"
+   ]
+  },
+  {
+   "id": "lab:question/p1-zero-gradient",
+   "type": "Question",
+   "label_ko": "기울기 0이면 바닥인가?",
+   "label_en": "Is zero gradient a minimum?",
+   "pages": [
+    "optimization_3d_map/1_math_map"
+   ]
+  },
+  {
+   "id": "lab:claim/normal-is-neg-gradient-lift",
+   "type": "Claim",
+   "label_ko": "그래프 곡면의 법선은 (−∂f/∂u, −∂f/∂v, 1)이다",
+   "label_en": "Normal of a graph surface is (−f_u, −f_v, 1)",
+   "pages": [
+    "optimization_3d_map/1_math_map"
+   ]
+  },
+  {
+   "id": "lab:claim/curl-grad-zero",
+   "type": "Claim",
+   "label_ko": "그래디언트의 회전과 회전의 발산은 늘 0이다",
+   "label_en": "Curl of gradient and divergence of curl vanish",
+   "pages": [
+    "optimization_3d_map/1_math_map"
+   ]
+  },
+  {
+   "id": "lab:claim/laplacian-examples",
+   "type": "Claim",
+   "label_ko": "∇²(x² + y²) = 4, ∇²(x² − y²) = 0",
+   "label_en": "Laplacian examples",
+   "pages": [
+    "optimization_3d_map/1_math_map"
+   ]
+  },
+  {
+   "id": "lab:claim/crisp-doubly-ruled",
+   "type": "Claim",
+   "label_ko": "쌍곡포물면은 곧은 선 두 무리를 품는다",
+   "label_en": "A hyperbolic paraboloid is doubly ruled",
+   "pages": [
+    "optimization_3d_map/1_math_map"
+   ]
+  },
+  {
+   "id": "lab:claim/hessian-classifies",
+   "type": "Claim",
+   "label_ko": "헤시안 고유값이 임계점을 분류한다",
+   "label_en": "Hessian eigenvalues classify critical points",
+   "pages": [
+    "optimization_3d_map/1_math_map"
+   ]
+  },
+  {
+   "id": "lab:claim/saddles-proliferate-high-dim",
+   "type": "Claim",
+   "label_ko": "고차원 비볼록 지형에서는 나쁜 국소 최소보다 안장점이 문제를 일으킨다",
+   "label_en": "Saddle points, not local minima, proliferate in high dimensions",
+   "pages": [
+    "optimization_3d_map/1_math_map"
+   ]
+  },
+  {
+   "id": "lab:claim/lr-limit-quadratic",
+   "type": "Claim",
+   "label_ko": "2차 함수에서 경사하강은 학습률이 2/λmax보다 작을 때 줄어든다",
+   "label_en": "GD converges on a quadratic iff lr < 2/λmax",
+   "pages": [
+    "optimization_3d_map/1_math_map",
+    "optimization_3d_map/2_experiment_lab"
+   ]
+  },
+  {
+   "id": "lab:claim/backprop-1986",
+   "type": "Claim",
+   "label_ko": "역전파는 층마다의 기울기를 뒤에서부터 전해 가중치를 고친다",
+   "label_en": "Backpropagation adjusts weights by propagating error gradients",
+   "pages": [
+    "optimization_3d_map/1_math_map"
+   ]
+  },
+  {
+   "id": "lab:claim/one-neuron-bowl",
+   "type": "Claim",
+   "label_ko": "뉴런 하나(w, b)의 평균제곱오차는 그릇 모양 2차 곡면이다",
+   "label_en": "MSE of a single linear neuron is a quadratic bowl",
+   "pages": [
+    "optimization_3d_map/1_math_map"
+   ]
+  },
+  {
+   "id": "lab:concept/batch-size",
+   "type": "Concept",
+   "label_ko": "배치 크기",
+   "label_en": "Batch size",
+   "pages": [
+    "optimization_3d_map/2_experiment_lab"
+   ]
+  },
+  {
+   "id": "lab:concept/epoch",
+   "type": "Concept",
+   "label_ko": "에포크",
+   "label_en": "Epoch",
+   "pages": [
+    "optimization_3d_map/2_experiment_lab"
+   ]
+  },
+  {
+   "id": "lab:concept/depth-width",
+   "type": "Concept",
+   "label_ko": "깊이·너비",
+   "label_en": "Depth and width",
+   "pages": [
+    "optimization_3d_map/2_experiment_lab"
+   ]
+  },
+  {
+   "id": "lab:method/minibatch-sgd",
+   "type": "Method",
+   "label_ko": "미니배치 경사하강",
+   "label_en": "Mini-batch gradient descent",
+   "pages": [
+    "optimization_3d_map/2_experiment_lab"
+   ]
+  },
+  {
+   "id": "lab:method/full-batch-gd",
+   "type": "Method",
+   "label_ko": "풀배치 경사하강",
+   "label_en": "Full-batch gradient descent",
+   "pages": [
+    "optimization_3d_map/2_experiment_lab"
+   ]
+  },
+  {
+   "id": "lab:concept/divergence-of-training",
+   "type": "Concept",
+   "label_ko": "발산",
+   "label_en": "Training divergence",
+   "pages": [
+    "optimization_3d_map/2_experiment_lab"
+   ]
+  },
+  {
+   "id": "lab:method/random-direction-slice",
+   "type": "Method",
+   "label_ko": "무작위 방향 2차원 단면",
+   "label_en": "Random-direction 2D slice",
+   "pages": [
+    "optimization_3d_map/2_experiment_lab"
+   ]
+  },
+  {
+   "id": "lab:concept/validation-set",
+   "type": "Concept",
+   "label_ko": "검증 데이터",
+   "label_en": "Validation set",
+   "pages": [
+    "optimization_3d_map/2_experiment_lab"
+   ]
+  },
+  {
+   "id": "lab:concept/test-set",
+   "type": "Concept",
+   "label_ko": "시험 데이터",
+   "label_en": "Test set",
+   "pages": [
+    "optimization_3d_map/2_experiment_lab"
+   ]
+  },
+  {
+   "id": "lab:metric/full-data-loss",
+   "type": "Metric",
+   "label_ko": "전체 데이터 오차",
+   "label_en": "Full-data loss",
+   "pages": [
+    "optimization_3d_map/2_experiment_lab"
+   ]
+  },
+  {
+   "id": "lab:metric/validation-loss",
+   "type": "Metric",
+   "label_ko": "검증 오차",
+   "label_en": "Validation loss",
+   "pages": [
+    "optimization_3d_map/2_experiment_lab"
+   ]
+  },
+  {
+   "id": "lab:limitation/fixed-learning-rate",
+   "type": "Limitation",
+   "label_ko": "학습률을 묶어 둠",
+   "label_en": "Learning rate held fixed",
+   "pages": [
+    "optimization_3d_map/2_experiment_lab"
+   ]
+  },
+  {
+   "id": "lab:limitation/two-weights-only",
+   "type": "Limitation",
+   "label_ko": "가중치 두 개일 때만 한계를 계산할 수 있음",
+   "label_en": "Limit computable only for tiny models",
+   "pages": [
+    "optimization_3d_map/2_experiment_lab"
+   ]
+  },
+  {
+   "id": "lab:limitation/plenty-of-data",
+   "type": "Limitation",
+   "label_ko": "데이터가 넉넉할 때만 본 모습",
+   "label_en": "Seen only with ample data",
+   "pages": [
+    "optimization_3d_map/2_experiment_lab"
+   ]
+  },
+  {
+   "id": "lab:limitation/single-seed-run",
+   "type": "Limitation",
+   "label_ko": "데이터 40개·시드 하나의 한 번 실험",
+   "label_en": "Single small run",
+   "pages": [
+    "optimization_3d_map/2_experiment_lab"
+   ]
+  },
+  {
+   "id": "lab:method/learning-rate-sweep",
+   "type": "Method",
+   "label_ko": "② 학습률 고르기",
+   "label_en": "Learning-rate sweep",
+   "pages": [
+    "optimization_3d_map/2_experiment_lab"
+   ]
+  },
+  {
+   "id": "lab:analogy/flashcard-batches",
+   "type": "Analogy",
+   "label_ko": "문제 카드 묶음",
+   "label_en": "Flashcard batches",
+   "pages": [
+    "optimization_3d_map/2_experiment_lab"
+   ]
+  },
+  {
+   "id": "lab:analogy/lab-safety-range",
+   "type": "Analogy",
+   "label_ko": "실험 조건의 안전 범위",
+   "label_en": "Safe operating range",
+   "pages": [
+    "optimization_3d_map/2_experiment_lab"
+   ]
+  },
+  {
+   "id": "lab:analogy/tissue-section",
+   "type": "Analogy",
+   "label_ko": "시료의 얇은 절편",
+   "label_en": "Thin tissue section",
+   "pages": [
+    "optimization_3d_map/2_experiment_lab"
+   ]
+  },
+  {
+   "id": "lab:analogy/sealed-exam",
+   "type": "Analogy",
+   "label_ko": "봉인된 모의고사",
+   "label_en": "Sealed practice exam",
+   "pages": [
+    "optimization_3d_map/2_experiment_lab"
+   ]
+  },
+  {
+   "id": "lab:analogy/experiment-condition-table",
+   "type": "Analogy",
+   "label_ko": "실험 조건표",
+   "label_en": "Experiment condition sheet",
+   "pages": [
+    "optimization_3d_map/2_experiment_lab"
+   ]
+  },
+  {
+   "id": "lab:question/p2-cheapest-path",
+   "type": "Question",
+   "label_ko": "같은 그릇에서 공을 어떻게 굴려야 가장 싸고 빠르게 바닥에 닿을까?",
+   "label_en": "How to reach the bottom cheapest and fastest?",
+   "pages": [
+    "optimization_3d_map/2_experiment_lab"
+   ]
+  },
+  {
+   "id": "lab:question/p2-batch-duel",
+   "type": "Question",
+   "label_ko": "작은 배치냐, 풀배치냐 — 무엇을 같게 두고 견주나?",
+   "label_en": "Small batch or full batch — equal steps or equal compute?",
+   "pages": [
+    "optimization_3d_map/2_experiment_lab"
+   ]
+  },
+  {
+   "id": "lab:claim/mlfs39-numbers-reproduced",
+   "type": "Claim",
+   "label_ko": "39편 설명글의 숫자(7.869, 0.993, 0.956, 오르막 41걸음)가 영상 코드로 그대로 재현된다",
+   "label_en": "Part 39 numbers reproduce",
+   "pages": [
+    "optimization_3d_map/2_experiment_lab"
+   ]
+  },
+  {
+   "id": "lab:claim/mlfs43-numbers-reproduced",
+   "type": "Claim",
+   "label_ko": "43편의 학습률 0.1 검증 오차(목표 분산의 약 2%)가 영상 코드로 재현된다",
+   "label_en": "Part 43 number reproduces",
+   "pages": [
+    "optimization_3d_map/2_experiment_lab"
+   ]
+  },
+  {
+   "id": "lab:claim/random-direction-slices",
+   "type": "Claim",
+   "label_ko": "고차원 오차 지형은 무작위 방향으로 자른 1·2차원 단면으로 본다",
+   "label_en": "High-D landscapes are viewed through random-direction slices",
+   "pages": [
+    "optimization_3d_map/2_experiment_lab"
+   ]
+  },
+  {
+   "id": "lab:claim/early-stopping-validation",
+   "type": "Claim",
+   "label_ko": "검증 오차로 멈출 시점을 고르고 최종 성능은 따로 둔 데이터로 잰다",
+   "label_en": "Early stopping uses validation; report on held-out test",
+   "pages": [
+    "optimization_3d_map/2_experiment_lab"
+   ]
+  },
+  {
+   "id": "lab:claim/hessian-curvature",
+   "type": "Claim",
+   "label_ko": "헤시안은 기울기가 바뀌는 정도, 곧 굽음을 적는다",
+   "label_en": "Hessian captures how the gradient changes",
+   "pages": [
+    "optimization_3d_map/2_experiment_lab"
+   ]
+  }
+ ]
+}

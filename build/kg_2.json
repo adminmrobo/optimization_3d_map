@@ -1,0 +1,1681 @@
+{
+ "version": "1.0",
+ "page": "2_experiment_lab",
+ "nodes": [
+  {
+   "id": "lab:concept/hyperparameter",
+   "type": "Concept",
+   "label": {
+    "ko": "하이퍼파라미터",
+    "en": "Hyperparameter"
+   },
+   "page": "2_experiment_lab",
+   "anchor": "#map",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "학습 전에 사람이 정하는 숫자. 기울기로 고쳐지지 않는다."
+   }
+  },
+  {
+   "id": "lab:concept/learning-rate",
+   "type": "Concept",
+   "label": {
+    "ko": "학습률",
+    "en": "Learning rate"
+   },
+   "page": "2_experiment_lab",
+   "anchor": "#s2",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "한 걸음의 크기. 새 가중치 = 옛 가중치 − 학습률 × 기울기."
+   }
+  },
+  {
+   "id": "lab:concept/batch-size",
+   "type": "Concept",
+   "label": {
+    "ko": "배치 크기",
+    "en": "Batch size"
+   },
+   "page": "2_experiment_lab",
+   "anchor": "#s1",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "한 걸음에 기울기를 잴 때 쓰는 데이터 개수."
+   }
+  },
+  {
+   "id": "lab:concept/epoch",
+   "type": "Concept",
+   "label": {
+    "ko": "에포크",
+    "en": "Epoch"
+   },
+   "page": "2_experiment_lab",
+   "anchor": "#s4",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "데이터 전체를 한 바퀴 다 보는 것."
+   }
+  },
+  {
+   "id": "lab:concept/depth-width",
+   "type": "Concept",
+   "label": {
+    "ko": "깊이·너비",
+    "en": "Depth and width"
+   },
+   "page": "2_experiment_lab",
+   "anchor": "#map",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "층의 수와 층마다의 뉴런 수."
+   }
+  },
+  {
+   "id": "lab:method/minibatch-sgd",
+   "type": "Method",
+   "label": {
+    "ko": "미니배치 경사하강",
+    "en": "Mini-batch gradient descent"
+   },
+   "page": "2_experiment_lab",
+   "anchor": "#s1",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "걸음마다 일부 데이터로만 기울기를 재어 걷는 방법."
+   }
+  },
+  {
+   "id": "lab:method/full-batch-gd",
+   "type": "Method",
+   "label": {
+    "ko": "풀배치 경사하강",
+    "en": "Full-batch gradient descent"
+   },
+   "page": "2_experiment_lab",
+   "anchor": "#s1",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "걸음마다 데이터 전부로 정확한 기울기를 재는 방법."
+   }
+  },
+  {
+   "id": "lab:method/gradient-descent",
+   "type": "Method",
+   "label": {
+    "ko": "경사하강",
+    "en": "Gradient descent"
+   },
+   "page": "2_experiment_lab",
+   "anchor": "#s1",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "기울기의 반대 방향으로 조금씩 걸어 오차를 줄이는 방법."
+   }
+  },
+  {
+   "id": "lab:concept/divergence-of-training",
+   "type": "Concept",
+   "label": {
+    "ko": "발산",
+    "en": "Training divergence"
+   },
+   "page": "2_experiment_lab",
+   "anchor": "#s2",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "걸음마다 오차가 커져 숫자가 끝없이 불어나는 것."
+   }
+  },
+  {
+   "id": "lab:concept/step-size-limit",
+   "type": "Concept",
+   "label": {
+    "ko": "보폭 한계 2/λmax",
+    "en": "Step-size stability limit"
+   },
+   "page": "2_experiment_lab",
+   "anchor": "#s2",
+   "level": 3,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "2차 근사에서 경사하강이 줄어드는 학습률의 상한."
+   }
+  },
+  {
+   "id": "lab:concept/hessian",
+   "type": "Concept",
+   "label": {
+    "ko": "헤시안",
+    "en": "Hessian matrix"
+   },
+   "page": "2_experiment_lab",
+   "anchor": "#s2",
+   "level": 3,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "2차 편미분을 모은 정사각 표. 방향마다의 굽음을 적는다."
+   }
+  },
+  {
+   "id": "lab:concept/loss-slice",
+   "type": "Concept",
+   "label": {
+    "ko": "단면",
+    "en": "Loss-landscape slice"
+   },
+   "page": "2_experiment_lab",
+   "anchor": "#s3",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "다른 축은 고정하고 고른 방향으로만 자른 지형."
+   }
+  },
+  {
+   "id": "lab:method/random-direction-slice",
+   "type": "Method",
+   "label": {
+    "ko": "무작위 방향 2차원 단면",
+    "en": "Random-direction 2D slice"
+   },
+   "page": "2_experiment_lab",
+   "anchor": "#s3",
+   "level": 3,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "학습이 끝난 점을 가운데 두고 무작위 방향 두 개로 평면을 잘라 오차를 그린다. 방향 길이는 층별 가중치 크기에 맞춘다."
+   }
+  },
+  {
+   "id": "lab:concept/loss-landscape",
+   "type": "Concept",
+   "label": {
+    "ko": "오차 지형",
+    "en": "Loss landscape"
+   },
+   "page": "2_experiment_lab",
+   "anchor": "#s3",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "가중치마다 잰 오차를 높이로 세운 땅."
+   }
+  },
+  {
+   "id": "lab:concept/overfitting",
+   "type": "Concept",
+   "label": {
+    "ko": "과적합",
+    "en": "Overfitting"
+   },
+   "page": "2_experiment_lab",
+   "anchor": "#s4",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "훈련 데이터에만 지나치게 맞춰 처음 보는 데이터에서 오차가 커지는 것."
+   }
+  },
+  {
+   "id": "lab:method/early-stopping",
+   "type": "Method",
+   "label": {
+    "ko": "조기 종료",
+    "en": "Early stopping"
+   },
+   "page": "2_experiment_lab",
+   "anchor": "#s4",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "검증 오차가 더 나아지지 않을 때 학습을 멈추는 방법."
+   }
+  },
+  {
+   "id": "lab:concept/validation-set",
+   "type": "Concept",
+   "label": {
+    "ko": "검증 데이터",
+    "en": "Validation set"
+   },
+   "page": "2_experiment_lab",
+   "anchor": "#s4",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "학습에 쓰지 않고 떼어 둔 데이터. 설정과 멈출 시점을 고르는 데 쓴다."
+   }
+  },
+  {
+   "id": "lab:concept/test-set",
+   "type": "Concept",
+   "label": {
+    "ko": "시험 데이터",
+    "en": "Test set"
+   },
+   "page": "2_experiment_lab",
+   "anchor": "#s4",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "고르는 데도 쓰지 않고 마지막 채점에만 쓰는 데이터."
+   }
+  },
+  {
+   "id": "lab:metric/full-data-loss",
+   "type": "Metric",
+   "label": {
+    "ko": "전체 데이터 오차",
+    "en": "Full-data loss"
+   },
+   "page": "2_experiment_lab",
+   "anchor": "#s1",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:metric/validation-loss",
+   "type": "Metric",
+   "label": {
+    "ko": "검증 오차",
+    "en": "Validation loss"
+   },
+   "page": "2_experiment_lab",
+   "anchor": "#s3",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:limitation/fixed-learning-rate",
+   "type": "Limitation",
+   "label": {
+    "ko": "학습률을 묶어 둠",
+    "en": "Learning rate held fixed"
+   },
+   "page": "2_experiment_lab",
+   "anchor": "#s1",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:limitation/two-weights-only",
+   "type": "Limitation",
+   "label": {
+    "ko": "가중치 두 개일 때만 한계를 계산할 수 있음",
+    "en": "Limit computable only for tiny models"
+   },
+   "page": "2_experiment_lab",
+   "anchor": "#s2",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:limitation/plenty-of-data",
+   "type": "Limitation",
+   "label": {
+    "ko": "데이터가 넉넉할 때만 본 모습",
+    "en": "Seen only with ample data"
+   },
+   "page": "2_experiment_lab",
+   "anchor": "#s3",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:limitation/single-seed-run",
+   "type": "Limitation",
+   "label": {
+    "ko": "데이터 40개·시드 하나의 한 번 실험",
+    "en": "Single small run"
+   },
+   "page": "2_experiment_lab",
+   "anchor": "#s4",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:method/learning-rate-sweep",
+   "type": "Method",
+   "label": {
+    "ko": "② 학습률 고르기",
+    "en": "Learning-rate sweep"
+   },
+   "page": "2_experiment_lab",
+   "anchor": "#s2",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "학습률을 여러 값으로 돌려 보고 오차로 고른다. 굽음이 정한 한계를 넘지 않는다."
+   }
+  },
+  {
+   "id": "lab:analogy/flashcard-batches",
+   "type": "Analogy",
+   "label": {
+    "ko": "문제 카드 묶음",
+    "en": "Flashcard batches"
+   },
+   "page": "2_experiment_lab",
+   "anchor": "#s1",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:analogy/lab-safety-range",
+   "type": "Analogy",
+   "label": {
+    "ko": "실험 조건의 안전 범위",
+    "en": "Safe operating range"
+   },
+   "page": "2_experiment_lab",
+   "anchor": "#s2",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:analogy/tissue-section",
+   "type": "Analogy",
+   "label": {
+    "ko": "시료의 얇은 절편",
+    "en": "Thin tissue section"
+   },
+   "page": "2_experiment_lab",
+   "anchor": "#s3",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:analogy/sealed-exam",
+   "type": "Analogy",
+   "label": {
+    "ko": "봉인된 모의고사",
+    "en": "Sealed practice exam"
+   },
+   "page": "2_experiment_lab",
+   "anchor": "#s4",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:analogy/experiment-condition-table",
+   "type": "Analogy",
+   "label": {
+    "ko": "실험 조건표",
+    "en": "Experiment condition sheet"
+   },
+   "page": "2_experiment_lab",
+   "anchor": "#map",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:sim/p2-batch-race",
+   "type": "Simulation",
+   "label": {
+    "ko": "같은 그릇 공 세 개 경주",
+    "en": "Three-ball batch race"
+   },
+   "page": "2_experiment_lab",
+   "anchor": "#s1",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:sim/p2-lr-limit",
+   "type": "Simulation",
+   "label": {
+    "ko": "학습률과 보폭 한계",
+    "en": "Learning-rate limit"
+   },
+   "page": "2_experiment_lab",
+   "anchor": "#s2",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:sim/p2-deep-slice",
+   "type": "Simulation",
+   "label": {
+    "ko": "4,416차원 신경망의 단면",
+    "en": "Slice of a 4,416-D landscape"
+   },
+   "page": "2_experiment_lab",
+   "anchor": "#s3",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:sim/p2-overfit",
+   "type": "Simulation",
+   "label": {
+    "ko": "훈련·검증 오차 곡선",
+    "en": "Train vs validation curves"
+   },
+   "page": "2_experiment_lab",
+   "anchor": "#s4",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:sim/p2-duel",
+   "type": "Simulation",
+   "label": {
+    "ko": "배치 대결 (조건부)",
+    "en": "Batch duel (conditional)"
+   },
+   "page": "2_experiment_lab",
+   "anchor": "#duel",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:question/p2-cheapest-path",
+   "type": "Question",
+   "label": {
+    "ko": "같은 그릇에서 공을 어떻게 굴려야 가장 싸고 빠르게 바닥에 닿을까?",
+    "en": "How to reach the bottom cheapest and fastest?"
+   },
+   "page": "2_experiment_lab",
+   "anchor": "#top",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:question/p2-batch-duel",
+   "type": "Question",
+   "label": {
+    "ko": "작은 배치냐, 풀배치냐 — 무엇을 같게 두고 견주나?",
+    "en": "Small batch or full batch — equal steps or equal compute?"
+   },
+   "page": "2_experiment_lab",
+   "anchor": "#duel",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:work/mlfs39",
+   "type": "Work",
+   "label": {
+    "ko": "ML from Scratch 39 — 미니배치",
+    "en": "ML from Scratch 39 — mini batch"
+   },
+   "page": "2_experiment_lab",
+   "anchor": "#top",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:work/mlfs43",
+   "type": "Work",
+   "label": {
+    "ko": "ML from Scratch 43 — 하이퍼파라미터",
+    "en": "ML from Scratch 43 — hyperparameters"
+   },
+   "page": "2_experiment_lab",
+   "anchor": "#top",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:work/li2018visualizing",
+   "type": "Work",
+   "label": {
+    "ko": "Li 외 2018",
+    "en": "Li et al. 2018"
+   },
+   "page": "2_experiment_lab",
+   "anchor": "#top",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:work/goodfellow2016deep",
+   "type": "Work",
+   "label": {
+    "ko": "Goodfellow 외 2016 Deep Learning",
+    "en": "Goodfellow et al. 2016 Deep Learning"
+   },
+   "page": "2_experiment_lab",
+   "anchor": "#top",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:work/matharium_gjh",
+   "type": "Work",
+   "label": {
+    "ko": "matharium — Gradient, Jacobian and Hessian",
+    "en": "matharium — Gradient, Jacobian and Hessian"
+   },
+   "page": "2_experiment_lab",
+   "anchor": "#top",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:claim/mlfs39-numbers-reproduced",
+   "type": "Claim",
+   "label": {
+    "ko": "39편 설명글의 숫자(7.869, 0.993, 0.956, 오르막 41걸음)가 영상 코드로 그대로 재현된다",
+    "en": "Part 39 numbers reproduce"
+   },
+   "page": "2_experiment_lab",
+   "anchor": "#sum",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "source": [
+    {
+     "ref": "mlfs39",
+     "loc": "설명글, 영상 코드 minibatch.py"
+    }
+   ]
+  },
+  {
+   "id": "lab:claim/mlfs43-numbers-reproduced",
+   "type": "Claim",
+   "label": {
+    "ko": "43편의 학습률 0.1 검증 오차(목표 분산의 약 2%)가 영상 코드로 재현된다",
+    "en": "Part 43 number reproduces"
+   },
+   "page": "2_experiment_lab",
+   "anchor": "#sum",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "source": [
+    {
+     "ref": "mlfs43",
+     "loc": "설명글, 영상 코드 hyper.py"
+    }
+   ]
+  },
+  {
+   "id": "lab:claim/random-direction-slices",
+   "type": "Claim",
+   "label": {
+    "ko": "고차원 오차 지형은 무작위 방향으로 자른 1·2차원 단면으로 본다",
+    "en": "High-D landscapes are viewed through random-direction slices"
+   },
+   "page": "2_experiment_lab",
+   "anchor": "#s3",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "source": [
+    {
+     "ref": "li2018visualizing",
+     "loc": "3장"
+    }
+   ]
+  },
+  {
+   "id": "lab:claim/lr-limit-quadratic",
+   "type": "Claim",
+   "label": {
+    "ko": "2차 함수에서 경사하강은 학습률이 2/λmax보다 작을 때 줄어든다",
+    "en": "GD converges on a quadratic iff lr < 2/λmax"
+   },
+   "page": "2_experiment_lab",
+   "anchor": "#s2",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "source": [
+    {
+     "ref": "goodfellow2016deep",
+     "loc": "4장"
+    }
+   ]
+  },
+  {
+   "id": "lab:claim/early-stopping-validation",
+   "type": "Claim",
+   "label": {
+    "ko": "검증 오차로 멈출 시점을 고르고 최종 성능은 따로 둔 데이터로 잰다",
+    "en": "Early stopping uses validation; report on held-out test"
+   },
+   "page": "2_experiment_lab",
+   "anchor": "#s4",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "source": [
+    {
+     "ref": "goodfellow2016deep",
+     "loc": "7장(조기 종료)"
+    }
+   ]
+  },
+  {
+   "id": "lab:claim/hessian-curvature",
+   "type": "Claim",
+   "label": {
+    "ko": "헤시안은 기울기가 바뀌는 정도, 곧 굽음을 적는다",
+    "en": "Hessian captures how the gradient changes"
+   },
+   "page": "2_experiment_lab",
+   "anchor": "#s2",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "source": [
+    {
+     "ref": "matharium_gjh",
+     "loc": "Hessian 칸"
+    }
+   ]
+  },
+  {
+   "id": "lab:quiz/p2-s1-1",
+   "type": "QuizItem",
+   "label": {
+    "ko": "배치와 에포크 문제 1",
+    "en": "Quiz s1-1"
+   },
+   "page": "2_experiment_lab",
+   "anchor": "#s1",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:quiz/p2-s1-2",
+   "type": "QuizItem",
+   "label": {
+    "ko": "배치와 에포크 문제 2",
+    "en": "Quiz s1-2"
+   },
+   "page": "2_experiment_lab",
+   "anchor": "#s1",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:quiz/p2-s2-1",
+   "type": "QuizItem",
+   "label": {
+    "ko": "학습률 한계 문제 1",
+    "en": "Quiz s2-1"
+   },
+   "page": "2_experiment_lab",
+   "anchor": "#s2",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:quiz/p2-s2-2",
+   "type": "QuizItem",
+   "label": {
+    "ko": "학습률 한계 문제 2",
+    "en": "Quiz s2-2"
+   },
+   "page": "2_experiment_lab",
+   "anchor": "#s2",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:quiz/p2-s3-1",
+   "type": "QuizItem",
+   "label": {
+    "ko": "단면 문제 1",
+    "en": "Quiz s3-1"
+   },
+   "page": "2_experiment_lab",
+   "anchor": "#s3",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:quiz/p2-s3-2",
+   "type": "QuizItem",
+   "label": {
+    "ko": "단면 문제 2",
+    "en": "Quiz s3-2"
+   },
+   "page": "2_experiment_lab",
+   "anchor": "#s3",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:quiz/p2-s4-1",
+   "type": "QuizItem",
+   "label": {
+    "ko": "과적합과 시험 데이터 문제 1",
+    "en": "Quiz s4-1"
+   },
+   "page": "2_experiment_lab",
+   "anchor": "#s4",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:quiz/p2-s4-2",
+   "type": "QuizItem",
+   "label": {
+    "ko": "과적합과 시험 데이터 문제 2",
+    "en": "Quiz s4-2"
+   },
+   "page": "2_experiment_lab",
+   "anchor": "#s4",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:quiz/p2-duel-1",
+   "type": "QuizItem",
+   "label": {
+    "ko": "조건부 대결 문제 1",
+    "en": "Quiz duel-1"
+   },
+   "page": "2_experiment_lab",
+   "anchor": "#duel",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  }
+ ],
+ "edges": [
+  {
+   "s": "lab:method/minibatch-sgd",
+   "p": "lab:hasLimitation",
+   "o": "lab:limitation/fixed-learning-rate",
+   "anchor": "#s1",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:limitation/fixed-learning-rate",
+   "p": "lab:addressedBy",
+   "o": "lab:method/learning-rate-sweep",
+   "anchor": "#s1",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/minibatch-sgd",
+   "p": "lab:prerequisiteOf",
+   "o": "lab:method/learning-rate-sweep",
+   "anchor": "#sum",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/learning-rate-sweep",
+   "p": "lab:hasLimitation",
+   "o": "lab:limitation/two-weights-only",
+   "anchor": "#s2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:limitation/two-weights-only",
+   "p": "lab:addressedBy",
+   "o": "lab:method/random-direction-slice",
+   "anchor": "#s2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/learning-rate-sweep",
+   "p": "lab:prerequisiteOf",
+   "o": "lab:method/random-direction-slice",
+   "anchor": "#sum",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/random-direction-slice",
+   "p": "lab:hasLimitation",
+   "o": "lab:limitation/plenty-of-data",
+   "anchor": "#s3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:limitation/plenty-of-data",
+   "p": "lab:addressedBy",
+   "o": "lab:method/early-stopping",
+   "anchor": "#s3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/random-direction-slice",
+   "p": "lab:prerequisiteOf",
+   "o": "lab:method/early-stopping",
+   "anchor": "#sum",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/early-stopping",
+   "p": "lab:hasLimitation",
+   "o": "lab:limitation/single-seed-run",
+   "anchor": "#s4",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/batch-size",
+   "p": "lab:partOf",
+   "o": "lab:method/minibatch-sgd",
+   "anchor": "#s1",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/learning-rate",
+   "p": "lab:partOf",
+   "o": "lab:method/learning-rate-sweep",
+   "anchor": "#s2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/loss-slice",
+   "p": "lab:partOf",
+   "o": "lab:method/random-direction-slice",
+   "anchor": "#s3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/epoch",
+   "p": "lab:partOf",
+   "o": "lab:method/early-stopping",
+   "anchor": "#s4",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/learning-rate",
+   "p": "lab:partOf",
+   "o": "lab:concept/hyperparameter",
+   "anchor": "#map",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/batch-size",
+   "p": "lab:partOf",
+   "o": "lab:concept/hyperparameter",
+   "anchor": "#map",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/epoch",
+   "p": "lab:partOf",
+   "o": "lab:concept/hyperparameter",
+   "anchor": "#map",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/depth-width",
+   "p": "lab:partOf",
+   "o": "lab:concept/hyperparameter",
+   "anchor": "#map",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/minibatch-sgd",
+   "p": "lab:broader",
+   "o": "lab:topic/sgd-minibatch",
+   "anchor": "#s1",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/full-batch-gd",
+   "p": "lab:broader",
+   "o": "lab:topic/gradient-descent",
+   "anchor": "#s1",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/minibatch-sgd",
+   "p": "lab:broader",
+   "o": "lab:method/gradient-descent",
+   "anchor": "#s1",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/full-batch-gd",
+   "p": "lab:broader",
+   "o": "lab:method/gradient-descent",
+   "anchor": "#s1",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/gradient-descent",
+   "p": "lab:broader",
+   "o": "lab:topic/gradient-descent",
+   "anchor": "#s1",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/minibatch-sgd",
+   "p": "lab:contrastsWith",
+   "o": "lab:method/full-batch-gd",
+   "anchor": "#s1",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/minibatch-sgd",
+   "p": "lab:evaluatedBy",
+   "o": "lab:metric/full-data-loss",
+   "anchor": "#s1",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/full-batch-gd",
+   "p": "lab:evaluatedBy",
+   "o": "lab:metric/full-data-loss",
+   "anchor": "#s1",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/step-size-limit",
+   "p": "lab:derivedFrom",
+   "o": "lab:concept/hessian",
+   "anchor": "#s2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/divergence-of-training",
+   "p": "lab:relatedTo",
+   "o": "lab:concept/step-size-limit",
+   "anchor": "#s2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/learning-rate",
+   "p": "lab:hasLimitation",
+   "o": "lab:concept/divergence-of-training",
+   "anchor": "#s2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/loss-slice",
+   "p": "lab:partOf",
+   "o": "lab:concept/loss-landscape",
+   "anchor": "#s3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/random-direction-slice",
+   "p": "lab:solves",
+   "o": "lab:concept/loss-slice",
+   "anchor": "#s3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/loss-landscape",
+   "p": "lab:broader",
+   "o": "lab:topic/loss-function",
+   "anchor": "#s3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/random-direction-slice",
+   "p": "lab:evaluatedBy",
+   "o": "lab:metric/validation-loss",
+   "anchor": "#s3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/overfitting",
+   "p": "lab:evaluatedBy",
+   "o": "lab:metric/validation-loss",
+   "anchor": "#s4",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/overfitting",
+   "p": "lab:addressedBy",
+   "o": "lab:method/early-stopping",
+   "anchor": "#s4",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/early-stopping",
+   "p": "lab:evaluatedOn",
+   "o": "lab:concept/validation-set",
+   "anchor": "#s4",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/validation-set",
+   "p": "lab:relatedTo",
+   "o": "lab:concept/test-set",
+   "anchor": "#s4",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/epoch",
+   "p": "lab:relatedTo",
+   "o": "lab:concept/overfitting",
+   "anchor": "#s4",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:analogy/flashcard-batches",
+   "p": "lab:analogyOf",
+   "o": "lab:method/minibatch-sgd",
+   "anchor": "#s1",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:analogy/lab-safety-range",
+   "p": "lab:analogyOf",
+   "o": "lab:concept/step-size-limit",
+   "anchor": "#s2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:analogy/tissue-section",
+   "p": "lab:analogyOf",
+   "o": "lab:concept/loss-slice",
+   "anchor": "#s3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:analogy/sealed-exam",
+   "p": "lab:analogyOf",
+   "o": "lab:concept/validation-set",
+   "anchor": "#s4",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:analogy/experiment-condition-table",
+   "p": "lab:analogyOf",
+   "o": "lab:concept/hyperparameter",
+   "anchor": "#map",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/minibatch-sgd",
+   "p": "lab:demonstratedBy",
+   "o": "lab:sim/p2-batch-race",
+   "anchor": "#s1",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/step-size-limit",
+   "p": "lab:demonstratedBy",
+   "o": "lab:sim/p2-lr-limit",
+   "anchor": "#s2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/random-direction-slice",
+   "p": "lab:demonstratedBy",
+   "o": "lab:sim/p2-deep-slice",
+   "anchor": "#s3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/overfitting",
+   "p": "lab:demonstratedBy",
+   "o": "lab:sim/p2-overfit",
+   "anchor": "#s4",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/batch-size",
+   "p": "lab:demonstratedBy",
+   "o": "lab:sim/p2-duel",
+   "anchor": "#duel",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/hyperparameter",
+   "p": "lab:raises",
+   "o": "lab:question/p2-cheapest-path",
+   "anchor": "#top",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/batch-size",
+   "p": "lab:raises",
+   "o": "lab:question/p2-batch-duel",
+   "anchor": "#duel",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/mlfs39-numbers-reproduced",
+   "p": "lab:supports",
+   "o": "lab:method/minibatch-sgd",
+   "anchor": "#sum",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/mlfs39-numbers-reproduced",
+   "p": "lab:assertedIn",
+   "o": "lab:work/mlfs39",
+   "anchor": "#sum",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/mlfs43-numbers-reproduced",
+   "p": "lab:supports",
+   "o": "lab:concept/learning-rate",
+   "anchor": "#sum",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/mlfs43-numbers-reproduced",
+   "p": "lab:assertedIn",
+   "o": "lab:work/mlfs43",
+   "anchor": "#sum",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/random-direction-slices",
+   "p": "lab:supports",
+   "o": "lab:method/random-direction-slice",
+   "anchor": "#s3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/random-direction-slices",
+   "p": "lab:assertedIn",
+   "o": "lab:work/li2018visualizing",
+   "anchor": "#s3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/lr-limit-quadratic",
+   "p": "lab:supports",
+   "o": "lab:concept/step-size-limit",
+   "anchor": "#s2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/lr-limit-quadratic",
+   "p": "lab:assertedIn",
+   "o": "lab:work/goodfellow2016deep",
+   "anchor": "#s2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/early-stopping-validation",
+   "p": "lab:supports",
+   "o": "lab:method/early-stopping",
+   "anchor": "#s4",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/early-stopping-validation",
+   "p": "lab:assertedIn",
+   "o": "lab:work/goodfellow2016deep",
+   "anchor": "#s4",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/hessian-curvature",
+   "p": "lab:supports",
+   "o": "lab:concept/hessian",
+   "anchor": "#s2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/hessian-curvature",
+   "p": "lab:assertedIn",
+   "o": "lab:work/matharium_gjh",
+   "anchor": "#s2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:quiz/p2-s1-1",
+   "p": "lab:assesses",
+   "o": "lab:concept/epoch",
+   "anchor": "#s1",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:quiz/p2-s1-2",
+   "p": "lab:assesses",
+   "o": "lab:method/minibatch-sgd",
+   "anchor": "#s1",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:quiz/p2-s2-1",
+   "p": "lab:assesses",
+   "o": "lab:concept/step-size-limit",
+   "anchor": "#s2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:quiz/p2-s2-2",
+   "p": "lab:assesses",
+   "o": "lab:concept/learning-rate",
+   "anchor": "#s2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:quiz/p2-s3-1",
+   "p": "lab:assesses",
+   "o": "lab:concept/loss-slice",
+   "anchor": "#s3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:quiz/p2-s3-2",
+   "p": "lab:assesses",
+   "o": "lab:method/random-direction-slice",
+   "anchor": "#s3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:quiz/p2-s4-1",
+   "p": "lab:assesses",
+   "o": "lab:concept/overfitting",
+   "anchor": "#s4",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:quiz/p2-s4-2",
+   "p": "lab:assesses",
+   "o": "lab:concept/test-set",
+   "anchor": "#s4",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:quiz/p2-duel-1",
+   "p": "lab:assesses",
+   "o": "lab:concept/batch-size",
+   "anchor": "#duel",
+   "confidence": "high"
+  }
+ ]
+}

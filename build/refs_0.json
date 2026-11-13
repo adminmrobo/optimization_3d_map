@@ -1,0 +1,60 @@
+[
+ {
+  "id": "goodfellow2016deep",
+  "type": "book",
+  "title": "Deep Learning",
+  "author": [
+   {
+    "family": "Goodfellow",
+    "given": "Ian"
+   },
+   {
+    "family": "Bengio",
+    "given": "Yoshua"
+   },
+   {
+    "family": "Courville",
+    "given": "Aaron"
+   }
+  ],
+  "issued": {
+   "date-parts": [
+    [
+     2016
+    ]
+   ]
+  },
+  "publisher": "MIT Press",
+  "URL": "https://www.deeplearningbook.org/",
+  "accessed": {
+   "date-parts": [
+    [
+     2026,
+     11,
+     14
+    ]
+   ]
+  },
+  "lab": {
+   "work": "lab:work/goodfellow2016deep",
+   "role": "background",
+   "supports": [
+    "lab:method/gradient-descent"
+   ],
+   "locs": [
+    {
+     "claim": "lab:claim/lr-limit-quadratic",
+     "loc": "4장 수치 계산 (4.3)"
+    }
+   ],
+   "verified": {
+    "title": true,
+    "author": true,
+    "year": true,
+    "publisher": true,
+    "pages": false
+   },
+   "checkedBy": "제작자 지식 — 장·절 위치는 원문 대조 안 함"
+  }
+ }
+]

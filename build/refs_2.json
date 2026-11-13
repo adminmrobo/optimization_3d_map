@@ -1,0 +1,232 @@
+[
+ {
+  "id": "mlfs39",
+  "type": "motion_picture",
+  "title": "Machine Learning from Scratch, part 39: mini batch gradient descent",
+  "author": [
+   {
+    "literal": "Machine Learning from Scratch"
+   }
+  ],
+  "medium": "Facebook 릴스",
+  "accessed": {
+   "date-parts": [
+    [
+     2026,
+     11,
+     14
+    ]
+   ]
+  },
+  "lab": {
+   "work": "lab:work/mlfs39",
+   "role": "data",
+   "supports": [
+    "lab:method/minibatch-sgd"
+   ],
+   "locs": [],
+   "verified": {
+    "title": true,
+    "author": false,
+    "year": false,
+    "url": false
+   },
+   "checkedBy": "사용자 제공 자료(이미지·영상)에서 옮김. 원 게시물 주소·게시일은 받지 못함. 영상 속 코드를 옮겨 실행해 설명글 숫자 재현 확인(2026-11-14)"
+  }
+ },
+ {
+  "id": "mlfs43",
+  "type": "motion_picture",
+  "title": "Machine Learning from Scratch, part 43: hyperparameters",
+  "author": [
+   {
+    "literal": "Machine Learning from Scratch"
+   }
+  ],
+  "medium": "Facebook 릴스",
+  "accessed": {
+   "date-parts": [
+    [
+     2026,
+     11,
+     14
+    ]
+   ]
+  },
+  "lab": {
+   "work": "lab:work/mlfs43",
+   "role": "data",
+   "supports": [
+    "lab:concept/learning-rate"
+   ],
+   "locs": [],
+   "verified": {
+    "title": true,
+    "author": false,
+    "year": false,
+    "url": false
+   },
+   "checkedBy": "사용자 제공 자료(이미지·영상)에서 옮김. 원 게시물 주소·게시일은 받지 못함. 영상 속 코드를 옮겨 실행해 설명글 숫자 재현 확인(2026-11-14)"
+  }
+ },
+ {
+  "id": "li2018visualizing",
+  "type": "paper-conference",
+  "title": "Visualizing the Loss Landscape of Neural Nets",
+  "author": [
+   {
+    "family": "Li",
+    "given": "Hao"
+   },
+   {
+    "family": "Xu",
+    "given": "Zheng"
+   },
+   {
+    "family": "Taylor",
+    "given": "Gavin"
+   },
+   {
+    "family": "Studer",
+    "given": "Christoph"
+   },
+   {
+    "family": "Goldstein",
+    "given": "Tom"
+   }
+  ],
+  "issued": {
+   "date-parts": [
+    [
+     2018
+    ]
+   ]
+  },
+  "container-title": "Advances in Neural Information Processing Systems 31",
+  "URL": "https://arxiv.org/abs/1712.09913",
+  "accessed": {
+   "date-parts": [
+    [
+     2026,
+     11,
+     14
+    ]
+   ]
+  },
+  "lab": {
+   "work": "lab:work/li2018visualizing",
+   "role": "background",
+   "supports": [
+    "lab:method/random-direction-slice"
+   ],
+   "locs": [
+    {
+     "claim": "lab:claim/random-direction-slices",
+     "loc": "3장 (무작위 방향 단면, 필터 정규화)"
+    }
+   ],
+   "verified": {
+    "title": true,
+    "author": true,
+    "year": true,
+    "container": true,
+    "pages": false,
+    "doi": false
+   },
+   "checkedBy": "웹 검색 2026-11-14 (NeurIPS 논문 페이지, arXiv 1712.09913)"
+  }
+ },
+ {
+  "id": "goodfellow2016deep",
+  "type": "book",
+  "title": "Deep Learning",
+  "author": [
+   {
+    "family": "Goodfellow",
+    "given": "Ian"
+   },
+   {
+    "family": "Bengio",
+    "given": "Yoshua"
+   },
+   {
+    "family": "Courville",
+    "given": "Aaron"
+   }
+  ],
+  "issued": {
+   "date-parts": [
+    [
+     2016
+    ]
+   ]
+  },
+  "publisher": "MIT Press",
+  "URL": "https://www.deeplearningbook.org/",
+  "accessed": {
+   "date-parts": [
+    [
+     2026,
+     11,
+     14
+    ]
+   ]
+  },
+  "lab": {
+   "work": "lab:work/goodfellow2016deep",
+   "role": "background",
+   "supports": [
+    "lab:concept/step-size-limit",
+    "lab:method/early-stopping"
+   ],
+   "locs": [
+    {
+     "claim": "lab:claim/lr-limit-quadratic",
+     "loc": "4장 수치 계산 (4.3)"
+    }
+   ],
+   "verified": {
+    "title": true,
+    "author": true,
+    "year": true,
+    "publisher": true,
+    "pages": false
+   },
+   "checkedBy": "제작자 지식 — 장·절 위치는 원문 대조 안 함"
+  }
+ },
+ {
+  "id": "matharium_gjh",
+  "type": "graphic",
+  "title": "Gradient, Jacobian and Hessian",
+  "author": [
+   {
+    "literal": "matharium"
+   }
+  ],
+  "accessed": {
+   "date-parts": [
+    [
+     2026,
+     11,
+     14
+    ]
+   ]
+  },
+  "lab": {
+   "work": "lab:work/matharium_gjh",
+   "role": "primary",
+   "supports": [
+    "lab:concept/hessian"
+   ],
+   "locs": [],
+   "verified": {
+    "title": true,
+    "author": true,
+    "year": false,
+    "url": false
+   },
+   "checkedBy": "사용자 제공 자료(이미지·영상)에서 옮김. 원 게시물 주소·게시일은 받지 못함"
+  }
+ }
+]

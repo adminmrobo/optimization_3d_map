@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>좌표축 위의 그릇 ② 실험실 편 — 배치·학습률·에포크를 3D 지도 위에서 고르기</title>
+<meta name="description" content="같은 오차 그릇에서 배치 크기와 학습률을 바꿔 공을 굴리고, 가중치 4,416개짜리 신경망의 오차 지형을 단면으로 보며 에포크와 과적합을 확인하는 연구실 실험.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<!--@@CSS@@-->
+<style>
+.cards{display:grid;grid-template-columns:repeat(100,1fr);gap:1px;margin:8px 0}
+.cards i{display:block;aspect-ratio:1;border-radius:1px;background:#2a2d44}
+.cards i.on{background:var(--amber)}
+.cards i.done{background:#3b5b56}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:13.5px;color:var(--muted);margin:6px 0}
+.legend span::before{content:"";display:inline-block;width:12px;height:4px;border-radius:2px;margin-right:6px;vertical-align:middle;background:var(--lc)}
+.cond{display:inline-flex;gap:6px;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<nav class="top" aria-label="섹션 바로가기"><div class="row">
+  <a class="logo" href="index.html">좌표축 위의 <i>그릇</i> ②</a>
+  <div class="links">
+    <a href="1_math_map.html">← 1편</a><a href="#map">다이얼</a><a href="#s1">① 배치</a><a href="#s2">② 학습률</a><a href="#s3">③ 단면</a><a href="#s4">④ 에포크</a><a href="#duel">대결</a><a href="#sum">정리</a><a href="#kg">색인</a><a href="#export">꾸러미</a>
+  </div>
+</div></nav>
+
+<!-- lab-cover -->
+<div class="cover" data-img="cover_02"><div class="frame">
+  <canvas id="coverCv" aria-hidden="true"></canvas>
+  <span class="cap">같은 그릇, 공 세 개 — 연구실 실험의 날</span><span class="badge">대체 표지 · 그림 준비 중</span>
+  <div class="cast4"><img class="s" data-mood="sia_signal" alt="" aria-hidden="true"><img data-mood="fly_point" alt="" aria-hidden="true"><img data-mood="doc_front" alt="" aria-hidden="true"><img data-mood="asst_smile" alt="" aria-hidden="true"><img data-mood="robo_coin" alt="" aria-hidden="true"><img class="s" data-mood="moa_cheer" alt="" aria-hidden="true"></div>
+</div></div>
+<!-- /lab-cover -->
+
+<header class="hero" id="top"><div class="wrap">
+  <div class="eyebrow">3D 지도로 본 모델 최적화 · 2편 실험실 편 · 교과서 모드</div>
+  <h1>좌표축 위의 그릇 — 배치·학습률·에포크를 지도 위에서 고르기</h1>
+  <p class="question">같은 그릇에서 공을 어떻게 굴려야 가장 싸고 빠르게 바닥에 닿을까?</p>
+  <p class="lead">1편에서 오차를 땅의 높이로 놓고 기울기·굽음·휨을 봤습니다. 이번에는 그 땅에서 공을 직접 굴립니다. 신경망이 스스로 찾는 가중치와 달리, 학습 전에 사람이 정해 두는 숫자 — <b>하이퍼파라미터</b> — 를 하나씩 바꿔 보며 지도 위의 걸음이 어떻게 달라지는지 잽니다. 마지막에는 가중치가 4,416개라 3D로 다 그릴 수 없는 신경망의 지형을 <b>단면</b>으로 잘라 봅니다.</p>
+  <p class="byline">글 · 안상선 ((주)M-Robo 대표) · <a href="https://adminmrobo.github.io/who_am_i/who_am_i.html">저자 소개</a> · 2026-11-14 · v1.0 · 앞 편: <a href="1_math_map.html">1편 수학 편</a></p>
+  <div class="three"><b>세 줄로 먼저</b><ol>
+    <li>배치가 작으면 걸음은 싸지만 흔들리고, 크면 정확하지만 비싸다. 같은 계산량이면 작은 배치가 훨씬 멀리 간다.</li>
+    <li>학습률은 지형의 굽음이 정한 한계(2/λ<sub>max</sub>)를 넘으면 공이 튀어 나간다.</li>
+    <li>오래 배울수록 훈련 오차는 계속 줄지만, 처음 보는 데이터의 오차는 어느 순간부터 다시 오른다. 멈출 때는 검증 데이터가 정한다.</li></ol></div>
+  <div class="kpis" aria-label="숫자 요약">
+    <div class="kpi r"><b id="k-full">—</b><span>카드 1,000장 본 뒤 오차 · 풀배치<sup>①</sup></span></div>
+    <div class="kpi g"><b id="k-ten">—</b><span>카드 1,000장 본 뒤 오차 · 배치 10<sup>①</sup></span></div>
+    <div class="kpi a"><b id="k-lim">—</b><span>학습률 한계 2/λ<sub>max</sub><sup>①</sup></span></div>
+    <div class="kpi m"><b id="k-np">—</b><span>③의 신경망 가중치 수<sup>②</sup></span></div>
+  </div>
+  <p class="muted" style="font-size:13px">① 이 페이지가 직접 계산한 설명용 모형의 값(직선 주변 점 1,000개, 시드 39). ② 이 저장소의 code/deep_slices.py로 미리 계산해 넣은 값(시드 2026). 모두 실제 측정 데이터가 아닙니다.</p>
+  <div data-dlg="hero"></div>
+</div></header>
+
+<main>
+<section class="sec" id="cast" aria-labelledby="h-cast"><div class="wrap">
+  <h2 id="h-cast">등장인물과 이 페이지 사용법</h2>
+  <div class="cast" id="castgrid"></div>
+  <div class="secret"><button class="bt" id="secretbtn" type="button" aria-expanded="false">방청석 보기 (미공개 식구)</button><div class="row" id="secretrow" hidden></div></div>
+  <div class="steps four" style="margin-top:16px">
+    <div class="step"><b>1편을 먼저</b>기울기·헤시안이 낯설면 <a href="1_math_map.html">1편</a>의 ①~③을 먼저 보세요.</div>
+    <div class="step"><b>끌어서 돌리기</b>3D 지도는 끌면 돌아갑니다.</div>
+    <div class="step"><b>한 번에 하나만</b>모든 실험은 다이얼 하나만 바꾸고 나머지(시드, 출발점)는 그대로 둡니다.</div>
+    <div class="step"><b>도장 확인</b>노란 도장이 찍힌 그림은 설명용 모형입니다.</div>
+  </div>
+</div></section>
+
+<section class="sec" id="why" aria-labelledby="h-why"><div class="wrap">
+  <h2 id="h-why">왜 실험으로 고르나</h2>
+  <div class="steps">
+    <div class="step"><b>1. 지형을 미리 볼 수 없다</b>큰 모델의 지도는 축이 수천~수십억 개라 전체를 그릴 수 없습니다. 굽음(헤시안)도 다 계산하지 못합니다.</div>
+    <div class="step"><b>2. 다이얼끼리 얽혀 있다</b>배치를 줄이면 걸음이 흔들리고, 그러면 알맞은 학습률도 달라집니다.</div>
+    <div class="step"><b>3. 그래서 검증 데이터로 견준다</b>여러 값을 돌려 보고, 학습에 쓰지 않은 데이터에서 오차가 가장 작은 설정을 고릅니다.</div>
+  </div>
+</div></section>
+
+<section class="sec" id="map" aria-labelledby="h-map"><div class="wrap">
+  <h2 id="h-map">큰 그림 — 사람이 돌리는 다이얼</h2>
+  <p class="lead">가중치는 지도 위의 <b>위치</b>이고, 하이퍼파라미터는 그 위를 <b>걷는 방식</b>입니다. 이 페이지의 실험 조건표는 아래와 같습니다. 바꾸는 다이얼 하나 말고는 늘 이 값입니다.</p>
+  <div class="steps four">
+    <div class="step"><b>학습률 η</b>한 걸음의 크기. 새 가중치 = 옛 가중치 − η × 기울기. 기본 0.1.</div>
+    <div class="step"><b>배치 크기</b>한 걸음에 볼 카드(데이터) 수. 기본 1,000장 = 전부(풀배치).</div>
+    <div class="step"><b>에포크</b>카드 더미 전체를 몇 바퀴 도는지. 1 에포크 = 1,000장을 한 번씩.</div>
+    <div class="step"><b>깊이·너비</b>층의 수와 층마다의 뉴런 수. ③의 신경망은 4 → 64 → 64 → 1.</div>
+  </div>
+  <div class="pair">
+    <div><div class="tl">연구실에서는</div>실험 노트 맨 위의 "실험 조건표"입니다. 시약 양, 반복 횟수, 온도처럼 실험 전에 적어 두고, 한 번에 한 줄만 바꿔 결과를 비교합니다.</div>
+    <div><div class="tr">신경망에서는</div>학습 전에 사람이 정하는 숫자들입니다. 가중치처럼 기울기로 고쳐지지 않기 때문에, 여러 값을 돌려 보고 검증 데이터의 오차로 고릅니다.</div>
+  </div>
+  <div data-dlg="map"></div>
+</div></section>
+
+<!-- ① 배치 -->
+<section class="sec" id="s1" aria-labelledby="h-s1"><div class="wrap">
+  <h2 id="h-s1"><span class="hex">1</span>같은 그릇, 공 세 개 — 배치 크기</h2>
+  <div class="tags"><span class="tag nn">모델: 미니배치 경사하강</span><span class="tag fly">연구실: 카드 묶음 시험</span></div>
+  <div class="pair">
+    <div><div class="tl">연구실에서는</div>문제 카드 1,000장으로 공부합니다. 한 번에 다 풀고 채점한 뒤 공부법을 고칠 수도(풀배치), 10장씩 풀고 바로바로 고칠 수도(배치 10) 있습니다. 10장만 보고 고치면 빨리 자주 고치지만, 그 10장이 쉬운 카드뿐일 수도 있습니다.</div>
+    <div><div class="tr">신경망에서는</div>한 걸음마다 일부 데이터(미니배치)로만 기울기를 잽니다. 정확한 기울기 대신 빠르고 흔들리는 추정값으로 걷는 셈입니다. 큰 모델은 데이터가 수백만 개라 거의 언제나 미니배치(흔히 32~512)로 배웁니다.</div>
+  </div>
+  <div class="panel">
+    <div class="ptitle">경주 — 출발점 (−1, −1), 학습률 0.1, 걸음마다 카드를 새로 섞음</div>
+    <div class="twin"><div class="cwrap tall"><canvas id="cvS1a" aria-label="같은 오차 그릇 위의 세 경로: 풀배치, 배치 100, 배치 10"></canvas><span class="hint">끌어서 돌리기</span></div><div class="cwrap tall"><canvas id="cvS1b" aria-label="걸음 또는 본 카드 수에 따른 전체 데이터 오차"></canvas></div></div>
+    <div class="legend"><span style="--lc:var(--eye)">풀배치 (1,000장)</span><span style="--lc:var(--stain)">배치 100</span><span style="--lc:var(--gfp)">배치 10</span></div>
+    <div class="ctrl">
+      <div class="group"><span class="glabel">가로축</span><span id="g-x1"></span></div>
+      <div class="group"><label class="glabel" for="r-k1" id="l-k1">걸음</label><input type="range" id="r-k1" min="0" max="100" step="1" value="100"><span class="val" id="v-k1">100</span></div>
+      <div class="group"><button class="bt primary" id="b-play1" type="button">처음부터 굴리기</button></div>
+    </div>
+    <div class="tblwrap"><table class="cmp" id="tb1"></table></div>
+    <h3 style="font-size:15px;margin:14px 0 4px">행동으로 보기 — 배치 10이 지금 보고 있는 카드 (1,000장 중)</h3>
+    <div class="cards" id="cards1" aria-label="카드 1,000장 중 지금 걸음에 쓰는 10장"></div>
+    <div class="insight" id="i-s1" aria-live="polite"></div>
+  </div>
+  <div class="explain"><h4>풀이</h4><ol>
+    <li><b>같은 걸음 수</b>(100걸음)로 견주면 풀배치가 가장 바닥에 가깝습니다. 걸음마다 1,000장을 다 보니 정확한 내리막으로 갑니다.</li>
+    <li><b>같은 계산량</b>(카드 1,000장)으로 견주면 이야기가 뒤집힙니다. 풀배치는 고작 1걸음, 배치 10은 100걸음을 갔습니다. 가로축을 "본 카드 수"로 바꿔 보세요.</li>
+    <li>배치 10은 걸음의 절반쯤이 전체 데이터 오차를 오히려 늘렸습니다(오르막 걸음). 그래도 평균적으로는 내리막이라 바닥 근처에 닿습니다.</li>
+    <li>학습률을 그대로 두면 작은 배치는 바닥에 닿은 뒤에도 계속 떨립니다. 그래서 실제 학습에서는 학습률을 점점 줄이기도 합니다.</li></ol>
+    <div class="lim">이 칸의 한계: 학습률을 0.1로 묶어 두었습니다. 걸음 크기 자체를 바꾸면 무슨 일이 생길까요? → ②</div></div>
+  <div class="bridge gen"><b>생성 AI로 치면</b> 대형 언어 모델은 한 걸음에 문장 수백만 토큰을 묶어 보지만, 그래도 전체 학습 데이터(수조 토큰)의 아주 작은 일부입니다. 전체 데이터로 정확한 기울기를 재는 풀배치는 현실적으로 쓰지 않습니다.<div class="lim">비유의 한계: 이 그릇은 바닥이 하나인 2차 함수라, 흔들림이 다른 골짜기로 옮겨 가게 하는 효과는 여기서 볼 수 없습니다.</div></div>
+  <div data-dlg="s1"></div>
+  <div class="quiz" data-quiz="s1"></div>
+</div></section>
+
+<!-- ② 학습률 -->
+<section class="sec" id="s2" aria-labelledby="h-s2"><div class="wrap">
+  <h2 id="h-s2"><span class="hex">2</span>보폭의 한계 — 학습률</h2>
+  <div class="tags"><span class="tag nn">모델: 학습률 η · 발산</span><span class="tag fly">연구실: 실험 조건의 안전 범위</span></div>
+  <div class="pair">
+    <div><div class="tl">연구실에서는</div>가열 온도를 올리면 반응이 빨라지지만, 넘으면 안 되는 안전 범위가 있습니다. 그 범위는 감이 아니라 재료의 성질이 정합니다.</div>
+    <div><div class="tr">신경망에서는</div>학습률을 키우면 빨리 내려가지만, 지형의 가장 가파른 굽음 λ<sub>max</sub>가 정한 한계 2/λ<sub>max</sub>를 넘으면 공이 골짜기를 건너뛰며 점점 멀어집니다(발산).</div>
+  </div>
+  <div class="panel">
+    <div class="ptitle">학습률 실험 — 풀배치, 100걸음, 출발점 (−1, −1)</div>
+    <div class="twin"><div class="cwrap tall"><canvas id="cvS2a" aria-label="학습률에 따른 경사하강 경로"></canvas><span class="hint">끌어서 돌리기</span></div><div class="cwrap tall"><canvas id="cvS2b" aria-label="걸음마다의 오차, 로그 눈금"></canvas></div></div>
+    <div class="ctrl">
+      <div class="group"><label class="glabel" for="r-lr">학습률</label><input type="range" id="r-lr" min="0.01" max="0.4" step="0.005" value="0.1"><span class="val" id="v-lr">0.100</span></div>
+      <div class="group"><span class="glabel">바로 가기</span><span id="g-lr"></span></div>
+    </div>
+    <div class="eq" id="eq2"></div>
+    <div class="minis"><div class="mini a"><span>학습률</span><b id="m2-lr">—</b></div><div class="mini r"><span>한계 2/λ<sub>max</sub></span><b id="m2-lim">—</b></div><div class="mini g"><span>100걸음 뒤 오차</span><b id="m2-L">—</b></div><div class="mini m"><span>바닥 오차</span><b id="m2-bot">—</b></div></div>
+    <div class="insight" id="i-s2" aria-live="polite"></div>
+  </div>
+  <div class="explain"><h4>풀이</h4><ol>
+    <li>이 그릇의 헤시안 고유값은 <span id="t-eig">—</span>입니다(1편 ③). 가파른 방향의 배율은 1 − η·λ<sub>max</sub>, 완만한 방향은 1 − η·λ<sub>min</sub>입니다.</li>
+    <li>η = 0.01이면 완만한 방향의 배율이 0.98이라 100걸음을 가도 바닥에 못 닿습니다. 너무 작으면 "거의 움직이지 않은 채 끝난다".</li>
+    <li>η가 한계에 가까워지면 가파른 방향의 배율이 −1에 가까워져 공이 벽과 벽 사이를 오래 넘나듭니다. 한계를 넘으면 배율의 크기가 1을 넘어 걸음마다 멀어집니다.</li></ol>
+    <div class="lim">이 칸의 한계: 이 그릇은 가중치가 두 개뿐이라 한계를 정확히 계산할 수 있었습니다. 가중치가 수천 개면 지형을 다 그리지도, 굽음을 다 재지도 못합니다 → ③</div></div>
+  <div data-dlg="s2"></div>
+  <div class="quiz" data-quiz="s2"></div>
+</div></section>
+
+<!-- ③ 단면 -->
+<section class="sec" id="s3" aria-labelledby="h-s3"><div class="wrap">
+  <h2 id="h-s3"><span class="hex">3</span>축이 4,416개일 때 — 단면으로 보기</h2>
+  <div class="tags"><span class="tag nn">모델: 4 → 64 → 64 → 1 신경망</span><span class="tag fly">연구실: 시료의 얇은 절편</span></div>
+  <div class="pair">
+    <div><div class="tl">연구실에서는</div>덩어리 시료를 통째로 볼 수 없을 때 얇게 썰어 절편을 현미경에 올립니다. 절편 한 장은 전체가 아니지만, 어디를 어떻게 잘랐는지 적어 두면 믿을 만한 단서가 됩니다.</div>
+    <div><div class="tr">신경망에서는</div>가중치 4,416개 = 축 4,416개라 지도를 그릴 수 없습니다. 학습이 끝난 점을 가운데 두고 무작위 방향 두 개로 평면을 잘라, 그 평면 위의 오차만 3D로 세웁니다. 방향마다 층별 가중치 크기에 맞춰 길이를 조절했습니다.</div>
+  </div>
+  <div class="panel">
+    <div class="ptitle">신경망 지형의 단면 — sin(첫 입력)을 배우는 신경망, 검증 데이터 1,000개의 오차</div>
+    <div class="twin"><div class="cwrap tall"><canvas id="cvS3a" aria-label="학습이 끝난 가중치를 가운데 두고 무작위 방향 두 개로 자른 오차 지형 단면"></canvas><span class="hint">끌어서 돌리기</span></div><div class="cwrap tall"><canvas id="cvS3b" aria-label="학습률 세 가지의 에포크별 검증 오차 또는 출발점에서 도착점까지의 직선 단면"></canvas></div></div>
+    <div class="ctrl"><div class="group"><span class="glabel">오른쪽 그래프</span><span id="g-r3"></span></div></div>
+    <div class="minis"><div class="mini m"><span>가중치(축) 수</span><b id="m3-np">—</b></div><div class="mini g"><span>학습률 0.1 · 20 에포크 뒤 검증 오차</span><b id="m3-01">—</b></div><div class="mini a"><span>학습률 0.00001 · 20 에포크 뒤</span><b id="m3-1e5">—</b></div><div class="mini r"><span>학습률 10 · 20 에포크 뒤</span><b id="m3-10">—</b></div></div>
+    <div class="insight" id="i-s3" aria-live="polite"></div>
+  </div>
+  <div class="explain"><h4>풀이</h4><ol>
+    <li>왼쪽 3D는 4,416차원 지형의 <b>한 장의 절편</b>입니다. 가운데(초록 점)가 학습률 0.1로 20 에포크 배운 가중치이고, 그 둘레가 그릇처럼 패여 있습니다.</li>
+    <li>"학습률 세 가지"를 보면 1편과 같은 이야기가 큰 신경망에서도 나옵니다. 0.00001은 2,500걸음을 가도 많이 남고, 10은 오르내리며 자리를 잡지 못합니다. 0.1만 목표 분산의 약 <span id="t-ratio">—</span>까지 내려갑니다.</li>
+    <li>"출발 → 도착 직선"은 처음 가중치와 학습이 끝난 가중치를 잇는 선 위의 오차입니다. 이 선 위에서는 거의 한 번에 내려가는 모양입니다.</li>
+    <li>절편 두 방향은 시드로 고른 무작위 방향입니다. 다른 방향을 고르면 모양이 달라질 수 있어, 한 장의 절편으로 "지형 전체가 이렇다"고 말하지 않습니다.</li></ol>
+    <div class="lim">이 칸의 한계: 여기서는 훈련 데이터가 4,000개로 넉넉했습니다. 데이터가 적고 잡음이 많으면, 오래 배울수록 오히려 나빠지는 일이 생깁니다 → ④</div></div>
+  <div class="bridge field"><b>현장에 옮기면</b> 단면 그림은 두 모델이나 두 설정의 "바닥 모양"을 견줄 때 씁니다. 그림을 보고에 실을 때는 자른 방향을 어떻게 골랐는지(무작위·시드·크기 맞춤), 어느 데이터로 오차를 쟀는지를 함께 적습니다. 그렇지 않으면 같은 모델도 전혀 다른 그림이 나옵니다.<div class="lim">단면 그림만으로 일반화 성능을 단정하지 않습니다. 성능은 따로 떼어 둔 시험 데이터로 잽니다.</div></div>
+  <div data-dlg="s3"></div>
+  <div class="quiz" data-quiz="s3"></div>
+</div></section>
+
+<!-- ④ 에포크 -->
+<section class="sec" id="s4" aria-labelledby="h-s4"><div class="wrap">
+  <h2 id="h-s4"><span class="hex">4</span>언제 멈출까 — 에포크와 과적합</h2>
+  <div class="tags"><span class="tag nn">모델: 에포크 · 조기 종료</span><span class="tag fly">연구실: 봉인된 시험지</span></div>
+  <div class="pair">
+    <div><div class="tl">연구실에서는</div>같은 기출문제 40개만 수백 번 풀면 답을 외웁니다. 기출 점수는 만점에 가까워지는데, 처음 보는 시험지 점수는 어느 날부터 떨어집니다. 그래서 공부에 쓰지 않은 모의고사를 따로 봉인해 둡니다.</div>
+    <div><div class="tr">신경망에서는</div>잡음 섞인 훈련 데이터 40개로 1,500 에포크를 돌립니다. 훈련 오차는 끝까지 줄지만, 학습에 쓰지 않은 검증 데이터 1,000개의 오차는 일찍 바닥을 찍고 다시 오릅니다(과적합).</div>
+  </div>
+  <div class="panel">
+    <div class="ptitle">과적합 실험 — 훈련 40개(잡음 표준편차 0.3), 배치 8, 학습률 0.1</div>
+    <div class="cwrap tall"><canvas id="cvS4" aria-label="에포크에 따른 훈련 오차와 검증 오차, 로그 눈금"></canvas></div>
+    <div class="legend"><span style="--lc:var(--amber)">훈련 오차 (40개)</span><span style="--lc:var(--gfp)">검증 오차 (1,000개)</span></div>
+    <div class="ctrl"><div class="group"><label class="glabel" for="r-ep">여기서 멈춘다면</label><input type="range" id="r-ep" min="0" max="1" step="0.001" value="1"><span class="val" id="v-ep">—</span></div></div>
+    <div class="minis"><div class="mini a"><span>그 에포크의 훈련 오차</span><b id="m4-tr">—</b></div><div class="mini g"><span>그 에포크의 검증 오차</span><b id="m4-va">—</b></div><div class="mini m"><span>검증 오차가 가장 낮은 에포크</span><b id="m4-best">—</b></div><div class="mini r"><span>1,500 에포크 뒤 검증 오차</span><b id="m4-end">—</b></div></div>
+    <div class="insight" id="i-s4" aria-live="polite"></div>
+  </div>
+  <div class="explain"><h4>풀이</h4><ol>
+    <li>훈련 오차는 지도 위의 높이를 "훈련 데이터 40개로" 잰 것이고, 검증 오차는 "처음 보는 데이터로" 잰 것입니다. 데이터가 다르면 지도도 다릅니다. 훈련 지도의 바닥이 검증 지도의 바닥이 아닙니다.</li>
+    <li>검증 오차가 가장 낮은 에포크에서 멈추는 것이 <b>조기 종료</b>입니다. 이 실험에서는 아주 일찍(<span id="t-best">—</span> 에포크) 바닥을 찍었습니다. 잡음 섞인 데이터가 40개뿐이라 외울 것이 금방 생깁니다.</li>
+    <li>멈출 시점을 검증 데이터로 골랐다면, 최종 성능은 그 검증 데이터가 아니라 따로 떼어 둔 <b>시험 데이터</b>로 다시 잽니다. 고르는 데 쓴 데이터로 채점하면 점수가 부풀려집니다.</li></ol>
+    <div class="lim">이 칸의 한계: 데이터 40개, 시드 하나로 본 한 번의 실험입니다. 검증 곡선은 걸음마다 흔들리므로(배치 8), 실제로는 몇 에포크 동안 나아지지 않으면 멈추는 식으로 정합니다.</div></div>
+  <div data-dlg="s4"></div>
+  <div class="quiz" data-quiz="s4"></div>
+</div></section>
+
+<!-- 대결 -->
+<section class="sec" id="duel" aria-labelledby="h-duel"><div class="wrap">
+  <h2 id="h-duel">대결 — 작은 배치냐, 풀배치냐</h2>
+  <p class="lead">같은 그릇, 같은 출발점 (−1, −1), 같은 학습률 0.1, 같은 시드. 초파리 연구원은 <b>배치 10</b>, 주판봇은 <b>풀배치 1,000장</b>을 고릅니다. 판정 기준은 <b>전체 데이터 오차</b>(낮을수록 좋음)인데, 무엇을 같게 두고 견줄지는 두 가지 가정이 있습니다.</p>
+  <div class="duel">
+    <div class="side l"><div class="head"><img id="d-fly" data-mood="fly_point" alt="" aria-hidden="true"><div><b style="color:var(--c-fly)">초파리 연구원 · 배치 10</b><br><span class="muted">10장씩 보고 자주 고친다.</span></div></div><div data-dlg="dfly"></div></div>
+    <div class="vs">VS</div>
+    <div class="side r"><div class="head"><img id="d-robo" data-mood="robo_coin" alt="" aria-hidden="true"><div><b style="color:var(--c-robo)">주판봇 · 풀배치</b><br><span class="muted">1,000장을 다 보고 정확히 고친다.</span></div></div><div data-dlg="drobo"></div></div>
+  </div>
+  <div class="panel">
+    <div class="ctrl"><div class="group"><span class="glabel">먼저 맞혀 보기</span><button class="bt" data-pred="fly" type="button" aria-pressed="false">초파리가 이길 것 같다</button><button class="bt" data-pred="robo" type="button" aria-pressed="false">주판봇이 이길 것 같다</button></div>
+      <div class="group"><button class="bt primary" data-go type="button">결과 보기</button><button class="bt" data-close type="button" hidden>다시 닫기</button></div></div>
+    <div class="duel-res" hidden>
+      <div class="ctrl"><div class="group"><span class="glabel">가정</span><span class="cond" id="g-cond"></span></div></div>
+      <p class="muted" style="font-size:13.5px;margin:0">막대 = 전체 데이터 오차. 짧을수록 바닥에 가깝습니다.</p>
+      <div class="resbars"><div class="resbar"><span style="color:var(--c-fly)">초파리 · 배치 10</span><div class="bar"><i id="d-bf" style="background:var(--c-fly)"></i></div><b id="d-vf">—</b> <span class="muted" id="d-pf"></span></div>
+        <div class="resbar"><span style="color:var(--c-robo)">주판봇 · 풀배치</span><div class="bar"><i id="d-br" style="background:var(--c-robo)"></i></div><b id="d-vr">—</b> <span class="muted" id="d-pr"></span></div></div>
+      <div id="d-say"></div>
+      <div class="score"><span id="d-score"></span><span id="d-pred"></span></div>
+    </div>
+  </div>
+  <div class="quiz" data-quiz="duel"></div>
+</div></section>
+
+<!-- 정리 -->
+<section class="sec" id="sum" aria-labelledby="h-sum"><div class="wrap">
+  <h2 id="h-sum">정리 — 다이얼 네 개</h2>
+  <div class="tblwrap"><table class="cmp"><thead><tr><th>다이얼</th><th>지도에서는</th><th>너무 작으면</th><th>너무 크면</th><th>고르는 법</th></tr></thead><tbody>
+    <tr><td>학습률 η</td><td>보폭</td><td>거의 안 움직이고 끝남</td><td>골짜기를 넘나들다 튀어 나감(발산)</td><td>작은 값부터 늘려 가며 검증 오차 비교. 2차 근사로는 2/λ<sub>max</sub>가 상한</td></tr>
+    <tr><td>배치 크기</td><td>기울기를 재는 카드 수</td><td>걸음이 흔들림</td><td>걸음 하나가 비쌈</td><td>메모리 안에서, 학습률과 함께 조정</td></tr>
+    <tr><td>에포크</td><td>지도를 몇 바퀴 걷나</td><td>바닥에 못 닿음</td><td>훈련 지도에만 맞춤(과적합)</td><td>검증 오차가 더 내려가지 않으면 멈춤</td></tr>
+    <tr><td>깊이·너비</td><td>축의 개수와 지형의 복잡함</td><td>표현할 수 있는 모양이 적음</td><td>외울 여지가 커짐, 계산이 비쌈</td><td>여러 크기를 검증 데이터로 비교</td></tr>
+  </tbody></table></div>
+  <div class="verify"><b>검증 상자 — 참고한 영상의 숫자를 다시 돌려 봤다</b>
+    <ul style="margin:6px 0 0;padding-left:20px">
+      <li>39편(미니배치) 영상의 코드를 화면에서 옮겨 그대로 실행(시드 39)하니, 설명글의 숫자 — 1 에포크 뒤 풀배치 7.869, 배치 10 0.993, 100걸음 뒤 풀배치 0.956, 배치 10의 오르막 걸음 41 — 가 모두 같게 나왔다. 0.956은 최소제곱 해(w ≈ 2.01, b ≈ 1.04)의 오차와 같고, 배치 10의 마지막 오차는 그보다 3.9% 높았다(설명글의 "약 4%").</li>
+      <li>43편(하이퍼파라미터) 영상의 코드도 같은 방법으로 실행(시드 43)하니, 학습률 0.1에서 검증 오차가 목표 분산의 1.95%(설명글의 "2%")였다.</li>
+      <li>이 페이지의 실험은 그 코드를 옮긴 것이 아니라 같은 아이디어로 새로 짠 코드(시드 39·2026)라서 숫자가 조금 다르다. 이야기의 방향은 같다.</li>
+    </ul></div>
+  <h3>비유의 한계</h3>
+  <ul>
+    <li>카드 묶음 비유는 "어떤 카드를 보나"만 담습니다. 실제 미니배치의 흔들림은 학습률, 데이터의 잡음, 모델의 모양과 함께 정해집니다.</li>
+    <li>단면 3D는 수천 차원 지형의 한 조각입니다. 산맥 전체를 절편 한 장으로 판단하지 않습니다.</li>
+    <li>여기서 고른 숫자(학습률 0.1, 배치 10 등)는 이 장난감 데이터의 답입니다. 다른 데이터·모델에서는 다시 실험해야 합니다.</li>
+  </ul>
+  <div class="next"><a href="1_math_map.html"><b>← 1편 수학 편</b><br>좌표축·단면·기울기·굽음·안장점·야코비안</a><a href="https://adminmrobo.github.io/fish_market_learning_epoch_etc/"><b>Fish Market 연구실</b><br>학습률·에포크를 다른 예제로</a></div>
+</div></section>
+
+<section class="sec" id="outro" aria-labelledby="h-outro"><div class="wrap">
+  <h2 id="h-outro">아웃트로</h2>
+  <div data-dlg="outro"></div>
+</div></section>
+</main>
+
+<footer><div class="wrap">
+  <h3>출처</h3>
+  <table><thead><tr><th>#</th><th>자료</th><th>이 페이지에서 쓴 곳</th></tr></thead><tbody>
+    <tr><td>[1]</td><td>Machine Learning from Scratch, part 39 (mini batch gradient descent) — Facebook 릴스 (사용자 제공 영상과 설명글)</td><td>① 배치 비교 실험의 설계(뉴런 하나, 점 1,000개, 배치 1,000·100·10, 학습률 0.1, 100걸음), 검증 상자의 숫자</td></tr>
+    <tr><td>[2]</td><td>Machine Learning from Scratch, part 43 (hyperparameters) — Facebook 릴스 (사용자 제공 영상과 설명글)</td><td>②·③·④ 실험 설계(4-64-64-1 신경망, sin 목표, 학습률 0.00001·0.1·10, 잡음 데이터 40개로 과적합), 검증 상자의 숫자</td></tr>
+    <tr><td>[3]</td><td>Li, H., Xu, Z., Taylor, G., Studer, C., Goldstein, T. (2018). Visualizing the Loss Landscape of Neural Nets. NeurIPS 31.</td><td>③ 무작위 방향 두 개로 자른 단면, 방향 크기 맞춤의 아이디어</td></tr>
+    <tr><td>[4]</td><td>Goodfellow, I., Bengio, Y., Courville, A. (2016). Deep Learning. MIT Press. 4·8장</td><td>② 학습률 한계, ①·④ 미니배치·조기 종료의 배경</td></tr>
+    <tr><td>[5]</td><td>matharium, 「Gradient, Jacobian and Hessian」 인포그래픽 (사용자 제공 이미지)</td><td>② 헤시안과 굽음</td></tr>
+  </tbody></table>
+  <h3>예시값·설명용 모형인 것</h3>
+  <ul><li>①·② 그릇의 데이터(직선 y = 2x + 1 주변 점 1,000개, 시드 39)와 모든 경로·오차 값 — 페이지가 직접 계산</li><li>③·④ 신경망 실험의 모든 값 — code/deep_slices.py로 미리 계산(시드 2026)</li><li>표지 그림은 대체 표지(그림 준비 중)</li></ul>
+  <p>저작권: 캐릭터 이름·설정·그림은 저작권자 안상선의 허락 없이 사용할 수 없습니다. 참고한 영상의 코드와 그림은 이 페이지에 넣지 않았습니다.</p>
+  <p>글 · 안상선 ((주)M-Robo 대표) · <a href="index.html">목차</a> · <a href="1_math_map.html">1편 수학 편</a> · <a href="https://adminmrobo.github.io/ai_in_3d/">신경망 연구소</a></p>
+</div></footer>
+
+<script>
+/*@@SPRITES@@*/
+/*@@LABMATH@@*/
+/*@@COMMON@@*/
+var DEEP=/*@@DEEP@@*/;
+(function(){
+'use strict';
+var $=U.$,$$=U.$$,fmt=U.fmt,cssv=U.cssv;
+var D=LM.makeLine(39,1000),O=LM.ols(D),HS=LM.hessian(D);
+var M=(function(){var n=D.n,sx=0,sy=0,sxx=0,sxy=0,syy=0;for(var i=0;i<n;i++){var x=D.x[i],y=D.y[i];sx+=x;sy+=y;sxx+=x*x;sxy+=x*y;syy+=y*y;}return {x:sx/n,y:sy/n,xx:sxx/n,xy:sxy/n,yy:syy/n};})();
+function bowl(w,b){return M.xx*w*w+2*M.x*w*b+b*b-2*M.xy*w-2*M.y*b+M.yy;}
+var WR=[-1.5,5.5],BR=[-2.5,4.5];
+var SZ=[1000,100,10],COL={1000:cssv('--eye'),100:cssv('--stain'),10:cssv('--gfp')},NM={1000:'풀배치',100:'배치 100',10:'배치 10'};
+var RUN={};SZ.forEach(function(s){RUN[s]=LM.runBatch(D,s,{steps:100,lr:0.1});});
+/* 같은 카드 수(1,000장)로 비교하려면 풀배치 1걸음 · 배치 100은 10걸음 · 배치 10은 100걸음 */
+
+var DLG={
+ hero:[["doc","doc_front","오늘은 실험의 날입니다. 1편에서 그린 그릇에 공을 직접 굴려 보죠. 다이얼은 한 번에 하나만 돌립니다."],
+       ["asst","asst_smile","배치, 학습률, 에포크… 다 숫자인데 뭐부터 정해야 할지 모르겠어요. 하나씩 재 볼게요."],
+       ["fly","fly_point","카드 10장만 보고 고치면 엉뚱한 쪽으로 가지 않을까? 그래도 걸음은 빠르겠지."],
+       ["robo","robo_coin","나는 1,000장을 다 보고 정확하게 간다. 정확한 게 결국 이기는 법이지."]],
+ map:[["moa","moa_report","실험 조건표를 모아 뒀어요. 바꾸는 줄 하나에만 형광펜을 칠할게요."]],
+ s1:[["fly","fly_point","같은 걸음 수로 비교한 거야, 같은 계산량으로 비교한 거야? 가로축부터 확인해."]],
+ s2:[["robo","robo_calc","한계 0.334까지는 안전, 넘으면 손실 무한대. 이건 투자 위험 한도랑 똑같은 계산이야."]],
+ s3:[["sia","sia_explain","확인했습니다. 이 그림은 4,416차원을 두 방향으로 자른 한 장이에요. 자른 방향은 시드로 정했어요."]],
+ s4:[["asst","asst_report","훈련 오차는 1,500 에포크까지 계속 줄었는데, 검증 오차는 일찍 바닥을 찍고 다시 올랐어요. 숫자는 위 표 그대로예요."]],
+ dfly:[["fly","fly_point","10장씩이면 같은 시간에 백 번 고친다. 흔들려도 결국 내려가."]],
+ drobo:[["robo","robo_coin","정확한 기울기 한 번이 흔들리는 백 번보다 낫지. 풀배치에 건다."]],
+ outro:[["doc","doc_magic","오늘의 세 줄입니다.<br>① 배치는 \"같은 걸음 수냐, 같은 계산량이냐\"에 따라 승자가 바뀐다. 무엇을 같게 두고 견주는지부터 적는다.<br>② 학습률은 굽음이 정한 한계 안에서 고른다. 큰 모델은 한계를 계산할 수 없으니 실험으로 고른다.<br>③ 오래 배운다고 좋은 게 아니다. 멈출 때는 검증 데이터가 정하고, 최종 점수는 시험 데이터로 잰다."],
+        ["asst","asst_smile","이번 대결은 가정에 따라 승자가 갈려서 나눠 가졌어요. 숫자는 시드를 고정해 몇 번을 돌려도 같았어요."],
+        ["fly","fly_coffee","같은 계산량이면 내가 이겨. 그래도 걸음 수로 따지면 정확한 쪽이 낫다는 것도 인정."],
+        ["robo","robo_meh","본전은 찾았다. 다음엔 메모리 값까지 계산해서 배치를 고른다."]]
+};
+U.dialogues(DLG);
+var CAST=[["doc","doc_front","박사","해설과 판정. 판정은 늘 계산한 숫자대로."],["asst","asst_smile","조수 하루","실험을 돌리고 숫자를 발표해요."],["fly","fly_point","초파리 연구원","의심하는 쪽. 작고 싼 걸음을 고르고, 비교 조건을 따져요."],["robo","robo_coin","주판봇","확신하는 쪽. 크고 정확한 쪽에 걸어요."],["sia","sia_explain","인턴 시아","순서를 정리하고 진행 신호를 들어요."],["moa","moa_report","인턴 모아","실험 조건표와 기록을 모아요."]];
+$('#castgrid').innerHTML=CAST.map(function(c){return '<div class="castc" style="--cc:var(--c-'+c[0]+')"><img src="'+U.spr(c[1])+'" alt="" aria-hidden="true"><div><b>'+c[2]+'</b><p>'+c[3]+'</p></div></div>';}).join('');
+$('#secretrow').innerHTML=['x1','x2','x3'].map(function(x,i){return U.say(x,x+'_hint',['(반짝)','(…끄덕)','(짝짝짝)'][i]);}).join('');
+$('#secretbtn').onclick=function(){var r=$('#secretrow');r.hidden=!r.hidden;this.setAttribute('aria-expanded',String(!r.hidden));this.textContent=r.hidden?'방청석 보기 (미공개 식구)':'방청석 닫기';};
+U.fillImgs();
+
+/* 숫자 요약 */
+$('#k-full').textContent=fmt(RUN[1000].afterEpoch,3);$('#k-ten').textContent=fmt(RUN[10].afterEpoch,3);$('#k-lim').textContent=fmt(2/HS.lmax,3);$('#k-np').textContent=DEEP?DEEP.nparam.toLocaleString('ko-KR'):'—';
+
+/* 표지 대체: 세 경로 */
+(function(){var cv=$('#coverCv');U.reg(cv,function(){var R=U.setup(cv),g=R.g,w=R.w,h=R.h;var cx=w*.6,cy=h*.42;for(var k=14;k>0;k--){g.beginPath();g.ellipse(cx,cy,w*.05*k,h*.022*k,-.35,0,7);g.strokeStyle=U.cmap(k/14,.3);g.lineWidth=2;g.stroke();}
+  SZ.forEach(function(s){var P=RUN[s].path;g.strokeStyle=COL[s];g.lineWidth=2.5;g.beginPath();P.forEach(function(p,i){var x=cx+(p[0]-O.w)*w*.09,y=cy-(p[1]-O.b)*h*.07;i?g.lineTo(x,y):g.moveTo(x,y);});g.stroke();});});})();
+
+/* ── ① 배치 경주 ── */
+var xmode='step',K1=100,anim1=0;
+function kFor(s){return xmode==='step'?K1:Math.min(100,Math.floor(K1*10/s));} /* card 모드에서 K1 = 카드 수/10 */
+var S1=new U.Surf3D($('#cvS1a'),{f:bowl,xr:WR,yr:BR,n:26,alpha:0.62,axes:['w','b','오차'],stamp:'설명용 모형',
+  onTick:function(dt){if(anim1>0&&dt>0){anim1+=dt*30;K1=Math.min(100,Math.floor(anim1));$('#r-k1').value=K1;upd1(true);if(K1>=100)anim1=0;}}});
+S1.ov.push(function(g,S){S.dot3(g,O.w,O.b,O.L,'#ffffff',4);[1000,100,10].forEach(function(s){var P=RUN[s].path.slice(0,kFor(s)+1);S.line3(g,P,COL[s],s===10?1.4:2.4);var q=P[P.length-1];S.dot3(g,q[0],q[1],q[2],COL[s],5.5);});});
+function draw1b(){var cardsX=xmode==='card',series=SZ.map(function(s){var P=RUN[s].path,pts=[];for(var k=0;k<=kFor(s);k++)pts.push([cardsX?Math.max(1,k*s):Math.max(0,k),P[k][2]]);return {pts:pts,color:COL[s],width:s===10?1.5:2.4,name:NM[s]};});
+  U.plot($('#cvS1b'),cardsX?{xr:[1,100000],logx:true,yr:[0.9,40],logy:true,series:series,xt:[1,10,100,1000,10000,100000],xf:function(v){return v>=1000?(v/1000)+'천':String(v);},yt:[1,3,10,30],xl:'본 카드 수(로그)',yl:'전체 오차(로그)',hlines:[{y:O.L,color:'rgba(255,255,255,.5)',label:'바닥 '+fmt(O.L,3)}],vlines:[{x:1000,color:cssv('--amber'),label:'카드 1,000장'}],stamp:'설명용 모형',aria:'본 카드 수에 따른 오차'}
+   :{xr:[0,100],yr:[0.9,40],logy:true,series:series,xt:[0,25,50,75,100],yt:[1,3,10,30],xl:'걸음',yl:'전체 오차(로그)',hlines:[{y:O.L,color:'rgba(255,255,255,.5)',label:'바닥 '+fmt(O.L,3)}],stamp:'설명용 모형',aria:'걸음에 따른 오차'});}
+function cards(){var host=$('#cards1');if(!host.children.length){var h='';for(var i=0;i<1000;i++)h+='<i></i>';host.innerHTML=h;}
+  /* 배치 10의 k번째 걸음이 보는 카드: runBatch와 같은 시드로 섞은 순서를 다시 만든다 */
+  var k=kFor(10),r=LM.rng(7),idx=[];for(var i=0;i<1000;i++)idx.push(i);var on={},done={};
+  if(k>0){for(var j=999;j>0;j--){var t=Math.floor(r()*(j+1)),s=idx[j];idx[j]=idx[t];idx[t]=s;}for(var m=0;m<k;m++)for(var q=m*10;q<m*10+10;q++)(m===k-1?on:done)[idx[q]]=1;}
+  var ch=host.children;for(var i2=0;i2<1000;i2++)ch[i2].className=on[i2]?'on':done[i2]?'done':'';}
+function pct(L){var v=L/O.L*100-100;if(Math.abs(v)<0.05)return '0.0%';return (v>0?'+':'')+fmt(v,1)+'%';}
+function upd1(fromAnim){$('#v-k1').textContent=xmode==='step'?K1+'걸음':(K1*10).toLocaleString('ko-KR')+'장';
+  var rows='<thead><tr><th>방법</th><th>걸음 수</th><th>본 카드 수</th><th>지금 전체 오차</th><th>바닥보다</th><th>오르막 걸음(지금까지)</th></tr></thead><tbody>';
+  SZ.forEach(function(s){var k=kFor(s),P=RUN[s].path,L=P[k][2],up=0;for(var i=1;i<=k;i++)if(P[i][2]>P[i-1][2]+1e-9)up++;rows+='<tr><td style="color:'+COL[s]+'">'+NM[s]+'</td><td class="n">'+k+'</td><td class="n">'+(k*s).toLocaleString('ko-KR')+'</td><td class="n">'+fmt(L,3)+'</td><td class="n">'+pct(L)+'</td><td class="n">'+up+'</td></tr>';});
+  $('#tb1').innerHTML=rows+'</tbody>';
+  var it=[];if(xmode==='step')it.push(['m','지금은 <b>같은 걸음 수</b>로 견주는 중이에요. '+(K1>=100?'100걸음 뒤 풀배치 '+fmt(RUN[1000].last,3)+', 배치 10 '+fmt(RUN[10].last,3)+'. 정확한 기울기가 걸음당으로는 더 낫습니다.':'슬라이더를 끝까지 밀어 보세요.')]);
+  else it.push(['g','지금은 <b>같은 계산량(본 카드 수)</b>으로 견주는 중이에요. 카드 1,000장을 본 시점에 풀배치는 1걸음('+fmt(RUN[1000].afterEpoch,3)+'), 배치 10은 100걸음('+fmt(RUN[10].afterEpoch,3)+')을 갔어요.']);
+  it.push(['a','배치 10은 100걸음 중 '+RUN[10].up+'걸음이 전체 오차를 늘렸어요. 그래도 바닥보다 '+fmt(RUN[10].last/O.L*100-100,1)+'% 높은 곳까지 내려왔습니다.']);U.ins($('#i-s1'),it);
+  S1.dirty=true;draw1b();cards();}
+U.reg($('#cvS1b'),function(dt){if(dt===0)draw1b();});
+U.btns($('#g-x1'),[['step','걸음 수'],['card','본 카드 수']],'step',function(v){xmode=v;$('#l-k1').textContent=v==='step'?'걸음':'본 카드 (×10장)';upd1();});
+$('#r-k1').oninput=function(){K1=+this.value;anim1=0;upd1();};
+$('#b-play1').onclick=function(){if(U.reduce){K1=100;$('#r-k1').value=100;upd1();return;}anim1=0.001;K1=0;upd1();};
+upd1();
+
+/* ── ② 학습률 ── */
+var lr2=0.1,R2=null,LIM=2/HS.lmax;
+var S2=new U.Surf3D($('#cvS2a'),{f:bowl,xr:WR,yr:BR,n:26,alpha:0.62,axes:['w','b','오차'],stamp:'설명용 모형'});
+S2.ov.push(function(g,S){if(!R2)return;var P=R2.path.filter(function(p){return p[0]>=WR[0]-0.3&&p[0]<=WR[1]+0.3&&p[1]>=BR[0]-0.3&&p[1]<=BR[1]+0.3;});if(P.length>1)S.line3(g,P.map(function(p){return [U.clamp(p[0],WR[0],WR[1]),U.clamp(p[1],BR[0],BR[1]),Math.min(p[2],S.zr[1])];}),cssv('--amber'),2);
+  S.dot3(g,O.w,O.b,O.L,'#ffffff',4);if(P.length){var q=P[P.length-1];S.dot3(g,U.clamp(q[0],WR[0],WR[1]),U.clamp(q[1],BR[0],BR[1]),Math.min(q[2],S.zr[1]),cssv('--amber'),6);}});
+function draw2b(){if(!R2)return;var pts=R2.path.map(function(p,i){return [i,Math.min(p[2],1e6)];});
+  U.plot($('#cvS2b'),{xr:[0,100],yr:[0.9,1e4],logy:true,series:[{pts:pts,color:cssv('--amber'),width:2}],xt:[0,25,50,75,100],yt:[1,10,100,1000,10000],yf:function(v){return v>=1000?(v/1000)+'천':String(v);},xl:'걸음',yl:'전체 오차(로그)',hlines:[{y:O.L,color:'rgba(255,255,255,.5)',label:'바닥 '+fmt(O.L,3)},{y:LM.loss(D,-1,-1),color:'rgba(157,155,184,.6)',label:'출발'}],stamp:'설명용 모형',aria:'걸음마다 오차'});}
+U.reg($('#cvS2b'),function(dt){if(dt===0)draw2b();});
+function upd2(){R2=LM.runBatch(D,1000,{steps:100,lr:lr2});$('#v-lr').textContent=fmt(lr2,3);$('#m2-lr').textContent=fmt(lr2,3);$('#m2-lim').textContent=fmt(LIM,3);$('#m2-L').textContent=R2.blow?'발산':fmt(R2.last,3);$('#m2-bot').textContent=fmt(O.L,3);
+  var a=1-lr2*HS.lmax,b=1-lr2*HS.lmin;$('#eq2').innerHTML='걸음마다 바닥과의 거리 배율 · 가파른 방향 1 − η·λ<sub>max</sub> = <i>'+fmt(a,3)+'</i> · 완만한 방향 1 − η·λ<sub>min</sub> = <b>'+fmt(b,3)+'</b>';
+  var it=[];if(lr2>=LIM)it.push(['r','한계를 넘었어요. 가파른 방향 배율 |'+fmt(a,2)+'| ≥ 1이라 걸음마다 바닥에서 멀어집니다. '+(R2.blow?'100걸음 안에 숫자가 감당할 수 없을 만큼 커졌어요.':'100걸음 뒤 오차 '+fmt(R2.last,1)+'.')]);
+  else if(Math.abs(a)>0.9)it.push(['a','한계 바로 아래예요. 가파른 방향 배율이 '+fmt(a,2)+'라 공이 벽 사이를 오래 넘나듭니다.']);
+  else if(b>0.95)it.push(['a','너무 작아요. 완만한 방향 배율이 '+fmt(b,3)+'라 100걸음 뒤에도 바닥까지 '+fmt(R2.last-O.L,3)+' 남았습니다.']);
+  else it.push(['g','알맞은 범위예요. 두 방향 모두 배율의 크기가 1보다 충분히 작습니다.']);U.ins($('#i-s2'),it);S2.dirty=true;draw2b();}
+$('#r-lr').oninput=function(){lr2=+this.value;upd2();};
+U.btns($('#g-lr'),[[0.01,'0.01'],[0.1,'0.1'],[0.3,'0.3'],[0.33,'0.33'],[0.34,'0.34']],0.1,function(v){lr2=v;$('#r-lr').value=v;upd2();});
+$('#t-eig').innerHTML='λ<sub>min</sub> '+fmt(HS.lmin,2)+', λ<sub>max</sub> '+fmt(HS.lmax,2);
+upd2();
+
+/* ── ③ 단면 ── */
+var r3='lr';
+if(DEEP){var SL=DEEP.slice2d,n=SL.n;
+  var f3=function(a,b){var i=(a+1)/2*(n-1),j=(b+1)/2*(n-1),i0=Math.min(n-2,Math.floor(i)),j0=Math.min(n-2,Math.floor(j)),u=i-i0,v=j-j0,Z=SL.z;return (1-u)*(1-v)*Z[j0][i0]+u*(1-v)*Z[j0][i0+1]+(1-u)*v*Z[j0+1][i0]+u*v*Z[j0+1][i0+1];};
+  var S3=new U.Surf3D($('#cvS3a'),{f:f3,xr:[-1,1],yr:[-1,1],n:30,alpha:0.85,axes:['방향 1','방향 2','검증 오차'],stamp:'단면 · 설명용 모형',levels:14});
+  S3.ov.push(function(g,S){var q=S.dot3(g,0,0,SL.center,cssv('--gfp'),6);U.label(g,q[0]+10,q[1],'학습이 끝난 가중치',cssv('--gfp'));});
+  var draw3b=function(){if(r3==='lr'){var C={'1e-05':cssv('--amber'),'0.1':cssv('--gfp'),'10.0':cssv('--eye')},N={'1e-05':'η 0.00001','0.1':'η 0.1','10.0':'η 10'};
+      U.plot($('#cvS3b'),{xr:[0,20],yr:[0.005,1],logy:true,series:Object.keys(DEEP.lr).map(function(k){return {pts:DEEP.lr[k].map(function(r){return [r[0],r[2]];}),color:C[k],width:2,dots:2,name:N[k],ndy:-12};}),xt:[0,5,10,15,20],yt:[0.01,0.1,1],xl:'에포크',yl:'검증 오차(로그)',hlines:[{y:DEEP.varTarget,color:'rgba(157,155,184,.7)',label:'목표의 분산 '+DEEP.varTarget,left:true}],stamp:'설명용 모형',aria:'학습률 세 가지의 검증 오차'});}
+    else{U.plot($('#cvS3b'),{xr:[-0.25,1.25],yr:[0,0.7],series:[{pts:DEEP.line,color:cssv('--terrain'),width:2.5}],xt:[0,0.5,1],xf:function(v){return v===0?'출발':v===1?'도착':String(v);},yt:[0,0.2,0.4,0.6],xl:'출발 → 도착 직선 위의 위치',yl:'검증 오차',vlines:[{x:0,color:cssv('--amber'),label:'처음 가중치'},{x:1,color:cssv('--gfp'),label:'학습 끝',dy:18}],stamp:'설명용 모형',aria:'출발점과 도착점을 잇는 직선 위의 검증 오차'});}};
+  U.reg($('#cvS3b'),function(dt){if(dt===0)draw3b();});
+  U.btns($('#g-r3'),[['lr','학습률 세 가지'],['line','출발 → 도착 직선']],'lr',function(v){r3=v;draw3b();
+    U.ins($('#i-s3'),[v==='lr'?['m','같은 신경망·같은 시드에서 학습률만 바꿨어요. 1편의 한계 이야기처럼, 너무 작으면 느리고 너무 크면 자리를 못 잡습니다.']:['m','처음 가중치(왼쪽)에서 학습 끝(오른쪽)까지 똑바로 가는 선 위의 오차예요. 이 선 위로는 거의 한 번에 내려가는 모양입니다.']]);});
+  var last=function(k){var a=DEEP.lr[k];return a[a.length-1][2];};
+  $('#m3-np').textContent=DEEP.nparam.toLocaleString('ko-KR');$('#m3-01').textContent=fmt(last('0.1'),4);$('#m3-1e5').textContent=fmt(last('1e-05'),3);$('#m3-10').textContent=fmt(last('10.0'),3);
+  $('#t-ratio').textContent=fmt(last('0.1')/DEEP.varTarget*100,1)+'%';
+  U.ins($('#i-s3'),[['m','같은 신경망·같은 시드에서 학습률만 바꿨어요. 1편의 한계 이야기처럼, 너무 작으면 느리고 너무 크면 자리를 못 잡습니다.'],['g','왼쪽 단면의 가운데 오차는 '+fmt(SL.center,4)+', 단면 가장자리(방향마다 가중치 크기만큼 비켜 간 곳)는 최대 '+fmt(Math.max.apply(null,SL.z.map(function(r){return Math.max.apply(null,r);})),2)+'까지 올라갑니다.']]);}
+
+/* ── ④ 에포크 ── */
+if(DEEP){var OF=DEEP.overfit,best=DEEP.overfitBest,ep4=OF[OF.length-1][0];
+  var draw4=function(){U.plot($('#cvS4'),{xr:[1,1500],logx:true,yr:[1e-4,0.6],logy:true,series:[{pts:OF.filter(function(r){return r[0]>0;}).map(function(r){return [r[0],r[1]];}),color:cssv('--amber'),width:2,name:'훈련',ndy:14},{pts:OF.filter(function(r){return r[0]>0;}).map(function(r){return [r[0],r[2]];}),color:cssv('--gfp'),width:2,name:'검증'}],
+    xt:[1,10,100,1000],yt:[1e-4,1e-3,1e-2,0.1],yf:function(v){return v>=0.01?String(v):v.toExponential(0);},xl:'에포크(로그)',yl:'오차(로그)',vlines:[{x:Math.max(1,best[0]),color:'rgba(255,255,255,.6)',label:'검증 최저 '+best[0]+' 에포크'},{x:Math.max(1,ep4),color:cssv('--info'),label:'여기서 멈춘다면',dy:18}],stamp:'설명용 모형',aria:'에포크에 따른 훈련 오차와 검증 오차'});};
+  U.reg($('#cvS4'),function(dt){if(dt===0)draw4();});
+  var upd4=function(){var v=+$('#r-ep').value,e=Math.round(Math.pow(10,v*Math.log10(1500)));var row=OF[0];OF.forEach(function(r){if(r[0]<=e)row=r;});ep4=row[0];
+    $('#v-ep').textContent=ep4+' 에포크';$('#m4-tr').textContent=fmt(row[1],4);$('#m4-va').textContent=fmt(row[2],4);
+    var it=[];if(ep4<=best[0]+2)it.push(['g','검증 오차가 가장 낮은 곳 근처예요. 여기서 멈추는 것이 조기 종료입니다.']);
+    else if(row[2]>best[2]*3)it.push(['r','훈련 오차는 '+fmt(row[1],4)+'까지 줄었지만 검증 오차는 최저('+fmt(best[2],4)+')의 '+fmt(row[2]/best[2],1)+'배예요. 훈련 데이터 40개의 잡음까지 외운 상태입니다.']);
+    else it.push(['a','검증 오차가 최저보다 높아지기 시작했어요. 더 배워도 처음 보는 데이터에는 나아지지 않습니다.']);U.ins($('#i-s4'),it);draw4();};
+  $('#r-ep').oninput=upd4;$('#m4-best').textContent=best[0]+' 에포크 ('+fmt(best[2],4)+')';var lastOF=OF[OF.length-1];$('#m4-end').textContent=fmt(lastOF[2],4);$('#t-best').textContent=best[0];upd4();}
+
+/* ── 대결 (조건부 C) ── */
+var cond='step';
+function duelVals(){return cond==='step'?{fly:RUN[10].last,robo:RUN[1000].last,pf:'100걸음 · 카드 1,000장',pr:'100걸음 · 카드 100,000장'}:{fly:RUN[10].afterEpoch,robo:RUN[1000].afterEpoch,pf:'100걸음 · 카드 1,000장',pr:'1걸음 · 카드 1,000장'};}
+function showDuel(pred){var r=duelVals(),mx=Math.max(r.fly,r.robo);$('#d-bf').style.width=(r.fly/mx*100)+'%';$('#d-br').style.width=(r.robo/mx*100)+'%';$('#d-vf').textContent=fmt(r.fly,3);$('#d-vr').textContent=fmt(r.robo,3);$('#d-pf').textContent=r.pf;$('#d-pr').textContent=r.pr;
+  var A={step:[RUN[10].last,RUN[1000].last],card:[RUN[10].afterEpoch,RUN[1000].afterEpoch]};
+  $('#d-say').innerHTML=U.say('asst','asst_report','같은 걸음 수(100걸음)면 초파리 쪽 '+fmt(A.step[0],3)+', 주판봇 쪽 '+fmt(A.step[1],3)+'. 같은 계산량(카드 1,000장)이면 초파리 쪽 '+fmt(A.card[0],3)+', 주판봇 쪽 '+fmt(A.card[1],3)+'이에요.')+
+    U.say('doc','doc_think','같은 걸음 수로 견주면 주판봇, 같은 계산량으로 견주면 초파리. 어느 가정이 현실에 가까운지는 걸음 하나의 비용이 정한다.',true);
+  $('#d-score').textContent='이번 판: 조건부 (C) — 무승부로 센다';$('#d-pred').textContent=pred?('내 예상: '+(pred==='fly'?'초파리':'주판봇')+' → 가정에 따라 맞기도 빗나가기도 함'):'예상을 고르지 않았어요';
+  U.setMood($('#d-fly'),'fly_coffee');U.setMood($('#d-robo'),'robo_calc');}
+var lastPred=null;
+U.btns($('#g-cond'),[['step','가정 A · 같은 걸음 수 (100걸음)'],['card','가정 B · 같은 계산량 (카드 1,000장)']],'step',function(v){cond=v;showDuel(lastPred);});
+U.Duel({el:'#duel',run:function(){return duelVals();},show:function(r,pred){lastPred=pred;showDuel(pred);},reset:function(){U.setMood($('#d-fly'),'fly_point');U.setMood($('#d-robo'),'robo_coin');}});
+
+/* ── 용어와 퀴즈 ── */
+U.Gloss({
+ '하이퍼파라미터':['하이퍼파라미터','학습','학습 전에 사람이 정하는 숫자. 학습률, 배치 크기, 에포크, 층의 수·너비 등. 기울기로 고쳐지지 않습니다.'],
+ '가중치':['가중치','모델','입력에 곱하는 숫자. 지도 위의 위치(좌표)입니다.'],
+ '학습률':['학습률 η','학습','한 걸음의 크기. 새 가중치 = 옛 가중치 − 학습률 × 기울기.'],
+ '미니배치':['미니배치','학습','한 걸음에 기울기를 잴 때 쓰는 일부 데이터 묶음.'],
+ '풀배치':['풀배치','학습','한 걸음마다 데이터 전부로 기울기를 재는 방법. 정확하지만 걸음 하나가 비쌉니다.'],
+ '배치 크기':['배치 크기','학습','한 묶음에 들어가는 데이터 개수.'],
+ '에포크':['에포크','학습','데이터 전체를 한 바퀴 다 보는 것. 1,000장을 배치 10으로 보면 1 에포크 = 100걸음.'],
+ '발산':['발산','학습','걸음마다 오차가 커져 숫자가 끝없이 불어나는 것. 학습률이 너무 클 때 생깁니다.'],
+ '검증 데이터':['검증 데이터','평가','학습에 쓰지 않고 떼어 둔 데이터. 하이퍼파라미터와 멈출 시점을 고르는 데 씁니다.'],
+ '시험 데이터':['시험 데이터','평가','고르는 데도 쓰지 않고 마지막 채점에만 쓰는 데이터.'],
+ '과적합':['과적합','평가','훈련 데이터에만 지나치게 맞춰 처음 보는 데이터에서 오차가 커지는 것.'],
+ '조기 종료':['조기 종료','학습','검증 오차가 더 나아지지 않을 때 학습을 멈추는 방법.'],
+ '단면':['단면','지도','다른 축은 고정하고 고른 방향(한두 개)으로만 자른 지형. 큰 신경망의 지형을 보는 방법.'],
+ '헤시안':['헤시안','미분','2차 편미분의 표. 고유값이 굽음이고, 가장 큰 고유값이 학습률 한계를 정합니다.'],
+ '시드':['시드','실험','난수를 시작하는 숫자. 같으면 같은 결과가 다시 나옵니다.'],
+ 'η':['η (에타)','기호','학습률.'],
+ 'λ':['λ (람다)','기호','헤시안의 고유값, 한 방향의 굽음.']
+},['하이퍼파라미터','학습률','미니배치','풀배치','에포크','발산','검증 데이터','과적합','조기 종료','단면','시드','η']);
+U.Study({quiz:{
+ s1:[{q:'데이터 1,000개, 배치 10이면 1 에포크는 몇 걸음인가요?',o:['10걸음','100걸음','1,000걸음'],a:1,why:'1,000 ÷ 10 = 100. 한 걸음에 10장씩, 100번이면 전부를 한 번씩 봅니다.',hint:'1 에포크 = 데이터 전체를 한 바퀴.'},
+     {q:'같은 계산량(카드 1,000장)으로 견줄 때 배치 10이 풀배치보다 오차가 훨씬 작았던 이유는?',o:['배치 10의 기울기가 더 정확해서','같은 카드로 100걸음을 갔기 때문에','학습률이 더 커서'],a:1,why:'풀배치는 1,000장으로 1걸음, 배치 10은 같은 1,000장으로 100걸음을 갑니다. 걸음 하나는 흔들려도 걸음 수가 압도적입니다.',hint:'본 카드 수가 같을 때 걸음 수를 세어 보세요.'}],
+ s2:[{q:'이 그릇의 가장 큰 헤시안 고유값이 약 6이면, 풀배치 경사하강의 학습률 한계는?',o:['약 0.033','약 0.33','약 3.3'],a:1,why:'2/λmax = 2/6 ≈ 0.33. 넘으면 가파른 방향 배율의 크기가 1을 넘습니다.',hint:'한계 = 2 ÷ 가장 큰 굽음.'},
+     {q:'학습률이 너무 작을 때(0.01) 생기는 일은?',o:['발산한다','정해진 걸음 안에 바닥에 못 닿는다','과적합이 생긴다'],a:1,why:'완만한 방향 배율이 0.98이라 걸음마다 2%씩만 가까워집니다.',hint:'1 − η·λmin을 계산해 보세요.'}],
+ s3:[{q:'③의 3D 그림은 무엇인가요?',o:['신경망 오차 지형 전체','학습이 끝난 점을 지나는 무작위 평면 한 장의 단면','훈련 데이터의 분포'],a:1,why:'가중치가 4,416개라 전체는 그릴 수 없습니다. 무작위 방향 두 개로 자른 한 장입니다.',hint:'축이 몇 개인지 떠올려 보세요.'},
+     {q:'단면 그림을 보고에 실을 때 함께 적어야 하는 것은?',o:['자른 방향을 고른 방법과 오차를 잰 데이터','그림을 그린 프로그램 이름만','학습률만'],a:0,why:'방향과 데이터가 바뀌면 같은 모델도 다른 그림이 나옵니다.',hint:'같은 모델에서 다른 그림이 나오는 이유를 생각해 보세요.'}],
+ s4:[{q:'훈련 오차는 계속 줄고 검증 오차는 다시 오르기 시작했다면?',o:['더 오래 학습한다','과적합이 시작됐다, 멈출 때를 검토한다','학습률을 키운다'],a:1,why:'훈련 데이터에만 맞춰지는 중입니다. 검증 오차가 가장 낮은 곳에서 멈추는 것이 조기 종료입니다.',hint:'처음 보는 데이터의 오차가 기준이에요.'},
+     {q:'멈출 시점을 검증 데이터로 골랐다면 최종 성능은 무엇으로 재나요?',o:['같은 검증 데이터','훈련 데이터','따로 떼어 둔 시험 데이터'],a:2,why:'고르는 데 쓴 데이터로 채점하면 점수가 부풀려집니다.',hint:'고르는 데 쓴 데이터와 채점하는 데이터를 나눠요.'}],
+ duel:[{q:'이번 대결을 조건부(C)로 판정한 이유는?',o:['계산이 틀려서','무엇을 같게 두느냐(걸음 수 / 계산량)에 따라 승자가 바뀌어서','둘의 숫자가 똑같아서'],a:1,why:'같은 걸음 수면 풀배치가, 같은 계산량이면 배치 10이 더 낮은 오차였습니다.',hint:'두 가정의 결과를 모두 보세요.'}]
+}});
+U.start();
+})();
+</script>
+</body>
+</html>

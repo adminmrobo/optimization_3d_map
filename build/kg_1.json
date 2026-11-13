@@ -1,0 +1,2220 @@
+{
+ "version": "1.0",
+ "page": "1_math_map",
+ "nodes": [
+  {
+   "id": "lab:concept/parameter-axis",
+   "type": "Concept",
+   "label": {
+    "ko": "좌표축(가중치 축)",
+    "en": "Parameter axis"
+   },
+   "page": "1_math_map",
+   "anchor": "#map",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "가중치 하나가 지도의 축 하나. 가중치가 n개면 축이 n개인 지도."
+   }
+  },
+  {
+   "id": "lab:concept/loss-landscape",
+   "type": "Concept",
+   "label": {
+    "ko": "오차 지형",
+    "en": "Loss landscape"
+   },
+   "page": "1_math_map",
+   "anchor": "#map",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "가중치마다 잰 오차를 높이로 세운 땅."
+   },
+   "altLabel": {
+    "ko": [
+     "손실 지형"
+    ]
+   }
+  },
+  {
+   "id": "lab:concept/loss-slice",
+   "type": "Concept",
+   "label": {
+    "ko": "단면",
+    "en": "Loss-landscape slice"
+   },
+   "page": "1_math_map",
+   "anchor": "#s1",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "다른 축을 한 값에 묶고 남은 축으로만 본 지형."
+   }
+  },
+  {
+   "id": "lab:method/gradient-descent",
+   "type": "Method",
+   "label": {
+    "ko": "경사하강",
+    "en": "Gradient descent"
+   },
+   "page": "1_math_map",
+   "anchor": "#s1",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "기울기의 반대 방향으로 조금씩 걸어 오차를 줄이는 방법."
+   }
+  },
+  {
+   "id": "lab:concept/learning-rate",
+   "type": "Concept",
+   "label": {
+    "ko": "학습률",
+    "en": "Learning rate"
+   },
+   "page": "1_math_map",
+   "anchor": "#s1",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "한 걸음의 크기. 새 가중치 = 옛 가중치 − 학습률 × 기울기."
+   }
+  },
+  {
+   "id": "lab:concept/gradient",
+   "type": "Concept",
+   "label": {
+    "ko": "그래디언트",
+    "en": "Gradient"
+   },
+   "page": "1_math_map",
+   "anchor": "#s2",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "편미분을 모은 벡터. 가장 가파른 오르막 방향을 가리킨다."
+   },
+   "altLabel": {
+    "ko": [
+     "기울기",
+     "∇f"
+    ]
+   }
+  },
+  {
+   "id": "lab:concept/surface-normal",
+   "type": "Concept",
+   "label": {
+    "ko": "법선",
+    "en": "Surface normal"
+   },
+   "page": "1_math_map",
+   "anchor": "#s2",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "곡면과 직각인 방향. 그래프 곡면에서는 n = (−∂f/∂u, −∂f/∂v, 1)."
+   }
+  },
+  {
+   "id": "lab:concept/tangent-vector",
+   "type": "Concept",
+   "label": {
+    "ko": "접선 벡터",
+    "en": "Tangent vector"
+   },
+   "page": "1_math_map",
+   "anchor": "#s2",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "곡면 위 격자선을 따라가는 방향. t_u = (1, 0, ∂f/∂u)."
+   }
+  },
+  {
+   "id": "lab:concept/curl-free-gradient",
+   "type": "Concept",
+   "label": {
+    "ko": "그래디언트의 회전은 0",
+    "en": "Curl of a gradient is zero"
+   },
+   "page": "1_math_map",
+   "anchor": "#s2",
+   "level": 3,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "그래디언트로 만든 벡터장은 소용돌이가 없다. 내리막 흐름은 제자리를 돌지 않는다."
+   }
+  },
+  {
+   "id": "lab:concept/hessian",
+   "type": "Concept",
+   "label": {
+    "ko": "헤시안",
+    "en": "Hessian matrix"
+   },
+   "page": "1_math_map",
+   "anchor": "#s3",
+   "level": 3,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "2차 편미분을 모은 정사각 표. 방향마다의 굽음을 적는다."
+   }
+  },
+  {
+   "id": "lab:concept/curvature-eigenvalue",
+   "type": "Concept",
+   "label": {
+    "ko": "고유값(굽음)",
+    "en": "Curvature eigenvalue"
+   },
+   "page": "1_math_map",
+   "anchor": "#s3",
+   "level": 3,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "헤시안을 어느 방향으로 봐도 변하지 않는 굽음 숫자."
+   }
+  },
+  {
+   "id": "lab:concept/laplacian",
+   "type": "Concept",
+   "label": {
+    "ko": "라플라시안",
+    "en": "Laplacian"
+   },
+   "page": "1_math_map",
+   "anchor": "#s3",
+   "level": 3,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "2차 편미분의 합 = 헤시안 고유값의 합 = ∇·∇f."
+   }
+  },
+  {
+   "id": "lab:concept/step-size-limit",
+   "type": "Concept",
+   "label": {
+    "ko": "보폭 한계 2/λmax",
+    "en": "Step-size stability limit"
+   },
+   "page": "1_math_map",
+   "anchor": "#s3",
+   "level": 3,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "2차 근사에서 경사하강이 줄어드는 학습률의 상한."
+   }
+  },
+  {
+   "id": "lab:concept/ill-conditioning",
+   "type": "Concept",
+   "label": {
+    "ko": "길쭉함(조건수)",
+    "en": "Ill-conditioning"
+   },
+   "page": "1_math_map",
+   "anchor": "#s3",
+   "level": 3,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "가장 큰 굽음과 가장 작은 굽음의 비. 크면 지그재그로 느리게 내려간다."
+   }
+  },
+  {
+   "id": "lab:concept/saddle-point",
+   "type": "Concept",
+   "label": {
+    "ko": "안장점",
+    "en": "Saddle point"
+   },
+   "page": "1_math_map",
+   "anchor": "#s4",
+   "level": 3,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "기울기가 0이지만 한 방향으로는 최저, 다른 방향으로는 최고인 곳."
+   }
+  },
+  {
+   "id": "lab:concept/hyperbolic-paraboloid",
+   "type": "Concept",
+   "label": {
+    "ko": "쌍곡포물면",
+    "en": "Hyperbolic paraboloid"
+   },
+   "page": "1_math_map",
+   "anchor": "#s4",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "z = x²/a² − y²/b². 한 방향은 위로, 다른 방향은 아래로 휜 곡면."
+   }
+  },
+  {
+   "id": "lab:concept/doubly-ruled-surface",
+   "type": "Concept",
+   "label": {
+    "ko": "이중 선직면",
+    "en": "Doubly ruled surface"
+   },
+   "page": "1_math_map",
+   "anchor": "#s4",
+   "level": 3,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "곧은 선 두 무리로 다 덮이는 곡면."
+   }
+  },
+  {
+   "id": "lab:concept/jacobian",
+   "type": "Concept",
+   "label": {
+    "ko": "야코비안",
+    "en": "Jacobian matrix"
+   },
+   "page": "1_math_map",
+   "anchor": "#s5",
+   "level": 3,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "벡터 함수의 1차 편미분 표. 작은 원이 어떤 타원이 되는지 알려 준다."
+   }
+  },
+  {
+   "id": "lab:concept/chain-rule",
+   "type": "Concept",
+   "label": {
+    "ko": "연쇄 법칙",
+    "en": "Chain rule"
+   },
+   "page": "1_math_map",
+   "anchor": "#s5",
+   "level": 3,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "이어 붙인 함수의 미분은 각 미분의 곱(야코비안의 곱)."
+   }
+  },
+  {
+   "id": "lab:method/backpropagation",
+   "type": "Method",
+   "label": {
+    "ko": "역전파",
+    "en": "Backpropagation"
+   },
+   "page": "1_math_map",
+   "anchor": "#s5",
+   "level": 3,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "오차의 기울기에 층마다의 야코비안을 뒤에서부터 곱해 모든 가중치의 기울기를 구하는 계산."
+   }
+  },
+  {
+   "id": "lab:method/single-neuron-regression",
+   "type": "Method",
+   "label": {
+    "ko": "뉴런 하나 (w, b)",
+    "en": "Single linear neuron"
+   },
+   "page": "1_math_map",
+   "anchor": "#map",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "예측 = w·x + b. 가중치가 둘뿐이라 오차 지형 전체를 3D로 그릴 수 있다."
+   }
+  },
+  {
+   "id": "lab:limitation/one-axis-at-a-time",
+   "type": "Limitation",
+   "label": {
+    "ko": "축 하나씩만 움직임",
+    "en": "Moves one axis at a time"
+   },
+   "page": "1_math_map",
+   "anchor": "#s1",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:limitation/gradient-no-step-size",
+   "type": "Limitation",
+   "label": {
+    "ko": "기울기만으로는 보폭을 모름",
+    "en": "Gradient gives no step size"
+   },
+   "page": "1_math_map",
+   "anchor": "#s2",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:limitation/quadratic-local",
+   "type": "Limitation",
+   "label": {
+    "ko": "2차 근사는 그 점 둘레에서만 맞음",
+    "en": "Quadratic model is local"
+   },
+   "page": "1_math_map",
+   "anchor": "#s3",
+   "level": 3,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:limitation/single-map-only",
+   "type": "Limitation",
+   "label": {
+    "ko": "층을 지나는 변화는 모름",
+    "en": "Ignores layer-to-layer mapping"
+   },
+   "page": "1_math_map",
+   "anchor": "#s4",
+   "level": 3,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:limitation/linear-approx",
+   "type": "Limitation",
+   "label": {
+    "ko": "야코비안은 작은 범위의 직선 근사",
+    "en": "Jacobian is a local linear approximation"
+   },
+   "page": "1_math_map",
+   "anchor": "#s5",
+   "level": 3,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:method/slice-descent",
+   "type": "Method",
+   "label": {
+    "ko": "① 단면 위 한 걸음",
+    "en": "Step on a 1D slice"
+   },
+   "page": "1_math_map",
+   "anchor": "#s1",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "다른 축을 묶어 둔 단면 곡선의 기울기로 한 축만 옮긴다."
+   }
+  },
+  {
+   "id": "lab:method/curvature-step-limit",
+   "type": "Method",
+   "label": {
+    "ko": "③ 굽음으로 보폭 한계 정하기",
+    "en": "Curvature-based step limit"
+   },
+   "page": "1_math_map",
+   "anchor": "#s3",
+   "level": 3,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "헤시안의 가장 큰 고유값으로 학습률의 상한 2/λmax를 정한다."
+   }
+  },
+  {
+   "id": "lab:method/second-order-critical-test",
+   "type": "Method",
+   "label": {
+    "ko": "④ 헤시안 부호로 임계점 판별",
+    "en": "Second-order critical-point test"
+   },
+   "page": "1_math_map",
+   "anchor": "#s4",
+   "level": 3,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "기울기 0인 곳에서 고유값 부호로 바닥·봉우리·안장을 가린다."
+   }
+  },
+  {
+   "id": "lab:analogy/hill-slice",
+   "type": "Analogy",
+   "label": {
+    "ko": "산을 칼로 자른 단면",
+    "en": "Hill cross-section"
+   },
+   "page": "1_math_map",
+   "anchor": "#s1",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:analogy/flagpole-shadow",
+   "type": "Analogy",
+   "label": {
+    "ko": "비탈에 꽂은 깃대의 그림자",
+    "en": "Flagpole shadow on a slope"
+   },
+   "page": "1_math_map",
+   "anchor": "#s2",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:analogy/elongated-bowl",
+   "type": "Analogy",
+   "label": {
+    "ko": "길쭉한 그릇",
+    "en": "Elongated bowl"
+   },
+   "page": "1_math_map",
+   "anchor": "#s3",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:analogy/stacked-crisp",
+   "type": "Analogy",
+   "label": {
+    "ko": "통에 포개 담는 곡면 감자칩",
+    "en": "Stacked curved crisp"
+   },
+   "page": "1_math_map",
+   "anchor": "#s4",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:analogy/rubber-sheet",
+   "type": "Analogy",
+   "label": {
+    "ko": "당겨진 고무판의 모눈",
+    "en": "Stretched rubber sheet"
+   },
+   "page": "1_math_map",
+   "anchor": "#s5",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:sim/p1-bowl-map",
+   "type": "Simulation",
+   "label": {
+    "ko": "오차 지도 (뉴런 하나의 그릇)",
+    "en": "Bowl map of a single neuron"
+   },
+   "page": "1_math_map",
+   "anchor": "#map",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:sim/p1-slice-walk",
+   "type": "Simulation",
+   "label": {
+    "ko": "단면 위 1차원 경사하강",
+    "en": "1D descent on a slice"
+   },
+   "page": "1_math_map",
+   "anchor": "#s1",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:sim/p1-flagpole",
+   "type": "Simulation",
+   "label": {
+    "ko": "접선·법선·바닥 그림자",
+    "en": "Tangents, normal and shadow"
+   },
+   "page": "1_math_map",
+   "anchor": "#s2",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:sim/p1-curvature",
+   "type": "Simulation",
+   "label": {
+    "ko": "고유값으로 만든 땅과 공 굴리기",
+    "en": "Curvature playground"
+   },
+   "page": "1_math_map",
+   "anchor": "#s3",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:sim/p1-saddle",
+   "type": "Simulation",
+   "label": {
+    "ko": "쌍곡포물면 단면과 곧은 선",
+    "en": "Saddle sections and rulings"
+   },
+   "page": "1_math_map",
+   "anchor": "#s4",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:sim/p1-rubber",
+   "type": "Simulation",
+   "label": {
+    "ko": "원이 타원이 되는 고무판",
+    "en": "Circle-to-ellipse warp"
+   },
+   "page": "1_math_map",
+   "anchor": "#s5",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:method/curvature-check-escape",
+   "type": "Method",
+   "label": {
+    "ko": "굽음 확인 후 비켜 서기",
+    "en": "Curvature check and escape"
+   },
+   "page": "1_math_map",
+   "anchor": "#duel",
+   "level": 3,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "기울기가 0에 가까우면 헤시안 고유값을 보고, 음수 방향이 있으면 그쪽으로 한 발 비켜 선다."
+   }
+  },
+  {
+   "id": "lab:method/gradient-only-stop",
+   "type": "Method",
+   "label": {
+    "ko": "기울기 0이면 멈추기",
+    "en": "Stop at zero gradient"
+   },
+   "page": "1_math_map",
+   "anchor": "#duel",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "기울기만 보고, 0이 되면 바닥이라고 보고 멈춘다."
+   }
+  },
+  {
+   "id": "lab:metric/final-loss",
+   "type": "Metric",
+   "label": {
+    "ko": "멈춘 곳의 오차",
+    "en": "Final loss"
+   },
+   "page": "1_math_map",
+   "anchor": "#duel",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:sim/p1-duel",
+   "type": "Simulation",
+   "label": {
+    "ko": "안장점 대결",
+    "en": "Saddle duel"
+   },
+   "page": "1_math_map",
+   "anchor": "#duel",
+   "level": 3,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:question/p1-blindfold",
+   "type": "Question",
+   "label": {
+    "ko": "눈을 가린 채 기울기와 굽음만으로 바닥을 찾을 수 있을까?",
+    "en": "Can a blindfolded walker find the bottom from slope and curvature?"
+   },
+   "page": "1_math_map",
+   "anchor": "#top",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:question/p1-zero-gradient",
+   "type": "Question",
+   "label": {
+    "ko": "기울기 0이면 바닥인가?",
+    "en": "Is zero gradient a minimum?"
+   },
+   "page": "1_math_map",
+   "anchor": "#duel",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:work/matharium_crisp",
+   "type": "Work",
+   "label": {
+    "ko": "matharium — The geometry of a curved crisp",
+    "en": "matharium — The geometry of a curved crisp"
+   },
+   "page": "1_math_map",
+   "anchor": "#top",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:work/matharium_vecops",
+   "type": "Work",
+   "label": {
+    "ko": "matharium — The Vector Differential Operators",
+    "en": "matharium — The Vector Differential Operators"
+   },
+   "page": "1_math_map",
+   "anchor": "#top",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:work/matharium_gjh",
+   "type": "Work",
+   "label": {
+    "ko": "matharium — Gradient, Jacobian and Hessian",
+    "en": "matharium — Gradient, Jacobian and Hessian"
+   },
+   "page": "1_math_map",
+   "anchor": "#top",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:work/matheorems_graph",
+   "type": "Work",
+   "label": {
+    "ko": "matheorems — 그래프 곡면의 야코비안과 법선",
+    "en": "matheorems — Jacobian and normal of a graph surface"
+   },
+   "page": "1_math_map",
+   "anchor": "#top",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:work/mlfs39",
+   "type": "Work",
+   "label": {
+    "ko": "ML from Scratch 39 — 미니배치",
+    "en": "ML from Scratch 39 — mini batch"
+   },
+   "page": "1_math_map",
+   "anchor": "#top",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:work/mlfs43",
+   "type": "Work",
+   "label": {
+    "ko": "ML from Scratch 43 — 하이퍼파라미터",
+    "en": "ML from Scratch 43 — hyperparameters"
+   },
+   "page": "1_math_map",
+   "anchor": "#top",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:work/dauphin2014identifying",
+   "type": "Work",
+   "label": {
+    "ko": "Dauphin 외 2014",
+    "en": "Dauphin et al. 2014"
+   },
+   "page": "1_math_map",
+   "anchor": "#top",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:work/goodfellow2016deep",
+   "type": "Work",
+   "label": {
+    "ko": "Goodfellow 외 2016 Deep Learning",
+    "en": "Goodfellow et al. 2016 Deep Learning"
+   },
+   "page": "1_math_map",
+   "anchor": "#top",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:work/rumelhart1986learning",
+   "type": "Work",
+   "label": {
+    "ko": "Rumelhart·Hinton·Williams 1986",
+    "en": "Rumelhart, Hinton & Williams 1986"
+   },
+   "page": "1_math_map",
+   "anchor": "#top",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:claim/normal-is-neg-gradient-lift",
+   "type": "Claim",
+   "label": {
+    "ko": "그래프 곡면의 법선은 (−∂f/∂u, −∂f/∂v, 1)이다",
+    "en": "Normal of a graph surface is (−f_u, −f_v, 1)"
+   },
+   "page": "1_math_map",
+   "anchor": "#s2",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "source": [
+    {
+     "ref": "matheorems_graph",
+     "loc": "영상 수식"
+    }
+   ]
+  },
+  {
+   "id": "lab:claim/curl-grad-zero",
+   "type": "Claim",
+   "label": {
+    "ko": "그래디언트의 회전과 회전의 발산은 늘 0이다",
+    "en": "Curl of gradient and divergence of curl vanish"
+   },
+   "page": "1_math_map",
+   "anchor": "#s2",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "source": [
+    {
+     "ref": "matharium_vecops",
+     "loc": "How they connect"
+    }
+   ]
+  },
+  {
+   "id": "lab:claim/laplacian-examples",
+   "type": "Claim",
+   "label": {
+    "ko": "∇²(x² + y²) = 4, ∇²(x² − y²) = 0",
+    "en": "Laplacian examples"
+   },
+   "page": "1_math_map",
+   "anchor": "#s3",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "source": [
+    {
+     "ref": "matharium_vecops",
+     "loc": "Laplacian 칸"
+    }
+   ]
+  },
+  {
+   "id": "lab:claim/crisp-doubly-ruled",
+   "type": "Claim",
+   "label": {
+    "ko": "쌍곡포물면은 곧은 선 두 무리를 품는다",
+    "en": "A hyperbolic paraboloid is doubly ruled"
+   },
+   "page": "1_math_map",
+   "anchor": "#s4",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "source": [
+    {
+     "ref": "matharium_crisp",
+     "loc": "아래 문구"
+    }
+   ]
+  },
+  {
+   "id": "lab:claim/hessian-classifies",
+   "type": "Claim",
+   "label": {
+    "ko": "헤시안 고유값이 임계점을 분류한다",
+    "en": "Hessian eigenvalues classify critical points"
+   },
+   "page": "1_math_map",
+   "anchor": "#s3",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "source": [
+    {
+     "ref": "matharium_gjh",
+     "loc": "Hessian 칸"
+    }
+   ]
+  },
+  {
+   "id": "lab:claim/saddles-proliferate-high-dim",
+   "type": "Claim",
+   "label": {
+    "ko": "고차원 비볼록 지형에서는 나쁜 국소 최소보다 안장점이 문제를 일으킨다",
+    "en": "Saddle points, not local minima, proliferate in high dimensions"
+   },
+   "page": "1_math_map",
+   "anchor": "#s4",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "source": [
+    {
+     "ref": "dauphin2014identifying",
+     "loc": "초록, 2장"
+    }
+   ]
+  },
+  {
+   "id": "lab:claim/lr-limit-quadratic",
+   "type": "Claim",
+   "label": {
+    "ko": "2차 함수에서 경사하강은 학습률이 2/λmax보다 작을 때 줄어든다",
+    "en": "GD converges on a quadratic iff lr < 2/λmax"
+   },
+   "page": "1_math_map",
+   "anchor": "#s3",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "source": [
+    {
+     "ref": "goodfellow2016deep",
+     "loc": "4장"
+    }
+   ]
+  },
+  {
+   "id": "lab:claim/backprop-1986",
+   "type": "Claim",
+   "label": {
+    "ko": "역전파는 층마다의 기울기를 뒤에서부터 전해 가중치를 고친다",
+    "en": "Backpropagation adjusts weights by propagating error gradients"
+   },
+   "page": "1_math_map",
+   "anchor": "#s5",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "source": [
+    {
+     "ref": "rumelhart1986learning",
+     "loc": "본문"
+    }
+   ]
+  },
+  {
+   "id": "lab:claim/one-neuron-bowl",
+   "type": "Claim",
+   "label": {
+    "ko": "뉴런 하나(w, b)의 평균제곱오차는 그릇 모양 2차 곡면이다",
+    "en": "MSE of a single linear neuron is a quadratic bowl"
+   },
+   "page": "1_math_map",
+   "anchor": "#map",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "source": [
+    {
+     "ref": "mlfs39",
+     "loc": "영상 설명"
+    }
+   ]
+  },
+  {
+   "id": "lab:quiz/p1-s1-1",
+   "type": "QuizItem",
+   "label": {
+    "ko": "단면 위 한 걸음 문제 1",
+    "en": "Quiz s1-1"
+   },
+   "page": "1_math_map",
+   "anchor": "#s1",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:quiz/p1-s1-2",
+   "type": "QuizItem",
+   "label": {
+    "ko": "단면 위 한 걸음 문제 2",
+    "en": "Quiz s1-2"
+   },
+   "page": "1_math_map",
+   "anchor": "#s1",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:quiz/p1-s2-1",
+   "type": "QuizItem",
+   "label": {
+    "ko": "법선과 그래디언트 문제 1",
+    "en": "Quiz s2-1"
+   },
+   "page": "1_math_map",
+   "anchor": "#s2",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:quiz/p1-s2-2",
+   "type": "QuizItem",
+   "label": {
+    "ko": "법선과 그래디언트 문제 2",
+    "en": "Quiz s2-2"
+   },
+   "page": "1_math_map",
+   "anchor": "#s2",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:quiz/p1-s3-1",
+   "type": "QuizItem",
+   "label": {
+    "ko": "굽음과 보폭 문제 1",
+    "en": "Quiz s3-1"
+   },
+   "page": "1_math_map",
+   "anchor": "#s3",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:quiz/p1-s3-2",
+   "type": "QuizItem",
+   "label": {
+    "ko": "굽음과 보폭 문제 2",
+    "en": "Quiz s3-2"
+   },
+   "page": "1_math_map",
+   "anchor": "#s3",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:quiz/p1-s4-1",
+   "type": "QuizItem",
+   "label": {
+    "ko": "안장과 라플라시안 문제 1",
+    "en": "Quiz s4-1"
+   },
+   "page": "1_math_map",
+   "anchor": "#s4",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:quiz/p1-s4-2",
+   "type": "QuizItem",
+   "label": {
+    "ko": "안장과 라플라시안 문제 2",
+    "en": "Quiz s4-2"
+   },
+   "page": "1_math_map",
+   "anchor": "#s4",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:quiz/p1-s5-1",
+   "type": "QuizItem",
+   "label": {
+    "ko": "야코비안과 연쇄 문제 1",
+    "en": "Quiz s5-1"
+   },
+   "page": "1_math_map",
+   "anchor": "#s5",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:quiz/p1-s5-2",
+   "type": "QuizItem",
+   "label": {
+    "ko": "야코비안과 연쇄 문제 2",
+    "en": "Quiz s5-2"
+   },
+   "page": "1_math_map",
+   "anchor": "#s5",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:quiz/p1-duel-1",
+   "type": "QuizItem",
+   "label": {
+    "ko": "대결 안장점 문제 1",
+    "en": "Quiz duel-1"
+   },
+   "page": "1_math_map",
+   "anchor": "#duel",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  }
+ ],
+ "edges": [
+  {
+   "s": "lab:method/slice-descent",
+   "p": "lab:hasLimitation",
+   "o": "lab:limitation/one-axis-at-a-time",
+   "anchor": "#s1",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:limitation/one-axis-at-a-time",
+   "p": "lab:addressedBy",
+   "o": "lab:method/gradient-descent",
+   "anchor": "#s1",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/slice-descent",
+   "p": "lab:prerequisiteOf",
+   "o": "lab:method/gradient-descent",
+   "anchor": "#sum",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/gradient-descent",
+   "p": "lab:hasLimitation",
+   "o": "lab:limitation/gradient-no-step-size",
+   "anchor": "#s2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:limitation/gradient-no-step-size",
+   "p": "lab:addressedBy",
+   "o": "lab:method/curvature-step-limit",
+   "anchor": "#s2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/gradient-descent",
+   "p": "lab:prerequisiteOf",
+   "o": "lab:method/curvature-step-limit",
+   "anchor": "#sum",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/curvature-step-limit",
+   "p": "lab:hasLimitation",
+   "o": "lab:limitation/quadratic-local",
+   "anchor": "#s3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:limitation/quadratic-local",
+   "p": "lab:addressedBy",
+   "o": "lab:method/second-order-critical-test",
+   "anchor": "#s3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/curvature-step-limit",
+   "p": "lab:prerequisiteOf",
+   "o": "lab:method/second-order-critical-test",
+   "anchor": "#sum",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/second-order-critical-test",
+   "p": "lab:hasLimitation",
+   "o": "lab:limitation/single-map-only",
+   "anchor": "#s4",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:limitation/single-map-only",
+   "p": "lab:addressedBy",
+   "o": "lab:method/backpropagation",
+   "anchor": "#s4",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/second-order-critical-test",
+   "p": "lab:prerequisiteOf",
+   "o": "lab:method/backpropagation",
+   "anchor": "#sum",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/backpropagation",
+   "p": "lab:hasLimitation",
+   "o": "lab:limitation/linear-approx",
+   "anchor": "#s5",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/loss-slice",
+   "p": "lab:prerequisiteOf",
+   "o": "lab:method/slice-descent",
+   "anchor": "#s1",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/hessian",
+   "p": "lab:prerequisiteOf",
+   "o": "lab:method/curvature-step-limit",
+   "anchor": "#s3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/curvature-eigenvalue",
+   "p": "lab:prerequisiteOf",
+   "o": "lab:method/second-order-critical-test",
+   "anchor": "#s4",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/jacobian",
+   "p": "lab:prerequisiteOf",
+   "o": "lab:method/backpropagation",
+   "anchor": "#s5",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/gradient-descent",
+   "p": "lab:relatedTo",
+   "o": "lab:concept/gradient",
+   "anchor": "#s2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/parameter-axis",
+   "p": "lab:partOf",
+   "o": "lab:concept/loss-landscape",
+   "anchor": "#map",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/loss-landscape",
+   "p": "lab:broader",
+   "o": "lab:topic/loss-function",
+   "anchor": "#map",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/loss-slice",
+   "p": "lab:partOf",
+   "o": "lab:concept/loss-landscape",
+   "anchor": "#s1",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/gradient-descent",
+   "p": "lab:broader",
+   "o": "lab:topic/gradient-descent",
+   "anchor": "#s1",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/learning-rate",
+   "p": "lab:partOf",
+   "o": "lab:method/gradient-descent",
+   "anchor": "#s1",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/gradient",
+   "p": "lab:prerequisiteOf",
+   "o": "lab:method/gradient-descent",
+   "anchor": "#s2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/tangent-vector",
+   "p": "lab:prerequisiteOf",
+   "o": "lab:concept/surface-normal",
+   "anchor": "#s2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/surface-normal",
+   "p": "lab:relatedTo",
+   "o": "lab:concept/gradient",
+   "anchor": "#s2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/curl-free-gradient",
+   "p": "lab:partOf",
+   "o": "lab:concept/gradient",
+   "anchor": "#s2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/curvature-eigenvalue",
+   "p": "lab:partOf",
+   "o": "lab:concept/hessian",
+   "anchor": "#s3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/laplacian",
+   "p": "lab:derivedFrom",
+   "o": "lab:concept/hessian",
+   "anchor": "#s3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/step-size-limit",
+   "p": "lab:derivedFrom",
+   "o": "lab:concept/curvature-eigenvalue",
+   "anchor": "#s3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/step-size-limit",
+   "p": "lab:relatedTo",
+   "o": "lab:concept/learning-rate",
+   "anchor": "#s3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/ill-conditioning",
+   "p": "lab:derivedFrom",
+   "o": "lab:concept/curvature-eigenvalue",
+   "anchor": "#s3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/hyperbolic-paraboloid",
+   "p": "lab:relatedTo",
+   "o": "lab:concept/saddle-point",
+   "anchor": "#s4",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/doubly-ruled-surface",
+   "p": "lab:partOf",
+   "o": "lab:concept/hyperbolic-paraboloid",
+   "anchor": "#s4",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/saddle-point",
+   "p": "lab:evaluatedBy",
+   "o": "lab:concept/curvature-eigenvalue",
+   "anchor": "#s4",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/chain-rule",
+   "p": "lab:partOf",
+   "o": "lab:method/backpropagation",
+   "anchor": "#s5",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/jacobian",
+   "p": "lab:prerequisiteOf",
+   "o": "lab:concept/chain-rule",
+   "anchor": "#s5",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/backpropagation",
+   "p": "lab:broader",
+   "o": "lab:topic/backpropagation",
+   "anchor": "#s5",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/gradient",
+   "p": "lab:broader",
+   "o": "lab:topic/calculus-optimization-math",
+   "anchor": "#sum",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/hessian",
+   "p": "lab:broader",
+   "o": "lab:topic/calculus-optimization-math",
+   "anchor": "#sum",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/laplacian",
+   "p": "lab:broader",
+   "o": "lab:topic/calculus-optimization-math",
+   "anchor": "#sum",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/jacobian",
+   "p": "lab:broader",
+   "o": "lab:topic/calculus-optimization-math",
+   "anchor": "#sum",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/curvature-eigenvalue",
+   "p": "lab:broader",
+   "o": "lab:topic/calculus-optimization-math",
+   "anchor": "#sum",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:analogy/hill-slice",
+   "p": "lab:analogyOf",
+   "o": "lab:concept/loss-slice",
+   "anchor": "#s1",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:analogy/flagpole-shadow",
+   "p": "lab:analogyOf",
+   "o": "lab:concept/surface-normal",
+   "anchor": "#s2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:analogy/elongated-bowl",
+   "p": "lab:analogyOf",
+   "o": "lab:concept/ill-conditioning",
+   "anchor": "#s3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:analogy/stacked-crisp",
+   "p": "lab:analogyOf",
+   "o": "lab:concept/hyperbolic-paraboloid",
+   "anchor": "#s4",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:analogy/rubber-sheet",
+   "p": "lab:analogyOf",
+   "o": "lab:concept/jacobian",
+   "anchor": "#s5",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/loss-landscape",
+   "p": "lab:demonstratedBy",
+   "o": "lab:sim/p1-bowl-map",
+   "anchor": "#map",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/loss-slice",
+   "p": "lab:demonstratedBy",
+   "o": "lab:sim/p1-slice-walk",
+   "anchor": "#s1",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/surface-normal",
+   "p": "lab:demonstratedBy",
+   "o": "lab:sim/p1-flagpole",
+   "anchor": "#s2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/hessian",
+   "p": "lab:demonstratedBy",
+   "o": "lab:sim/p1-curvature",
+   "anchor": "#s3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/hyperbolic-paraboloid",
+   "p": "lab:demonstratedBy",
+   "o": "lab:sim/p1-saddle",
+   "anchor": "#s4",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/jacobian",
+   "p": "lab:demonstratedBy",
+   "o": "lab:sim/p1-rubber",
+   "anchor": "#s5",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/single-neuron-regression",
+   "p": "lab:demonstratedBy",
+   "o": "lab:sim/p1-bowl-map",
+   "anchor": "#map",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/curvature-check-escape",
+   "p": "lab:contrastsWith",
+   "o": "lab:method/gradient-only-stop",
+   "anchor": "#duel",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/curvature-check-escape",
+   "p": "lab:evaluatedBy",
+   "o": "lab:metric/final-loss",
+   "anchor": "#duel",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/gradient-only-stop",
+   "p": "lab:evaluatedBy",
+   "o": "lab:metric/final-loss",
+   "anchor": "#duel",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/curvature-check-escape",
+   "p": "lab:relatedTo",
+   "o": "lab:concept/saddle-point",
+   "anchor": "#duel",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/curvature-check-escape",
+   "p": "lab:demonstratedBy",
+   "o": "lab:sim/p1-duel",
+   "anchor": "#duel",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/loss-landscape",
+   "p": "lab:raises",
+   "o": "lab:question/p1-blindfold",
+   "anchor": "#top",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/saddle-point",
+   "p": "lab:raises",
+   "o": "lab:question/p1-zero-gradient",
+   "anchor": "#duel",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/normal-is-neg-gradient-lift",
+   "p": "lab:supports",
+   "o": "lab:concept/surface-normal",
+   "anchor": "#s2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/normal-is-neg-gradient-lift",
+   "p": "lab:assertedIn",
+   "o": "lab:work/matheorems_graph",
+   "anchor": "#s2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/curl-grad-zero",
+   "p": "lab:supports",
+   "o": "lab:concept/curl-free-gradient",
+   "anchor": "#s2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/curl-grad-zero",
+   "p": "lab:assertedIn",
+   "o": "lab:work/matharium_vecops",
+   "anchor": "#s2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/laplacian-examples",
+   "p": "lab:supports",
+   "o": "lab:concept/laplacian",
+   "anchor": "#s3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/laplacian-examples",
+   "p": "lab:assertedIn",
+   "o": "lab:work/matharium_vecops",
+   "anchor": "#s3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/crisp-doubly-ruled",
+   "p": "lab:supports",
+   "o": "lab:concept/doubly-ruled-surface",
+   "anchor": "#s4",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/crisp-doubly-ruled",
+   "p": "lab:assertedIn",
+   "o": "lab:work/matharium_crisp",
+   "anchor": "#s4",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/hessian-classifies",
+   "p": "lab:supports",
+   "o": "lab:concept/hessian",
+   "anchor": "#s3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/hessian-classifies",
+   "p": "lab:assertedIn",
+   "o": "lab:work/matharium_gjh",
+   "anchor": "#s3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/saddles-proliferate-high-dim",
+   "p": "lab:supports",
+   "o": "lab:concept/saddle-point",
+   "anchor": "#s4",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/saddles-proliferate-high-dim",
+   "p": "lab:assertedIn",
+   "o": "lab:work/dauphin2014identifying",
+   "anchor": "#s4",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/lr-limit-quadratic",
+   "p": "lab:supports",
+   "o": "lab:concept/step-size-limit",
+   "anchor": "#s3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/lr-limit-quadratic",
+   "p": "lab:assertedIn",
+   "o": "lab:work/goodfellow2016deep",
+   "anchor": "#s3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/backprop-1986",
+   "p": "lab:supports",
+   "o": "lab:method/backpropagation",
+   "anchor": "#s5",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/backprop-1986",
+   "p": "lab:assertedIn",
+   "o": "lab:work/rumelhart1986learning",
+   "anchor": "#s5",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/one-neuron-bowl",
+   "p": "lab:supports",
+   "o": "lab:method/single-neuron-regression",
+   "anchor": "#map",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/one-neuron-bowl",
+   "p": "lab:assertedIn",
+   "o": "lab:work/mlfs39",
+   "anchor": "#map",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:work/mlfs43",
+   "p": "lab:relatedTo",
+   "o": "lab:concept/learning-rate",
+   "anchor": "#s1",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:quiz/p1-s1-1",
+   "p": "lab:assesses",
+   "o": "lab:method/gradient-descent",
+   "anchor": "#s1",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:quiz/p1-s1-2",
+   "p": "lab:assesses",
+   "o": "lab:concept/step-size-limit",
+   "anchor": "#s1",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:quiz/p1-s2-1",
+   "p": "lab:assesses",
+   "o": "lab:concept/surface-normal",
+   "anchor": "#s2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:quiz/p1-s2-2",
+   "p": "lab:assesses",
+   "o": "lab:concept/gradient",
+   "anchor": "#s2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:quiz/p1-s3-1",
+   "p": "lab:assesses",
+   "o": "lab:concept/step-size-limit",
+   "anchor": "#s3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:quiz/p1-s3-2",
+   "p": "lab:assesses",
+   "o": "lab:concept/saddle-point",
+   "anchor": "#s3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:quiz/p1-s4-1",
+   "p": "lab:assesses",
+   "o": "lab:concept/laplacian",
+   "anchor": "#s4",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:quiz/p1-s4-2",
+   "p": "lab:assesses",
+   "o": "lab:concept/doubly-ruled-surface",
+   "anchor": "#s4",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:quiz/p1-s5-1",
+   "p": "lab:assesses",
+   "o": "lab:concept/jacobian",
+   "anchor": "#s5",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:quiz/p1-s5-2",
+   "p": "lab:assesses",
+   "o": "lab:concept/chain-rule",
+   "anchor": "#s5",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:quiz/p1-duel-1",
+   "p": "lab:assesses",
+   "o": "lab:concept/saddle-point",
+   "anchor": "#duel",
+   "confidence": "high"
+  }
+ ]
+}

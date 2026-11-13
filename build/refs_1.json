@@ -1,0 +1,401 @@
+[
+ {
+  "id": "matharium_crisp",
+  "type": "graphic",
+  "title": "The geometry of a curved crisp",
+  "author": [
+   {
+    "literal": "matharium"
+   }
+  ],
+  "accessed": {
+   "date-parts": [
+    [
+     2026,
+     11,
+     14
+    ]
+   ]
+  },
+  "lab": {
+   "work": "lab:work/matharium_crisp",
+   "role": "primary",
+   "supports": [
+    "lab:concept/doubly-ruled-surface",
+    "lab:concept/hyperbolic-paraboloid"
+   ],
+   "locs": [],
+   "verified": {
+    "title": true,
+    "author": true,
+    "year": false,
+    "url": false
+   },
+   "checkedBy": "사용자 제공 자료(이미지·영상)에서 옮김. 원 게시물 주소·게시일은 받지 못함",
+   "note": "그림은 페이지에 넣지 않고 새로 그림"
+  }
+ },
+ {
+  "id": "matharium_vecops",
+  "type": "graphic",
+  "title": "The Vector Differential Operators",
+  "author": [
+   {
+    "literal": "matharium"
+   }
+  ],
+  "accessed": {
+   "date-parts": [
+    [
+     2026,
+     11,
+     14
+    ]
+   ]
+  },
+  "lab": {
+   "work": "lab:work/matharium_vecops",
+   "role": "primary",
+   "supports": [
+    "lab:concept/curl-free-gradient",
+    "lab:concept/laplacian"
+   ],
+   "locs": [],
+   "verified": {
+    "title": true,
+    "author": true,
+    "year": false,
+    "url": false
+   },
+   "checkedBy": "사용자 제공 자료(이미지·영상)에서 옮김. 원 게시물 주소·게시일은 받지 못함"
+  }
+ },
+ {
+  "id": "matharium_gjh",
+  "type": "graphic",
+  "title": "Gradient, Jacobian and Hessian",
+  "author": [
+   {
+    "literal": "matharium"
+   }
+  ],
+  "accessed": {
+   "date-parts": [
+    [
+     2026,
+     11,
+     14
+    ]
+   ]
+  },
+  "lab": {
+   "work": "lab:work/matharium_gjh",
+   "role": "primary",
+   "supports": [
+    "lab:concept/hessian",
+    "lab:concept/jacobian",
+    "lab:concept/gradient"
+   ],
+   "locs": [],
+   "verified": {
+    "title": true,
+    "author": true,
+    "year": false,
+    "url": false
+   },
+   "checkedBy": "사용자 제공 자료(이미지·영상)에서 옮김. 원 게시물 주소·게시일은 받지 못함"
+  }
+ },
+ {
+  "id": "matheorems_graph",
+  "type": "motion_picture",
+  "title": "그래프 곡면 z = f(u, v)의 야코비안과 법선 (z = sin u cos v)",
+  "author": [
+   {
+    "literal": "matheorems"
+   }
+  ],
+  "accessed": {
+   "date-parts": [
+    [
+     2026,
+     11,
+     14
+    ]
+   ]
+  },
+  "lab": {
+   "work": "lab:work/matheorems_graph",
+   "role": "primary",
+   "supports": [
+    "lab:concept/surface-normal",
+    "lab:concept/tangent-vector"
+   ],
+   "locs": [],
+   "verified": {
+    "title": false,
+    "author": true,
+    "year": false,
+    "url": false
+   },
+   "checkedBy": "사용자 제공 자료(이미지·영상)에서 옮김. 원 게시물 주소·게시일은 받지 못함",
+   "note": "제목은 영상 내용을 보고 붙인 설명 제목"
+  }
+ },
+ {
+  "id": "mlfs39",
+  "type": "motion_picture",
+  "title": "Machine Learning from Scratch, part 39: mini batch gradient descent",
+  "author": [
+   {
+    "literal": "Machine Learning from Scratch"
+   }
+  ],
+  "medium": "Facebook 릴스",
+  "accessed": {
+   "date-parts": [
+    [
+     2026,
+     11,
+     14
+    ]
+   ]
+  },
+  "lab": {
+   "work": "lab:work/mlfs39",
+   "role": "data",
+   "supports": [
+    "lab:method/single-neuron-regression"
+   ],
+   "locs": [],
+   "verified": {
+    "title": true,
+    "author": false,
+    "year": false,
+    "url": false
+   },
+   "checkedBy": "사용자 제공 자료(이미지·영상)에서 옮김. 원 게시물 주소·게시일은 받지 못함. 영상 속 코드를 옮겨 실행해 설명글 숫자 재현 확인(2026-11-14)"
+  }
+ },
+ {
+  "id": "mlfs43",
+  "type": "motion_picture",
+  "title": "Machine Learning from Scratch, part 43: hyperparameters",
+  "author": [
+   {
+    "literal": "Machine Learning from Scratch"
+   }
+  ],
+  "medium": "Facebook 릴스",
+  "accessed": {
+   "date-parts": [
+    [
+     2026,
+     11,
+     14
+    ]
+   ]
+  },
+  "lab": {
+   "work": "lab:work/mlfs43",
+   "role": "data",
+   "supports": [
+    "lab:concept/learning-rate"
+   ],
+   "locs": [],
+   "verified": {
+    "title": true,
+    "author": false,
+    "year": false,
+    "url": false
+   },
+   "checkedBy": "사용자 제공 자료(이미지·영상)에서 옮김. 원 게시물 주소·게시일은 받지 못함. 영상 속 코드를 옮겨 실행해 설명글 숫자 재현 확인(2026-11-14)"
+  }
+ },
+ {
+  "id": "dauphin2014identifying",
+  "type": "paper-conference",
+  "title": "Identifying and attacking the saddle point problem in high-dimensional non-convex optimization",
+  "author": [
+   {
+    "family": "Dauphin",
+    "given": "Yann N."
+   },
+   {
+    "family": "Pascanu",
+    "given": "Razvan"
+   },
+   {
+    "family": "Gulcehre",
+    "given": "Caglar"
+   },
+   {
+    "family": "Cho",
+    "given": "Kyunghyun"
+   },
+   {
+    "family": "Ganguli",
+    "given": "Surya"
+   },
+   {
+    "family": "Bengio",
+    "given": "Yoshua"
+   }
+  ],
+  "issued": {
+   "date-parts": [
+    [
+     2014
+    ]
+   ]
+  },
+  "container-title": "Advances in Neural Information Processing Systems 27",
+  "page": "2933-2941",
+  "URL": "https://arxiv.org/abs/1406.2572",
+  "accessed": {
+   "date-parts": [
+    [
+     2026,
+     11,
+     14
+    ]
+   ]
+  },
+  "lab": {
+   "work": "lab:work/dauphin2014identifying",
+   "role": "background",
+   "supports": [
+    "lab:concept/saddle-point"
+   ],
+   "locs": [
+    {
+     "claim": "lab:claim/saddles-proliferate-high-dim",
+     "loc": "초록, 2장"
+    }
+   ],
+   "verified": {
+    "title": true,
+    "author": true,
+    "year": true,
+    "container": true,
+    "pages": true,
+    "doi": false
+   },
+   "checkedBy": "웹 검색 2026-11-14 (NeurIPS 논문 페이지, arXiv 1406.2572, mlanthology)"
+  }
+ },
+ {
+  "id": "goodfellow2016deep",
+  "type": "book",
+  "title": "Deep Learning",
+  "author": [
+   {
+    "family": "Goodfellow",
+    "given": "Ian"
+   },
+   {
+    "family": "Bengio",
+    "given": "Yoshua"
+   },
+   {
+    "family": "Courville",
+    "given": "Aaron"
+   }
+  ],
+  "issued": {
+   "date-parts": [
+    [
+     2016
+    ]
+   ]
+  },
+  "publisher": "MIT Press",
+  "URL": "https://www.deeplearningbook.org/",
+  "accessed": {
+   "date-parts": [
+    [
+     2026,
+     11,
+     14
+    ]
+   ]
+  },
+  "lab": {
+   "work": "lab:work/goodfellow2016deep",
+   "role": "background",
+   "supports": [
+    "lab:concept/step-size-limit"
+   ],
+   "locs": [
+    {
+     "claim": "lab:claim/lr-limit-quadratic",
+     "loc": "4장 수치 계산 (4.3)"
+    }
+   ],
+   "verified": {
+    "title": true,
+    "author": true,
+    "year": true,
+    "publisher": true,
+    "pages": false
+   },
+   "checkedBy": "제작자 지식 — 장·절 위치는 원문 대조 안 함"
+  }
+ },
+ {
+  "id": "rumelhart1986learning",
+  "type": "article-journal",
+  "title": "Learning representations by back-propagating errors",
+  "author": [
+   {
+    "family": "Rumelhart",
+    "given": "David E."
+   },
+   {
+    "family": "Hinton",
+    "given": "Geoffrey E."
+   },
+   {
+    "family": "Williams",
+    "given": "Ronald J."
+   }
+  ],
+  "issued": {
+   "date-parts": [
+    [
+     1986
+    ]
+   ]
+  },
+  "container-title": "Nature",
+  "volume": "323",
+  "page": "533-536",
+  "DOI": "10.1038/323533a0",
+  "accessed": {
+   "date-parts": [
+    [
+     2026,
+     11,
+     14
+    ]
+   ]
+  },
+  "lab": {
+   "work": "lab:work/rumelhart1986learning",
+   "role": "background",
+   "supports": [
+    "lab:method/backpropagation"
+   ],
+   "locs": [],
+   "verified": {
+    "title": true,
+    "author": true,
+    "year": true,
+    "container": true,
+    "pages": true,
+    "doi": true
+   },
+   "checkedBy": "웹 검색 2026-11-14 (nature.com 인용 정보, ADS)"
+  }
+ }
+]

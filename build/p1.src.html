@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>좌표축 위의 그릇 ① 수학 편 — 기울기·굽음·휨으로 읽는 3D 오차 지도</title>
+<meta name="description" content="오차를 땅의 높이로, 가중치를 좌표축으로 놓고 그래디언트·법선·헤시안·안장점·야코비안을 3D 지도 위에서 돌려 보는 연구실 해설.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<!--@@CSS@@-->
+</head>
+<body>
+<nav class="top" aria-label="섹션 바로가기"><div class="row">
+  <a class="logo" href="index.html">좌표축 위의 <i>그릇</i> ①</a>
+  <div class="links">
+    <a href="#map">지도</a><a href="#s1">① 자르기</a><a href="#s2">② 깃대</a><a href="#s3">③ 굽음</a><a href="#s4">④ 고개</a><a href="#s5">⑤ 휨</a><a href="#duel">대결</a><a href="#sum">정리</a><a href="#kg">색인</a><a href="#export">꾸러미</a><a href="2_experiment_lab.html">2편 →</a>
+  </div>
+</div></nav>
+
+<!-- lab-cover -->
+<div class="cover" data-img="cover_01"><div class="frame">
+  <canvas id="coverCv" aria-hidden="true"></canvas>
+  <span class="cap">연구실 식구가 3D 오차 지도 위에 섰다</span><span class="badge">대체 표지 · 그림 준비 중</span>
+  <div class="cast4"><img data-mood="fly_point" alt="" aria-hidden="true"><img data-mood="doc_front" alt="" aria-hidden="true"><img data-mood="asst_smile" alt="" aria-hidden="true"><img data-mood="robo_coin" alt="" aria-hidden="true"></div>
+</div></div>
+<!-- /lab-cover -->
+
+<header class="hero" id="top"><div class="wrap">
+  <div class="eyebrow">3D 지도로 본 모델 최적화 · 1편 수학 편 · 교과서 모드</div>
+  <h1>좌표축 위의 그릇 — 기울기·굽음·휨으로 읽는 오차 지도</h1>
+  <p class="question">모델은 눈을 가린 채 발밑의 기울기와 굽음만으로 어떻게 골짜기 바닥을 찾을까?</p>
+  <p class="lead">신경망이 배우는 일은 <b>가중치</b>라는 숫자들을 고치는 일입니다. 가중치 두 개를 가로·세로 좌표축에 놓고, 그 자리에서 잰 <b>오차</b>를 높이로 세우면 땅 모양의 지도가 생깁니다. 이 페이지는 그 지도 위에서 수학 다섯 가지 — 자르기(단면), 기울기(그래디언트)와 깃대(법선), 굽음(헤시안), 고개(안장점), 휨(야코비안) — 를 하나씩 돌려 봅니다.</p>
+  <p class="byline">글 · 안상선 ((주)M-Robo 대표) · <a href="https://adminmrobo.github.io/who_am_i/who_am_i.html">저자 소개</a> · 2026-11-14 · v1.0</p>
+  <div class="three"><b>세 줄로 먼저</b><ol>
+    <li>가중치가 좌표축, 오차가 높이다. 학습은 이 지도에서 낮은 곳으로 걸어가는 일이다.</li>
+    <li>한 걸음의 방향은 <b>기울기</b>(1차 미분)가 정하고, 얼마나 크게 디뎌도 되는지는 <b>굽음</b>(2차 미분)이 정한다.</li>
+    <li>기울기가 0이어도 바닥이 아닐 수 있다(안장점). 층을 지날 때 지도가 휘는 정도(야코비안)를 곱해 가는 것이 역전파다.</li></ol></div>
+  <div class="kpis" aria-label="숫자 요약">
+    <div class="kpi g"><b>2개</b><span>지도의 좌표축 (w, b)<sup>①</sup></span></div>
+    <div class="kpi m"><b id="k-bot">—</b><span>그릇 바닥의 오차<sup>①</sup></span></div>
+    <div class="kpi a"><b id="k-eig">—</b><span>굽음 λ (헤시안 고유값)<sup>①</sup></span></div>
+    <div class="kpi r"><b id="k-lim">—</b><span>보폭 한계 2/λ<sub>max</sub><sup>①</sup></span></div>
+  </div>
+  <p class="muted" style="font-size:13px">① 이 페이지가 직접 계산한 설명용 모형의 값입니다(데이터: 직선 y = 2x + 1 주변의 점 1,000개, 시드 39). 실제 측정 데이터가 아닙니다.</p>
+  <div data-dlg="hero"></div>
+</div></header>
+
+<main>
+<section class="sec" id="cast" aria-labelledby="h-cast"><div class="wrap">
+  <h2 id="h-cast">등장인물과 이 페이지 사용법</h2>
+  <div class="cast" id="castgrid"></div>
+  <div class="secret"><button class="bt" id="secretbtn" type="button" aria-expanded="false">방청석 보기 (미공개 식구)</button><div class="row" id="secretrow" hidden></div></div>
+  <div class="steps four" style="margin-top:16px">
+    <div class="step"><b>끌어서 돌리기</b>3D 지도는 마우스나 손가락으로 끌면 돌아갑니다.</div>
+    <div class="step"><b>밑줄 누르기</b>노란 점선 밑줄을 누르면 용어 뜻이 나옵니다.</div>
+    <div class="step"><b>도장 확인</b>노란 도장이 찍힌 그림은 설명용 모형입니다.</div>
+    <div class="step"><b>다음 편</b>배치·학습률·과적합 실험은 <a href="2_experiment_lab.html">2편 실험실 편</a>에서 합니다.</div>
+  </div>
+</div></section>
+
+<section class="sec" id="why" aria-labelledby="h-why"><div class="wrap">
+  <h2 id="h-why">왜 지도로 보나</h2>
+  <div class="steps">
+    <div class="step"><b>1. 숫자표는 모양을 숨긴다</b>오차를 숫자로만 보면 어느 쪽이 내리막인지, 얼마나 가파른지 보이지 않습니다. 높이로 세우면 한눈에 보입니다.</div>
+    <div class="step"><b>2. 수학 이름이 지도 말로 바뀐다</b>그래디언트는 경사, 헤시안은 굽음, 안장점은 고개. 낯선 기호가 등산 지도의 낱말이 됩니다.</div>
+    <div class="step"><b>3. 학습률이 왜 그 값인지 보인다</b>"학습률 0.1"이 감이 아니라 땅의 굽음에서 나온 한계와 견줄 수 있는 숫자가 됩니다.</div>
+  </div>
+</div></section>
+
+<section class="sec" id="map" aria-labelledby="h-map"><div class="wrap">
+  <h2 id="h-map">큰 그림 — 좌표축 두 개, 높이 하나</h2>
+  <p class="lead">재료는 뉴런 하나입니다. 입력 x에 가중치 <b>w</b>를 곱하고 편향 <b>b</b>를 더해 예측합니다(예측 = w·x + b). 점 1,000개에 대해 예측과 정답의 차이를 제곱해 평균 낸 값이 <b>오차</b>입니다. 가중치가 두 개뿐이라 오차 지형 <em>전체</em>가 3D에 다 들어갑니다. 아래 그릇이 그 지형입니다.</p>
+  <div class="steps four">
+    <div class="step"><b>가로축 w · 세로축 b</b>지도의 한 점 = 가중치 한 벌. 좌표축 하나가 가중치 하나입니다.</div>
+    <div class="step"><b>높이 = 오차</b>그 가중치로 예측했을 때의 평균제곱오차입니다.</div>
+    <div class="step"><b>경사 = 기울기</b>발밑이 어느 쪽으로 얼마나 기울었나. 1차 미분입니다.</div>
+    <div class="step"><b>굽음 = 헤시안</b>경사가 얼마나 빨리 바뀌나. 2차 미분입니다.</div>
+  </div>
+  <div class="panel">
+    <div class="ptitle">오차 지도 — 뉴런 하나(w, b)의 그릇</div>
+    <div class="cwrap t3"><canvas id="cvMap" aria-label="w와 b를 좌표축으로, 오차를 높이로 그린 그릇 모양의 3D 오차 지도"></canvas><span class="hint">끌어서 돌리기</span></div>
+    <div class="ctrl"><div class="group"><span class="glabel">보는 곳</span><span id="g-view"></span></div>
+      <div class="group"><button class="bt" id="b-spin" type="button" aria-pressed="false">천천히 돌리기</button></div></div>
+    <div class="minis"><div class="mini a"><span>출발점 (w, b) = (−1, −1)</span><b id="m-start">—</b></div><div class="mini g"><span>바닥 위치 (w, b)</span><b id="m-botw">—</b></div><div class="mini g"><span>바닥 오차</span><b id="m-botL">—</b></div><div class="mini m"><span>데이터를 만든 직선</span><b>w 2 · b 1</b></div></div>
+    <div class="insight" id="i-map" aria-live="polite"></div>
+  </div>
+  <div data-dlg="map"></div>
+</div></section>
+
+<!-- ① 자르기 -->
+<section class="sec" id="s1" aria-labelledby="h-s1"><div class="wrap">
+  <h2 id="h-s1"><span class="hex">1</span>칼로 자르기 — 단면과 한 걸음</h2>
+  <div class="tags"><span class="tag nn">모델: 1차원 경사하강</span><span class="tag fly">일상: 산을 칼로 자른 단면</span></div>
+  <div class="pair">
+    <div><div class="tl">일상으로 치면</div>산을 남북으로 똑바로 자르면 단면은 오르락내리락하는 선 하나입니다. 그 선 위에서는 "앞으로 갈까, 뒤로 갈까"만 정하면 됩니다.</div>
+    <div><div class="tr">신경망에서는</div>b를 한 값에 묶어 두면 오차는 w 하나의 함수가 됩니다. 그 곡선의 기울기만 보고 w를 한 걸음 옮기는 것이 가장 작은 경사하강입니다.</div>
+  </div>
+  <div class="panel">
+    <div class="ptitle">단면 실험 — 한 축을 묶고 다른 축으로 걷기</div>
+    <div class="twin"><div class="cwrap tall"><canvas id="cvS1a" aria-label="그릇을 한 방향으로 자른 단면을 3D로 표시"></canvas><span class="hint">끌어서 돌리기</span></div><div class="cwrap tall"><canvas id="cvS1b" aria-label="단면 곡선과 공의 위치, 접선"></canvas></div></div>
+    <div class="ctrl">
+      <div class="group"><span class="glabel">자르는 방향</span><span id="g-cut"></span></div>
+      <div class="group"><label class="glabel" for="r-fix" id="l-fix">묶어 둔 b</label><input type="range" id="r-fix" min="-2" max="4" step="0.1" value="1"><span class="val" id="v-fix">1.0</span></div>
+      <div class="group"><label class="glabel" for="r-lr1">학습률</label><input type="range" id="r-lr1" min="0.01" max="0.4" step="0.01" value="0.1"><span class="val" id="v-lr1">0.10</span></div>
+      <div class="group"><button class="bt primary" id="b-step1" type="button">한 걸음</button><button class="bt" id="b-run1" type="button">열 걸음</button><button class="bt" id="b-reset1" type="button">처음으로</button></div>
+    </div>
+    <div class="eq" id="eq1"></div>
+    <div class="minis"><div class="mini a"><span>지금 위치</span><b id="m1-pos">—</b></div><div class="mini m"><span>단면의 기울기</span><b id="m1-g">—</b></div><div class="mini g"><span>지금 오차</span><b id="m1-L">—</b></div><div class="mini r"><span>이 단면의 보폭 한계</span><b id="m1-lim">—</b></div></div>
+    <div class="insight" id="i-s1" aria-live="polite"></div>
+  </div>
+  <div class="explain"><h4>풀이</h4><ol>
+    <li>단면 곡선 위에서 <b>기울기</b>는 "오른쪽으로 한 칸 갔을 때 오차가 얼마나 늘어나나"입니다. 양수면 오른쪽이 오르막이라 왼쪽으로 갑니다.</li>
+    <li>그래서 새 위치 = 옛 위치 − 학습률 × 기울기. 빼기가 "내리막 쪽으로"라는 뜻입니다.</li>
+    <li>w 방향 단면과 b 방향 단면은 굽은 정도가 다릅니다. 그래서 보폭 한계(위 표의 빨간 칸)도 다릅니다. 이 차이가 ③에서 헤시안으로 이어집니다.</li></ol>
+    <div class="lim">이 칸의 한계: 한 번에 축 하나만 움직입니다. 두 축을 함께 움직이려면 "어느 방향이 가장 가파른가"를 알아야 합니다 → ②</div></div>
+  <details class="fold"><summary>수식으로 보기 (전문가용)</summary><p>오차 <i>L</i>(w, b) = (1/n) Σ (w·xᵢ + b − yᵢ)². b를 b₀에 묶으면 L(w) = A·w² + B·w + C 꼴의 포물선이고, A = mean(x²). 한 걸음 w ← w − η·L′(w)는 바닥과의 거리를 (1 − 2Aη)배로 줄입니다. |1 − 2Aη| &lt; 1, 곧 η &lt; 1/A = 2/L″이면 줄어듭니다.</p></details>
+  <div data-dlg="s1"></div>
+  <div class="quiz" data-quiz="s1"></div>
+</div></section>
+
+<!-- ② 깃대와 그림자 -->
+<section class="sec" id="s2" aria-labelledby="h-s2"><div class="wrap">
+  <h2 id="h-s2"><span class="hex">2</span>깃대와 그림자 — 그래디언트와 법선</h2>
+  <div class="tags"><span class="tag nn">모델: 그래디언트 ∇f</span><span class="tag fly">일상: 비탈에 꽂은 깃대</span></div>
+  <div class="pair">
+    <div><div class="tl">일상으로 치면</div>비탈에 깃대를 땅과 직각으로 꽂으면 깃대는 내리막 쪽으로 기웁니다. 해가 머리 위에 있을 때 깃대 그림자가 가리키는 쪽이 가장 가파른 내리막입니다.</div>
+    <div><div class="tr">신경망에서는</div>곡면 위 한 점의 법선은 n = (−∂f/∂w₁, −∂f/∂w₂, 1)입니다. 바닥에 비친 부분 (−∂f/∂w₁, −∂f/∂w₂)가 바로 −∇f, 경사하강이 가는 방향입니다.</div>
+  </div>
+  <div class="panel">
+    <div class="ptitle">깃대 실험 — 한 점의 접선 두 개, 법선, 바닥 그림자</div>
+    <div class="twin"><div class="cwrap tall"><canvas id="cvS2a" aria-label="곡면 위 한 점의 접선 벡터 두 개, 법선 벡터, 바닥의 그림자 화살표"></canvas><span class="hint">끌어서 돌리기 · 눌러서 점 옮기기</span></div><div class="cwrap tall"><canvas id="cvS2b" aria-label="위에서 본 등고선 지도와 기울기 화살표 밭"></canvas></div></div>
+    <div class="ctrl">
+      <div class="group"><span class="glabel">땅</span><span id="g-surf"></span></div>
+      <div class="group"><label class="glabel" for="r-u">u (가로)</label><input type="range" id="r-u" min="-3" max="3" step="0.05" value="0.9"><span class="val" id="v-u">0.90</span></div>
+      <div class="group"><label class="glabel" for="r-v">v (세로)</label><input type="range" id="r-v" min="-3" max="3" step="0.05" value="0.6"><span class="val" id="v-v">0.60</span></div>
+    </div>
+    <div class="eq" id="eq2"></div>
+    <div class="minis"><div class="mini r"><span>∂f/∂u (빨강 접선의 경사)</span><b id="m2-fu">—</b></div><div class="mini m"><span>∂f/∂v (청록 접선의 경사)</span><b id="m2-fv">—</b></div><div class="mini g"><span>|∇f| 가장 가파른 경사</span><b id="m2-gn">—</b></div><div class="mini a"><span>법선 n</span><b id="m2-n">—</b></div></div>
+    <div class="insight" id="i-s2" aria-live="polite"></div>
+  </div>
+  <div class="explain"><h4>풀이</h4><ol>
+    <li>곡면을 그래프 x = u, y = v, z = f(u, v)로 쓰면, u 격자선 방향의 접선은 t<sub>u</sub> = (1, 0, ∂f/∂u), v 격자선 방향은 t<sub>v</sub> = (0, 1, ∂f/∂v)입니다.</li>
+    <li>두 접선의 외적이 법선입니다: t<sub>u</sub> × t<sub>v</sub> = (−∂f/∂u, −∂f/∂v, 1). 직접 곱해 보면 맞습니다.</li>
+    <li>법선의 앞 두 칸은 그래디언트 ∇f = (∂f/∂u, ∂f/∂v)에 마이너스를 붙인 것입니다. 그래서 <b>깃대의 그림자 = 내리막 방향 = −∇f</b>.</li>
+    <li>오른쪽 그림처럼 기울기 화살표는 언제나 <b>등고선과 직각</b>입니다. 그리고 그래디언트로 만든 화살표 밭은 회전(curl)이 0이라 소용돌이가 없습니다. 내리막을 따라가는 공은 제자리를 빙빙 돌지 않습니다.</li></ol>
+    <div class="lim">이 칸의 한계: 기울기는 "지금 여기서" 어느 쪽이 내리막인지만 알려 줍니다. 그 방향으로 얼마나 멀리 가도 되는지는 땅이 얼마나 굽었는지 알아야 합니다 → ③</div></div>
+  <div class="bridge field"><b>그림 그릴 때 주의</b> 기울기 화살표를 곡면 위에 세워 그린 그림이 많습니다. 그래디언트는 입력 평면(바닥)의 벡터라서, 정확히 그리려면 화살표는 바닥(등고선 지도)에 두고 곡면 위에는 그 방향의 경사로만 표시합니다. 이 페이지의 3D는 바닥 그림자를 초록 화살표로 그렸습니다.<div class="lim">3D 화면의 화살표 길이는 축 눈금에 맞춰 줄인 것입니다. 방향은 가로·세로 눈금이 같을 때만 그대로 맞으므로, 이 실험의 두 땅은 가로·세로 범위를 같게 잡았습니다.</div></div>
+  <details class="fold"><summary>수식으로 보기 — 그래디언트의 회전은 0</summary><p>∇f = (f<sub>u</sub>, f<sub>v</sub>, 0)이면 회전의 z 성분은 ∂f<sub>v</sub>/∂u − ∂f<sub>u</sub>/∂v = f<sub>vu</sub> − f<sub>uv</sub> = 0입니다(2차 편미분이 연속이면 순서를 바꿔도 같다). 같은 이유로 회전의 발산도 늘 0입니다. 그래디언트의 발산 ∇·∇f는 라플라시안 ∇²f이고, ③에서 굽음을 재는 데 씁니다.</p></details>
+  <div data-dlg="s2"></div>
+  <div class="quiz" data-quiz="s2"></div>
+</div></section>
+
+<!-- ③ 굽음 -->
+<section class="sec" id="s3" aria-labelledby="h-s3"><div class="wrap">
+  <h2 id="h-s3"><span class="hex">3</span>땅의 굽음 — 헤시안, 고유값, 보폭 한계</h2>
+  <div class="tags"><span class="tag nn">모델: 헤시안 H</span><span class="tag fly">일상: 그릇의 길쭉함</span></div>
+  <div class="pair">
+    <div><div class="tl">일상으로 치면</div>둥근 그릇은 어느 쪽에서 굴려도 바닥으로 곧장 갑니다. 길쭉한 그릇에서는 가파른 옆벽을 오가며 지그재그로 내려갑니다. 벽이 가파를수록 발을 작게 디뎌야 넘어가지 않습니다.</div>
+    <div><div class="tr">신경망에서는</div>2차 편미분을 모은 표가 헤시안입니다. 고유값 λ는 "가장 많이 굽은 방향과 가장 덜 굽은 방향의 굽음"입니다. 보폭(학습률)이 2/λ<sub>max</sub>를 넘으면 공은 바닥을 지나쳐 점점 멀어집니다.</div>
+  </div>
+  <div class="panel">
+    <div class="ptitle">굽음 실험 — 고유값 두 개로 땅 만들기</div>
+    <div class="twin"><div class="cwrap tall"><canvas id="cvS3a" aria-label="고유값 두 개로 만든 2차 곡면과 경사하강 경로"></canvas><span class="hint">끌어서 돌리기</span></div><div class="cwrap tall"><canvas id="cvS3b" aria-label="걸음마다의 높이 그래프"></canvas></div></div>
+    <div class="ctrl">
+      <div class="group"><label class="glabel" for="r-l1">λ₁</label><input type="range" id="r-l1" min="-2" max="6" step="0.1" value="6"><span class="val" id="v-l1">6.0</span></div>
+      <div class="group"><label class="glabel" for="r-l2">λ₂</label><input type="range" id="r-l2" min="-2" max="6" step="0.1" value="2"><span class="val" id="v-l2">2.0</span></div>
+      <div class="group"><label class="glabel" for="r-th">기울인 각</label><input type="range" id="r-th" min="0" max="90" step="1" value="25"><span class="val" id="v-th">25°</span></div>
+      <div class="group"><label class="glabel" for="r-lr3">학습률</label><input type="range" id="r-lr3" min="0.02" max="0.6" step="0.01" value="0.1"><span class="val" id="v-lr3">0.10</span></div>
+      <div class="group"><button class="bt primary" id="b-run3" type="button">공 굴리기</button><button class="bt" id="b-ours" type="button">우리 그릇 값으로</button></div>
+    </div>
+    <div class="eq" id="eq3"></div>
+    <div class="minis"><div class="mini a"><span>헤시안 H</span><b id="m3-H" style="font-size:16px">—</b></div><div class="mini m"><span>라플라시안 λ₁ + λ₂</span><b id="m3-lap">—</b></div><div class="mini r"><span>보폭 한계 2/λ<sub>max</sub></span><b id="m3-lim">—</b></div><div class="mini g"><span>땅의 이름</span><b id="m3-kind">—</b></div></div>
+    <div class="insight" id="i-s3" aria-live="polite"></div>
+  </div>
+  <div class="explain"><h4>풀이</h4><ol>
+    <li>헤시안은 "기울기가 얼마나 빨리 바뀌나"를 방향마다 적은 2×2 표입니다. 표를 돌려 놓고 봐도 변하지 않는 두 숫자가 고유값 λ₁, λ₂입니다.</li>
+    <li>둘 다 양수면 <b>그릇</b>(바닥), 둘 다 음수면 <b>봉우리</b>, 부호가 다르면 <b>안장</b>(고개)입니다. 고유값의 합이 라플라시안입니다. 그릇 x² + y²는 4, 안장 x² − y²는 0입니다.</li>
+    <li>이 페이지의 그릇(뉴런 하나)은 2차 함수라 헤시안이 어디서나 같습니다. <span id="t-ours">—</span></li>
+    <li>λ<sub>max</sub>와 λ<sub>min</sub>의 비(길쭉함)가 크면 가파른 방향 때문에 보폭을 작게 잡아야 하고, 그러면 완만한 방향으로는 아주 느리게 갑니다. 공이 곧게 내려가지 않고 휘어 들어가는 이유입니다.</li></ol>
+    <div class="lim">이 칸의 한계: 2차 근사는 그 점 둘레에서만 맞습니다. 실제 신경망의 지형은 곳곳에서 굽음이 달라, 한 곳의 헤시안으로 학습률 하나를 정할 수는 없습니다. 2편에서 학습률을 실험으로 고르는 이유입니다.</div></div>
+  <details class="fold"><summary>수식으로 보기 — 왜 2/λ인가</summary>
+    <p>2차 함수 f(θ) = ½ θᵀHθ에서 경사하강 θ ← θ − η Hθ = (I − ηH)θ. 고유 방향마다 거리가 (1 − ηλᵢ)배가 됩니다. 모든 방향에서 |1 − ηλᵢ| &lt; 1이어야 줄어들므로 0 &lt; η &lt; 2/λ<sub>max</sub>. λᵢ &lt; 0인 방향은 어떤 η에서도 거리가 커집니다(그쪽은 내리막이 계속됨).</p>
+    <p style="margin:0"><math display="block" aria-label="헤시안 행렬은 2차 편미분 네 개를 모은 2행 2열 행렬"><mi>H</mi><mo>=</mo><mrow><mo>[</mo><mtable><mtr><mtd><mfrac><mrow><msup><mo>∂</mo><mn>2</mn></msup><mi>f</mi></mrow><mrow><mo>∂</mo><msubsup><mi>w</mi><mn>1</mn><mn>2</mn></msubsup></mrow></mfrac></mtd><mtd><mfrac><mrow><msup><mo>∂</mo><mn>2</mn></msup><mi>f</mi></mrow><mrow><mo>∂</mo><msub><mi>w</mi><mn>1</mn></msub><mo>∂</mo><msub><mi>w</mi><mn>2</mn></msub></mrow></mfrac></mtd></mtr><mtr><mtd><mfrac><mrow><msup><mo>∂</mo><mn>2</mn></msup><mi>f</mi></mrow><mrow><mo>∂</mo><msub><mi>w</mi><mn>2</mn></msub><mo>∂</mo><msub><mi>w</mi><mn>1</mn></msub></mrow></mfrac></mtd><mtd><mfrac><mrow><msup><mo>∂</mo><mn>2</mn></msup><mi>f</mi></mrow><mrow><mo>∂</mo><msubsup><mi>w</mi><mn>2</mn><mn>2</mn></msubsup></mrow></mfrac></mtd></mtr></mtable><mo>]</mo></mrow></math></p></details>
+  <div class="bridge gen"><b>생성 AI로 치면</b> 큰 언어 모델을 학습할 때 처음 몇천 걸음은 학습률을 0에서 천천히 올리는 "워밍업"을 흔히 씁니다. 학습 초기에는 지형이 가팔라(λ가 커서) 큰 보폭이 위험하다는 설명이 많이 쓰입니다.<div class="lim">비유의 한계: 실제 대형 모델에서 헤시안을 다 계산하지는 않습니다. 가중치가 수십억 개라 표 자체가 너무 큽니다.</div></div>
+  <div data-dlg="s3"></div>
+  <div class="quiz" data-quiz="s3"></div>
+</div></section>
+
+<!-- ④ 안장점 -->
+<section class="sec" id="s4" aria-labelledby="h-s4"><div class="wrap">
+  <h2 id="h-s4"><span class="hex">4</span>감자칩 고개 — 안장점과 곧은 선 두 무리</h2>
+  <div class="tags"><span class="tag nn">모델: 안장점 · 쌍곡포물면</span><span class="tag fly">일상: 통에 포개 담는 곡면 감자칩</span></div>
+  <div class="pair">
+    <div><div class="tl">일상으로 치면</div>통에 겹겹이 담는 감자칩은 가로로 보면 위로 휘고, 세로로 보면 아래로 휩니다. 가운데는 말안장처럼 생겼고, 그 한가운데는 평평합니다.</div>
+    <div><div class="tr">신경망에서는</div>z = x²/a² − y²/b²의 가운데 (0, 0)은 기울기가 0이지만 바닥이 아닙니다. 한 방향으로는 최저점, 다른 방향으로는 최고점인 <b>안장점</b>입니다. 가중치가 많은 신경망의 지형에는 이런 곳이 많다고 알려져 있습니다.</div>
+  </div>
+  <div class="panel">
+    <div class="ptitle">고개 실험 — 두 단면과 곧은 선</div>
+    <div class="cwrap t3"><canvas id="cvS4" aria-label="쌍곡포물면과 두 방향 단면, 곡면 위의 곧은 선 두 무리"></canvas><span class="hint">끌어서 돌리기</span></div>
+    <div class="ctrl">
+      <div class="group"><label class="glabel" for="r-a">a</label><input type="range" id="r-a" min="0.6" max="2" step="0.05" value="1"><span class="val" id="v-a">1.00</span></div>
+      <div class="group"><label class="glabel" for="r-b">b</label><input type="range" id="r-b" min="0.6" max="2" step="0.05" value="1"><span class="val" id="v-b">1.00</span></div>
+      <div class="group"><span class="glabel">보이기</span><button class="bt" id="t-cx" type="button" aria-pressed="true">x 방향 단면</button><button class="bt" id="t-cy" type="button" aria-pressed="true">y 방향 단면</button><button class="bt" id="t-ra" type="button" aria-pressed="false">곧은 선 무리 A</button><button class="bt" id="t-rb" type="button" aria-pressed="false">곧은 선 무리 B</button></div>
+    </div>
+    <div class="eq" id="eq4"></div>
+    <div class="minis"><div class="mini r"><span>x 방향 굽음 2/a²</span><b id="m4-hx">—</b></div><div class="mini m"><span>y 방향 굽음 −2/b²</span><b id="m4-hy">—</b></div><div class="mini a"><span>라플라시안</span><b id="m4-lap">—</b></div><div class="mini g"><span>가운데 기울기</span><b>(0, 0)</b></div></div>
+    <div class="insight" id="i-s4" aria-live="polite"></div>
+  </div>
+  <div class="explain"><h4>풀이</h4><ol>
+    <li>y = 0으로 고정하면 z = x²/a², 위로 열린 포물선. x = 0으로 고정하면 z = −y²/b², 아래로 열린 포물선. ①에서 한 "칼로 자르기"를 두 번 한 것입니다.</li>
+    <li>z = (x/a − y/b)(x/a + y/b)로 쓸 수 있습니다. x/a − y/b를 한 값 t로 묶으면 z = t·(x/a + y/b)가 되어 남은 변수에 대해 <b>직선</b>입니다. 그래서 휘어 보이는 곡면에 곧은 선이 두 무리나 들어 있습니다(이중 선직면). 곧은 보로 얇고 단단한 지붕을 짓는 데 이 모양을 씁니다.</li>
+    <li>a = b이면 라플라시안이 정확히 0입니다. 위로 휜 만큼 아래로 휘어 상쇄됩니다.</li>
+    <li>경사하강은 기울기만 봅니다. 공이 정확히 능선 위에서 출발하면 안장점으로 굴러가 기울기 0에서 멈춥니다. 이 장면이 아래 <a href="#duel">대결</a>입니다.</li></ol>
+    <div class="lim">이 칸의 한계: 여기까지는 지도가 "입력 → 오차" 하나였습니다. 실제 신경망은 층을 여러 번 지나며 입력 자체가 바뀝니다. 층이 지도를 어떻게 휘는지 알아야 기울기를 앞 층까지 전할 수 있습니다 → ⑤</div></div>
+  <div data-dlg="s4"></div>
+  <div class="quiz" data-quiz="s4"></div>
+</div></section>
+
+<!-- ⑤ 야코비안 -->
+<section class="sec" id="s5" aria-labelledby="h-s5"><div class="wrap">
+  <h2 id="h-s5"><span class="hex">5</span>층을 지나며 휘는 지도 — 야코비안과 역전파</h2>
+  <div class="tags"><span class="tag nn">모델: 야코비안 J · 연쇄 법칙</span><span class="tag fly">일상: 고무판에 그린 모눈</span></div>
+  <div class="pair">
+    <div><div class="tl">일상으로 치면</div>고무판에 모눈과 작은 동그라미를 그리고 잡아당기면, 동그라미는 기울어진 타원이 됩니다. 아주 작은 동그라미라면 어디를 당기든 늘 타원입니다.</div>
+    <div><div class="tr">신경망에서는</div>층 하나 F(x) = tanh(Wx)는 입력 평면을 출력 평면으로 휘는 지도입니다. 한 점 둘레의 작은 원이 어떤 타원이 되는지 적은 표가 야코비안 J이고, F(x + Δx) ≈ F(x) + JΔx입니다.</div>
+  </div>
+  <div class="panel">
+    <div class="ptitle">고무판 실험 — 원이 타원이 되는 모습</div>
+    <div class="cwrap tall"><canvas id="cvS5" aria-label="왼쪽 입력 평면의 모눈과 작은 원이 오른쪽 출력 평면에서 휘어진 모눈과 타원이 되는 그림"></canvas><span class="hint">왼쪽 판을 눌러 점 옮기기</span></div>
+    <div class="ctrl">
+      <div class="group"><span class="glabel">층의 가중치 W</span><span id="g-W"></span></div>
+      <div class="group"><button class="bt" id="t-l2" type="button" aria-pressed="false">층 하나 더 (연쇄)</button></div>
+    </div>
+    <div class="eq" id="eq5"></div>
+    <div class="minis"><div class="mini a"><span>야코비안 J</span><b id="m5-J" style="font-size:16px">—</b></div><div class="mini m"><span>넓이 배율 |det J|</span><b id="m5-det">—</b></div><div class="mini g"><span>점 x</span><b id="m5-x">—</b></div><div class="mini r"><span>tanh 기울기 (1 − tanh²)</span><b id="m5-s">—</b></div></div>
+    <div class="insight" id="i-s5" aria-live="polite"></div>
+  </div>
+  <div class="explain"><h4>풀이</h4><ol>
+    <li>J의 (i, j) 칸 = ∂F<sub>i</sub>/∂x<sub>j</sub>: "입력 j를 조금 움직이면 출력 i가 얼마나 움직이나". tanh 층에서는 J = diag(1 − tanh²(Wx))·W입니다.</li>
+    <li>|det J|는 작은 넓이가 몇 배가 되는지입니다. 0에 가까우면 평면이 납작하게 눌려 정보가 뭉개집니다. tanh가 포화된 곳(|Wx|가 큰 곳)에서는 1 − tanh²가 0에 가까워 J가 작아집니다.</li>
+    <li>"층 하나 더"를 켜면 두 층을 이어 붙인 지도의 야코비안이 J₂·J₁로 곱해집니다(연쇄 법칙). 역전파는 오차의 기울기에 이 표들을 <b>뒤에서부터</b> 곱해 앞 층까지 전하는 계산입니다.</li>
+    <li>곡면 z = f(u, v)를 x = u, y = v, z = f로 보는 지도의 야코비안은 3×2 표이고, 두 열이 ②의 접선 t<sub>u</sub>, t<sub>v</sub>입니다. 참고한 영상은 같은 표를 눕혀(2×3, 행이 접선) 썼습니다. 이 페이지는 행 = 출력, 열 = 입력인 표준 표기로 통일했습니다.</li></ol>
+    <div class="lim">이 칸의 한계: 야코비안은 1차(직선) 근사라 원이 클수록 실제 모양(주황)과 타원(초록 점선)이 어긋납니다. 그래도 학습의 한 걸음은 작기 때문에 이 근사로 충분합니다.</div></div>
+  <details class="fold"><summary>수식으로 보기 — 역전파는 야코비안의 곱</summary>
+    <p>오차 L이 출력 h₂ = F₂(h₁), h₁ = F₁(x)를 거쳐 나올 때 ∂L/∂x = (∂L/∂h₂)·J₂·J₁. 가중치에 대한 기울기도 같은 사슬에 마지막 고리만 바꿔 얻습니다. 실제 계산은 큰 J를 만들지 않고 "벡터 × J"만 차례로 구해(벡터-야코비안 곱) 비용을 줄입니다.</p>
+    <p style="margin:0"><math display="block" aria-label="야코비안 J는 출력 F i를 입력 x j로 편미분한 값을 모은 m행 n열 행렬"><msub><mi>J</mi><mi>F</mi></msub><mo>(</mo><mi mathvariant="bold">x</mi><mo>)</mo><mo>=</mo><msub><mrow><mo>[</mo><mfrac><mrow><mo>∂</mo><msub><mi>F</mi><mi>i</mi></msub></mrow><mrow><mo>∂</mo><msub><mi>x</mi><mi>j</mi></msub></mrow></mfrac><mo>]</mo></mrow><mrow><mi>m</mi><mo>×</mo><mi>n</mi></mrow></msub></math></p></details>
+  <div class="bridge gen"><b>생성 AI로 치면</b> 트랜스포머처럼 층이 수십~백여 개인 모델에서는 야코비안을 수십 번 곱합니다. 곱할수록 아주 작아지거나(기울기 소실) 커질(기울기 폭발) 수 있어, 잔차 연결·정규화 층처럼 J를 1 근처로 붙잡는 장치가 들어갑니다.<div class="lim">비유의 한계: 고무판은 2차원이지만 실제 층은 수천 차원이라 "타원"은 수천 개의 축을 가진 타원체입니다.</div></div>
+  <div data-dlg="s5"></div>
+  <div class="quiz" data-quiz="s5"></div>
+</div></section>
+
+<!-- 대결 -->
+<section class="sec" id="duel" aria-labelledby="h-duel"><div class="wrap">
+  <h2 id="h-duel">대결 — 기울기 0이면 바닥인가?</h2>
+  <p class="lead">땅: f(w₁, w₂) = (w₁² − 1)² + w₂². 바닥은 (±1, 0) 두 곳(오차 0), 가운데 (0, 0)은 고개(오차 1)입니다. 공은 능선 위 (0, 1.5)에서 출발하고 학습률 0.05로 내려갑니다. 판정 기준은 <b>멈춘 곳의 오차</b>(낮을수록 좋음)입니다.</p>
+  <div class="duel">
+    <div class="side l"><div class="head"><img id="d-fly" data-mood="fly_point" alt="" aria-hidden="true"><div><b style="color:var(--c-fly)">초파리 연구원</b><br><span class="muted">기울기가 0에 가까우면 헤시안 고유값을 본다. 음수가 있으면 그 방향으로 한 발 비켜 선다.</span></div></div><div data-dlg="dfly"></div></div>
+    <div class="vs">VS</div>
+    <div class="side r"><div class="head"><img id="d-robo" data-mood="robo_coin" alt="" aria-hidden="true"><div><b style="color:var(--c-robo)">주판봇</b><br><span class="muted">기울기만 본다. 기울기가 0이 되면 그곳이 바닥이라고 보고 멈춘다.</span></div></div><div data-dlg="drobo"></div></div>
+  </div>
+  <div class="panel">
+    <div class="cwrap t3"><canvas id="cvDuel" aria-label="두 바닥과 가운데 고개가 있는 곡면 위에서 두 공이 굴러가는 경로"></canvas><span class="hint">끌어서 돌리기</span></div>
+    <div class="ctrl"><div class="group"><span class="glabel">먼저 맞혀 보기</span><button class="bt" data-pred="fly" type="button" aria-pressed="false">초파리가 이길 것 같다</button><button class="bt" data-pred="robo" type="button" aria-pressed="false">주판봇이 이길 것 같다</button></div>
+      <div class="group"><button class="bt primary" data-go type="button">결과 보기</button><button class="bt" data-close type="button" hidden>다시 닫기</button></div></div>
+    <div class="duel-res" hidden>
+      <p class="muted" style="font-size:13.5px;margin:6px 0 0">막대 = 멈춘 곳의 오차. 짧을수록 바닥에 가깝습니다.</p><div class="resbars"><div class="resbar"><span style="color:var(--c-fly)">초파리 연구원 · 멈춘 곳 오차</span><div class="bar"><i id="d-bf" style="background:var(--c-fly)"></i></div><b id="d-vf">—</b> <span class="muted" id="d-pf"></span></div>
+        <div class="resbar"><span style="color:var(--c-robo)">주판봇 · 멈춘 곳 오차</span><div class="bar"><i id="d-br" style="background:var(--c-robo)"></i></div><b id="d-vr">—</b> <span class="muted" id="d-pr"></span></div></div>
+      <div id="d-say"></div>
+      <div class="score"><span id="d-score"></span><span id="d-pred"></span></div>
+    </div>
+  </div>
+  <div class="quiz" data-quiz="duel"></div>
+</div></section>
+
+<!-- 정리 -->
+<section class="sec" id="sum" aria-labelledby="h-sum"><div class="wrap">
+  <h2 id="h-sum">정리 — 지도 말과 수학 말</h2>
+  <div class="tblwrap"><table class="cmp"><thead><tr><th>칸</th><th>수학 이름</th><th>지도에서는</th><th>한 줄 식</th><th>이 칸의 한계</th></tr></thead><tbody>
+    <tr><td>①</td><td>단면, 1차원 경사하강</td><td>산을 칼로 자른 선</td><td>w ← w − η·L′(w)</td><td>축 하나씩만 움직임</td></tr>
+    <tr><td>②</td><td>그래디언트 ∇f, 법선 n</td><td>깃대와 그 그림자</td><td>n = (−∇f, 1)</td><td>멀리 가도 되는지 모름</td></tr>
+    <tr><td>③</td><td>헤시안 H, 고유값 λ, 라플라시안</td><td>그릇의 길쭉함과 가파름</td><td>η &lt; 2/λ<sub>max</sub></td><td>그 점 둘레에서만 맞음</td></tr>
+    <tr><td>④</td><td>안장점, 쌍곡포물면</td><td>감자칩 가운데 고개</td><td>∇f = 0, λ₁λ₂ &lt; 0</td><td>층을 지나는 변화는 모름</td></tr>
+    <tr><td>⑤</td><td>야코비안 J, 연쇄 법칙</td><td>당겨진 고무판의 모눈</td><td>J<sub>전체</sub> = J₂·J₁</td><td>작은 범위의 직선 근사</td></tr>
+  </tbody></table></div>
+  <h3>용어 대응 카드</h3>
+  <div class="gloss">
+    <div><b>좌표축</b> = 가중치 하나. 가중치가 n개면 축이 n개인 지도.</div>
+    <div><b>오차 지형(손실 지형)</b> = 가중치마다 잰 오차를 높이로 세운 땅.</div>
+    <div><b>그래디언트 ∇f</b> = 편미분을 모은 벡터. 가장 가파른 오르막 방향.</div>
+    <div><b>법선</b> = 곡면과 직각인 깃대. 바닥 그림자가 −∇f.</div>
+    <div><b>헤시안</b> = 2차 편미분 표. 고유값이 굽음.</div>
+    <div><b>라플라시안</b> = 고유값의 합 = ∇·∇f. 그릇이면 양수, 균형 잡힌 안장이면 0.</div>
+    <div><b>안장점</b> = 기울기 0, 굽음의 부호가 섞인 곳.</div>
+    <div><b>야코비안</b> = 벡터 함수의 1차 편미분 표. 작은 원을 타원으로 바꾸는 표.</div>
+  </div>
+  <h3>비유의 한계</h3>
+  <ul>
+    <li>실제 지도는 2차원 땅이지만 신경망의 지도는 축이 수천~수십억 개입니다. 3D로 볼 수 있는 것은 이 페이지처럼 가중치가 둘뿐인 모델이거나, 큰 모델을 자른 <b>단면</b>뿐입니다(2편 ③).</li>
+    <li>등산객은 산 전체를 볼 수 있지만, 모델은 지금 서 있는 곳의 기울기(와 가끔 굽음)만 잴 수 있습니다. 지도를 미리 그려 놓고 걷는 것이 아닙니다.</li>
+    <li>오차 지형은 데이터에 따라 바뀝니다. 다른 데이터를 쓰면 같은 모델이라도 다른 땅입니다.</li>
+  </ul>
+  <div class="next"><a href="2_experiment_lab.html"><b>2편 실험실 편 →</b><br>같은 그릇에서 배치 크기·학습률을 바꾸고, 가중치 4,416개짜리 신경망의 단면을 봅니다.</a></div>
+</div></section>
+
+<section class="sec" id="outro" aria-labelledby="h-outro"><div class="wrap">
+  <h2 id="h-outro">아웃트로</h2>
+  <div data-dlg="outro"></div>
+</div></section>
+</main>
+
+<footer><div class="wrap">
+  <h3>출처</h3>
+  <table><thead><tr><th>#</th><th>자료</th><th>이 페이지에서 쓴 곳</th></tr></thead><tbody>
+    <tr><td>[1]</td><td>matharium, 「The geometry of a curved crisp」 인포그래픽 (사용자 제공 이미지)</td><td>④ 쌍곡포물면, 두 단면, 곧은 선 두 무리. 그림은 쓰지 않고 새로 그렸음</td></tr>
+    <tr><td>[2]</td><td>matharium, 「The Vector Differential Operators」 인포그래픽 (사용자 제공 이미지)</td><td>② 회전 = 0 항등식, ③ 라플라시안 예 (∇²(x²+y²) = 4, ∇²(x²−y²) = 0)</td></tr>
+    <tr><td>[3]</td><td>matharium, 「Gradient, Jacobian and Hessian」 인포그래픽 (사용자 제공 이미지)</td><td>②·③·⑤ 정의와 쓰임</td></tr>
+    <tr><td>[4]</td><td>matheorems, 그래프 곡면의 야코비안·법선 영상 (사용자 제공 영상, z = sin u cos v)</td><td>② 접선 t<sub>u</sub>, t<sub>v</sub>와 법선, ⑤ 표기 차이 각주</td></tr>
+    <tr><td>[5]</td><td>Machine Learning from Scratch, part 39 (mini batch gradient descent), part 43 (hyperparameters) — Facebook 릴스 (사용자 제공 영상과 설명글)</td><td>뉴런 하나 (w, b) 그릇 아이디어, 학습률 공식. 수치는 이 페이지가 따로 계산함</td></tr>
+    <tr><td>[6]</td><td>Dauphin, Y. N. 외 (2014). Identifying and attacking the saddle point problem in high-dimensional non-convex optimization. NeurIPS 27.</td><td>④ 고차원 지형에 안장점이 많다는 주장</td></tr>
+    <tr><td>[7]</td><td>Goodfellow, I., Bengio, Y., Courville, A. (2016). Deep Learning. MIT Press. 4장 수치 계산</td><td>③ 헤시안·고유값·학습률 한계의 배경</td></tr>
+    <tr><td>[8]</td><td>Rumelhart, D. E., Hinton, G. E., Williams, R. J. (1986). Learning representations by back-propagating errors. Nature 323.</td><td>⑤ 역전파</td></tr>
+  </tbody></table>
+  <h3>예시값·설명용 모형인 것</h3>
+  <ul><li>모든 3D 지도와 그래프의 데이터(직선 주변 점 1,000개, 시드 39)와 그 결과 수치</li><li>③의 2차 곡면, ④의 감자칩 곡면, ⑤의 층 가중치 W, 대결의 땅 (w₁² − 1)² + w₂²</li><li>표지 그림은 대체 표지(그림 준비 중)</li></ul>
+  <p>저작권: 캐릭터 이름·설정·그림은 저작권자 안상선의 허락 없이 사용할 수 없습니다. 참고한 인포그래픽·영상의 그림은 이 페이지에 넣지 않았습니다.</p>
+  <p>글 · 안상선 ((주)M-Robo 대표) · <a href="index.html">목차</a> · <a href="2_experiment_lab.html">2편 실험실 편</a> · <a href="https://adminmrobo.github.io/fish_market_learning_epoch_etc/">Fish Market 연구실(학습률·에포크)</a> · <a href="https://adminmrobo.github.io/ai_in_3d/">신경망 연구소</a></p>
+</div></footer>
+
+<script>
+/*@@SPRITES@@*/
+/*@@LABMATH@@*/
+/*@@COMMON@@*/
+(function(){
+'use strict';
+var $=U.$,$$=U.$$,fmt=U.fmt,cssv=U.cssv;
+var D=LM.makeLine(39,1000),O=LM.ols(D),HS=LM.hessian(D);
+/* 그릇을 빠르게: 모멘트로 닫힌 식 */
+var M=(function(){var n=D.n,sx=0,sy=0,sxx=0,sxy=0,syy=0;for(var i=0;i<n;i++){var x=D.x[i],y=D.y[i];sx+=x;sy+=y;sxx+=x*x;sxy+=x*y;syy+=y*y;}return {x:sx/n,y:sy/n,xx:sxx/n,xy:sxy/n,yy:syy/n};})();
+function bowl(w,b){return M.xx*w*w+2*M.x*w*b+b*b-2*M.xy*w-2*M.y*b+M.yy;}
+function bowlG(w,b){return [2*(M.xx*w+M.x*b-M.xy),2*(M.x*w+b-M.y)];}
+var WR=[-1.5,5.5],BR=[-2.5,4.5];
+
+/* ── 대사 ── */
+var DLG={
+ hero:[["doc","doc_front","오늘은 오차를 땅의 높이로 바꿔 지도를 그립니다. 가로·세로 좌표축은 가중치, 높이는 오차예요."],
+       ["asst","asst_smile","눈을 가리고 산을 내려가는 거라면… 발밑만 보고도 바닥을 찾을 수 있나요?"],
+       ["fly","fly_point","기울기가 0인 곳이 다 바닥일까? 감자칩 한가운데도 평평하잖아."],
+       ["robo","robo_coin","내려가기만 하면 되지! 기울기 0이면 거기가 바닥이야. 확신해."]],
+ map:[["sia","sia_explain","순서대로 말씀드릴게요. ① 자르기 → ② 깃대 → ③ 굽음 → ④ 고개 → ⑤ 휨, 그리고 대결이에요."]],
+ s1:[["asst","asst_report","w 방향으로 자르면 보폭 한계가 약 0.33, b 방향은 약 1.0이에요. 같은 그릇인데 방향마다 달라요."]],
+ s2:[["fly","fly_magnify","화살표를 곡면 위에 세우면 헷갈려. 기울기는 바닥 평면에 사는 벡터야. 깃대 그림자를 봐."]],
+ s3:[["robo","robo_calc","고유값 둘 다 양수면 그릇, 하나가 음수면 안장. 계산은 맡겨 줘. 숫자는 거짓말을 안 하거든."]],
+ s4:[["moa","moa_report","감자칩 기록을 모아 왔어요. 가로로는 위로, 세로로는 아래로 휘었어요. 그래서 포개 담아도 잘 안 깨진대요."]],
+ s5:[["doc","doc_think","층을 지날 때마다 지도가 늘어나고 기울어져요. 그 휨을 적은 표가 야코비안, 그 표를 곱해 가는 게 역전파예요."]],
+ dfly:[["fly","fly_point","평평하다고 다 바닥은 아니야. 굽음까지 보고 판단할게."]],
+ drobo:[["robo","robo_coin","기울기 0이면 끝이지. 쓸데없는 계산에 투자 안 해."]],
+ outro:[["doc","doc_magic","오늘의 세 줄입니다.<br>① 좌표축은 가중치, 높이는 오차. 학습은 이 지도에서 낮은 곳으로 걷는 일이다.<br>② 방향은 기울기가, 보폭의 한계는 굽음(2/λ<sub>max</sub>)이 정한다.<br>③ 기울기 0은 바닥의 증거가 아니다. 층의 휨(야코비안)을 곱해 가면 역전파가 된다."],
+        ["fly","fly_arms","평평한 곳에서 한 번 더 의심한 게 이겼어. 그래도 매번 헤시안을 다 계산하는 건 비싸다는 것도 기억해 둬."],
+        ["robo","robo_sigh","이번 판은 손절. 기울기만 믿다가 고개에 주저앉았네. 2편 실험실에서 본전 찾는다."],
+        ["asst","asst_smile","2편에서는 같은 그릇에 배치 크기와 학습률을 바꿔 공 세 개를 굴려 볼 거예요. 숫자는 제가 다시 셀게요."]]
+};
+U.dialogues(DLG);
+var CAST=[["doc","doc_front","박사","해설과 판정. 판정은 늘 계산한 숫자대로."],["asst","asst_smile","조수 하루","처음 배우는 사람의 눈으로 묻고, 숫자를 발표해요."],["fly","fly_point","초파리 연구원","의심하는 쪽. 평평한 곳에서 한 번 더 확인해요."],["robo","robo_coin","주판봇","확신하는 쪽. 기울기와 큰 숫자를 믿어요."],["sia","sia_explain","인턴 시아","순서를 정리하고 진행 신호를 들어요."],["moa","moa_tea","인턴 모아","기록을 모으고 응원해요."]];
+$('#castgrid').innerHTML=CAST.map(function(c){return '<div class="castc" style="--cc:var(--c-'+c[0]+')"><img src="'+U.spr(c[1])+'" alt="" aria-hidden="true"><div><b>'+c[2]+'</b><p>'+c[3]+'</p></div></div>';}).join('');
+$('#secretrow').innerHTML=['x1','x2','x3'].map(function(x,i){return U.say(x,x+'_hint',['(반짝)','(…끄덕)','(짝짝짝)'][i]);}).join('');
+$('#secretbtn').onclick=function(){var r=$('#secretrow');r.hidden=!r.hidden;this.setAttribute('aria-expanded',String(!r.hidden));this.textContent=r.hidden?'방청석 보기 (미공개 식구)':'방청석 닫기';};
+U.fillImgs();
+
+/* ── 숫자 요약 ── */
+$('#k-bot').textContent=fmt(O.L,3);$('#k-eig').textContent=fmt(HS.lmin,1)+' · '+fmt(HS.lmax,1);$('#k-lim').textContent=fmt(2/HS.lmax,3);
+
+/* ── 표지 대체 그림: 그릇 등고선 ── */
+(function(){var cv=$('#coverCv');U.reg(cv,function(){var R=U.setup(cv),g=R.g,w=R.w,h=R.h;for(var k=14;k>0;k--){g.beginPath();g.ellipse(w*.62,h*.42,w*.05*k,h*.022*k,-.35,0,7);g.strokeStyle=U.cmap(k/14,.35);g.lineWidth=2;g.stroke();}
+  g.beginPath();g.arc(w*.62,h*.42,6,0,7);g.fillStyle=cssv('--gfp');g.fill();});})();
+
+/* ── 큰 그림 지도 ── */
+var spin=false;
+var Smap=new U.Surf3D($('#cvMap'),{f:bowl,xr:WR,yr:BR,n:30,axes:['w (가중치)','b (편향)','오차'],stamp:'설명용 모형 · 실제 데이터 아님',
+  onTick:function(dt){if(spin&&dt>0){Smap.yaw+=dt*0.35;Smap.dirty=true;}}});
+Smap.ov.push(function(g,S){S.dot3(g,-1,-1,bowl(-1,-1),cssv('--amber'),6);U.label(g,S.P(-1,-1,bowl(-1,-1))[0]+10,S.P(-1,-1,bowl(-1,-1))[1],'출발점',cssv('--amber'));
+  var q=S.dot3(g,O.w,O.b,O.L,cssv('--gfp'),6);U.label(g,q[0]+10,q[1],'바닥',cssv('--gfp'));var q0=S.P(O.w,O.b,S.zr[0]);g.setLineDash([3,3]);g.strokeStyle='rgba(94,227,156,.7)';g.beginPath();g.moveTo(q[0],q[1]);g.lineTo(q0[0],q0[1]);g.stroke();g.setLineDash([]);});
+U.btns($('#g-view'),[['side','비스듬히'],['top','하늘에서 (초파리 시점)'],['low','낮게']],'side',function(v){if(v==='top')Smap.view(0,1.5);else if(v==='low')Smap.view(-0.9,0.25);else Smap.view(-0.75,0.62);
+  U.ins($('#i-map'),[v==='top'?['m','하늘에서 내려다보면 3D 그릇이 바닥의 등고선 지도가 됩니다. 등고선이 촘촘한 곳이 가파른 곳이에요. 타원이 한쪽으로 길쭉한 것이 ③의 "길쭉함"입니다.']:['g','그릇의 바닥(초록 점)이 오차가 가장 작은 가중치입니다. 출발점(노란 점)에서 이곳까지 걸어가는 것이 학습이에요.']]);});
+$('#b-spin').onclick=function(){spin=!spin;this.setAttribute('aria-pressed',String(spin));};
+$('#m-start').textContent=fmt(bowl(-1,-1),2);$('#m-botw').textContent=fmt(O.w,2)+', '+fmt(O.b,2);$('#m-botL').textContent=fmt(O.L,3);
+U.ins($('#i-map'),[['g','그릇의 바닥(초록 점)이 오차가 가장 작은 가중치입니다. 출발점(노란 점)에서 이곳까지 걸어가는 것이 학습이에요.'],['a','바닥이 데이터를 만든 직선(w = 2, b = 1)과 조금 다른 것은 점마다 섞인 잡음 때문입니다.']]);
+
+/* ── ① 자르기 ── */
+var cut='b',fix=1,lr1=0.1,pos1=-1,hist1=[];
+function f1(t){return cut==='b'?bowl(t,fix):bowl(fix,t);}
+function g1(t){var G=cut==='b'?bowlG(t,fix):bowlG(fix,t);return cut==='b'?G[0]:G[1];}
+var curv1=function(){return cut==='b'?2*M.xx:2;};
+var range1=function(){return cut==='b'?WR:BR;};
+var S1=new U.Surf3D($('#cvS1a'),{f:bowl,xr:WR,yr:BR,n:26,alpha:0.55,axes:['w','b','오차'],stamp:'설명용 모형'});
+S1.ov.push(function(g,S){var r=range1(),pts=[];for(var k=0;k<=60;k++){var t=r[0]+(r[1]-r[0])*k/60;pts.push(cut==='b'?[t,fix,bowl(t,fix)]:[fix,t,bowl(fix,t)]);}S.line3(g,pts,cssv('--eye'),3);
+  hist1.forEach(function(t,k){var p=cut==='b'?[t,fix]:[fix,t];S.dot3(g,p[0],p[1],f1(t),'rgba(241,182,70,.55)',3,false);});var p=cut==='b'?[pos1,fix]:[fix,pos1];S.dot3(g,p[0],p[1],f1(pos1),cssv('--amber'),6);});
+function draw1(){var r=range1(),pts=[],mx=0;for(var k=0;k<=120;k++){var t=r[0]+(r[1]-r[0])*k/120,y=f1(t);pts.push([t,y]);mx=Math.max(mx,y);}
+  var P=U.plot($('#cvS1b'),{xr:r,yr:[0,mx*1.05],series:[{pts:pts,color:cssv('--eye'),width:2.5},{pts:hist1.map(function(t){return [t,f1(t)];}),color:'rgba(241,182,70,.7)',width:1,dots:3}],xt:[r[0],(r[0]+r[1])/2,r[1]].map(function(v){return Math.round(v*10)/10;}),yt:[0,Math.round(mx/2),Math.round(mx)],xl:cut==='b'?'w':'b',yl:'오차',stamp:'설명용 모형',aria:'단면 곡선과 공의 위치'});
+  var g=P.g,gr=g1(pos1),y0=f1(pos1),d=0.8;g.strokeStyle=cssv('--stain');g.lineWidth=1.5;g.setLineDash([5,4]);g.beginPath();g.moveTo(P.X(pos1-d),P.Y(y0-gr*d));g.lineTo(P.X(pos1+d),P.Y(y0+gr*d));g.stroke();g.setLineDash([]);
+  g.beginPath();g.arc(P.X(pos1),P.Y(y0),6,0,7);g.fillStyle=cssv('--amber');g.fill();
+  var nx=pos1-lr1*gr;U.arrow2(g,P.X(pos1),P.Y(y0)+14,P.X(nx),P.Y(y0)+14,cssv('--gfp'),2);}
+U.reg($('#cvS1b'),function(dt){if(dt===0)draw1();});
+function upd1(){var gr=g1(pos1),nx=pos1-lr1*gr,nm=cut==='b'?'w':'b';
+  $('#eq1').innerHTML='새 '+nm+' = <i>'+fmt(pos1,3)+'</i> − <b>'+fmt(lr1,2)+'</b> × <em>'+fmt(gr,3)+'</em> = '+fmt(nx,3);
+  $('#m1-pos').textContent=nm+' = '+fmt(pos1,3);$('#m1-g').textContent=fmt(gr,3);$('#m1-L').textContent=fmt(f1(pos1),3);$('#m1-lim').textContent=fmt(2/curv1(),3);
+  var lim=2/curv1(),it=[];if(lr1>=lim)it.push(['r','학습률 '+fmt(lr1,2)+'은 이 단면의 한계 '+fmt(lim,3)+' 이상이에요. 공이 골짜기를 넘어가 점점 멀어집니다. "열 걸음"을 눌러 보세요.']);
+  else if(lr1>lim/2)it.push(['a','한계의 절반을 넘었어요. 공이 바닥을 사이에 두고 좌우로 넘나들며 내려갑니다(지그재그).']);else it.push(['g','한계 '+fmt(lim,3)+'보다 충분히 작아요. 공이 한쪽에서 차분히 내려갑니다.']);
+  it.push(['m','기울기(분홍 점선 접선의 경사)가 '+(gr>0?'양수라 왼쪽':'음수라 오른쪽')+'이 내리막이에요. 초록 화살표가 다음 한 걸음입니다.']);U.ins($('#i-s1'),it);
+  S1.dirty=true;draw1();}
+function reset1(){pos1=cut==='b'?-1:-2;hist1=[];upd1();}
+U.btns($('#g-cut'),[['b','b를 묶고 w 방향으로'],['w','w를 묶고 b 방향으로']],'b',function(v){cut=v;$('#l-fix').textContent=v==='b'?'묶어 둔 b':'묶어 둔 w';var r=$('#r-fix');if(v==='b'){r.min=-2;r.max=4;r.value=1;}else{r.min=-1;r.max=5;r.value=2;}fix=+r.value;$('#v-fix').textContent=fmt(fix,1);reset1();});
+$('#r-fix').oninput=function(){fix=+this.value;$('#v-fix').textContent=fmt(fix,1);hist1=[];upd1();};
+$('#r-lr1').oninput=function(){lr1=+this.value;$('#v-lr1').textContent=fmt(lr1,2);upd1();};
+function step1(){hist1.push(pos1);pos1=U.clamp(pos1-lr1*g1(pos1),-50,50);upd1();}
+$('#b-step1').onclick=step1;$('#b-run1').onclick=function(){for(var k=0;k<10;k++)step1();};$('#b-reset1').onclick=reset1;reset1();
+
+/* ── ② 깃대와 그림자 ── */
+var surf2='wave',u2=0.9,v2=0.6;
+var SURF2={wave:{f:function(u,v){return Math.sin(u)*Math.cos(v);},g:function(u,v){return [Math.cos(u)*Math.cos(v),-Math.sin(u)*Math.sin(v)];},xr:[-Math.PI,Math.PI],yr:[-Math.PI,Math.PI],ax:['u','v','z'],name:'물결 z = sin u · cos v'},
+  bowl:{f:bowl,g:bowlG,xr:[-1.5,5.5],yr:[-2.5,4.5],ax:['w','b','오차'],name:'우리 그릇'}};
+var S2=new U.Surf3D($('#cvS2a'),{f:SURF2.wave.f,xr:SURF2.wave.xr,yr:SURF2.wave.yr,n:30,alpha:0.8,axes:SURF2.wave.ax,stamp:'설명용 모형',onPick:function(p){if(!p)return;setUV(p[0],p[1]);}});
+function disp(S){return {sx:2/(S.xr[1]-S.xr[0]),sy:2/(S.yr[1]-S.yr[0]),sz:(S.o.zs||1.1)/(S.zr[1]-S.zr[0])};}
+S2.ov.push(function(g,S){var F=SURF2[surf2],z=F.f(u2,v2),G=F.g(u2,v2),k=disp(S),L=0.45;
+  /* 화면 비율 공간에서 접선·법선을 만들고 세계 좌표 변화량으로 되돌린다 */
+  function back(d){return [d[0]/k.sx,d[1]/k.sy,d[2]/k.sz];}
+  function nrm(d){var m=Math.hypot(d[0],d[1],d[2]);return [d[0]/m*L,d[1]/m*L,d[2]/m*L];}
+  var tu=[k.sx,0,k.sz*G[0]],tv=[0,k.sy,k.sz*G[1]],n=[tu[1]*tv[2]-tu[2]*tv[1],tu[2]*tv[0]-tu[0]*tv[2],tu[0]*tv[1]-tu[1]*tv[0]];
+  var p=[u2,v2,z];function add(a,b){return [a[0]+b[0],a[1]+b[1],a[2]+b[2]];}
+  /* 바닥 그림자 = -∇f */
+  var gn=Math.hypot(G[0],G[1]),fl=[u2,v2,S.zr[0]];
+  var q0=S.P(u2,v2,S.zr[0]),q1=S.P(u2,v2,z);g.setLineDash([3,3]);g.strokeStyle='rgba(236,234,243,.45)';g.beginPath();g.moveTo(q0[0],q0[1]);g.lineTo(q1[0],q1[1]);g.stroke();g.setLineDash([]);
+  if(gn>1e-6){var sh=back([-G[0]/gn*L*1.6*k.sx/Math.max(k.sx,k.sy),-G[1]/gn*L*1.6*k.sy/Math.max(k.sx,k.sy),0]);var e3=S.arrow3(g,fl,add(fl,sh),cssv('--gfp'),3.4);U.label(g,e3[0]+8,e3[1],'−∇f',cssv('--gfp'));
+    var gu=back([G[0]/gn*L*0.8*k.sx/Math.max(k.sx,k.sy),G[1]/gn*L*0.8*k.sy/Math.max(k.sx,k.sy),0]);g.setLineDash([4,3]);S.arrow3(g,fl,add(fl,gu),'rgba(94,227,156,.45)',2);g.setLineDash([]);}
+  var e1=S.arrow3(g,p,add(p,back(nrm(tu))),cssv('--eye'),3.2);var e2=S.arrow3(g,p,add(p,back(nrm(tv))),cssv('--terrain'),3.2);var tip=S.arrow3(g,p,add(p,back(nrm(n))),'#ffffff',3.2);U.label(g,e1[0]+8,e1[1],'t_u',cssv('--eye'));U.label(g,e2[0]+8,e2[1],'t_v',cssv('--terrain'));
+  S.dot3(g,u2,v2,z,cssv('--amber'),5);U.label(g,tip[0]+8,tip[1],'n',  '#ffffff');});
+function draw2b(){var F=SURF2[surf2],cv=$('#cvS2b'),R=U.setup(cv),g=R.g,w=R.w,h=R.h,pad=26,sz=Math.min(w,h)-pad*2,x0=(w-sz)/2,y0=(h-sz)/2;U.grid24(g,w,h);
+  var X=function(u){return x0+(u-F.xr[0])/(F.xr[1]-F.xr[0])*sz;},Y=function(v){return y0+sz-(v-F.yr[0])/(F.yr[1]-F.yr[0])*sz;},n=48,zs=[],mn=1e9,mx=-1e9,i,j;
+  for(j=0;j<=n;j++){zs.push([]);for(i=0;i<=n;i++){var z=F.f(F.xr[0]+(F.xr[1]-F.xr[0])*i/n,F.yr[0]+(F.yr[1]-F.yr[0])*j/n);zs[j].push(z);mn=Math.min(mn,z);mx=Math.max(mx,z);}}
+  var cs=sz/n;for(j=0;j<n;j++)for(i=0;i<n;i++){g.fillStyle=U.cmap((zs[j][i]-mn)/(mx-mn),.5);g.fillRect(x0+i*cs,y0+sz-(j+1)*cs,cs+.6,cs+.6);}
+  g.lineWidth=1;for(var L=1;L<12;L++){var zl=mn+(mx-mn)*(surf2==='bowl'?Math.pow(L/12,1.8):L/12);g.strokeStyle='rgba(19,20,31,.55)';g.beginPath();for(j=0;j<n;j++)for(i=0;i<n;i++){var q=[zs[j][i],zs[j][i+1],zs[j+1][i+1],zs[j+1][i]],P2=[[i,j],[i+1,j],[i+1,j+1],[i,j+1]],seg=[];for(var e=0;e<4;e++){var a=q[e],b=q[(e+1)%4];if((a-zl)*(b-zl)<0){var t=(zl-a)/(b-a),pa=P2[e],pb=P2[(e+1)%4];seg.push([pa[0]+(pb[0]-pa[0])*t,pa[1]+(pb[1]-pa[1])*t]);}}if(seg.length>=2){g.moveTo(x0+seg[0][0]*cs,y0+sz-seg[0][1]*cs);g.lineTo(x0+seg[1][0]*cs,y0+sz-seg[1][1]*cs);}}g.stroke();}
+  var m=9,maxg=0,G2=[];for(j=0;j<m;j++)for(i=0;i<m;i++){var u=F.xr[0]+(F.xr[1]-F.xr[0])*(i+.5)/m,v=F.yr[0]+(F.yr[1]-F.yr[0])*(j+.5)/m,G=F.g(u,v);G2.push([u,v,G]);maxg=Math.max(maxg,Math.hypot(G[0],G[1]));}
+  G2.forEach(function(t){var gx=t[2][0]/maxg,gy=t[2][1]/maxg,len=sz/m*0.45;U.arrow2(g,X(t[0]),Y(t[1]),X(t[0])-gx*len*(F.xr[1]-F.xr[0])/(F.xr[1]-F.xr[0]),Y(t[1])+gy*len,'rgba(94,227,156,.8)',1.4);});
+  g.beginPath();g.arc(X(u2),Y(v2),6,0,7);g.fillStyle=cssv('--amber');g.fill();g.strokeStyle='#13141f';g.stroke();
+  U.label(g,x0+4,y0+10,'위에서 본 지도 · 화살표 = −∇f',cssv('--muted'));U.stamp(g,w,'설명용 모형');}
+U.reg($('#cvS2b'),function(dt){if(dt===0)draw2b();});
+function setUV(u,v){var F=SURF2[surf2];u2=U.clamp(u,F.xr[0],F.xr[1]);v2=U.clamp(v,F.yr[0],F.yr[1]);$('#r-u').value=u2;$('#r-v').value=v2;upd2();}
+function upd2(){var F=SURF2[surf2],G=F.g(u2,v2),gn=Math.hypot(G[0],G[1]);$('#v-u').textContent=fmt(u2,2);$('#v-v').textContent=fmt(v2,2);
+  $('#m2-fu').textContent=fmt(G[0],3);$('#m2-fv').textContent=fmt(G[1],3);$('#m2-gn').textContent=fmt(gn,3);$('#m2-n').textContent='('+fmt(-G[0],2)+', '+fmt(-G[1],2)+', 1)';
+  $('#eq2').innerHTML='t<sub>u</sub> = (1, 0, <em>'+fmt(G[0],3)+'</em>) · t<sub>v</sub> = (0, 1, <em>'+fmt(G[1],3)+'</em>) · t<sub>u</sub> × t<sub>v</sub> = n = (<b>'+fmt(-G[0],3)+'</b>, <b>'+fmt(-G[1],3)+'</b>, 1) · 그림자 −∇f = (<b>'+fmt(-G[0],3)+'</b>, <b>'+fmt(-G[1],3)+'</b>)';
+  var it=[['g','초록 화살표(깃대 그림자)가 가장 가파른 내리막, 연한 점선 화살표가 오르막 ∇f입니다. 둘은 정반대예요.']];
+  if(gn<0.05)it.push(['a','여기는 거의 평평해요(|∇f| ≈ 0). 깃대가 똑바로 서고 그림자가 사라집니다. 바닥인지 봉우리인지 고개인지는 기울기만으로는 모릅니다 → ③·④']);
+  else it.push(['m','빨강 t<sub>u</sub>는 u 격자선을, 청록 t<sub>v</sub>는 v 격자선을 따라갑니다. 흰 깃대 n은 둘 모두와 직각이에요.']);
+  U.ins($('#i-s2'),it);S2.dirty=true;draw2b();}
+U.btns($('#g-surf'),[['wave','물결 sin u · cos v'],['bowl','우리 그릇']],'wave',function(v){surf2=v;var F=SURF2[v];S2.o.axes=F.ax;S2.setF(F.f,F.xr,F.yr);var ru=$('#r-u'),rv=$('#r-v');ru.min=F.xr[0];ru.max=F.xr[1];rv.min=F.yr[0];rv.max=F.yr[1];ru.step=rv.step=v==='bowl'?0.05:0.05;
+  if(v==='bowl')setUV(0.2,-1.2);else setUV(0.9,0.6);});
+$('#r-u').oninput=function(){setUV(+this.value,v2);};$('#r-v').oninput=function(){setUV(u2,+this.value);};upd2();
+
+/* ── ③ 굽음 ── */
+var l1=6,l2=2,th=25,lr3=0.1,path3=[],anim3=0;
+function H3(){var c=Math.cos(th*Math.PI/180),s=Math.sin(th*Math.PI/180);return [[l1*c*c+l2*s*s,(l1-l2)*c*s],[(l1-l2)*c*s,l1*s*s+l2*c*c]];}
+function f3(x,y){var H=H3();return 0.5*(H[0][0]*x*x+2*H[0][1]*x*y+H[1][1]*y*y);}
+function g3(x,y){var H=H3();return [H[0][0]*x+H[0][1]*y,H[0][1]*x+H[1][1]*y];}
+var S3=new U.Surf3D($('#cvS3a'),{f:f3,xr:[-2,2],yr:[-2,2],n:26,alpha:0.78,axes:['w₁','w₂','오차'],stamp:'설명용 모형',
+  onTick:function(dt){if(anim3>0&&dt>0){anim3=Math.min(path3.length,anim3+dt*18);S3.dirty=true;draw3b();if(anim3>=path3.length)anim3=0;}}});
+S3.ov.push(function(g,S){var k=anim3>0?Math.floor(anim3):path3.length;var pts=path3.slice(0,Math.max(1,k)).filter(function(p){return Math.abs(p[0])<=2.05&&Math.abs(p[1])<=2.05;});
+  if(pts.length>1)S.line3(g,pts.map(function(p){return [p[0],p[1],f3(p[0],p[1])];}),cssv('--amber'),2.2);var c=Math.cos(th*Math.PI/180),s=Math.sin(th*Math.PI/180);
+  S.line3(g,[[-2*c,-2*s,0].map(function(v,i){return i<2?v*0.95:0;}).concat([]),[2*c*0.95,2*s*0.95,0]].map(function(p){return [p[0],p[1],S.zr[0]];}),'rgba(240,96,77,.8)',1.5,[5,4]);
+  S.line3(g,[[2*s*0.95,-2*c*0.95],[-2*s*0.95,2*c*0.95]].map(function(p){return [p[0],p[1],S.zr[0]];}),'rgba(79,195,201,.85)',1.5,[5,4]);
+  if(pts.length){var q=pts[pts.length-1];S.dot3(g,q[0],q[1],f3(q[0],q[1]),cssv('--amber'),6);}});
+function run3(){var p=[1.6,1.4];path3=[p.slice()];for(var k=0;k<60;k++){var G=g3(p[0],p[1]);p=[p[0]-lr3*G[0],p[1]-lr3*G[1]];path3.push(p.slice());if(Math.abs(p[0])>40||Math.abs(p[1])>40)break;}}
+function draw3b(){var k=anim3>0?Math.floor(anim3):path3.length,pts=path3.slice(0,Math.max(1,k)).map(function(p,i){return [i,Math.max(1e-4,f3(p[0],p[1]))];});var z0=f3(1.6,1.4);
+  U.plot($('#cvS3b'),{xr:[0,60],yr:[1e-4,Math.max(10,z0*20)],logy:true,series:[{pts:pts,color:cssv('--amber'),width:2,dots:2}],xt:[0,20,40,60],yt:[1e-4,1e-2,1,100].filter(function(v){return v<=Math.max(10,z0*20);}),yf:function(v){return v>=1?String(v):v.toExponential(0);},xl:'걸음',yl:'오차(로그)',hlines:[{y:z0,color:'rgba(157,155,184,.7)',label:'출발 높이'}],stamp:'설명용 모형',aria:'걸음마다 높이'});}
+function upd3(){$('#v-l1').textContent=fmt(l1,1);$('#v-l2').textContent=fmt(l2,1);$('#v-th').textContent=th+'°';$('#v-lr3').textContent=fmt(lr3,2);
+  var H=H3(),lmax=Math.max(l1,l2),lmin=Math.min(l1,l2),lim=lmax>0?2/lmax:Infinity,kind=l1>0&&l2>0?'그릇':l1<0&&l2<0?'봉우리':(l1*l2<0?'안장(고개)':'골짜기(평평한 방향)');
+  $('#m3-H').textContent='['+fmt(H[0][0],2)+', '+fmt(H[0][1],2)+'; '+fmt(H[1][0],2)+', '+fmt(H[1][1],2)+']';$('#m3-lap').textContent=fmt(l1+l2,2);$('#m3-lim').textContent=isFinite(lim)?fmt(lim,3):'없음';$('#m3-kind').textContent=kind;
+  $('#eq3').innerHTML='걸음마다 고유 방향의 거리 × (1 − η·λ): 빨강 방향 <i>1 − '+fmt(lr3,2)+'×'+fmt(l1,1)+' = '+fmt(1-lr3*l1,2)+'</i> · 청록 방향 <i>1 − '+fmt(lr3,2)+'×'+fmt(l2,1)+' = '+fmt(1-lr3*l2,2)+'</i>';
+  var it=[];if(l1<0||l2<0)it.push(['r','음수 고유값 방향(1 − ηλ &gt; 1)으로는 걸을수록 멀어집니다. 그쪽은 내리막이 끝없이 이어지는 방향이에요.']);
+  if(lmax>0&&lr3>=lim)it.push(['r','학습률 '+fmt(lr3,2)+' ≥ 한계 '+fmt(lim,3)+'. 가파른 방향에서 |1 − ηλ| ≥ 1이라 공이 벽을 넘나들며 튀어 나갑니다.']);
+  else if(lmax>0&&lr3>lim/2)it.push(['a','한계 안이지만 가파른 방향의 배율이 음수예요(1 − ηλ &lt; 0). 그 방향으로는 지그재그로 줄어듭니다.']);
+  if(l1>0&&l2>0&&lr3<lim)it.push(['g','길쭉함 λ<sub>max</sub>/λ<sub>min</sub> = '+fmt(lmax/lmin,2)+'. 완만한 방향의 배율 '+fmt(1-lr3*lmin,2)+'이 1에 가까울수록 바닥까지 오래 걸립니다.']);
+  U.ins($('#i-s3'),it);run3();S3.setF(f3,[-2,2],[-2,2],null);draw3b();}
+[['r-l1',function(v){l1=v;}],['r-l2',function(v){l2=v;}],['r-th',function(v){th=v;}],['r-lr3',function(v){lr3=v;}]].forEach(function(a){$('#'+a[0]).oninput=function(){a[1](+this.value);anim3=0;upd3();};});
+$('#b-run3').onclick=function(){run3();anim3=U.reduce?0:1;if(U.reduce)draw3b();};
+$('#b-ours').onclick=function(){l1=+HS.lmax.toFixed(1);l2=+HS.lmin.toFixed(1);var a=Math.atan2(HS.lmax-HS.H[0][0],HS.H[0][1])*180/Math.PI;th=Math.round(((a%180)+180)%180);if(th>90){th-=90;var tmp=l1;l1=l2;l2=tmp;}$('#r-l1').value=l1;$('#r-l2').value=l2;$('#r-th').value=th;upd3();};
+$('#t-ours').textContent='헤시안 H = ['+fmt(HS.H[0][0],2)+', '+fmt(HS.H[0][1],2)+'; '+fmt(HS.H[1][0],2)+', '+fmt(HS.H[1][1],2)+'], 고유값 '+fmt(HS.lmin,2)+'와 '+fmt(HS.lmax,2)+'. 그래서 학습률 한계는 2/'+fmt(HS.lmax,2)+' ≈ '+fmt(2/HS.lmax,3)+'이고, 그릇은 한쪽으로 약 '+fmt(HS.lmax/HS.lmin,1)+'배 길쭉합니다. "우리 그릇 값으로" 버튼이 이 값을 넣어 줍니다.';
+upd3();
+
+/* ── ④ 감자칩 ── */
+var A4=1,B4=1,tog={cx:true,cy:true,ra:false,rb:false};
+function f4(x,y){return x*x/(A4*A4)-y*y/(B4*B4);}
+var S4=new U.Surf3D($('#cvS4'),{f:f4,xr:[-1.5,1.5],yr:[-1.5,1.5],n:30,yaw:-0.4,pitch:0.5,alpha:0.82,axes:['x','y','z'],stamp:'설명용 모형',zs:1.0,contours:true});
+S4.ov.push(function(g,S){var k,pts;
+  if(tog.cx){pts=[];for(k=0;k<=50;k++){var x=-1.5+3*k/50;pts.push([x,0,f4(x,0)]);}S.line3(g,pts,cssv('--eye'),3.2);}
+  if(tog.cy){pts=[];for(k=0;k<=50;k++){var y=-1.5+3*k/50;pts.push([0,y,f4(0,y)]);}S.line3(g,pts,cssv('--terrain'),3.2);}
+  function rul(fam,col){for(var t=-1.4;t<=1.41;t+=0.35){var seg=[];for(var s=-3;s<=3.001;s+=0.1){var x=A4*(t+s)/2,y=fam==='A'?B4*(s-t)/2:B4*(t-s)/2;if(Math.abs(x)>1.5||Math.abs(y)>1.5){if(seg.length>1)S.line3(g,seg,col,1.8);seg=[];continue;}seg.push([x,y,f4(x,y)]);}if(seg.length>1)S.line3(g,seg,col,1.8);}}
+  if(tog.ra)rul('A','#ffffff');if(tog.rb)rul('B',cssv('--amber'));S.dot3(g,0,0,0,cssv('--gfp'),6);});
+function upd4(){$('#v-a').textContent=fmt(A4,2);$('#v-b').textContent=fmt(B4,2);var hx=2/(A4*A4),hy=-2/(B4*B4);$('#m4-hx').textContent=fmt(hx,2);$('#m4-hy').textContent=fmt(hy,2);$('#m4-lap').textContent=fmt(hx+hy,2);
+  $('#eq4').innerHTML='z = x²/<i>'+fmt(A4,2)+'</i>² − y²/<i>'+fmt(B4,2)+'</i>² · y = 0이면 <em>z = x²/'+fmt(A4*A4,2)+'</em> (위로 열림) · x = 0이면 <b>z = −y²/'+fmt(B4*B4,2)+'</b> (아래로 열림)';
+  var it=[['g','가운데 초록 점은 기울기가 (0, 0)인데도 바닥이 아닙니다. 빨강 단면에서는 최저점, 청록 단면에서는 최고점이에요.']];
+  if(Math.abs(hx+hy)<0.02)it.push(['m','a = b라서 라플라시안이 0이에요. 위로 휜 만큼 아래로 휘었습니다.']);else it.push(['a','a ≠ b라서 라플라시안이 '+fmt(hx+hy,2)+'이에요. 그래도 고유값의 부호가 섞여 있으면 안장입니다. 라플라시안 하나로는 안장을 가려내지 못해요.']);
+  if(tog.ra||tog.rb)it.push(['m','흰·노란 선은 곡면 위에 그대로 놓인 곧은 선입니다. 휘어 보이는 곡면을 곧은 막대만으로 엮을 수 있어요.']);
+  U.ins($('#i-s4'),it);S4.setF(f4,[-1.5,1.5],[-1.5,1.5],[-2.6,2.6]);}
+$('#r-a').oninput=function(){A4=+this.value;upd4();};$('#r-b').oninput=function(){B4=+this.value;upd4();};
+['cx','cy','ra','rb'].forEach(function(k){$('#t-'+k).onclick=function(){tog[k]=!tog[k];this.setAttribute('aria-pressed',String(tog[k]));upd4();};});upd4();
+
+/* ── ⑤ 야코비안 ── */
+var WS={stretch:[[1.6,0.2],[0.1,0.7]],rot:[[0.9,-1.1],[1.0,0.8]],flat:[[1.0,0.9],[0.95,0.86]]},Wk='stretch',V2=[[0.8,-0.9],[0.7,1.2]],two=false,px5=[0.35,0.25],R5=0.18;
+function F1(x){var W=WS[Wk];return [Math.tanh(W[0][0]*x[0]+W[0][1]*x[1]),Math.tanh(W[1][0]*x[0]+W[1][1]*x[1])];}
+function F2(h){return [Math.tanh(V2[0][0]*h[0]+V2[0][1]*h[1]),Math.tanh(V2[1][0]*h[0]+V2[1][1]*h[1])];}
+function Fall(x){return two?F2(F1(x)):F1(x);}
+function Jt(W,x){var a=W[0][0]*x[0]+W[0][1]*x[1],b=W[1][0]*x[0]+W[1][1]*x[1],sa=1-Math.tanh(a)*Math.tanh(a),sb=1-Math.tanh(b)*Math.tanh(b);return {J:[[sa*W[0][0],sa*W[0][1]],[sb*W[1][0],sb*W[1][1]]],s:[sa,sb]};}
+function mm(A,B){return [[A[0][0]*B[0][0]+A[0][1]*B[1][0],A[0][0]*B[0][1]+A[0][1]*B[1][1]],[A[1][0]*B[0][0]+A[1][1]*B[1][0],A[1][0]*B[0][1]+A[1][1]*B[1][1]]];}
+function Jall(x){var j1=Jt(WS[Wk],x);if(!two)return {J:j1.J,s:j1.s,J1:j1.J};var j2=Jt(V2,F1(x));return {J:mm(j2.J,j1.J),s:j1.s,J1:j1.J,J2:j2.J};}
+var cv5=$('#cvS5'),geo5=null;
+function draw5(){var R=U.setup(cv5),g=R.g,w=R.w,h=R.h;U.grid24(g,w,h);var gap=24,sz=Math.min((w-gap*3)/2,h-60),y0=30,xa=gap,xb=gap*2+sz;geo5={xa:xa,y0:y0,sz:sz};
+  function Pa(p){return [xa+(p[0]+2)/4*sz,y0+sz-(p[1]+2)/4*sz];}function Pb(p){return [xb+(p[0]+1.05)/2.1*sz,y0+sz-(p[1]+1.05)/2.1*sz];}
+  [xa,xb].forEach(function(x){g.fillStyle='#171a2b';g.fillRect(x,y0,sz,sz);g.strokeStyle=cssv('--rule');g.strokeRect(x+.5,y0+.5,sz,sz);});
+  U.label(g,xa+4,y0-12,'입력 평면 x',cssv('--muted'));U.label(g,xb+4,y0-12,two?'두 층을 지난 출력 F₂(F₁(x))':'출력 평면 F(x) = tanh(Wx)',cssv('--muted'));
+  for(var k=-4;k<=4;k++){var t=k/2;[0,1].forEach(function(dir){var A=[],B=[];for(var s=0;s<=40;s++){var u=-2+4*s/40,p=dir?[t,u]:[u,t];A.push(Pa(p));B.push(Pb(Fall(p)));}
+    g.strokeStyle=dir?'rgba(79,195,201,.45)':'rgba(240,96,77,.45)';g.lineWidth=1;g.beginPath();A.forEach(function(q,i){i?g.lineTo(q[0],q[1]):g.moveTo(q[0],q[1]);});g.stroke();g.beginPath();B.forEach(function(q,i){i?g.lineTo(q[0],q[1]):g.moveTo(q[0],q[1]);});g.stroke();});}
+  var C=[],E=[],T=[],J=Jall(px5).J,o=Fall(px5);for(var s=0;s<=64;s++){var a=s/64*2*Math.PI,d=[R5*Math.cos(a),R5*Math.sin(a)];var p=[px5[0]+d[0],px5[1]+d[1]];C.push(Pa(p));T.push(Pb(Fall(p)));E.push(Pb([o[0]+J[0][0]*d[0]+J[0][1]*d[1],o[1]+J[1][0]*d[0]+J[1][1]*d[1]]));}
+  function poly(P,col,wd,dash){g.strokeStyle=col;g.lineWidth=wd;g.setLineDash(dash||[]);g.beginPath();P.forEach(function(q,i){i?g.lineTo(q[0],q[1]):g.moveTo(q[0],q[1]);});g.closePath();g.stroke();g.setLineDash([]);}
+  poly(C,cssv('--amber'),2.5);poly(T,'#f0a04d',2.5);poly(E,cssv('--gfp'),2,[5,4]);
+  var pa=Pa(px5),pb=Pb(o);g.fillStyle=cssv('--amber');g.beginPath();g.arc(pa[0],pa[1],4,0,7);g.fill();g.beginPath();g.arc(pb[0],pb[1],4,0,7);g.fill();
+  U.arrow2(g,xa+sz+4,y0+sz/2,xb-4,y0+sz/2,cssv('--stain'),2);U.label(g,(xa+sz+xb)/2,y0+sz/2-14,two?'J₂·J₁':'J','#e8a8e8','center');
+  U.label(g,xb+4,y0+sz+14,'주황 = 실제 모양 · 초록 점선 = 야코비안 타원',cssv('--muted'));U.stamp(g,w,'설명용 모형');}
+U.reg(cv5,function(dt){if(dt===0)draw5();});
+cv5.addEventListener('pointerdown',function(e){if(!geo5)return;var r=cv5.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;if(x<geo5.xa||x>geo5.xa+geo5.sz||y<geo5.y0||y>geo5.y0+geo5.sz)return;px5=[(x-geo5.xa)/geo5.sz*4-2,(geo5.y0+geo5.sz-y)/geo5.sz*4-2];upd5();});
+function m2s(A){return '['+fmt(A[0][0],2)+', '+fmt(A[0][1],2)+'; '+fmt(A[1][0],2)+', '+fmt(A[1][1],2)+']';}
+function upd5(){var r=Jall(px5),J=r.J,det=J[0][0]*J[1][1]-J[0][1]*J[1][0];$('#m5-J').textContent=m2s(J);$('#m5-det').textContent=fmt(Math.abs(det),3);$('#m5-x').textContent='('+fmt(px5[0],2)+', '+fmt(px5[1],2)+')';$('#m5-s').textContent=fmt(r.s[0],2)+', '+fmt(r.s[1],2);
+  $('#eq5').innerHTML=two?'J<sub>전체</sub> = <em>J₂ '+m2s(r.J2)+'</em> · <i>J₁ '+m2s(r.J1)+'</i> = <b>'+m2s(J)+'</b>':'J = diag(1 − tanh²(Wx)) · W = <b>'+m2s(J)+'</b>';
+  var it=[];if(Math.abs(det)<0.06)it.push(['r','|det J|가 '+fmt(Math.abs(det),3)+'로 0에 가까워요. 원이 거의 선으로 눌렸습니다. 이 방향으로 들어온 차이는 다음 층에 거의 전해지지 않아요.']);
+  else it.push(['g','작은 원이 넓이 '+fmt(Math.abs(det),2)+'배의 기울어진 타원이 됐어요. 초록 점선(야코비안)이 주황(실제)과 거의 겹치면 직선 근사가 잘 맞는 것입니다.']);
+  if(Math.min(r.s[0],r.s[1])<0.3)it.push(['a','tanh 기울기가 '+fmt(Math.min(r.s[0],r.s[1]),2)+'까지 떨어졌어요(포화). 점을 가운데로 옮기면 다시 커집니다.']);
+  if(two)it.push(['m','두 층의 표를 곱한 것이 두 층 전체의 야코비안입니다. 역전파는 이 곱을 뒤(출력 쪽)에서부터 계산해요.']);U.ins($('#i-s5'),it);draw5();}
+U.btns($('#g-W'),[['stretch','늘이기'],['rot','돌리며 늘이기'],['flat','눌러 납작하게']],'stretch',function(v){Wk=v;upd5();});
+$('#t-l2').onclick=function(){two=!two;this.setAttribute('aria-pressed',String(two));upd5();};upd5();
+
+/* ── 대결 ── */
+var RF=null,RR=null,tD=0,playD=false;
+var SD=new U.Surf3D($('#cvDuel'),{f:function(x,y){return LM.sf([x,y]);},xr:[-1.6,1.6],yr:[-1.6,1.6],n:30,alpha:0.8,axes:['w₁','w₂','오차'],zr:[0,4],stamp:'설명용 모형',
+  onTick:function(dt){if(playD&&dt>0){tD+=dt*40;SD.dirty=true;if(RF&&tD>Math.max(RF.path.length,RR.path.length)+5)playD=false;}}});
+SD.ov.push(function(g,S){S.dot3(g,1,0,0,cssv('--gfp'),4);S.dot3(g,-1,0,0,cssv('--gfp'),4);S.dot3(g,0,0,1,'#ffffff',4);U.label(g,S.P(0,0,1)[0]+8,S.P(0,0,1)[1]-10,'고개',  '#ffffff');
+  S.dot3(g,0,1.5,LM.sf([0,1.5]),cssv('--amber'),5);
+  [[RR,cssv('--c-robo')],[RF,cssv('--c-fly')]].forEach(function(a){var R=a[0];if(!R)return;var k=Math.min(R.path.length,Math.max(1,Math.floor(tD)));var pts=R.path.slice(0,k);S.line3(g,pts.map(function(p){return [p[0],p[1],p[2]];}),a[1],2.6);var q=pts[pts.length-1];S.dot3(g,q[0],q[1],q[2],a[1],6);});});
+U.Duel({el:'#duel',run:function(){RF=LM.saddleRun(true);RR=LM.saddleRun(false);tD=U.reduce?999:1;playD=!U.reduce;return {fly:RF.L,robo:RR.L};},
+  show:function(r,pred){var mx=Math.max(r.fly,r.robo,1e-9);$('#d-bf').style.width=(r.fly/mx*100)+'%';$('#d-br').style.width=(r.robo/mx*100)+'%';
+    $('#d-vf').textContent=fmt(r.fly,3);$('#d-vr').textContent=fmt(r.robo,3);$('#d-pf').textContent='멈춘 곳 ('+fmt(RF.end[0],2)+', '+fmt(RF.end[1],2)+') · '+RF.steps+'걸음';$('#d-pr').textContent='멈춘 곳 ('+fmt(RR.end[0],2)+', '+fmt(RR.end[1],2)+') · '+RR.steps+'걸음';
+    var flyWin=r.fly<r.robo-1e-3;
+    $('#d-say').innerHTML=U.say('asst','asst_report','멈춘 곳의 오차는 초파리 쪽 '+fmt(r.fly,3)+', 주판봇 쪽 '+fmt(r.robo,3)+'이에요. 주판봇 공은 고개 (0, 0)에서 기울기 0을 보고 멈췄고, 초파리 공은 헤시안 고유값 −4를 보고 한 발 비켜 선 뒤 바닥 (1, 0)까지 갔어요.')+
+      U.say('doc','doc_judge',flyWin?'기울기 0은 바닥의 증거가 아니다. 굽음까지 봐야 안다. 초파리 승.':'이번 판은 나눠 갖는다.',true)+(U.say('sia','sia_signal','확인했습니다. 대결 종료 신호 드립니다.'));
+    $('#d-score').textContent='이번 판: '+(flyWin?'초파리 연구원 승 (F)':'무승부');$('#d-pred').textContent=pred?('내 예상: '+(pred==='fly'?'초파리':'주판봇')+' → '+((pred==='fly')===flyWin?'맞힘':'빗나감')):'예상을 고르지 않았어요';
+    U.setMood($('#d-fly'),flyWin?'fly_arms':'fly_coffee');U.setMood($('#d-robo'),flyWin?'robo_sigh':'robo_meh');},
+  reset:function(){RF=RR=null;tD=0;playD=false;SD.dirty=true;U.setMood($('#d-fly'),'fly_point');U.setMood($('#d-robo'),'robo_coin');}});
+
+/* ── 용어와 퀴즈 ── */
+U.Gloss({
+ '좌표축':['좌표축','지도','가중치 하나가 축 하나입니다. 가중치가 두 개면 가로·세로 두 축, n개면 n개의 축이 있는 지도입니다.'],
+ '가중치':['가중치 (weight)','모델','입력에 곱하는 숫자. 학습은 이 숫자들을 고치는 일입니다.'],
+ '오차':['오차 (손실, loss)','모델','예측이 정답과 얼마나 다른지 잰 값. 여기서는 차이를 제곱해 평균 낸 평균제곱오차.'],
+ '단면':['단면','지도','다른 축을 한 값에 묶고 남은 한 축(또는 두 축)으로만 본 지형. 감자칩의 y = 0 단면이 그 예.'],
+ '그래디언트':['그래디언트 ∇f','미분','편미분을 모은 벡터. 가장 가파른 오르막 방향을 가리키고, 길이가 그 경사입니다.'],
+ '편미분':['편미분 ∂f/∂x','미분','다른 변수는 그대로 두고 한 변수만 아주 조금 움직였을 때의 변화율.'],
+ '법선':['법선 (normal)','기하','곡면과 직각인 방향. 그래프 곡면에서는 n = (−∂f/∂u, −∂f/∂v, 1).'],
+ '헤시안':['헤시안 H','미분','2차 편미분을 모은 정사각 표. 기울기가 방향마다 얼마나 빨리 바뀌는지, 곧 굽음을 적습니다.'],
+ '고유값':['고유값 λ','선형대수','표(행렬)를 어느 방향으로 봐도 변하지 않는 굽음 숫자. 헤시안의 고유값이 양수면 그 방향으로 위로 휨.'],
+ '라플라시안':['라플라시안 ∇²f','미분','2차 편미분의 합 = 헤시안 고유값의 합 = ∇·∇f. 한 점이 이웃보다 낮으면 양수.'],
+ '안장점':['안장점 (saddle point)','지형','기울기가 0이지만 한 방향으로는 최저, 다른 방향으로는 최고인 곳. 말안장·감자칩 가운데.'],
+ '야코비안':['야코비안 J','미분','벡터 함수의 1차 편미분 표. (i, j) 칸 = ∂F_i/∂x_j. 작은 원이 어떤 타원이 되는지 알려 줍니다.'],
+ '역전파':['역전파 (backpropagation)','학습','오차의 기울기에 층마다의 야코비안을 뒤에서부터 곱해, 모든 가중치의 기울기를 한 번에 구하는 계산.'],
+ '학습률':['학습률 η (learning rate)','학습','한 걸음의 크기. 새 가중치 = 옛 가중치 − 학습률 × 기울기.'],
+ '경사하강':['경사하강 (gradient descent)','학습','기울기의 반대 방향으로 조금씩 걸어 오차를 줄이는 방법.'],
+ '쌍곡포물면':['쌍곡포물면','기하','z = x²/a² − y²/b². 한 방향은 위로, 다른 방향은 아래로 휜 안장 모양 곡면.'],
+ '∇':['∇ (나블라)','기호','(∂/∂x, ∂/∂y, ∂/∂z). 그래디언트·발산·회전·라플라시안을 만드는 재료.'],
+ 'λ':['λ (람다)','기호','이 페이지에서는 헤시안의 고유값, 곧 한 방향의 굽음.'],
+ 'η':['η (에타)','기호','학습률.']
+},['좌표축','오차','단면','그래디언트','법선','헤시안','고유값','라플라시안','안장점','야코비안','역전파','λ']);
+U.Study({quiz:{
+ s1:[{q:'b를 묶고 w 방향 단면 위에서 기울기가 +2.0, 학습률이 0.1이면 w는 어떻게 바뀌나요?',o:['0.2 늘어난다','0.2 줄어든다','2.0 줄어든다'],a:1,why:'새 w = 옛 w − 0.1 × 2.0 = 옛 w − 0.2. 기울기가 양수면 오른쪽이 오르막이라 왼쪽으로 갑니다.',hint:'공식의 빼기 기호가 "내리막 쪽으로"라는 뜻이에요.'},
+     {q:'같은 그릇인데 w 방향 단면의 보폭 한계(약 0.33)가 b 방향(약 1.0)보다 작은 이유는?',o:['w 방향이 더 많이 굽어서','w 방향이 더 길어서','데이터가 더 많아서'],a:0,why:'보폭 한계는 2/굽음입니다. w 방향 굽음은 2·mean(x²) ≈ 6, b 방향은 2라서 한계가 각각 약 0.33, 1.0입니다.',hint:'한계 = 2 / (그 단면의 2차 미분)'}],
+ s2:[{q:'그래프 곡면 z = f(u, v)의 법선 n은?',o:['(∂f/∂u, ∂f/∂v, 1)','(−∂f/∂u, −∂f/∂v, 1)','(1, 1, −∂f/∂u)'],a:1,why:'t_u × t_v = (1, 0, f_u) × (0, 1, f_v) = (−f_u, −f_v, 1).',hint:'외적의 첫 칸은 0·f_v − f_u·1이에요.'},
+     {q:'법선의 바닥 그림자 (−∂f/∂u, −∂f/∂v)는 무엇과 같나요?',o:['그래디언트 ∇f','−∇f, 경사하강이 가는 방향','등고선 방향'],a:1,why:'그래디언트에 마이너스를 붙인 것이고, 가장 가파른 내리막입니다. 등고선과는 직각이에요.',hint:'깃대는 내리막 쪽으로 기울어요.'}],
+ s3:[{q:'헤시안 고유값이 6과 2인 그릇에서 경사하강이 바닥으로 줄어들 학습률의 한계는?',o:['2/2 = 1','2/6 ≈ 0.33','6/2 = 3'],a:1,why:'가장 가파른 방향(λ = 6)에서 |1 − 6η| < 1이어야 하므로 η < 2/6.',hint:'가장 큰 고유값이 한계를 정해요.'},
+     {q:'고유값이 +3과 −1이면 이 점은?',o:['그릇(최저점)','봉우리','안장점'],a:2,why:'부호가 섞이면 한 방향은 위로, 한 방향은 아래로 휜 고개입니다.',hint:'두 고유값의 부호를 보세요.'}],
+ s4:[{q:'z = x² − y²의 라플라시안은?',o:['4','0','−2'],a:1,why:'∂²z/∂x² = 2, ∂²z/∂y² = −2, 합은 0. 위로 휜 만큼 아래로 휘었습니다.',hint:'두 방향의 2차 미분을 더하세요.'},
+     {q:'쌍곡포물면이 "곧은 선 두 무리"를 품는 이유로 맞는 것은?',o:['x/a − y/b를 묶으면 z가 남은 변수의 1차식이 되어서','곡면이 평평해서','a와 b가 같아서'],a:0,why:'z = (x/a − y/b)(x/a + y/b). 한 괄호를 t로 묶으면 z = t × (다른 괄호), 직선입니다. 다른 괄호를 묶으면 두 번째 무리가 나옵니다.',hint:'z를 두 괄호의 곱으로 써 보세요.'}],
+ s5:[{q:'tanh 층 F(x) = tanh(Wx)의 야코비안은?',o:['W','diag(1 − tanh²(Wx)) · W','tanh(W)'],a:1,why:'연쇄 법칙: 안쪽 Wx의 야코비안 W에 바깥 tanh의 기울기 1 − tanh²를 곱합니다.',hint:'tanh의 미분은 1 − tanh²예요.'},
+     {q:'두 층을 이어 붙인 지도의 야코비안은?',o:['J₁ + J₂','J₂ · J₁','J₁ · J₂ · J₁'],a:1,why:'나중 층의 표를 앞에 곱합니다(연쇄 법칙). 역전파는 이 곱을 뒤에서부터 계산해요.',hint:'함수를 이어 붙이면 미분은 곱해져요.'}],
+ duel:[{q:'대결에서 주판봇 공이 멈춘 (0, 0)의 헤시안 고유값은 −4와 2입니다. 이 점은?',o:['바닥','안장점','봉우리'],a:1,why:'고유값 부호가 섞였으니 안장점입니다. 기울기 0만으로는 바닥인지 알 수 없어요.',hint:'③에서 본 분류표를 떠올려 보세요.'}]
+}});
+U.start();
+})();
+</script>
+</body>
+</html>

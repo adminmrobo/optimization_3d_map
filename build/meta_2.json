@@ -1,0 +1,43 @@
+{
+ "title": "좌표축 위의 그릇 ② 실험실 편 — 배치·학습률·에포크를 3D 지도 위에서 고르기",
+ "series": "좌표축 위의 그릇 — 3D 지도로 본 모델 최적화",
+ "number": "2",
+ "creator": [
+  {
+   "name": "안상선",
+   "role": "author",
+   "affiliation": "(주)M-Robo"
+  }
+ ],
+ "contributor": [
+  {
+   "name": "AI 보조 제작",
+   "role": "assistant"
+  }
+ ],
+ "date": "2026-11-14",
+ "version": "1.0",
+ "language": [
+  "ko"
+ ],
+ "license": "",
+ "url": "https://adminmrobo.github.io/optimization_3d_map/2_experiment_lab.html",
+ "about": [
+  "lab:concept/hyperparameter",
+  "lab:method/minibatch-sgd",
+  "lab:concept/learning-rate",
+  "lab:concept/loss-slice",
+  "lab:concept/overfitting"
+ ],
+ "basedOn": [
+  "mlfs39",
+  "mlfs43",
+  "li2018visualizing",
+  "goodfellow2016deep",
+  "matharium_gjh"
+ ],
+ "educationalLevel": "입문~중급",
+ "learningResourceType": "interactive explainer",
+ "registry": "KG_00_registry 0.2",
+ "suggestedCitation": "안상선 (2026). 좌표축 위의 그릇 ② 실험실 편 — 배치·학습률·에포크를 3D 지도 위에서 고르기. 좌표축 위의 그릇 — 3D 지도로 본 모델 최적화 2, v1.0."
+}
