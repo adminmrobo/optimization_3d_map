@@ -149,5 +149,47 @@ function Duel(o){var host=$(o.el),pred=null;
   go.onclick=function(){var r=o.run();res.hidden=false;o.show(r,pred);go.hidden=true;close.hidden=false;};
   close.onclick=function(){res.hidden=true;go.hidden=false;close.hidden=true;o.reset&&o.reset();};}
 
-return {$:$,$$:$$,esc:esc,cssv:cssv,reduce:reduce,fmt:fmt,clamp:clamp,spr:spr,say:say,dialogues:dialogues,fillImgs:fillImgs,setMood:setMood,reg:reg,start:start,drawAll:drawAll,setup:setup,grid24:grid24,stamp:stamp,label:label,arrow2:arrow2,btns:btns,ins:ins,Gloss:Gloss,Study:Study,cmap:cmap,Surf3D:Surf3D,plot:plot,Duel:Duel,NAMES:NAMES};
+/* ── 3D 공간 (3편): x·y·z 세 축이 모두 공간 축인 상자. 화살표 밭·점·선을 그린다 ──
+   o={L:축 반길이, axes:['x','y','z'], yaw, pitch, zoom, stamp, aria, onTick, views, ticks} · S.ov에 덧그림 함수를 넣는다 */
+function Space3D(cv,o){var S=this;S.cv=cv;S.o=o||{};S.L=S.o.L||2;S.yaw=S.o.yaw==null?-0.6:S.o.yaw;S.pitch=S.o.pitch==null?0.42:S.o.pitch;S.ov=[];S.dirty=true;
+  var drag=null;cv.addEventListener('pointerdown',function(e){drag={x:e.clientX,y:e.clientY,yaw:S.yaw,pitch:S.pitch};cv.setPointerCapture(e.pointerId);cv.style.cursor='grabbing';});
+  cv.addEventListener('pointermove',function(e){if(!drag)return;S.yaw=drag.yaw+(e.clientX-drag.x)*0.008;S.pitch=clamp(drag.pitch+(e.clientY-drag.y)*0.006,-1.5,1.5);S.dirty=true;});
+  function up(){drag=null;cv.style.cursor='grab';}cv.addEventListener('pointerup',up);cv.addEventListener('pointercancel',up);
+  cv.setAttribute('role','img');cv.tabIndex=0;if(S.o.aria)cv.setAttribute('aria-label',S.o.aria);
+  cv.addEventListener('keydown',function(e){var k=e.key,d=0.12;if(k==='ArrowLeft')S.yaw-=d;else if(k==='ArrowRight')S.yaw+=d;else if(k==='ArrowUp')S.pitch=clamp(S.pitch+d,-1.5,1.5);else if(k==='ArrowDown')S.pitch=clamp(S.pitch-d,-1.5,1.5);else return;e.preventDefault();S.dirty=true;});
+  if(S.o.views!==false&&cv.parentNode){var vb=document.createElement('div');vb.className='vbtns';vb.setAttribute('role','group');vb.setAttribute('aria-label','3D 시점 바꾸기');
+    [['비스듬히',-0.6,0.42],['위에서 (z축을 내려다봄)',0,1.5],['앞에서 (x·z 평면)',0,0.0],['옆에서 (y·z 평면)',-Math.PI/2,0.0],['왼쪽으로 돌리기','L'],['오른쪽으로 돌리기','R']].forEach(function(v){var b=document.createElement('button');b.type='button';b.className='bt';b.textContent=v[0];
+      b.onclick=function(){if(v[1]==='L')S.yaw-=0.35;else if(v[1]==='R')S.yaw+=0.35;else{S.yaw=v[1];S.pitch=v[2];}S.dirty=true;};vb.appendChild(b);});
+    var host=cv.parentNode.closest('.twin')||cv.parentNode;var w=document.createElement('div');w.className='vbtns-wrap';w.appendChild(vb);host.insertAdjacentElement('afterend',w);}
+  reg(cv,function(dt){if(S.o.onTick)S.o.onTick(dt);if(S.dirty||dt===0){S.draw();S.dirty=false;}});}
+/* 화면 좌표 [x, y, 깊이]: 깊이가 클수록 멀다 */
+Space3D.prototype.P=function(x,y,z){var S=this,X=x/S.L,Y=y/S.L,Z=z/S.L,c=Math.cos(S.yaw),s=Math.sin(S.yaw),rx=X*c-Y*s,ry=X*s+Y*c,cp=Math.cos(S.pitch),sp=Math.sin(S.pitch);
+  return [S.cx+rx*S.sc,S.cy+(-Z*cp-ry*sp)*S.sc,ry*cp-Z*sp];};
+Space3D.prototype.draw=function(){var S=this,R=setup(S.cv),g=R.g,w=R.w,h=R.h,L=S.L;S.w=w;S.h=h;S.cx=w/2;S.cy=h*0.52;S.sc=Math.min(w*0.30,h*0.34)*(S.o.zoom||1);grid24(g,w,h);
+  /* 상자 모서리 (흐리게) */
+  var cs=[-L,L],E=[];cs.forEach(function(a){cs.forEach(function(b){E.push([[-L,a,b],[L,a,b]]);E.push([[a,-L,b],[a,L,b]]);E.push([[a,b,-L],[a,b,L]]);});});
+  g.strokeStyle='rgba(22,33,43,.13)';g.lineWidth=1;g.setLineDash([4,4]);E.forEach(function(e){var p=S.P.apply(S,e[0]),q=S.P.apply(S,e[1]);g.beginPath();g.moveTo(p[0],p[1]);g.lineTo(q[0],q[1]);g.stroke();});g.setLineDash([]);
+  /* 바닥 격자 z = −L (옅게) */
+  if(S.o.floor!==false){g.strokeStyle='rgba(22,33,43,.06)';for(var k=-L;k<=L+1e-9;k+=L/2){var a=S.P(k,-L,-L),b=S.P(k,L,-L),c=S.P(-L,k,-L),d=S.P(L,k,-L);g.beginPath();g.moveTo(a[0],a[1]);g.lineTo(b[0],b[1]);g.moveTo(c[0],c[1]);g.lineTo(d[0],d[1]);g.stroke();}}
+  /* 세 축: 원점을 지나 −L → +L. x 빨강, y 청록, z 검정 */
+  var ax=S.o.axes||['x','y','z'],AC=[cssv('--eye'),cssv('--terrain'),S.o.dark?'rgba(235,240,245,.85)':'rgba(22,33,43,.75)'];
+  [[1,0,0],[0,1,0],[0,0,1]].forEach(function(u,i){var p=S.P(-L*u[0],-L*u[1],-L*u[2]),q=S.P(L*1.15*u[0],L*1.15*u[1],L*1.15*u[2]);arrow2(g,p[0],p[1],q[0],q[1],AC[i],1.6);
+    if(S.o.ticks!==false){g.fillStyle=AC[i];g.font='10.5px '+cssv('--font');g.textAlign='center';for(var t=-Math.floor(L);t<=Math.floor(L);t++){if(t===0)continue;var m=S.P(t*u[0],t*u[1],t*u[2]);g.fillRect(m[0]-1.5,m[1]-1.5,3,3);g.fillText(String(t),m[0]+(i===2?10:0),m[1]+(i===2?3:13));}}
+    label(g,q[0]+8,q[1],ax[i],AC[i]);});
+  S.ov.forEach(function(fn){fn(g,S);});
+  if(S.o.stamp)stamp(g,w,S.o.stamp);};
+Space3D.prototype.line3=function(g,pts,col,wd,dash){var S=this;g.strokeStyle=col;g.lineWidth=wd||2;g.setLineDash(dash||[]);g.beginPath();pts.forEach(function(p,k){var q=S.P(p[0],p[1],p[2]);k?g.lineTo(q[0],q[1]):g.moveTo(q[0],q[1]);});g.stroke();g.setLineDash([]);};
+Space3D.prototype.dot3=function(g,x,y,z,col,r,ring){var q=this.P(x,y,z);g.beginPath();g.arc(q[0],q[1],r||5,0,7);g.fillStyle=col;g.fill();if(ring!==false){g.lineWidth=1.6;g.strokeStyle='#ffffff';g.stroke();}return q;};
+Space3D.prototype.arrow3=function(g,a,b,col,wd){var p=this.P(a[0],a[1],a[2]),q=this.P(b[0],b[1],b[2]);arrow2(g,p[0],p[1],q[0],q[1],col,wd||2.2);return q;};
+/* 바닥(z = −L)에 비친 그림자 선: 점의 높이를 읽기 쉽게 */
+Space3D.prototype.drop=function(g,x,y,z){var S=this,a=S.P(x,y,z),b=S.P(x,y,-S.L);g.save();g.setLineDash([3,3]);g.strokeStyle='rgba(22,33,43,.35)';g.lineWidth=1;g.beginPath();g.moveTo(a[0],a[1]);g.lineTo(b[0],b[1]);g.stroke();g.restore();g.beginPath();g.arc(b[0],b[1],2.5,0,7);g.fillStyle='rgba(22,33,43,.35)';g.fill();};
+/* 화살표 밭: F(x,y,z) → [Fx,Fy,Fz]. n×n×n 격자, 먼 것부터, 길이는 scale로 맞추고 너무 긴 것은 자름 */
+Space3D.prototype.field=function(g,F,o){var S=this;o=o||{};var n=o.n||5,L=(o.R||S.L*0.85),sc=o.scale||0.35,mx=o.max||0.9,list=[];
+  for(var i=0;i<n;i++)for(var j=0;j<n;j++)for(var k=0;k<n;k++){var x=-L+2*L*i/(n-1),y=-L+2*L*j/(n-1),z=o.flat?0:-L+2*L*k/(n-1);if(o.flat&&k>0)continue;var v=F(x,y,z),m=Math.hypot(v[0],v[1],v[2]);if(!isFinite(m))continue;
+    var f=sc,len=m*sc;if(len>mx)f=mx/m;if(m<1e-9)continue;var b=[x+v[0]*f,y+v[1]*f,z+v[2]*f];list.push([S.P(x,y,z)[2],[x,y,z],b,m]);}
+  list.sort(function(a,b){return b[0]-a[0];});
+  list.forEach(function(it){var d=(it[0]+1.5)/3,al=clamp(0.95-d*0.55,0.3,0.95);var col=o.color?o.color(it[3],al):'rgba(15,127,134,'+al.toFixed(2)+')';S.arrow3(g,it[1],it[2],col,o.wd||1.6);});};
+Space3D.prototype.view=function(yaw,pitch){this.yaw=yaw;this.pitch=pitch;this.dirty=true;};
+
+return {$:$,$$:$$,esc:esc,cssv:cssv,reduce:reduce,fmt:fmt,clamp:clamp,spr:spr,say:say,dialogues:dialogues,fillImgs:fillImgs,setMood:setMood,reg:reg,start:start,drawAll:drawAll,setup:setup,grid24:grid24,stamp:stamp,label:label,arrow2:arrow2,btns:btns,ins:ins,Gloss:Gloss,Study:Study,cmap:cmap,Surf3D:Surf3D,Space3D:Space3D,plot:plot,Duel:Duel,NAMES:NAMES};
 })();

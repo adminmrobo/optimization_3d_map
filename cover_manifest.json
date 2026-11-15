@@ -19,6 +19,11 @@
         "path": "2_experiment_lab.html",
         "kg": true,
         "export": true
+      },
+      {
+        "path": "3_arrow_field.html",
+        "kg": true,
+        "export": true
       }
     ],
     "files": [
@@ -30,7 +35,7 @@
       "ko"
     ],
     "pages": {
-      "ko": 3
+      "ko": 4
     },
     "readme_langs": [
       "ko"
@@ -99,7 +104,27 @@
       "source_of": null,
       "status": "ok",
       "received": "2026-11-14"
+    },
+    {
+      "id": "cover_03",
+      "role": "cover",
+      "path": "img/cover_03.webp",
+      "size": [
+        1600,
+        900
+      ],
+      "characters": [
+        "doc",
+        "asst",
+        "fly",
+        "jupanbot"
+      ],
+      "robot": "jupanbot-v2",
+      "prompt_en": "Website top cover illustration, wide 16:9 ... a large transparent glass cube water tank with red, teal and black rods as x, y, z axes, a gentle vortex of glowing arrows, a tiny paddle wheel and spreading purple dye ... No text (전체: COVER_PROMPTS_optimization_3d_map.md 3번)",
+      "source_of": null,
+      "status": "pending",
+      "received": null
     }
   ],
-  "updated": "2026-11-14"
+  "updated": "2026-11-16"
 }

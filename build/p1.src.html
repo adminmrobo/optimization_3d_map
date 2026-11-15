@@ -13,7 +13,7 @@
 <nav class="top" aria-label="섹션 바로가기"><div class="row">
   <a class="logo" href="index.html">좌표축 위의 <i>그릇</i> ①</a>
   <div class="links">
-    <a href="#map">지도</a><a href="#s1">① 자르기</a><a href="#s2">② 깃대</a><a href="#s3">③ 굽음</a><a href="#s4">④ 고개</a><a href="#s5">⑤ 휨</a><a href="#duel">대결</a><a href="#sum">정리</a><a href="#kg">색인</a><a href="#export">꾸러미</a><a href="2_experiment_lab.html">2편 →</a>
+    <a href="#map">지도</a><a href="#s1">① 자르기</a><a href="#s2">② 깃대</a><a href="#s3">③ 굽음</a><a href="#s4">④ 고개</a><a href="#s5">⑤ 휨</a><a href="#duel">대결</a><a href="#sum">정리</a><a href="#kg">색인</a><a href="#export">꾸러미</a><a href="2_experiment_lab.html">2편 →</a><a href="3_arrow_field.html">3편 →</a>
   </div>
 </div></nav>
 
@@ -156,7 +156,8 @@
       <tr><td>∇×F (화살표 밭과 외적)</td><td>회전</td><td>제자리 소용돌이의 축과 세기(오른손 법칙)</td><td>그래디언트 밭은 늘 0 — 공은 빙빙 돌지 않는다</td></tr>
       <tr><td>∇²f = ∇·∇f</td><td>라플라시안</td><td>평균 굽음. 그릇 x² + y²은 +4, 돔 −(x² + y²)은 −4</td><td>③ 헤시안 고유값의 합</td></tr>
     </tbody></table></div>
-    <div class="lim">이름 이야기: 이 미분 연산자는 W. R. 해밀턴이 1837년경 옆으로 누운 ◁ 모양으로 처음 썼고, 지금의 ∇ 모양으로 다듬어 널리 쓴 사람은 P. G. 테이트입니다. "나블라"라는 이름은 1870년 W. R. 스미스가 고대 하프(νάβλα)를 닮았다며 테이트에게 제안했고, 맥스웰은 이 이름을 주로 농담처럼 썼습니다. 영어권에서는 del이라고도 부릅니다 [12][13].</div></div>
+    <div class="lim">이름 이야기: 이 미분 연산자는 W. R. 해밀턴이 1837년경 옆으로 누운 ◁ 모양으로 처음 썼고, 지금의 ∇ 모양으로 다듬어 널리 쓴 사람은 P. G. 테이트입니다. "나블라"라는 이름은 1870년 W. R. 스미스가 고대 하프(νάβλα)를 닮았다며 테이트에게 제안했고, 맥스웰은 이 이름을 주로 농담처럼 썼습니다. 영어권에서는 del이라고도 부릅니다 [12][13].</div>
+    <div class="lim" style="border-left-color:var(--info)">더 쉽게, 진짜 x·y·z 세 축 공간에서 네 연산을 하나씩 돌려 보려면 → <a href="3_arrow_field.html">3편 화살표 밭 편</a></div></div>
   <details class="fold"><summary>수식으로 보기 — 그래디언트의 회전은 0</summary><p>∇f = (f<sub>u</sub>, f<sub>v</sub>, 0)이면 회전의 z 성분은 ∂f<sub>v</sub>/∂u − ∂f<sub>u</sub>/∂v = f<sub>vu</sub> − f<sub>uv</sub> = 0입니다(2차 편미분이 연속이면 순서를 바꿔도 같다). 같은 이유로 회전의 발산도 늘 0입니다. 그래디언트의 발산 ∇·∇f는 라플라시안 ∇²f이고, ③에서 굽음을 재는 데 씁니다.</p></details>
   <div data-dlg="s2"></div>
   <div class="quiz" data-quiz="s2"></div>
@@ -316,7 +317,7 @@
     <li>등산객은 산 전체를 볼 수 있지만, 모델은 지금 서 있는 곳의 기울기(와 가끔 굽음)만 잴 수 있습니다. 지도를 미리 그려 놓고 걷는 것이 아닙니다.</li>
     <li>오차 지형은 데이터에 따라 바뀝니다. 다른 데이터를 쓰면 같은 모델이라도 다른 땅입니다.</li>
   </ul>
-  <div class="next"><a href="2_experiment_lab.html"><b>2편 실험실 편 →</b><br>같은 그릇에서 배치 크기·학습률을 바꾸고, 가중치 4,416개짜리 신경망의 단면을 봅니다.</a></div>
+  <div class="next"><a href="2_experiment_lab.html"><b>2편 실험실 편 →</b><br>같은 그릇에서 배치 크기·학습률을 바꾸고, 가중치 4,416개짜리 신경망의 단면을 봅니다.</a><a href="3_arrow_field.html"><b>3편 화살표 밭 편 →</b><br>x·y·z 세 축 공간에서 ∇·그래디언트·발산·회전·라플라시안을 봅니다.</a></div>
 </div></section>
 
 <section class="sec" id="outro" aria-labelledby="h-outro"><div class="wrap">
@@ -345,7 +346,7 @@
   <h3>예시값·설명용 모형인 것</h3>
   <ul><li>모든 3D 지도와 그래프의 데이터(직선 주변 점 1,000개, 시드 39)와 그 결과 수치</li><li>③의 2차 곡면, ④의 감자칩 곡면, ⑤의 층 가중치 W, 대결의 땅 (w₁² − 1)² + w₂²</li><li>표지 그림은 연구실 캐릭터로 새로 그린 삽화(실제 장면 아님)</li></ul>
   <p>저작권: 캐릭터 이름·설정·그림은 저작권자 안상선의 허락 없이 사용할 수 없습니다. 참고한 인포그래픽·영상의 그림은 이 페이지에 넣지 않았습니다.</p>
-  <p>글 · 안상선 ((주)M-Robo 대표) · <a href="index.html">목차</a> · <a href="2_experiment_lab.html">2편 실험실 편</a> · <a href="https://adminmrobo.github.io/fish_market_learning_epoch_etc/">Fish Market 연구실(학습률·에포크)</a> · <a href="https://adminmrobo.github.io/ai_in_3d/">신경망 연구소</a></p>
+  <p>글 · 안상선 ((주)M-Robo 대표) · <a href="index.html">목차</a> · <a href="2_experiment_lab.html">2편 실험실 편</a> · <a href="3_arrow_field.html">3편 화살표 밭 편</a> · <a href="https://adminmrobo.github.io/fish_market_learning_epoch_etc/">Fish Market 연구실(학습률·에포크)</a> · <a href="https://adminmrobo.github.io/ai_in_3d/">신경망 연구소</a></p>
 </div></footer>
 
 <script>

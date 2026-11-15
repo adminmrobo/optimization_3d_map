@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>좌표축 위의 그릇 ③ 화살표 밭 편 — x·y·z 세 축 공간에서 읽는 ∇(나블라)</title>
+<meta name="description" content="x·y·z 세 축이 모두 진짜 공간인 3D 상자에서 편미분·그래디언트·발산·회전·라플라시안을 난로·물감·바람개비로 하나씩 돌려 보는 초보자용 연구실 해설.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<!--@@CSS@@-->
+</head>
+<body>
+<nav class="top" aria-label="섹션 바로가기"><div class="row">
+  <a class="logo" href="index.html">좌표축 위의 <i>그릇</i> ③</a>
+  <div class="links">
+    <a href="#map">세 축</a><a href="#s1">① 편미분</a><a href="#s2">② 그래디언트</a><a href="#s3">③ 발산</a><a href="#s4">④ 회전</a><a href="#s5">⑤ 라플라시안</a><a href="#duel">대결</a><a href="#sum">정리</a><a href="#kg">색인</a><a href="#export">꾸러미</a><a href="1_math_map.html">← 1편</a>
+  </div>
+</div></nav>
+
+<!-- lab-cover : 표지 그림(cover_03)을 받기 전까지 그림판 표지 -->
+<div class="cover" id="cover" data-img="cover_03"><div class="frame">
+  <canvas id="coverCv" aria-hidden="true"></canvas>
+  <div class="cast4"><img class="s" data-mood="fly_magnify" alt="" aria-hidden="true"><img data-mood="doc_front" alt="" aria-hidden="true"><img data-mood="asst_smile" alt="" aria-hidden="true"><img class="s" data-mood="robo_coin" alt="" aria-hidden="true"></div>
+  <span class="cap">x·y·z 상자 안의 화살표 밭</span>
+  <span class="badge">표지 그림 준비 중 · 설명용 그림</span>
+  <span class="cover-chip">좌표축 위의 그릇 · ③ 화살표 밭 편</span>
+</div></div>
+<!-- /lab-cover -->
+
+<header class="hero" id="top"><div class="wrap">
+  <div class="eyebrow">3D 지도로 본 모델 최적화 · 3편 화살표 밭 편 · 입문 모드</div>
+  <h1>좌표축 위의 그릇 ③ — x·y·z 세 축 공간에서 읽는 ∇(나블라)</h1>
+  <p class="question">기호 ∇ 하나가 어떻게 "오르막", "샘", "소용돌이", "움푹함"을 모두 잴까?</p>
+  <p class="lead">1편과 2편의 3D 지도에서 높이(z)는 <b>오차</b>였습니다. 이번 편의 z는 진짜 공간의 <b>세 번째 방향</b>입니다. 방 안처럼 앞뒤(x)·좌우(y)·위아래(z)가 모두 있는 상자 속에서, 점마다 숫자가 붙은 <b>숫자 밭</b>(온도 같은 것)과 점마다 화살표가 붙은 <b>화살표 밭</b>(바람·물 흐름 같은 것)을 다룹니다. 그리고 ∇ 하나로 만드는 네 가지 연산을 난로, 물감, 바람개비로 하나씩 돌려 봅니다.</p>
+  <p class="byline">글 · 안상선 ((주)M-Robo 대표) · <a href="https://adminmrobo.github.io/who_am_i/who_am_i.html">저자 소개</a> · 2026-11-16 · v1.0</p>
+  <div class="three"><b>세 줄로 먼저</b><ol>
+    <li>∇는 "x·y·z 세 방향으로 조금씩 움직여 보고 얼마나 바뀌는지 재는 도구"를 한데 묶은 것이다.</li>
+    <li>숫자 밭에 쓰면 <b>그래디언트</b>(가장 가파른 오르막), 화살표 밭에 쓰면 <b>발산</b>(퍼져 나감)과 <b>회전</b>(소용돌이)이 된다.</li>
+    <li>그래디언트에 한 번 더 발산을 쓰면 <b>라플라시안</b> — "이웃 평균보다 내가 얼마나 낮은가"가 된다.</li></ol></div>
+  <div class="start"><b>처음이라면</b> 세 축 → ① 편미분 → ② 그래디언트 → ③ 발산 → ④ 회전 → 대결 → 정리 순서로 보세요. ⑤ 라플라시안은 두 번째 읽을 때 봐도 됩니다. 식은 "수식으로 보기"를 펼칠 때만 나옵니다. 1편 ②의 "∇ 하나, 연산 넷" 상자를 넓힌 편입니다.</div>
+  <div class="kpis" aria-label="숫자 요약">
+    <div class="kpi g"><b>3개</b><span>진짜 공간 축 x·y·z</span></div>
+    <div class="kpi m"><b>4가지</b><span>∇로 만드는 연산</span></div>
+    <div class="kpi a"><b id="k-div">—</b><span>샘 밭의 발산 (상자로 잼)<sup>①</sup></span></div>
+    <div class="kpi r"><b id="k-om">—</b><span>소용돌이 속 바람개비 빠르기<sup>①</sup></span></div>
+  </div>
+  <p class="muted" style="font-size:13px">① 이 페이지가 직접 계산한 설명용 모형의 값입니다. 실제 측정한 바람·물·온도가 아닙니다.</p>
+  <div data-dlg="hero"></div>
+</div></header>
+
+<main>
+<section class="sec" id="cast" aria-labelledby="h-cast"><div class="wrap">
+  <h2 id="h-cast">등장인물과 이 페이지 사용법</h2>
+  <div class="cast" id="castgrid"></div>
+  <div class="secret"><button class="bt" id="secretbtn" type="button" aria-expanded="false">방청석 보기 (미공개 식구)</button><div class="row" id="secretrow" hidden></div></div>
+  <div class="steps four" style="margin-top:16px">
+    <div class="step"><b>끌어서 돌리기</b>3D 상자는 마우스나 손가락으로 끌면 돌아갑니다. "위에서", "앞에서" 버튼으로 한 평면만 볼 수도 있어요.</div>
+    <div class="step"><b>축 색깔</b>x축은 빨강, y축은 청록, z축은 검정입니다. 세 실험 모두 같은 색을 씁니다.</div>
+    <div class="step"><b>밑줄 누르기</b>노란 점선 밑줄을 누르면 용어 뜻이 나옵니다.</div>
+    <div class="step"><b>앞 편</b>오차 지도와 경사하강은 <a href="1_math_map.html">1편 수학 편</a>에서 봅니다.</div>
+  </div>
+</div></section>
+
+<section class="sec" id="why" aria-labelledby="h-why"><div class="wrap">
+  <h2 id="h-why">왜 세 축 공간에서 보나</h2>
+  <div class="steps">
+    <div class="step"><b>1. 1편의 z는 가짜 축이었다</b>1편 지도의 높이는 오차라는 "값"이었습니다. 진짜 공간에서는 위아래도 x·y와 똑같은 방향이라, 화살표가 위로도 아래로도 뻗습니다.</div>
+    <div class="step"><b>2. ∇는 원래 세 방향짜리다</b>∇ = (∂/∂x, ∂/∂y, ∂/∂z). 칸이 셋인 이유가 상자 안에서 바로 보입니다.</div>
+    <div class="step"><b>3. 생활 속 장면이 많다</b>난로 둘레 온도, 욕조에 푼 물감, 개울의 바람개비. 모두 세 축 공간의 숫자 밭·화살표 밭입니다.</div>
+  </div>
+</div></section>
+
+<section class="sec" id="map" aria-labelledby="h-map"><div class="wrap">
+  <h2 id="h-map">큰 그림 — x·y·z 세 축, 그리고 두 종류의 밭</h2>
+  <p class="lead">상자 안의 한 점은 숫자 세 개 (x, y, z)로 부릅니다. 원점에서 x축을 따라 가고, y축 방향으로 꺾고, 마지막에 z축 방향으로 올라가면 그 점에 닿습니다. 이 상자의 점마다 무엇이 붙어 있느냐에 따라 밭의 종류가 나뉩니다.</p>
+  <div class="steps four">
+    <div class="step"><b>점의 주소 (x, y, z)</b>앞뒤·좌우·위아래로 몇 칸인지. 세 숫자가 모두 공간의 방향입니다.</div>
+    <div class="step"><b>숫자 밭 f(x, y, z)</b>점마다 숫자 하나. 방 안의 온도, 물속의 소금 농도. 수학 이름은 스칼라장.</div>
+    <div class="step"><b>화살표 밭 F(x, y, z)</b>점마다 화살표 하나. 바람, 물 흐름. 수학 이름은 벡터장.</div>
+    <div class="step"><b>∇ (나블라)</b>세 방향으로 조금씩 움직여 재는 도구 묶음. 밭에 어떻게 붙이느냐로 네 연산이 됩니다.</div>
+  </div>
+  <div class="panel">
+    <div class="ptitle">세 축 상자 — 점의 주소, 숫자 밭, 화살표 밭</div>
+    <div class="cwrap t3"><canvas id="cvMap" aria-label="x축 빨강, y축 청록, z축 검정의 3D 상자와 점 하나의 주소"></canvas><span class="hint">끌어서 돌리기</span></div>
+    <div class="ctrl"><div class="group"><span class="glabel">상자 안에 놓을 것</span><span id="g-map"></span></div></div>
+    <div class="insight" id="i-map" aria-live="polite"></div>
+  </div>
+  <div class="tblwrap"><table class="cmp"><thead><tr><th>붙이는 방식</th><th>이름</th><th>무엇이 나오나</th><th>생활 장면</th><th>칸</th></tr></thead><tbody>
+    <tr><td>∇f — 숫자 밭에 그대로</td><td>그래디언트</td><td>화살표 (가장 가파른 오르막)</td><td>난로 쪽으로 가면 따뜻해진다</td><td>②</td></tr>
+    <tr><td>∇·F — 화살표 밭과 점곱</td><td>발산</td><td>숫자 (퍼져 나가는 양)</td><td>욕조에 푼 물감이 퍼진다</td><td>③</td></tr>
+    <tr><td>∇×F — 화살표 밭과 가위곱</td><td>회전</td><td>화살표 (소용돌이의 축과 세기)</td><td>개울에 띄운 바람개비가 돈다</td><td>④</td></tr>
+    <tr><td>∇²f = ∇·∇f</td><td>라플라시안</td><td>숫자 (이웃보다 얼마나 움푹한가)</td><td>차가운 구석이 데워진다</td><td>⑤</td></tr>
+  </tbody></table></div>
+  <div data-dlg="map"></div>
+</div></section>
+
+<!-- ① 편미분 -->
+<section class="sec" id="s1" aria-labelledby="h-s1"><div class="wrap">
+  <h2 id="h-s1"><span class="hex">1</span>한 방향씩 재 보기 — 편미분</h2>
+  <div class="tags"><span class="tag nn">수학: 편미분 ∂f/∂x, ∂f/∂y, ∂f/∂z</span><span class="tag fly">일상: 온도계를 한 방향으로만 옮겨 보기</span></div>
+  <div class="pair">
+    <div><div class="tl">일상으로 치면</div>방 안에 난로가 있습니다. 온도계를 들고 지금 자리에서 <b>앞으로만</b> 반 뼘 옮기면 온도가 조금 바뀝니다. 같은 일을 <b>옆으로만</b>, <b>위로만</b> 해 보면 방향마다 바뀌는 정도가 다릅니다.</div>
+    <div><div class="tr">수학에서는</div>다른 두 좌표는 그대로 두고 한 좌표만 아주 조금 움직였을 때의 변화율이 편미분입니다. 세 방향이니 편미분도 셋: ∂f/∂x, ∂f/∂y, ∂f/∂z. ∂는 "다른 건 고정하고"라는 표시예요.</div>
+  </div>
+  <div class="panel">
+    <div class="ptitle">온도계 실험 — 한 점에서 x·y·z로 한 칸씩 찍어 보기</div>
+    <div class="cwrap t3"><canvas id="cvS1" aria-label="숫자 밭의 색 구름, 고른 점, 세 축 방향의 편미분 화살표"></canvas><span class="hint">끌어서 돌리기</span></div>
+    <div class="ctrl">
+      <div class="group"><span class="glabel">숫자 밭</span><span id="g-f1"></span></div>
+      <div class="group" data-xyz="p1" data-v="1,0.5,0.8"></div>
+    </div>
+    <div class="eq" id="eq1"></div>
+    <div class="minis"><div class="mini a"><span>이 점의 값 f</span><b id="m1-f">—</b></div><div class="mini r"><span>∂f/∂x (빨강, x로만)</span><b id="m1-x">—</b></div><div class="mini g"><span>∂f/∂y (청록, y로만)</span><b id="m1-y" style="color:var(--terrain)">—</b></div><div class="mini m"><span>∂f/∂z (검정, z로만)</span><b id="m1-z" style="color:var(--ink)">—</b></div></div>
+    <div class="insight" id="i-s1" aria-live="polite"></div>
+  </div>
+  <p class="gut">한 줄 직관: 편미분은 "한 방향으로만 반 뼘 옮겼을 때 얼마나 바뀌나"이고, 세 방향이라 세 개다.</p>
+  <div class="explain"><h4>풀이</h4><ol>
+    <li>점 (x, y, z)에서 x만 0.1 늘린 점과 0.1 줄인 점의 값을 잽니다. 그 차이를 움직인 거리 0.2로 나누면 ∂f/∂x에 아주 가까워집니다. y, z도 똑같이 합니다.</li>
+    <li>화살표 세 개(빨강·청록·검정)는 각 편미분의 크기와 부호입니다. 화살표가 축의 + 쪽이면 그 방향으로 갈수록 값이 커집니다.</li>
+    <li>"기울어진 판"을 고르면 어디서 재도 세 화살표가 똑같습니다. 판은 어디서나 같은 정도로 기울었기 때문이에요.</li></ol>
+    <div class="lim">이 칸의 한계: 편미분은 축 방향 세 개만 봅니다. 비스듬한 방향 중 어디가 가장 가파른지는 세 개를 합쳐야 알 수 있습니다 → ②</div></div>
+  <details class="fold"><summary>수식으로 보기</summary><p>∂f/∂x = lim<sub>h→0</sub> [f(x + h, y, z) − f(x − h, y, z)] / (2h). 이 페이지는 h = 0.001로 계산하고, 화면의 식은 이해를 돕기 위해 h = 0.1로 보여 줍니다. 난로 밭 f = 20 + 30·e<sup>−(x² + y² + z²)/2</sup>의 정확한 편미분은 ∂f/∂x = −30x·e<sup>−(x² + y² + z²)/2</sup>입니다.</p></details>
+  <div data-dlg="s1"></div>
+  <div class="quiz" data-quiz="s1"></div>
+</div></section>
+
+<!-- ② 그래디언트 -->
+<section class="sec" id="s2" aria-labelledby="h-s2"><div class="wrap">
+  <h2 id="h-s2"><span class="hex">2</span>가장 가파른 오르막 — 그래디언트 ∇f</h2>
+  <div class="tags"><span class="tag nn">수학: ∇f = (∂f/∂x, ∂f/∂y, ∂f/∂z)</span><span class="tag fly">일상: 따뜻해지는 쪽을 가리키는 나침반</span></div>
+  <div class="pair">
+    <div><div class="tl">일상으로 치면</div>추운 방에서 눈을 감고도 난로 쪽을 알 수 있습니다. 조금씩 움직여 보고 가장 빨리 따뜻해지는 쪽으로 가면 되니까요. 그 쪽을 가리키는 나침반이 그래디언트입니다.</div>
+    <div><div class="tr">수학에서는</div>①의 편미분 세 개를 한 화살표로 묶은 것이 ∇f입니다. 이 화살표는 값이 가장 빨리 커지는 방향을 가리키고, 길이는 그 빠르기입니다. −∇f는 가장 빠른 내리막 — 1편의 경사하강이 가는 방향입니다.</div>
+  </div>
+  <div class="panel">
+    <div class="ptitle">나침반 실험 — 같은 값 껍질(등위면)과 그래디언트 화살표</div>
+    <div class="cwrap t3"><canvas id="cvS2" aria-label="그래디언트 방향 화살표 밭, 고른 점을 지나는 같은 값 껍질, 오르막·내리막 화살표"></canvas><span class="hint">끌어서 돌리기</span></div>
+    <div class="ctrl">
+      <div class="group"><span class="glabel">숫자 밭</span><span id="g-f2"></span></div>
+      <div class="group" data-xyz="p2" data-v="-0.4,1.5,1"></div>
+      <div class="group"><span class="glabel">걷는 쪽</span><span id="g-dir2"></span><button class="bt primary" id="b-walk2" type="button">걷기</button><button class="bt" id="b-reset2" type="button">처음으로</button></div>
+    </div>
+    <div class="eq" id="eq2"></div>
+    <div class="minis"><div class="mini a"><span>이 점의 값 (껍질의 값)</span><b id="m2-f">—</b></div><div class="mini m"><span>∇f (오르막 화살표)</span><b id="m2-g" style="font-size:16px">—</b></div><div class="mini m"><span>|∇f| 가장 가파른 빠르기</span><b id="m2-n">—</b></div><div class="mini g"><span>걸은 뒤 값</span><b id="m2-w">—</b></div></div>
+    <div class="insight" id="i-s2" aria-live="polite"></div>
+  </div>
+  <p class="gut">한 줄 직관: 같은 값끼리 이은 껍질에 늘 직각으로 꽂힌 화살표가 그래디언트다.</p>
+  <div class="explain"><h4>풀이</h4><ol>
+    <li>점이 지나가는 <b>같은 값 껍질</b>(회색 점들)이 보입니다. 난로나 그릇이면 공 모양, 기울어진 판이면 평평한 판, 안장이면 모래시계처럼 휜 면입니다.</li>
+    <li>껍질 위를 따라 걸으면 값이 그대로입니다. 그래서 값이 가장 빨리 바뀌는 쪽은 껍질과 <b>직각</b>인 쪽, 곧 ∇f(보라)입니다.</li>
+    <li>"내리막"으로 걸으면 공이 −∇f(초록)를 따라 내려갑니다. 그릇 밭에서는 원점(가장 낮은 곳)에 모입니다. 1편 오차 지도의 경사하강과 같은 움직임이에요.</li></ol>
+    <div class="lim">이 칸의 한계: 그래디언트는 숫자 밭에만 씁니다. 바람·물처럼 이미 화살표가 붙어 있는 밭에서는 "퍼짐"과 "돎"을 따로 재야 합니다 → ③·④</div></div>
+  <div class="bridge gen"><b>생성 AI로 치면</b> 그림을 만드는 확산 모델의 한 갈래(점수 기반 생성 모델)는 <b>데이터가 많은 쪽으로 가는 그래디언트</b>를 신경망으로 배웁니다. 이 방법을 낸 논문은 잡음을 여러 세기로 섞은 데이터마다 그 그래디언트 밭(점수)을 함께 추정하고, 그림을 만들 때는 잡음이 줄어드는 차례대로 그 화살표를 따라간다고 설명합니다 [4]. 잡음 그림을 그 화살표를 따라 조금씩 옮기면 그림이 나옵니다. 축이 x·y·z 셋이 아니라 픽셀 수만큼 많다는 것만 다릅니다.</div>
+  <details class="fold"><summary>수식으로 보기 — 왜 껍질과 직각인가</summary><p>껍질 위의 아주 짧은 이동 d = (dx, dy, dz)에서는 값이 변하지 않으므로 df = ∂f/∂x·dx + ∂f/∂y·dy + ∂f/∂z·dz = ∇f · d = 0입니다. 점곱이 0이니 ∇f는 껍질 위의 모든 방향과 직각입니다. 방향 u(길이 1)로 가는 변화율은 ∇f · u = |∇f| cos θ라서 θ = 0, 곧 ∇f 방향일 때 가장 큽니다.</p></details>
+  <div data-dlg="s2"></div>
+  <div class="quiz" data-quiz="s2"></div>
+</div></section>
+
+<!-- ③ 발산 -->
+<section class="sec" id="s3" aria-labelledby="h-s3"><div class="wrap">
+  <h2 id="h-s3"><span class="hex">3</span>퍼지는가, 모이는가 — 발산 ∇·F</h2>
+  <div class="tags"><span class="tag nn">수학: ∇·F = ∂F<sub>x</sub>/∂x + ∂F<sub>y</sub>/∂y + ∂F<sub>z</sub>/∂z</span><span class="tag fly">일상: 물속에 띄운 투명 상자와 물감</span></div>
+  <div class="pair">
+    <div><div class="tl">일상으로 치면</div>흐르는 물속에 그물로 된 작은 상자를 띄웁니다. 여섯 면으로 <b>나가는 물</b>과 <b>들어오는 물</b>을 세어 봅니다. 나가는 게 더 많으면 상자 안 어딘가에 물이 솟는 샘이 있는 것이고, 들어오는 게 더 많으면 빠지는 구멍이 있는 것입니다.</div>
+    <div><div class="tr">수학에서는</div>상자를 아주 작게 줄였을 때 "나간 양 − 들어온 양"을 상자 부피로 나눈 값이 발산 ∇·F입니다. 결과는 화살표가 아니라 <b>숫자 하나</b>입니다. 양수면 샘, 음수면 빨아들이는 곳, 0이면 들어온 만큼 나갑니다.</div>
+  </div>
+  <div class="panel">
+    <div class="ptitle">그물 상자 실험 — 여섯 면의 출입을 세고, 물감을 풀어 보기</div>
+    <div class="cwrap t3"><canvas id="cvS3" aria-label="화살표 밭, 그물 상자, 면마다 나가는(주황)·들어오는(파랑) 화살표, 흘러가며 모양이 바뀌는 물감 상자"></canvas><span class="hint">끌어서 돌리기</span></div>
+    <div class="ctrl">
+      <div class="group"><span class="glabel">화살표 밭</span><span id="g-f3"></span></div>
+      <div class="group" data-xyz="p3" data-v="0.8,0.6,0.4"></div>
+      <div class="group"><label class="glabel" for="r-a3">상자 한 변</label><input type="range" id="r-a3" min="0.3" max="1.2" step="0.05" value="0.8"><span class="val" id="v-a3">0.80</span></div>
+      <div class="group"><button class="bt primary" id="b-dye3" type="button">물감 풀기</button><button class="bt" id="b-reset3" type="button">처음으로</button></div>
+    </div>
+    <div class="eq" id="eq3"></div>
+    <div class="minis"><div class="mini a"><span>나간 양 (주황 면)</span><b id="m3-o">—</b></div><div class="mini r"><span>들어온 양 (파랑 면)</span><b id="m3-i" style="color:var(--info)">—</b></div><div class="mini g"><span>(나감 − 들어옴) ÷ 부피</span><b id="m3-d">—</b></div><div class="mini m"><span>물감 부피 (처음 = 1)</span><b id="m3-v">1.00</b></div></div>
+    <div class="insight" id="i-s3" aria-live="polite"></div>
+  </div>
+  <p class="gut">한 줄 직관: 발산은 "작은 상자에서 나간 것 − 들어온 것"을 부피로 나눈 숫자다.</p>
+  <div class="explain"><h4>풀이</h4><ol>
+    <li><b>샘</b>은 어디에 상자를 둬도 (나감 − 들어옴) ÷ 부피가 3입니다. x·y·z 세 방향으로 1씩 퍼지기 때문이에요. 물감 상자는 점점 커집니다.</li>
+    <li><b>빨라지는 흐름</b>은 화살표가 모두 나란한데도 발산이 1입니다. 뒤쪽 면보다 앞쪽 면에서 물이 더 빨리 나가기 때문입니다. 나란해 보여도 퍼질 수 있어요.</li>
+    <li><b>소용돌이</b>와 <b>균일한 흐름</b>은 들어온 만큼 나가서 0입니다. 물감 상자는 돌거나 밀려가기만 하고 부피는 1 그대로입니다.</li></ol>
+    <div class="lim">이 칸의 한계: 발산은 "얼마나 퍼지나"만 셉니다. 물이 상자 둘레를 빙빙 도는지는 알려 주지 않습니다(소용돌이도 0) → ④</div></div>
+  <details class="fold"><summary>수식으로 보기 — 상자 셈과 식이 같은 이유</summary><p>x 방향의 두 면(넓이 a²)만 보면, 앞면에서 나간 양 − 뒷면에서 들어온 양 ≈ [F<sub>x</sub>(x + a/2) − F<sub>x</sub>(x − a/2)]·a² ≈ (∂F<sub>x</sub>/∂x)·a³. y, z 면도 같아서 모두 더하고 부피 a³로 나누면 ∂F<sub>x</sub>/∂x + ∂F<sub>y</sub>/∂y + ∂F<sub>z</sub>/∂z = ∇·F. 물감 부피 V는 dV/dt = (∇·F)·V로 바뀌므로, 샘에서는 시간 t 뒤 e<sup>3t</sup>배가 됩니다.</p></details>
+  <div data-dlg="s3"></div>
+  <div class="quiz" data-quiz="s3"></div>
+</div></section>
+
+<!-- ④ 회전 -->
+<section class="sec" id="s4" aria-labelledby="h-s4"><div class="wrap">
+  <h2 id="h-s4"><span class="hex">4</span>바람개비가 도는가 — 회전 ∇×F</h2>
+  <div class="tags"><span class="tag nn">수학: ∇×F (회전, curl)</span><span class="tag fly">일상: 개울에 띄운 작은 바람개비</span></div>
+  <div class="pair">
+    <div><div class="tl">일상으로 치면</div>흐르는 물에 날개 네 개짜리 작은 바람개비를 꽂습니다. 날개마다 받는 물살이 다르면 바람개비가 돕니다. 어느 축으로 꽂느냐에 따라 돌기도 하고 안 돌기도 합니다.</div>
+    <div><div class="tr">수학에서는</div>회전 ∇×F는 <b>화살표</b>입니다. 화살표의 방향은 바람개비가 가장 빨리 도는 축, 길이는 도는 세기(바람개비 빠르기의 두 배)입니다. 오른손 네 손가락을 도는 쪽으로 감으면 엄지가 화살표 방향입니다.</div>
+  </div>
+  <div class="panel">
+    <div class="ptitle">바람개비 실험 — 축을 골라 꽂고 도는 빠르기 재기</div>
+    <div class="cwrap t3"><canvas id="cvS4" aria-label="화살표 밭, 고른 축에 꽂힌 날개 네 개의 바람개비, 회전 화살표"></canvas><span class="hint">끌어서 돌리기</span></div>
+    <div class="ctrl">
+      <div class="group"><span class="glabel">화살표 밭</span><span id="g-f4"></span></div>
+      <div class="group"><span class="glabel">바람개비 축</span><span id="g-ax4"></span></div>
+      <div class="group" data-xyz="p4" data-v="0.8,0.4,0.2"></div>
+    </div>
+    <div class="eq" id="eq4"></div>
+    <div class="minis"><div class="mini a"><span>바람개비 빠르기 (초당 라디안)</span><b id="m4-w">—</b></div><div class="mini g"><span>도는 쪽 (축 끝에서 볼 때)</span><b id="m4-s" style="font-size:16px">—</b></div><div class="mini m"><span>∇×F (회전 화살표)</span><b id="m4-c" style="font-size:16px">—</b></div><div class="mini r"><span>|∇×F| 소용돌이 세기</span><b id="m4-n">—</b></div></div>
+    <div class="insight" id="i-s4" aria-live="polite"></div>
+  </div>
+  <p class="gut">한 줄 직관: 회전은 바람개비가 가장 빨리 도는 축을 가리키는 화살표다.</p>
+  <div class="explain"><h4>풀이</h4><ol>
+    <li><b>소용돌이 (−y, x, 0)</b>는 z축에 꽂은 바람개비만 돕니다(빠르기 1). x축이나 y축에 꽂으면 날개 양쪽이 같은 물살을 받아 서 있습니다. 회전 화살표가 z축을 가리키는 이유예요.</li>
+    <li><b>옆으로 누운 소용돌이 (0, −z, y)</b>는 x축에 꽂아야 돕니다. 회전 화살표도 x축을 가리킵니다. 회전은 "얼마나"뿐 아니라 "어느 축으로"를 함께 알려 주는 화살표입니다.</li>
+    <li><b>비틀린 밭 (y, x, 0)</b>은 화살표가 휘어 보이지만 어느 축으로 꽂아도 안 돕니다. 이 밭은 숫자 밭 xy의 그래디언트라서, 1편 ②에서 본 대로 회전이 늘 0입니다.</li></ol>
+    <div class="lim">이 칸의 한계: 바람개비는 아주 작다고 가정합니다. 큰 바람개비는 여러 곳의 물살을 평균 내므로 한 점의 회전과 다를 수 있습니다.</div></div>
+  <details class="fold"><summary>수식으로 보기 — 행렬식으로 쓰는 회전</summary><p>∇×F = (∂F<sub>z</sub>/∂y − ∂F<sub>y</sub>/∂z, ∂F<sub>x</sub>/∂z − ∂F<sub>z</sub>/∂x, ∂F<sub>y</sub>/∂x − ∂F<sub>x</sub>/∂y). 첫 줄에 단위 벡터 î, ĵ, k̂, 둘째 줄에 ∂/∂x, ∂/∂y, ∂/∂z, 셋째 줄에 F<sub>x</sub>, F<sub>y</sub>, F<sub>z</sub>를 놓은 3×3 행렬식을 펼친 것과 같습니다. 이 페이지의 바람개비는 축 n에 수직인 작은 고리(반지름 0.06)를 따라 물살을 더한 값 ÷ 고리 넓이로 (∇×F)·n을 재고, 그 절반을 빠르기로 씁니다.</p></details>
+  <div data-dlg="s4"></div>
+  <div class="quiz" data-quiz="s4"></div>
+</div></section>
+
+<!-- ⑤ 라플라시안 -->
+<section class="sec" id="s5" aria-labelledby="h-s5"><div class="wrap">
+  <h2 id="h-s5"><span class="hex">5</span>이웃보다 움푹한가 — 라플라시안 ∇²f</h2>
+  <div class="tags"><span class="tag nn">수학: ∇²f = ∇·∇f</span><span class="tag fly">일상: 이웃 여섯 집과 우리 집 온도 비교</span></div>
+  <div class="pair">
+    <div><div class="tl">일상으로 치면</div>우리 집 앞·뒤·좌·우·위·아래 여섯 집의 온도를 재서 평균을 냅니다. 평균이 우리 집보다 따뜻하면 우리 집은 "움푹 들어간 차가운 곳"이라 곧 데워지고, 평균이 더 차가우면 식습니다.</div>
+    <div><div class="tr">수학에서는</div>"이웃 여섯의 평균 − 가운데"를 거리로 맞춘 것이 라플라시안입니다. ②의 그래디언트 화살표 밭에 ③의 발산을 쓴 것과 같아서 ∇·∇f, 줄여 ∇²f라고 씁니다. 1편 ③에서는 헤시안 고유값의 합으로 만났습니다.</div>
+  </div>
+  <div class="panel">
+    <div class="ptitle">이웃 여섯 집 실험 — 가운데와 이웃 평균 비교</div>
+    <div class="cwrap t3"><canvas id="cvS5" aria-label="가운데 점과 x·y·z 방향 앞뒤의 이웃 여섯 점, 각 점의 값"></canvas><span class="hint">끌어서 돌리기</span></div>
+    <div class="ctrl">
+      <div class="group"><span class="glabel">숫자 밭</span><span id="g-f5"></span></div>
+      <div class="group" data-xyz="p5" data-v="0.4,0.3,0.2"></div>
+      <div class="group"><label class="glabel" for="r-h5">이웃까지 거리 h</label><input type="range" id="r-h5" min="0.2" max="1" step="0.05" value="0.5"><span class="val" id="v-h5">0.50</span></div>
+    </div>
+    <div class="eq" id="eq5"></div>
+    <div class="minis"><div class="mini a"><span>가운데 값</span><b id="m5-c">—</b></div><div class="mini g"><span>이웃 여섯 평균</span><b id="m5-a">—</b></div><div class="mini m"><span>6 × (평균 − 가운데) ÷ h² ≈ ∇²f</span><b id="m5-e">—</b></div><div class="mini r"><span>식으로 구한 ∇²f</span><b id="m5-x">—</b></div></div>
+    <div class="insight" id="i-s5" aria-live="polite"></div>
+  </div>
+  <p class="gut">한 줄 직관: 라플라시안이 양수면 "이웃보다 내가 낮다(움푹)", 음수면 "이웃보다 내가 높다(볼록)".</p>
+  <div class="explain"><h4>풀이</h4><ol>
+    <li><b>그릇 x² + y² + z²</b>는 어디서나 +6, <b>돔</b>은 −6입니다. 1편에서 본 2차원 그릇 x² + y²의 +4보다 큰 것은 z 방향 굽음 +2가 하나 더 붙어서입니다.</li>
+    <li><b>안장 x² + y² − 2z²</b>은 x·y로 위로 휜 만큼(+2 + 2) z로 아래로 휘어(−4) 합이 0입니다. 움푹도 볼록도 아닌 균형입니다.</li>
+    <li><b>난로</b>는 한가운데가 −90으로 가장 볼록(뜨거운 꼭대기)하고, 원점에서 거리 √3 ≈ 1.73보다 멀어지면 양수로 바뀝니다. 열은 라플라시안이 양수인 곳을 데우고 음수인 곳을 식혀 고르게 만듭니다(열방정식).</li></ol>
+    <div class="lim">이 칸의 한계: 이웃까지 거리 h가 크면 값이 식과 조금 달라집니다. h를 줄이면 가까워집니다. 그릇·돔·안장처럼 2차식이면 h와 상관없이 딱 맞습니다.</div></div>
+  <div class="bridge gen"><b>그림 처리로 치면</b> 사진에서 경계선을 찾을 때 쓰는 라플라시안 필터는 이 실험의 2차원판입니다. 픽셀 하나를 가운데로, 위·아래·왼쪽·오른쪽 네 이웃을 더하고 가운데의 4배를 빼면 됩니다. 밝기가 갑자기 바뀌는 곳에서 값이 크게 튀어 경계가 드러납니다 [5]. CNN의 첫 층이 배우는 필터 가운데에도 비슷한 모양이 자주 보입니다.</div>
+  <details class="fold"><summary>수식으로 보기 — 이웃 평균과 라플라시안</summary><p>테일러 전개로 f(x + h) + f(x − h) = 2f(x) + h²·∂²f/∂x² + … 세 축을 모두 더하면 (이웃 여섯의 합) − 6f = h²·∇²f + …, 곧 ∇²f ≈ 6·(이웃 평균 − 가운데)/h². 열방정식 ∂T/∂t = k∇²T는 "이웃 평균보다 낮으면 오른다"를 그대로 적은 식입니다. 난로 밭의 정확한 값은 ∇²f = 30·e<sup>−r²/2</sup>(r² − 3), r² = x² + y² + z².</p></details>
+  <div data-dlg="s5"></div>
+  <div class="quiz" data-quiz="s5"></div>
+</div></section>
+
+<!-- 대결 -->
+<section class="sec" id="duel" aria-labelledby="h-duel"><div class="wrap">
+  <h2 id="h-duel">대결 — 겉모양으로 알 수 있나, 바람개비가 도는 곳은?</h2>
+  <p class="lead">네 곳에 바람개비를 z축으로 꽂습니다. 주판봇은 화살표 <b>모양</b>을 보고 맞히고, 초파리 연구원은 회전 ∇×F의 z 성분을 <b>계산</b>해서 맞힙니다. 판정은 실제로 바람개비 둘레의 물살을 더해 돌려 본 결과이고, 기준은 <b>네 곳 중 맞힌 수</b>입니다.</p>
+  <div class="duel">
+    <div class="side l"><div class="head"><img id="d-fly" data-mood="fly_magnify" alt="" aria-hidden="true"><div><b style="color:var(--c-fly)">초파리 연구원</b><br><span class="muted">∂F<sub>y</sub>/∂x − ∂F<sub>x</sub>/∂y를 이웃 점으로 재서 0이 아니면 "돈다".</span></div></div><div data-dlg="dfly"></div></div>
+    <div class="vs">VS</div>
+    <div class="side r"><div class="head"><img id="d-robo" data-mood="robo_coin" alt="" aria-hidden="true"><div><b style="color:var(--c-robo)">주판봇</b><br><span class="muted">화살표가 원을 그리며 돌면 "돈다", 나란하거나 뻗어 나가면 "안 돈다".</span></div></div><div data-dlg="drobo"></div></div>
+  </div>
+  <div class="panel">
+    <div class="cwrap t3"><canvas id="cvDuel" aria-label="z = 0 평면의 화살표 밭과 z축으로 꽂은 바람개비"></canvas><span class="hint">끌어서 돌리기</span></div>
+    <div class="ctrl"><div class="group"><span class="glabel">볼 곳</span><span id="g-case"></span></div></div>
+    <div class="ctrl"><div class="group"><span class="glabel">먼저 맞혀 보기</span><button class="bt" data-pred="fly" type="button" aria-pressed="false">초파리가 이길 것 같다</button><button class="bt" data-pred="robo" type="button" aria-pressed="false">주판봇이 이길 것 같다</button></div>
+      <div class="group"><button class="bt primary" data-go type="button">결과 보기</button><button class="bt" data-close type="button" hidden>다시 닫기</button></div></div>
+    <div class="duel-res" hidden>
+      <div class="tblwrap"><table class="cmp"><thead><tr><th>곳</th><th>화살표 밭 · 점</th><th>겉모양</th><th>주판봇</th><th>초파리</th><th>실제 바람개비</th></tr></thead><tbody id="d-tbl"></tbody></table></div>
+      <p class="muted" style="font-size:13.5px;margin:6px 0 0">막대 = 네 곳 중 맞힌 수.</p><div class="resbars"><div class="resbar"><span style="color:var(--c-fly)">초파리 연구원 · 맞힌 수</span><div class="bar"><i id="d-bf" style="background:var(--c-fly)"></i></div><b id="d-vf">—</b></div>
+        <div class="resbar"><span style="color:var(--c-robo)">주판봇 · 맞힌 수</span><div class="bar"><i id="d-br" style="background:var(--c-robo)"></i></div><b id="d-vr">—</b></div></div>
+      <div id="d-say"></div>
+      <div class="score"><span id="d-score"></span><span id="d-pred"></span></div>
+    </div>
+  </div>
+  <div class="quiz" data-quiz="duel"></div>
+</div></section>
+
+<!-- 정리 -->
+<section class="sec" id="sum" aria-labelledby="h-sum"><div class="wrap">
+  <h2 id="h-sum">정리 — ∇ 하나, 연산 넷</h2>
+  <div class="tblwrap"><table class="cmp"><thead><tr><th>칸</th><th>이름과 식</th><th>들어가는 것 → 나오는 것</th><th>생활 장면</th><th>이 칸의 한계</th></tr></thead><tbody>
+    <tr><td>①</td><td>편미분 ∂f/∂x, ∂f/∂y, ∂f/∂z</td><td>숫자 밭 → 숫자 셋</td><td>온도계를 한 방향으로만 옮기기</td><td>축 방향 셋만 봄</td></tr>
+    <tr><td>②</td><td>그래디언트 ∇f</td><td>숫자 밭 → 화살표</td><td>따뜻해지는 쪽 나침반</td><td>화살표 밭에는 못 씀</td></tr>
+    <tr><td>③</td><td>발산 ∇·F</td><td>화살표 밭 → 숫자</td><td>그물 상자의 출입, 물감 퍼짐</td><td>소용돌이는 못 봄</td></tr>
+    <tr><td>④</td><td>회전 ∇×F</td><td>화살표 밭 → 화살표</td><td>개울의 바람개비</td><td>아주 작은 바람개비 가정</td></tr>
+    <tr><td>⑤</td><td>라플라시안 ∇²f = ∇·∇f</td><td>숫자 밭 → 숫자</td><td>이웃 여섯 집과 비교</td><td>h가 크면 근사가 어긋남</td></tr>
+  </tbody></table></div>
+  <h3>용어 대응 카드</h3>
+  <div class="gloss">
+    <div><b>숫자 밭 (스칼라장)</b> = 점마다 숫자 하나. 온도, 농도, 1편의 오차.</div>
+    <div><b>화살표 밭 (벡터장)</b> = 점마다 화살표 하나. 바람, 물 흐름, 그래디언트 밭.</div>
+    <div><b>∇ (나블라)</b> = (∂/∂x, ∂/∂y, ∂/∂z). 세 방향으로 조금씩 재는 도구 묶음.</div>
+    <div><b>편미분</b> = 한 좌표만 움직였을 때의 변화율.</div>
+    <div><b>그래디언트 ∇f</b> = 가장 가파른 오르막 화살표. 같은 값 껍질과 직각.</div>
+    <div><b>발산 ∇·F</b> = (나감 − 들어옴) ÷ 부피. 양수 샘, 음수 구멍.</div>
+    <div><b>회전 ∇×F</b> = 바람개비가 가장 빨리 도는 축과 세기. 오른손 법칙.</div>
+    <div><b>라플라시안 ∇²f</b> = 이웃 평균보다 얼마나 낮은가. 양수 움푹, 음수 볼록.</div>
+  </div>
+  <h3>함께 기억할 두 가지 0</h3>
+  <ul>
+    <li><b>그래디언트의 회전은 늘 0</b> — 숫자 밭의 오르막 화살표들은 소용돌이를 만들지 않습니다. 1편의 공이 오차 지도에서 빙빙 돌지 않는 이유입니다(④의 비틀린 밭).</li>
+    <li><b>회전의 발산은 늘 0</b> — 회전 화살표들로 만든 밭에는 샘도 구멍도 없습니다.</li>
+  </ul>
+  <h3>비유의 한계</h3>
+  <ul>
+    <li>신경망의 오차 지도는 축이 수천~수십억 개라 상자로 그릴 수 없습니다. 그래도 ∇는 축 수만큼 칸이 늘어날 뿐 뜻은 같습니다.</li>
+    <li>회전(가위곱)은 세 축 공간에서만 화살표로 깔끔하게 나옵니다. 축이 많은 공간에서는 그래디언트와 라플라시안을 주로 씁니다.</li>
+    <li>이 페이지의 밭은 모두 식으로 만든 설명용 모형입니다. 실제 바람·물은 시간에 따라 바뀌고 훨씬 복잡합니다.</li>
+  </ul>
+  <div class="next"><a href="1_math_map.html"><b>← 1편 수학 편</b><br>그래디언트가 오차 지도 위에서 경사하강의 방향이 되는 모습을 봅니다.</a><a href="2_experiment_lab.html"><b>2편 실험실 편</b><br>배치·학습률·에포크를 지도 위에서 고릅니다.</a><a href="index.html"><b>목차</b><br>세 편 한눈에 보기</a></div>
+</div></section>
+
+<section class="sec" id="outro" aria-labelledby="h-outro"><div class="wrap">
+  <h2 id="h-outro">아웃트로</h2>
+  <div data-dlg="outro"></div>
+</div></section>
+</main>
+
+<footer><div class="wrap">
+  <h3>출처</h3>
+  <table><thead><tr><th>#</th><th>자료</th><th>이 페이지에서 쓴 곳</th></tr></thead><tbody>
+    <tr><td>[1]</td><td>matharium, 「The Del Operator」 인포그래픽 (사용자 제공 이미지, 원 게시물 주소·게시일 미확인)</td><td>전체 구성 — ∇의 정의와 네 연산, 그릇·돔 라플라시안 예. 그림은 쓰지 않고 새로 그렸음</td></tr>
+    <tr><td>[2]</td><td>matharium, 「The Vector Differential Operators」 인포그래픽 (사용자 제공 이미지, 원 게시물 주소·게시일 미확인)</td><td>정리의 "두 가지 0" 항등식</td></tr>
+    <tr><td>[3]</td><td>Knott, C. G. (1911). Life and Scientific Work of Peter Guthrie Tait. Cambridge University Press. / Wikipedia, "Nabla symbol" (2026-11-16 확인)</td><td>나블라 이름의 내력(1편 ② 상자와 같은 내용)</td></tr>
+    <tr><td>[4]</td><td>Song, Y., Ermon, S. (2019). Generative Modeling by Estimating Gradients of the Data Distribution. NeurIPS 32. arXiv:1907.05600.</td><td>② 생성 AI 상자 — 점수(그래디언트) 기반 생성</td></tr>
+    <tr><td>[5]</td><td>Gonzalez, R. C., Woods, R. E. (2018). Digital Image Processing, 4th ed. Pearson. 3장 공간 필터링</td><td>⑤ 그림 처리 상자 — 라플라시안 필터</td></tr>
+  </tbody></table>
+  <h3>예시값·설명용 모형인 것</h3>
+  <ul><li>모든 숫자 밭(난로 20 + 30·e<sup>−r²/2</sup>, 그릇, 돔, 기울어진 판, 안장)과 화살표 밭(샘, 빨아들임, 균일한 흐름, 빨라지는 흐름, 소용돌이, 옆으로 누운 소용돌이, 층밀림, 비틀린 밭, 배수구 소용돌이)과 그 결과 수치</li><li>표지는 그림 파일을 받기 전까지 그림판으로 그린 설명용 그림</li></ul>
+  <p>저작권: 캐릭터 이름·설정·그림은 저작권자 안상선의 허락 없이 사용할 수 없습니다. 참고한 인포그래픽의 그림은 이 페이지에 넣지 않았습니다.</p>
+  <p>글 · 안상선 ((주)M-Robo 대표) · <a href="index.html">목차</a> · <a href="1_math_map.html">1편 수학 편</a> · <a href="2_experiment_lab.html">2편 실험실 편</a> · <a href="https://adminmrobo.github.io/fish_market_learning_epoch_etc/">Fish Market 연구실(학습률·에포크)</a> · <a href="https://adminmrobo.github.io/ai_in_3d/">신경망 연구소</a></p>
+</div></footer>
+
+<script>
+/*@@SPRITES@@*/
+/*@@VECMATH@@*/
+/*@@COMMON@@*/
+(function(){
+'use strict';
+var $=U.$,$$=U.$$,fmt=U.fmt,cssv=U.cssv,SF=VM.SF,VF=VM.VF;
+var AX=function(i){return [cssv('--eye'),cssv('--terrain'),cssv('--ink')][i];};
+function vf(v,d){return '('+v.map(function(x){return fmt(Math.abs(x)<5e-10?0:x,d==null?2:d);}).join(', ')+')';}
+function n3(v){return Math.hypot(v[0],v[1],v[2]);}
+/* 점 고르기 슬라이더 세 개 */
+function xyz(key,on){var host=$('[data-xyz="'+key+'"]'),P=host.dataset.v.split(',').map(Number);
+  host.innerHTML=['x','y','z'].map(function(a,i){return '<span style="white-space:nowrap;display:inline-flex;align-items:center;gap:6px"><label class="glabel" for="r-'+key+a+'" style="color:'+AX(i)+'">'+a+'</label><input type="range" id="r-'+key+a+'" min="-2" max="2" step="0.1" value="'+P[i]+'"><span class="val" id="v-'+key+a+'">'+P[i].toFixed(1)+'</span></span>';}).join(' ');
+  ['x','y','z'].forEach(function(a,i){var r=$('#r-'+key+a);r.oninput=function(){P[i]=+r.value;$('#v-'+key+a).textContent=P[i].toFixed(1);on(P);};});
+  return P;}
+/* 숫자 밭의 색 구름: 7×7×7 점, 먼 것부터 */
+function range(f){var lo=Infinity,hi=-Infinity;for(var i=0;i<=8;i++)for(var j=0;j<=8;j++)for(var k=0;k<=8;k++){var v=f(-2+i/2,-2+j/2,-2+k/2);lo=Math.min(lo,v);hi=Math.max(hi,v);}return [lo,hi];}
+function cloud(g,S,f,R,n,al){n=n||7;var L=S.L*0.9,list=[];for(var i=0;i<n;i++)for(var j=0;j<n;j++)for(var k=0;k<n;k++){var x=-L+2*L*i/(n-1),y=-L+2*L*j/(n-1),z=-L+2*L*k/(n-1),q=S.P(x,y,z);list.push([q,f(x,y,z)]);}
+  list.sort(function(a,b){return b[0][2]-a[0][2];});list.forEach(function(it){g.beginPath();g.arc(it[0][0],it[0][1],3.2,0,7);g.fillStyle=U.cmap((it[1]-R[0])/(R[1]-R[0]),al||0.4);g.fill();});}
+/* 숫자 밭 버튼 목록 */
+var SFB={heater:'난로 둘레 온도',bowl:'그릇',dome:'돔',tilt:'기울어진 판',saddle:'안장'};
+function sfList(keys){return keys.map(function(k){return [k,SFB[k]];});}
+
+/* ── 대사 ── */
+var DLG={
+ hero:[["doc","doc_front","오늘 상자의 z축은 오차가 아니라 진짜 위아래입니다. 세 축이 모두 공간이에요."],
+       ["asst","asst_smile","그럼 화살표가 위로도 아래로도 뻗겠네요. ∇ 칸이 셋인 이유를 보러 가요!"],
+       ["fly","fly_magnify","화살표가 빙글빙글 돌아 보인다고 소용돌이일까? 겉모양은 늘 의심해야지."],
+       ["robo","robo_coin","보면 알지! 도는 모양이면 도는 거야. 계산은 시간 낭비."]],
+ map:[["sia","sia_explain","순서대로 말씀드릴게요. ① 한 방향씩 재기 → ② 오르막 → ③ 퍼짐 → ④ 돎 → ⑤ 움푹함, 그리고 대결이에요."],
+      ["moa","moa_report","표의 \"생활 장면\" 칸만 먼저 읽어도 반은 안 거래요."]],
+ s1:[["asst","asst_report","난로 밭에서 (1, 0.5, 0.8)이면 x 방향 편미분이 가장 크게 음수예요. 난로에서 x로 멀어질수록 빨리 식는다는 뜻이죠."]],
+ s2:[["fly","fly_point","껍질 위를 걸으면 온도가 그대로야. 그러니 가장 빨리 바뀌는 쪽은 껍질과 직각일 수밖에 없지."],
+     ["robo","robo_calc","그릇 밭에서 내리막으로 걸으면 원점에 모여. 1편 경사하강이랑 똑같네. 이건 인정."]],
+ s3:[["moa","moa_sparkle","샘에서 물감 상자가 점점 커져요! 소용돌이에서는 빙글 돌기만 하고 크기는 그대로예요."],
+     ["asst","asst_spark","빨라지는 흐름은 화살표가 다 나란한데도 발산이 1이에요. 모양만 보면 놓쳐요."]],
+ s4:[["doc","doc_think","바람개비를 어느 축에 꽂느냐가 중요합니다. 가장 빨리 도는 축이 회전 화살표의 방향이에요."]],
+ s5:[["robo","robo_calc","이웃 여섯 평균 빼기 가운데, 곱하기 6, 나누기 h². 그릇은 언제나 6. 숫자는 거짓말을 안 하거든."],
+     ["fly","fly_clip","난로 한가운데는 −90이야. 가장 뜨거운 꼭대기니까 식는 쪽이지."]],
+ dfly:[["fly","fly_magnify","겉모양 말고 이웃 점의 물살 차이를 잴게. 그게 회전이야."]],
+ drobo:[["robo","robo_coin","도는 모양이면 돈다. 보는 게 제일 빠르지."]],
+ outro:[["doc","doc_magic","오늘의 세 줄입니다.<br>① ∇는 x·y·z 세 방향으로 조금씩 재는 도구 묶음이다.<br>② 숫자 밭에 쓰면 오르막(그래디언트), 화살표 밭에 쓰면 퍼짐(발산)과 돎(회전).<br>③ 오르막 화살표들의 퍼짐이 라플라시안 — 이웃보다 얼마나 움푹한가."],
+        ["fly","fly_arms","원을 그려도 안 도는 곳, 나란해도 도는 곳. 계산이 겉모양을 이겼어."],
+        ["robo","robo_sigh","이번 판도 손절… 그래도 그래디언트의 회전이 0이라 1편 공이 안 도는 건 이제 확실히 알았다."],
+        ["asst","asst_smile","1편으로 돌아가면 오차 지도의 ∇f가 다르게 보일 거예요. 축이 수십억 개여도 뜻은 같아요."]]
+};
+U.dialogues(DLG);
+var CAST=[["doc","doc_front","박사","해설과 판정. 판정은 늘 계산한 숫자대로."],["asst","asst_smile","조수 하루","처음 배우는 사람의 눈으로 묻고, 숫자를 발표해요."],["fly","fly_magnify","초파리 연구원","의심하는 쪽. 겉모양보다 계산을 믿어요."],["robo","robo_coin","주판봇","확신하는 쪽. 눈에 보이는 모양을 믿어요."],["sia","sia_explain","인턴 시아","순서를 정리하고 진행 신호를 들어요."],["moa","moa_tea","인턴 모아","기록을 모으고 응원해요."]];
+$('#castgrid').innerHTML=CAST.map(function(c){return '<div class="castc" style="--cc:var(--c-'+c[0]+')"><img src="'+U.spr(c[1])+'" alt="" aria-hidden="true"><div><b>'+c[2]+'</b><p>'+c[3]+'</p></div></div>';}).join('');
+$('#secretrow').innerHTML=['x1','x2','x3'].map(function(x,i){return U.say(x,x+'_hint',['(반짝)','(…끄덕)','(짝짝짝)'][i]);}).join('');
+$('#secretbtn').onclick=function(){var r=$('#secretrow');r.hidden=!r.hidden;this.setAttribute('aria-expanded',String(!r.hidden));this.textContent=r.hidden?'방청석 보기 (미공개 식구)':'방청석 닫기';};
+U.fillImgs();
+
+/* ── 숫자 요약 ── */
+$('#k-div').textContent=fmt(VM.flux(VF.source.F,[0.5,0.5,0.5],0.6).perVol,2);
+$('#k-om').textContent=fmt(VM.circ(VF.swirl.F,[1,0,0],[0,0,1],0.06).omega,2);
+
+/* ── 표지 그림판 ── */
+(function(){var cv=$('#coverCv');if(!cv)return;var S=new U.Space3D(cv,{L:2,views:false,ticks:false,floor:false,zoom:0.95,yaw:-0.5,pitch:0.35,axes:['x','y','z'],
+  onTick:function(dt){if(dt>0&&!U.reduce){S.yaw+=dt*0.06;S.dirty=true;}}});
+  S.ov.push(function(g,S){S.field(g,VF.swirl.F,{n:5,scale:0.32,color:function(m,a){return 'rgba(15,127,134,'+(a*0.8).toFixed(2)+')';}});});})();
+
+/* ── 큰 그림: 세 축 상자 ── */
+var mapMode='addr',MP=[1.5,1,1.2],RH=range(SF.heater.f);
+var Smap=new U.Space3D($('#cvMap'),{L:2,stamp:'설명용 모형',aria:'x·y·z 세 축 상자'});
+Smap.ov.push(function(g,S){
+  if(mapMode==='scalar')cloud(g,S,SF.heater.f,RH,7,0.5);
+  if(mapMode==='vector')S.field(g,VF.swirl.F,{n:5,scale:0.3});
+  if(mapMode==='addr'){S.line3(g,[[0,0,0],[MP[0],0,0]],AX(0),3);S.line3(g,[[MP[0],0,0],[MP[0],MP[1],0]],AX(1),3);S.line3(g,[[MP[0],MP[1],0],MP],AX(2),3);
+    S.line3(g,[[0,0,0],[MP[0],0,0],[MP[0],MP[1],0],[0,MP[1],0],[0,0,0]],'rgba(22,33,43,.18)',1,[3,3]);
+    var a=S.P(MP[0]/2,0,0);U.label(g,a[0],a[1]+14,'x로 1.5',AX(0),'center');var b=S.P(MP[0],MP[1]/2,0);U.label(g,b[0]+10,b[1]+12,'y로 1',AX(1));var c=S.P(MP[0],MP[1],MP[2]/2);U.label(g,c[0]+10,c[1],'z로 1.2',AX(2));}
+  var q=S.dot3(g,MP[0],MP[1],MP[2],cssv('--amber'),7);U.label(g,q[0]+12,q[1]-12,'점 (1.5, 1, 1.2)'+(mapMode==='scalar'?' · 온도 '+fmt(SF.heater.f(MP[0],MP[1],MP[2]),1)+'℃':mapMode==='vector'?' · 화살표 '+vf(VF.swirl.F(MP[0],MP[1],MP[2]),1):''),cssv('--amber'));
+  if(mapMode==='vector'){var v=VF.swirl.F(MP[0],MP[1],MP[2]);S.arrow3(g,MP,[MP[0]+v[0]*0.4,MP[1]+v[1]*0.4,MP[2]+v[2]*0.4],cssv('--amber'),3);}});
+var MAPI={addr:[['g','원점에서 x축(빨강)으로 1.5, y축(청록) 방향으로 1, z축(검정) 방향으로 1.2를 가면 노란 점에 닿습니다. 이 세 숫자가 점의 주소 (x, y, z)예요.'],['a','1편의 지도와 달리 z도 공간의 방향입니다. 점을 위아래로 옮겨도 "오차"가 바뀌는 게 아니라 자리가 바뀝니다.']],
+  scalar:[['g','숫자 밭: 점마다 숫자 하나가 붙어 있습니다. 여기서는 원점에 난로가 있는 방의 온도예요. 가운데가 빨갛고(뜨겁고) 멀수록 남색(차가움)입니다.'],['m','숫자 밭에 ∇를 그대로 붙이면 그래디언트(②), 두 번 쓰면 라플라시안(⑤)이 됩니다.']],
+  vector:[['g','화살표 밭: 점마다 화살표 하나가 붙어 있습니다. 여기서는 z축을 감고 도는 소용돌이 물살이에요. 화살표가 모두 수평이라 위아래(z)로는 흐르지 않습니다.'],['m','화살표 밭에는 ∇를 점곱으로 붙이면 발산(③), 가위곱으로 붙이면 회전(④)이 됩니다.']]};
+U.btns($('#g-map'),[['addr','점의 주소'],['scalar','숫자 밭 (온도)'],['vector','화살표 밭 (물살)']],'addr',function(v){mapMode=v;Smap.dirty=true;U.ins($('#i-map'),MAPI[v]);});
+U.ins($('#i-map'),MAPI.addr);
+
+/* ── ① 편미분 ── */
+var f1='heater',R1=range(SF.heater.f);
+var S1=new U.Space3D($('#cvS1'),{L:2,stamp:'설명용 모형',aria:'편미분 실험'});
+var P1=xyz('p1',function(){S1.dirty=true;up1();});
+S1.ov.push(function(g,S){var F=SF[f1],p=P1;cloud(g,S,F.f,R1,7,0.28);S.drop(g,p[0],p[1],p[2]);
+  var G=VM.grad(F.f,p),m=Math.max(Math.abs(G[0]),Math.abs(G[1]),Math.abs(G[2]),1e-9),k=0.9/m;
+  for(var i=0;i<3;i++){var a=p.slice(),b=p.slice();a[i]-=0.1;b[i]+=0.1;S.dot3(g,a[0],a[1],a[2],AX(i),2.6,false);S.dot3(g,b[0],b[1],b[2],AX(i),2.6,false);
+    var e=p.slice();e[i]+=G[i]*k;if(Math.abs(G[i])*k>0.03){var q=S.arrow3(g,p,e,AX(i),3);U.label(g,q[0]+8,q[1],['∂f/∂x ','∂f/∂y ','∂f/∂z '][i]+fmt(G[i],2),AX(i));}}
+  S.dot3(g,p[0],p[1],p[2],cssv('--amber'),6);});
+function up1(){var F=SF[f1],p=P1,G=VM.grad(F.f,p),u=F.unit;
+  $('#m1-f').textContent=fmt(F.f(p[0],p[1],p[2]),2)+u;$('#m1-x').textContent=fmt(G[0],2);$('#m1-y').textContent=fmt(G[1],2);$('#m1-z').textContent=fmt(G[2],2);
+  var a=F.f(p[0]+0.1,p[1],p[2]),b=F.f(p[0]-0.1,p[1],p[2]);
+  $('#eq1').innerHTML='∂f/∂x ≈ [f(x + 0.1, y, z) − f(x − 0.1, y, z)] ÷ 0.2 = ('+fmt(a,3)+' − '+fmt(b,3)+') ÷ 0.2 = <b>'+fmt((a-b)/0.2,3)+'</b>';
+  var i=[0,1,2].sort(function(s,t){return Math.abs(G[t])-Math.abs(G[s]);})[0],nm=['x','y','z'][i];
+  var msg=[['g','세 방향 가운데 <b>'+nm+'</b> 방향으로 움직일 때 값이 가장 많이 바뀝니다('+fmt(G[i],2)+'). '+(G[i]<0?'+'+nm+' 쪽으로 가면 값이 줄어요.':'+'+nm+' 쪽으로 가면 값이 늘어요.')]];
+  if(f1==='tilt')msg.push(['a','기울어진 판은 점을 어디로 옮겨도 세 값이 (1, 2, 0.5) 그대로입니다. 슬라이더를 움직여 확인해 보세요.']);
+  else if(f1==='heater')msg.push(['a','난로 밭에서는 세 편미분이 모두 "난로(원점) 쪽이 +"인 부호를 가집니다. 점의 x가 양수면 ∂f/∂x는 음수예요.']);
+  else msg.push(['a','그릇 밭의 편미분은 (2x, 2y, 2z)입니다. 점의 좌표를 두 배 한 값과 비교해 보세요.']);
+  U.ins($('#i-s1'),msg);}
+U.btns($('#g-f1'),sfList(['heater','bowl','tilt']),'heater',function(v){f1=v;R1=range(SF[v].f);S1.dirty=true;up1();});
+up1();
+
+/* ── ② 그래디언트 ── */
+var f2='heater',dir2=-1,walk2=null,wt2=0;
+var S2=new U.Space3D($('#cvS2'),{L:2,stamp:'설명용 모형',aria:'그래디언트 실험',
+  onTick:function(dt){if(walk2&&walk2.go&&dt>0){wt2+=dt;while(wt2>0.03&&walk2.path.length<220){wt2-=0.03;var p=walk2.path[walk2.path.length-1],G=VM.grad(SF[f2].f,p),m=n3(G);if(m<1e-4){walk2.go=false;break;}
+      var s=0.05*Math.min(1,m)/m*dir2,q=[p[0]+G[0]*s,p[1]+G[1]*s,p[2]+G[2]*s];if(Math.max(Math.abs(q[0]),Math.abs(q[1]),Math.abs(q[2]))>2){walk2.go=false;break;}walk2.path.push(q);}
+    if(walk2.path.length>=220)walk2.go=false;S2.dirty=true;up2w();}}});
+var P2=xyz('p2',function(){walk2=null;lev2();S2.dirty=true;up2();});
+var LV2=[];
+function lev2(){var f=SF[f2].f,p=P2,c=f(p[0],p[1],p[2]),n=26,L=2,h=2*L/n,out=[];for(var i=0;i<=n;i++)for(var j=0;j<=n;j++)for(var k=0;k<=n;k++){var x=-L+i*h,y=-L+j*h,z=-L+k*h,v=f(x,y,z)-c;
+  if(i<n){var v2=f(x+h,y,z)-c;if(v*v2<0)out.push([x+h*v/(v-v2),y,z]);}if(j<n){var v3=f(x,y+h,z)-c;if(v*v3<0)out.push([x,y+h*v/(v-v3),z]);}if(k<n){var v4=f(x,y,z+h)-c;if(v*v4<0)out.push([x,y,z+h*v/(v-v4)]);}}
+  LV2=out;}
+S2.ov.push(function(g,S){var F=SF[f2],p=P2;
+  S.field(g,function(x,y,z){var G=F.g(x,y,z),m=n3(G);return m<1e-9?[0,0,0]:[G[0]/m,G[1]/m,G[2]/m];},{n:5,scale:0.32,color:function(m,a){return 'rgba(155,63,181,'+(a*0.55).toFixed(2)+')';},wd:1.3});
+  var pts=LV2.map(function(q){return [S.P(q[0],q[1],q[2]),q];});pts.sort(function(a,b){return b[0][2]-a[0][2];});pts.forEach(function(it){var d=(it[0][2]+1.5)/3;g.fillStyle='rgba(22,33,43,'+U.clamp(0.3-d*0.2,0.06,0.3).toFixed(2)+')';g.fillRect(it[0][0]-0.9,it[0][1]-0.9,1.8,1.8);});
+  var G=F.g(p[0],p[1],p[2]),m=n3(G);S.drop(g,p[0],p[1],p[2]);
+  if(m>1e-9){var k=0.8/m,q=S.arrow3(g,p,[p[0]+G[0]*k,p[1]+G[1]*k,p[2]+G[2]*k],cssv('--stain'),3.2);U.label(g,q[0]+8,q[1],'∇f 오르막',cssv('--stain'));
+    var r=S.arrow3(g,p,[p[0]-G[0]*k,p[1]-G[1]*k,p[2]-G[2]*k],cssv('--gfp'),3.2);U.label(g,r[0]+8,r[1],'−∇f 내리막',cssv('--gfp'));}
+  if(walk2&&walk2.path.length>1){S.line3(g,walk2.path,cssv('--amber'),2.6);var e=walk2.path[walk2.path.length-1];S.dot3(g,e[0],e[1],e[2],cssv('--amber'),5);}
+  S.dot3(g,p[0],p[1],p[2],cssv('--amber'),6);});
+function up2(){var F=SF[f2],p=P2,G=F.g(p[0],p[1],p[2]),v=F.f(p[0],p[1],p[2]);
+  $('#m2-f').textContent=fmt(v,2)+F.unit;$('#m2-g').textContent=vf(G,2);$('#m2-n').textContent=fmt(n3(G),2);$('#m2-w').textContent='—';
+  $('#eq2').innerHTML='∇f = (∂f/∂x, ∂f/∂y, ∂f/∂z) = <b>'+vf(G,3)+'</b>, 길이 |∇f| = √('+G.map(function(x){return (x<0?'('+fmt(x,2)+')':fmt(x,2))+'²';}).join(' + ')+') = <b>'+fmt(n3(G),3)+'</b>';
+  var SH={heater:'공 모양 껍질(같은 온도). 난로를 중심으로 한 동심 공입니다.',bowl:'공 모양 껍질(원점에서 같은 거리).',tilt:'평평한 판 모양 껍질. 판이니 어디서나 직각 방향이 같습니다.',saddle:'모래시계처럼 휜 껍질. 그래도 화살표는 언제나 껍질과 직각입니다.'};
+  U.ins($('#i-s2'),[['g','회색 점들이 이 점을 지나는 <b>같은 값 껍질</b>입니다: '+SH[f2]],['m','보라 화살표(∇f)가 껍질과 직각으로 꽂힌 것을 "위에서", "앞에서" 버튼으로 돌려 확인해 보세요.']]);}
+function up2w(){if(!walk2)return;var e=walk2.path[walk2.path.length-1],F=SF[f2];$('#m2-w').textContent=fmt(F.f(e[0],e[1],e[2]),2)+F.unit;
+  if(!walk2.go){var w=dir2<0?'내리막':'오르막',ex={heater:dir2<0?'난로에서 멀어지며 상자 끝에 닿았습니다(차가운 쪽).':'난로(원점)에 다가가 가장 뜨거운 곳에 모였습니다.',bowl:dir2<0?'원점(가장 낮은 곳)에 모였습니다. 1편 경사하강과 같은 움직임이에요.':'원점에서 멀어져 상자 끝에 닿았습니다.',tilt:'곧은 줄을 따라 상자 끝까지 갔습니다. 판은 어디서나 같은 쪽이 오르막이에요.',saddle:dir2<0?'z 방향으로는 내리막이 계속 이어져 상자 끝에 닿았습니다.':'x·y 방향으로 계속 올라가 상자 끝에 닿았습니다.'};
+    U.ins($('#i-s2'),[['a',w+'으로 '+(walk2.path.length-1)+'걸음: '+ex[f2]]]);}}
+U.btns($('#g-f2'),sfList(['heater','bowl','tilt','saddle']),'heater',function(v){f2=v;walk2=null;lev2();S2.dirty=true;up2();});
+U.btns($('#g-dir2'),[[-1,'내리막 (−∇f)'],[1,'오르막 (+∇f)']],-1,function(v){dir2=v;walk2=null;S2.dirty=true;up2();});
+$('#b-walk2').onclick=function(){walk2={path:[P2.slice()],go:true};wt2=0;if(U.reduce){while(walk2.go){S2.o.onTick(0.05);}}};
+$('#b-reset2').onclick=function(){walk2=null;S2.dirty=true;up2();};
+lev2();up2();
+
+/* ── ③ 발산 ── */
+var f3='source',a3=0.8,dye3=null;
+var S3=new U.Space3D($('#cvS3'),{L:2,stamp:'설명용 모형',aria:'발산 실험',
+  onTick:function(dt){if(dye3&&dye3.go&&dt>0){var F=VF[f3].F;for(var s=0;s<4;s++){dye3.C=dye3.C.map(function(p){return VM.step(F,p,dt/4*0.8);});}dye3.t+=dt*0.8;
+    var big=dye3.C.some(function(p){return Math.max(Math.abs(p[0]),Math.abs(p[1]),Math.abs(p[2]))>2.6;});if(dye3.t>2.5||big)dye3.go=false;S3.dirty=true;up3d();}}});
+var P3=xyz('p3',function(){dye3=null;S3.dirty=true;up3();});
+var EDG=[[0,1],[2,3],[4,5],[6,7],[0,2],[1,3],[4,6],[5,7],[0,4],[1,5],[2,6],[3,7]];
+function box(g,S,C,col,wd,dash){EDG.forEach(function(e){S.line3(g,[C[e[0]],C[e[1]]],col,wd,dash);});}
+S3.ov.push(function(g,S){var F=VF[f3].F,c=P3,a=a3;S.field(g,F,{n:5,scale:0.28,max:0.7});
+  box(g,S,VM.corners(c,a),'rgba(22,33,43,.55)',1.4,[4,3]);
+  var FL=VM.flux(F,c,a);FL.faces.forEach(function(fc){var p=c.slice();p[fc.axis]+=fc.sign*a/2;var per=fc.flux/(a*a);if(Math.abs(per)<0.02)return;var len=U.clamp(Math.abs(per)*0.35,0.12,0.6),q=p.slice();q[fc.axis]+=fc.sign*(per>0?1:-1)*len;
+    if(per>0)S.arrow3(g,p,q,cssv('--amber'),3);else S.arrow3(g,q,p,cssv('--info'),3);});
+  if(dye3)box(g,S,dye3.C,cssv('--stain'),2.4);
+  S.dot3(g,c[0],c[1],c[2],cssv('--ink'),3.5,false);});
+function up3(){var F=VF[f3].F,c=P3,a=a3,FL=VM.flux(F,c,a),d=VF[f3].div(c[0],c[1],c[2]);
+  $('#m3-o').textContent=fmt(FL.out,3);$('#m3-i').textContent=fmt(FL.inn,3);$('#m3-d').textContent=fmt(FL.perVol,2);$('#m3-v').textContent='1.00';
+  $('#eq3').innerHTML='(나감 '+fmt(FL.out,3)+' − 들어옴 '+fmt(FL.inn,3)+') ÷ 부피 '+fmt(a*a*a,3)+' = <b>'+fmt(FL.perVol,3)+'</b> · 식으로 구한 ∇·F = '+VM.VF[f3].name.split(' ')[0]+' → <b>'+fmt(d,2)+'</b>';
+  var T={source:[['a','샘: 여섯 면 모두 주황(나감)입니다. 상자를 어디에 둬도 결과는 3 — 어디서나 고르게 솟는 밭이에요.']],sink:[['r','빨아들임: 여섯 면 모두 파랑(들어옴)입니다. −3. 물감을 풀면 상자가 쪼그라듭니다.']],
+    uniform:[['g','균일한 흐름: 앞쪽 면에서 나가고 뒤쪽 면으로 같은 양이 들어와 0입니다. 물감 상자는 모양 그대로 밀려가기만 해요.']],
+    stretch:[['m','빨라지는 흐름: 화살표가 모두 x 방향으로 나란한데도 1입니다. x가 클수록 물이 빨라서, 앞면에서 나가는 양이 뒷면으로 들어오는 양보다 많아요.']],
+    swirl:[['g','소용돌이: 물이 상자 옆면으로 들어오는 만큼 다른 옆면으로 나가 0입니다. 물감 상자는 빙글 돌 뿐 부피는 1 그대로예요. 도는 정도는 ④에서 잽니다.']]};
+  U.ins($('#i-s3'),T[f3].concat([['a','상자 한 변을 줄이거나 늘려 보세요. 이 밭들은 직선 흐름이라 크기와 상관없이 같은 값이 나옵니다.']]));}
+function up3d(){if(!dye3)return;var v=VM.vol(dye3.C)/dye3.v0;$('#m3-v').textContent=fmt(v,2);
+  if(!dye3.go)U.ins($('#i-s3'),[['m','물감을 '+fmt(dye3.t,2)+'초 흘려 보낸 뒤 부피는 처음의 '+fmt(v,2)+'배입니다. '+(Math.abs(v-1)<0.01?'발산이 0이면 부피가 그대로예요.':'e^(발산 × 시간) = e^('+fmt(VF[f3].div(0,0,0),0)+' × '+fmt(dye3.t,2)+') = '+fmt(Math.exp(VF[f3].div(0,0,0)*dye3.t),2)+'배와 같습니다.')]]);}
+U.btns($('#g-f3'),[['source','샘'],['sink','빨아들임'],['uniform','균일한 흐름'],['stretch','빨라지는 흐름'],['swirl','소용돌이']],'source',function(v){f3=v;dye3=null;S3.dirty=true;up3();});
+$('#r-a3').oninput=function(){a3=+this.value;$('#v-a3').textContent=a3.toFixed(2);dye3=null;S3.dirty=true;up3();};
+$('#b-dye3').onclick=function(){var C=VM.corners(P3,a3);dye3={C:C,v0:VM.vol(C),t:0,go:true};if(U.reduce){while(dye3.go)S3.o.onTick(0.05);}S3.dirty=true;};
+$('#b-reset3').onclick=function(){dye3=null;S3.dirty=true;up3();};
+up3();
+
+/* ── ④ 회전 ── */
+var f4='swirl',ax4=2,th4=0,AXV=[[1,0,0],[0,1,0],[0,0,1]];
+function basis(n){var a=Math.abs(n[0])<0.9?[1,0,0]:[0,1,0],u=[n[1]*a[2]-n[2]*a[1],n[2]*a[0]-n[0]*a[2],n[0]*a[1]-n[1]*a[0]],m=n3(u);u=u.map(function(x){return x/m;});return [u,[n[1]*u[2]-n[2]*u[1],n[2]*u[0]-n[0]*u[2],n[0]*u[1]-n[1]*u[0]]];}
+function paddle(g,S,c,n,th,col){var B=basis(n),u=B[0],v=B[1],r=0.42;
+  var hub=S.arrow3(g,[c[0]-n[0]*0.35,c[1]-n[1]*0.35,c[2]-n[2]*0.35],[c[0]+n[0]*0.45,c[1]+n[1]*0.45,c[2]+n[2]*0.45],'rgba(22,33,43,.6)',1.6);
+  for(var k=0;k<4;k++){var t=th+k*Math.PI/2,ct=Math.cos(t),st=Math.sin(t),tip=[0,1,2].map(function(i){return c[i]+r*(ct*u[i]+st*v[i]);});S.line3(g,[c,tip],col,3.2);S.dot3(g,tip[0],tip[1],tip[2],k===0?cssv('--amber'):col,4,false);}}
+var S4=new U.Space3D($('#cvS4'),{L:2,stamp:'설명용 모형',aria:'회전 실험',onTick:function(dt){if(dt>0){var w=VM.circ(VF[f4].F,P4,AXV[ax4],0.06).omega;if(Math.abs(w)>1e-6&&!U.reduce){th4+=w*dt*1.5;S4.dirty=true;}}}});
+var P4=xyz('p4',function(){S4.dirty=true;up4();});
+S4.ov.push(function(g,S){var F=VF[f4].F,c=P4;S.field(g,F,{n:5,scale:0.28,max:0.7});S.drop(g,c[0],c[1],c[2]);
+  paddle(g,S,c,AXV[ax4],th4,cssv('--c-robo'));
+  var C=VM.curl(F,c),m=n3(C);if(m>1e-6){var k=0.55/Math.max(1,m)*Math.min(1,m),q=S.arrow3(g,c,[c[0]+C[0]*0.4,c[1]+C[1]*0.4,c[2]+C[2]*0.4],cssv('--stain'),3.4);U.label(g,q[0]+8,q[1],'∇×F',cssv('--stain'));}
+  S.dot3(g,c[0],c[1],c[2],cssv('--ink'),4,false);});
+function up4(){var F=VF[f4].F,c=P4,n=AXV[ax4],R=VM.circ(F,c,n,0.06),C=VM.curl(F,c),w=Math.abs(R.omega)<1e-6?0:R.omega;
+  $('#m4-w').textContent=fmt(Math.abs(w),2);$('#m4-s').textContent=w>0?'반시계 (↺)':w<0?'시계 (↻)':'안 돎';$('#m4-c').textContent=vf(C,2);$('#m4-n').textContent=fmt(n3(C),2);
+  var nm=['x','y','z'][ax4];
+  $('#eq4').innerHTML=nm+'축 바람개비 빠르기 = (고리 둘레 물살의 합 ÷ 고리 넓이) ÷ 2 = '+fmt(R.curlN,3)+' ÷ 2 = <b>'+fmt(w,3)+'</b> · 회전의 '+nm+' 성분 (∇×F)<sub>'+nm+'</sub> = <b>'+fmt(C[ax4],3)+'</b>';
+  var best=[0,1,2].sort(function(s,t){return Math.abs(C[t])-Math.abs(C[s]);})[0],msg=[];
+  if(n3(C)<1e-6)msg.push(['g','이 밭은 어느 축으로 꽂아도 바람개비가 안 돕니다. 회전이 (0, 0, 0)이에요.'+(f4==='twist'?' 화살표가 휘어 보여도 숫자 밭 xy의 그래디언트라서 회전이 0입니다.':f4==='source'?' 바깥으로 뻗기만 하니 날개 양쪽이 같은 힘을 받습니다.':'')]);
+  else if(best===ax4)msg.push(['g',nm+'축으로 꽂아 가장 빨리 돕니다. 회전 화살표(보라)가 바로 이 축을 가리켜요. 오른손 네 손가락을 도는 쪽으로 감으면 엄지가 보라 화살표 쪽입니다.']);
+  else msg.push(['r',nm+'축으로는 '+(Math.abs(w)<1e-6?'안 돕니다':'느리게 돕니다')+'. 회전 화살표가 '+['x','y','z'][best]+'축 쪽이니, 바람개비 축을 '+['x','y','z'][best]+'로 바꿔 보세요.']);
+  msg.push(['a','이 밭들은 어디에 꽂아도 같은 빠르기입니다(회전이 어디서나 같음). 점을 옮겨 확인해 보세요.']);U.ins($('#i-s4'),msg);}
+U.btns($('#g-f4'),[['swirl','소용돌이 (z축 둘레)'],['roll','옆으로 누운 소용돌이 (x축 둘레)'],['twist','비틀린 밭'],['source','샘']],'swirl',function(v){f4=v;S4.dirty=true;up4();});
+U.btns($('#g-ax4'),[[0,'x축'],[1,'y축'],[2,'z축']],2,function(v){ax4=v;S4.dirty=true;up4();});
+up4();
+
+/* ── ⑤ 라플라시안 ── */
+var f5='bowl',h5=0.5,R5=range(SF.bowl.f);
+var S5=new U.Space3D($('#cvS5'),{L:2,stamp:'설명용 모형',aria:'라플라시안 실험'});
+var P5=xyz('p5',function(){S5.dirty=true;up5();});
+S5.ov.push(function(g,S){var F=SF[f5],p=P5,r=VM.lap6(F.f,p,h5);cloud(g,S,F.f,R5,7,0.18);
+  var vals=r.nb.map(function(x){return x[1];}).concat([r.c]),lo=Math.min.apply(null,vals),hi=Math.max.apply(null,vals);if(hi-lo<1e-9){lo-=1;hi+=1;}
+  r.nb.forEach(function(it,k){var q=it[0];S.line3(g,[p,q],AX(Math.floor(k/2)),2);});
+  r.nb.slice().sort(function(a,b){return S.P(b[0][0],b[0][1],b[0][2])[2]-S.P(a[0][0],a[0][1],a[0][2])[2];}).forEach(function(it){var q=it[0],s=S.dot3(g,q[0],q[1],q[2],U.cmap((it[1]-lo)/(hi-lo)),6);U.label(g,s[0]+9,s[1]-9,fmt(it[1],2),cssv('--text'));});
+  var s=S.dot3(g,p[0],p[1],p[2],U.cmap((r.c-lo)/(hi-lo)),8);g.lineWidth=2.4;g.strokeStyle=cssv('--amber');g.beginPath();g.arc(s[0],s[1],10,0,7);g.stroke();U.label(g,s[0]-12,s[1]+18,'가운데 '+fmt(r.c,2),cssv('--amber'),'right');});
+function up5(){var F=SF[f5],p=P5,r=VM.lap6(F.f,p,h5),ex=F.lap(p[0],p[1],p[2]);
+  $('#m5-c').textContent=fmt(r.c,2);$('#m5-a').textContent=fmt(r.avg,2);$('#m5-e').textContent=fmt(r.est,2);$('#m5-x').textContent=fmt(ex,2);
+  $('#eq5').innerHTML='6 × (이웃 평균 '+fmt(r.avg,3)+' − 가운데 '+fmt(r.c,3)+') ÷ '+fmt(h5,2)+'² = <b>'+fmt(r.est,3)+'</b> · 식: ∇²f = <b>'+fmt(ex,3)+'</b>';
+  var msg=[];if(r.est>1e-6)msg.push(['g','이웃 평균이 가운데보다 <b>높습니다</b> → 라플라시안 양수, 가운데가 움푹합니다. 온도라면 이 점은 데워집니다.']);
+  else if(r.est<-1e-6)msg.push(['r','이웃 평균이 가운데보다 <b>낮습니다</b> → 라플라시안 음수, 가운데가 볼록합니다. 온도라면 이 점은 식습니다.']);
+  else msg.push(['m','이웃 평균과 가운데가 같습니다 → 라플라시안 0. 위로 휜 만큼 아래로 휜 균형이에요.']);
+  if(f5==='heater')msg.push(['a','난로 밭은 h를 줄일수록 상자 셈이 식에 가까워집니다. 원점에서 거리가 '+fmt(n3(p),2)+(n3(p)<Math.sqrt(3)?' — √3보다 가까워 음수 쪽입니다.':' — √3보다 멀어 양수 쪽입니다.')]);
+  else msg.push(['a','2차식 밭은 h를 바꿔도 상자 셈과 식이 똑같습니다. 그릇 6, 돔 −6, 안장 0.']);U.ins($('#i-s5'),msg);}
+U.btns($('#g-f5'),sfList(['bowl','dome','saddle','heater']),'bowl',function(v){f5=v;R5=range(SF[v].f);S5.dirty=true;up5();});
+$('#r-h5').oninput=function(){h5=+this.value;$('#v-h5').textContent=h5.toFixed(2);S5.dirty=true;up5();};
+up5();
+
+/* ── 대결 ── */
+var DC=VM.DUEL,cs=0,shown=false,thD=0,DR=null;
+var CN={swirl:'소용돌이 (−y, x, 0)',shear:'층밀림 (y, 0, 0)',vortex:'배수구 소용돌이 (−y, x, 0)/(x² + y²)',source:'샘 (x, y, z)'};
+var SD=new U.Space3D($('#cvDuel'),{L:2,stamp:'설명용 모형',yaw:-0.5,pitch:0.75,aria:'대결 화살표 밭',
+  onTick:function(dt){if(shown&&dt>0&&!U.reduce){var w=VM.circ(VF[DC[cs].key].F,DC[cs].p,[0,0,1],0.06).omega;if(Math.abs(w)>1e-6){thD+=w*dt*1.5;SD.dirty=true;}}}});
+SD.ov.push(function(g,S){var d=DC[cs],F=VF[d.key].F;S.field(g,F,{n:7,flat:true,R:1.8,scale:0.3,max:0.5});paddle(g,S,d.p,[0,0,1],thD,cssv('--c-robo'));
+  var q=S.P(d.p[0],d.p[1],d.p[2]);U.label(g,q[0]-14,q[1]-26,(cs+1)+'번 곳 '+vf(d.p,0),cssv('--amber'));});
+U.btns($('#g-case'),DC.map(function(d,i){return [i,(i+1)+'번 · '+CN[d.key].split(' (')[0]];}),0,function(v){cs=v;thD=0;SD.dirty=true;});
+function yn(b){return b?'돈다':'안 돈다';}
+U.Duel({el:'#duel',run:function(){DR=VM.duel();shown=true;return DR;},
+  show:function(r,pred){var nf=r.filter(function(x){return x.flyOk;}).length,nr=r.filter(function(x){return x.roboOk;}).length;
+    $('#d-tbl').innerHTML=r.map(function(x,i){return '<tr><td>'+(i+1)+'</td><td>'+CN[x.key]+' · '+vf(x.p,0)+'</td><td>'+x.look+'</td><td>'+yn(x.robo)+(x.roboOk?' ✓':' ✗')+'</td><td>'+yn(x.fly)+(x.flyOk?' ✓':' ✗')+'</td><td><b>'+(x.spin?'돈다 (빠르기 '+fmt(Math.abs(x.omega),2)+')':'안 돈다')+'</b></td></tr>';}).join('');
+    $('#d-bf').style.width=(nf/4*100)+'%';$('#d-br').style.width=(nr/4*100)+'%';$('#d-vf').textContent=nf+' / 4';$('#d-vr').textContent=nr+' / 4';
+    var flyWin=nf>nr;
+    $('#d-say').innerHTML=U.say('doc','doc_judge','판정합니다. 2번 층밀림은 화살표가 모두 나란한데도 위쪽 물살이 빨라 바람개비가 돌고, 3번 배수구 소용돌이는 원을 그리지만, 바깥 날개가 받는 느린 물살과 안쪽 날개가 받는 빠른 물살이 정확히 맞비겨 바람개비가 돌지 않습니다(한가운데 z축만 예외). 맞힌 수 초파리 '+nf+', 주판봇 '+nr+'.')+U.say('robo','robo_blush','모양이 돈다고 바람개비가 도는 건 아니었네… 다음엔 이웃 점 물살부터 셀게.',true);
+    U.fillImgs();
+    $('#d-score').textContent='이번 판: '+(flyWin?'초파리 연구원 승 (F)':nf===nr?'무승부':'주판봇 승 (R)');$('#d-pred').textContent=pred?('내 예상: '+(pred==='fly'?'초파리':'주판봇')+' → '+((pred==='fly')===flyWin?'맞힘':'빗나감')):'예상을 고르지 않았어요';
+    U.setMood($('#d-fly'),flyWin?'fly_arms':'fly_coffee');U.setMood($('#d-robo'),flyWin?'robo_sigh':'robo_happy');SD.dirty=true;},
+  reset:function(){shown=false;thD=0;DR=null;SD.dirty=true;U.setMood($('#d-fly'),'fly_magnify');U.setMood($('#d-robo'),'robo_coin');}});
+
+/* ── 용어와 퀴즈 ── */
+U.Gloss({
+ '숫자 밭':['숫자 밭 (스칼라장)','밭','공간의 점마다 숫자 하나가 붙은 것. 온도, 농도, 1편의 오차.'],
+ '화살표 밭':['화살표 밭 (벡터장)','밭','공간의 점마다 화살표 하나가 붙은 것. 바람, 물 흐름, 그래디언트 밭.'],
+ '편미분':['편미분 ∂f/∂x','미분','다른 좌표는 그대로 두고 한 좌표만 아주 조금 움직였을 때의 변화율.'],
+ '그래디언트':['그래디언트 ∇f','미분','편미분 셋을 묶은 화살표. 가장 가파른 오르막을 가리키고, 같은 값 껍질과 직각.'],
+ '등위면':['등위면 (같은 값 껍질)','기하','값이 같은 점들을 이은 면. 2차원 지도에서는 등고선.'],
+ '발산':['발산 ∇·F','미분','작은 상자에서 (나간 양 − 들어온 양) ÷ 부피. 양수면 샘, 음수면 빨아들이는 곳.'],
+ '회전':['회전 ∇×F (curl)','미분','작은 바람개비가 가장 빨리 도는 축을 가리키는 화살표. 길이는 바람개비 빠르기의 두 배.'],
+ '라플라시안':['라플라시안 ∇²f','미분','∇·∇f. 6 × (이웃 여섯 평균 − 가운데) ÷ h². 양수면 움푹, 음수면 볼록.'],
+ '오른손':['오른손 법칙','기하','오른손 네 손가락을 도는 쪽으로 감으면 엄지가 회전 화살표의 방향.'],
+ '점곱':['점곱 (내적, ·)','기호','칸끼리 곱해 더한 숫자 하나. ∇·F = ∂Fx/∂x + ∂Fy/∂y + ∂Fz/∂z.'],
+ '가위곱':['가위곱 (외적, ×)','기호','두 화살표에 모두 직각인 새 화살표를 만드는 곱. ∇×F가 회전.'],
+ '열방정식':['열방정식','물리','∂T/∂t = k∇²T. 이웃 평균보다 낮은 곳은 데워지고 높은 곳은 식는다.'],
+ '경사하강':['경사하강 (gradient descent)','학습','−∇f 쪽으로 조금씩 걸어 값을 줄이는 방법. 1편의 학습.'],
+ '∇':['∇ (나블라, del)','기호','(∂/∂x, ∂/∂y, ∂/∂z). 세 방향으로 조금씩 재는 도구 묶음.'],
+ '∂':['∂ (편미분 기호)','기호','"다른 좌표는 고정하고"라는 뜻의 둥근 d.']
+},['숫자 밭','화살표 밭','편미분','그래디언트','등위면','발산','회전','라플라시안','∇','오른손']);
+U.Study({quiz:{
+ s1:[{q:'f(x, y, z)에서 ∂f/∂y를 잴 때 움직이는 것은?',o:['y만 조금 움직인다','x·y·z를 모두 조금 움직인다','y는 고정하고 x·z를 움직인다'],a:0,why:'편미분은 한 좌표만 움직이고 나머지 둘은 고정합니다.',hint:'∂는 "다른 건 고정"이라는 표시예요.'},
+     {q:'그릇 밭 f = x² + y² + z²의 점 (1, −2, 0.5)에서 ∂f/∂y는?',o:['−2','−4','4'],a:1,why:'∂f/∂y = 2y = 2 × (−2) = −4. y가 커질수록(−2에서 0 쪽으로) 값이 줄어든다는 뜻입니다.',hint:'∂(y²)/∂y = 2y.'}],
+ s2:[{q:'그래디언트 ∇f와 같은 값 껍질(등위면)의 관계는?',o:['나란하다','직각이다','45도다'],a:1,why:'껍질 위로 움직이면 값이 안 바뀌므로 ∇f · (껍질 방향) = 0, 곧 직각입니다.',hint:'껍질 위를 걸으면 값이 그대로예요.'},
+     {q:'그릇 밭에서 −∇f를 따라 걸으면 공은 어디로 가나요?',o:['원점(가장 낮은 곳)','상자 끝','제자리에서 빙빙 돈다'],a:0,why:'−∇f = −(2x, 2y, 2z)는 늘 원점 쪽을 가리킵니다. 1편 경사하강과 같은 움직임입니다.',hint:'−(2x, 2y, 2z)의 방향을 생각해 보세요.'}],
+ s3:[{q:'샘 F = (x, y, z)의 발산은?',o:['0','1','3'],a:2,why:'∂x/∂x + ∂y/∂y + ∂z/∂z = 1 + 1 + 1 = 3. 세 방향으로 1씩 퍼집니다.',hint:'세 칸의 편미분을 더하세요.'},
+     {q:'화살표가 모두 x 방향으로 나란한 F = (x, 0, 0)의 발산은?',o:['0 (나란하니까)','1','−1'],a:1,why:'∂(x)/∂x = 1. 앞쪽 면에서 나가는 물이 뒤쪽 면으로 들어오는 물보다 많습니다.',hint:'화살표 길이가 x에 따라 달라져요.'}],
+ s4:[{q:'소용돌이 F = (−y, x, 0)의 회전 ∇×F는?',o:['(0, 0, 2)','(2, 0, 0)','(0, 0, 0)'],a:0,why:'z 성분 ∂Fy/∂x − ∂Fx/∂y = 1 − (−1) = 2. 나머지는 0. z축에 꽂은 바람개비만 돕니다.',hint:'∂Fy/∂x − ∂Fx/∂y를 계산하세요.'},
+     {q:'비틀린 밭 F = (y, x, 0)에 z축 바람개비를 꽂으면?',o:['반시계로 돈다','시계로 돈다','안 돈다'],a:2,why:'∂Fy/∂x − ∂Fx/∂y = 1 − 1 = 0. 이 밭은 숫자 밭 xy의 그래디언트라서 회전이 0입니다.',hint:'그래디언트의 회전은 늘 0이에요.'}],
+ s5:[{q:'이웃 여섯 평균이 가운데보다 높으면 라플라시안은?',o:['양수 (움푹)','음수 (볼록)','0'],a:0,why:'∇²f ≈ 6 × (평균 − 가운데) ÷ h². 평균이 크면 양수, 가운데가 움푹한 곳입니다.',hint:'평균 − 가운데의 부호를 보세요.'},
+     {q:'f = x² + y² − 2z²의 라플라시안은?',o:['6','−2','0'],a:2,why:'2 + 2 − 4 = 0. x·y로 위로 휜 만큼 z로 아래로 휘었습니다.',hint:'∂²/∂x², ∂²/∂y², ∂²/∂z²를 더하세요.'}],
+ duel:[{q:'층밀림 F = (y, 0, 0)은 화살표가 모두 나란한데 z축 바람개비가 도는 이유는?',o:['위쪽(y가 큰 쪽) 물살이 아래쪽보다 빨라 날개 한쪽만 더 밀려서','화살표가 원을 그려서','발산이 커서'],a:0,why:'∂Fy/∂x − ∂Fx/∂y = 0 − 1 = −1. 날개 양쪽이 받는 물살이 달라 시계 방향으로 돕니다.',hint:'y에 따라 화살표 길이가 달라요.'}]
+}});
+U.start();
+})();
+</script>
+</body>
+</html>

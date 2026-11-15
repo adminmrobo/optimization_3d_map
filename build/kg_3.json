@@ -1,0 +1,1897 @@
+{
+ "version": "1.3",
+ "page": "3_arrow_field",
+ "nodes": [
+  {
+   "id": "lab:concept/scalar-field",
+   "type": "Concept",
+   "label": {
+    "ko": "숫자 밭(스칼라장)",
+    "en": "Scalar field"
+   },
+   "page": "3_arrow_field",
+   "anchor": "#map",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "공간의 점마다 숫자 하나가 붙은 것. 온도, 농도, 오차."
+   },
+   "altLabel": {
+    "ko": [
+     "스칼라장"
+    ]
+   }
+  },
+  {
+   "id": "lab:concept/vector-field",
+   "type": "Concept",
+   "label": {
+    "ko": "화살표 밭(벡터장)",
+    "en": "Vector field"
+   },
+   "page": "3_arrow_field",
+   "anchor": "#map",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "공간의 점마다 화살표 하나가 붙은 것. 바람, 물 흐름."
+   },
+   "altLabel": {
+    "ko": [
+     "벡터장"
+    ]
+   }
+  },
+  {
+   "id": "lab:concept/cartesian-3d",
+   "type": "Concept",
+   "label": {
+    "ko": "x·y·z 세 축 공간",
+    "en": "3D Cartesian space"
+   },
+   "page": "3_arrow_field",
+   "anchor": "#map",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "앞뒤·좌우·위아래 세 방향이 모두 공간 축인 좌표계. 점의 주소는 (x, y, z)."
+   }
+  },
+  {
+   "id": "lab:concept/del-operator",
+   "type": "Concept",
+   "label": {
+    "ko": "나블라(∇) 연산자",
+    "en": "Del (nabla) operator"
+   },
+   "page": "3_arrow_field",
+   "anchor": "#map",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "(∂/∂x, ∂/∂y, ∂/∂z). 세 방향으로 조금씩 재는 도구 묶음."
+   },
+   "altLabel": {
+    "ko": [
+     "델",
+     "del",
+     "∇"
+    ]
+   }
+  },
+  {
+   "id": "lab:concept/partial-derivative",
+   "type": "Concept",
+   "label": {
+    "ko": "편미분",
+    "en": "Partial derivative"
+   },
+   "page": "3_arrow_field",
+   "anchor": "#s1",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "다른 좌표는 고정하고 한 좌표만 움직였을 때의 변화율."
+   }
+  },
+  {
+   "id": "lab:concept/gradient",
+   "type": "Concept",
+   "label": {
+    "ko": "그래디언트",
+    "en": "Gradient"
+   },
+   "page": "3_arrow_field",
+   "anchor": "#s2",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "편미분 셋을 묶은 화살표. 가장 가파른 오르막, 등위면과 직각."
+   },
+   "altLabel": {
+    "ko": [
+     "기울기",
+     "∇f"
+    ]
+   }
+  },
+  {
+   "id": "lab:concept/level-surface",
+   "type": "Concept",
+   "label": {
+    "ko": "등위면(같은 값 껍질)",
+    "en": "Level surface"
+   },
+   "page": "3_arrow_field",
+   "anchor": "#s2",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "값이 같은 점들을 이은 면. 2차원에서는 등고선."
+   }
+  },
+  {
+   "id": "lab:concept/divergence",
+   "type": "Concept",
+   "label": {
+    "ko": "발산",
+    "en": "Divergence"
+   },
+   "page": "3_arrow_field",
+   "anchor": "#s3",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "∇·F. 작은 상자에서 (나간 양 − 들어온 양) ÷ 부피."
+   }
+  },
+  {
+   "id": "lab:concept/curl",
+   "type": "Concept",
+   "label": {
+    "ko": "회전",
+    "en": "Curl"
+   },
+   "page": "3_arrow_field",
+   "anchor": "#s4",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "∇×F. 작은 바람개비가 가장 빨리 도는 축과 세기(빠르기의 두 배)."
+   }
+  },
+  {
+   "id": "lab:concept/right-hand-rule",
+   "type": "Concept",
+   "label": {
+    "ko": "오른손 법칙",
+    "en": "Right-hand rule"
+   },
+   "page": "3_arrow_field",
+   "anchor": "#s4",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "네 손가락을 도는 쪽으로 감으면 엄지가 회전 화살표 방향."
+   }
+  },
+  {
+   "id": "lab:concept/laplacian",
+   "type": "Concept",
+   "label": {
+    "ko": "라플라시안",
+    "en": "Laplacian"
+   },
+   "page": "3_arrow_field",
+   "anchor": "#s5",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "∇·∇f. 6 × (이웃 여섯 평균 − 가운데) ÷ h². 양수 움푹, 음수 볼록."
+   }
+  },
+  {
+   "id": "lab:concept/heat-equation",
+   "type": "Concept",
+   "label": {
+    "ko": "열방정식",
+    "en": "Heat equation"
+   },
+   "page": "3_arrow_field",
+   "anchor": "#s5",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "∂T/∂t = k∇²T. 이웃 평균보다 낮은 곳은 데워진다."
+   }
+  },
+  {
+   "id": "lab:concept/curl-free-gradient",
+   "type": "Concept",
+   "label": {
+    "ko": "그래디언트의 회전은 0",
+    "en": "Curl of a gradient is zero"
+   },
+   "page": "3_arrow_field",
+   "anchor": "#sum",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "그래디언트로 만든 화살표 밭은 소용돌이가 없다."
+   }
+  },
+  {
+   "id": "lab:concept/div-of-curl-zero",
+   "type": "Concept",
+   "label": {
+    "ko": "회전의 발산은 0",
+    "en": "Divergence of a curl is zero"
+   },
+   "page": "3_arrow_field",
+   "anchor": "#sum",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "회전 화살표로 만든 밭에는 샘도 구멍도 없다."
+   }
+  },
+  {
+   "id": "lab:method/gradient-descent",
+   "type": "Method",
+   "label": {
+    "ko": "경사하강",
+    "en": "Gradient descent"
+   },
+   "page": "3_arrow_field",
+   "anchor": "#s2",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "−∇f 쪽으로 조금씩 걸어 값을 줄이는 방법."
+   }
+  },
+  {
+   "id": "lab:method/finite-difference",
+   "type": "Method",
+   "label": {
+    "ko": "이웃 점 찍어 보기(차분)",
+    "en": "Finite difference"
+   },
+   "page": "3_arrow_field",
+   "anchor": "#s1",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "한 좌표를 ±h 움직인 두 점의 값 차이 ÷ 2h로 편미분을 잰다."
+   }
+  },
+  {
+   "id": "lab:method/flux-box",
+   "type": "Method",
+   "label": {
+    "ko": "그물 상자 출입 세기",
+    "en": "Flux through a small box"
+   },
+   "page": "3_arrow_field",
+   "anchor": "#s3",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "여섯 면의 출입을 더해 부피로 나눠 발산을 잰다."
+   }
+  },
+  {
+   "id": "lab:method/paddle-wheel",
+   "type": "Method",
+   "label": {
+    "ko": "바람개비 고리 셈(순환)",
+    "en": "Paddle-wheel circulation"
+   },
+   "page": "3_arrow_field",
+   "anchor": "#s4",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "축에 수직인 작은 고리를 따라 물살을 더해 넓이로 나눈 값 = 회전의 그 축 성분."
+   }
+  },
+  {
+   "id": "lab:method/six-neighbour-stencil",
+   "type": "Method",
+   "label": {
+    "ko": "이웃 여섯 평균 비교",
+    "en": "Six-neighbour stencil"
+   },
+   "page": "3_arrow_field",
+   "anchor": "#s5",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "∇²f ≈ 6 × (이웃 평균 − 가운데) ÷ h²."
+   }
+  },
+  {
+   "id": "lab:method/judge-by-look",
+   "type": "Method",
+   "label": {
+    "ko": "겉모양으로 판단",
+    "en": "Judge rotation by arrow shape"
+   },
+   "page": "3_arrow_field",
+   "anchor": "#duel",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "화살표가 원을 그리면 돈다고 본다."
+   }
+  },
+  {
+   "id": "lab:method/judge-by-curl",
+   "type": "Method",
+   "label": {
+    "ko": "회전을 계산해 판단",
+    "en": "Judge rotation by computed curl"
+   },
+   "page": "3_arrow_field",
+   "anchor": "#duel",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "∂Fy/∂x − ∂Fx/∂y를 이웃 점으로 재서 0이 아니면 돈다고 본다."
+   }
+  },
+  {
+   "id": "lab:metric/correct-calls",
+   "type": "Metric",
+   "label": {
+    "ko": "네 곳 중 맞힌 수",
+    "en": "Correct calls out of four"
+   },
+   "page": "3_arrow_field",
+   "anchor": "#duel",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:analogy/thermometer-probe",
+   "type": "Analogy",
+   "label": {
+    "ko": "온도계를 한 방향으로만 옮기기",
+    "en": "Moving a thermometer along one axis"
+   },
+   "page": "3_arrow_field",
+   "anchor": "#s1",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:analogy/warmth-compass",
+   "type": "Analogy",
+   "label": {
+    "ko": "따뜻해지는 쪽 나침반",
+    "en": "Compass toward warmth"
+   },
+   "page": "3_arrow_field",
+   "anchor": "#s2",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:analogy/mesh-box-dye",
+   "type": "Analogy",
+   "label": {
+    "ko": "그물 상자와 물감",
+    "en": "Mesh box and dye"
+   },
+   "page": "3_arrow_field",
+   "anchor": "#s3",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:analogy/stream-paddle",
+   "type": "Analogy",
+   "label": {
+    "ko": "개울의 바람개비",
+    "en": "Paddle wheel in a stream"
+   },
+   "page": "3_arrow_field",
+   "anchor": "#s4",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:analogy/six-neighbours",
+   "type": "Analogy",
+   "label": {
+    "ko": "이웃 여섯 집 온도 비교",
+    "en": "Comparing with six neighbours"
+   },
+   "page": "3_arrow_field",
+   "anchor": "#s5",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:limitation/partials-axis-only",
+   "type": "Limitation",
+   "label": {
+    "ko": "편미분은 축 방향 셋만 봄",
+    "en": "Partials see only the three axes"
+   },
+   "page": "3_arrow_field",
+   "anchor": "#s1",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:limitation/gradient-scalar-only",
+   "type": "Limitation",
+   "label": {
+    "ko": "그래디언트는 숫자 밭에만",
+    "en": "Gradient applies to scalar fields only"
+   },
+   "page": "3_arrow_field",
+   "anchor": "#s2",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:limitation/divergence-misses-swirl",
+   "type": "Limitation",
+   "label": {
+    "ko": "발산은 소용돌이를 못 봄",
+    "en": "Divergence misses swirl"
+   },
+   "page": "3_arrow_field",
+   "anchor": "#s3",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:limitation/paddle-infinitesimal",
+   "type": "Limitation",
+   "label": {
+    "ko": "아주 작은 바람개비 가정",
+    "en": "Assumes an infinitesimal paddle"
+   },
+   "page": "3_arrow_field",
+   "anchor": "#s4",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:limitation/stencil-step-size",
+   "type": "Limitation",
+   "label": {
+    "ko": "h가 크면 근사가 어긋남",
+    "en": "Large h breaks the approximation"
+   },
+   "page": "3_arrow_field",
+   "anchor": "#s5",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:sim/p3-axes",
+   "type": "Simulation",
+   "label": {
+    "ko": "세 축 상자와 점의 주소",
+    "en": "3D box and point address"
+   },
+   "page": "3_arrow_field",
+   "anchor": "#map",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:sim/p3-thermometer",
+   "type": "Simulation",
+   "label": {
+    "ko": "온도계 실험",
+    "en": "Thermometer probe"
+   },
+   "page": "3_arrow_field",
+   "anchor": "#s1",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:sim/p3-compass",
+   "type": "Simulation",
+   "label": {
+    "ko": "나침반 실험(등위면과 그래디언트)",
+    "en": "Level surface and gradient"
+   },
+   "page": "3_arrow_field",
+   "anchor": "#s2",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:sim/p3-flux-box",
+   "type": "Simulation",
+   "label": {
+    "ko": "그물 상자 실험",
+    "en": "Flux box and dye"
+   },
+   "page": "3_arrow_field",
+   "anchor": "#s3",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:sim/p3-paddle",
+   "type": "Simulation",
+   "label": {
+    "ko": "바람개비 실험",
+    "en": "Paddle wheel"
+   },
+   "page": "3_arrow_field",
+   "anchor": "#s4",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:sim/p3-neighbours",
+   "type": "Simulation",
+   "label": {
+    "ko": "이웃 여섯 집 실험",
+    "en": "Six-neighbour stencil"
+   },
+   "page": "3_arrow_field",
+   "anchor": "#s5",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:sim/p3-duel",
+   "type": "Simulation",
+   "label": {
+    "ko": "바람개비 대결",
+    "en": "Paddle duel"
+   },
+   "page": "3_arrow_field",
+   "anchor": "#duel",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:question/p3-one-symbol",
+   "type": "Question",
+   "label": {
+    "ko": "기호 ∇ 하나가 어떻게 오르막·샘·소용돌이·움푹함을 모두 잴까?",
+    "en": "How does one symbol measure slope, source, swirl and dip?"
+   },
+   "page": "3_arrow_field",
+   "anchor": "#top",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:question/p3-look-vs-curl",
+   "type": "Question",
+   "label": {
+    "ko": "화살표 겉모양으로 바람개비가 도는지 알 수 있나?",
+    "en": "Can arrow shape tell whether a paddle spins?"
+   },
+   "page": "3_arrow_field",
+   "anchor": "#duel",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:work/matharium_del",
+   "type": "Work",
+   "label": {
+    "ko": "matharium — The Del Operator",
+    "en": "matharium — The Del Operator"
+   },
+   "page": "3_arrow_field",
+   "anchor": "#top",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:work/matharium_vecops",
+   "type": "Work",
+   "label": {
+    "ko": "matharium — The Vector Differential Operators",
+    "en": "matharium — The Vector Differential Operators"
+   },
+   "page": "3_arrow_field",
+   "anchor": "#top",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:work/knott1911life",
+   "type": "Work",
+   "label": {
+    "ko": "Knott 1911 Life of P. G. Tait",
+    "en": "Knott 1911 Life and Scientific Work of P. G. Tait"
+   },
+   "page": "3_arrow_field",
+   "anchor": "#top",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:work/song2019generative",
+   "type": "Work",
+   "label": {
+    "ko": "Song·Ermon 2019",
+    "en": "Song & Ermon 2019"
+   },
+   "page": "3_arrow_field",
+   "anchor": "#top",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:work/gonzalez2018digital",
+   "type": "Work",
+   "label": {
+    "ko": "Gonzalez·Woods 2018 Digital Image Processing",
+    "en": "Gonzalez & Woods 2018 Digital Image Processing"
+   },
+   "page": "3_arrow_field",
+   "anchor": "#top",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:claim/del-four-operations",
+   "type": "Claim",
+   "label": {
+    "ko": "∇ 하나가 붙는 방식에 따라 그래디언트·발산·회전·라플라시안을 만든다",
+    "en": "One del operator yields gradient, divergence, curl and Laplacian"
+   },
+   "page": "3_arrow_field",
+   "anchor": "#map",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "source": [
+    {
+     "ref": "matharium_del",
+     "loc": "본문 전체"
+    }
+   ]
+  },
+  {
+   "id": "lab:claim/curl-grad-zero",
+   "type": "Claim",
+   "label": {
+    "ko": "그래디언트의 회전과 회전의 발산은 늘 0이다",
+    "en": "Curl of gradient and divergence of curl vanish"
+   },
+   "page": "3_arrow_field",
+   "anchor": "#sum",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "source": [
+    {
+     "ref": "matharium_vecops",
+     "loc": "How they connect"
+    }
+   ]
+  },
+  {
+   "id": "lab:claim/nabla-name-1870",
+   "type": "Claim",
+   "label": {
+    "ko": "나블라라는 이름은 1870년 W. R. 스미스가 하프 모양을 보고 테이트에게 제안했다",
+    "en": "The name nabla was suggested to Tait by W. R. Smith in 1870"
+   },
+   "page": "3_arrow_field",
+   "anchor": "#map",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "source": [
+    {
+     "ref": "knott1911life",
+     "loc": "p. 145"
+    }
+   ]
+  },
+  {
+   "id": "lab:claim/score-is-gradient",
+   "type": "Claim",
+   "label": {
+    "ko": "점수 기반 생성 모델은 데이터 분포의 그래디언트(점수)를 추정해 그 방향으로 표본을 옮긴다",
+    "en": "Score-based models estimate and follow gradients of the data distribution"
+   },
+   "page": "3_arrow_field",
+   "anchor": "#s2",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "source": [
+    {
+     "ref": "song2019generative",
+     "loc": "초록, 2장"
+    }
+   ]
+  },
+  {
+   "id": "lab:claim/laplacian-filter-edges",
+   "type": "Claim",
+   "label": {
+    "ko": "라플라시안 필터는 밝기가 급히 바뀌는 경계를 드러낸다",
+    "en": "The Laplacian filter highlights intensity edges"
+   },
+   "page": "3_arrow_field",
+   "anchor": "#s5",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "source": [
+    {
+     "ref": "gonzalez2018digital",
+     "loc": "3장"
+    }
+   ]
+  },
+  {
+   "id": "lab:quiz/p3-s1-1",
+   "type": "QuizItem",
+   "label": {
+    "ko": "편미분 문제 1",
+    "en": "Quiz s1-1"
+   },
+   "page": "3_arrow_field",
+   "anchor": "#s1",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:quiz/p3-s1-2",
+   "type": "QuizItem",
+   "label": {
+    "ko": "편미분 문제 2",
+    "en": "Quiz s1-2"
+   },
+   "page": "3_arrow_field",
+   "anchor": "#s1",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:quiz/p3-s2-1",
+   "type": "QuizItem",
+   "label": {
+    "ko": "그래디언트 문제 1",
+    "en": "Quiz s2-1"
+   },
+   "page": "3_arrow_field",
+   "anchor": "#s2",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:quiz/p3-s2-2",
+   "type": "QuizItem",
+   "label": {
+    "ko": "그래디언트 문제 2",
+    "en": "Quiz s2-2"
+   },
+   "page": "3_arrow_field",
+   "anchor": "#s2",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:quiz/p3-s3-1",
+   "type": "QuizItem",
+   "label": {
+    "ko": "발산 문제 1",
+    "en": "Quiz s3-1"
+   },
+   "page": "3_arrow_field",
+   "anchor": "#s3",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:quiz/p3-s3-2",
+   "type": "QuizItem",
+   "label": {
+    "ko": "발산 문제 2",
+    "en": "Quiz s3-2"
+   },
+   "page": "3_arrow_field",
+   "anchor": "#s3",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:quiz/p3-s4-1",
+   "type": "QuizItem",
+   "label": {
+    "ko": "회전 문제 1",
+    "en": "Quiz s4-1"
+   },
+   "page": "3_arrow_field",
+   "anchor": "#s4",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:quiz/p3-s4-2",
+   "type": "QuizItem",
+   "label": {
+    "ko": "회전 문제 2",
+    "en": "Quiz s4-2"
+   },
+   "page": "3_arrow_field",
+   "anchor": "#s4",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:quiz/p3-s5-1",
+   "type": "QuizItem",
+   "label": {
+    "ko": "라플라시안 문제 1",
+    "en": "Quiz s5-1"
+   },
+   "page": "3_arrow_field",
+   "anchor": "#s5",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:quiz/p3-s5-2",
+   "type": "QuizItem",
+   "label": {
+    "ko": "라플라시안 문제 2",
+    "en": "Quiz s5-2"
+   },
+   "page": "3_arrow_field",
+   "anchor": "#s5",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:quiz/p3-duel-1",
+   "type": "QuizItem",
+   "label": {
+    "ko": "대결 바람개비 문제 1",
+    "en": "Quiz duel-1"
+   },
+   "page": "3_arrow_field",
+   "anchor": "#duel",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  }
+ ],
+ "edges": [
+  {
+   "s": "lab:analogy/thermometer-probe",
+   "p": "lab:analogyOf",
+   "o": "lab:concept/partial-derivative",
+   "anchor": "#s1",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:analogy/warmth-compass",
+   "p": "lab:analogyOf",
+   "o": "lab:concept/gradient",
+   "anchor": "#s2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:analogy/mesh-box-dye",
+   "p": "lab:analogyOf",
+   "o": "lab:concept/divergence",
+   "anchor": "#s3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:analogy/stream-paddle",
+   "p": "lab:analogyOf",
+   "o": "lab:concept/curl",
+   "anchor": "#s4",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:analogy/six-neighbours",
+   "p": "lab:analogyOf",
+   "o": "lab:concept/laplacian",
+   "anchor": "#s5",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/partial-derivative",
+   "p": "lab:hasLimitation",
+   "o": "lab:limitation/partials-axis-only",
+   "anchor": "#s1",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:limitation/partials-axis-only",
+   "p": "lab:addressedBy",
+   "o": "lab:concept/gradient",
+   "anchor": "#s1",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/gradient",
+   "p": "lab:hasLimitation",
+   "o": "lab:limitation/gradient-scalar-only",
+   "anchor": "#s2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:limitation/gradient-scalar-only",
+   "p": "lab:addressedBy",
+   "o": "lab:concept/divergence",
+   "anchor": "#s2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/divergence",
+   "p": "lab:hasLimitation",
+   "o": "lab:limitation/divergence-misses-swirl",
+   "anchor": "#s3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:limitation/divergence-misses-swirl",
+   "p": "lab:addressedBy",
+   "o": "lab:concept/curl",
+   "anchor": "#s3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/curl",
+   "p": "lab:hasLimitation",
+   "o": "lab:limitation/paddle-infinitesimal",
+   "anchor": "#s4",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/laplacian",
+   "p": "lab:hasLimitation",
+   "o": "lab:limitation/stencil-step-size",
+   "anchor": "#s5",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/cartesian-3d",
+   "p": "lab:prerequisiteOf",
+   "o": "lab:concept/partial-derivative",
+   "anchor": "#sum",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/partial-derivative",
+   "p": "lab:prerequisiteOf",
+   "o": "lab:concept/gradient",
+   "anchor": "#sum",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/gradient",
+   "p": "lab:prerequisiteOf",
+   "o": "lab:concept/divergence",
+   "anchor": "#sum",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/divergence",
+   "p": "lab:prerequisiteOf",
+   "o": "lab:concept/curl",
+   "anchor": "#sum",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/gradient",
+   "p": "lab:prerequisiteOf",
+   "o": "lab:concept/laplacian",
+   "anchor": "#sum",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/divergence",
+   "p": "lab:prerequisiteOf",
+   "o": "lab:concept/laplacian",
+   "anchor": "#sum",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/gradient",
+   "p": "lab:derivedFrom",
+   "o": "lab:concept/del-operator",
+   "anchor": "#map",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/divergence",
+   "p": "lab:derivedFrom",
+   "o": "lab:concept/del-operator",
+   "anchor": "#map",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/curl",
+   "p": "lab:derivedFrom",
+   "o": "lab:concept/del-operator",
+   "anchor": "#map",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/laplacian",
+   "p": "lab:derivedFrom",
+   "o": "lab:concept/del-operator",
+   "anchor": "#map",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/gradient",
+   "p": "lab:evaluatedOn",
+   "o": "lab:concept/scalar-field",
+   "anchor": "#map",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/divergence",
+   "p": "lab:evaluatedOn",
+   "o": "lab:concept/vector-field",
+   "anchor": "#map",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/curl",
+   "p": "lab:evaluatedOn",
+   "o": "lab:concept/vector-field",
+   "anchor": "#map",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/laplacian",
+   "p": "lab:evaluatedOn",
+   "o": "lab:concept/scalar-field",
+   "anchor": "#map",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/scalar-field",
+   "p": "lab:partOf",
+   "o": "lab:concept/cartesian-3d",
+   "anchor": "#map",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/vector-field",
+   "p": "lab:partOf",
+   "o": "lab:concept/cartesian-3d",
+   "anchor": "#map",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/level-surface",
+   "p": "lab:relatedTo",
+   "o": "lab:concept/gradient",
+   "anchor": "#s2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/gradient-descent",
+   "p": "lab:derivedFrom",
+   "o": "lab:concept/gradient",
+   "anchor": "#s2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/right-hand-rule",
+   "p": "lab:partOf",
+   "o": "lab:concept/curl",
+   "anchor": "#s4",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/heat-equation",
+   "p": "lab:derivedFrom",
+   "o": "lab:concept/laplacian",
+   "anchor": "#s5",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/curl-free-gradient",
+   "p": "lab:relatedTo",
+   "o": "lab:concept/gradient",
+   "anchor": "#sum",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/curl-free-gradient",
+   "p": "lab:relatedTo",
+   "o": "lab:concept/curl",
+   "anchor": "#sum",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/div-of-curl-zero",
+   "p": "lab:relatedTo",
+   "o": "lab:concept/divergence",
+   "anchor": "#sum",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/div-of-curl-zero",
+   "p": "lab:relatedTo",
+   "o": "lab:concept/curl",
+   "anchor": "#sum",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/finite-difference",
+   "p": "lab:solves",
+   "o": "lab:concept/partial-derivative",
+   "anchor": "#s1",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/flux-box",
+   "p": "lab:demonstratedBy",
+   "o": "lab:sim/p3-flux-box",
+   "anchor": "#s3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/paddle-wheel",
+   "p": "lab:demonstratedBy",
+   "o": "lab:sim/p3-paddle",
+   "anchor": "#s4",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/six-neighbour-stencil",
+   "p": "lab:demonstratedBy",
+   "o": "lab:sim/p3-neighbours",
+   "anchor": "#s5",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/cartesian-3d",
+   "p": "lab:demonstratedBy",
+   "o": "lab:sim/p3-axes",
+   "anchor": "#map",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/partial-derivative",
+   "p": "lab:demonstratedBy",
+   "o": "lab:sim/p3-thermometer",
+   "anchor": "#s1",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/gradient",
+   "p": "lab:demonstratedBy",
+   "o": "lab:sim/p3-compass",
+   "anchor": "#s2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/divergence",
+   "p": "lab:demonstratedBy",
+   "o": "lab:sim/p3-flux-box",
+   "anchor": "#s3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/curl",
+   "p": "lab:demonstratedBy",
+   "o": "lab:sim/p3-paddle",
+   "anchor": "#s4",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/laplacian",
+   "p": "lab:demonstratedBy",
+   "o": "lab:sim/p3-neighbours",
+   "anchor": "#s5",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/curl",
+   "p": "lab:demonstratedBy",
+   "o": "lab:sim/p3-duel",
+   "anchor": "#duel",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/flux-box",
+   "p": "lab:relatedTo",
+   "o": "lab:concept/divergence",
+   "anchor": "#s3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/paddle-wheel",
+   "p": "lab:relatedTo",
+   "o": "lab:concept/curl",
+   "anchor": "#s4",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/six-neighbour-stencil",
+   "p": "lab:relatedTo",
+   "o": "lab:concept/laplacian",
+   "anchor": "#s5",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/judge-by-curl",
+   "p": "lab:contrastsWith",
+   "o": "lab:method/judge-by-look",
+   "anchor": "#duel",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/judge-by-curl",
+   "p": "lab:evaluatedBy",
+   "o": "lab:metric/correct-calls",
+   "anchor": "#duel",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/judge-by-look",
+   "p": "lab:evaluatedBy",
+   "o": "lab:metric/correct-calls",
+   "anchor": "#duel",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/judge-by-curl",
+   "p": "lab:relatedTo",
+   "o": "lab:concept/curl",
+   "anchor": "#duel",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/del-operator",
+   "p": "lab:raises",
+   "o": "lab:question/p3-one-symbol",
+   "anchor": "#top",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/curl",
+   "p": "lab:raises",
+   "o": "lab:question/p3-look-vs-curl",
+   "anchor": "#duel",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/del-four-operations",
+   "p": "lab:supports",
+   "o": "lab:concept/del-operator",
+   "anchor": "#map",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/del-four-operations",
+   "p": "lab:assertedIn",
+   "o": "lab:work/matharium_del",
+   "anchor": "#map",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/curl-grad-zero",
+   "p": "lab:supports",
+   "o": "lab:concept/curl-free-gradient",
+   "anchor": "#sum",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/curl-grad-zero",
+   "p": "lab:assertedIn",
+   "o": "lab:work/matharium_vecops",
+   "anchor": "#sum",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/nabla-name-1870",
+   "p": "lab:supports",
+   "o": "lab:concept/del-operator",
+   "anchor": "#map",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/nabla-name-1870",
+   "p": "lab:assertedIn",
+   "o": "lab:work/knott1911life",
+   "anchor": "#map",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/score-is-gradient",
+   "p": "lab:supports",
+   "o": "lab:concept/gradient",
+   "anchor": "#s2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/score-is-gradient",
+   "p": "lab:assertedIn",
+   "o": "lab:work/song2019generative",
+   "anchor": "#s2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/laplacian-filter-edges",
+   "p": "lab:supports",
+   "o": "lab:concept/laplacian",
+   "anchor": "#s5",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/laplacian-filter-edges",
+   "p": "lab:assertedIn",
+   "o": "lab:work/gonzalez2018digital",
+   "anchor": "#s5",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/partial-derivative",
+   "p": "lab:broader",
+   "o": "lab:topic/calculus-optimization-math",
+   "anchor": "#sum",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/gradient",
+   "p": "lab:broader",
+   "o": "lab:topic/calculus-optimization-math",
+   "anchor": "#sum",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/divergence",
+   "p": "lab:broader",
+   "o": "lab:topic/calculus-optimization-math",
+   "anchor": "#sum",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/curl",
+   "p": "lab:broader",
+   "o": "lab:topic/calculus-optimization-math",
+   "anchor": "#sum",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/laplacian",
+   "p": "lab:broader",
+   "o": "lab:topic/calculus-optimization-math",
+   "anchor": "#sum",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/del-operator",
+   "p": "lab:broader",
+   "o": "lab:topic/calculus-optimization-math",
+   "anchor": "#sum",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/gradient-descent",
+   "p": "lab:broader",
+   "o": "lab:topic/gradient-descent",
+   "anchor": "#s2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:quiz/p3-s1-1",
+   "p": "lab:assesses",
+   "o": "lab:concept/partial-derivative",
+   "anchor": "#s1",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:quiz/p3-s1-2",
+   "p": "lab:assesses",
+   "o": "lab:concept/partial-derivative",
+   "anchor": "#s1",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:quiz/p3-s2-1",
+   "p": "lab:assesses",
+   "o": "lab:concept/level-surface",
+   "anchor": "#s2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:quiz/p3-s2-2",
+   "p": "lab:assesses",
+   "o": "lab:method/gradient-descent",
+   "anchor": "#s2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:quiz/p3-s3-1",
+   "p": "lab:assesses",
+   "o": "lab:concept/divergence",
+   "anchor": "#s3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:quiz/p3-s3-2",
+   "p": "lab:assesses",
+   "o": "lab:concept/divergence",
+   "anchor": "#s3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:quiz/p3-s4-1",
+   "p": "lab:assesses",
+   "o": "lab:concept/curl",
+   "anchor": "#s4",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:quiz/p3-s4-2",
+   "p": "lab:assesses",
+   "o": "lab:concept/curl-free-gradient",
+   "anchor": "#s4",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:quiz/p3-s5-1",
+   "p": "lab:assesses",
+   "o": "lab:concept/laplacian",
+   "anchor": "#s5",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:quiz/p3-s5-2",
+   "p": "lab:assesses",
+   "o": "lab:concept/laplacian",
+   "anchor": "#s5",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:quiz/p3-duel-1",
+   "p": "lab:assesses",
+   "o": "lab:concept/curl",
+   "anchor": "#duel",
+   "confidence": "high"
+  }
+ ]
+}

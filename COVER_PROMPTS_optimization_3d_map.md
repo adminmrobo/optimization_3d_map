@@ -1,6 +1,6 @@
-# 표지 지시문 — 좌표축 위의 그릇 (목차 · 1편 · 2편)
+# 표지 지시문 — 좌표축 위의 그릇 (목차 · 1편 · 2편 · 3편)
 
-세 장 모두 받아 반영했습니다(2026-11-14, `img/`). 연구실 스킬 v1.14의 "낮의 연구실" 기준(시즌 구절, 장소 표, 표지 조립 순서)을 따릅니다. 밤·어둠·네온 불빛 같은 말은 넣지 않습니다. 그림을 받으면 ai-lab-explainer 18-15 절차로 `data-img="cover_index"`, `cover_01`, `cover_02` 자리에 넣고 `cover_manifest.json`의 `status`를 고칩니다.
+목차·1편·2편 세 장은 받아 반영했습니다(2026-11-14, `img/`). 3편 표지(cover_03)는 아직 받지 않았습니다. 연구실 스킬 v1.14의 "낮의 연구실" 기준(시즌 구절, 장소 표, 표지 조립 순서)을 따릅니다. 밤·어둠·네온 불빛 같은 말은 넣지 않습니다. 그림을 받으면 ai-lab-explainer 18-15 절차로 `data-img="cover_index"`, `cover_01`, `cover_02` 자리에 넣고 `cover_manifest.json`의 `status`를 고칩니다.
 
 **참고 이미지 (세 장 모두 함께 올리기):** 네 캐릭터 기본 그림 — GitHub `adminmrobo/fruitfly-lab-expressions`의 박사·조수·초파리 연구원·주판봇 기본 표정(E13), 목차 표지는 인턴 시아·모아(E13)도.
 
@@ -104,6 +104,40 @@ boxy beige retro CRT-monitor robot, dark green screen face with mint pixel eyes 
 Two small maid interns at the sides: a calm girl with long straight jet-black hair holding a small signal flag; a gentle girl with ash-beige wavy hair and white frilled headband cheering with a fist.
 Visual metaphor of the topic: three glowing balls (red, pink, green) rolling down into the bowl along three different paths, the green one zigzagging, the red one smooth.
 Composition: keep every face and hand inside the central safe area (12% margin left and right, 10% top, 18% bottom); keep the bottom-left corner plain, bright and simple; the light falls on the bowl and the three balls.
+Mood: curious, friendly rivalry, the moment before the result.
+No text, no letters, no numbers, no logos, no weapons, no cigarettes, no alcohol, no blood, no real brands.
+```
+
+---
+
+## 3. 3편 화살표 밭 편 — `cover_03` (아직 받지 않음)
+
+지금은 그림판 표지(3D 상자 안의 소용돌이 화살표 + 캐릭터 기본 그림)가 임시로 들어 있습니다. 그림을 받으면 `3_arrow_field.html`의 `<div class="cover" id="cover" data-img="cover_03">` 안의 그림판(canvas·cast4·badge)을 1편과 같은 `<picture>` 구조로 바꾸고, `cover_manifest.json`의 cover_03 `status`를 `ok`로 고칩니다.
+
+| 항목 | 내용 |
+|---|---|
+| 키 · 판 | cover_03 · L (16:9, 1920 이상) |
+| 장소 (앵커) | C 실험 — 낮의 연구실 한가운데 투명한 유리 큐브 수조(가로·세로·높이 모서리에 빨강·청록·검정 막대가 붙어 x·y·z 축처럼 보임) |
+| 주제 은유 | 수조 안 물이 소용돌이치고 작은 날개 네 개짜리 바람개비가 꽂혀 돎, 한쪽 구석에서 보라색 물감 덩어리가 퍼져 나감 |
+| 네 캐릭터 포즈 | 박사: 가운데 뒤에서 수조를 손바닥으로 가리킴 / 조수: 오른쪽에서 온도계를 수조 쪽으로 내밂 / 초파리: 왼쪽에서 오른쪽을 보며 돋보기로 바람개비를 들여다봄 / 주판봇: 오른쪽에서 왼쪽을 보며 주판을 들고 소용돌이를 가리키며 자신만만 · 인턴 시아·모아는 뒤쪽 양옆에 작게 |
+| 대체 글 (alt) | 세 축 막대가 붙은 유리 수조 안 소용돌이와 바람개비를 연구실 식구들이 살펴보는 장면 |
+| 앞 표지와 다른 점 | 목차는 바닥 지형, 1편은 안장 모형·깃대, 2편은 그릇·공 세 개, 3편은 유리 큐브 수조·소용돌이·바람개비·물감 |
+
+**영어 프롬프트**
+```
+Website top cover illustration, wide 16:9.
+Match the art style, proportions and colors of the attached reference images exactly
+(if there are no reference images: 16-bit RPG style pixel art, bold dark outline, 2-3 tone shading, small highlights).
+Bright daytime laboratory mood, soft natural sunlight through large windows, clean white walls, light lavender, mint and pink accents.
+Scene: a wide bright daytime laboratory; in the center stands a large transparent glass cube water tank, with three colored rods along three meeting edges (red, teal and black) so they look like x, y and z axes.
+All four characters together:
+chibi scientist, thin teal rectangular glasses, spiky black hair with one white streak, small ponytail at the back, white lab coat over black vest and tie, at the center back presenting the tank with an open palm;
+girl researcher, long pink hair with two round buns and a navy streak, blue eyes, white lab coat over lavender hoodie, jeans, on the right holding a thermometer toward the tank;
+anthropomorphic fruit fly researcher, black body, big red compound eyes, blue helmet with a gold stripe and pink and blue cables, white lab coat over a black vest, black gloves, transparent wings, on the left facing right, looking closely at a small paddle wheel through a magnifying glass;
+boxy beige retro CRT-monitor robot, dark green screen face with mint pixel eyes and mouth, short antenna topped with a red-brown abacus bead, gray segmented arms, two small tank treads, on the right facing left, holding a wooden abacus and confidently pointing at the swirl.
+Two small maid interns in the background at the sides: one calm girl with long straight jet-black hair, charcoal-black maid dress with large gray bow; one gentle girl with long ash-beige wavy hair, white frilled maid headband, camel cardigan.
+Visual metaphor of the topic: inside the tank the water swirls in a gentle vortex shown by many small glowing teal arrows, a tiny four-blade paddle wheel stands in the flow, and a soft purple cloud of dye spreads out from one corner.
+Composition: keep every face and hand inside the central safe area (12% margin left and right, 10% top, 18% bottom); keep the bottom-left corner plain, bright and simple; the light falls on the glass tank.
 Mood: curious, friendly rivalry, the moment before the result.
 No text, no letters, no numbers, no logos, no weapons, no cigarettes, no alcohol, no blood, no real brands.
 ```

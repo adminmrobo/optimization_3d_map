@@ -69,6 +69,13 @@ REFS = {
  "kingma2015adam": lambda s: ref("kingma2015adam", "paper-conference", "Adam: A Method for Stochastic Optimization",
         [{"family": "Kingma", "given": "Diederik P."}, {"family": "Ba", "given": "Jimmy"}], 2015, "International Conference on Learning Representations (ICLR)", {"URL": "https://arxiv.org/abs/1412.6980"}, supports=s,
         verified={"title": True, "author": True, "year": True, "container": True, "pages": False, "doi": False}, checked="제작자 지식 — 원문 대조 안 함"),
+ "song2019generative": lambda s: ref("song2019generative", "paper-conference", "Generative Modeling by Estimating Gradients of the Data Distribution",
+        [{"family": "Song", "given": "Yang"}, {"family": "Ermon", "given": "Stefano"}], 2019, "Advances in Neural Information Processing Systems 32", {"page": "11895-11907", "URL": "https://arxiv.org/abs/1907.05600"}, supports=s,
+        locs=[{"claim": "lab:claim/score-is-gradient", "loc": "초록, 2장"}],
+        verified={"title": True, "author": True, "year": True, "container": True, "pages": True, "doi": False}, checked="웹 검색 2026-11-16 (arXiv 1907.05600, NeurIPS 2019 논문 페이지, 저자 저장소 BibTeX)"),
+ "gonzalez2018digital": lambda s: ref("gonzalez2018digital", "book", "Digital Image Processing (4th ed.)", [{"family": "Gonzalez", "given": "Rafael C."}, {"family": "Woods", "given": "Richard E."}],
+        2018, None, {"publisher": "Pearson", "ISBN": "978-0-13-335672-4"}, supports=s, locs=[{"claim": "lab:claim/laplacian-filter-edges", "loc": "3장 공간 필터링 (3.6 샤프닝 필터)"}],
+        verified={"title": True, "author": True, "year": True, "publisher": True, "pages": False}, checked="웹 검색 2026-11-16 (Pearson·MathWorks 도서 페이지) — 절 번호는 원문 대조 안 함"),
 }
 
 # ── 그래프 도우미 ──────────────────────────────────────────
@@ -302,6 +309,87 @@ def meta(n, title, about, based, slug):
 (B / "meta_2.json").write_text(json.dumps(meta(2, "좌표축 위의 그릇 ② 실험실 편 — 배치·학습률·에포크를 3D 지도 위에서 고르기",
     ["lab:concept/hyperparameter", "lab:method/minibatch-sgd", "lab:concept/learning-rate", "lab:concept/loss-slice", "lab:concept/overfitting"], list(used2), "2_experiment_lab.html"), ensure_ascii=False, indent=1))
 
+# ══════════════ 3편 ══════════════
+g = G("3_arrow_field")
+sfield = g.n("lab:concept/scalar-field", "Concept", "숫자 밭(스칼라장)", "Scalar field", "#map", 1, "공간의 점마다 숫자 하나가 붙은 것. 온도, 농도, 오차.", alt=["스칼라장"])
+vfield = g.n("lab:concept/vector-field", "Concept", "화살표 밭(벡터장)", "Vector field", "#map", 1, "공간의 점마다 화살표 하나가 붙은 것. 바람, 물 흐름.", alt=["벡터장"])
+axes3 = g.n("lab:concept/cartesian-3d", "Concept", "x·y·z 세 축 공간", "3D Cartesian space", "#map", 1, "앞뒤·좌우·위아래 세 방향이 모두 공간 축인 좌표계. 점의 주소는 (x, y, z).")
+delop = g.n("lab:concept/del-operator", "Concept", "나블라(∇) 연산자", "Del (nabla) operator", "#map", 1, "(∂/∂x, ∂/∂y, ∂/∂z). 세 방향으로 조금씩 재는 도구 묶음.", alt=["델", "del", "∇"])
+pdv = g.n("lab:concept/partial-derivative", "Concept", "편미분", "Partial derivative", "#s1", 1, "다른 좌표는 고정하고 한 좌표만 움직였을 때의 변화율.")
+grad = g.n("lab:concept/gradient", "Concept", "그래디언트", "Gradient", "#s2", 1, "편미분 셋을 묶은 화살표. 가장 가파른 오르막, 등위면과 직각.", alt=["기울기", "∇f"])
+lvl = g.n("lab:concept/level-surface", "Concept", "등위면(같은 값 껍질)", "Level surface", "#s2", 1, "값이 같은 점들을 이은 면. 2차원에서는 등고선.")
+divg = g.n("lab:concept/divergence", "Concept", "발산", "Divergence", "#s3", 1, "∇·F. 작은 상자에서 (나간 양 − 들어온 양) ÷ 부피.")
+curl = g.n("lab:concept/curl", "Concept", "회전", "Curl", "#s4", 2, "∇×F. 작은 바람개비가 가장 빨리 도는 축과 세기(빠르기의 두 배).")
+rhr = g.n("lab:concept/right-hand-rule", "Concept", "오른손 법칙", "Right-hand rule", "#s4", 1, "네 손가락을 도는 쪽으로 감으면 엄지가 회전 화살표 방향.")
+lap = g.n("lab:concept/laplacian", "Concept", "라플라시안", "Laplacian", "#s5", 2, "∇·∇f. 6 × (이웃 여섯 평균 − 가운데) ÷ h². 양수 움푹, 음수 볼록.")
+heat = g.n("lab:concept/heat-equation", "Concept", "열방정식", "Heat equation", "#s5", 2, "∂T/∂t = k∇²T. 이웃 평균보다 낮은 곳은 데워진다.")
+curl0 = g.n("lab:concept/curl-free-gradient", "Concept", "그래디언트의 회전은 0", "Curl of a gradient is zero", "#sum", 2, "그래디언트로 만든 화살표 밭은 소용돌이가 없다.")
+divcurl0 = g.n("lab:concept/div-of-curl-zero", "Concept", "회전의 발산은 0", "Divergence of a curl is zero", "#sum", 2, "회전 화살표로 만든 밭에는 샘도 구멍도 없다.")
+gd = g.n("lab:method/gradient-descent", "Method", "경사하강", "Gradient descent", "#s2", 1, "−∇f 쪽으로 조금씩 걸어 값을 줄이는 방법.")
+m_fd = g.n("lab:method/finite-difference", "Method", "이웃 점 찍어 보기(차분)", "Finite difference", "#s1", 1, "한 좌표를 ±h 움직인 두 점의 값 차이 ÷ 2h로 편미분을 잰다.")
+m_box = g.n("lab:method/flux-box", "Method", "그물 상자 출입 세기", "Flux through a small box", "#s3", 1, "여섯 면의 출입을 더해 부피로 나눠 발산을 잰다.")
+m_pad = g.n("lab:method/paddle-wheel", "Method", "바람개비 고리 셈(순환)", "Paddle-wheel circulation", "#s4", 2, "축에 수직인 작은 고리를 따라 물살을 더해 넓이로 나눈 값 = 회전의 그 축 성분.")
+m_nb6 = g.n("lab:method/six-neighbour-stencil", "Method", "이웃 여섯 평균 비교", "Six-neighbour stencil", "#s5", 2, "∇²f ≈ 6 × (이웃 평균 − 가운데) ÷ h².")
+m_look = g.n("lab:method/judge-by-look", "Method", "겉모양으로 판단", "Judge rotation by arrow shape", "#duel", 1, "화살표가 원을 그리면 돈다고 본다.")
+m_calc = g.n("lab:method/judge-by-curl", "Method", "회전을 계산해 판단", "Judge rotation by computed curl", "#duel", 2, "∂Fy/∂x − ∂Fx/∂y를 이웃 점으로 재서 0이 아니면 돈다고 본다.")
+met = g.n("lab:metric/correct-calls", "Metric", "네 곳 중 맞힌 수", "Correct calls out of four", "#duel", 1)
+A = {k: g.n("lab:analogy/" + k, "Analogy", ko, en, anc, 1) for k, ko, en, anc in [
+    ("thermometer-probe", "온도계를 한 방향으로만 옮기기", "Moving a thermometer along one axis", "#s1"),
+    ("warmth-compass", "따뜻해지는 쪽 나침반", "Compass toward warmth", "#s2"),
+    ("mesh-box-dye", "그물 상자와 물감", "Mesh box and dye", "#s3"),
+    ("stream-paddle", "개울의 바람개비", "Paddle wheel in a stream", "#s4"),
+    ("six-neighbours", "이웃 여섯 집 온도 비교", "Comparing with six neighbours", "#s5")]}
+for a, t in zip(A.values(), [pdv, grad, divg, curl, lap]): g.e(a, "analogyOf", t, g.nodes[[n["id"] for n in g.nodes].index(a)]["anchor"])
+L = {k: g.n("lab:limitation/" + k, "Limitation", ko, en, anc, 2) for k, ko, en, anc in [
+    ("partials-axis-only", "편미분은 축 방향 셋만 봄", "Partials see only the three axes", "#s1"),
+    ("gradient-scalar-only", "그래디언트는 숫자 밭에만", "Gradient applies to scalar fields only", "#s2"),
+    ("divergence-misses-swirl", "발산은 소용돌이를 못 봄", "Divergence misses swirl", "#s3"),
+    ("paddle-infinitesimal", "아주 작은 바람개비 가정", "Assumes an infinitesimal paddle", "#s4"),
+    ("stencil-step-size", "h가 크면 근사가 어긋남", "Large h breaks the approximation", "#s5")]}
+for a, l, b, anc in [(pdv, "partials-axis-only", grad, "#s1"), (grad, "gradient-scalar-only", divg, "#s2"), (divg, "divergence-misses-swirl", curl, "#s3")]:
+    g.e(a, "hasLimitation", L[l], anc); g.e(L[l], "addressedBy", b, anc)
+g.e(curl, "hasLimitation", L["paddle-infinitesimal"], "#s4"); g.e(lap, "hasLimitation", L["stencil-step-size"], "#s5")
+for a, b in [(axes3, pdv), (pdv, grad), (grad, divg), (divg, curl), (grad, lap), (divg, lap)]: g.e(a, "prerequisiteOf", b, "#sum")
+for c in (grad, divg, curl, lap): g.e(c, "derivedFrom", delop, "#map")
+g.e(grad, "evaluatedOn", sfield, "#map"); g.e(divg, "evaluatedOn", vfield, "#map"); g.e(curl, "evaluatedOn", vfield, "#map"); g.e(lap, "evaluatedOn", sfield, "#map")
+g.e(sfield, "partOf", axes3, "#map"); g.e(vfield, "partOf", axes3, "#map"); g.e(lvl, "relatedTo", grad, "#s2"); g.e(gd, "derivedFrom", grad, "#s2"); g.e(rhr, "partOf", curl, "#s4"); g.e(heat, "derivedFrom", lap, "#s5")
+g.e(curl0, "relatedTo", grad, "#sum"); g.e(curl0, "relatedTo", curl, "#sum"); g.e(divcurl0, "relatedTo", divg, "#sum"); g.e(divcurl0, "relatedTo", curl, "#sum")
+g.e(m_fd, "solves", pdv, "#s1"); g.e(m_box, "demonstratedBy", "lab:sim/p3-flux-box", "#s3"); g.e(m_pad, "demonstratedBy", "lab:sim/p3-paddle", "#s4"); g.e(m_nb6, "demonstratedBy", "lab:sim/p3-neighbours", "#s5")
+for sid, ko, en, anc, tgt in [("p3-axes", "세 축 상자와 점의 주소", "3D box and point address", "#map", axes3), ("p3-thermometer", "온도계 실험", "Thermometer probe", "#s1", pdv), ("p3-compass", "나침반 실험(등위면과 그래디언트)", "Level surface and gradient", "#s2", grad),
+                              ("p3-flux-box", "그물 상자 실험", "Flux box and dye", "#s3", divg), ("p3-paddle", "바람개비 실험", "Paddle wheel", "#s4", curl), ("p3-neighbours", "이웃 여섯 집 실험", "Six-neighbour stencil", "#s5", lap), ("p3-duel", "바람개비 대결", "Paddle duel", "#duel", curl)]:
+    g.n("lab:sim/" + sid, "Simulation", ko, en, anc, 2); g.e(tgt, "demonstratedBy", "lab:sim/" + sid, anc)
+g.e(m_box, "relatedTo", divg, "#s3"); g.e(m_pad, "relatedTo", curl, "#s4"); g.e(m_nb6, "relatedTo", lap, "#s5")
+g.e(m_calc, "contrastsWith", m_look, "#duel"); g.e(m_calc, "evaluatedBy", met, "#duel"); g.e(m_look, "evaluatedBy", met, "#duel"); g.e(m_calc, "relatedTo", curl, "#duel")
+q1 = g.n("lab:question/p3-one-symbol", "Question", "기호 ∇ 하나가 어떻게 오르막·샘·소용돌이·움푹함을 모두 잴까?", "How does one symbol measure slope, source, swirl and dip?", "#top", 1)
+q2 = g.n("lab:question/p3-look-vs-curl", "Question", "화살표 겉모양으로 바람개비가 도는지 알 수 있나?", "Can arrow shape tell whether a paddle spins?", "#duel", 2)
+g.e(delop, "raises", q1, "#top"); g.e(curl, "raises", q2, "#duel")
+W = {k: g.work(k, ko, en) for k, ko, en in [
+    ("matharium_del", "matharium — The Del Operator", "matharium — The Del Operator"),
+    ("matharium_vecops", "matharium — The Vector Differential Operators", "matharium — The Vector Differential Operators"),
+    ("knott1911life", "Knott 1911 Life of P. G. Tait", "Knott 1911 Life and Scientific Work of P. G. Tait"),
+    ("song2019generative", "Song·Ermon 2019", "Song & Ermon 2019"),
+    ("gonzalez2018digital", "Gonzalez·Woods 2018 Digital Image Processing", "Gonzalez & Woods 2018 Digital Image Processing")]}
+C = [("lab:claim/del-four-operations", "∇ 하나가 붙는 방식에 따라 그래디언트·발산·회전·라플라시안을 만든다", "One del operator yields gradient, divergence, curl and Laplacian", "#map", delop, "matharium_del", "본문 전체"),
+     ("lab:claim/curl-grad-zero", "그래디언트의 회전과 회전의 발산은 늘 0이다", "Curl of gradient and divergence of curl vanish", "#sum", curl0, "matharium_vecops", "How they connect"),
+     ("lab:claim/nabla-name-1870", "나블라라는 이름은 1870년 W. R. 스미스가 하프 모양을 보고 테이트에게 제안했다", "The name nabla was suggested to Tait by W. R. Smith in 1870", "#map", delop, "knott1911life", "p. 145"),
+     ("lab:claim/score-is-gradient", "점수 기반 생성 모델은 데이터 분포의 그래디언트(점수)를 추정해 그 방향으로 표본을 옮긴다", "Score-based models estimate and follow gradients of the data distribution", "#s2", grad, "song2019generative", "초록, 2장"),
+     ("lab:claim/laplacian-filter-edges", "라플라시안 필터는 밝기가 급히 바뀌는 경계를 드러낸다", "The Laplacian filter highlights intensity edges", "#s5", lap, "gonzalez2018digital", "3장")]
+for cid, ko, en, anc, tgt, wk, loc in C:
+    g.n(cid, "Claim", ko, en, anc, 2, source=[{"ref": wk, "loc": loc}]); g.e(cid, "supports", tgt, anc); g.e(cid, "assertedIn", W[wk], anc)
+for c in (pdv, grad, divg, curl, lap, delop): g.e(c, "broader", T_CALC, "#sum")
+g.e(gd, "broader", T_GD, "#s2")
+Q = [("s1", 1, pdv), ("s1", 2, pdv), ("s2", 1, lvl), ("s2", 2, gd), ("s3", 1, divg), ("s3", 2, divg), ("s4", 1, curl), ("s4", 2, curl0), ("s5", 1, lap), ("s5", 2, lap), ("duel", 1, curl)]
+QL = {"s1": "편미분", "s2": "그래디언트", "s3": "발산", "s4": "회전", "s5": "라플라시안", "duel": "대결 바람개비"}
+for sec, k, tgt in Q:
+    qid = f"lab:quiz/p3-{sec}-{k}"; g.n(qid, "QuizItem", f"{QL[sec]} 문제 {k}", f"Quiz {sec}-{k}", "#" + sec, 2); g.e(qid, "assesses", tgt, "#" + sec)
+g.dump(3)
+used3 = {"matharium_del": [delop, grad, divg, curl, lap], "matharium_vecops": [curl0, divcurl0], "knott1911life": [delop], "song2019generative": [grad], "gonzalez2018digital": [lap]}
+(B / "refs_3.json").write_text(json.dumps([REFS[k](v) for k, v in used3.items()], ensure_ascii=False, indent=1))
+m3 = meta(3, "좌표축 위의 그릇 ③ 화살표 밭 편 — x·y·z 세 축 공간에서 읽는 ∇(나블라)",
+    ["lab:concept/del-operator", "lab:concept/gradient", "lab:concept/divergence", "lab:concept/curl", "lab:concept/laplacian"], list(used3), "3_arrow_field.html")
+m3.update({"date": "2026-11-16", "version": "1.0", "educationalLevel": "입문", "suggestedCitation": "안상선 (2026). 좌표축 위의 그릇 ③ 화살표 밭 편 — x·y·z 세 축 공간에서 읽는 ∇(나블라). 좌표축 위의 그릇 — 3D 지도로 본 모델 최적화 3, v1.0."})
+(B / "meta_3.json").write_text(json.dumps(m3, ensure_ascii=False, indent=1))
+
 # ══════════════ 목차 ══════════════
 g = G("index")
 land = g.n("lab:concept/loss-landscape", "Concept", "오차 지형", "Loss landscape", "#top", 1, "가중치마다 잰 오차를 높이로 세운 땅.")
@@ -310,6 +398,9 @@ gd = g.n("lab:method/gradient-descent", "Method", "경사하강", "Gradient desc
 hp = g.n("lab:concept/hyperparameter", "Concept", "하이퍼파라미터", "Hyperparameter", "#chapters", 1, "학습 전에 사람이 정하는 숫자.")
 p1 = g.n("lab:section/series-part-1", "Section", "1편 수학 편", "Part 1: mathematics", "#chapters", 1)
 p2 = g.n("lab:section/series-part-2", "Section", "2편 실험실 편", "Part 2: experiments", "#chapters", 1)
+p3 = g.n("lab:section/series-part-3", "Section", "3편 화살표 밭 편", "Part 3: vector fields and del", "#chapters", 1)
+delop0 = g.n("lab:concept/del-operator", "Concept", "나블라(∇) 연산자", "Del (nabla) operator", "#chapters", 1, "(∂/∂x, ∂/∂y, ∂/∂z). 그래디언트·발산·회전·라플라시안을 만드는 도구 묶음.")
+g.e(delop0, "explainedIn", p3, "#chapters"); g.e(p1, "relatedTo", p3, "#chapters"); g.e(delop0, "broader", T_CALC, "#chapters")
 q = g.n("lab:question/series", "Question", "학습을 오차 지도 위의 걷기로 볼 수 있을까?", "Can learning be read as walking on a loss map?", "#top", 1)
 w = g.work("goodfellow2016deep", "Goodfellow 외 2016 Deep Learning", "Goodfellow et al. 2016 Deep Learning")
 c = g.n("lab:claim/gd-on-loss", "Claim", "경사하강은 오차 함수의 기울기 반대 방향으로 가중치를 고친다", "Gradient descent moves weights against the loss gradient", "#top", 1, source=[{"ref": "goodfellow2016deep", "loc": "4.3"}])
@@ -320,7 +411,7 @@ g.dump(0)
 m0 = meta(0, "좌표축 위의 그릇 — 3D 지도로 본 모델 최적화 (목차)", ["lab:concept/loss-landscape", "lab:method/gradient-descent", "lab:concept/hyperparameter"], ["goodfellow2016deep"], "")
 (B / "meta_0.json").write_text(json.dumps(m0, ensure_ascii=False, indent=1))
 
-for n in (0, 1, 2):
+for n in (0, 1, 2, 3):
     k = json.loads((B / f"kg_{n}.json").read_text()); ids = {x["id"] for x in k["nodes"]}
     deg = {i: 0 for i in ids}; rel = 0; bad = []
     for e in k["edges"]:

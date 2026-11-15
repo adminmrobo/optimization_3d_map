@@ -1,6 +1,6 @@
 {
  "version": "0.2+optimization_3d_map",
- "updated": "2026-11-14",
+ "updated": "2026-11-16",
  "note": "KG_00_registry 0.2에 없던 ID. ahnboat_lab_explainer/data/KG_00_registry.json에 합칠 때 쓴다.",
  "reused": [
   "lab:concept/learning-rate",
@@ -16,9 +16,9 @@
    "label_ko": "오차 지형",
    "label_en": "Loss landscape",
    "pages": [
-    "optimization_3d_map/index",
     "optimization_3d_map/1_math_map",
-    "optimization_3d_map/2_experiment_lab"
+    "optimization_3d_map/2_experiment_lab",
+    "optimization_3d_map/index"
    ]
   },
   {
@@ -27,8 +27,8 @@
    "label_ko": "좌표축(가중치 축)",
    "label_en": "Parameter axis",
    "pages": [
-    "optimization_3d_map/index",
-    "optimization_3d_map/1_math_map"
+    "optimization_3d_map/1_math_map",
+    "optimization_3d_map/index"
    ]
   },
   {
@@ -37,8 +37,8 @@
    "label_ko": "하이퍼파라미터",
    "label_en": "Hyperparameter",
    "pages": [
-    "optimization_3d_map/index",
-    "optimization_3d_map/2_experiment_lab"
+    "optimization_3d_map/2_experiment_lab",
+    "optimization_3d_map/index"
    ]
   },
   {
@@ -75,7 +75,8 @@
    "label_ko": "그래디언트",
    "label_en": "Gradient",
    "pages": [
-    "optimization_3d_map/1_math_map"
+    "optimization_3d_map/1_math_map",
+    "optimization_3d_map/3_arrow_field"
    ]
   },
   {
@@ -102,7 +103,8 @@
    "label_ko": "그래디언트의 회전은 0",
    "label_en": "Curl of a gradient is zero",
    "pages": [
-    "optimization_3d_map/1_math_map"
+    "optimization_3d_map/1_math_map",
+    "optimization_3d_map/3_arrow_field"
    ]
   },
   {
@@ -130,7 +132,8 @@
    "label_ko": "라플라시안",
    "label_en": "Laplacian",
    "pages": [
-    "optimization_3d_map/1_math_map"
+    "optimization_3d_map/1_math_map",
+    "optimization_3d_map/3_arrow_field"
    ]
   },
   {
@@ -410,7 +413,8 @@
    "label_ko": "그래디언트의 회전과 회전의 발산은 늘 0이다",
    "label_en": "Curl of gradient and divergence of curl vanish",
    "pages": [
-    "optimization_3d_map/1_math_map"
+    "optimization_3d_map/1_math_map",
+    "optimization_3d_map/3_arrow_field"
    ]
   },
   {
@@ -781,6 +785,317 @@
    "label_en": "Hessian captures how the gradient changes",
    "pages": [
     "optimization_3d_map/2_experiment_lab"
+   ]
+  },
+  {
+   "id": "lab:concept/scalar-field",
+   "type": "Concept",
+   "label_ko": "숫자 밭(스칼라장)",
+   "label_en": "Scalar field",
+   "pages": [
+    "optimization_3d_map/3_arrow_field"
+   ]
+  },
+  {
+   "id": "lab:concept/vector-field",
+   "type": "Concept",
+   "label_ko": "화살표 밭(벡터장)",
+   "label_en": "Vector field",
+   "pages": [
+    "optimization_3d_map/3_arrow_field"
+   ]
+  },
+  {
+   "id": "lab:concept/cartesian-3d",
+   "type": "Concept",
+   "label_ko": "x·y·z 세 축 공간",
+   "label_en": "3D Cartesian space",
+   "pages": [
+    "optimization_3d_map/3_arrow_field"
+   ]
+  },
+  {
+   "id": "lab:concept/del-operator",
+   "type": "Concept",
+   "label_ko": "나블라(∇) 연산자",
+   "label_en": "Del (nabla) operator",
+   "pages": [
+    "optimization_3d_map/1_math_map",
+    "optimization_3d_map/3_arrow_field",
+    "optimization_3d_map/index"
+   ]
+  },
+  {
+   "id": "lab:concept/partial-derivative",
+   "type": "Concept",
+   "label_ko": "편미분",
+   "label_en": "Partial derivative",
+   "pages": [
+    "optimization_3d_map/3_arrow_field"
+   ]
+  },
+  {
+   "id": "lab:concept/level-surface",
+   "type": "Concept",
+   "label_ko": "등위면(같은 값 껍질)",
+   "label_en": "Level surface",
+   "pages": [
+    "optimization_3d_map/3_arrow_field"
+   ]
+  },
+  {
+   "id": "lab:concept/divergence",
+   "type": "Concept",
+   "label_ko": "발산",
+   "label_en": "Divergence",
+   "pages": [
+    "optimization_3d_map/1_math_map",
+    "optimization_3d_map/3_arrow_field"
+   ]
+  },
+  {
+   "id": "lab:concept/curl",
+   "type": "Concept",
+   "label_ko": "회전",
+   "label_en": "Curl",
+   "pages": [
+    "optimization_3d_map/3_arrow_field"
+   ]
+  },
+  {
+   "id": "lab:concept/right-hand-rule",
+   "type": "Concept",
+   "label_ko": "오른손 법칙",
+   "label_en": "Right-hand rule",
+   "pages": [
+    "optimization_3d_map/3_arrow_field"
+   ]
+  },
+  {
+   "id": "lab:concept/heat-equation",
+   "type": "Concept",
+   "label_ko": "열방정식",
+   "label_en": "Heat equation",
+   "pages": [
+    "optimization_3d_map/3_arrow_field"
+   ]
+  },
+  {
+   "id": "lab:concept/div-of-curl-zero",
+   "type": "Concept",
+   "label_ko": "회전의 발산은 0",
+   "label_en": "Divergence of a curl is zero",
+   "pages": [
+    "optimization_3d_map/3_arrow_field"
+   ]
+  },
+  {
+   "id": "lab:method/finite-difference",
+   "type": "Method",
+   "label_ko": "이웃 점 찍어 보기(차분)",
+   "label_en": "Finite difference",
+   "pages": [
+    "optimization_3d_map/3_arrow_field"
+   ]
+  },
+  {
+   "id": "lab:method/flux-box",
+   "type": "Method",
+   "label_ko": "그물 상자 출입 세기",
+   "label_en": "Flux through a small box",
+   "pages": [
+    "optimization_3d_map/3_arrow_field"
+   ]
+  },
+  {
+   "id": "lab:method/paddle-wheel",
+   "type": "Method",
+   "label_ko": "바람개비 고리 셈(순환)",
+   "label_en": "Paddle-wheel circulation",
+   "pages": [
+    "optimization_3d_map/3_arrow_field"
+   ]
+  },
+  {
+   "id": "lab:method/six-neighbour-stencil",
+   "type": "Method",
+   "label_ko": "이웃 여섯 평균 비교",
+   "label_en": "Six-neighbour stencil",
+   "pages": [
+    "optimization_3d_map/3_arrow_field"
+   ]
+  },
+  {
+   "id": "lab:method/judge-by-look",
+   "type": "Method",
+   "label_ko": "겉모양으로 판단",
+   "label_en": "Judge rotation by arrow shape",
+   "pages": [
+    "optimization_3d_map/3_arrow_field"
+   ]
+  },
+  {
+   "id": "lab:method/judge-by-curl",
+   "type": "Method",
+   "label_ko": "회전을 계산해 판단",
+   "label_en": "Judge rotation by computed curl",
+   "pages": [
+    "optimization_3d_map/3_arrow_field"
+   ]
+  },
+  {
+   "id": "lab:metric/correct-calls",
+   "type": "Metric",
+   "label_ko": "네 곳 중 맞힌 수",
+   "label_en": "Correct calls out of four",
+   "pages": [
+    "optimization_3d_map/3_arrow_field"
+   ]
+  },
+  {
+   "id": "lab:analogy/thermometer-probe",
+   "type": "Analogy",
+   "label_ko": "온도계를 한 방향으로만 옮기기",
+   "label_en": "Moving a thermometer along one axis",
+   "pages": [
+    "optimization_3d_map/3_arrow_field"
+   ]
+  },
+  {
+   "id": "lab:analogy/warmth-compass",
+   "type": "Analogy",
+   "label_ko": "따뜻해지는 쪽 나침반",
+   "label_en": "Compass toward warmth",
+   "pages": [
+    "optimization_3d_map/3_arrow_field"
+   ]
+  },
+  {
+   "id": "lab:analogy/mesh-box-dye",
+   "type": "Analogy",
+   "label_ko": "그물 상자와 물감",
+   "label_en": "Mesh box and dye",
+   "pages": [
+    "optimization_3d_map/3_arrow_field"
+   ]
+  },
+  {
+   "id": "lab:analogy/stream-paddle",
+   "type": "Analogy",
+   "label_ko": "개울의 바람개비",
+   "label_en": "Paddle wheel in a stream",
+   "pages": [
+    "optimization_3d_map/3_arrow_field"
+   ]
+  },
+  {
+   "id": "lab:analogy/six-neighbours",
+   "type": "Analogy",
+   "label_ko": "이웃 여섯 집 온도 비교",
+   "label_en": "Comparing with six neighbours",
+   "pages": [
+    "optimization_3d_map/3_arrow_field"
+   ]
+  },
+  {
+   "id": "lab:limitation/partials-axis-only",
+   "type": "Limitation",
+   "label_ko": "편미분은 축 방향 셋만 봄",
+   "label_en": "Partials see only the three axes",
+   "pages": [
+    "optimization_3d_map/3_arrow_field"
+   ]
+  },
+  {
+   "id": "lab:limitation/gradient-scalar-only",
+   "type": "Limitation",
+   "label_ko": "그래디언트는 숫자 밭에만",
+   "label_en": "Gradient applies to scalar fields only",
+   "pages": [
+    "optimization_3d_map/3_arrow_field"
+   ]
+  },
+  {
+   "id": "lab:limitation/divergence-misses-swirl",
+   "type": "Limitation",
+   "label_ko": "발산은 소용돌이를 못 봄",
+   "label_en": "Divergence misses swirl",
+   "pages": [
+    "optimization_3d_map/3_arrow_field"
+   ]
+  },
+  {
+   "id": "lab:limitation/paddle-infinitesimal",
+   "type": "Limitation",
+   "label_ko": "아주 작은 바람개비 가정",
+   "label_en": "Assumes an infinitesimal paddle",
+   "pages": [
+    "optimization_3d_map/3_arrow_field"
+   ]
+  },
+  {
+   "id": "lab:limitation/stencil-step-size",
+   "type": "Limitation",
+   "label_ko": "h가 크면 근사가 어긋남",
+   "label_en": "Large h breaks the approximation",
+   "pages": [
+    "optimization_3d_map/3_arrow_field"
+   ]
+  },
+  {
+   "id": "lab:question/p3-one-symbol",
+   "type": "Question",
+   "label_ko": "기호 ∇ 하나가 어떻게 오르막·샘·소용돌이·움푹함을 모두 잴까?",
+   "label_en": "How does one symbol measure slope, source, swirl and dip?",
+   "pages": [
+    "optimization_3d_map/3_arrow_field"
+   ]
+  },
+  {
+   "id": "lab:question/p3-look-vs-curl",
+   "type": "Question",
+   "label_ko": "화살표 겉모양으로 바람개비가 도는지 알 수 있나?",
+   "label_en": "Can arrow shape tell whether a paddle spins?",
+   "pages": [
+    "optimization_3d_map/3_arrow_field"
+   ]
+  },
+  {
+   "id": "lab:claim/del-four-operations",
+   "type": "Claim",
+   "label_ko": "∇ 하나가 붙는 방식에 따라 그래디언트·발산·회전·라플라시안을 만든다",
+   "label_en": "One del operator yields gradient, divergence, curl and Laplacian",
+   "pages": [
+    "optimization_3d_map/1_math_map",
+    "optimization_3d_map/3_arrow_field"
+   ]
+  },
+  {
+   "id": "lab:claim/nabla-name-1870",
+   "type": "Claim",
+   "label_ko": "나블라라는 이름은 1870년 W. R. 스미스가 하프 모양을 보고 테이트에게 제안했다",
+   "label_en": "The name nabla was suggested to Tait by W. R. Smith in 1870",
+   "pages": [
+    "optimization_3d_map/1_math_map",
+    "optimization_3d_map/3_arrow_field"
+   ]
+  },
+  {
+   "id": "lab:claim/score-is-gradient",
+   "type": "Claim",
+   "label_ko": "점수 기반 생성 모델은 데이터 분포의 그래디언트(점수)를 추정해 그 방향으로 표본을 옮긴다",
+   "label_en": "Score-based models estimate and follow gradients of the data distribution",
+   "pages": [
+    "optimization_3d_map/3_arrow_field"
+   ]
+  },
+  {
+   "id": "lab:claim/laplacian-filter-edges",
+   "type": "Claim",
+   "label_ko": "라플라시안 필터는 밝기가 급히 바뀌는 경계를 드러낸다",
+   "label_en": "The Laplacian filter highlights intensity edges",
+   "pages": [
+    "optimization_3d_map/3_arrow_field"
    ]
   }
  ]

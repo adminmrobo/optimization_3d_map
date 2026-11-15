@@ -129,6 +129,47 @@
    "match": []
   },
   {
+   "id": "lab:section/series-part-3",
+   "type": "Section",
+   "label": {
+    "ko": "3편 화살표 밭 편",
+    "en": "Part 3: vector fields and del"
+   },
+   "page": "index",
+   "anchor": "#chapters",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:concept/del-operator",
+   "type": "Concept",
+   "label": {
+    "ko": "나블라(∇) 연산자",
+    "en": "Del (nabla) operator"
+   },
+   "page": "index",
+   "anchor": "#chapters",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "(∂/∂x, ∂/∂y, ∂/∂z). 그래디언트·발산·회전·라플라시안을 만드는 도구 묶음."
+   }
+  },
+  {
    "id": "lab:question/series",
    "type": "Question",
    "label": {
@@ -193,6 +234,27 @@
   }
  ],
  "edges": [
+  {
+   "s": "lab:concept/del-operator",
+   "p": "lab:explainedIn",
+   "o": "lab:section/series-part-3",
+   "anchor": "#chapters",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:section/series-part-1",
+   "p": "lab:relatedTo",
+   "o": "lab:section/series-part-3",
+   "anchor": "#chapters",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/del-operator",
+   "p": "lab:broader",
+   "o": "lab:topic/calculus-optimization-math",
+   "anchor": "#chapters",
+   "confidence": "high"
+  },
   {
    "s": "lab:concept/parameter-axis",
    "p": "lab:partOf",

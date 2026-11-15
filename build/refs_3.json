@@ -1,0 +1,234 @@
+[
+ {
+  "id": "matharium_del",
+  "type": "graphic",
+  "title": "The Del Operator",
+  "author": [
+   {
+    "literal": "matharium"
+   }
+  ],
+  "accessed": {
+   "date-parts": [
+    [
+     2026,
+     11,
+     14
+    ]
+   ]
+  },
+  "lab": {
+   "work": "lab:work/matharium_del",
+   "role": "primary",
+   "supports": [
+    "lab:concept/del-operator",
+    "lab:concept/gradient",
+    "lab:concept/divergence",
+    "lab:concept/curl",
+    "lab:concept/laplacian"
+   ],
+   "locs": [],
+   "verified": {
+    "title": true,
+    "author": true,
+    "year": false,
+    "url": false
+   },
+   "checkedBy": "사용자 제공 자료(이미지·영상)에서 옮김. 원 게시물 주소·게시일은 받지 못함",
+   "note": "그림은 페이지에 넣지 않고 표로 다시 씀"
+  }
+ },
+ {
+  "id": "matharium_vecops",
+  "type": "graphic",
+  "title": "The Vector Differential Operators",
+  "author": [
+   {
+    "literal": "matharium"
+   }
+  ],
+  "accessed": {
+   "date-parts": [
+    [
+     2026,
+     11,
+     14
+    ]
+   ]
+  },
+  "lab": {
+   "work": "lab:work/matharium_vecops",
+   "role": "primary",
+   "supports": [
+    "lab:concept/curl-free-gradient",
+    "lab:concept/div-of-curl-zero"
+   ],
+   "locs": [],
+   "verified": {
+    "title": true,
+    "author": true,
+    "year": false,
+    "url": false
+   },
+   "checkedBy": "사용자 제공 자료(이미지·영상)에서 옮김. 원 게시물 주소·게시일은 받지 못함"
+  }
+ },
+ {
+  "id": "knott1911life",
+  "type": "book",
+  "title": "Life and Scientific Work of Peter Guthrie Tait",
+  "author": [
+   {
+    "family": "Knott",
+    "given": "Cargill Gilston"
+   }
+  ],
+  "issued": {
+   "date-parts": [
+    [
+     1911
+    ]
+   ]
+  },
+  "publisher": "Cambridge University Press",
+  "accessed": {
+   "date-parts": [
+    [
+     2026,
+     11,
+     14
+    ]
+   ]
+  },
+  "lab": {
+   "work": "lab:work/knott1911life",
+   "role": "background",
+   "supports": [
+    "lab:concept/del-operator"
+   ],
+   "locs": [
+    {
+     "claim": "lab:claim/nabla-name-1870",
+     "loc": "p. 145"
+    }
+   ],
+   "verified": {
+    "title": true,
+    "author": true,
+    "year": true,
+    "pages": false
+   },
+   "checkedBy": "웹 검색 2026-11-16 (Wikipedia 'Nabla symbol' 각주, Neumaier 'History of Nabla')"
+  }
+ },
+ {
+  "id": "song2019generative",
+  "type": "paper-conference",
+  "title": "Generative Modeling by Estimating Gradients of the Data Distribution",
+  "author": [
+   {
+    "family": "Song",
+    "given": "Yang"
+   },
+   {
+    "family": "Ermon",
+    "given": "Stefano"
+   }
+  ],
+  "issued": {
+   "date-parts": [
+    [
+     2019
+    ]
+   ]
+  },
+  "container-title": "Advances in Neural Information Processing Systems 32",
+  "page": "11895-11907",
+  "URL": "https://arxiv.org/abs/1907.05600",
+  "accessed": {
+   "date-parts": [
+    [
+     2026,
+     11,
+     14
+    ]
+   ]
+  },
+  "lab": {
+   "work": "lab:work/song2019generative",
+   "role": "background",
+   "supports": [
+    "lab:concept/gradient"
+   ],
+   "locs": [
+    {
+     "claim": "lab:claim/score-is-gradient",
+     "loc": "초록, 2장"
+    }
+   ],
+   "verified": {
+    "title": true,
+    "author": true,
+    "year": true,
+    "container": true,
+    "pages": true,
+    "doi": false
+   },
+   "checkedBy": "웹 검색 2026-11-16 (arXiv 1907.05600, NeurIPS 2019 논문 페이지, 저자 저장소 BibTeX)"
+  }
+ },
+ {
+  "id": "gonzalez2018digital",
+  "type": "book",
+  "title": "Digital Image Processing (4th ed.)",
+  "author": [
+   {
+    "family": "Gonzalez",
+    "given": "Rafael C."
+   },
+   {
+    "family": "Woods",
+    "given": "Richard E."
+   }
+  ],
+  "issued": {
+   "date-parts": [
+    [
+     2018
+    ]
+   ]
+  },
+  "publisher": "Pearson",
+  "ISBN": "978-0-13-335672-4",
+  "accessed": {
+   "date-parts": [
+    [
+     2026,
+     11,
+     14
+    ]
+   ]
+  },
+  "lab": {
+   "work": "lab:work/gonzalez2018digital",
+   "role": "background",
+   "supports": [
+    "lab:concept/laplacian"
+   ],
+   "locs": [
+    {
+     "claim": "lab:claim/laplacian-filter-edges",
+     "loc": "3장 공간 필터링 (3.6 샤프닝 필터)"
+    }
+   ],
+   "verified": {
+    "title": true,
+    "author": true,
+    "year": true,
+    "publisher": true,
+    "pages": false
+   },
+   "checkedBy": "웹 검색 2026-11-16 (Pearson·MathWorks 도서 페이지) — 절 번호는 원문 대조 안 함"
+  }
+ }
+]
