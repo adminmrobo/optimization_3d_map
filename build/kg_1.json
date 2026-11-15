@@ -278,6 +278,57 @@
    }
   },
   {
+   "id": "lab:concept/del-operator",
+   "type": "Concept",
+   "label": {
+    "ko": "나블라(∇) 연산자",
+    "en": "Del (nabla) operator"
+   },
+   "page": "1_math_map",
+   "anchor": "#del-op",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "칸마다 편미분이 든 벡터 (∂/∂x, ∂/∂y, ∂/∂z). 붙는 방식에 따라 그래디언트·발산·회전·라플라시안이 된다."
+   },
+   "altLabel": {
+    "ko": [
+     "델",
+     "del",
+     "∇"
+    ]
+   }
+  },
+  {
+   "id": "lab:concept/divergence",
+   "type": "Concept",
+   "label": {
+    "ko": "발산",
+    "en": "Divergence"
+   },
+   "page": "1_math_map",
+   "anchor": "#del-op",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "∇·F. 한 점에서 나가는 양과 들어오는 양의 차. 양수면 샘, 음수면 빨아들이는 곳."
+   }
+  },
+  {
    "id": "lab:concept/step-size-limit",
    "type": "Concept",
    "label": {
@@ -1004,6 +1055,44 @@
    "match": []
   },
   {
+   "id": "lab:work/matharium_del",
+   "type": "Work",
+   "label": {
+    "ko": "matharium — The Del Operator",
+    "en": "matharium — The Del Operator"
+   },
+   "page": "1_math_map",
+   "anchor": "#top",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:work/knott1911life",
+   "type": "Work",
+   "label": {
+    "ko": "Knott 1911 Life of P. G. Tait",
+    "en": "Knott 1911 Life and Scientific Work of P. G. Tait"
+   },
+   "page": "1_math_map",
+   "anchor": "#top",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
    "id": "lab:work/matharium_gjh",
    "type": "Work",
    "label": {
@@ -1340,6 +1429,56 @@
     {
      "ref": "matharium_vecops",
      "loc": "Laplacian 칸"
+    }
+   ]
+  },
+  {
+   "id": "lab:claim/del-four-operations",
+   "type": "Claim",
+   "label": {
+    "ko": "∇ 하나가 붙는 방식에 따라 그래디언트·발산·회전·라플라시안을 만든다",
+    "en": "One del operator yields gradient, divergence, curl and Laplacian"
+   },
+   "page": "1_math_map",
+   "anchor": "#del-op",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "source": [
+    {
+     "ref": "matharium_del",
+     "loc": "본문 전체"
+    }
+   ]
+  },
+  {
+   "id": "lab:claim/nabla-name-1870",
+   "type": "Claim",
+   "label": {
+    "ko": "나블라라는 이름은 1870년 W. R. 스미스가 하프 모양을 보고 테이트에게 제안했다",
+    "en": "The name nabla was suggested to Tait by W. R. Smith in 1870"
+   },
+   "page": "1_math_map",
+   "anchor": "#del-op",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "source": [
+    {
+     "ref": "knott1911life",
+     "loc": "p. 145"
     }
    ]
   },
@@ -1704,6 +1843,41 @@
   }
  ],
  "edges": [
+  {
+   "s": "lab:concept/del-operator",
+   "p": "lab:relatedTo",
+   "o": "lab:concept/gradient",
+   "anchor": "#del-op",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/del-operator",
+   "p": "lab:relatedTo",
+   "o": "lab:concept/divergence",
+   "anchor": "#del-op",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/del-operator",
+   "p": "lab:relatedTo",
+   "o": "lab:concept/laplacian",
+   "anchor": "#del-op",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/del-operator",
+   "p": "lab:relatedTo",
+   "o": "lab:concept/curl-free-gradient",
+   "anchor": "#del-op",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/laplacian",
+   "p": "lab:relatedTo",
+   "o": "lab:concept/divergence",
+   "anchor": "#del-op",
+   "confidence": "high"
+  },
   {
    "s": "lab:method/slice-descent",
    "p": "lab:hasLimitation",
@@ -2220,6 +2394,34 @@
    "p": "lab:assertedIn",
    "o": "lab:work/matharium_vecops",
    "anchor": "#s3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/del-four-operations",
+   "p": "lab:supports",
+   "o": "lab:concept/del-operator",
+   "anchor": "#del-op",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/del-four-operations",
+   "p": "lab:assertedIn",
+   "o": "lab:work/matharium_del",
+   "anchor": "#del-op",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/nabla-name-1870",
+   "p": "lab:supports",
+   "o": "lab:concept/del-operator",
+   "anchor": "#del-op",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/nabla-name-1870",
+   "p": "lab:assertedIn",
+   "o": "lab:work/knott1911life",
+   "anchor": "#del-op",
    "confidence": "high"
   },
   {

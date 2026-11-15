@@ -257,6 +257,91 @@
   }
  },
  {
+  "id": "matharium_del",
+  "type": "graphic",
+  "title": "The Del Operator",
+  "author": [
+   {
+    "literal": "matharium"
+   }
+  ],
+  "accessed": {
+   "date-parts": [
+    [
+     2026,
+     11,
+     14
+    ]
+   ]
+  },
+  "lab": {
+   "work": "lab:work/matharium_del",
+   "role": "primary",
+   "supports": [
+    "lab:concept/del-operator",
+    "lab:concept/divergence",
+    "lab:concept/laplacian"
+   ],
+   "locs": [],
+   "verified": {
+    "title": true,
+    "author": true,
+    "year": false,
+    "url": false
+   },
+   "checkedBy": "사용자 제공 자료(이미지·영상)에서 옮김. 원 게시물 주소·게시일은 받지 못함",
+   "note": "그림은 페이지에 넣지 않고 표로 다시 씀"
+  }
+ },
+ {
+  "id": "knott1911life",
+  "type": "book",
+  "title": "Life and Scientific Work of Peter Guthrie Tait",
+  "author": [
+   {
+    "family": "Knott",
+    "given": "Cargill Gilston"
+   }
+  ],
+  "issued": {
+   "date-parts": [
+    [
+     1911
+    ]
+   ]
+  },
+  "publisher": "Cambridge University Press",
+  "accessed": {
+   "date-parts": [
+    [
+     2026,
+     11,
+     14
+    ]
+   ]
+  },
+  "lab": {
+   "work": "lab:work/knott1911life",
+   "role": "background",
+   "supports": [
+    "lab:concept/del-operator"
+   ],
+   "locs": [
+    {
+     "claim": "lab:claim/nabla-name-1870",
+     "loc": "p. 145"
+    }
+   ],
+   "verified": {
+    "title": true,
+    "author": true,
+    "year": true,
+    "pages": false
+   },
+   "checkedBy": "웹 검색 2026-11-16 (Wikipedia 'Nabla symbol' 각주, Neumaier 'History of Nabla')"
+  }
+ },
+ {
   "id": "matharium_gjh",
   "type": "graphic",
   "title": "Gradient, Jacobian and Hessian",

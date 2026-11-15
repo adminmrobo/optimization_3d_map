@@ -24,6 +24,11 @@ REFS = {
         verified={"title": True, "author": True, "year": False, "url": False}, checked=USERSRC, note="그림은 페이지에 넣지 않고 새로 그림"),
  "matharium_vecops": lambda s: ref("matharium_vecops", "graphic", "The Vector Differential Operators", [{"literal": "matharium"}], role="primary", supports=s,
         verified={"title": True, "author": True, "year": False, "url": False}, checked=USERSRC),
+ "matharium_del": lambda s: ref("matharium_del", "graphic", "The Del Operator", [{"literal": "matharium"}], role="primary", supports=s,
+        verified={"title": True, "author": True, "year": False, "url": False}, checked=USERSRC, note="그림은 페이지에 넣지 않고 표로 다시 씀"),
+ "knott1911life": lambda s: ref("knott1911life", "book", "Life and Scientific Work of Peter Guthrie Tait", [{"family": "Knott", "given": "Cargill Gilston"}],
+        1911, None, {"publisher": "Cambridge University Press"}, supports=s, locs=[{"claim": "lab:claim/nabla-name-1870", "loc": "p. 145"}],
+        verified={"title": True, "author": True, "year": True, "pages": False}, checked="웹 검색 2026-11-16 (Wikipedia 'Nabla symbol' 각주, Neumaier 'History of Nabla')"),
  "matharium_gjh": lambda s: ref("matharium_gjh", "graphic", "Gradient, Jacobian and Hessian", [{"literal": "matharium"}], role="primary", supports=s,
         verified={"title": True, "author": True, "year": False, "url": False}, checked=USERSRC),
  "matheorems_graph": lambda s: ref("matheorems_graph", "motion_picture", "그래프 곡면 z = f(u, v)의 야코비안과 법선 (z = sin u cos v)", [{"literal": "matheorems"}], role="primary", supports=s,
@@ -98,6 +103,9 @@ curl0 = g.n("lab:concept/curl-free-gradient", "Concept", "그래디언트의 회
 hes = g.n("lab:concept/hessian", "Concept", "헤시안", "Hessian matrix", "#s3", 3, "2차 편미분을 모은 정사각 표. 방향마다의 굽음을 적는다.")
 eig = g.n("lab:concept/curvature-eigenvalue", "Concept", "고유값(굽음)", "Curvature eigenvalue", "#s3", 3, "헤시안을 어느 방향으로 봐도 변하지 않는 굽음 숫자.")
 lap = g.n("lab:concept/laplacian", "Concept", "라플라시안", "Laplacian", "#s3", 3, "2차 편미분의 합 = 헤시안 고유값의 합 = ∇·∇f.")
+delop = g.n("lab:concept/del-operator", "Concept", "나블라(∇) 연산자", "Del (nabla) operator", "#del-op", 2, "칸마다 편미분이 든 벡터 (∂/∂x, ∂/∂y, ∂/∂z). 붙는 방식에 따라 그래디언트·발산·회전·라플라시안이 된다.", alt=["델", "del", "∇"])
+divg = g.n("lab:concept/divergence", "Concept", "발산", "Divergence", "#del-op", 2, "∇·F. 한 점에서 나가는 양과 들어오는 양의 차. 양수면 샘, 음수면 빨아들이는 곳.")
+g.e(delop, "relatedTo", grad, "#del-op"); g.e(delop, "relatedTo", divg, "#del-op"); g.e(delop, "relatedTo", lap, "#del-op"); g.e(delop, "relatedTo", curl0, "#del-op"); g.e(lap, "relatedTo", divg, "#del-op")
 lim = g.n("lab:concept/step-size-limit", "Concept", "보폭 한계 2/λmax", "Step-size stability limit", "#s3", 3, "2차 근사에서 경사하강이 줄어드는 학습률의 상한.")
 cond = g.n("lab:concept/ill-conditioning", "Concept", "길쭉함(조건수)", "Ill-conditioning", "#s3", 3, "가장 큰 굽음과 가장 작은 굽음의 비. 크면 지그재그로 느리게 내려간다.")
 sad = g.n("lab:concept/saddle-point", "Concept", "안장점", "Saddle point", "#s4", 3, "기울기가 0이지만 한 방향으로는 최저, 다른 방향으로는 최고인 곳.")
@@ -162,6 +170,8 @@ g.e(land, "raises", q1, "#top"); g.e(sad, "raises", q2, "#duel")
 W = {k: g.work(k, ko, en) for k, ko, en in [
     ("matharium_crisp", "matharium — The geometry of a curved crisp", "matharium — The geometry of a curved crisp"),
     ("matharium_vecops", "matharium — The Vector Differential Operators", "matharium — The Vector Differential Operators"),
+    ("matharium_del", "matharium — The Del Operator", "matharium — The Del Operator"),
+    ("knott1911life", "Knott 1911 Life of P. G. Tait", "Knott 1911 Life and Scientific Work of P. G. Tait"),
     ("matharium_gjh", "matharium — Gradient, Jacobian and Hessian", "matharium — Gradient, Jacobian and Hessian"),
     ("matheorems_graph", "matheorems — 그래프 곡면의 야코비안과 법선", "matheorems — Jacobian and normal of a graph surface"),
     ("mlfs39", "ML from Scratch 39 — 미니배치", "ML from Scratch 39 — mini batch"),
@@ -176,6 +186,8 @@ C = [("lab:claim/lr-warmup", "학습 초기에 학습률을 천천히 올리는 
      ("lab:claim/normal-is-neg-gradient-lift", "그래프 곡면의 법선은 (−∂f/∂u, −∂f/∂v, 1)이다", "Normal of a graph surface is (−f_u, −f_v, 1)", "#s2", nrm, "matheorems_graph", "영상 수식"),
      ("lab:claim/curl-grad-zero", "그래디언트의 회전과 회전의 발산은 늘 0이다", "Curl of gradient and divergence of curl vanish", "#s2", curl0, "matharium_vecops", "How they connect"),
      ("lab:claim/laplacian-examples", "∇²(x² + y²) = 4, ∇²(x² − y²) = 0", "Laplacian examples", "#s3", lap, "matharium_vecops", "Laplacian 칸"),
+     ("lab:claim/del-four-operations", "∇ 하나가 붙는 방식에 따라 그래디언트·발산·회전·라플라시안을 만든다", "One del operator yields gradient, divergence, curl and Laplacian", "#del-op", delop, "matharium_del", "본문 전체"),
+     ("lab:claim/nabla-name-1870", "나블라라는 이름은 1870년 W. R. 스미스가 하프 모양을 보고 테이트에게 제안했다", "The name nabla was suggested to Tait by W. R. Smith in 1870", "#del-op", delop, "knott1911life", "p. 145"),
      ("lab:claim/crisp-doubly-ruled", "쌍곡포물면은 곧은 선 두 무리를 품는다", "A hyperbolic paraboloid is doubly ruled", "#s4", rul, "matharium_crisp", "아래 문구"),
      ("lab:claim/hessian-classifies", "헤시안 고유값이 임계점을 분류한다", "Hessian eigenvalues classify critical points", "#s3", hes, "matharium_gjh", "Hessian 칸"),
      ("lab:claim/saddles-proliferate-high-dim", "고차원 비볼록 지형에서는 나쁜 국소 최소보다 안장점이 문제를 일으킨다", "Saddle points, not local minima, proliferate in high dimensions", "#s4", sad, "dauphin2014identifying", "초록, 2장"),
@@ -191,7 +203,7 @@ QL = {"s1": "단면 위 한 걸음", "s2": "법선과 그래디언트", "s3": "�
 for sec, k, tgt in Q:
     qid = f"lab:quiz/p1-{sec}-{k}"; g.n(qid, "QuizItem", f"{QL[sec]} 문제 {k}", f"Quiz {sec}-{k}", "#" + sec, 2); g.e(qid, "assesses", tgt, "#" + sec)
 g.dump(1)
-used1 = {"goyal2017accurate": [lr], "he2016deep": [bp], "ioffe2015batch": [bp], "matharium_crisp": [rul, hyp], "matharium_vecops": [curl0, lap], "matharium_gjh": [hes, jac, grad], "matheorems_graph": [nrm, tan],
+used1 = {"goyal2017accurate": [lr], "he2016deep": [bp], "ioffe2015batch": [bp], "matharium_crisp": [rul, hyp], "matharium_vecops": [curl0, lap], "matharium_del": [delop, divg, lap], "knott1911life": [delop], "matharium_gjh": [hes, jac, grad], "matheorems_graph": [nrm, tan],
          "mlfs39": [neuron], "mlfs43": [lr], "dauphin2014identifying": [sad], "goodfellow2016deep": [lim], "rumelhart1986learning": [bp]}
 (B / "refs_1.json").write_text(json.dumps([REFS[k](v) for k, v in used1.items()], ensure_ascii=False, indent=1))
 
