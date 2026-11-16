@@ -1112,6 +1112,25 @@
    "match": []
   },
   {
+   "id": "lab:work/matharium_lagrange",
+   "type": "Work",
+   "label": {
+    "ko": "matharium — Lagrange Multipliers",
+    "en": "matharium — Lagrange Multipliers"
+   },
+   "page": "1_math_map",
+   "anchor": "#top",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
    "id": "lab:work/sciencesnow_gjh",
    "type": "Work",
    "label": {
@@ -1878,6 +1897,279 @@
    ]
   },
   {
+   "id": "lab:concept/lagrangian",
+   "type": "Concept",
+   "label": {
+    "ko": "라그랑지안",
+    "en": "Lagrangian"
+   },
+   "page": "1_math_map",
+   "anchor": "#s6",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "ℒ(x, λ) = f(x) − λg(x). 모든 변수와 λ로 편미분해 0으로 놓으면 ∇f = λ∇g와 g = 0."
+   },
+   "altLabel": {
+    "ko": [
+     "ℒ"
+    ]
+   }
+  },
+  {
+   "id": "lab:concept/lagrange-multiplier",
+   "type": "Concept",
+   "label": {
+    "ko": "라그랑주 승수",
+    "en": "Lagrange multiplier"
+   },
+   "page": "1_math_map",
+   "anchor": "#s6",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "제약 위 최적점에서 ∇f = λ∇g를 맞추는 배수."
+   },
+   "altLabel": {
+    "ko": [
+     "λ"
+    ]
+   }
+  },
+  {
+   "id": "lab:concept/shadow-price",
+   "type": "Concept",
+   "label": {
+    "ko": "그림자 가격",
+    "en": "Shadow price"
+   },
+   "page": "1_math_map",
+   "anchor": "#s6-shadow",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "제약 한 단위의 값어치. λ = df*/dc."
+   },
+   "altLabel": {
+    "ko": [
+     "잠재가격"
+    ]
+   }
+  },
+  {
+   "id": "lab:concept/constrained-optimization",
+   "type": "Concept",
+   "label": {
+    "ko": "제약 있는 최적화",
+    "en": "Constrained optimization"
+   },
+   "page": "1_math_map",
+   "anchor": "#s6",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "g(x) = 0을 지키면서 f(x)를 가장 크게 또는 작게 하는 문제."
+   }
+  },
+  {
+   "id": "lab:analogy/ridge-trail-touch",
+   "type": "Analogy",
+   "label": {
+    "ko": "둘레길에 스치는 등고선",
+    "en": "Contour touching the trail"
+   },
+   "page": "1_math_map",
+   "anchor": "#s6",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:limitation/lagrange-candidates-only",
+   "type": "Limitation",
+   "label": {
+    "ko": "∇f = λ∇g는 후보만 찾는다",
+    "en": "Tangency gives candidates only"
+   },
+   "page": "1_math_map",
+   "anchor": "#s6",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:limitation/lagrange-needs-grad-g",
+   "type": "Limitation",
+   "label": {
+    "ko": "후보 점에서 ∇g ≠ 0이어야 한다",
+    "en": "Needs a nonzero constraint gradient"
+   },
+   "page": "1_math_map",
+   "anchor": "#s6",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:sim/p1-lagrange-fence",
+   "type": "Simulation",
+   "label": {
+    "ko": "곡면 위 울타리와 ∇f·∇g",
+    "en": "Constraint curve on a surface with ∇f and ∇g"
+   },
+   "page": "1_math_map",
+   "anchor": "#s6",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:sim/p1-shadow-price",
+   "type": "Simulation",
+   "label": {
+    "ko": "울타리를 넓히면 — 그림자 가격",
+    "en": "Relaxing the constraint: shadow price"
+   },
+   "page": "1_math_map",
+   "anchor": "#s6-shadow",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:claim/lagrange-tangency",
+   "type": "Claim",
+   "label": {
+    "ko": "제약 위 최적점에서는 f의 등위선이 제약 곡선에 접하므로 ∇f = λ∇g이고, g = 0과 합쳐 n + 1개 식이 된다",
+    "en": "At a constrained optimum ∇f = λ∇g, giving n + 1 equations with g = 0"
+   },
+   "page": "1_math_map",
+   "anchor": "#s6",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "source": [
+    {
+     "ref": "matharium_lagrange",
+     "loc": "인포그래픽 본문"
+    }
+   ]
+  },
+  {
+   "id": "lab:claim/lagrange-circle-example",
+   "type": "Claim",
+   "label": {
+    "ko": "원 x² + y² = 1 위에서 x + y의 최댓값은 (1/√2, 1/√2)에서 √2이다",
+    "en": "Max of x + y on the unit circle is √2 at (1/√2, 1/√2)"
+   },
+   "page": "1_math_map",
+   "anchor": "#s6",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "source": [
+    {
+     "ref": "matharium_lagrange",
+     "loc": "인포그래픽 본문"
+    }
+   ]
+  },
+  {
+   "id": "lab:claim/lambda-shadow-price",
+   "type": "Claim",
+   "label": {
+    "ko": "λ는 제약을 풀 때 최적값이 바뀌는 빠르기로, 경제학에서 그림자 가격이라 부른다",
+    "en": "λ is the rate of change of the optimum as the constraint relaxes — the shadow price"
+   },
+   "page": "1_math_map",
+   "anchor": "#s6-shadow",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "source": [
+    {
+     "ref": "matharium_lagrange",
+     "loc": "인포그래픽 본문"
+    }
+   ]
+  },
+  {
    "id": "lab:quiz/p1-s1-1",
    "type": "QuizItem",
    "label": {
@@ -2076,6 +2368,44 @@
    },
    "page": "1_math_map",
    "anchor": "#s5",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:quiz/p1-s6-1",
+   "type": "QuizItem",
+   "label": {
+    "ko": "라그랑주 승수 문제 1",
+    "en": "Quiz s6-1"
+   },
+   "page": "1_math_map",
+   "anchor": "#s6",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:quiz/p1-s6-2",
+   "type": "QuizItem",
+   "label": {
+    "ko": "라그랑주 승수 문제 2",
+    "en": "Quiz s6-2"
+   },
+   "page": "1_math_map",
+   "anchor": "#s6",
    "level": 2,
    "status": "known",
    "confidence": "high",
@@ -2864,6 +3194,118 @@
    "confidence": "high"
   },
   {
+   "s": "lab:analogy/ridge-trail-touch",
+   "p": "lab:analogyOf",
+   "o": "lab:concept/lagrange-multiplier",
+   "anchor": "#s6",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/lagrangian",
+   "p": "lab:partOf",
+   "o": "lab:concept/constrained-optimization",
+   "anchor": "#s6",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/lagrange-multiplier",
+   "p": "lab:partOf",
+   "o": "lab:concept/lagrangian",
+   "anchor": "#s6",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/lagrange-multiplier",
+   "p": "lab:relatedTo",
+   "o": "lab:concept/gradient",
+   "anchor": "#s6",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/gradient",
+   "p": "lab:prerequisiteOf",
+   "o": "lab:concept/lagrange-multiplier",
+   "anchor": "#s6",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/shadow-price",
+   "p": "lab:relatedTo",
+   "o": "lab:concept/lagrange-multiplier",
+   "anchor": "#s6-shadow",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/lagrange-multiplier",
+   "p": "lab:hasLimitation",
+   "o": "lab:limitation/lagrange-candidates-only",
+   "anchor": "#s6",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/lagrange-multiplier",
+   "p": "lab:hasLimitation",
+   "o": "lab:limitation/lagrange-needs-grad-g",
+   "anchor": "#s6",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/lagrange-multiplier",
+   "p": "lab:demonstratedBy",
+   "o": "lab:sim/p1-lagrange-fence",
+   "anchor": "#s6",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/shadow-price",
+   "p": "lab:demonstratedBy",
+   "o": "lab:sim/p1-shadow-price",
+   "anchor": "#s6-shadow",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/lagrange-tangency",
+   "p": "lab:supports",
+   "o": "lab:concept/lagrange-multiplier",
+   "anchor": "#s6",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/lagrange-tangency",
+   "p": "lab:assertedIn",
+   "o": "lab:work/matharium_lagrange",
+   "anchor": "#s6",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/lagrange-circle-example",
+   "p": "lab:supports",
+   "o": "lab:concept/lagrange-multiplier",
+   "anchor": "#s6",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/lagrange-circle-example",
+   "p": "lab:assertedIn",
+   "o": "lab:work/matharium_lagrange",
+   "anchor": "#s6",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/lambda-shadow-price",
+   "p": "lab:supports",
+   "o": "lab:concept/shadow-price",
+   "anchor": "#s6-shadow",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/lambda-shadow-price",
+   "p": "lab:assertedIn",
+   "o": "lab:work/matharium_lagrange",
+   "anchor": "#s6-shadow",
+   "confidence": "high"
+  },
+  {
    "s": "lab:quiz/p1-s1-1",
    "p": "lab:assesses",
    "o": "lab:method/gradient-descent",
@@ -2938,6 +3380,20 @@
    "p": "lab:assesses",
    "o": "lab:concept/chain-rule",
    "anchor": "#s5",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:quiz/p1-s6-1",
+   "p": "lab:assesses",
+   "o": "lab:concept/lagrange-multiplier",
+   "anchor": "#s6",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:quiz/p1-s6-2",
+   "p": "lab:assesses",
+   "o": "lab:concept/shadow-price",
+   "anchor": "#s6",
    "confidence": "high"
   },
   {

@@ -13,7 +13,7 @@
 <nav class="top" aria-label="섹션 바로가기"><div class="row">
   <a class="logo" href="index.html">좌표축 위의 <i>그릇</i> ①</a>
   <div class="links">
-    <a href="#map">지도</a><a href="#s1">① 자르기</a><a href="#s2">② 깃대</a><a href="#s3">③ 굽음</a><a href="#s4">④ 고개</a><a href="#s5">⑤ 휨</a><a href="#duel">대결</a><a href="#sum">정리</a><a href="#kg">색인</a><a href="#export">꾸러미</a><a href="2_experiment_lab.html">2편 →</a><a href="3_arrow_field.html">3편 →</a>
+    <a href="#map">지도</a><a href="#s1">① 자르기</a><a href="#s2">② 깃대</a><a href="#s3">③ 굽음</a><a href="#s4">④ 고개</a><a href="#s5">⑤ 휨</a><a href="#s6">⑥ 울타리</a><a href="#duel">대결</a><a href="#sum">정리</a><a href="#kg">색인</a><a href="#export">꾸러미</a><a href="2_experiment_lab.html">2편 →</a><a href="3_arrow_field.html">3편 →</a>
   </div>
 </div></nav>
 
@@ -32,7 +32,7 @@
   <h1>좌표축 위의 그릇 — 기울기·굽음·휨으로 읽는 오차 지도</h1>
   <p class="question">모델은 눈을 가린 채 발밑의 기울기와 굽음만으로 어떻게 골짜기 바닥을 찾을까?</p>
   <p class="lead">신경망이 배우는 일은 <b>가중치</b>라는 숫자들을 고치는 일입니다. 가중치 두 개를 가로·세로 좌표축에 놓고, 그 자리에서 잰 <b>오차</b>를 높이로 세우면 땅 모양의 지도가 생깁니다. 이 페이지는 그 지도 위에서 수학 다섯 가지 — 자르기(단면), 기울기(그래디언트)와 깃대(법선), 굽음(헤시안), 고개(안장점), 휨(야코비안) — 를 하나씩 돌려 봅니다.</p>
-  <p class="byline">글 · 안상선 ((주)M-Robo 대표) · <a href="https://adminmrobo.github.io/who_am_i/who_am_i.html">저자 소개</a> · 2026-11-16 · v1.4</p>
+  <p class="byline">글 · 안상선 ((주)M-Robo 대표) · <a href="https://adminmrobo.github.io/who_am_i/who_am_i.html">저자 소개</a> · 2026-11-16 · v1.5</p>
   <div class="three"><b>세 줄로 먼저</b><ol>
     <li>가중치가 좌표축, 오차가 높이다. 학습은 이 지도에서 낮은 곳으로 걸어가는 일이다.</li>
     <li>한 걸음의 방향은 <b>기울기</b>(1차 미분)가 정하고, 얼마나 크게 디뎌도 되는지는 <b>굽음</b>(2차 미분)이 정한다.</li>
@@ -271,6 +271,57 @@
 </div></section>
 
 <!-- 대결 -->
+<section class="sec" id="s6" aria-labelledby="h-s6"><div class="wrap">
+  <h2 id="h-s6"><span class="hex">6</span>울타리를 따라 걷기 — 라그랑주 승수</h2>
+  <div class="tags"><span class="tag nn">모델: 제약 있는 최적화 ℒ = f − λg</span><span class="tag fly">일상: 정상에 못 오르는 둘레길</span></div>
+  <p class="muted" style="font-size:14px">②장(그래디언트와 등고선)을 읽었다면 ③~⑤를 건너뛰고 바로 읽어도 됩니다.</p>
+  <div class="pair">
+    <div><div class="tl">일상으로 치면</div>산 정상은 출입 금지라 둘레길(울타리)로만 걸을 수 있습니다. 둘레길에서 가장 높은 곳은 어디일까요? 등고선이 둘레길을 <b>가로지르는</b> 곳이라면 한쪽으로 조금 더 가면 더 높아집니다. 등고선이 둘레길에 <b>스치듯 닿기만</b> 하는 곳에서 더는 오를 수 없습니다.</div>
+    <div><div class="tr">수학에서는</div>제약 g(x) = 0을 지키면서 f(x)를 가장 크게(또는 작게) 하는 문제입니다. 라그랑주의 방법은 둘을 한 식 <b>ℒ(x, λ) = f(x) − λ g(x)</b>로 묶고, 모든 변수와 λ로 편미분한 값을 0으로 놓습니다. 그 결과가 "∇f = λ∇g, 그리고 g(x) = 0"입니다.</div>
+  </div>
+  <div class="panel">
+    <div class="ptitle">울타리 실험 — 왼쪽: 땅 위에 올린 울타리(빨강), 오른쪽: 위에서 본 등고선과 두 화살표</div>
+    <div class="twin"><div class="cwrap tall"><canvas id="cvS6a" aria-label="곡면 z = f(x, y) 위에 원 모양 제약 곡선을 올리고, 지금 점과 제약 위의 최적점을 표시한 3D 그림"></canvas><span class="hint">끌어서 돌리기</span></div><div class="cwrap tall"><canvas id="cvS6b" aria-label="위에서 본 등고선 지도, 원 모양 울타리, 지금 점에서의 ∇f와 ∇g 화살표"></canvas></div></div>
+    <div class="ctrl">
+      <div class="group" role="group" aria-label="땅 고르기"><span class="glabel">땅</span><button class="bt" type="button" data-s6="curved" aria-pressed="true">굽은 땅</button><button class="bt" type="button" data-s6="plane" aria-pressed="false">예제: f = x + y</button></div>
+      <div class="group"><label class="glabel" for="r-th6">울타리 위 위치 θ</label><input type="range" id="r-th6" min="0" max="359" step="1" value="120"><span class="val" id="v-th6">120°</span></div>
+      <div class="group"><button class="bt" type="button" id="b6max">가장 높은 점으로</button><button class="bt" type="button" id="b6min">가장 낮은 점으로</button></div>
+    </div>
+    <div class="eq" id="eq6"></div>
+    <div class="minis"><div class="mini a"><span>지금 점의 높이 f</span><b id="m6-f">—</b></div><div class="mini m"><span>∇f와 ∇g 사이 각도</span><b id="m6-ang">—</b></div><div class="mini g"><span>울타리 따라 경사 (0이면 후보)</span><b id="m6-t">—</b></div><div class="mini r"><span>λ = ∇f를 ∇g로 맞춘 배수</span><b id="m6-lam">—</b></div></div>
+    <div class="insight" id="i-s6" aria-live="polite"></div>
+  </div>
+  <p class="gut">한 줄 직관: 울타리 위의 최적점에서는 f의 등고선이 울타리에 스치듯 닿고, 그래서 두 곡선의 깃대(법선) 방향이 나란해진다.</p>
+  <div class="explain"><h4>풀이</h4><ol>
+    <li>울타리 위에서 조금 움직이는 방향은 울타리의 접선 방향뿐입니다. 그 방향으로 f가 변하지 않아야(경사 0) 더 오를 곳이 없습니다.</li>
+    <li>f가 접선 방향으로 변하지 않으려면 ∇f가 접선과 직각, 곧 울타리의 법선 방향이어야 합니다. 울타리의 법선은 ∇g이므로 <b>∇f = λ∇g</b>. 같은 방향이면 λ > 0, 정반대면 λ &lt; 0입니다.</li>
+    <li>이것은 ②에서 본 "∇f는 등고선과 직각"과 같은 말입니다. 두 곡선(f의 등고선과 울타리)이 접하면 접선을 함께 쓰고, 그러면 법선도 나란합니다.</li>
+    <li>식으로 쓰면 ∇f − λ∇g = 0 (n개)와 g(x) = 0 (1개), 모두 <b>n + 1개의 식</b>으로 n개의 좌표와 λ를 구합니다. 이 식들은 ℒ = f − λg를 모든 변수와 λ로 편미분해 0으로 놓은 것과 똑같습니다.</li></ol>
+    <div class="lim" style="border-left-color:var(--gfp)"><b>예제</b> 원 x² + y² = 1 위에서 f = x + y를 가장 크게.<br>
+      ∇f = (1, 1), g = x² + y² − 1, ∇g = (2x, 2y). ∇f = λ∇g에서 1 = 2λx, 1 = 2λy → x = y.<br>
+      제약에 넣으면 2x² = 1 → x = y = ±1/√2. 후보가 <b>두 개</b>입니다.<br>
+      (1/√2, 1/√2): f = √2 ≈ 1.414, λ = 1/√2 ≈ 0.707 → <b>최대</b> · (−1/√2, −1/√2): f = −√2, λ = −1/√2 → <b>최소</b><br>
+      위 실험에서 "예제: f = x + y"를 고르고 두 단추를 눌러 확인해 보세요.</div>
+    <div class="lim">이 칸의 가정: ① ∇f = λ∇g는 <b>후보</b>를 찾는 조건입니다. 최대인지 최소인지는 후보들의 f 값을 비교하거나 2차 조건으로 따로 가립니다. ② 후보 점에서 ∇g ≠ 0이어야 합니다(울타리에 꺾인 곳이나 한 점으로 쪼그라든 곳이 없어야 함). ③ 등식 제약만 다룹니다. "넘지 말 것" 같은 부등식은 KKT 조건으로 넓힙니다.</div>
+    <div class="lim" style="border-left-color:var(--info)">표기 주의: ③·④의 λ는 헤시안의 <b>고유값</b>이고, 이 장의 λ는 <b>라그랑주 승수</b>입니다. 같은 글자, 다른 뜻입니다. ℒ = f + λg로 쓰는 책도 있는데, 그러면 λ의 부호만 바뀝니다.</div></div>
+
+  <h3 id="s6-shadow">λ의 두 번째 얼굴 — 그림자 가격</h3>
+  <div class="pair">
+    <div><div class="tl">일상으로 치면</div>둘레길을 조금 바깥으로 넓혀 준다면, 둘레길의 가장 높은 곳은 얼마나 더 높아질까요? 그 "넓혀 준 만큼 얻는 이득의 속도"가 λ입니다.</div>
+    <div><div class="tr">수학에서는</div>제약을 g(x) = x² + y² − c로 쓰고 c를 조금 늘리면, 최적값 f*(c)가 변하는 빠르기가 df*/dc = λ입니다. 제약 한 단위의 값어치라서 경제학자는 λ를 <b>그림자 가격</b>(잠재가격, shadow price)이라 부릅니다.</div>
+  </div>
+  <div class="panel">
+    <div class="ptitle">울타리를 넓히면 — 최적값 f*(c)와 기울기 λ인 접선</div>
+    <div class="cwrap"><canvas id="cvS6c" aria-label="울타리 크기 c에 따른 최적값 곡선과 c = 1에서 기울기 λ인 접선"></canvas></div>
+    <div class="ctrl"><div class="group"><label class="glabel" for="r-eps6">울타리 넓히기 ε (c = 1 + ε)</label><input type="range" id="r-eps6" min="-0.5" max="0.8" step="0.05" value="0.2"><span class="val" id="v-eps6">0.20</span></div></div>
+    <div class="minis"><div class="mini a"><span>실제 최적값 f*(1 + ε)</span><b id="m6-v">—</b></div><div class="mini g"><span>λ로 어림 f*(1) + λ·ε</span><b id="m6-p">—</b></div><div class="mini m"><span>차이</span><b id="m6-d">—</b></div><div class="mini r"><span>c = 1에서의 λ</span><b id="m6-l1">—</b></div></div>
+    <div class="insight" id="i-s6c" aria-live="polite"></div>
+  </div>
+  <div class="bridge field"><b>다른 장과 이어지는 곳</b> 경제학: <a href="first_step_2.html#s42">최적화 첫걸음 ② 4.2</a>에서 "16톤을 가장 싸게"의 λ = 한계비용이 바로 이 그림자 가격입니다(목표를 1톤 올릴 때 늘어나는 최소 비용). 신경망: <a href="first_step_2.html#s54">첫걸음 ② 5.4</a>의 "가중치 크기 울타리"와 규제항 λ|w|²이 같은 그림입니다. 부등식 울타리(KKT)는 제조업 편에서 다룹니다.</div>
+  <div data-dlg="s6"></div>
+  <div class="quiz" data-quiz="s6"></div>
+</div></section>
+
 <section class="sec" id="duel" aria-labelledby="h-duel"><div class="wrap">
   <h2 id="h-duel">대결 — 기울기 0이면 바닥인가?</h2>
   <p class="lead">땅: f(w₁, w₂) = (w₁² − 1)² + w₂². 바닥은 (±1, 0) 두 곳(오차 0), 가운데 (0, 0)은 고개(오차 1)입니다. 공은 능선 위 (0, 1.5)에서 출발하고 학습률 0.05로 내려갑니다. 판정 기준은 <b>멈춘 곳의 오차</b>(낮을수록 좋음)입니다.</p>
@@ -302,6 +353,7 @@
     <tr><td>③</td><td>헤시안 H, 고유값 λ, 라플라시안</td><td>그릇의 길쭉함과 가파름</td><td>η &lt; 2/λ<sub>max</sub></td><td>그 점 둘레에서만 맞음</td></tr>
     <tr><td>④</td><td>안장점, 쌍곡포물면</td><td>감자칩 가운데 고개</td><td>∇f = 0, λ₁λ₂ &lt; 0</td><td>층을 지나는 변화는 모름</td></tr>
     <tr><td>⑤</td><td>야코비안 J, 연쇄 법칙</td><td>당겨진 고무판의 모눈</td><td>J<sub>전체</sub> = J₂·J₁</td><td>작은 범위의 직선 근사</td></tr>
+    <tr><td>⑥</td><td>라그랑주 승수 λ, 그림자 가격</td><td>둘레길에 스치는 등고선</td><td>∇f = λ∇g, g = 0</td><td>후보만 찾음 · 등식 제약</td></tr>
   </tbody></table></div>
   <h3 id="gjh">그래디언트·야코비안·헤시안 한눈에</h3>
   <div class="tblwrap"><table class="cmp"><thead><tr><th>항목</th><th>그래디언트 ∇f</th><th>야코비안 J<sub>F</sub></th><th>헤시안 H<sub>f</sub></th></tr></thead><tbody>
@@ -368,6 +420,7 @@
     <tr><td>[16]</td><td>Wikipedia, "Hessian matrix" / MacTutor History of Mathematics, "Ludwig Otto Hesse" (2026-11-16 확인)</td><td>③ 헤세와 이름(실베스터), 정리 "헤시안 = 그래디언트의 야코비안"</td></tr>
     <tr><td>[17]</td><td>Nocedal, J., Wright, S. J. (2006). Numerical Optimization (2nd ed.). Springer. 3·6·7장</td><td>③ 뉴턴 방법, 헤시안 근사(L-BFGS)</td></tr>
     <tr><td>[18]</td><td>Baydin, A. G., Pearlmutter, B. A., Radul, A. A., Siskind, J. M. (2018). Automatic Differentiation in Machine Learning: a Survey. Journal of Machine Learning Research, 18(153), 1–43.</td><td>⑤ 순방향(JVP)·역방향(VJP) 자동미분</td></tr>
+    <tr><td>[19]</td><td>matharium, 인포그래픽 「Lagrange Multipliers」 (사용자 제공 이미지, 2026-11-16 확인)</td><td>⑥ — 곡면 위 제약 곡선과 최적점 장면, 원 위 x + y 예제의 구성만 참고. 그림은 쓰지 않고 새로 그림. 후보 두 개·∇g ≠ 0 조건·그림자 가격 검산은 이 페이지에서 덧붙임</td></tr>
   </tbody></table>
   <h3>예시값·설명용 모형인 것</h3>
   <ul><li>모든 3D 지도와 그래프의 데이터(직선 주변 점 1,000개, 시드 39)와 그 결과 수치</li><li>③의 2차 곡면, ④의 감자칩 곡면, ⑤의 층 가중치 W, 대결의 땅 (w₁² − 1)² + w₂²</li><li>표지 그림은 연구실 캐릭터로 새로 그린 삽화(실제 장면 아님)</li></ul>
@@ -400,6 +453,10 @@ var DLG={
  s2:[["fly","fly_magnify","화살표를 곡면 위에 세우면 헷갈려. 기울기는 바닥 평면에 사는 벡터야. 깃대 그림자를 봐."]],
  s3:[["robo","robo_calc","고유값 둘 다 양수면 그릇, 하나가 음수면 안장. 계산은 맡겨 줘. 숫자는 거짓말을 안 하거든."]],
  s4:[["moa","moa_report","감자칩 기록을 모아 왔어요. 가로로는 위로, 세로로는 아래로 휘었어요. 그래서 포개 담아도 잘 안 깨진대요."]],
+ s6:[["asst","asst_smile","둘레길에서 제일 높은 곳은 등고선이 살짝 닿는 곳이군요. 그런데 λ는 ③의 고유값이랑 같은 거예요?"],
+      ["doc","doc_front","글자만 같아요. 여기 λ는 \"제약을 한 단위 풀어 주면 최적값이 얼마나 좋아지나\"를 잽니다. 그래서 경제학에서는 그림자 가격이라 불러요."],
+      ["moa","moa_report","첫걸음 ②에서 본 λ = 한계비용이 그거네요! 16톤을 17톤으로 올릴 때 더 드는 비용."],
+      ["robo","robo_calc","울타리를 넓혀 주면 그만큼 이득… 울타리 값을 매기는 셈이군."]],
  s5:[["doc","doc_think","층을 지날 때마다 지도가 늘어나고 기울어져요. 그 휨을 적은 표가 야코비안, 그 표를 곱해 가는 게 역전파예요."]],
  dfly:[["fly","fly_point","평평하다고 다 바닥은 아니야. 굽음까지 보고 판단할게."]],
  drobo:[["robo","robo_coin","기울기 0이면 끝이지. 쓸데없는 계산에 투자 안 해."]],
@@ -592,6 +649,62 @@ function upd5(){var r=Jall(px5),J=r.J,det=J[0][0]*J[1][1]-J[0][1]*J[1][0];$('#m5
 U.btns($('#g-W'),[['stretch','늘이기'],['rot','돌리며 늘이기'],['flat','눌러 납작하게']],'stretch',function(v){Wk=v;upd5();});
 $('#t-l2').onclick=function(){two=!two;this.setAttribute('aria-pressed',String(two));upd5();};upd5();
 
+/* ── ⑥ 라그랑주 승수 ── */
+function rng6(id,vid,f,cb){var r=$('#'+id);r.oninput=function(){var v=+r.value;$('#'+vid).textContent=f(v);cb(v);};}
+var LAG={curved:{f:function(x,y){return 0.9*x+0.6*y+0.45*(x*x-y*y)-0.15*x*y;},g:function(x,y){return [0.9+0.9*x-0.15*y,0.6-0.9*y-0.15*x];},name:'굽은 땅 f = 0.9x + 0.6y + 0.45(x² − y²) − 0.15xy'},
+  plane:{f:function(x,y){return x+y;},g:function(){return [1,1];},name:'예제 f = x + y'}};
+var lag='curved',th6=120,XR6=[-1.6,1.6];
+function lagCrit(F,c){var r=Math.sqrt(c),N=7200,best=[0,-1e9],worst=[0,1e9];for(var k=0;k<N;k++){var t=2*Math.PI*k/N,v=F.f(r*Math.cos(t),r*Math.sin(t));if(v>best[1])best=[t,v];if(v<worst[1])worst=[t,v];}
+  function refine(t,s){for(var it=0;it<40;it++){var h=1e-4,a=F.f(r*Math.cos(t-h),r*Math.sin(t-h)),b=F.f(r*Math.cos(t),r*Math.sin(t)),d=F.f(r*Math.cos(t+h),r*Math.sin(t+h)),d1=(d-a)/(2*h),d2=(d-2*b+a)/(h*h);if(Math.abs(d2)<1e-12)break;var nt=t-d1/d2;if(Math.abs(nt-t)>0.01)nt=t+0.01*Math.sign(nt-t);t=nt;}return [t,F.f(r*Math.cos(t),r*Math.sin(t))];}
+  return {max:refine(best[0]),min:refine(worst[0]),r:r};}
+function lagAt(t){var F=LAG[lag],x=Math.cos(t),y=Math.sin(t),G=F.g(x,y),Gg=[2*x,2*y],dot=G[0]*Gg[0]+G[1]*Gg[1],nf=Math.hypot(G[0],G[1]),ng=Math.hypot(Gg[0],Gg[1]),ang=Math.acos(Math.max(-1,Math.min(1,dot/(nf*ng))))*180/Math.PI,tan=-G[0]*y+G[1]*x;if(Math.abs(tan)<5e-4)tan=0;
+  return {x:x,y:y,f:F.f(x,y),G:G,Gg:Gg,ang:ang,tan:tan,lam:dot/(ng*ng)};}
+var sf6=new U.Surf3D($('#cvS6a'),{f:LAG.curved.f,xr:XR6,yr:XR6,n:30,axes:['x','y','z = f(x, y)'],yaw:-0.85,pitch:0.55,zoom:0.9,stamp:'설명용 모형',contours:true});
+sf6.ov.push(function(g,S){var F=LAG[lag],C=lagCrit(F,1),ring=[],flo=[];for(var k=0;k<=120;k++){var t=2*Math.PI*k/120,x=Math.cos(t),y=Math.sin(t);ring.push([x,y,F.f(x,y)+0.015]);flo.push([x,y,S.zr[0]]);}
+  S.line3(g,flo,'rgba(201,48,44,.45)',1.6,[5,4]);S.line3(g,ring,cssv('--eye'),3);
+  var mx=C.max[0],mn=C.min[0];S.dot3(g,Math.cos(mn),Math.sin(mn),C.min[1],cssv('--info'),6,true);var q=S.dot3(g,Math.cos(mx),Math.sin(mx),C.max[1],cssv('--gfp'),7,true);
+  U.label(g,q[0]+12,q[1]-14,'울타리 위 최적점',cssv('--gfp'));var P=lagAt(th6*Math.PI/180);S.dot3(g,P.x,P.y,P.f,cssv('--amber'),6);
+  var qq=S.P(-1.45,1.45,S.zr[1]);U.label(g,qq[0],qq[1],'g(x, y) = x² + y² − 1 = 0',cssv('--eye'));});
+function draw6b(){var F=LAG[lag],cv=$('#cvS6b'),R=U.setup(cv),g=R.g,w=R.w,h=R.h,pad=26,sz=Math.min(w,h)-pad*2,x0=(w-sz)/2,y0=(h-sz)/2;U.grid24(g,w,h);
+  var X=function(u){return x0+(u-XR6[0])/(XR6[1]-XR6[0])*sz;},Y=function(v){return y0+sz-(v-XR6[0])/(XR6[1]-XR6[0])*sz;},n=56,zs=[],mn=1e9,mx=-1e9,i,j;
+  for(j=0;j<=n;j++){zs.push([]);for(i=0;i<=n;i++){var z=F.f(XR6[0]+(XR6[1]-XR6[0])*i/n,XR6[0]+(XR6[1]-XR6[0])*j/n);zs[j].push(z);mn=Math.min(mn,z);mx=Math.max(mx,z);}}
+  var cs=sz/n;for(j=0;j<n;j++)for(i=0;i<n;i++){g.fillStyle=U.cmap((zs[j][i]-mn)/(mx-mn),.45);g.fillRect(x0+i*cs,y0+sz-(j+1)*cs,cs+.6,cs+.6);}
+  function iso(zl,col,wd){g.strokeStyle=col;g.lineWidth=wd;g.beginPath();for(j=0;j<n;j++)for(i=0;i<n;i++){var q=[zs[j][i],zs[j][i+1],zs[j+1][i+1],zs[j+1][i]],P2=[[i,j],[i+1,j],[i+1,j+1],[i,j+1]],seg=[];for(var e=0;e<4;e++){var a=q[e],b=q[(e+1)%4];if((a-zl)*(b-zl)<0){var t=(zl-a)/(b-a),pa=P2[e],pb=P2[(e+1)%4];seg.push([pa[0]+(pb[0]-pa[0])*t,pa[1]+(pb[1]-pa[1])*t]);}}if(seg.length>=2){g.moveTo(x0+seg[0][0]*cs,y0+sz-seg[0][1]*cs);g.lineTo(x0+seg[1][0]*cs,y0+sz-seg[1][1]*cs);}}g.stroke();}
+  for(var L=1;L<14;L++)iso(mn+(mx-mn)*L/14,'rgba(22,33,43,.22)',1);
+  var P=lagAt(th6*Math.PI/180);g.setLineDash([]);iso(P.f,cssv('--amber'),2.4);
+  g.strokeStyle=cssv('--eye');g.lineWidth=2.6;g.beginPath();g.arc(X(0),Y(0),sz/(XR6[1]-XR6[0]),0,7);g.stroke();
+  var C=lagCrit(F,1);[[C.max[0],cssv('--gfp')],[C.min[0],cssv('--info')]].forEach(function(a){g.beginPath();g.arc(X(Math.cos(a[0])),Y(Math.sin(a[0])),8,0,7);g.strokeStyle=a[1];g.lineWidth=2.5;g.stroke();});
+  var sc=sz*0.16,nf=Math.hypot(P.G[0],P.G[1]),ng=Math.hypot(P.Gg[0],P.Gg[1]);
+  U.arrow2(g,X(P.x),Y(P.y),X(P.x)+P.Gg[0]/ng*sc*1.35,Y(P.y)-P.Gg[1]/ng*sc*1.35,cssv('--eye'),3.2);U.arrow2(g,X(P.x),Y(P.y),X(P.x)+P.G[0]/nf*sc,Y(P.y)-P.G[1]/nf*sc,cssv('--gfp'),2.6);
+  g.beginPath();g.arc(X(P.x),Y(P.y),6,0,7);g.fillStyle=cssv('--amber');g.fill();g.strokeStyle='#fff';g.lineWidth=1.5;g.stroke();
+  U.label(g,x0+4,y0+sz-30,'주황 곡선 = 지금 점을 지나는 등고선',cssv('--muted'));U.label(g,x0+4,y0+sz-10,'초록 ∇f · 빨강 ∇g(울타리의 법선)',cssv('--muted'));U.stamp(g,w,'설명용 모형');}
+U.reg($('#cvS6b'),function(dt){if(dt===0)draw6b();});
+var v6c={dirty:true};function draw6c(){var F=LAG[lag],pts=[];for(var c=0.3;c<=2.001;c+=0.05)pts.push([c,lagCrit(F,c).max[1]]);
+  var l1=lagAt(lagCrit(F,1).max[0]).lam,v1=lagCrit(F,1).max[1],e=eps6,ve=lagCrit(F,1+e).max[1];
+  var P6=U.plot($('#cvS6c'),{xr:[0.3,2],yr:[Math.min.apply(null,pts.map(function(p){return p[1];}))-0.2,Math.max.apply(null,pts.map(function(p){return p[1];}))+0.25],yt:(function(){var lo=Math.min.apply(null,pts.map(function(p){return p[1];})),hi=Math.max.apply(null,pts.map(function(p){return p[1];})),t=[];for(var v=Math.ceil(lo*2)/2;v<=hi+0.25;v+=0.5)t.push(+v.toFixed(2));return t;})(),xt:[0.5,1,1.5,2],xl:'울타리 크기 c (x² + y² = c)',yl:'최적값 f*(c)',
+    series:[{pts:pts,color:cssv('--gfp'),width:2.6,name:'f*(c)'},{pts:[[0.4,v1+l1*(0.4-1)],[1.9,v1+l1*0.9]],color:cssv('--amber'),width:2,dash:[6,4],name:'기울기 λ인 접선',ndy:16}],
+    vlines:[{x:1,color:cssv('--muted'),label:'c = 1'},{x:1+e,color:cssv('--eye'),label:'c = '+fmt(1+e,2),dy:18}],
+    stamp:'설명용 모형'});
+  [[1,v1,cssv('--gfp')],[1+e,ve,cssv('--eye')]].forEach(function(m){P6.g.beginPath();P6.g.arc(P6.X(m[0]),P6.Y(m[1]),6,0,7);P6.g.fillStyle=m[2];P6.g.fill();P6.g.strokeStyle='#fff';P6.g.lineWidth=1.5;P6.g.stroke();});}
+U.reg($('#cvS6c'),function(dt){if(v6c.dirty||dt===0){draw6c();v6c.dirty=false;}});
+var eps6=0.2;
+function up6(){var F=LAG[lag],P=lagAt(th6*Math.PI/180),C=lagCrit(F,1),Pm=lagAt(C.max[0]),Pn=lagAt(C.min[0]);
+  $('#m6-f').textContent=fmt(P.f,3);$('#m6-ang').textContent=fmt(P.ang,1)+'°';$('#m6-t').textContent=fmt(P.tan,3);$('#m6-lam').textContent=(P.ang<1||P.ang>179)?fmt(P.lam,3):'—';
+  $('#eq6').innerHTML='지금 점 ('+fmt(P.x,3)+', '+fmt(P.y,3)+') · ∇f = ('+fmt(P.G[0],3)+', '+fmt(P.G[1],3)+') · ∇g = (2x, 2y) = ('+fmt(P.Gg[0],3)+', '+fmt(P.Gg[1],3)+')<br>울타리 따라 경사 = ∇f · (접선 방향) = '+fmt(P.tan,3)+' → 0이 되는 곳이 후보<br>최대 ('+fmt(Pm.x,3)+', '+fmt(Pm.y,3)+')에서 f = '+fmt(Pm.f,3)+', λ = '+fmt(Pm.lam,3)+' · 최소 ('+fmt(Pn.x,3)+', '+fmt(Pn.y,3)+')에서 f = '+fmt(Pn.f,3)+', λ = '+fmt(Pn.lam,3);
+  var it=[];if(P.ang<1)it.push(['g','두 화살표가 같은 방향입니다(각도 '+fmt(P.ang,1)+'°). 주황 등고선이 빨간 울타리에 스치듯 닿았어요 — 울타리 위에서 가장 높은 점, λ = '+fmt(P.lam,3)+' > 0.']);
+  else if(P.ang>179)it.push(['m','두 화살표가 정반대입니다(각도 '+fmt(P.ang,1)+'°). 이것도 "나란함"이라 후보가 됩니다. 여기는 울타리 위에서 가장 낮은 점, λ = '+fmt(P.lam,3)+' &lt; 0.']);
+  else it.push(['a','두 화살표가 '+fmt(P.ang,0)+'° 벌어져 있습니다. 주황 등고선이 울타리를 가로지르니, 울타리를 따라 '+(P.tan>0?'반시계 방향':'시계 방향')+'으로 가면 더 높아집니다.']);
+  U.ins($('#i-s6'),it);
+  var l1=Pm.lam,v1=Pm.f,ve=lagCrit(F,1+eps6).max[1],pr=v1+l1*eps6;$('#m6-v').textContent=fmt(ve,4);$('#m6-p').textContent=fmt(pr,4);$('#m6-d').textContent=fmt(ve-pr,4);$('#m6-l1').textContent=fmt(l1,4);
+  U.ins($('#i-s6c'),[['g','울타리를 ε = '+fmt(eps6,2)+'만큼 넓히면 최적값이 '+fmt(v1,3)+' → '+fmt(ve,3)+'로 바뀝니다. λ로 어림한 값('+fmt(pr,3)+')과 차이는 '+fmt(ve-pr,4)+' — ε가 작을수록 차이가 0에 가까워집니다.'],['m',lag==='plane'?'예제에서는 f*(c) = √(2c)라 c = 1에서 기울기가 1/√2 ≈ 0.707 = λ. 계산과 딱 맞습니다.':'λ = '+fmt(l1,3)+'은 "울타리 크기 c를 1만큼 넓힐 때 최적값이 늘어나는 빠르기", 곧 제약 한 단위의 값어치(그림자 가격)입니다.']]);
+  sf6.dirty=true;draw6b();v6c.dirty=true;}
+U.$$('[data-s6]').forEach(function(b){b.onclick=function(){lag=b.dataset.s6;U.$$('[data-s6]').forEach(function(x){x.setAttribute('aria-pressed',String(x===b));});sf6.setF(LAG[lag].f,XR6,XR6);up6();};});
+rng6('r-th6','v-th6',function(v){return v+'°';},function(v){th6=v;up6();});
+rng6('r-eps6','v-eps6',function(v){return v.toFixed(2);},function(v){eps6=v;up6();});
+function go6(t){th6=Math.round(((t*180/Math.PI)%360+360)%360);var r=$('#r-th6');r.value=th6;$('#v-th6').textContent=th6+'°';th6=t*180/Math.PI;up6();}
+$('#b6max').onclick=function(){go6(lagCrit(LAG[lag],1).max[0]);};$('#b6min').onclick=function(){go6(lagCrit(LAG[lag],1).min[0]);};
+up6();
+
 /* ── 대결 ── */
 var RF=null,RR=null,tD=0,playD=false;
 var SD=new U.Surf3D($('#cvDuel'),{f:function(x,y){return LM.sf([x,y]);},xr:[-1.6,1.6],yr:[-1.6,1.6],n:30,alpha:0.8,axes:['w₁','w₂','오차'],zr:[0,4],stamp:'설명용 모형',
@@ -629,9 +742,12 @@ U.Gloss({
  '경사하강':['경사하강 (gradient descent)','학습','기울기의 반대 방향으로 조금씩 걸어 오차를 줄이는 방법.'],
  '쌍곡포물면':['쌍곡포물면','기하','z = x²/a² − y²/b². 한 방향은 위로, 다른 방향은 아래로 휜 안장 모양 곡면.'],
  '∇':['∇ (나블라)','기호','(∂/∂x, ∂/∂y, ∂/∂z). 그래디언트·발산·회전·라플라시안을 만드는 재료.'],
- 'λ':['λ (람다)','기호','이 페이지에서는 헤시안의 고유값, 곧 한 방향의 굽음.'],
+ 'λ':['λ (람다)','기호','이 페이지에서 두 뜻: ③·④에서는 헤시안의 고유값(한 방향의 굽음), ⑥에서는 라그랑주 승수.'],
+ '라그랑주 승수':['라그랑주 승수 λ','최적화','제약 있는 최적화에서 ∇f = λ∇g를 맞추는 배수. 제약을 한 단위 풀 때 최적값이 바뀌는 빠르기와 같다.'],
+ '그림자 가격':['그림자 가격 (잠재가격, shadow price)','경제','제약 한 단위의 값어치. 라그랑주 승수 λ = df*/dc.'],
+ '라그랑지안':['라그랑지안 ℒ','최적화','ℒ(x, λ) = f(x) − λg(x). 모든 변수와 λ로 편미분해 0으로 놓으면 ∇f = λ∇g와 g = 0이 나온다.'],
  'η':['η (에타)','기호','학습률.']
-},['좌표축','오차','단면','그래디언트','법선','헤시안','고유값','라플라시안','안장점','야코비안','역전파','λ']);
+},['좌표축','오차','단면','그래디언트','법선','헤시안','고유값','라플라시안','안장점','야코비안','역전파','라그랑주 승수','그림자 가격','λ']);
 U.Study({quiz:{
  s1:[{q:'b를 묶고 w 방향 단면 위에서 기울기가 +2.0, 학습률이 0.1이면 w는 어떻게 바뀌나요?',o:['0.2 늘어난다','0.2 줄어든다','2.0 줄어든다'],a:1,why:'새 w = 옛 w − 0.1 × 2.0 = 옛 w − 0.2. 기울기가 양수면 오른쪽이 오르막이라 왼쪽으로 갑니다.',hint:'공식의 빼기 기호가 "내리막 쪽으로"라는 뜻이에요.'},
      {q:'같은 그릇인데 w 방향 단면의 보폭 한계(약 0.33)가 b 방향(약 1.0)보다 작은 이유는?',o:['w 방향이 더 많이 굽어서','w 방향이 더 길어서','데이터가 더 많아서'],a:0,why:'보폭 한계는 2/굽음입니다. w 방향 굽음은 2·mean(x²) ≈ 6, b 방향은 2라서 한계가 각각 약 0.33, 1.0입니다.',hint:'한계 = 2 / (그 단면의 2차 미분)'}],
@@ -642,6 +758,8 @@ U.Study({quiz:{
      {q:'고유값이 +2와 −2인 안장 땅에서 뉴턴 한 걸음(θ ← θ − H⁻¹∇f)을 하면?',o:['음의 고유값 방향으로 계속 내려간다','안장점(기울기 0인 곳)으로 곧장 가서 멈춘다','바닥을 찾아 한 걸음에 내려간다'],a:1,why:'2차 땅에서 뉴턴 걸음은 기울기 0인 점으로 바로 갑니다. 그 점이 고개여도 그렇습니다. 그래서 뉴턴 방법은 헤시안을 고쳐 쓰거나 다른 방법과 섞어 씁니다.',hint:'"뉴턴 한 걸음" 단추를 λ₂ = −2로 눌러 보세요.'}],
  s4:[{q:'z = x² − y²의 라플라시안은?',o:['4','0','−2'],a:1,why:'∂²z/∂x² = 2, ∂²z/∂y² = −2, 합은 0. 위로 휜 만큼 아래로 휘었습니다.',hint:'두 방향의 2차 미분을 더하세요.'},
      {q:'쌍곡포물면이 "곧은 선 두 무리"를 품는 이유로 맞는 것은?',o:['x/a − y/b를 묶으면 z가 남은 변수의 1차식이 되어서','곡면이 평평해서','a와 b가 같아서'],a:0,why:'z = (x/a − y/b)(x/a + y/b). 한 괄호를 t로 묶으면 z = t × (다른 괄호), 직선입니다. 다른 괄호를 묶으면 두 번째 무리가 나옵니다.',hint:'z를 두 괄호의 곱으로 써 보세요.'}],
+ s6:[{q:'원 x² + y² = 1 위에서 f = x + y를 가장 크게 하는 점에서 ∇f와 ∇g는?',o:['서로 직각이다','같은 방향으로 나란하다','둘 다 0이다'],a:1,why:'최적점에서는 f의 등고선이 울타리에 접해 두 법선이 나란합니다. (1/√2, 1/√2)에서 ∇f = (1, 1), ∇g = (√2, √2) — λ = 1/√2.',hint:'⑥ 실험에서 각도가 몇 도일 때 멈췄나요?'},
+     {q:'라그랑주 승수 λ = 0.7이면, 제약을 c = 1에서 1.1로 조금 풀어 줄 때 최적값은 대략?',o:['0.07쯤 늘어난다','0.7쯤 늘어난다','변하지 않는다'],a:0,why:'df*/dc = λ이므로 Δf* ≈ λ·Δc = 0.7 × 0.1 = 0.07. 그래서 λ를 그림자 가격이라 부릅니다.',hint:'그림자 가격 실험의 "λ로 어림" 칸.'}],
  s5:[{q:'tanh 층 F(x) = tanh(Wx)의 야코비안은?',o:['W','diag(1 − tanh²(Wx)) · W','tanh(W)'],a:1,why:'연쇄 법칙: 안쪽 Wx의 야코비안 W에 바깥 tanh의 기울기 1 − tanh²를 곱합니다.',hint:'tanh의 미분은 1 − tanh²예요.'},
      {q:'두 층을 이어 붙인 지도의 야코비안은?',o:['J₁ + J₂','J₂ · J₁','J₁ · J₂ · J₁'],a:1,why:'나중 층의 표를 앞에 곱합니다(연쇄 법칙). 역전파는 이 곱을 뒤에서부터 계산해요.',hint:'함수를 이어 붙이면 미분은 곱해져요.'}],
  duel:[{q:'대결에서 주판봇 공이 멈춘 (0, 0)의 헤시안 고유값은 −4와 2입니다. 이 점은?',o:['바닥','안장점','봉우리'],a:1,why:'고유값 부호가 섞였으니 안장점입니다. 기울기 0만으로는 바닥인지 알 수 없어요.',hint:'③에서 본 분류표를 떠올려 보세요.'}]

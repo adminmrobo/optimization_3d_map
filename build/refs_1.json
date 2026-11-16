@@ -378,6 +378,42 @@
   }
  },
  {
+  "id": "matharium_lagrange",
+  "type": "graphic",
+  "title": "Lagrange Multipliers",
+  "author": [
+   {
+    "literal": "matharium"
+   }
+  ],
+  "accessed": {
+   "date-parts": [
+    [
+     2026,
+     11,
+     14
+    ]
+   ]
+  },
+  "lab": {
+   "work": "lab:work/matharium_lagrange",
+   "role": "primary",
+   "supports": [
+    "lab:concept/lagrange-multiplier",
+    "lab:concept/shadow-price",
+    "lab:concept/lagrangian"
+   ],
+   "locs": [],
+   "verified": {
+    "title": true,
+    "author": true,
+    "year": false,
+    "url": false
+   },
+   "checkedBy": "사용자 제공 자료(이미지·영상)에서 옮김. 원 게시물 주소·게시일은 받지 못함"
+  }
+ },
+ {
   "id": "sciencesnow_gjh",
   "type": "graphic",
   "title": "Gradient vs Jacobian vs Hessian",

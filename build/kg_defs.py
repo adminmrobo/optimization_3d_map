@@ -29,6 +29,8 @@ REFS = {
  "knott1911life": lambda s: ref("knott1911life", "book", "Life and Scientific Work of Peter Guthrie Tait", [{"family": "Knott", "given": "Cargill Gilston"}],
         1911, None, {"publisher": "Cambridge University Press"}, supports=s, locs=[{"claim": "lab:claim/nabla-name-1870", "loc": "p. 145"}],
         verified={"title": True, "author": True, "year": True, "pages": False}, checked="웹 검색 2026-11-16 (Wikipedia 'Nabla symbol' 각주, Neumaier 'History of Nabla')"),
+ "matharium_lagrange": lambda s: ref("matharium_lagrange", "graphic", "Lagrange Multipliers", [{"literal": "matharium"}], role="primary", supports=s,
+        verified={"title": True, "author": True, "year": False, "url": False}, checked=USERSRC),
  "matharium_gjh": lambda s: ref("matharium_gjh", "graphic", "Gradient, Jacobian and Hessian", [{"literal": "matharium"}], role="primary", supports=s,
         verified={"title": True, "author": True, "year": False, "url": False}, checked=USERSRC),
  "matheorems_graph": lambda s: ref("matheorems_graph", "motion_picture", "그래프 곡면 z = f(u, v)의 야코비안과 법선 (z = sin u cos v)", [{"literal": "matheorems"}], role="primary", supports=s,
@@ -209,6 +211,7 @@ W = {k: g.work(k, ko, en) for k, ko, en in [
     ("matharium_del", "matharium — The Del Operator", "matharium — The Del Operator"),
     ("knott1911life", "Knott 1911 Life of P. G. Tait", "Knott 1911 Life and Scientific Work of P. G. Tait"),
     ("matharium_gjh", "matharium — Gradient, Jacobian and Hessian", "matharium — Gradient, Jacobian and Hessian"),
+    ("matharium_lagrange", "matharium — Lagrange Multipliers", "matharium — Lagrange Multipliers"),
     ("sciencesnow_gjh", "Sciences Now — Gradient vs Jacobian vs Hessian", "Sciences Now — Gradient vs Jacobian vs Hessian"),
     ("matharium_hessian", "matharium — Hessian Matrix", "matharium — Hessian Matrix"),
     ("wiki_hessian", "Wikipedia — Hessian matrix", "Wikipedia — Hessian matrix"),
@@ -244,13 +247,29 @@ C = [("lab:claim/lr-warmup", "학습 초기에 학습률을 천천히 올리는 
 for cid, ko, en, anc, tgt, wk, loc in C:
     g.n(cid, "Claim", ko, en, anc, 2, source=[{"ref": wk, "loc": loc}]); g.e(cid, "supports", tgt, anc); g.e(cid, "assertedIn", W[wk], anc)
 g.e(W["mlfs43"], "relatedTo", lr, "#s1")
+# ── ⑥ 라그랑주 승수 ──
+lgn = g.n("lab:concept/lagrangian", "Concept", "라그랑지안", "Lagrangian", "#s6", 2, "ℒ(x, λ) = f(x) − λg(x). 모든 변수와 λ로 편미분해 0으로 놓으면 ∇f = λ∇g와 g = 0.", alt=["ℒ"])
+lmu = g.n("lab:concept/lagrange-multiplier", "Concept", "라그랑주 승수", "Lagrange multiplier", "#s6", 2, "제약 위 최적점에서 ∇f = λ∇g를 맞추는 배수.", alt=["λ"])
+shp = g.n("lab:concept/shadow-price", "Concept", "그림자 가격", "Shadow price", "#s6-shadow", 2, "제약 한 단위의 값어치. λ = df*/dc.", alt=["잠재가격"])
+cop = g.n("lab:concept/constrained-optimization", "Concept", "제약 있는 최적화", "Constrained optimization", "#s6", 2, "g(x) = 0을 지키면서 f(x)를 가장 크게 또는 작게 하는 문제.")
+tng = g.n("lab:analogy/ridge-trail-touch", "Analogy", "둘레길에 스치는 등고선", "Contour touching the trail", "#s6", 1)
+g.e(tng, "analogyOf", lmu, "#s6"); g.e(lgn, "partOf", cop, "#s6"); g.e(lmu, "partOf", lgn, "#s6"); g.e(lmu, "relatedTo", grad, "#s6"); g.e(grad, "prerequisiteOf", lmu, "#s6"); g.e(shp, "relatedTo", lmu, "#s6-shadow")
+L6a = g.n("lab:limitation/lagrange-candidates-only", "Limitation", "∇f = λ∇g는 후보만 찾는다", "Tangency gives candidates only", "#s6", 2)
+L6b = g.n("lab:limitation/lagrange-needs-grad-g", "Limitation", "후보 점에서 ∇g ≠ 0이어야 한다", "Needs a nonzero constraint gradient", "#s6", 2)
+g.e(lmu, "hasLimitation", L6a, "#s6"); g.e(lmu, "hasLimitation", L6b, "#s6")
+for sid, ko, en, anc, tgt in [("lab:sim/p1-lagrange-fence", "곡면 위 울타리와 ∇f·∇g", "Constraint curve on a surface with ∇f and ∇g", "#s6", lmu), ("lab:sim/p1-shadow-price", "울타리를 넓히면 — 그림자 가격", "Relaxing the constraint: shadow price", "#s6-shadow", shp)]:
+    g.n(sid, "Simulation", ko, en, anc, 2); g.e(tgt, "demonstratedBy", sid, anc)
+for cid, ko, en, anc, tgt in [("lab:claim/lagrange-tangency", "제약 위 최적점에서는 f의 등위선이 제약 곡선에 접하므로 ∇f = λ∇g이고, g = 0과 합쳐 n + 1개 식이 된다", "At a constrained optimum ∇f = λ∇g, giving n + 1 equations with g = 0", "#s6", lmu),
+                              ("lab:claim/lagrange-circle-example", "원 x² + y² = 1 위에서 x + y의 최댓값은 (1/√2, 1/√2)에서 √2이다", "Max of x + y on the unit circle is √2 at (1/√2, 1/√2)", "#s6", lmu),
+                              ("lab:claim/lambda-shadow-price", "λ는 제약을 풀 때 최적값이 바뀌는 빠르기로, 경제학에서 그림자 가격이라 부른다", "λ is the rate of change of the optimum as the constraint relaxes — the shadow price", "#s6-shadow", shp)]:
+    g.n(cid, "Claim", ko, en, anc, 2, source=[{"ref": "matharium_lagrange", "loc": "인포그래픽 본문"}]); g.e(cid, "supports", tgt, anc); g.e(cid, "assertedIn", W["matharium_lagrange"], anc)
 # 퀴즈
-Q = [("s1", 1, gd), ("s1", 2, lim), ("s2", 1, nrm), ("s2", 2, grad), ("s3", 1, lim), ("s3", 2, sad), ("s3", 3, hes), ("s4", 1, lap), ("s4", 2, rul), ("s5", 1, jac), ("s5", 2, chain), ("duel", 1, sad)]
-QL = {"s1": "단면 위 한 걸음", "s2": "법선과 그래디언트", "s3": "굽음과 보폭", "s4": "안장과 라플라시안", "s5": "야코비안과 연쇄", "duel": "대결 안장점"}
+Q = [("s1", 1, gd), ("s1", 2, lim), ("s2", 1, nrm), ("s2", 2, grad), ("s3", 1, lim), ("s3", 2, sad), ("s3", 3, hes), ("s4", 1, lap), ("s4", 2, rul), ("s5", 1, jac), ("s5", 2, chain), ("s6", 1, lmu), ("s6", 2, shp), ("duel", 1, sad)]
+QL = {"s1": "단면 위 한 걸음", "s2": "법선과 그래디언트", "s3": "굽음과 보폭", "s4": "안장과 라플라시안", "s5": "야코비안과 연쇄", "s6": "라그랑주 승수", "duel": "대결 안장점"}
 for sec, k, tgt in Q:
     qid = f"lab:quiz/p1-{sec}-{k}"; g.n(qid, "QuizItem", f"{QL[sec]} 문제 {k}", f"Quiz {sec}-{k}", "#" + sec, 2); g.e(qid, "assesses", tgt, "#" + sec)
 g.dump(1)
-used1 = {"goyal2017accurate": [lr], "he2016deep": [bp], "ioffe2015batch": [bp], "matharium_crisp": [rul, hyp], "matharium_vecops": [curl0, lap], "matharium_del": [delop, divg, lap], "knott1911life": [delop], "matharium_gjh": [hes, jac, grad], "sciencesnow_gjh": [hes, jac, grad], "matharium_hessian": [hes], "wiki_hessian": [hes], "nocedal2006numerical": [hes], "baydin2018automatic": [bp], "matheorems_graph": [nrm, tan],
+used1 = {"goyal2017accurate": [lr], "he2016deep": [bp], "ioffe2015batch": [bp], "matharium_crisp": [rul, hyp], "matharium_vecops": [curl0, lap], "matharium_del": [delop, divg, lap], "knott1911life": [delop], "matharium_gjh": [hes, jac, grad], "matharium_lagrange": [lmu, shp, lgn], "sciencesnow_gjh": [hes, jac, grad], "matharium_hessian": [hes], "wiki_hessian": [hes], "nocedal2006numerical": [hes], "baydin2018automatic": [bp], "matheorems_graph": [nrm, tan],
          "mlfs39": [neuron], "mlfs43": [lr], "dauphin2014identifying": [sad], "goodfellow2016deep": [lim], "rumelhart1986learning": [bp]}
 (B / "refs_1.json").write_text(json.dumps([REFS[k](v) for k, v in used1.items()], ensure_ascii=False, indent=1))
 
@@ -345,7 +364,7 @@ def meta(n, title, about, based, slug):
             "educationalLevel": "입문~중급", "learningResourceType": "interactive explainer", "registry": "KG_00_registry 0.2",
             "suggestedCitation": f"안상선 (2026). {title}. 좌표축 위의 그릇 — 3D 지도로 본 모델 최적화 {n}, v1.3."}
 (B / "meta_1.json").write_text(json.dumps(meta(1, "좌표축 위의 그릇 ① 수학 편 — 기울기·굽음·휨으로 읽는 3D 오차 지도",
-    ["lab:concept/loss-landscape", "lab:concept/gradient", "lab:concept/hessian", "lab:concept/saddle-point", "lab:concept/jacobian"], list(used1), "1_math_map.html"), ensure_ascii=False, indent=1))
+    ["lab:concept/loss-landscape", "lab:concept/gradient", "lab:concept/hessian", "lab:concept/saddle-point", "lab:concept/jacobian", "lab:concept/lagrange-multiplier"], list(used1), "1_math_map.html"), ensure_ascii=False, indent=1))
 (B / "meta_2.json").write_text(json.dumps(meta(2, "좌표축 위의 그릇 ② 실험실 편 — 배치·학습률·에포크를 3D 지도 위에서 고르기",
     ["lab:concept/hyperparameter", "lab:method/minibatch-sgd", "lab:concept/learning-rate", "lab:concept/loss-slice", "lab:concept/overfitting"], list(used2), "2_experiment_lab.html"), ensure_ascii=False, indent=1))
 

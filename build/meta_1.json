@@ -27,7 +27,8 @@
   "lab:concept/gradient",
   "lab:concept/hessian",
   "lab:concept/saddle-point",
-  "lab:concept/jacobian"
+  "lab:concept/jacobian",
+  "lab:concept/lagrange-multiplier"
  ],
  "basedOn": [
   "goyal2017accurate",
@@ -38,6 +39,7 @@
   "matharium_del",
   "knott1911life",
   "matharium_gjh",
+  "matharium_lagrange",
   "sciencesnow_gjh",
   "matharium_hessian",
   "wiki_hessian",

@@ -11,3 +11,8 @@ for(const lr of [0.01,0.1,0.3,0.33,0.34,0.5]){const R=LM.runBatch(D,1000,{steps:
 const a=LM.saddleRun(false),b=LM.saddleRun(true);
 console.log('안장 대결 주판봇(기울기만): 끝 (%s,%s) 오차 %s 걸음 %s',a.end[0].toFixed(3),a.end[1].toFixed(3),a.L.toFixed(3),a.steps);
 console.log('안장 대결 초파리(굽음 확인): 끝 (%s,%s) 오차 %s 걸음 %s 한발 %s',b.end[0].toFixed(3),b.end[1].toFixed(3),b.L.toFixed(3),b.steps,b.kicks);
+// ⑥ 라그랑주 승수: 원 x² + y² = c 위 최적점, λ = ∇f·∇g/|∇g|², 그림자 가격 df*/dc ≈ λ
+{const FS={plane:[(x,y)=>x+y,(x,y)=>[1,1]],curved:[(x,y)=>0.9*x+0.6*y+0.45*(x*x-y*y)-0.15*x*y,(x,y)=>[0.9+0.9*x-0.15*y,0.6-0.9*y-0.15*x]]};
+ const best=(f,c,sgn)=>{let b=null;const r=Math.sqrt(c);for(let k=0;k<200000;k++){const t=2*Math.PI*k/200000,v=sgn*f(r*Math.cos(t),r*Math.sin(t));if(!b||v>b[1])b=[t,v];}return [b[0],sgn*b[1]];};
+ for(const [nm,[f,gf]] of Object.entries(FS))for(const [lab,sgn] of [['최대',1],['최소',-1]]){const [t,v]=best(f,1,sgn),x=Math.cos(t),y=Math.sin(t),G=gf(x,y),lam=(G[0]*2*x+G[1]*2*y)/(4*(x*x+y*y)),e=1e-3,dv=(best(f,1+e,sgn)[1]-best(f,1-e,sgn)[1])/(2*e);
+  console.log('⑥ %s %s: (%s, %s) f=%s λ=%s · df*/dc=%s %s',nm,lab,x.toFixed(4),y.toFixed(4),v.toFixed(4),lam.toFixed(4),dv.toFixed(4),Math.abs(dv-lam)<2e-3?'ok':'불일치');}}
