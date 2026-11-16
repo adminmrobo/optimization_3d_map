@@ -1,5 +1,7 @@
 # Genspark 그림 지시문 — 최적화 첫걸음 ("혹시… 미분 좋아하세요?")
 
+> **받음 (2026-11-16):** 표지 2장·프롤로그 3컷·카드 썸네일 1장을 반영했습니다. 저장소 `img/fs_cover_01·02(.webp, _960)`, `img/fs_prologue_1~3(.webp, _600)`, `img/fs_thumb.webp`. 말풍선 대사는 HTML 글자로 얹었습니다. 같은 그림이 캐릭터 저장소 fruitfly-lab-expressions의 `images/scenes/optimization_first_step/`에도 있습니다.
+
 ## 공통 규칙
 
 - **참고 이미지:** fruitfly-lab-expressions의 캐릭터 그림만 첨부합니다. 장면마다 표정 E번호를 고릅니다(specs/README.md).

@@ -153,9 +153,9 @@
       ],
       "robot": "jupanbot-v2",
       "prompt_en": "전체: plan/COVER_PROMPTS_optimization_first_step.md",
-      "source_of": null,
-      "status": "pending",
-      "received": null,
+      "source_of": "Genspark (사용자 제공 OPT_FIRST zip)",
+      "status": "ok",
+      "received": "2026-11-16",
       "page": "first_step_1.html"
     },
     {
@@ -176,9 +176,9 @@
       ],
       "robot": "jupanbot-v2",
       "prompt_en": "전체: plan/COVER_PROMPTS_optimization_first_step.md",
-      "source_of": null,
-      "status": "pending",
-      "received": null,
+      "source_of": "Genspark (사용자 제공 OPT_FIRST zip)",
+      "status": "ok",
+      "received": "2026-11-16",
       "page": "first_step_2.html"
     },
     {
@@ -193,9 +193,9 @@
         "asst"
       ],
       "prompt_en": "전체: plan/COVER_PROMPTS_optimization_first_step.md 3번",
-      "source_of": null,
-      "status": "pending",
-      "received": null,
+      "source_of": "Genspark (사용자 제공 OPT_FIRST zip)",
+      "status": "ok",
+      "received": "2026-11-16",
       "page": "first_step_1.html"
     },
     {
@@ -210,9 +210,9 @@
         "sia"
       ],
       "prompt_en": "전체: plan/COVER_PROMPTS_optimization_first_step.md 3번",
-      "source_of": null,
-      "status": "pending",
-      "received": null,
+      "source_of": "Genspark (사용자 제공 OPT_FIRST zip)",
+      "status": "ok",
+      "received": "2026-11-16",
       "page": "first_step_1.html"
     },
     {
@@ -227,10 +227,27 @@
         "moa"
       ],
       "prompt_en": "전체: plan/COVER_PROMPTS_optimization_first_step.md 3번",
-      "source_of": null,
-      "status": "pending",
-      "received": null,
+      "source_of": "Genspark (사용자 제공 OPT_FIRST zip)",
+      "status": "ok",
+      "received": "2026-11-16",
       "page": "first_step_1.html"
+    },
+    {
+      "id": "fs_thumb",
+      "role": "card",
+      "path": "img/fs_thumb.webp",
+      "size": [
+        800,
+        800
+      ],
+      "characters": [
+        "asst"
+      ],
+      "prompt_en": "전체: plan/COVER_PROMPTS_optimization_first_step.md 4번",
+      "source_of": "Genspark (사용자 제공 OPT_FIRST zip)",
+      "status": "ok",
+      "received": "2026-11-16",
+      "page": "ahnboat.xyz SPECIAL 카드"
     }
   ],
   "updated": "2026-11-16"

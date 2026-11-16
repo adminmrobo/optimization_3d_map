@@ -234,6 +234,10 @@ footer td,footer th{border:1px solid var(--rule);padding:6px 8px;text-align:left
 
 </style>
 <style>
+.cover .frame{container-type:inline-size}
+.bubtx{position:absolute;display:flex;align-items:center;justify-content:center;text-align:center;font-weight:700;color:#16212b;line-height:1.25;pointer-events:none;padding:0 2%;box-sizing:border-box;word-break:keep-all}
+.cover .bubtx{font-size:clamp(12px,2.7cqw,30px)}
+.cover .bubtx.sm{font-size:clamp(9px,1.35cqw,16px)}
 .assume{border:1px dashed var(--terrain);background:#f4fbfb;border-radius:8px;padding:8px 12px;margin:10px 0;font-size:14.5px}
 .assume b{color:var(--terrain)}
 .sub{font-size:13px;color:var(--muted);font-weight:500;margin-left:6px}
@@ -266,12 +270,13 @@ footer td,footer th{border:1px solid var(--rule);padding:6px 8px;text-align:left
   </div>
 </div></nav>
 
-<!-- lab-cover : 표지 그림(fs_cover_02)을 받기 전까지 그림판 표지 -->
+<!-- lab-cover -->
 <div class="cover" id="cover" data-img="fs_cover_02"><div class="frame">
-  <canvas id="coverCv" aria-hidden="true"></canvas>
-  <div class="cast4"><img class="s" data-mood="fly_point" alt="" aria-hidden="true"><img data-mood="doc_front" alt="" aria-hidden="true"><img data-mood="moa_sparkle" alt="" aria-hidden="true"><img class="s" data-mood="robo_coin" alt="" aria-hidden="true"></div>
-  <span class="cap">작은 공장, 그리고 두 곡선이 만나는 점</span>
-  <span class="badge">표지 그림 준비 중 · 설명용 그림</span>
+  <picture>
+    <source type="image/webp" srcset="img/fs_cover_02_960.webp 960w, img/fs_cover_02.webp 1600w" sizes="(max-width:1080px) 100vw, 1080px">
+    <img class="art" src="img/fs_cover_02.webp" width="1600" height="900" alt="실험대 위 작은 공장 모형 앞에서 박사·모아·초파리 연구원·주판봇이 두 곡선이 만나는 빛나는 점을 살펴보는 장면" fetchpriority="high" decoding="async">
+  </picture>
+  <span class="bubtx sm" style="left:63.5%;top:19.5%;width:12%;height:10.5%">얼마만큼<br>만들까요?</span>
   <span class="cover-chip">최적화 첫걸음 · ② 공장에서 인공지능까지</span>
 </div></div>
 <!-- /lab-cover -->
@@ -538,7 +543,7 @@ footer td,footer th{border:1px solid var(--rule);padding:6px 8px;text-align:left
     <tr><td>[6]</td><td>adminmrobo, 「시멘트 제조업 World」 (smart_factory_world/cement, 2026-11-16 확인)</td><td>에필로그 — 시간·비용이 들어간 공정 최적화로 이어지는 곳</td></tr>
   </tbody></table>
   <h3>예시값·설명용 모형인 것</h3>
-  <ul><li>공장 생산함수 Q = 2√(LK), 가격 10·임금 5·사용료 10, 커피 식기 k = 0.1, 손실 (w − 3)² + 1, 연쇄 예 x → 2x + 1 → u² → 3v, 특성공학 데이터(씨앗 고정 난수), 규제항 예의 손실 행렬과 그 결과 수치 모두</li><li>표지는 그림 파일을 받기 전까지 그림판으로 그린 설명용 그림</li></ul>
+  <ul><li>공장 생산함수 Q = 2√(LK), 가격 10·임금 5·사용료 10, 커피 식기 k = 0.1, 손실 (w − 3)² + 1, 연쇄 예 x → 2x + 1 → u² → 3v, 특성공학 데이터(씨앗 고정 난수), 규제항 예의 손실 행렬과 그 결과 수치 모두</li><li>표지는 Genspark로 만든 그림에 대사 글자를 얹은 것</li></ul>
   <p>캐릭터 이름·설정·그림은 저작권자 안상선의 허락 없이 사용할 수 없습니다.</p>
   <p>글 · 안상선 ((주)M-Robo 대표) · <a href="index.html">목차</a> · <a href="first_step_1.html">최적화 첫걸음 ①</a> · <a href="1_math_map.html">좌표축 위의 그릇 1편</a> · <a href="https://adminmrobo.github.io/smart_factory_world/cement/">시멘트 제조업 World</a></p>
 </div></footer>
@@ -857,16 +862,6 @@ U.fillImgs();
 
 /* ── 숫자 요약 ── */
 var D2=DM.duel2();$('#k-l').textContent=fmt(F.shortRun(10,5,4).L,0)+'명';$('#k-lam').textContent=fmt(F.costMin(16).lam,2)+'만 원';$('#k-v').textContent=fmt(D2.fly.valid,3);
-
-/* ── 표지 그림판: 작은 공장과 두 곡선 ── */
-(function(){var cv=$('#coverCv');if(!cv)return;var t=0,o;o=V(cv,function(){var R=U.setup(cv),g=R.g,w=R.w,h=R.h;g.fillStyle='#f6f8fb';g.fillRect(0,0,w,h);
-  var X=function(x){return w*0.18+x/40*w*0.64;},Y=function(y){return h*0.62-y/20*h*0.5;};
-  g.strokeStyle='rgba(22,33,43,.25)';g.lineWidth=1;g.beginPath();g.moveTo(X(0),Y(0));g.lineTo(X(40),Y(0));g.moveTo(X(0),Y(0));g.lineTo(X(0),Y(20));g.stroke();
-  g.strokeStyle='#d6453a';g.lineWidth=3;g.beginPath();for(var i=1;i<=400;i++){var L=i/10,y=20/Math.sqrt(L);if(y>20)continue;g.lineTo(X(L),Y(y));}g.stroke();
-  g.strokeStyle='#1c8c48';g.beginPath();g.moveTo(X(0),Y(5));g.lineTo(X(40),Y(5));g.stroke();
-  var r=7+3*Math.sin(t*2);g.beginPath();g.arc(X(16),Y(5),r,0,7);g.fillStyle='rgba(255,209,102,.9)';g.fill();
-  for(var k=0;k<5;k++){var bx=X(4+k*7),by=h*0.72;g.fillStyle='#c9b48a';g.fillRect(bx,by,w*0.06,h*0.08);g.fillStyle='#8a6a3a';g.fillRect(bx+w*0.02,by-h*0.05,w*0.015,h*0.05);}},
-  function(dt){if(!U.reduce){t+=dt;o.dirty=true;}});})();
 
 /* ── 4.1 ── */
 var L41=9,w41=5,p41=10,K=F.K0;

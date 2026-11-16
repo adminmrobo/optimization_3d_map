@@ -234,14 +234,16 @@ footer td,footer th{border:1px solid var(--rule);padding:6px 8px;text-align:left
 
 </style>
 <style>
+.cover .frame{container-type:inline-size}
+.bubtx{position:absolute;display:flex;align-items:center;justify-content:center;text-align:center;font-weight:700;color:#16212b;line-height:1.25;pointer-events:none;padding:0 2%;box-sizing:border-box;word-break:keep-all}
+.cover .bubtx{font-size:clamp(12px,2.7cqw,30px)}
+.cover .bubtx.sm{font-size:clamp(9px,1.35cqw,16px)}
 .panels{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0}
-.panel3{position:relative;border:2px solid var(--text);border-radius:6px;background:repeating-linear-gradient(45deg,#fbfbfd 0 6px,#f3f3f8 6px 7px);min-height:250px;overflow:hidden}
-.panel3 img{position:absolute;left:50%;bottom:0;transform:translateX(-50%);width:62%;max-width:190px}
-.panel3 .bub{position:absolute;background:#fff;border:2px solid var(--text);border-radius:50%;padding:10px 12px;font-size:15px;font-weight:700;line-height:1.35;text-align:center}
-.panel3 .bub.l{left:5%;top:8%;max-width:44%}
-.panel3 .bub.r{right:5%;top:30%;max-width:46%}
+.panel3{position:relative;border:2px solid var(--text);border-radius:6px;overflow:hidden;aspect-ratio:4/3;container-type:inline-size;background:#fff}
+.panel3 img.art{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.panel3 .bubtx{font-size:clamp(11px,4cqw,18px)}
 .panel3 .who{position:absolute;left:8px;bottom:8px;font-size:12px;background:rgba(255,255,255,.9);border:1px solid var(--rule);border-radius:999px;padding:1px 8px}
-@media(max-width:760px){.panels{grid-template-columns:1fr}.panel3{min-height:220px}}
+@media(max-width:760px){.panels{grid-template-columns:1fr}}
 .assume{border:1px dashed var(--terrain);background:#f4fbfb;border-radius:8px;padding:8px 12px;margin:10px 0;font-size:14.5px}
 .assume b{color:var(--terrain)}
 .tline{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
@@ -273,12 +275,14 @@ table.lim-tbl td,table.lim-tbl th{padding:4px 10px;text-align:right}
   </div>
 </div></nav>
 
-<!-- lab-cover : 표지 그림(fs_cover_01)을 받기 전까지 그림판 표지 -->
+<!-- lab-cover -->
 <div class="cover" id="cover" data-img="fs_cover_01"><div class="frame">
-  <canvas id="coverCv" aria-hidden="true"></canvas>
-  <div class="cast4"><img class="s" data-mood="sia_think" alt="" aria-hidden="true"><img data-mood="asst_smile" alt="" aria-hidden="true"><img class="s" data-mood="moa_sparkle" alt="" aria-hidden="true"></div>
-  <span class="cap">칠판의 언덕과 꼭대기의 수평 접선</span>
-  <span class="badge">표지 그림 준비 중 · 설명용 그림</span>
+  <picture>
+    <source type="image/webp" srcset="img/fs_cover_01_960.webp 960w, img/fs_cover_01.webp 1600w" sizes="(max-width:1080px) 100vw, 1080px">
+    <img class="art" src="img/fs_cover_01.webp" width="1600" height="900" alt="칠판의 언덕 곡선 앞에서 조수 하루가 수줍게 묻고, 인턴 시아와 모아가 양옆에서 함께 서 있는 장면" fetchpriority="high" decoding="async">
+  </picture>
+  <span class="bubtx" style="left:2.6%;top:5.6%;width:19.3%;height:27%">혹시…</span>
+  <span class="bubtx" style="left:78.8%;top:5.9%;width:18.9%;height:27%">미분<br>좋아하세요?</span>
   <span class="cover-chip">최적화 첫걸음 · ① 왜, 언제부터, 어디에</span>
 </div></div>
 <!-- /lab-cover -->
@@ -307,9 +311,9 @@ table.lim-tbl td,table.lim-tbl th{padding:4px 10px;text-align:right}
 <section class="sec" id="prologue" aria-labelledby="h-pro"><div class="wrap">
   <h2 id="h-pro">프롤로그 — 혹시… 미분 좋아하세요?</h2>
   <div class="panels" aria-label="세 사람이 차례로 묻는 세 컷">
-    <div class="panel3"><span class="bub l">혹시…</span><span class="bub r">미분<br>좋아하세요?</span><img data-mood="asst_smile" alt="조수 하루가 수줍게 묻는다"><span class="who">조수 하루</span></div>
-    <div class="panel3"><span class="bub l">그럼…</span><span class="bub r">미분은 언제부터 있었어요?</span><img data-mood="sia_think" alt="인턴 시아가 손가락을 들고 묻는다"><span class="who">인턴 시아</span></div>
-    <div class="panel3"><span class="bub l">그걸로…</span><span class="bub r">뭘 할 수 있어요?</span><img data-mood="moa_sparkle" alt="인턴 모아가 노트를 안고 반짝이는 눈으로 묻는다"><span class="who">인턴 모아</span></div>
+    <div class="panel3"><picture><source type="image/webp" srcset="img/fs_prologue_1_600.webp 600w, img/fs_prologue_1.webp 1200w" sizes="(max-width:760px) 100vw, 360px"><img class="art" src="img/fs_prologue_1.webp" width="1200" height="900" alt="조수 하루가 미소 지으며 묻는 장면" loading="lazy" decoding="async"></picture><span class="bubtx" style="left:3.5%;top:18.7%;width:21.7%;height:26.0%">혹시…</span><span class="bubtx" style="left:74.9%;top:19.6%;width:22.0%;height:26.0%">미분<br>좋아<br>하세요?</span><span class="who">조수 하루</span></div>
+    <div class="panel3"><picture><source type="image/webp" srcset="img/fs_prologue_2_600.webp 600w, img/fs_prologue_2.webp 1200w" sizes="(max-width:760px) 100vw, 360px"><img class="art" src="img/fs_prologue_2.webp" width="1200" height="900" alt="인턴 시아가 손가락 하나를 들고 묻는 장면" loading="lazy" decoding="async"></picture><span class="bubtx" style="left:4.4%;top:5.3%;width:25.0%;height:28.0%">그럼…</span><span class="bubtx" style="left:69.6%;top:5.4%;width:24.9%;height:28.0%">미분은 언제부터<br>있었어요?</span><span class="who">인턴 시아</span></div>
+    <div class="panel3"><picture><source type="image/webp" srcset="img/fs_prologue_3_600.webp 600w, img/fs_prologue_3.webp 1200w" sizes="(max-width:760px) 100vw, 360px"><img class="art" src="img/fs_prologue_3.webp" width="1200" height="900" alt="인턴 모아가 노트를 안고 반짝이는 눈으로 묻는 장면" loading="lazy" decoding="async"></picture><span class="bubtx" style="left:2.8%;top:4.9%;width:25.1%;height:38.0%">그걸로…</span><span class="bubtx" style="left:75.7%;top:14.7%;width:22.6%;height:33.0%">뭘 할 수<br>있어요?</span><span class="who">인턴 모아</span></div>
   </div>
   <div data-dlg="pro"></div>
   <div class="steps">
@@ -579,7 +583,7 @@ table.lim-tbl td,table.lim-tbl th{padding:4px 10px;text-align:right}
     <tr><td>[9]</td><td>Rumelhart, D. E., Hinton, G. E., Williams, R. J. (1986). Learning representations by back-propagating errors. Nature, 323, 533–536.</td><td>2.1 연표 — 역전파</td></tr>
   </tbody></table>
   <h3>예시값·설명용 모형인 것</h3>
-  <ul><li>자전거 위치 s(t) = t², 빵 공장 비용 VC(Q) = 20Q − 3Q² + 0.2Q³·고정비 60·최대 15판, 물의 만족 10·ln(1 + n), 밭 넓이 예와 그 결과 수치</li><li>프롤로그 세 컷과 표지는 그림 파일을 받기 전까지 연구실 식구 기본 그림으로 꾸민 설명용 화면</li></ul>
+  <ul><li>자전거 위치 s(t) = t², 빵 공장 비용 VC(Q) = 20Q − 3Q² + 0.2Q³·고정비 60·최대 15판, 물의 만족 10·ln(1 + n), 밭 넓이 예와 그 결과 수치</li><li>표지·프롤로그 세 컷은 Genspark로 만든 그림에 대사 글자를 얹은 것(말풍선은 그림에서 비워 둠)</li></ul>
   <p>프롤로그는 "OO 좋아하세요?"라는 말투만 빌린 패러디이며, 다른 작품의 인물·그림은 쓰지 않았습니다. 캐릭터 이름·설정·그림은 저작권자 안상선의 허락 없이 사용할 수 없습니다.</p>
   <p>글 · 안상선 ((주)M-Robo 대표) · <a href="index.html">목차</a> · <a href="first_step_2.html">최적화 첫걸음 ②</a> · <a href="1_math_map.html">좌표축 위의 그릇 1편</a> · <a href="https://adminmrobo.github.io/smart_factory_world/cement/">시멘트 제조업 World</a></p>
 </div></footer>
@@ -901,16 +905,6 @@ U.fillImgs();
 
 /* ── 숫자 요약 ── */
 var b20=B.best(20);$('#k-q').textContent=fmt(b20.Q,1)+'판';$('#k-pi').textContent=fmt(b20.profit,1)+'천 원';$('#k-shut').textContent=fmt(B.avcMin().v,2)+'천 원';
-
-/* ── 표지 그림판: 언덕 곡선과 꼭대기의 수평 접선 ── */
-(function(){var cv=$('#coverCv');if(!cv)return;var t=0,o;o=V(cv,function(){var R=U.setup(cv),g=R.g,w=R.w,h=R.h;g.fillStyle='#f6f8fb';g.fillRect(0,0,w,h);
-  g.fillStyle='#2f4a44';g.fillRect(w*0.12,h*0.08,w*0.76,h*0.5);g.strokeStyle='#8a6a3a';g.lineWidth=6;g.strokeRect(w*0.12,h*0.08,w*0.76,h*0.5);
-  var X=function(x){return w*0.16+x/15*w*0.68;},Y=function(y){return h*0.5-(y+70)/120*h*0.38;};
-  g.strokeStyle='rgba(255,255,255,.9)';g.lineWidth=3;g.beginPath();for(var i=0;i<=150;i++){var q=i/10,y=B.profit(q,20);i?g.lineTo(X(q),Y(y)):g.moveTo(X(q),Y(y));}g.stroke();
-  var q0=10+3.5*Math.sin(t*0.6),s=DM.d(function(q){return B.profit(q,20);},q0),y0=B.profit(q0,20);
-  g.strokeStyle='#ffd166';g.lineWidth=3;g.beginPath();g.moveTo(X(q0-2.2),Y(y0-2.2*s));g.lineTo(X(q0+2.2),Y(y0+2.2*s));g.stroke();
-  g.beginPath();g.arc(X(q0),Y(y0),6,0,7);g.fillStyle='#ffd166';g.fill();},function(dt){if(!U.reduce){t+=dt;o.dirty=true;}});
-})();
 
 /* ── 0 기울기 복습 ── */
 var bx=5,by=4;
