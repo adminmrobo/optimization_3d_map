@@ -301,9 +301,9 @@ footer td,footer th{border:1px solid var(--rule);padding:6px 8px;text-align:left
   </div>
   <p class="muted" style="font-size:13px;margin:0 0 6px">카드 왼쪽 위의 하루 얼굴이 난이도입니다. 단계가 오를수록 하루의 표정이 굳어 갑니다.</p>
   <div class="chap">
-    <a href="first_step_1.html"><span class="diff" aria-label="난이도 1단계 산책"><img src="img/diff_haru_1.webp" alt="" width="44" height="44" loading="lazy"><span><b>산책</b><span class="pip">●○○○</span></span></span><canvas id="cvF1" aria-label="첫걸음 ① 미리보기: 할선이 접선으로 좁혀지고 꼭대기에서 기울기가 0이 되는 곡선"></canvas><div class="t"><b>최적화 첫걸음 ① · 왜, 언제부터, 어디에</b><span>모델은 한 번에 만들어지지 않는다 · 하루·시아·모아의 세 질문 · 입문</span>
+    <a href="first_step_1.html"><span class="diff" aria-label="난이도 1단계 산책"><img src="img/diff_haru_1.webp" alt="" width="44" height="44" loading="lazy"><span><b>산책</b><span class="pip">●○○○</span></span></span><canvas id="cvF1" aria-label="첫걸음 ① 미리보기: 언덕 모양 3D 곡면 위의 접선과 기울기 0인 꼭대기"></canvas><div class="t"><b>최적화 첫걸음 ① · 왜, 언제부터, 어디에</b><span>모델은 한 번에 만들어지지 않는다 · 하루·시아·모아의 세 질문 · 입문</span>
       <ol><li>서론: 반복해서 고치는 모델 — 훈련·검증, 다시 정비하기</li><li>준비운동: 그래프와 기울기 1분 복습</li><li>미분은 왜 쓰나 — 순간의 변화, 한계, 기울기 0, 편미분·전미분</li><li>미분의 역사 — 뉴턴·라이프니츠, 극한, 한계혁명</li><li>경제학의 최적화 — MR = MC, 조업중단점</li><li>대결: 많이 구울수록 이익일까?</li></ol></div></a>
-    <a href="first_step_2.html"><span class="diff" aria-label="난이도 2단계 오르막"><img src="img/diff_haru_2.webp" alt="" width="44" height="44" loading="lazy"><span><b>오르막</b><span class="pip">●●○○</span></span></span><canvas id="cvF2" aria-label="첫걸음 ② 미리보기: 한계수입과 한계비용이 만나는 점과 이윤 언덕"></canvas><div class="t"><b>최적화 첫걸음 ② · 공장에서 인공지능까지</b><span>얼마만큼 생산하면 될까요? · 입문</span>
+    <a href="first_step_2.html"><span class="diff" aria-label="난이도 2단계 오르막"><img src="img/diff_haru_2.webp" alt="" width="44" height="44" loading="lazy"><span><b>오르막</b><span class="pip">●●○○</span></span></span><canvas id="cvF2" aria-label="첫걸음 ② 미리보기: 노동과 자본에 따른 생산량 3D 곡면, 기계 4대일 때 가장 좋은 고용 16명"></canvas><div class="t"><b>최적화 첫걸음 ② · 공장에서 인공지능까지</b><span>얼마만큼 생산하면 될까요? · 입문</span>
       <ol><li>공장 하나 — 사람 한 명 더, 라그랑지안과 λ = 한계비용</li><li>오일러 정리, 미분방정식</li><li>경사하강, 연쇄법칙과 역전파</li><li>특성공학: 비선형성 vs 상호작용, 규제항</li><li>대결: 제곱항만 넣으면 다 될까?</li></ol></div></a>
   </div>
 </div></section>
@@ -694,26 +694,15 @@ U.dialogues({hero:[["doc","doc_front","오늘의 지도는 땅이 아니라 오�
 U.fillImgs();
 var D=LM.makeLine(39,1000),O=LM.ols(D);
 (function(){var cv=$('#coverCv');if(!cv)return;U.reg(cv,function(){var R=U.setup(cv),g=R.g,w=R.w,h=R.h;for(var k=16;k>0;k--){g.beginPath();g.ellipse(w*.5,h*.38,w*.045*k,h*.02*k,-.3,0,7);g.strokeStyle=U.cmap(k/16,.32);g.lineWidth=2;g.stroke();}g.beginPath();g.arc(w*.5,h*.38,6,0,7);g.fillStyle=U.cssv('--gfp');g.fill();});})();
-/* 첫걸음 미리보기 (어두운 바탕) */
-function darkAxes(g,w,h,L,B){g.strokeStyle='rgba(255,255,255,.35)';g.lineWidth=1.2;g.beginPath();g.moveTo(L,16);g.lineTo(L,h-B);g.lineTo(w-14,h-B);g.stroke();}
-U.reg($('#cvF1'),function(){var R=U.setup($('#cvF1')),g=R.g,w=R.w,h=R.h,L=40,B=30,W=w-L-20,H=h-B-40;darkAxes(g,w,h,L,B);
-  var f=function(x){return 1-Math.pow(x-0.55,2)*3.2;},X=function(x){return L+x*W;},Y=function(y){return h-B-(y+0.25)/1.35*H;};
-  g.strokeStyle='#e9eef5';g.lineWidth=2.6;g.beginPath();for(var i=0;i<=80;i++){var x=i/80;i?g.lineTo(X(x),Y(f(x))):g.moveTo(X(x),Y(f(x)));}g.stroke();
-  var x0=0.25,d=-6.4*(x0-0.55);[0.42,0.26,0.12].forEach(function(hh,k){var m=(f(x0+hh)-f(x0))/hh;g.strokeStyle='rgba(240,96,77,'+(0.35+0.2*k)+')';g.setLineDash([5,4]);g.lineWidth=1.6;g.beginPath();g.moveTo(X(0),Y(f(x0)-m*x0));g.lineTo(X(0.95),Y(f(x0)+m*(0.95-x0)));g.stroke();});g.setLineDash([]);
-  g.strokeStyle='#4fc3c9';g.lineWidth=2.4;g.beginPath();g.moveTo(X(0),Y(f(x0)-d*x0));g.lineTo(X(0.62),Y(f(x0)+d*(0.62-x0)));g.stroke();
-  g.strokeStyle='#9be2b0';g.lineWidth=2.6;g.beginPath();g.moveTo(X(0.32),Y(1));g.lineTo(X(0.78),Y(1));g.stroke();
-  [[x0,'#f1b646'],[0.55,'#9be2b0']].forEach(function(p){g.beginPath();g.arc(X(p[0]),Y(f(p[0])),6,0,7);g.fillStyle=p[1];g.fill();});
-  U.label(g,X(0.8),Y(1)-2,'기울기 0',U.cssv('--gfp'));U.label(g,X(0.06),Y(f(0.06))+26,'할선 → 접선',U.cssv('--eye'));U.stamp(g,w,'설명용 모형');});
-U.reg($('#cvF2'),function(){var R=U.setup($('#cvF2')),g=R.g,w=R.w,h=R.h,L=40,B=30,W=w-L-20,H=h-B-40;darkAxes(g,w,h,L,B);
-  var X=function(q){return L+q/15*W;},Y=function(v){return h-B-v/34*H;};
-  var mc=function(q){return 0.25*q*q-2.5*q+12.5+2.5;};/* MC: 그림용 */
-  var qs=5+Math.sqrt(45),pr=function(q){return 5*q+1.25*q*q-q*q*q/12;},pm=pr(qs);
-  g.fillStyle='rgba(155,226,176,.16)';g.beginPath();g.moveTo(X(0),Y(0));for(var q=0;q<=15;q+=0.25){g.lineTo(X(q),Y(Math.max(0,pr(q))/pm*14));}g.lineTo(X(15),Y(0));g.closePath();g.fill();
-  g.strokeStyle='rgba(155,226,176,.55)';g.setLineDash([4,4]);g.lineWidth=1.4;g.beginPath();g.moveTo(X(qs),Y(14));g.lineTo(X(qs),Y(20));g.stroke();g.setLineDash([]);
-  g.strokeStyle='#f1b646';g.lineWidth=2.4;g.beginPath();g.moveTo(X(0),Y(20));g.lineTo(X(15),Y(20));g.stroke();
-  g.strokeStyle='#f0604d';g.lineWidth=2.6;g.beginPath();for(q=0;q<=15;q+=0.2){q?g.lineTo(X(q),Y(Math.min(mc(q),34))):g.moveTo(X(q),Y(mc(q)));}g.stroke();
-  g.beginPath();g.arc(X(qs),Y(20),7,0,7);g.fillStyle='#9be2b0';g.fill();g.strokeStyle='#fff';g.lineWidth=2;g.stroke();
-  U.label(g,X(0.4),Y(20)-14,'MR (가격)',U.cssv('--amber'));U.label(g,X(13.2),Y(30),'MC',U.cssv('--eye'));U.label(g,X(qs)-10,Y(20)-16,'MR = MC',U.cssv('--gfp'),'right');U.label(g,X(qs),Y(7),'이윤 최대',U.cssv('--gfp'),'center');U.stamp(g,w,'설명용 모형');});
+/* 첫걸음 미리보기 (1~3편과 같은 3D 지도) */
+(function(){var hill=function(x,y){return Math.exp(-(x*x+y*y)/1.6);};
+  var S=new U.Surf3D($('#cvF1'),{f:hill,xr:[-2.2,2.2],yr:[-2.2,2.2],n:22,axes:['x₁','x₂','y'],contours:false,views:false,yaw:-0.45,pitch:0.5,zoom:0.95,stamp:'설명용 모형'});
+  S.ov.push(function(g,S){var x0=1.0,d=-2*x0/1.6*hill(x0,0),ln=[];for(var i=0;i<=40;i++){var x=-2.2+4.4*i/40;ln.push([x,0,hill(x,0)+0.01]);}S.line3(g,ln,'rgba(255,255,255,.85)',2);
+    S.line3(g,[[x0-0.9,0,hill(x0,0)-0.9*d],[x0+0.7,0,hill(x0,0)+0.7*d]],'#4fc3c9',2.6);S.line3(g,[[-0.9,0,1.0],[0.9,0,1.0]],'#9be2b0',2.8);
+    S.dot3(g,x0,0,hill(x0,0),'#f1b646',5);var q=S.dot3(g,0,0,1,'#9be2b0',6);U.label(g,q[0]+12,q[1]-12,'기울기 0',U.cssv('--gfp'));});})();
+(function(){var Qf=function(L,K){return 2*Math.sqrt(L*K);};
+  var S=new U.Surf3D($('#cvF2'),{f:Qf,xr:[0,24],yr:[0,8],n:22,axes:['노동 L','자본 K','생산량 Q'],contours:false,views:false,yaw:-0.7,pitch:0.55,zoom:0.85,stamp:'설명용 모형'});
+  S.ov.push(function(g,S){var ln=[];for(var i=0;i<=40;i++){var L=24*i/40;ln.push([L,4,Qf(L,4)+0.1]);}S.line3(g,ln,'#f1b646',2.8);var q=S.dot3(g,16,4,Qf(16,4)+0.1,'#9be2b0',6);U.label(g,q[0]+10,q[1]+18,'L = 16명',U.cssv('--gfp'));});})();
 new U.Surf3D($('#cv1'),{f:function(w,b){return LM.loss(D,w,b);},xr:[-1.5,5.5],yr:[-2.5,4.5],n:20,axes:['w','b','오차'],contours:false,views:false,yaw:-0.9,pitch:0.55,zoom:0.85,stamp:'설명용 모형'});
 var SL=DEEP.slice2d,n=SL.n;new U.Surf3D($('#cv2'),{f:function(a,b){var i=Math.round((a+1)/2*(n-1)),j=Math.round((b+1)/2*(n-1));return SL.z[j][i];},xr:[-1,1],yr:[-1,1],n:30,axes:['방향 1','방향 2','검증 오차'],contours:false,views:false,yaw:-0.6,pitch:0.55,zoom:0.85,stamp:'단면 · 설명용 모형'});
 new U.Space3D($('#cv3'),{L:2,views:false,ticks:false,dark:true,floor:false,zoom:0.95,yaw:-0.5,pitch:0.4,stamp:'설명용 모형'}).ov.push(function(g,S){S.field(g,VM.VF.swirl.F,{n:4,scale:0.32,color:function(m,a){return 'rgba(120,220,225,'+a.toFixed(2)+')';}});});
