@@ -56,7 +56,7 @@ table.lim-tbl td,table.lim-tbl th{padding:4px 10px;text-align:right}
   <h1>최적화 첫걸음 ① — 혹시… 미분 좋아하세요?</h1>
   <p class="question">미분은 왜 쓰고, 언제부터 있었고, 그걸로 무엇을 할 수 있을까?</p>
   <p class="lead">인공지능 모델을 학습시키는 일도, 공장의 생산량을 정하는 일도 결국 "가장 좋은 값 찾기", 곧 <b>최적화</b>입니다. 그리고 최적화의 첫 신호는 언제나 <b>기울기</b>에서 나옵니다. 이 편은 미분을 처음 만나는 분을 위해 직선의 기울기에서 출발해, 빵 공장이 하루에 빵을 얼마나 구워야 이익이 가장 큰지까지 함께 걸어갑니다.</p>
-  <p class="byline">글 · 안상선 ((주)M-Robo 대표) · <a href="https://adminmrobo.github.io/who_am_i/who_am_i.html">저자 소개</a> · 2026-11-16 · v1.1</p>
+  <p class="byline">글 · 안상선 ((주)M-Robo 대표) · <a href="https://adminmrobo.github.io/who_am_i/who_am_i.html">저자 소개</a> · 2026-11-16 · v1.2</p>
   <div class="three"><b>세 줄로 먼저</b><ol>
     <li>미분은 "아주 짧은 순간의 기울기"다. 경제학에서는 이것을 <b>한계</b>라고 부른다.</li>
     <li>꼭대기와 바닥에서는 기울기가 0이다. 그래서 최적화는 기울기 0을 찾는 일에서 시작한다.</li>
@@ -219,8 +219,8 @@ table.lim-tbl td,table.lim-tbl th{padding:4px 10px;text-align:right}
 
   <h3 id="s31">3.1 수입·비용·이윤 — 비용은 두 가지</h3>
   <div class="pair">
-    <div><div class="tl">일상으로 치면</div>빵을 안 구워도 내야 하는 돈(가게 임대료)이 <b>고정비</b>, 구울수록 늘어나는 돈(밀가루·전기·알바비)이 <b>가변비</b>입니다. 판 돈(수입)에서 둘을 뺀 것이 이윤입니다.</div>
-    <div><div class="tr">수학에서는</div>수입 R = P × Q, 비용 C(Q) = 고정비 FC + 가변비 VC(Q), 이윤 π(Q) = R − C(Q). 처음에는 손이 익어 한 판당 비용이 줄다가, 많이 구울수록 오븐이 붐벼 다시 늘어나는 가변비를 씁니다.</div>
+    <div><div class="tl">일상으로 치면</div>빵을 안 구워도 내야 하는 돈(가게 임대료)이 <b>고정비</b>, 구울수록 늘어나는 돈(밀가루·전기·알바비)이 <b>가변비</b>입니다. 판 돈(수입)에서 둘을 뺀 것이 이윤입니다. 그런데 많이 팔수록 수입은 늘어도, 비용이 그보다 더 빨리 늘기 시작하면 손에 쥐는 이윤은 오히려 줄어듭니다.</div>
+    <div><div class="tr">수학에서는</div>수입 R = P × Q, 비용 C(Q) = 고정비 FC + 가변비 VC(Q), 이윤 π(Q) = R − C(Q). 처음에는 손이 익어 한 판당 비용이 줄다가, 많이 구울수록 오븐이 붐벼 다시 늘어나는 가변비를 씁니다. 수입은 한 판마다 똑같이 P씩 늘지만, 비용 곡선은 갈수록 가팔라지니 어느 생산량부터는 이윤 곡선이 꺾여 내려옵니다.</div>
   </div>
   <div class="panel">
     <div class="ptitle">빵 가격 2만 원 — 수입 직선, 비용 곡선, 이윤</div>
@@ -229,6 +229,7 @@ table.lim-tbl td,table.lim-tbl th{padding:4px 10px;text-align:right}
     <div class="minis"><div class="mini g"><span>수입 R</span><b id="m31a">—</b></div><div class="mini a"><span>고정비 FC</span><b id="m31b">60</b></div><div class="mini r"><span>가변비 VC</span><b id="m31c">—</b></div><div class="mini m"><span>이윤 π</span><b id="m31d">—</b></div></div>
     <div class="insight" id="i31" aria-live="polite"></div>
   </div>
+  <div data-dlg="c31"></div>
 
   <h3 id="s32">3.2 MR = MC — 하나 더 팔아 버는 돈 = 하나 더 만드는 비용</h3>
   <div class="pair">
@@ -262,18 +263,18 @@ table.lim-tbl td,table.lim-tbl th{padding:4px 10px;text-align:right}
 
 <!-- 대결 -->
 <section class="sec" id="duel" aria-labelledby="h-duel"><div class="wrap">
-  <h2 id="h-duel">대결 — 많이 구울수록 이익일까?</h2>
-  <p class="lead">빵 가격이 하루씩 2만 원, 1만 4천 원, 7천 원으로 바뀝니다. 주판봇은 "많이 팔수록 이익"이라며 매일 최대 15판을 굽습니다. 초파리 연구원은 MR = MC에서 멈추고, 가격이 조업중단점 밑이면 문을 닫습니다. 판정 기준은 <b>세 날 이윤의 합</b>입니다.</p>
+  <h2 id="h-duel">대결 — 손해 나는 날에도 문을 열까?</h2>
+  <p class="lead">빵 가격이 하루씩 2만 원, 1만 4천 원, 7천 원으로 바뀝니다. 3.1에서 깨달은 주판봇은 이제 매일 MR = MC로 "가장 많이 남는 판수"를 고릅니다. 다만 "팔아야 돈이 들어온다"며 가게 문은 절대 닫지 않습니다. 초파리 연구원은 같은 방법으로 고르되, 가격이 조업중단점 밑이면 문을 닫습니다. 판정 기준은 세 날 이윤의 합입니다.</p>
   <div class="duel">
     <div class="side l"><div class="head"><img id="d-fly" data-mood="fly_magnify" alt="" aria-hidden="true"><div><b style="color:var(--c-fly)">초파리 연구원</b><br><span class="muted">MR = MC에서 멈춘다. 가격이 AVC 최저점(8.75) 밑이면 문을 닫는다.</span></div></div></div>
     <div class="vs">VS</div>
-    <div class="side r"><div class="head"><img id="d-robo" data-mood="robo_coin" alt="" aria-hidden="true"><div><b style="color:var(--c-robo)">주판봇</b><br><span class="muted">하루 최대 15판. 많이 팔수록 남는다.</span></div></div></div>
+    <div class="side r"><div class="head"><img id="d-robo" data-mood="robo_coin" alt="" aria-hidden="true"><div><b style="color:var(--c-robo)">주판봇</b><br><span class="muted">MR = MC로 판수를 고른다. 하지만 문은 절대 닫지 않는다 — 팔아야 돈이 들어오니까.</span></div></div></div>
   </div>
   <div class="panel">
     <div class="ctrl"><div class="group"><span class="glabel">먼저 맞혀 보기</span><button class="bt" data-pred="fly" type="button" aria-pressed="false">초파리가 이길 것 같다</button><button class="bt" data-pred="robo" type="button" aria-pressed="false">주판봇이 이길 것 같다</button></div>
       <div class="group"><button class="bt primary" data-go type="button">결과 보기</button><button class="bt" data-close type="button" hidden>다시 닫기</button></div></div>
     <div class="duel-res" hidden>
-      <div class="tblwrap"><table class="cmp"><thead><tr><th>날</th><th>빵 가격</th><th>주판봇 (15판) 이윤</th><th>초파리 이윤</th></tr></thead><tbody id="d-tbl"></tbody></table></div>
+      <div class="tblwrap"><table class="cmp"><thead><tr><th>날</th><th>빵 가격</th><th>주판봇 (늘 연다) 이윤</th><th>초파리 이윤</th></tr></thead><tbody id="d-tbl"></tbody></table></div>
       <div class="resbars"><div class="resbar"><span style="color:var(--c-fly)">초파리 · 세 날 이윤 합</span><div class="bar"><i id="d-bf" style="background:var(--c-fly)"></i></div><b id="d-vf">—</b></div>
         <div class="resbar"><span style="color:var(--c-robo)">주판봇 · 세 날 이윤 합</span><div class="bar"><i id="d-br" style="background:var(--c-robo)"></i></div><b id="d-vr">—</b></div></div>
       <p class="muted" style="font-size:13px;margin:4px 0 0">이윤 단위는 천 원입니다. 두 쪽 모두 합이 음수(손해)라서, 막대는 손해가 작을수록 길게 그렸습니다(가장 큰 손해를 0으로 둠).</p>
@@ -357,13 +358,18 @@ var DLG={
  c2:[["sia","sia_think","미분은 언제부터 있었어요? 누가 만들었어요?"],["doc","doc_board","1660년대 영국의 뉴턴, 1670년대 독일의 라이프니츠가 따로 만들었어요. 경제학에 들어온 건 200년쯤 뒤입니다."],
      ["moa","moa_report","연표에 오른쪽 아래 링크가 있어요. 오늘 배울 칸과 이어져요!"]],
  c3:[["moa","moa_sparkle","그걸로 뭘 할 수 있어요?"],["doc","doc_front","예를 들어 빵집 사장님이 \"오늘 빵을 몇 판 구울까?\"를 정할 수 있어요. 경제학을 처음 듣는 분도 따라올 수 있게 빵 공장으로 해 볼게요."]],
+ c31:[["sia","sia_think","어? 슬라이더를 15판까지 밀어 봤는데요. 10판일 땐 4만 원이 남았는데, 15판을 다 팔았더니 6만 원 손해예요."],
+      ["moa","moa_report","수입은 30만 원까지 늘었는데… 많이 팔았는데 왜 우리가 가져가는 돈은 적어지죠?"],
+      ["asst","asst_shock","주판봇, 많이 팔수록 많이 남는다면서요!"],
+      ["robo","robo_calc","(주판을 튕기며) …수입은 한 판마다 2만 원씩 똑같이 늘지만, 비용은 판이 늘수록 점점 더 가파르게 늘어요. 많이 판다고 다가 아니네요. 그러니까 몇 판을 구워야 손에 쥐는 돈이 가장 많은지 골라야죠!"],
+      ["fly","fly_point","바로 그 \"몇 판\"을 기울기로 찾는 게 3.2야."]],
  outro:[["doc","doc_magic","오늘의 세 줄입니다.<br>① 미분 = 아주 짧은 순간의 기울기, 경제학에서는 '한계'.<br>② 꼭대기·바닥에서는 기울기 0 — 최적화의 첫 신호.<br>③ 빵 공장은 MR = MC에서 멈추고, 가격이 조업중단점 밑이면 문을 닫는다."],
-        ["fly","fly_arms","많이 굽는다고 남는 게 아니었지. 멈출 곳은 기울기가 알려 줘."],
-        ["robo","robo_sigh","15판 다 구웠는데 세 날 다 손해… 다음엔 MC부터 볼게."],
+        ["fly","fly_arms","많이 굽는다고 남는 것도, 문을 연다고 남는 것도 아니지. 멈출 곳은 기울기가, 닫을 때는 조업중단점이 알려 줘."],
+        ["robo","robo_sigh","판수는 잘 골랐는데 7천 원 날엔 닫는 게 나았네… 닫아도 나가는 돈은 똑같았어."],
         ["asst","asst_proud","② 편에서는 사람과 기계를 얼마나 쓸지, 그리고 인공지능이 어떻게 같은 방법으로 배우는지 봐요!"]]
 };
 U.dialogues(DLG);
-var CAST=[["doc","doc_front","박사","세 질문에 답하고 판정해요."],["asst","asst_smile","조수 하루","첫 질문 \"왜 써요?\""],["sia","sia_think","인턴 시아","두 번째 질문 \"언제부터요?\""],["moa","moa_sparkle","인턴 모아","세 번째 질문 \"뭘 할 수 있어요?\""],["fly","fly_magnify","초파리 연구원","의심하는 쪽. 기울기를 믿어요."],["robo","robo_coin","주판봇","확신하는 쪽. 많이 팔면 남는다고 믿어요."]];
+var CAST=[["doc","doc_front","박사","세 질문에 답하고 판정해요."],["asst","asst_smile","조수 하루","첫 질문 \"왜 써요?\""],["sia","sia_think","인턴 시아","두 번째 질문 \"언제부터요?\""],["moa","moa_sparkle","인턴 모아","세 번째 질문 \"뭘 할 수 있어요?\""],["fly","fly_magnify","초파리 연구원","의심하는 쪽. 기울기를 믿어요."],["robo","robo_coin","주판봇","돈 세는 쪽. 처음엔 많이 팔면 남는다고 믿어요."]];
 $('#castgrid').innerHTML=CAST.map(function(c){return '<div class="castc" style="--cc:var(--c-'+c[0]+')"><img src="'+U.spr(c[1])+'" alt="" aria-hidden="true"><div><b>'+c[2]+'</b><p>'+c[3]+'</p></div></div>';}).join('');
 $('#secretrow').innerHTML=['x1','x2','x3'].map(function(x,i){return U.say(x,x+'_hint',['(반짝)','(…끄덕)','(짝짝짝)'][i]);}).join('');
 $('#secretbtn').onclick=function(){var r=$('#secretrow');r.hidden=!r.hidden;this.setAttribute('aria-expanded',String(!r.hidden));this.textContent=r.hidden?'방청석 보기 (미공개 식구)':'방청석 닫기';};
@@ -455,7 +461,7 @@ var v31=V($('#cv31'),function(){var P=U.plot($('#cv31'),{xr:[0,15],yr:[-100,400]
   series:[{pts:lin(0,15,function(q){return 20*q;}),color:cssv('--gfp'),width:2.4,name:'수입 R = 20Q',ndy:-14},{pts:lin(0,15,B.TC),color:cssv('--eye'),width:2.4,name:'총비용 C',ndy:14},{pts:lin(0,15,pf),color:cssv('--stain'),width:2.4,name:'이윤 π',ndy:-12}],stamp:'설명용 예시',aria:'수입·비용·이윤'});
   var q=q31;P.g.strokeStyle=cssv('--amber');P.g.setLineDash([4,4]);P.g.beginPath();P.g.moveTo(P.X(q),P.Y(-100));P.g.lineTo(P.X(q),P.Y(400));P.g.stroke();P.g.setLineDash([]);});
 function up31(){var q=q31;$('#m31a').textContent=fmt(20*q,1);$('#m31c').textContent=fmt(B.VC(q),1);$('#m31d').textContent=fmt(pf(q),1);
-  U.ins($('#i31'),[[pf(q)>=0?'g':'r',q===0?'하나도 안 구우면 수입 0, 고정비 60만 나가 이윤은 −60입니다.':'수입 '+fmt(20*q,1)+' − 고정비 60 − 가변비 '+fmt(B.VC(q),1)+' = 이윤 '+fmt(pf(q),1)+'.'],['m','보라 이윤 곡선의 꼭대기는 어디일까요? 3.2에서 기울기로 찾습니다.']]);v31.dirty=true;}
+  U.ins($('#i31'),[[pf(q)>=0?'g':'r',q===0?'하나도 안 구우면 수입 0, 고정비 60만 나가 이윤은 −60입니다.':'수입 '+fmt(20*q,1)+' − 고정비 60 − 가변비 '+fmt(B.VC(q),1)+' = 이윤 '+fmt(pf(q),1)+'.'],].concat(q>10?[['a','10판을 넘으니 수입은 계속 늘어도 비용이 더 빨리 늘어 이윤이 줄고 있어요(10판일 때 '+fmt(pf(10),1)+').']]:[]).concat([['m','보라 이윤 곡선의 꼭대기는 어디일까요? 3.2에서 기울기로 찾습니다.']]));v31.dirty=true;}
 rng('r31','v31',function(v){return v.toFixed(1)+'판';},function(v){q31=v;up31();});up31();
 
 /* ── 3.2 MR = MC ── */
@@ -480,10 +486,10 @@ rng('r33','v33',function(v){return v.toFixed(1);},function(v){p33=v;up33();});up
 
 /* ── 대결 ── */
 U.Duel({el:'#duel',run:function(){return DM.duel1();},show:function(r,pred){var sf=0,sr=0;
-  $('#d-tbl').innerHTML=r.map(function(x,i){sf+=x.fly;sr+=x.robo;return '<tr><td>'+(i+1)+'일</td><td>'+(x.P*1000).toLocaleString('ko-KR')+'원</td><td>15판 → '+fmt(x.robo,1)+'</td><td>'+(x.open?fmt(x.flyQ,2)+'판 → ':'문 닫음 → ')+fmt(x.fly,1)+'</td></tr>';}).join('');
+  $('#d-tbl').innerHTML=r.map(function(x,i){sf+=x.fly;sr+=x.robo;return '<tr><td>'+(i+1)+'일</td><td>'+(x.P*1000).toLocaleString('ko-KR')+'원</td><td>'+fmt(x.roboQ,2)+'판 → '+fmt(x.robo,1)+'</td><td>'+(x.open?fmt(x.flyQ,2)+'판 → ':'문 닫음 → ')+fmt(x.fly,1)+'</td></tr>';}).join('');
   var lo=Math.min(sf,sr)*1.05,wf=(sf-lo)/(0-lo)*100,wr=(sr-lo)/(0-lo)*100;$('#d-bf').style.width=Math.max(4,wf)+'%';$('#d-br').style.width=Math.max(4,wr)+'%';$('#d-vf').textContent=fmt(sf,1);$('#d-vr').textContent=fmt(sr,1);
   var flyWin=sf>sr;
-  $('#d-say').innerHTML=U.say('doc','doc_judge','판정합니다. 세 날 이윤 합 초파리 '+fmt(sf,1)+', 주판봇 '+fmt(sr,1)+'. 1일째(2만 원)에도 15판은 꼭대기(10판)를 지나쳐 손해였고, 3일째(7천 원)는 조업중단점 밑이라 문을 닫는 편이 나았습니다. 초파리도 세 날 합은 손해지만, 1만 4천 원·7천 원 날은 누가 해도 손해인 날이었어요. 손해를 가장 작게 줄이는 것도 최적화입니다.')+U.say('robo','robo_blush','많이 구운 게 오히려 독이었네… 한 판 더의 비용부터 볼게.',true);
+  var d3=r[r.length-1];$('#d-say').innerHTML=U.say('doc','doc_judge','판정합니다. 세 날 이윤 합 초파리 '+fmt(sf,1)+', 주판봇 '+fmt(sr,1)+'. 1·2일째는 둘이 같은 판수를 골라 이윤도 같았습니다. 갈린 건 3일째(7천 원)예요. 가격이 조업중단점(8.75) 밑이라 빵을 팔아도 재료비조차 못 건집니다. 열면 '+fmt(d3.robo,1)+', 닫으면 고정비만 나가 '+fmt(d3.fly,1)+'. 둘 다 세 날 합은 손해지만, 손해를 가장 작게 줄이는 것도 최적화입니다.')+U.say('robo','robo_blush','문을 열어야 돈이 들어온다고 생각했는데… 닫아도 나가는 돈(고정비)은 똑같았네.',true);
   U.fillImgs();$('#d-score').textContent='이번 판: '+(flyWin?'초파리 연구원 승 (F)':'주판봇 승 (R)');$('#d-pred').textContent=pred?('내 예상: '+(pred==='fly'?'초파리':'주판봇')+' → '+((pred==='fly')===flyWin?'맞힘':'빗나감')):'예상을 고르지 않았어요';
   U.setMood($('#d-fly'),flyWin?'fly_arms':'fly_coffee');U.setMood($('#d-robo'),flyWin?'robo_sigh':'robo_happy');},
  reset:function(){U.setMood($('#d-fly'),'fly_magnify');U.setMood($('#d-robo'),'robo_coin');}});
@@ -515,7 +521,7 @@ U.Study({quiz:{
      {q:'한계혁명이 경제학에 가져온 생각은?',o:['값어치는 "하나 더"의 쓸모에서 나온다','값어치는 들어간 노동 시간으로 정해진다','가격은 정부가 정한다'],a:0,why:'제번스·멩거·왈라스는 한계효용으로 값어치를 설명했습니다.',hint:'물 한 잔 더의 만족.'}],
  c3:[{q:'완전경쟁 빵집의 이윤이 가장 큰 생산량의 조건은?',o:['수입 = 비용','가격(MR) = 한계비용(MC), MC가 오르는 구간','평균비용이 가장 낮은 곳'],a:1,why:'이윤의 기울기 MR − MC = 0이고, MC가 MR을 아래에서 뚫고 올라가는 교점이 꼭대기입니다.',hint:'한 판 더 팔아 버는 돈과 드는 돈.'},
      {q:'빵 가격이 1만 2천 원(조업중단점 8.75와 손익분기점 15.85 사이)이면?',o:['이익이 난다','바로 문을 닫는다','손해지만 문을 여는 편이 낫다'],a:2,why:'재료비를 빼고 남는 돈이 고정비 일부를 메워, 닫을 때(−60)보다 손해가 작습니다.',hint:'닫아도 고정비 60은 나갑니다.'}],
- duel:[{q:'주판봇이 2만 원 날에도 손해를 본 이유는?',o:['15판은 MC가 가격보다 큰 구간까지 구웠기 때문','가격이 너무 낮아서','고정비가 없어서'],a:0,why:'10판을 넘으면 한 판 더의 비용(MC)이 2만 원보다 커서, 더 구울수록 이윤이 줄어 −60까지 떨어졌습니다.',hint:'꼭대기는 10판이었어요.'}]
+ duel:[{q:'3일째(7천 원)에 주판봇이 초파리보다 손해가 컸던 이유는?',o:['빵을 너무 적게 구워서','가격이 조업중단점(8.75) 밑인데 문을 열어서','고정비가 더 많아서'],a:1,why:'7천 원은 평균가변비용의 최저점보다 낮아 빵을 팔아도 가변비조차 못 건집니다. 열면 고정비 60에 가변비 손해까지 더해집니다.',hint:'닫아도 나가는 돈은 얼마일까요?'}]
 }});
 U.start();
 })();

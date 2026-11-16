@@ -582,7 +582,7 @@ bakery.best=function(P){var x=bakery.cross(P),q=x?Math.min(Math.max(x[1],0),bake
   if(pr< -bakery.FC||!x)return {Q:0,profit:-bakery.FC,open:false,qx:q,prx:pr};return {Q:q,profit:pr,open:true,qx:q,prx:pr};};
 /* 대결 ①: 세 가격에서 주판봇(능력 한도까지 생산) vs 초파리(MR = MC, 손해가 고정비보다 크면 중단) */
 var DUEL1=[20,14,7];
-function duel1(){return DUEL1.map(function(P){var B=bakery,robo=B.profit(B.cap,P),f=B.best(P);return {P:P,roboQ:B.cap,robo:robo,flyQ:f.Q,fly:f.profit,open:f.open};});}
+function duel1(){return DUEL1.map(function(P){var B=bakery,x=B.cross(P),rq=x?Math.min(Math.max(x[1],0),B.cap):0,robo=B.profit(rq,P),f=B.best(P);return {P:P,roboQ:rq,robo:robo,flyQ:f.Q,fly:f.profit,open:f.open};});}
 
 /* ② 4장 공장: Q = 2√(L·K), 가격 P, 임금 w, 기계 사용료(이자) r. 단위: 사람·대·톤·만원(하루) */
 var fac={P:10,w:5,r:10,K0:4};

@@ -5,7 +5,7 @@ const B=D.bakery;
 ok('① 2만 원 최선 생산량',B.best(20).Q,10);ok('① 2만 원 이윤',B.best(20).profit,40);ok('① 15판 이윤(2만 원)',B.profit(15,20),-60);
 ok('① 조업중단점 AVC 최저',B.avcMin().v,8.75);ok('① 손익분기점 ATC 최저',B.atcMin().v,15.849,1e-3);
 ok('① MC = 총비용 미분(Q=8)',B.MC(8),D.d(B.TC,8));ok('① 이윤 기울기 0 (Q=10)',D.d(q=>B.profit(q,20),10),0);
-const d1=D.duel1();ok('① 대결 초파리 합',d1.reduce((s,x)=>s+x.fly,0),-36.762,1e-2);ok('① 대결 주판봇 합',d1.reduce((s,x)=>s+x.robo,0),-465);
+const d1=D.duel1();ok('① 대결 초파리 합',d1.reduce((s,x)=>s+x.fly,0),-36.762,1e-2);ok('① 대결 주판봇 합(늘 연다)',d1.reduce((s,x)=>s+x.robo,0),-49.33,1e-2);ok('① 대결 3일째 주판봇(7천 원, 연다)',d1[2].robo,-72.6,0.05);
 const F=D.fac,sr=F.shortRun(10,5,4);ok('② 사람 수',sr.L,16);ok('② 생산량',sr.Q,16);ok('② 이윤',sr.profit,40);
 const cm=F.costMin(16);ok('② 최소 비용',cm.C,113.137);ok('② λ',cm.lam,7.0711);ok('② λ = 1톤 더 비용',F.costMin(17).C-cm.C,cm.lam);
 ok('② 등량선 위',F.Q(cm.L,cm.K),16);ok('② 오일러: MP_L·L + MP_K·K = Q',F.MPL(cm.L,cm.K)*cm.L+F.MPK(cm.L,cm.K)*cm.K,16);ok('② P = λ이면 이윤 0',cm.lam*16-cm.C,0);

@@ -429,7 +429,7 @@ mrmc = g.n("lab:concept/mr-equals-mc", "Concept", "MR = MC", "MR equals MC", "#s
 shut = g.n("lab:concept/shutdown-point", "Concept", "조업중단점", "Shutdown point", "#s33", 1, "평균가변비용의 최저점. 가격이 이 밑이면 단기에도 문을 닫는다.")
 beven = g.n("lab:concept/break-even-point", "Concept", "손익분기점", "Break-even point", "#s33", 1, "평균총비용의 최저점. 이윤 0.")
 pc = g.n("lab:concept/perfect-competition", "Concept", "완전경쟁", "Perfect competition", "#c3", 1, "누구도 가격을 정하지 못하는 시장. MR = P.")
-m_flip = g.n("lab:method/max-capacity", "Method", "능력 한도까지 생산", "Produce at capacity", "#duel", 1, "많이 팔수록 남는다고 보고 최대치로 생산.")
+m_flip = g.n("lab:method/never-shut", "Method", "MR = MC, 문은 늘 연다", "MR = MC without shutdown", "#duel", 1, "판수는 MR = MC로 고르되, 가격이 조업중단점 밑이어도 문을 연다.")
 m_mrmc = g.n("lab:method/mr-mc-rule", "Method", "MR = MC에서 멈추기 + 조업중단", "MR = MC rule with shutdown", "#duel", 1)
 met = g.n("lab:metric/profit-sum", "Metric", "세 날 이윤 합", "Sum of profits over three days", "#duel", 1)
 A = {k: g.n("lab:analogy/" + k, "Analogy", ko, en, anc, 1) for k, ko, en, anc in [
@@ -448,7 +448,7 @@ g.e(secant, "partOf", deriv, "#s11"); g.e(tangent, "partOf", deriv, "#s11"); g.e
 g.e(mrev, "relatedTo", mu, "#s23"); g.e(beven, "contrastsWith", shut, "#s33"); g.e(pc, "relatedTo", mr, "#c3"); g.e(mrmc, "relatedTo", mc, "#s32")
 for sid, ko, en, anc, tgt in [("fs1-slope", "기울기 삼각형", "Slope triangle", "#s0", slope), ("fs1-secant", "할선을 접선으로", "Secant to tangent", "#s11", deriv), ("fs1-onemore", "한 판 더의 비용", "Cost of one more batch", "#s12", mc),
                               ("fs1-hill", "이윤 곡선의 기울기 0", "Zero slope on the profit curve", "#s13", stat), ("fs1-area", "밭 넓이의 전미분", "Total differential of area", "#s14", tdiff), ("fs1-limit", "h를 줄이는 표", "Shrinking h table", "#s22", limit),
-                              ("fs1-mrmc", "MC와 가격의 교점", "MC meets price", "#s32", mrmc), ("fs1-shutdown", "문을 열까 닫을까", "Open or shut", "#s33", shut), ("fs1-duel", "빵 공장 대결", "Bakery duel", "#duel", mrmc)]:
+                              ("fs1-mrmc", "MC와 가격의 교점", "MC meets price", "#s32", mrmc), ("fs1-shutdown", "문을 열까 닫을까", "Open or shut", "#s33", shut), ("fs1-duel", "빵 공장 대결", "Bakery duel", "#duel", shut)]:
     g.n("lab:sim/" + sid, "Simulation", ko, en, anc, 1); g.e(tgt, "demonstratedBy", "lab:sim/" + sid, anc)
 g.e(m_mrmc, "contrastsWith", m_flip, "#duel"); g.e(m_mrmc, "evaluatedBy", met, "#duel"); g.e(m_flip, "evaluatedBy", met, "#duel"); g.e(m_mrmc, "relatedTo", mrmc, "#duel")
 q1 = g.n("lab:question/fs-why", "Question", "미분은 왜 쓰나요?", "Why do we use derivatives?", "#prologue", 1)
@@ -467,14 +467,14 @@ for cid, ko, en, anc, tgt, wk, loc in C1:
     g.n(cid, "Claim", ko, en, anc, 2, source=[{"ref": wk, "loc": loc}]); g.e(cid, "supports", tgt, anc); g.e(cid, "assertedIn", W1[wk], anc)
 for wk in ("bussotti2003genesis", "lemarechal2012cauchy", "het_euler", "hoerl1970ridge", "rumelhart1986learning"): g.e(W1[wk], "relatedTo", limit, "#s21")
 for c in (deriv, pdv, tdiff, stat, limit): g.e(c, "broader", T_CALC, "#sum")
-Q1 = [("s0", 1, slope), ("c1", 1, deriv), ("c1", 2, stat), ("c1", 3, pdv), ("c2", 1, deriv), ("c2", 2, mrev), ("c3", 1, mrmc), ("c3", 2, shut), ("duel", 1, mrmc)]
+Q1 = [("s0", 1, slope), ("c1", 1, deriv), ("c1", 2, stat), ("c1", 3, pdv), ("c2", 1, deriv), ("c2", 2, mrev), ("c3", 1, mrmc), ("c3", 2, shut), ("duel", 1, shut)]
 for sec, k, tgt in Q1:
     qid = f"lab:quiz/fs1-{sec}-{k}"; g.n(qid, "QuizItem", f"{sec} 문제 {k}", f"Quiz {sec}-{k}", "#" + sec, 1); g.e(qid, "assesses", tgt, "#" + sec)
 g.dump(4)
 used4 = {"leibniz1684nova": [deriv], "archimede_newton_leibniz": [deriv], "wiki_calculus_controversy": [deriv], "het_neoclassicals": [mrev], "bussotti2003genesis": [limit], "lemarechal2012cauchy": [limit], "het_euler": [limit], "hoerl1970ridge": [limit], "rumelhart1986learning": [limit]}
 (B / "refs_4.json").write_text(json.dumps([REFS[k](v) for k, v in used4.items()], ensure_ascii=False, indent=1))
 m4 = meta(4, "최적화 첫걸음 ① 혹시… 미분 좋아하세요? — 왜, 언제부터, 어디에", [deriv, marg, stat, mrmc, shut], list(used4), "first_step_1.html")
-m4.update({"series": FS, "date": "2026-11-16", "version": "1.1", "educationalLevel": "입문", "suggestedCitation": "안상선 (2026). 최적화 첫걸음 ① 혹시… 미분 좋아하세요? — 왜, 언제부터, 어디에. 최적화 첫걸음 1, v1.1."})
+m4.update({"series": FS, "date": "2026-11-16", "version": "1.2", "educationalLevel": "입문", "suggestedCitation": "안상선 (2026). 최적화 첫걸음 ① 혹시… 미분 좋아하세요? — 왜, 언제부터, 어디에. 최적화 첫걸음 1, v1.2."})
 (B / "meta_4.json").write_text(json.dumps(m4, ensure_ascii=False, indent=1))
 
 # ══════════════ 최적화 첫걸음 ② ══════════════

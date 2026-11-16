@@ -405,11 +405,11 @@
    }
   },
   {
-   "id": "lab:method/max-capacity",
+   "id": "lab:method/never-shut",
    "type": "Method",
    "label": {
-    "ko": "능력 한도까지 생산",
-    "en": "Produce at capacity"
+    "ko": "MR = MC, 문은 늘 연다",
+    "en": "MR = MC without shutdown"
    },
    "page": "first_step_1",
    "anchor": "#duel",
@@ -423,7 +423,7 @@
    ],
    "match": [],
    "definition": {
-    "ko": "많이 팔수록 남는다고 보고 최대치로 생산."
+    "ko": "판수는 MR = MC로 고르되, 가격이 조업중단점 밑이어도 문을 연다."
    }
   },
   {
@@ -1619,7 +1619,7 @@
    "confidence": "high"
   },
   {
-   "s": "lab:concept/mr-equals-mc",
+   "s": "lab:concept/shutdown-point",
    "p": "lab:demonstratedBy",
    "o": "lab:sim/fs1-duel",
    "anchor": "#duel",
@@ -1628,7 +1628,7 @@
   {
    "s": "lab:method/mr-mc-rule",
    "p": "lab:contrastsWith",
-   "o": "lab:method/max-capacity",
+   "o": "lab:method/never-shut",
    "anchor": "#duel",
    "confidence": "high"
   },
@@ -1640,7 +1640,7 @@
    "confidence": "high"
   },
   {
-   "s": "lab:method/max-capacity",
+   "s": "lab:method/never-shut",
    "p": "lab:evaluatedBy",
    "o": "lab:metric/profit-sum",
    "anchor": "#duel",
@@ -1859,7 +1859,7 @@
   {
    "s": "lab:quiz/fs1-duel-1",
    "p": "lab:assesses",
-   "o": "lab:concept/mr-equals-mc",
+   "o": "lab:concept/shutdown-point",
    "anchor": "#duel",
    "confidence": "high"
   }
