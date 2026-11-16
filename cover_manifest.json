@@ -24,6 +24,16 @@
         "path": "3_arrow_field.html",
         "kg": true,
         "export": true
+      },
+      {
+        "path": "first_step_1.html",
+        "kg": true,
+        "export": true
+      },
+      {
+        "path": "first_step_2.html",
+        "kg": true,
+        "export": true
       }
     ],
     "files": [
@@ -35,7 +45,7 @@
       "ko"
     ],
     "pages": {
-      "ko": 4
+      "ko": 6
     },
     "readme_langs": [
       "ko"
@@ -124,6 +134,103 @@
       "source_of": null,
       "status": "pending",
       "received": null
+    },
+    {
+      "id": "fs_cover_01",
+      "role": "cover",
+      "path": "img/fs_cover_01.webp",
+      "size": [
+        1600,
+        900
+      ],
+      "characters": [
+        "doc",
+        "asst",
+        "sia",
+        "moa",
+        "fly",
+        "jupanbot"
+      ],
+      "robot": "jupanbot-v2",
+      "prompt_en": "전체: plan/COVER_PROMPTS_optimization_first_step.md",
+      "source_of": null,
+      "status": "pending",
+      "received": null,
+      "page": "first_step_1.html"
+    },
+    {
+      "id": "fs_cover_02",
+      "role": "cover",
+      "path": "img/fs_cover_02.webp",
+      "size": [
+        1600,
+        900
+      ],
+      "characters": [
+        "doc",
+        "asst",
+        "sia",
+        "moa",
+        "fly",
+        "jupanbot"
+      ],
+      "robot": "jupanbot-v2",
+      "prompt_en": "전체: plan/COVER_PROMPTS_optimization_first_step.md",
+      "source_of": null,
+      "status": "pending",
+      "received": null,
+      "page": "first_step_2.html"
+    },
+    {
+      "id": "fs_prologue_1",
+      "role": "panel",
+      "path": "img/fs_prologue_1.webp",
+      "size": [
+        1200,
+        900
+      ],
+      "characters": [
+        "asst"
+      ],
+      "prompt_en": "전체: plan/COVER_PROMPTS_optimization_first_step.md 3번",
+      "source_of": null,
+      "status": "pending",
+      "received": null,
+      "page": "first_step_1.html"
+    },
+    {
+      "id": "fs_prologue_2",
+      "role": "panel",
+      "path": "img/fs_prologue_2.webp",
+      "size": [
+        1200,
+        900
+      ],
+      "characters": [
+        "sia"
+      ],
+      "prompt_en": "전체: plan/COVER_PROMPTS_optimization_first_step.md 3번",
+      "source_of": null,
+      "status": "pending",
+      "received": null,
+      "page": "first_step_1.html"
+    },
+    {
+      "id": "fs_prologue_3",
+      "role": "panel",
+      "path": "img/fs_prologue_3.webp",
+      "size": [
+        1200,
+        900
+      ],
+      "characters": [
+        "moa"
+      ],
+      "prompt_en": "전체: plan/COVER_PROMPTS_optimization_first_step.md 3번",
+      "source_of": null,
+      "status": "pending",
+      "received": null,
+      "page": "first_step_1.html"
     }
   ],
   "updated": "2026-11-16"

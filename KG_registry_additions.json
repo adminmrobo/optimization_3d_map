@@ -197,7 +197,8 @@
    "label_ko": "연쇄 법칙",
    "label_en": "Chain rule",
    "pages": [
-    "optimization_3d_map/1_math_map"
+    "optimization_3d_map/1_math_map",
+    "optimization_3d_map/first_step_2"
    ]
   },
   {
@@ -469,7 +470,8 @@
    "label_ko": "역전파는 층마다의 기울기를 뒤에서부터 전해 가중치를 고친다",
    "label_en": "Backpropagation adjusts weights by propagating error gradients",
    "pages": [
-    "optimization_3d_map/1_math_map"
+    "optimization_3d_map/1_math_map",
+    "optimization_3d_map/first_step_2"
    ]
   },
   {
@@ -831,7 +833,9 @@
    "label_ko": "편미분",
    "label_en": "Partial derivative",
    "pages": [
-    "optimization_3d_map/3_arrow_field"
+    "optimization_3d_map/3_arrow_field",
+    "optimization_3d_map/first_step_1",
+    "optimization_3d_map/first_step_2"
    ]
   },
   {
@@ -1096,6 +1100,665 @@
    "label_en": "The Laplacian filter highlights intensity edges",
    "pages": [
     "optimization_3d_map/3_arrow_field"
+   ]
+  },
+  {
+   "id": "lab:concept/slope",
+   "type": "Concept",
+   "label_ko": "기울기",
+   "label_en": "Slope",
+   "pages": [
+    "optimization_3d_map/first_step_1"
+   ]
+  },
+  {
+   "id": "lab:concept/derivative",
+   "type": "Concept",
+   "label_ko": "미분(도함수)",
+   "label_en": "Derivative",
+   "pages": [
+    "optimization_3d_map/first_step_1",
+    "optimization_3d_map/index"
+   ]
+  },
+  {
+   "id": "lab:concept/secant-line",
+   "type": "Concept",
+   "label_ko": "할선",
+   "label_en": "Secant line",
+   "pages": [
+    "optimization_3d_map/first_step_1"
+   ]
+  },
+  {
+   "id": "lab:concept/tangent-line",
+   "type": "Concept",
+   "label_ko": "접선",
+   "label_en": "Tangent line",
+   "pages": [
+    "optimization_3d_map/first_step_1"
+   ]
+  },
+  {
+   "id": "lab:concept/limit",
+   "type": "Concept",
+   "label_ko": "극한",
+   "label_en": "Limit",
+   "pages": [
+    "optimization_3d_map/first_step_1"
+   ]
+  },
+  {
+   "id": "lab:concept/marginal",
+   "type": "Concept",
+   "label_ko": "한계(marginal)",
+   "label_en": "Marginal",
+   "pages": [
+    "optimization_3d_map/first_step_1"
+   ]
+  },
+  {
+   "id": "lab:concept/marginal-cost",
+   "type": "Concept",
+   "label_ko": "한계비용(MC)",
+   "label_en": "Marginal cost",
+   "pages": [
+    "optimization_3d_map/first_step_1",
+    "optimization_3d_map/first_step_2"
+   ]
+  },
+  {
+   "id": "lab:concept/marginal-revenue",
+   "type": "Concept",
+   "label_ko": "한계수입(MR)",
+   "label_en": "Marginal revenue",
+   "pages": [
+    "optimization_3d_map/first_step_1"
+   ]
+  },
+  {
+   "id": "lab:concept/stationary-point",
+   "type": "Concept",
+   "label_ko": "기울기 0인 점",
+   "label_en": "Stationary point",
+   "pages": [
+    "optimization_3d_map/first_step_1"
+   ]
+  },
+  {
+   "id": "lab:concept/total-differential",
+   "type": "Concept",
+   "label_ko": "전미분",
+   "label_en": "Total differential",
+   "pages": [
+    "optimization_3d_map/first_step_1"
+   ]
+  },
+  {
+   "id": "lab:concept/marginal-utility",
+   "type": "Concept",
+   "label_ko": "한계효용",
+   "label_en": "Marginal utility",
+   "pages": [
+    "optimization_3d_map/first_step_1"
+   ]
+  },
+  {
+   "id": "lab:concept/marginal-revolution",
+   "type": "Concept",
+   "label_ko": "한계혁명",
+   "label_en": "Marginal revolution",
+   "pages": [
+    "optimization_3d_map/first_step_1"
+   ]
+  },
+  {
+   "id": "lab:concept/fixed-variable-cost",
+   "type": "Concept",
+   "label_ko": "고정비·가변비",
+   "label_en": "Fixed and variable cost",
+   "pages": [
+    "optimization_3d_map/first_step_1"
+   ]
+  },
+  {
+   "id": "lab:concept/mr-equals-mc",
+   "type": "Concept",
+   "label_ko": "MR = MC",
+   "label_en": "MR equals MC",
+   "pages": [
+    "optimization_3d_map/first_step_1"
+   ]
+  },
+  {
+   "id": "lab:concept/shutdown-point",
+   "type": "Concept",
+   "label_ko": "조업중단점",
+   "label_en": "Shutdown point",
+   "pages": [
+    "optimization_3d_map/first_step_1"
+   ]
+  },
+  {
+   "id": "lab:concept/break-even-point",
+   "type": "Concept",
+   "label_ko": "손익분기점",
+   "label_en": "Break-even point",
+   "pages": [
+    "optimization_3d_map/first_step_1"
+   ]
+  },
+  {
+   "id": "lab:concept/perfect-competition",
+   "type": "Concept",
+   "label_ko": "완전경쟁",
+   "label_en": "Perfect competition",
+   "pages": [
+    "optimization_3d_map/first_step_1"
+   ]
+  },
+  {
+   "id": "lab:method/max-capacity",
+   "type": "Method",
+   "label_ko": "능력 한도까지 생산",
+   "label_en": "Produce at capacity",
+   "pages": [
+    "optimization_3d_map/first_step_1"
+   ]
+  },
+  {
+   "id": "lab:method/mr-mc-rule",
+   "type": "Method",
+   "label_ko": "MR = MC에서 멈추기 + 조업중단",
+   "label_en": "MR = MC rule with shutdown",
+   "pages": [
+    "optimization_3d_map/first_step_1"
+   ]
+  },
+  {
+   "id": "lab:metric/profit-sum",
+   "type": "Metric",
+   "label_ko": "세 날 이윤 합",
+   "label_en": "Sum of profits over three days",
+   "pages": [
+    "optimization_3d_map/first_step_1"
+   ]
+  },
+  {
+   "id": "lab:analogy/speedometer",
+   "type": "Analogy",
+   "label_ko": "속도계",
+   "label_en": "Speedometer",
+   "pages": [
+    "optimization_3d_map/first_step_1"
+   ]
+  },
+  {
+   "id": "lab:analogy/one-more-batch",
+   "type": "Analogy",
+   "label_ko": "한 판 더",
+   "label_en": "One more batch",
+   "pages": [
+    "optimization_3d_map/first_step_1"
+   ]
+  },
+  {
+   "id": "lab:analogy/hilltop",
+   "type": "Analogy",
+   "label_ko": "산꼭대기의 평평한 발밑",
+   "label_en": "Flat ground at the hilltop",
+   "pages": [
+    "optimization_3d_map/first_step_1"
+   ]
+  },
+  {
+   "id": "lab:analogy/field-area",
+   "type": "Analogy",
+   "label_ko": "밭 넓이의 띠와 귀퉁이",
+   "label_en": "Strips and corner of a field",
+   "pages": [
+    "optimization_3d_map/first_step_1"
+   ]
+  },
+  {
+   "id": "lab:analogy/glass-of-water",
+   "type": "Analogy",
+   "label_ko": "물 한 잔 더",
+   "label_en": "One more glass of water",
+   "pages": [
+    "optimization_3d_map/first_step_1"
+   ]
+  },
+  {
+   "id": "lab:analogy/rent-anyway",
+   "type": "Analogy",
+   "label_ko": "닫아도 나가는 임대료",
+   "label_en": "Rent paid even when closed",
+   "pages": [
+    "optimization_3d_map/first_step_1"
+   ]
+  },
+  {
+   "id": "lab:limitation/smooth-only",
+   "type": "Limitation",
+   "label_ko": "매끄러운 곡선에서만 미분",
+   "label_en": "Differentiable only where smooth",
+   "pages": [
+    "optimization_3d_map/first_step_1"
+   ]
+  },
+  {
+   "id": "lab:limitation/discrete-vs-marginal",
+   "type": "Limitation",
+   "label_ko": "한 판 더 ≠ 미분",
+   "label_en": "One more unit is not exactly the derivative",
+   "pages": [
+    "optimization_3d_map/first_step_1"
+   ]
+  },
+  {
+   "id": "lab:limitation/stationary-not-optimum",
+   "type": "Limitation",
+   "label_ko": "기울기 0은 후보일 뿐",
+   "label_en": "Zero slope is only a candidate",
+   "pages": [
+    "optimization_3d_map/first_step_1"
+   ]
+  },
+  {
+   "id": "lab:limitation/short-run-only",
+   "type": "Limitation",
+   "label_ko": "조업중단점은 단기 개념",
+   "label_en": "Shutdown is a short-run idea",
+   "pages": [
+    "optimization_3d_map/first_step_1"
+   ]
+  },
+  {
+   "id": "lab:limitation/price-taker",
+   "type": "Limitation",
+   "label_ko": "완전경쟁 가정 (MR = P)",
+   "label_en": "Assumes price-taking (MR = P)",
+   "pages": [
+    "optimization_3d_map/first_step_1"
+   ]
+  },
+  {
+   "id": "lab:question/fs-why",
+   "type": "Question",
+   "label_ko": "미분은 왜 쓰나요?",
+   "label_en": "Why do we use derivatives?",
+   "pages": [
+    "optimization_3d_map/first_step_1"
+   ]
+  },
+  {
+   "id": "lab:question/fs-when",
+   "type": "Question",
+   "label_ko": "미분은 언제부터 있었어요?",
+   "label_en": "Since when has the derivative existed?",
+   "pages": [
+    "optimization_3d_map/first_step_1"
+   ]
+  },
+  {
+   "id": "lab:question/fs-what",
+   "type": "Question",
+   "label_ko": "미분으로 뭘 할 수 있어요?",
+   "label_en": "What can we do with derivatives?",
+   "pages": [
+    "optimization_3d_map/first_step_1"
+   ]
+  },
+  {
+   "id": "lab:claim/leibniz-first-publication",
+   "type": "Claim",
+   "label_ko": "1684년 라이프니츠의 논문이 미분을 다룬 첫 출판물이다",
+   "label_en": "Leibniz 1684 is the first publication on calculus",
+   "pages": [
+    "optimization_3d_map/first_step_1"
+   ]
+  },
+  {
+   "id": "lab:claim/newton-fluxions-1665",
+   "type": "Claim",
+   "label_ko": "뉴턴은 1665–66년에 유율법을 세웠고 1687년에 처음 출판했다",
+   "label_en": "Newton developed fluxions in 1665–66, first published 1687",
+   "pages": [
+    "optimization_3d_map/first_step_1"
+   ]
+  },
+  {
+   "id": "lab:claim/independent-invention",
+   "type": "Claim",
+   "label_ko": "두 사람이 따로 만들었다는 견해가 널리 받아들여진다",
+   "label_en": "Independent invention is widely accepted",
+   "pages": [
+    "optimization_3d_map/first_step_1"
+   ]
+  },
+  {
+   "id": "lab:claim/marginal-revolution-1871",
+   "type": "Claim",
+   "label_ko": "제번스·멩거(1871)와 왈라스(1874)가 한계효용으로 값어치를 설명했다",
+   "label_en": "Jevons, Menger (1871) and Walras (1874) founded marginal utility theory",
+   "pages": [
+    "optimization_3d_map/first_step_1"
+   ]
+  },
+  {
+   "id": "lab:concept/marginal-product",
+   "type": "Concept",
+   "label_ko": "한계생산",
+   "label_en": "Marginal product",
+   "pages": [
+    "optimization_3d_map/first_step_2"
+   ]
+  },
+  {
+   "id": "lab:concept/vmp-equals-wage",
+   "type": "Concept",
+   "label_ko": "P × MP_L = w",
+   "label_en": "Value of marginal product equals wage",
+   "pages": [
+    "optimization_3d_map/first_step_2"
+   ]
+  },
+  {
+   "id": "lab:concept/lagrangian",
+   "type": "Concept",
+   "label_ko": "라그랑지안",
+   "label_en": "Lagrangian",
+   "pages": [
+    "optimization_3d_map/first_step_2"
+   ]
+  },
+  {
+   "id": "lab:concept/lagrange-multiplier",
+   "type": "Concept",
+   "label_ko": "라그랑주 승수 λ",
+   "label_en": "Lagrange multiplier",
+   "pages": [
+    "optimization_3d_map/first_step_2"
+   ]
+  },
+  {
+   "id": "lab:concept/isoquant",
+   "type": "Concept",
+   "label_ko": "등량선·등비용선",
+   "label_en": "Isoquant and isocost",
+   "pages": [
+    "optimization_3d_map/first_step_2"
+   ]
+  },
+  {
+   "id": "lab:concept/constant-returns",
+   "type": "Concept",
+   "label_ko": "규모에 대한 수익 불변",
+   "label_en": "Constant returns to scale",
+   "pages": [
+    "optimization_3d_map/first_step_2"
+   ]
+  },
+  {
+   "id": "lab:concept/euler-theorem",
+   "type": "Concept",
+   "label_ko": "오일러 정리(생산물 소진)",
+   "label_en": "Euler's theorem (product exhaustion)",
+   "pages": [
+    "optimization_3d_map/first_step_2"
+   ]
+  },
+  {
+   "id": "lab:concept/differential-equation",
+   "type": "Concept",
+   "label_ko": "미분방정식",
+   "label_en": "Differential equation",
+   "pages": [
+    "optimization_3d_map/first_step_2"
+   ]
+  },
+  {
+   "id": "lab:method/euler-method",
+   "type": "Method",
+   "label_ko": "오일러 방법(계단 풀이)",
+   "label_en": "Euler method",
+   "pages": [
+    "optimization_3d_map/first_step_2"
+   ]
+  },
+  {
+   "id": "lab:concept/nonlinearity",
+   "type": "Concept",
+   "label_ko": "비선형성",
+   "label_en": "Nonlinearity",
+   "pages": [
+    "optimization_3d_map/first_step_2"
+   ]
+  },
+  {
+   "id": "lab:concept/interaction",
+   "type": "Concept",
+   "label_ko": "상호작용",
+   "label_en": "Interaction",
+   "pages": [
+    "optimization_3d_map/first_step_2"
+   ]
+  },
+  {
+   "id": "lab:concept/feature-engineering",
+   "type": "Concept",
+   "label_ko": "특성공학",
+   "label_en": "Feature engineering",
+   "pages": [
+    "optimization_3d_map/first_step_2"
+   ]
+  },
+  {
+   "id": "lab:concept/regularization",
+   "type": "Concept",
+   "label_ko": "규제항(벌점)",
+   "label_en": "Regularization penalty",
+   "pages": [
+    "optimization_3d_map/first_step_2"
+   ]
+  },
+  {
+   "id": "lab:method/square-terms",
+   "type": "Method",
+   "label_ko": "제곱항 추가",
+   "label_en": "Add squared terms",
+   "pages": [
+    "optimization_3d_map/first_step_2"
+   ]
+  },
+  {
+   "id": "lab:method/cross-term",
+   "type": "Method",
+   "label_ko": "교차항 추가",
+   "label_en": "Add cross term",
+   "pages": [
+    "optimization_3d_map/first_step_2"
+   ]
+  },
+  {
+   "id": "lab:metric/validation-mse",
+   "type": "Metric",
+   "label_ko": "검증 평균제곱오차",
+   "label_en": "Validation MSE",
+   "pages": [
+    "optimization_3d_map/first_step_2"
+   ]
+  },
+  {
+   "id": "lab:analogy/one-more-worker",
+   "type": "Analogy",
+   "label_ko": "사람 한 명 더",
+   "label_en": "One more worker",
+   "pages": [
+    "optimization_3d_map/first_step_2"
+   ]
+  },
+  {
+   "id": "lab:analogy/cheapest-16t",
+   "type": "Analogy",
+   "label_ko": "16톤을 가장 싸게",
+   "label_en": "16 tonnes at least cost",
+   "pages": [
+    "optimization_3d_map/first_step_2"
+   ]
+  },
+  {
+   "id": "lab:analogy/split-revenue",
+   "type": "Analogy",
+   "label_ko": "매출 나눠 주기",
+   "label_en": "Splitting the revenue",
+   "pages": [
+    "optimization_3d_map/first_step_2"
+   ]
+  },
+  {
+   "id": "lab:analogy/cooling-coffee",
+   "type": "Analogy",
+   "label_ko": "식는 커피",
+   "label_en": "Cooling coffee",
+   "pages": [
+    "optimization_3d_map/first_step_2"
+   ]
+  },
+  {
+   "id": "lab:analogy/foggy-mountain",
+   "type": "Analogy",
+   "label_ko": "안개 낀 산 내려가기",
+   "label_en": "Descending a foggy mountain",
+   "pages": [
+    "optimization_3d_map/first_step_2"
+   ]
+  },
+  {
+   "id": "lab:analogy/flour-to-sales",
+   "type": "Analogy",
+   "label_ko": "밀가루 값에서 매출까지",
+   "label_en": "From flour price to sales",
+   "pages": [
+    "optimization_3d_map/first_step_2"
+   ]
+  },
+  {
+   "id": "lab:analogy/fertilizer-water",
+   "type": "Analogy",
+   "label_ko": "비료와 물",
+   "label_en": "Fertilizer and water",
+   "pages": [
+    "optimization_3d_map/first_step_2"
+   ]
+  },
+  {
+   "id": "lab:analogy/fence",
+   "type": "Analogy",
+   "label_ko": "가중치 울타리",
+   "label_en": "A fence around the weights",
+   "pages": [
+    "optimization_3d_map/first_step_2"
+   ]
+  },
+  {
+   "id": "lab:limitation/short-run-capital",
+   "type": "Limitation",
+   "label_ko": "단기(기계 고정)",
+   "label_en": "Short run with fixed capital",
+   "pages": [
+    "optimization_3d_map/first_step_2"
+   ]
+  },
+  {
+   "id": "lab:limitation/equality-constraint",
+   "type": "Limitation",
+   "label_ko": "등식 제약만 (부등식은 KKT)",
+   "label_en": "Equality constraints only",
+   "pages": [
+    "optimization_3d_map/first_step_2"
+   ]
+  },
+  {
+   "id": "lab:limitation/crs-long-run",
+   "type": "Limitation",
+   "label_ko": "규모수익불변·장기 경쟁",
+   "label_en": "Constant returns and long-run competition",
+   "pages": [
+    "optimization_3d_map/first_step_2"
+   ]
+  },
+  {
+   "id": "lab:limitation/convex-bowl",
+   "type": "Limitation",
+   "label_ko": "그릇 모양 손실",
+   "label_en": "Bowl-shaped loss",
+   "pages": [
+    "optimization_3d_map/first_step_2"
+   ]
+  },
+  {
+   "id": "lab:limitation/convex-only",
+   "type": "Limitation",
+   "label_ko": "볼록일 때만 같은 답",
+   "label_en": "Equivalent only when convex",
+   "pages": [
+    "optimization_3d_map/first_step_2"
+   ]
+  },
+  {
+   "id": "lab:question/fs-how-much",
+   "type": "Question",
+   "label_ko": "얼마만큼 생산하면 될까요?",
+   "label_en": "How much should we produce?",
+   "pages": [
+    "optimization_3d_map/first_step_2"
+   ]
+  },
+  {
+   "id": "lab:question/fs-time-cost",
+   "type": "Question",
+   "label_ko": "시간과 비용이 들어간 공정은 어떻게 최적화할까?",
+   "label_en": "How to optimize a process with time and cost?",
+   "pages": [
+    "optimization_3d_map/first_step_2"
+   ]
+  },
+  {
+   "id": "lab:claim/lagrange-1788",
+   "type": "Claim",
+   "label_ko": "라그랑주 승수법은 1788년 『해석역학』에서 정식화됐다",
+   "label_en": "Lagrange multipliers were formulated in Mécanique analytique (1788)",
+   "pages": [
+    "optimization_3d_map/first_step_2"
+   ]
+  },
+  {
+   "id": "lab:claim/wicksteed-flux-1894",
+   "type": "Claim",
+   "label_ko": "윅스티드(1894)의 생산물 소진 주장을 플럭스가 오일러 정리로 짚었다",
+   "label_en": "Flux identified Wicksteed's product exhaustion with Euler's theorem (1894)",
+   "pages": [
+    "optimization_3d_map/first_step_2"
+   ]
+  },
+  {
+   "id": "lab:claim/cauchy-1847",
+   "type": "Claim",
+   "label_ko": "경사하강은 1847년 코시의 학술원 보고에서 처음 나왔다",
+   "label_en": "Gradient descent first appeared in Cauchy's 1847 note",
+   "pages": [
+    "optimization_3d_map/first_step_2"
+   ]
+  },
+  {
+   "id": "lab:claim/ridge-1970",
+   "type": "Claim",
+   "label_ko": "능형 회귀는 가중치 크기에 벌점을 더해 큰 계수를 누른다",
+   "label_en": "Ridge regression penalizes coefficient size",
+   "pages": [
+    "optimization_3d_map/first_step_2"
    ]
   }
  ]

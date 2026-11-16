@@ -1,0 +1,47 @@
+{
+ "title": "최적화 첫걸음 ① 혹시… 미분 좋아하세요? — 왜, 언제부터, 어디에",
+ "series": "최적화 첫걸음 — 혹시… 미분 좋아하세요?",
+ "number": "4",
+ "creator": [
+  {
+   "name": "안상선",
+   "role": "author",
+   "affiliation": "(주)M-Robo"
+  }
+ ],
+ "contributor": [
+  {
+   "name": "AI 보조 제작",
+   "role": "assistant"
+  }
+ ],
+ "date": "2026-11-16",
+ "version": "1.0",
+ "language": [
+  "ko"
+ ],
+ "license": "",
+ "url": "https://adminmrobo.github.io/optimization_3d_map/first_step_1.html",
+ "about": [
+  "lab:concept/derivative",
+  "lab:concept/marginal",
+  "lab:concept/stationary-point",
+  "lab:concept/mr-equals-mc",
+  "lab:concept/shutdown-point"
+ ],
+ "basedOn": [
+  "leibniz1684nova",
+  "archimede_newton_leibniz",
+  "wiki_calculus_controversy",
+  "het_neoclassicals",
+  "bussotti2003genesis",
+  "lemarechal2012cauchy",
+  "het_euler",
+  "hoerl1970ridge",
+  "rumelhart1986learning"
+ ],
+ "educationalLevel": "입문",
+ "learningResourceType": "interactive explainer",
+ "registry": "KG_00_registry 0.2",
+ "suggestedCitation": "안상선 (2026). 최적화 첫걸음 ① 혹시… 미분 좋아하세요? — 왜, 언제부터, 어디에. 최적화 첫걸음 1, v1.0."
+}

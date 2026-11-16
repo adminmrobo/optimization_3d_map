@@ -76,6 +76,24 @@ REFS = {
  "gonzalez2018digital": lambda s: ref("gonzalez2018digital", "book", "Digital Image Processing (4th ed.)", [{"family": "Gonzalez", "given": "Rafael C."}, {"family": "Woods", "given": "Richard E."}],
         2018, None, {"publisher": "Pearson", "ISBN": "978-0-13-335672-4"}, supports=s, locs=[{"claim": "lab:claim/laplacian-filter-edges", "loc": "3장 공간 필터링 (3.6 샤프닝 필터)"}],
         verified={"title": True, "author": True, "year": True, "publisher": True, "pages": False}, checked="웹 검색 2026-11-16 (Pearson·MathWorks 도서 페이지) — 절 번호는 원문 대조 안 함"),
+ "leibniz1684nova": lambda s: ref("leibniz1684nova", "article-journal", "Nova Methodus pro Maximis et Minimis", [{"family": "Leibniz", "given": "Gottfried Wilhelm"}], 1684, "Acta Eruditorum", {"volume": "3", "page": "467-473"}, supports=s,
+        verified={"title": True, "author": True, "year": True, "pages": True}, checked="웹 검색 2026-11-16 (Wikipedia 'Nova Methodus pro Maximis et Minimis', Il Giardino di Archimede)"),
+ "archimede_newton_leibniz": lambda s: ref("archimede_newton_leibniz", "webpage", "Newton and Leibniz: the birth of calculus", [{"literal": "Il Giardino di Archimede"}], None, None, {"URL": "https://archimede.dimai.unifi.it/archimede/archimede_NEW_inglese/mostra_calcolo/pannelli/3.html"}, supports=s,
+        verified={"title": True, "author": True, "year": False, "url": True}, checked="웹 검색 2026-11-16"),
+ "wiki_calculus_controversy": lambda s: ref("wiki_calculus_controversy", "webpage", "Leibniz–Newton calculus controversy", [{"literal": "웹 검색 2026-11-16ikipedia"}], None, None, {"URL": "https://en.wikipedia.org/wiki/Leibniz%E2%80%93Newton_calculus_controversy"}, supports=s,
+        verified={"title": True, "author": True, "year": False, "url": True}, checked="웹 검색 2026-11-16"),
+ "het_neoclassicals": lambda s: ref("het_neoclassicals", "webpage", "The Neoclassicals — Introduction", [{"family": "Fonseca", "given": "Gonçalo L."}], None, "History of Economic Thought website", {"URL": "https://www.hetwebsite.net/het/essays/margrev/ncintro.htm"}, supports=s,
+        verified={"title": True, "author": True, "year": False, "url": True}, checked="웹 검색 2026-11-16"),
+ "bussotti2003genesis": lambda s: ref("bussotti2003genesis", "article-journal", "On the Genesis of the Lagrange Multipliers", [{"family": "Bussotti", "given": "P."}], 2003, "Journal of Optimization Theory and Applications", {"volume": "117", "issue": "3", "page": "453-459"}, supports=s,
+        verified={"title": True, "author": True, "year": True, "pages": True}, checked="웹 검색 2026-11-16 (Harvard Knill 게시 PDF 첫 쪽)"),
+ "lemarechal2012cauchy": lambda s: ref("lemarechal2012cauchy", "article-journal", "Cauchy and the Gradient Method", [{"family": "Lemaréchal", "given": "Claude"}], 2012, "Documenta Mathematica, Extra Volume ISMP", {"page": "251-254"}, supports=s,
+        verified={"title": True, "author": True, "year": True, "pages": True}, checked="웹 검색 2026-11-16 (EMS Press 장 파일)"),
+ "het_euler": lambda s: ref("het_euler", "webpage", "Euler's Theorem", [{"family": "Fonseca", "given": "Gonçalo L."}], None, "History of Economic Thought website", {"URL": "https://www.hetwebsite.net/het/essays/math/euler.htm"}, supports=s,
+        verified={"title": True, "author": True, "year": False, "url": True}, checked="웹 검색 2026-11-16 (+ Britannica 'Philip Henry Wicksteed', Flux 1894 서평)"),
+ "hoerl1970ridge": lambda s: ref("hoerl1970ridge", "article-journal", "Ridge Regression: Biased Estimation for Nonorthogonal Problems", [{"family": "Hoerl", "given": "Arthur E."}, {"family": "Kennard", "given": "Robert W."}], 1970, "Technometrics", {"volume": "12", "issue": "1", "page": "55-67", "DOI": "10.1080/00401706.1970.10488634"}, supports=s,
+        verified={"title": True, "author": True, "year": True, "pages": True, "doi": True}, checked="웹 검색 2026-11-16 (MaRDI, CMU 사본)"),
+ "cement_world": lambda s: ref("cement_world", "webpage", "시멘트 제조업 World", [{"literal": "adminmrobo"}], 2026, None, {"URL": "https://adminmrobo.github.io/smart_factory_world/cement/"}, role="background", supports=s,
+        verified={"title": True, "author": True, "year": True, "url": True}, checked="2026-11-16 페이지 확인"),
 }
 
 # ── 그래프 도우미 ──────────────────────────────────────────
@@ -390,6 +408,142 @@ m3 = meta(3, "좌표축 위의 그릇 ③ 화살표 밭 편 — x·y·z 세 축 
 m3.update({"date": "2026-11-16", "version": "1.0", "educationalLevel": "입문", "suggestedCitation": "안상선 (2026). 좌표축 위의 그릇 ③ 화살표 밭 편 — x·y·z 세 축 공간에서 읽는 ∇(나블라). 좌표축 위의 그릇 — 3D 지도로 본 모델 최적화 3, v1.0."})
 (B / "meta_3.json").write_text(json.dumps(m3, ensure_ascii=False, indent=1))
 
+# ══════════════ 최적화 첫걸음 ① ══════════════
+FS = "최적화 첫걸음 — 혹시… 미분 좋아하세요?"
+g = G("first_step_1")
+slope = g.n("lab:concept/slope", "Concept", "기울기", "Slope", "#s0", 1, "올라간 양 ÷ 옆으로 간 거리.")
+deriv = g.n("lab:concept/derivative", "Concept", "미분(도함수)", "Derivative", "#s11", 1, "간격을 0에 가깝게 줄였을 때의 기울기 = 접선의 기울기.", alt=["미분계수", "도함수"])
+secant = g.n("lab:concept/secant-line", "Concept", "할선", "Secant line", "#s11", 1, "곡선 위 두 점을 이은 직선.")
+tangent = g.n("lab:concept/tangent-line", "Concept", "접선", "Tangent line", "#s11", 1, "곡선에 한 점에서 닿는 직선.")
+limit = g.n("lab:concept/limit", "Concept", "극한", "Limit", "#s22", 1, "한없이 가까워질 때 다가가는 끝값.")
+marg = g.n("lab:concept/marginal", "Concept", "한계(marginal)", "Marginal", "#s12", 1, "하나 더 했을 때 늘어나는 양. 경제학에서 미분의 다른 이름.")
+mc = g.n("lab:concept/marginal-cost", "Concept", "한계비용(MC)", "Marginal cost", "#s12", 1, "한 단위 더 만들 때 늘어나는 비용 = 총비용의 미분.")
+mr = g.n("lab:concept/marginal-revenue", "Concept", "한계수입(MR)", "Marginal revenue", "#s32", 1, "한 단위 더 팔 때 늘어나는 수입. 완전경쟁이면 가격.")
+stat = g.n("lab:concept/stationary-point", "Concept", "기울기 0인 점", "Stationary point", "#s13", 1, "꼭대기·바닥(·안장)의 후보.")
+pdv = g.n("lab:concept/partial-derivative", "Concept", "편미분", "Partial derivative", "#s14", 1, "나머지는 고정하고 하나만 움직였을 때의 기울기.")
+tdiff = g.n("lab:concept/total-differential", "Concept", "전미분", "Total differential", "#s14", 1, "모두 조금씩 움직였을 때의 변화 = 편미분 × 움직인 양의 합.")
+mu = g.n("lab:concept/marginal-utility", "Concept", "한계효용", "Marginal utility", "#s23", 1, "하나 더 쓸 때 늘어나는 만족.")
+mrev = g.n("lab:concept/marginal-revolution", "Concept", "한계혁명", "Marginal revolution", "#s23", 2, "1871–74년 제번스·멩거·왈라스가 한계효용으로 값어치를 설명한 일.")
+fcvc = g.n("lab:concept/fixed-variable-cost", "Concept", "고정비·가변비", "Fixed and variable cost", "#s31", 1, "생산량과 무관한 비용과 생산량 따라 느는 비용.")
+mrmc = g.n("lab:concept/mr-equals-mc", "Concept", "MR = MC", "MR equals MC", "#s32", 1, "이윤 최대의 1계 조건. MC가 MR을 아래에서 뚫고 올라가는 교점.")
+shut = g.n("lab:concept/shutdown-point", "Concept", "조업중단점", "Shutdown point", "#s33", 1, "평균가변비용의 최저점. 가격이 이 밑이면 단기에도 문을 닫는다.")
+beven = g.n("lab:concept/break-even-point", "Concept", "손익분기점", "Break-even point", "#s33", 1, "평균총비용의 최저점. 이윤 0.")
+pc = g.n("lab:concept/perfect-competition", "Concept", "완전경쟁", "Perfect competition", "#c3", 1, "누구도 가격을 정하지 못하는 시장. MR = P.")
+m_flip = g.n("lab:method/max-capacity", "Method", "능력 한도까지 생산", "Produce at capacity", "#duel", 1, "많이 팔수록 남는다고 보고 최대치로 생산.")
+m_mrmc = g.n("lab:method/mr-mc-rule", "Method", "MR = MC에서 멈추기 + 조업중단", "MR = MC rule with shutdown", "#duel", 1)
+met = g.n("lab:metric/profit-sum", "Metric", "세 날 이윤 합", "Sum of profits over three days", "#duel", 1)
+A = {k: g.n("lab:analogy/" + k, "Analogy", ko, en, anc, 1) for k, ko, en, anc in [
+    ("speedometer", "속도계", "Speedometer", "#s11"), ("one-more-batch", "한 판 더", "One more batch", "#s12"),
+    ("hilltop", "산꼭대기의 평평한 발밑", "Flat ground at the hilltop", "#s13"), ("field-area", "밭 넓이의 띠와 귀퉁이", "Strips and corner of a field", "#s14"),
+    ("glass-of-water", "물 한 잔 더", "One more glass of water", "#s23"), ("rent-anyway", "닫아도 나가는 임대료", "Rent paid even when closed", "#s33")]}
+for a, t in zip(A.values(), [deriv, mc, stat, tdiff, mu, shut]): g.e(a, "analogyOf", t, g.nodes[[n["id"] for n in g.nodes].index(a)]["anchor"])
+L = {k: g.n("lab:limitation/" + k, "Limitation", ko, en, anc, 2) for k, ko, en, anc in [
+    ("smooth-only", "매끄러운 곡선에서만 미분", "Differentiable only where smooth", "#s11"), ("discrete-vs-marginal", "한 판 더 ≠ 미분", "One more unit is not exactly the derivative", "#s12"),
+    ("stationary-not-optimum", "기울기 0은 후보일 뿐", "Zero slope is only a candidate", "#s13"), ("short-run-only", "조업중단점은 단기 개념", "Shutdown is a short-run idea", "#s33"),
+    ("price-taker", "완전경쟁 가정 (MR = P)", "Assumes price-taking (MR = P)", "#c3")]}
+g.e(deriv, "hasLimitation", L["smooth-only"], "#s11"); g.e(mc, "hasLimitation", L["discrete-vs-marginal"], "#s12"); g.e(stat, "hasLimitation", L["stationary-not-optimum"], "#s13")
+g.e(L["stationary-not-optimum"], "addressedBy", mrmc, "#s32"); g.e(shut, "hasLimitation", L["short-run-only"], "#s33"); g.e(mrmc, "hasLimitation", L["price-taker"], "#c3")
+for a, b in [(slope, deriv), (deriv, marg), (deriv, stat), (deriv, pdv), (pdv, tdiff), (marg, mrmc), (stat, mrmc), (fcvc, shut), (mrmc, shut), (limit, deriv)]: g.e(a, "prerequisiteOf", b, "#sum")
+g.e(secant, "partOf", deriv, "#s11"); g.e(tangent, "partOf", deriv, "#s11"); g.e(mc, "derivedFrom", marg, "#s12"); g.e(mr, "derivedFrom", marg, "#s32"); g.e(mu, "derivedFrom", marg, "#s23")
+g.e(mrev, "relatedTo", mu, "#s23"); g.e(beven, "contrastsWith", shut, "#s33"); g.e(pc, "relatedTo", mr, "#c3"); g.e(mrmc, "relatedTo", mc, "#s32")
+for sid, ko, en, anc, tgt in [("fs1-slope", "기울기 삼각형", "Slope triangle", "#s0", slope), ("fs1-secant", "할선을 접선으로", "Secant to tangent", "#s11", deriv), ("fs1-onemore", "한 판 더의 비용", "Cost of one more batch", "#s12", mc),
+                              ("fs1-hill", "이윤 곡선의 기울기 0", "Zero slope on the profit curve", "#s13", stat), ("fs1-area", "밭 넓이의 전미분", "Total differential of area", "#s14", tdiff), ("fs1-limit", "h를 줄이는 표", "Shrinking h table", "#s22", limit),
+                              ("fs1-mrmc", "MC와 가격의 교점", "MC meets price", "#s32", mrmc), ("fs1-shutdown", "문을 열까 닫을까", "Open or shut", "#s33", shut), ("fs1-duel", "빵 공장 대결", "Bakery duel", "#duel", mrmc)]:
+    g.n("lab:sim/" + sid, "Simulation", ko, en, anc, 1); g.e(tgt, "demonstratedBy", "lab:sim/" + sid, anc)
+g.e(m_mrmc, "contrastsWith", m_flip, "#duel"); g.e(m_mrmc, "evaluatedBy", met, "#duel"); g.e(m_flip, "evaluatedBy", met, "#duel"); g.e(m_mrmc, "relatedTo", mrmc, "#duel")
+q1 = g.n("lab:question/fs-why", "Question", "미분은 왜 쓰나요?", "Why do we use derivatives?", "#prologue", 1)
+q2 = g.n("lab:question/fs-when", "Question", "미분은 언제부터 있었어요?", "Since when has the derivative existed?", "#prologue", 1)
+q3 = g.n("lab:question/fs-what", "Question", "미분으로 뭘 할 수 있어요?", "What can we do with derivatives?", "#prologue", 1)
+g.e(deriv, "raises", q1, "#prologue"); g.e(limit, "raises", q2, "#prologue"); g.e(mrmc, "raises", q3, "#prologue")
+W1 = {k: g.work(k, ko, en) for k, ko, en in [("leibniz1684nova", "라이프니츠 1684", "Leibniz 1684"), ("archimede_newton_leibniz", "아르키메데스 정원: 뉴턴과 라이프니츠", "Garden of Archimedes: Newton and Leibniz"),
+    ("wiki_calculus_controversy", "미적분 우선권 논쟁", "Leibniz–Newton calculus controversy"), ("het_neoclassicals", "HET: 신고전학파 소개", "HET: The Neoclassicals"),
+    ("bussotti2003genesis", "Bussotti 2003", "Bussotti 2003"), ("lemarechal2012cauchy", "Lemaréchal 2012", "Lemaréchal 2012"), ("het_euler", "HET: 오일러 정리", "HET: Euler's Theorem"),
+    ("hoerl1970ridge", "Hoerl·Kennard 1970", "Hoerl & Kennard 1970"), ("rumelhart1986learning", "Rumelhart·Hinton·Williams 1986", "Rumelhart, Hinton & Williams 1986")]}
+C1 = [("lab:claim/leibniz-first-publication", "1684년 라이프니츠의 논문이 미분을 다룬 첫 출판물이다", "Leibniz 1684 is the first publication on calculus", "#s21", deriv, "leibniz1684nova", "Acta Eruditorum 3"),
+      ("lab:claim/newton-fluxions-1665", "뉴턴은 1665–66년에 유율법을 세웠고 1687년에 처음 출판했다", "Newton developed fluxions in 1665–66, first published 1687", "#s21", deriv, "archimede_newton_leibniz", "패널 3"),
+      ("lab:claim/independent-invention", "두 사람이 따로 만들었다는 견해가 널리 받아들여진다", "Independent invention is widely accepted", "#s21", deriv, "wiki_calculus_controversy", "Hall 1980 인용"),
+      ("lab:claim/marginal-revolution-1871", "제번스·멩거(1871)와 왈라스(1874)가 한계효용으로 값어치를 설명했다", "Jevons, Menger (1871) and Walras (1874) founded marginal utility theory", "#s23", mrev, "het_neoclassicals", "Introduction")]
+for cid, ko, en, anc, tgt, wk, loc in C1:
+    g.n(cid, "Claim", ko, en, anc, 2, source=[{"ref": wk, "loc": loc}]); g.e(cid, "supports", tgt, anc); g.e(cid, "assertedIn", W1[wk], anc)
+for wk in ("bussotti2003genesis", "lemarechal2012cauchy", "het_euler", "hoerl1970ridge", "rumelhart1986learning"): g.e(W1[wk], "relatedTo", limit, "#s21")
+for c in (deriv, pdv, tdiff, stat, limit): g.e(c, "broader", T_CALC, "#sum")
+Q1 = [("s0", 1, slope), ("c1", 1, deriv), ("c1", 2, stat), ("c1", 3, pdv), ("c2", 1, deriv), ("c2", 2, mrev), ("c3", 1, mrmc), ("c3", 2, shut), ("duel", 1, mrmc)]
+for sec, k, tgt in Q1:
+    qid = f"lab:quiz/fs1-{sec}-{k}"; g.n(qid, "QuizItem", f"{sec} 문제 {k}", f"Quiz {sec}-{k}", "#" + sec, 1); g.e(qid, "assesses", tgt, "#" + sec)
+g.dump(4)
+used4 = {"leibniz1684nova": [deriv], "archimede_newton_leibniz": [deriv], "wiki_calculus_controversy": [deriv], "het_neoclassicals": [mrev], "bussotti2003genesis": [limit], "lemarechal2012cauchy": [limit], "het_euler": [limit], "hoerl1970ridge": [limit], "rumelhart1986learning": [limit]}
+(B / "refs_4.json").write_text(json.dumps([REFS[k](v) for k, v in used4.items()], ensure_ascii=False, indent=1))
+m4 = meta(4, "최적화 첫걸음 ① 혹시… 미분 좋아하세요? — 왜, 언제부터, 어디에", [deriv, marg, stat, mrmc, shut], list(used4), "first_step_1.html")
+m4.update({"series": FS, "date": "2026-11-16", "version": "1.0", "educationalLevel": "입문", "suggestedCitation": "안상선 (2026). 최적화 첫걸음 ① 혹시… 미분 좋아하세요? — 왜, 언제부터, 어디에. 최적화 첫걸음 1, v1.0."})
+(B / "meta_4.json").write_text(json.dumps(m4, ensure_ascii=False, indent=1))
+
+# ══════════════ 최적화 첫걸음 ② ══════════════
+g = G("first_step_2")
+mp = g.n("lab:concept/marginal-product", "Concept", "한계생산", "Marginal product", "#s41", 1, "한 단위 더 투입할 때의 생산 증가 = 생산함수의 편미분.")
+pdv = g.n("lab:concept/partial-derivative", "Concept", "편미분", "Partial derivative", "#s41", 1, "나머지는 고정하고 하나만 움직였을 때의 기울기.")
+vmp = g.n("lab:concept/vmp-equals-wage", "Concept", "P × MP_L = w", "Value of marginal product equals wage", "#s41", 1, "한 명 더의 매출 = 임금에서 고용을 멈춘다.")
+lag = g.n("lab:concept/lagrangian", "Concept", "라그랑지안", "Lagrangian", "#s42", 2, "목표 − λ × (제약). 편미분을 모두 0으로 놓아 푼다.")
+lam = g.n("lab:concept/lagrange-multiplier", "Concept", "라그랑주 승수 λ", "Lagrange multiplier", "#s42", 2, "제약을 1단위 풀 때 목표가 바뀌는 양. 비용 최소화에서는 한계비용.")
+iso = g.n("lab:concept/isoquant", "Concept", "등량선·등비용선", "Isoquant and isocost", "#s42", 1, "같은 생산량 곡선과 같은 비용 직선. 접하는 점이 가장 싼 조합.")
+mc = g.n("lab:concept/marginal-cost", "Concept", "한계비용(MC)", "Marginal cost", "#s42", 1, "한 단위 더 만들 때 늘어나는 비용.")
+crs = g.n("lab:concept/constant-returns", "Concept", "규모에 대한 수익 불변", "Constant returns to scale", "#s43", 1, "모든 투입을 t배 하면 생산도 t배.")
+euler = g.n("lab:concept/euler-theorem", "Concept", "오일러 정리(생산물 소진)", "Euler's theorem (product exhaustion)", "#s43", 2, "1차 동차함수면 Q = MP_L·L + MP_K·K.")
+ode = g.n("lab:concept/differential-equation", "Concept", "미분방정식", "Differential equation", "#s44", 2, "지금 상태가 변화 속도를 정하는 식.")
+eulm = g.n("lab:method/euler-method", "Method", "오일러 방법(계단 풀이)", "Euler method", "#s44", 2, "짧은 Δt마다 기울기 × Δt만큼 이동해 미분방정식을 푼다.")
+gd = g.n("lab:method/gradient-descent", "Method", "경사하강", "Gradient descent", "#s51", 1, "w ← w − 학습률 × 기울기.")
+lr = g.n("lab:concept/learning-rate", "Concept", "학습률", "Learning rate", "#s51", 1, "경사하강의 보폭.")
+chainr = g.n("lab:concept/chain-rule", "Concept", "연쇄법칙", "Chain rule", "#s52", 1, "이어진 함수의 미분 = 고리마다 미분의 곱.")
+bp = g.n("lab:method/backpropagation", "Method", "역전파", "Backpropagation", "#s52", 2, "연쇄법칙의 곱을 손실에서부터 거꾸로 계산.")
+nonlin = g.n("lab:concept/nonlinearity", "Concept", "비선형성", "Nonlinearity", "#s53", 1, "∂²y/∂x² ≠ 0. 제곱항으로 잡는다.")
+inter = g.n("lab:concept/interaction", "Concept", "상호작용", "Interaction", "#s53", 1, "∂²y/∂x₁∂x₂ ≠ 0. 교차항으로 잡는다.")
+fe = g.n("lab:concept/feature-engineering", "Concept", "특성공학", "Feature engineering", "#s53", 1, "모형에 넣을 입력(특성)을 만들고 고르는 일.")
+reg = g.n("lab:concept/regularization", "Concept", "규제항(벌점)", "Regularization penalty", "#s54", 2, "가중치 크기에 매기는 벌점 λ|w|². 볼록 손실에서는 울타리 제약과 같은 답.")
+m_sq = g.n("lab:method/square-terms", "Method", "제곱항 추가", "Add squared terms", "#duel", 1, "1, x₁, x₂, x₁², x₂².")
+m_cross = g.n("lab:method/cross-term", "Method", "교차항 추가", "Add cross term", "#duel", 1, "1, x₁, x₂, x₁², x₁·x₂.")
+met = g.n("lab:metric/validation-mse", "Metric", "검증 평균제곱오차", "Validation MSE", "#duel", 1)
+A = {k: g.n("lab:analogy/" + k, "Analogy", ko, en, anc, 1) for k, ko, en, anc in [
+    ("one-more-worker", "사람 한 명 더", "One more worker", "#s41"), ("cheapest-16t", "16톤을 가장 싸게", "16 tonnes at least cost", "#s42"), ("split-revenue", "매출 나눠 주기", "Splitting the revenue", "#s43"),
+    ("cooling-coffee", "식는 커피", "Cooling coffee", "#s44"), ("foggy-mountain", "안개 낀 산 내려가기", "Descending a foggy mountain", "#s51"), ("flour-to-sales", "밀가루 값에서 매출까지", "From flour price to sales", "#s52"),
+    ("fertilizer-water", "비료와 물", "Fertilizer and water", "#s53"), ("fence", "가중치 울타리", "A fence around the weights", "#s54")]}
+for a, t in zip(A.values(), [vmp, lag, euler, ode, gd, chainr, inter, reg]): g.e(a, "analogyOf", t, g.nodes[[n["id"] for n in g.nodes].index(a)]["anchor"])
+L = {k: g.n("lab:limitation/" + k, "Limitation", ko, en, anc, 2) for k, ko, en, anc in [
+    ("short-run-capital", "단기(기계 고정)", "Short run with fixed capital", "#s41"), ("equality-constraint", "등식 제약만 (부등식은 KKT)", "Equality constraints only", "#s42"),
+    ("crs-long-run", "규모수익불변·장기 경쟁", "Constant returns and long-run competition", "#s43"), ("convex-bowl", "그릇 모양 손실", "Bowl-shaped loss", "#s51"), ("convex-only", "볼록일 때만 같은 답", "Equivalent only when convex", "#s54")]}
+g.e(vmp, "hasLimitation", L["short-run-capital"], "#s41"); g.e(L["short-run-capital"], "addressedBy", lag, "#s42"); g.e(lag, "hasLimitation", L["equality-constraint"], "#s42")
+g.e(euler, "hasLimitation", L["crs-long-run"], "#s43"); g.e(gd, "hasLimitation", L["convex-bowl"], "#s51"); g.e(reg, "hasLimitation", L["convex-only"], "#s54")
+for a, b in [(pdv, mp), (mp, vmp), (vmp, lag), (lag, lam), (crs, euler), (ode, gd), (gd, bp), (chainr, bp), (pdv, nonlin), (pdv, inter), (lag, reg)]: g.e(a, "prerequisiteOf", b, "#sum")
+g.e(lam, "relatedTo", mc, "#s42"); g.e(iso, "partOf", lag, "#s42"); g.e(eulm, "solves", ode, "#s44"); g.e(gd, "relatedTo", eulm, "#s44"); g.e(lr, "partOf", gd, "#s51")
+g.e(nonlin, "contrastsWith", inter, "#s53"); g.e(nonlin, "partOf", fe, "#s53"); g.e(inter, "partOf", fe, "#s53"); g.e(reg, "relatedTo", lag, "#s54")
+for sid, ko, en, anc, tgt in [("fs2-hire", "사람 한 명 더 실험", "Hiring experiment", "#s41", vmp), ("fs2-isoquant", "등량선과 비용 직선", "Isoquant and isocost", "#s42", lag), ("fs2-euler", "매출 나누기 막대", "Revenue split bars", "#s43", euler),
+                              ("fs2-ode", "커피·경사하강 계단 풀이", "Euler steps for coffee and descent", "#s44", ode), ("fs2-gd", "학습률 실험", "Learning-rate experiment", "#s51", gd), ("fs2-chain", "연쇄 세 고리", "Three-link chain", "#s52", chainr),
+                              ("fs2-features", "특성과 두 번 미분", "Features and second derivatives", "#s53", inter), ("fs2-ridge", "울타리와 벌점", "Fence and penalty", "#s54", reg), ("fs2-duel", "제곱항 vs 교차항 대결", "Square vs cross-term duel", "#duel", inter)]:
+    g.n("lab:sim/" + sid, "Simulation", ko, en, anc, 1); g.e(tgt, "demonstratedBy", "lab:sim/" + sid, anc)
+g.e(m_cross, "contrastsWith", m_sq, "#duel"); g.e(m_cross, "evaluatedBy", met, "#duel"); g.e(m_sq, "evaluatedBy", met, "#duel"); g.e(m_cross, "relatedTo", inter, "#duel"); g.e(m_sq, "relatedTo", nonlin, "#duel")
+q = g.n("lab:question/fs-how-much", "Question", "얼마만큼 생산하면 될까요?", "How much should we produce?", "#top", 1)
+q2 = g.n("lab:question/fs-time-cost", "Question", "시간과 비용이 들어간 공정은 어떻게 최적화할까?", "How to optimize a process with time and cost?", "#epi", 2)
+g.e(vmp, "raises", q, "#top"); g.e(ode, "raises", q2, "#epi")
+W2 = {k: g.work(k, ko, en) for k, ko, en in [("bussotti2003genesis", "Bussotti 2003", "Bussotti 2003"), ("het_euler", "HET: 오일러 정리", "HET: Euler's Theorem"), ("lemarechal2012cauchy", "Lemaréchal 2012", "Lemaréchal 2012"),
+    ("rumelhart1986learning", "Rumelhart·Hinton·Williams 1986", "Rumelhart, Hinton & Williams 1986"), ("hoerl1970ridge", "Hoerl·Kennard 1970", "Hoerl & Kennard 1970"), ("cement_world", "시멘트 제조업 World", "Cement manufacturing World")]}
+C2 = [("lab:claim/lagrange-1788", "라그랑주 승수법은 1788년 『해석역학』에서 정식화됐다", "Lagrange multipliers were formulated in Mécanique analytique (1788)", "#s42", lag, "bussotti2003genesis", "본문 2절"),
+      ("lab:claim/wicksteed-flux-1894", "윅스티드(1894)의 생산물 소진 주장을 플럭스가 오일러 정리로 짚었다", "Flux identified Wicksteed's product exhaustion with Euler's theorem (1894)", "#s43", euler, "het_euler", "본문"),
+      ("lab:claim/cauchy-1847", "경사하강은 1847년 코시의 학술원 보고에서 처음 나왔다", "Gradient descent first appeared in Cauchy's 1847 note", "#s51", gd, "lemarechal2012cauchy", "p. 251"),
+      ("lab:claim/backprop-1986", "역전파는 연쇄법칙으로 층마다의 기울기를 뒤에서부터 전한다", "Backpropagation propagates gradients backward via the chain rule", "#s52", bp, "rumelhart1986learning", "본문"),
+      ("lab:claim/ridge-1970", "능형 회귀는 가중치 크기에 벌점을 더해 큰 계수를 누른다", "Ridge regression penalizes coefficient size", "#s54", reg, "hoerl1970ridge", "2절")]
+for cid, ko, en, anc, tgt, wk, loc in C2:
+    g.n(cid, "Claim", ko, en, anc, 2, source=[{"ref": wk, "loc": loc}]); g.e(cid, "supports", tgt, anc); g.e(cid, "assertedIn", W2[wk], anc)
+g.e(W2["cement_world"], "relatedTo", ode, "#epi")
+for c in (pdv, lag, lam, euler, ode, chainr): g.e(c, "broader", T_CALC, "#sum")
+g.e(gd, "broader", T_GD, "#s51"); g.e(bp, "broader", T_BP, "#s52"); g.e(fe, "broader", "lab:topic/feature-engineering", "#s53"); g.e(reg, "broader", "lab:topic/weight-decay", "#s54")
+Q2 = [("c4", 1, vmp), ("c4", 2, lam), ("c4", 3, euler), ("c5", 1, lr), ("c5", 2, chainr), ("c5", 3, inter), ("duel", 1, inter)]
+for sec, k, tgt in Q2:
+    qid = f"lab:quiz/fs2-{sec}-{k}"; g.n(qid, "QuizItem", f"{sec} 문제 {k}", f"Quiz {sec}-{k}", "#" + sec, 1); g.e(qid, "assesses", tgt, "#" + sec)
+g.dump(5)
+used5 = {"bussotti2003genesis": [lag], "het_euler": [euler], "lemarechal2012cauchy": [gd], "rumelhart1986learning": [bp], "hoerl1970ridge": [reg], "cement_world": [ode]}
+(B / "refs_5.json").write_text(json.dumps([REFS[k](v) for k, v in used5.items()], ensure_ascii=False, indent=1))
+m5 = meta(5, "최적화 첫걸음 ② 공장에서 인공지능까지 — 얼마만큼 생산하면 될까요?", [vmp, lag, euler, gd, inter], list(used5), "first_step_2.html")
+m5.update({"series": FS, "date": "2026-11-16", "version": "1.0", "educationalLevel": "입문", "suggestedCitation": "안상선 (2026). 최적화 첫걸음 ② 공장에서 인공지능까지. 최적화 첫걸음 2, v1.0."})
+(B / "meta_5.json").write_text(json.dumps(m5, ensure_ascii=False, indent=1))
+
 # ══════════════ 목차 ══════════════
 g = G("index")
 land = g.n("lab:concept/loss-landscape", "Concept", "오차 지형", "Loss landscape", "#top", 1, "가중치마다 잰 오차를 높이로 세운 땅.")
@@ -400,7 +554,11 @@ p1 = g.n("lab:section/series-part-1", "Section", "1편 수학 편", "Part 1: mat
 p2 = g.n("lab:section/series-part-2", "Section", "2편 실험실 편", "Part 2: experiments", "#chapters", 1)
 p3 = g.n("lab:section/series-part-3", "Section", "3편 화살표 밭 편", "Part 3: vector fields and del", "#chapters", 1)
 delop0 = g.n("lab:concept/del-operator", "Concept", "나블라(∇) 연산자", "Del (nabla) operator", "#chapters", 1, "(∂/∂x, ∂/∂y, ∂/∂z). 그래디언트·발산·회전·라플라시안을 만드는 도구 묶음.")
-g.e(delop0, "explainedIn", p3, "#chapters"); g.e(p1, "relatedTo", p3, "#chapters"); g.e(delop0, "broader", T_CALC, "#chapters")
+g.e(delop0, "explainedIn", p3, "#chapters");
+fs1 = g.n("lab:section/first-step-1", "Section", "최적화 첫걸음 ①", "First step to optimization 1", "#firststep", 1)
+fs2 = g.n("lab:section/first-step-2", "Section", "최적화 첫걸음 ②", "First step to optimization 2", "#firststep", 1)
+der0 = g.n("lab:concept/derivative", "Concept", "미분", "Derivative", "#firststep", 1, "아주 짧은 순간의 기울기.")
+g.e(der0, "explainedIn", fs1, "#firststep"); g.e(fs1, "prerequisiteOf", fs2, "#firststep"); g.e(fs2, "prerequisiteOf", p1, "#firststep"); g.e(der0, "broader", T_CALC, "#firststep"); g.e(p1, "relatedTo", p3, "#chapters"); g.e(delop0, "broader", T_CALC, "#chapters")
 q = g.n("lab:question/series", "Question", "학습을 오차 지도 위의 걷기로 볼 수 있을까?", "Can learning be read as walking on a loss map?", "#top", 1)
 w = g.work("goodfellow2016deep", "Goodfellow 외 2016 Deep Learning", "Goodfellow et al. 2016 Deep Learning")
 c = g.n("lab:claim/gd-on-loss", "Claim", "경사하강은 오차 함수의 기울기 반대 방향으로 가중치를 고친다", "Gradient descent moves weights against the loss gradient", "#top", 1, source=[{"ref": "goodfellow2016deep", "loc": "4.3"}])
@@ -411,7 +569,7 @@ g.dump(0)
 m0 = meta(0, "좌표축 위의 그릇 — 3D 지도로 본 모델 최적화 (목차)", ["lab:concept/loss-landscape", "lab:method/gradient-descent", "lab:concept/hyperparameter"], ["goodfellow2016deep"], "")
 (B / "meta_0.json").write_text(json.dumps(m0, ensure_ascii=False, indent=1))
 
-for n in (0, 1, 2, 3):
+for n in (0, 1, 2, 3, 4, 5):
     k = json.loads((B / f"kg_{n}.json").read_text()); ids = {x["id"] for x in k["nodes"]}
     deg = {i: 0 for i in ids}; rel = 0; bad = []
     for e in k["edges"]:

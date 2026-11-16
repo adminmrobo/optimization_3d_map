@@ -1,0 +1,1867 @@
+{
+ "version": "1.3",
+ "page": "first_step_1",
+ "nodes": [
+  {
+   "id": "lab:concept/slope",
+   "type": "Concept",
+   "label": {
+    "ko": "기울기",
+    "en": "Slope"
+   },
+   "page": "first_step_1",
+   "anchor": "#s0",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "올라간 양 ÷ 옆으로 간 거리."
+   }
+  },
+  {
+   "id": "lab:concept/derivative",
+   "type": "Concept",
+   "label": {
+    "ko": "미분(도함수)",
+    "en": "Derivative"
+   },
+   "page": "first_step_1",
+   "anchor": "#s11",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "간격을 0에 가깝게 줄였을 때의 기울기 = 접선의 기울기."
+   },
+   "altLabel": {
+    "ko": [
+     "미분계수",
+     "도함수"
+    ]
+   }
+  },
+  {
+   "id": "lab:concept/secant-line",
+   "type": "Concept",
+   "label": {
+    "ko": "할선",
+    "en": "Secant line"
+   },
+   "page": "first_step_1",
+   "anchor": "#s11",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "곡선 위 두 점을 이은 직선."
+   }
+  },
+  {
+   "id": "lab:concept/tangent-line",
+   "type": "Concept",
+   "label": {
+    "ko": "접선",
+    "en": "Tangent line"
+   },
+   "page": "first_step_1",
+   "anchor": "#s11",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "곡선에 한 점에서 닿는 직선."
+   }
+  },
+  {
+   "id": "lab:concept/limit",
+   "type": "Concept",
+   "label": {
+    "ko": "극한",
+    "en": "Limit"
+   },
+   "page": "first_step_1",
+   "anchor": "#s22",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "한없이 가까워질 때 다가가는 끝값."
+   }
+  },
+  {
+   "id": "lab:concept/marginal",
+   "type": "Concept",
+   "label": {
+    "ko": "한계(marginal)",
+    "en": "Marginal"
+   },
+   "page": "first_step_1",
+   "anchor": "#s12",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "하나 더 했을 때 늘어나는 양. 경제학에서 미분의 다른 이름."
+   }
+  },
+  {
+   "id": "lab:concept/marginal-cost",
+   "type": "Concept",
+   "label": {
+    "ko": "한계비용(MC)",
+    "en": "Marginal cost"
+   },
+   "page": "first_step_1",
+   "anchor": "#s12",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "한 단위 더 만들 때 늘어나는 비용 = 총비용의 미분."
+   }
+  },
+  {
+   "id": "lab:concept/marginal-revenue",
+   "type": "Concept",
+   "label": {
+    "ko": "한계수입(MR)",
+    "en": "Marginal revenue"
+   },
+   "page": "first_step_1",
+   "anchor": "#s32",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "한 단위 더 팔 때 늘어나는 수입. 완전경쟁이면 가격."
+   }
+  },
+  {
+   "id": "lab:concept/stationary-point",
+   "type": "Concept",
+   "label": {
+    "ko": "기울기 0인 점",
+    "en": "Stationary point"
+   },
+   "page": "first_step_1",
+   "anchor": "#s13",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "꼭대기·바닥(·안장)의 후보."
+   }
+  },
+  {
+   "id": "lab:concept/partial-derivative",
+   "type": "Concept",
+   "label": {
+    "ko": "편미분",
+    "en": "Partial derivative"
+   },
+   "page": "first_step_1",
+   "anchor": "#s14",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "나머지는 고정하고 하나만 움직였을 때의 기울기."
+   }
+  },
+  {
+   "id": "lab:concept/total-differential",
+   "type": "Concept",
+   "label": {
+    "ko": "전미분",
+    "en": "Total differential"
+   },
+   "page": "first_step_1",
+   "anchor": "#s14",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "모두 조금씩 움직였을 때의 변화 = 편미분 × 움직인 양의 합."
+   }
+  },
+  {
+   "id": "lab:concept/marginal-utility",
+   "type": "Concept",
+   "label": {
+    "ko": "한계효용",
+    "en": "Marginal utility"
+   },
+   "page": "first_step_1",
+   "anchor": "#s23",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "하나 더 쓸 때 늘어나는 만족."
+   }
+  },
+  {
+   "id": "lab:concept/marginal-revolution",
+   "type": "Concept",
+   "label": {
+    "ko": "한계혁명",
+    "en": "Marginal revolution"
+   },
+   "page": "first_step_1",
+   "anchor": "#s23",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "1871–74년 제번스·멩거·왈라스가 한계효용으로 값어치를 설명한 일."
+   }
+  },
+  {
+   "id": "lab:concept/fixed-variable-cost",
+   "type": "Concept",
+   "label": {
+    "ko": "고정비·가변비",
+    "en": "Fixed and variable cost"
+   },
+   "page": "first_step_1",
+   "anchor": "#s31",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "생산량과 무관한 비용과 생산량 따라 느는 비용."
+   }
+  },
+  {
+   "id": "lab:concept/mr-equals-mc",
+   "type": "Concept",
+   "label": {
+    "ko": "MR = MC",
+    "en": "MR equals MC"
+   },
+   "page": "first_step_1",
+   "anchor": "#s32",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "이윤 최대의 1계 조건. MC가 MR을 아래에서 뚫고 올라가는 교점."
+   }
+  },
+  {
+   "id": "lab:concept/shutdown-point",
+   "type": "Concept",
+   "label": {
+    "ko": "조업중단점",
+    "en": "Shutdown point"
+   },
+   "page": "first_step_1",
+   "anchor": "#s33",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "평균가변비용의 최저점. 가격이 이 밑이면 단기에도 문을 닫는다."
+   }
+  },
+  {
+   "id": "lab:concept/break-even-point",
+   "type": "Concept",
+   "label": {
+    "ko": "손익분기점",
+    "en": "Break-even point"
+   },
+   "page": "first_step_1",
+   "anchor": "#s33",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "평균총비용의 최저점. 이윤 0."
+   }
+  },
+  {
+   "id": "lab:concept/perfect-competition",
+   "type": "Concept",
+   "label": {
+    "ko": "완전경쟁",
+    "en": "Perfect competition"
+   },
+   "page": "first_step_1",
+   "anchor": "#c3",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "누구도 가격을 정하지 못하는 시장. MR = P."
+   }
+  },
+  {
+   "id": "lab:method/max-capacity",
+   "type": "Method",
+   "label": {
+    "ko": "능력 한도까지 생산",
+    "en": "Produce at capacity"
+   },
+   "page": "first_step_1",
+   "anchor": "#duel",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "많이 팔수록 남는다고 보고 최대치로 생산."
+   }
+  },
+  {
+   "id": "lab:method/mr-mc-rule",
+   "type": "Method",
+   "label": {
+    "ko": "MR = MC에서 멈추기 + 조업중단",
+    "en": "MR = MC rule with shutdown"
+   },
+   "page": "first_step_1",
+   "anchor": "#duel",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:metric/profit-sum",
+   "type": "Metric",
+   "label": {
+    "ko": "세 날 이윤 합",
+    "en": "Sum of profits over three days"
+   },
+   "page": "first_step_1",
+   "anchor": "#duel",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:analogy/speedometer",
+   "type": "Analogy",
+   "label": {
+    "ko": "속도계",
+    "en": "Speedometer"
+   },
+   "page": "first_step_1",
+   "anchor": "#s11",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:analogy/one-more-batch",
+   "type": "Analogy",
+   "label": {
+    "ko": "한 판 더",
+    "en": "One more batch"
+   },
+   "page": "first_step_1",
+   "anchor": "#s12",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:analogy/hilltop",
+   "type": "Analogy",
+   "label": {
+    "ko": "산꼭대기의 평평한 발밑",
+    "en": "Flat ground at the hilltop"
+   },
+   "page": "first_step_1",
+   "anchor": "#s13",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:analogy/field-area",
+   "type": "Analogy",
+   "label": {
+    "ko": "밭 넓이의 띠와 귀퉁이",
+    "en": "Strips and corner of a field"
+   },
+   "page": "first_step_1",
+   "anchor": "#s14",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:analogy/glass-of-water",
+   "type": "Analogy",
+   "label": {
+    "ko": "물 한 잔 더",
+    "en": "One more glass of water"
+   },
+   "page": "first_step_1",
+   "anchor": "#s23",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:analogy/rent-anyway",
+   "type": "Analogy",
+   "label": {
+    "ko": "닫아도 나가는 임대료",
+    "en": "Rent paid even when closed"
+   },
+   "page": "first_step_1",
+   "anchor": "#s33",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:limitation/smooth-only",
+   "type": "Limitation",
+   "label": {
+    "ko": "매끄러운 곡선에서만 미분",
+    "en": "Differentiable only where smooth"
+   },
+   "page": "first_step_1",
+   "anchor": "#s11",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:limitation/discrete-vs-marginal",
+   "type": "Limitation",
+   "label": {
+    "ko": "한 판 더 ≠ 미분",
+    "en": "One more unit is not exactly the derivative"
+   },
+   "page": "first_step_1",
+   "anchor": "#s12",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:limitation/stationary-not-optimum",
+   "type": "Limitation",
+   "label": {
+    "ko": "기울기 0은 후보일 뿐",
+    "en": "Zero slope is only a candidate"
+   },
+   "page": "first_step_1",
+   "anchor": "#s13",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:limitation/short-run-only",
+   "type": "Limitation",
+   "label": {
+    "ko": "조업중단점은 단기 개념",
+    "en": "Shutdown is a short-run idea"
+   },
+   "page": "first_step_1",
+   "anchor": "#s33",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:limitation/price-taker",
+   "type": "Limitation",
+   "label": {
+    "ko": "완전경쟁 가정 (MR = P)",
+    "en": "Assumes price-taking (MR = P)"
+   },
+   "page": "first_step_1",
+   "anchor": "#c3",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:sim/fs1-slope",
+   "type": "Simulation",
+   "label": {
+    "ko": "기울기 삼각형",
+    "en": "Slope triangle"
+   },
+   "page": "first_step_1",
+   "anchor": "#s0",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:sim/fs1-secant",
+   "type": "Simulation",
+   "label": {
+    "ko": "할선을 접선으로",
+    "en": "Secant to tangent"
+   },
+   "page": "first_step_1",
+   "anchor": "#s11",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:sim/fs1-onemore",
+   "type": "Simulation",
+   "label": {
+    "ko": "한 판 더의 비용",
+    "en": "Cost of one more batch"
+   },
+   "page": "first_step_1",
+   "anchor": "#s12",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:sim/fs1-hill",
+   "type": "Simulation",
+   "label": {
+    "ko": "이윤 곡선의 기울기 0",
+    "en": "Zero slope on the profit curve"
+   },
+   "page": "first_step_1",
+   "anchor": "#s13",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:sim/fs1-area",
+   "type": "Simulation",
+   "label": {
+    "ko": "밭 넓이의 전미분",
+    "en": "Total differential of area"
+   },
+   "page": "first_step_1",
+   "anchor": "#s14",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:sim/fs1-limit",
+   "type": "Simulation",
+   "label": {
+    "ko": "h를 줄이는 표",
+    "en": "Shrinking h table"
+   },
+   "page": "first_step_1",
+   "anchor": "#s22",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:sim/fs1-mrmc",
+   "type": "Simulation",
+   "label": {
+    "ko": "MC와 가격의 교점",
+    "en": "MC meets price"
+   },
+   "page": "first_step_1",
+   "anchor": "#s32",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:sim/fs1-shutdown",
+   "type": "Simulation",
+   "label": {
+    "ko": "문을 열까 닫을까",
+    "en": "Open or shut"
+   },
+   "page": "first_step_1",
+   "anchor": "#s33",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:sim/fs1-duel",
+   "type": "Simulation",
+   "label": {
+    "ko": "빵 공장 대결",
+    "en": "Bakery duel"
+   },
+   "page": "first_step_1",
+   "anchor": "#duel",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:question/fs-why",
+   "type": "Question",
+   "label": {
+    "ko": "미분은 왜 쓰나요?",
+    "en": "Why do we use derivatives?"
+   },
+   "page": "first_step_1",
+   "anchor": "#prologue",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:question/fs-when",
+   "type": "Question",
+   "label": {
+    "ko": "미분은 언제부터 있었어요?",
+    "en": "Since when has the derivative existed?"
+   },
+   "page": "first_step_1",
+   "anchor": "#prologue",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:question/fs-what",
+   "type": "Question",
+   "label": {
+    "ko": "미분으로 뭘 할 수 있어요?",
+    "en": "What can we do with derivatives?"
+   },
+   "page": "first_step_1",
+   "anchor": "#prologue",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:work/leibniz1684nova",
+   "type": "Work",
+   "label": {
+    "ko": "라이프니츠 1684",
+    "en": "Leibniz 1684"
+   },
+   "page": "first_step_1",
+   "anchor": "#top",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:work/archimede_newton_leibniz",
+   "type": "Work",
+   "label": {
+    "ko": "아르키메데스 정원: 뉴턴과 라이프니츠",
+    "en": "Garden of Archimedes: Newton and Leibniz"
+   },
+   "page": "first_step_1",
+   "anchor": "#top",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:work/wiki_calculus_controversy",
+   "type": "Work",
+   "label": {
+    "ko": "미적분 우선권 논쟁",
+    "en": "Leibniz–Newton calculus controversy"
+   },
+   "page": "first_step_1",
+   "anchor": "#top",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:work/het_neoclassicals",
+   "type": "Work",
+   "label": {
+    "ko": "HET: 신고전학파 소개",
+    "en": "HET: The Neoclassicals"
+   },
+   "page": "first_step_1",
+   "anchor": "#top",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:work/bussotti2003genesis",
+   "type": "Work",
+   "label": {
+    "ko": "Bussotti 2003",
+    "en": "Bussotti 2003"
+   },
+   "page": "first_step_1",
+   "anchor": "#top",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:work/lemarechal2012cauchy",
+   "type": "Work",
+   "label": {
+    "ko": "Lemaréchal 2012",
+    "en": "Lemaréchal 2012"
+   },
+   "page": "first_step_1",
+   "anchor": "#top",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:work/het_euler",
+   "type": "Work",
+   "label": {
+    "ko": "HET: 오일러 정리",
+    "en": "HET: Euler's Theorem"
+   },
+   "page": "first_step_1",
+   "anchor": "#top",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:work/hoerl1970ridge",
+   "type": "Work",
+   "label": {
+    "ko": "Hoerl·Kennard 1970",
+    "en": "Hoerl & Kennard 1970"
+   },
+   "page": "first_step_1",
+   "anchor": "#top",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:work/rumelhart1986learning",
+   "type": "Work",
+   "label": {
+    "ko": "Rumelhart·Hinton·Williams 1986",
+    "en": "Rumelhart, Hinton & Williams 1986"
+   },
+   "page": "first_step_1",
+   "anchor": "#top",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:claim/leibniz-first-publication",
+   "type": "Claim",
+   "label": {
+    "ko": "1684년 라이프니츠의 논문이 미분을 다룬 첫 출판물이다",
+    "en": "Leibniz 1684 is the first publication on calculus"
+   },
+   "page": "first_step_1",
+   "anchor": "#s21",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "source": [
+    {
+     "ref": "leibniz1684nova",
+     "loc": "Acta Eruditorum 3"
+    }
+   ]
+  },
+  {
+   "id": "lab:claim/newton-fluxions-1665",
+   "type": "Claim",
+   "label": {
+    "ko": "뉴턴은 1665–66년에 유율법을 세웠고 1687년에 처음 출판했다",
+    "en": "Newton developed fluxions in 1665–66, first published 1687"
+   },
+   "page": "first_step_1",
+   "anchor": "#s21",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "source": [
+    {
+     "ref": "archimede_newton_leibniz",
+     "loc": "패널 3"
+    }
+   ]
+  },
+  {
+   "id": "lab:claim/independent-invention",
+   "type": "Claim",
+   "label": {
+    "ko": "두 사람이 따로 만들었다는 견해가 널리 받아들여진다",
+    "en": "Independent invention is widely accepted"
+   },
+   "page": "first_step_1",
+   "anchor": "#s21",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "source": [
+    {
+     "ref": "wiki_calculus_controversy",
+     "loc": "Hall 1980 인용"
+    }
+   ]
+  },
+  {
+   "id": "lab:claim/marginal-revolution-1871",
+   "type": "Claim",
+   "label": {
+    "ko": "제번스·멩거(1871)와 왈라스(1874)가 한계효용으로 값어치를 설명했다",
+    "en": "Jevons, Menger (1871) and Walras (1874) founded marginal utility theory"
+   },
+   "page": "first_step_1",
+   "anchor": "#s23",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "source": [
+    {
+     "ref": "het_neoclassicals",
+     "loc": "Introduction"
+    }
+   ]
+  },
+  {
+   "id": "lab:quiz/fs1-s0-1",
+   "type": "QuizItem",
+   "label": {
+    "ko": "s0 문제 1",
+    "en": "Quiz s0-1"
+   },
+   "page": "first_step_1",
+   "anchor": "#s0",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:quiz/fs1-c1-1",
+   "type": "QuizItem",
+   "label": {
+    "ko": "c1 문제 1",
+    "en": "Quiz c1-1"
+   },
+   "page": "first_step_1",
+   "anchor": "#c1",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:quiz/fs1-c1-2",
+   "type": "QuizItem",
+   "label": {
+    "ko": "c1 문제 2",
+    "en": "Quiz c1-2"
+   },
+   "page": "first_step_1",
+   "anchor": "#c1",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:quiz/fs1-c1-3",
+   "type": "QuizItem",
+   "label": {
+    "ko": "c1 문제 3",
+    "en": "Quiz c1-3"
+   },
+   "page": "first_step_1",
+   "anchor": "#c1",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:quiz/fs1-c2-1",
+   "type": "QuizItem",
+   "label": {
+    "ko": "c2 문제 1",
+    "en": "Quiz c2-1"
+   },
+   "page": "first_step_1",
+   "anchor": "#c2",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:quiz/fs1-c2-2",
+   "type": "QuizItem",
+   "label": {
+    "ko": "c2 문제 2",
+    "en": "Quiz c2-2"
+   },
+   "page": "first_step_1",
+   "anchor": "#c2",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:quiz/fs1-c3-1",
+   "type": "QuizItem",
+   "label": {
+    "ko": "c3 문제 1",
+    "en": "Quiz c3-1"
+   },
+   "page": "first_step_1",
+   "anchor": "#c3",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:quiz/fs1-c3-2",
+   "type": "QuizItem",
+   "label": {
+    "ko": "c3 문제 2",
+    "en": "Quiz c3-2"
+   },
+   "page": "first_step_1",
+   "anchor": "#c3",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:quiz/fs1-duel-1",
+   "type": "QuizItem",
+   "label": {
+    "ko": "duel 문제 1",
+    "en": "Quiz duel-1"
+   },
+   "page": "first_step_1",
+   "anchor": "#duel",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  }
+ ],
+ "edges": [
+  {
+   "s": "lab:analogy/speedometer",
+   "p": "lab:analogyOf",
+   "o": "lab:concept/derivative",
+   "anchor": "#s11",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:analogy/one-more-batch",
+   "p": "lab:analogyOf",
+   "o": "lab:concept/marginal-cost",
+   "anchor": "#s12",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:analogy/hilltop",
+   "p": "lab:analogyOf",
+   "o": "lab:concept/stationary-point",
+   "anchor": "#s13",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:analogy/field-area",
+   "p": "lab:analogyOf",
+   "o": "lab:concept/total-differential",
+   "anchor": "#s14",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:analogy/glass-of-water",
+   "p": "lab:analogyOf",
+   "o": "lab:concept/marginal-utility",
+   "anchor": "#s23",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:analogy/rent-anyway",
+   "p": "lab:analogyOf",
+   "o": "lab:concept/shutdown-point",
+   "anchor": "#s33",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/derivative",
+   "p": "lab:hasLimitation",
+   "o": "lab:limitation/smooth-only",
+   "anchor": "#s11",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/marginal-cost",
+   "p": "lab:hasLimitation",
+   "o": "lab:limitation/discrete-vs-marginal",
+   "anchor": "#s12",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/stationary-point",
+   "p": "lab:hasLimitation",
+   "o": "lab:limitation/stationary-not-optimum",
+   "anchor": "#s13",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:limitation/stationary-not-optimum",
+   "p": "lab:addressedBy",
+   "o": "lab:concept/mr-equals-mc",
+   "anchor": "#s32",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/shutdown-point",
+   "p": "lab:hasLimitation",
+   "o": "lab:limitation/short-run-only",
+   "anchor": "#s33",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/mr-equals-mc",
+   "p": "lab:hasLimitation",
+   "o": "lab:limitation/price-taker",
+   "anchor": "#c3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/slope",
+   "p": "lab:prerequisiteOf",
+   "o": "lab:concept/derivative",
+   "anchor": "#sum",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/derivative",
+   "p": "lab:prerequisiteOf",
+   "o": "lab:concept/marginal",
+   "anchor": "#sum",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/derivative",
+   "p": "lab:prerequisiteOf",
+   "o": "lab:concept/stationary-point",
+   "anchor": "#sum",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/derivative",
+   "p": "lab:prerequisiteOf",
+   "o": "lab:concept/partial-derivative",
+   "anchor": "#sum",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/partial-derivative",
+   "p": "lab:prerequisiteOf",
+   "o": "lab:concept/total-differential",
+   "anchor": "#sum",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/marginal",
+   "p": "lab:prerequisiteOf",
+   "o": "lab:concept/mr-equals-mc",
+   "anchor": "#sum",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/stationary-point",
+   "p": "lab:prerequisiteOf",
+   "o": "lab:concept/mr-equals-mc",
+   "anchor": "#sum",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/fixed-variable-cost",
+   "p": "lab:prerequisiteOf",
+   "o": "lab:concept/shutdown-point",
+   "anchor": "#sum",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/mr-equals-mc",
+   "p": "lab:prerequisiteOf",
+   "o": "lab:concept/shutdown-point",
+   "anchor": "#sum",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/limit",
+   "p": "lab:prerequisiteOf",
+   "o": "lab:concept/derivative",
+   "anchor": "#sum",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/secant-line",
+   "p": "lab:partOf",
+   "o": "lab:concept/derivative",
+   "anchor": "#s11",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/tangent-line",
+   "p": "lab:partOf",
+   "o": "lab:concept/derivative",
+   "anchor": "#s11",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/marginal-cost",
+   "p": "lab:derivedFrom",
+   "o": "lab:concept/marginal",
+   "anchor": "#s12",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/marginal-revenue",
+   "p": "lab:derivedFrom",
+   "o": "lab:concept/marginal",
+   "anchor": "#s32",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/marginal-utility",
+   "p": "lab:derivedFrom",
+   "o": "lab:concept/marginal",
+   "anchor": "#s23",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/marginal-revolution",
+   "p": "lab:relatedTo",
+   "o": "lab:concept/marginal-utility",
+   "anchor": "#s23",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/break-even-point",
+   "p": "lab:contrastsWith",
+   "o": "lab:concept/shutdown-point",
+   "anchor": "#s33",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/perfect-competition",
+   "p": "lab:relatedTo",
+   "o": "lab:concept/marginal-revenue",
+   "anchor": "#c3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/mr-equals-mc",
+   "p": "lab:relatedTo",
+   "o": "lab:concept/marginal-cost",
+   "anchor": "#s32",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/slope",
+   "p": "lab:demonstratedBy",
+   "o": "lab:sim/fs1-slope",
+   "anchor": "#s0",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/derivative",
+   "p": "lab:demonstratedBy",
+   "o": "lab:sim/fs1-secant",
+   "anchor": "#s11",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/marginal-cost",
+   "p": "lab:demonstratedBy",
+   "o": "lab:sim/fs1-onemore",
+   "anchor": "#s12",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/stationary-point",
+   "p": "lab:demonstratedBy",
+   "o": "lab:sim/fs1-hill",
+   "anchor": "#s13",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/total-differential",
+   "p": "lab:demonstratedBy",
+   "o": "lab:sim/fs1-area",
+   "anchor": "#s14",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/limit",
+   "p": "lab:demonstratedBy",
+   "o": "lab:sim/fs1-limit",
+   "anchor": "#s22",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/mr-equals-mc",
+   "p": "lab:demonstratedBy",
+   "o": "lab:sim/fs1-mrmc",
+   "anchor": "#s32",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/shutdown-point",
+   "p": "lab:demonstratedBy",
+   "o": "lab:sim/fs1-shutdown",
+   "anchor": "#s33",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/mr-equals-mc",
+   "p": "lab:demonstratedBy",
+   "o": "lab:sim/fs1-duel",
+   "anchor": "#duel",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/mr-mc-rule",
+   "p": "lab:contrastsWith",
+   "o": "lab:method/max-capacity",
+   "anchor": "#duel",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/mr-mc-rule",
+   "p": "lab:evaluatedBy",
+   "o": "lab:metric/profit-sum",
+   "anchor": "#duel",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/max-capacity",
+   "p": "lab:evaluatedBy",
+   "o": "lab:metric/profit-sum",
+   "anchor": "#duel",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:method/mr-mc-rule",
+   "p": "lab:relatedTo",
+   "o": "lab:concept/mr-equals-mc",
+   "anchor": "#duel",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/derivative",
+   "p": "lab:raises",
+   "o": "lab:question/fs-why",
+   "anchor": "#prologue",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/limit",
+   "p": "lab:raises",
+   "o": "lab:question/fs-when",
+   "anchor": "#prologue",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/mr-equals-mc",
+   "p": "lab:raises",
+   "o": "lab:question/fs-what",
+   "anchor": "#prologue",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/leibniz-first-publication",
+   "p": "lab:supports",
+   "o": "lab:concept/derivative",
+   "anchor": "#s21",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/leibniz-first-publication",
+   "p": "lab:assertedIn",
+   "o": "lab:work/leibniz1684nova",
+   "anchor": "#s21",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/newton-fluxions-1665",
+   "p": "lab:supports",
+   "o": "lab:concept/derivative",
+   "anchor": "#s21",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/newton-fluxions-1665",
+   "p": "lab:assertedIn",
+   "o": "lab:work/archimede_newton_leibniz",
+   "anchor": "#s21",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/independent-invention",
+   "p": "lab:supports",
+   "o": "lab:concept/derivative",
+   "anchor": "#s21",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/independent-invention",
+   "p": "lab:assertedIn",
+   "o": "lab:work/wiki_calculus_controversy",
+   "anchor": "#s21",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/marginal-revolution-1871",
+   "p": "lab:supports",
+   "o": "lab:concept/marginal-revolution",
+   "anchor": "#s23",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/marginal-revolution-1871",
+   "p": "lab:assertedIn",
+   "o": "lab:work/het_neoclassicals",
+   "anchor": "#s23",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:work/bussotti2003genesis",
+   "p": "lab:relatedTo",
+   "o": "lab:concept/limit",
+   "anchor": "#s21",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:work/lemarechal2012cauchy",
+   "p": "lab:relatedTo",
+   "o": "lab:concept/limit",
+   "anchor": "#s21",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:work/het_euler",
+   "p": "lab:relatedTo",
+   "o": "lab:concept/limit",
+   "anchor": "#s21",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:work/hoerl1970ridge",
+   "p": "lab:relatedTo",
+   "o": "lab:concept/limit",
+   "anchor": "#s21",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:work/rumelhart1986learning",
+   "p": "lab:relatedTo",
+   "o": "lab:concept/limit",
+   "anchor": "#s21",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/derivative",
+   "p": "lab:broader",
+   "o": "lab:topic/calculus-optimization-math",
+   "anchor": "#sum",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/partial-derivative",
+   "p": "lab:broader",
+   "o": "lab:topic/calculus-optimization-math",
+   "anchor": "#sum",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/total-differential",
+   "p": "lab:broader",
+   "o": "lab:topic/calculus-optimization-math",
+   "anchor": "#sum",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/stationary-point",
+   "p": "lab:broader",
+   "o": "lab:topic/calculus-optimization-math",
+   "anchor": "#sum",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/limit",
+   "p": "lab:broader",
+   "o": "lab:topic/calculus-optimization-math",
+   "anchor": "#sum",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:quiz/fs1-s0-1",
+   "p": "lab:assesses",
+   "o": "lab:concept/slope",
+   "anchor": "#s0",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:quiz/fs1-c1-1",
+   "p": "lab:assesses",
+   "o": "lab:concept/derivative",
+   "anchor": "#c1",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:quiz/fs1-c1-2",
+   "p": "lab:assesses",
+   "o": "lab:concept/stationary-point",
+   "anchor": "#c1",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:quiz/fs1-c1-3",
+   "p": "lab:assesses",
+   "o": "lab:concept/partial-derivative",
+   "anchor": "#c1",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:quiz/fs1-c2-1",
+   "p": "lab:assesses",
+   "o": "lab:concept/derivative",
+   "anchor": "#c2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:quiz/fs1-c2-2",
+   "p": "lab:assesses",
+   "o": "lab:concept/marginal-revolution",
+   "anchor": "#c2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:quiz/fs1-c3-1",
+   "p": "lab:assesses",
+   "o": "lab:concept/mr-equals-mc",
+   "anchor": "#c3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:quiz/fs1-c3-2",
+   "p": "lab:assesses",
+   "o": "lab:concept/shutdown-point",
+   "anchor": "#c3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:quiz/fs1-duel-1",
+   "p": "lab:assesses",
+   "o": "lab:concept/mr-equals-mc",
+   "anchor": "#duel",
+   "confidence": "high"
+  }
+ ]
+}

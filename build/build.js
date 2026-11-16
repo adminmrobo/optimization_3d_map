@@ -5,7 +5,7 @@
 const fs=require('fs'),path=require('path'),vm=require('vm');
 const B=__dirname,R=path.join(B,'..');
 const rd=f=>fs.readFileSync(path.join(B,f),'utf8');
-const css=rd('common.css'),vecmath=rd('vecmath.js'),sprites=rd('sprites96.js'),labmath=rd('labmath.js'),common=rd('common.js');
+const css=rd('common.css'),vecmath=rd('vecmath.js'),diffmath=rd('diffmath.js'),sprites=rd('sprites96.js'),labmath=rd('labmath.js'),common=rd('common.js');
 const kgx=rd('kgx.js');  // ai-lab-explainer v1.14 판 (흰 배경 기본색)
 const BB=JSON.parse(rd('backbone.json'));
 // KGX.toJsonLd를 쓰려고 브라우저 없이 모듈을 띄운다
@@ -31,11 +31,11 @@ function attach(H,kg,refs,meta){
   H=H.replace('</head>',bh+'</head>');
   let i=H.lastIndexOf('<footer'),j=H.lastIndexOf('</body>'),p=(i>=0&&i<j)?i:j;H=H.slice(0,p)+body+H.slice(p);
   j=H.lastIndexOf('</body>');H=H.slice(0,j)+sc+H.slice(j);return H;}
-const pages=[['p0.src.html','index.html','0'],['p1.src.html','1_math_map.html','1'],['p2.src.html','2_experiment_lab.html','2'],['p3.src.html','3_arrow_field.html','3']];
+const pages=[['p0.src.html','index.html','0'],['p1.src.html','1_math_map.html','1'],['p2.src.html','2_experiment_lab.html','2'],['p3.src.html','3_arrow_field.html','3'],['p4.src.html','first_step_1.html','4'],['p5.src.html','first_step_2.html','5']];
 for(const [src,out,n] of pages){
   if(!fs.existsSync(path.join(B,src)))continue;
   let H=rd(src).replace('<!--@@CSS@@-->','<style>\n'+css+'\n</style>')
-    .replace('/*@@SPRITES@@*/',()=>n==='0'?rd('sprites_index.js'):sprites).replace('/*@@LABMATH@@*/',()=>labmath).replace('/*@@VECMATH@@*/',()=>vecmath).replace('/*@@COMMON@@*/',()=>common)
+    .replace('/*@@SPRITES@@*/',()=>n==='0'?rd('sprites_index.js'):sprites).replace('/*@@LABMATH@@*/',()=>labmath).replace('/*@@VECMATH@@*/',()=>vecmath).replace('/*@@DIFFMATH@@*/',()=>diffmath).replace('/*@@COMMON@@*/',()=>common)
     .replace('/*@@DEEP@@*/',()=>fs.existsSync(path.join(B,'deep.json'))?rd('deep.json'):'null');
   const kf=path.join(B,'kg_'+n+'.json');
   if(fs.existsSync(kf))H=attach(H,JSON.parse(fs.readFileSync(kf,'utf8')),JSON.parse(rd('refs_'+n+'.json')),JSON.parse(rd('meta_'+n+'.json')));

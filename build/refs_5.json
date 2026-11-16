@@ -1,0 +1,279 @@
+[
+ {
+  "id": "bussotti2003genesis",
+  "type": "article-journal",
+  "title": "On the Genesis of the Lagrange Multipliers",
+  "author": [
+   {
+    "family": "Bussotti",
+    "given": "P."
+   }
+  ],
+  "issued": {
+   "date-parts": [
+    [
+     2003
+    ]
+   ]
+  },
+  "container-title": "Journal of Optimization Theory and Applications",
+  "volume": "117",
+  "issue": "3",
+  "page": "453-459",
+  "accessed": {
+   "date-parts": [
+    [
+     2026,
+     11,
+     14
+    ]
+   ]
+  },
+  "lab": {
+   "work": "lab:work/bussotti2003genesis",
+   "role": "background",
+   "supports": [
+    "lab:concept/lagrangian"
+   ],
+   "locs": [],
+   "verified": {
+    "title": true,
+    "author": true,
+    "year": true,
+    "pages": true
+   },
+   "checkedBy": "웹 검색 2026-11-16 (Harvard Knill 게시 PDF 첫 쪽)"
+  }
+ },
+ {
+  "id": "het_euler",
+  "type": "webpage",
+  "title": "Euler's Theorem",
+  "author": [
+   {
+    "family": "Fonseca",
+    "given": "Gonçalo L."
+   }
+  ],
+  "container-title": "History of Economic Thought website",
+  "URL": "https://www.hetwebsite.net/het/essays/math/euler.htm",
+  "accessed": {
+   "date-parts": [
+    [
+     2026,
+     11,
+     14
+    ]
+   ]
+  },
+  "lab": {
+   "work": "lab:work/het_euler",
+   "role": "background",
+   "supports": [
+    "lab:concept/euler-theorem"
+   ],
+   "locs": [],
+   "verified": {
+    "title": true,
+    "author": true,
+    "year": false,
+    "url": true
+   },
+   "checkedBy": "웹 검색 2026-11-16 (+ Britannica 'Philip Henry Wicksteed', Flux 1894 서평)"
+  }
+ },
+ {
+  "id": "lemarechal2012cauchy",
+  "type": "article-journal",
+  "title": "Cauchy and the Gradient Method",
+  "author": [
+   {
+    "family": "Lemaréchal",
+    "given": "Claude"
+   }
+  ],
+  "issued": {
+   "date-parts": [
+    [
+     2012
+    ]
+   ]
+  },
+  "container-title": "Documenta Mathematica, Extra Volume ISMP",
+  "page": "251-254",
+  "accessed": {
+   "date-parts": [
+    [
+     2026,
+     11,
+     14
+    ]
+   ]
+  },
+  "lab": {
+   "work": "lab:work/lemarechal2012cauchy",
+   "role": "background",
+   "supports": [
+    "lab:method/gradient-descent"
+   ],
+   "locs": [],
+   "verified": {
+    "title": true,
+    "author": true,
+    "year": true,
+    "pages": true
+   },
+   "checkedBy": "웹 검색 2026-11-16 (EMS Press 장 파일)"
+  }
+ },
+ {
+  "id": "rumelhart1986learning",
+  "type": "article-journal",
+  "title": "Learning representations by back-propagating errors",
+  "author": [
+   {
+    "family": "Rumelhart",
+    "given": "David E."
+   },
+   {
+    "family": "Hinton",
+    "given": "Geoffrey E."
+   },
+   {
+    "family": "Williams",
+    "given": "Ronald J."
+   }
+  ],
+  "issued": {
+   "date-parts": [
+    [
+     1986
+    ]
+   ]
+  },
+  "container-title": "Nature",
+  "volume": "323",
+  "page": "533-536",
+  "DOI": "10.1038/323533a0",
+  "accessed": {
+   "date-parts": [
+    [
+     2026,
+     11,
+     14
+    ]
+   ]
+  },
+  "lab": {
+   "work": "lab:work/rumelhart1986learning",
+   "role": "background",
+   "supports": [
+    "lab:method/backpropagation"
+   ],
+   "locs": [],
+   "verified": {
+    "title": true,
+    "author": true,
+    "year": true,
+    "container": true,
+    "pages": true,
+    "doi": true
+   },
+   "checkedBy": "웹 검색 2026-11-14 (nature.com 인용 정보, ADS)"
+  }
+ },
+ {
+  "id": "hoerl1970ridge",
+  "type": "article-journal",
+  "title": "Ridge Regression: Biased Estimation for Nonorthogonal Problems",
+  "author": [
+   {
+    "family": "Hoerl",
+    "given": "Arthur E."
+   },
+   {
+    "family": "Kennard",
+    "given": "Robert W."
+   }
+  ],
+  "issued": {
+   "date-parts": [
+    [
+     1970
+    ]
+   ]
+  },
+  "container-title": "Technometrics",
+  "volume": "12",
+  "issue": "1",
+  "page": "55-67",
+  "DOI": "10.1080/00401706.1970.10488634",
+  "accessed": {
+   "date-parts": [
+    [
+     2026,
+     11,
+     14
+    ]
+   ]
+  },
+  "lab": {
+   "work": "lab:work/hoerl1970ridge",
+   "role": "background",
+   "supports": [
+    "lab:concept/regularization"
+   ],
+   "locs": [],
+   "verified": {
+    "title": true,
+    "author": true,
+    "year": true,
+    "pages": true,
+    "doi": true
+   },
+   "checkedBy": "웹 검색 2026-11-16 (MaRDI, CMU 사본)"
+  }
+ },
+ {
+  "id": "cement_world",
+  "type": "webpage",
+  "title": "시멘트 제조업 World",
+  "author": [
+   {
+    "literal": "adminmrobo"
+   }
+  ],
+  "issued": {
+   "date-parts": [
+    [
+     2026
+    ]
+   ]
+  },
+  "URL": "https://adminmrobo.github.io/smart_factory_world/cement/",
+  "accessed": {
+   "date-parts": [
+    [
+     2026,
+     11,
+     14
+    ]
+   ]
+  },
+  "lab": {
+   "work": "lab:work/cement_world",
+   "role": "background",
+   "supports": [
+    "lab:concept/differential-equation"
+   ],
+   "locs": [],
+   "verified": {
+    "title": true,
+    "author": true,
+    "year": true,
+    "url": true
+   },
+   "checkedBy": "2026-11-16 페이지 확인"
+  }
+ }
+]

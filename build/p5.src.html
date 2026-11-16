@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>최적화 첫걸음 ② 공장에서 인공지능까지 — 얼마만큼 생산하면 될까요?</title>
+<meta name="description" content="미분을 처음 만나는 대학생을 위한 연구실 해설 2편. 공장의 고용, 라그랑지안과 λ = 한계비용, 오일러 정리, 미분방정식, 경사하강, 연쇄법칙과 역전파, 특성공학의 비선형성과 상호작용, 규제항까지.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<!--@@CSS@@-->
+<style>
+.assume{border:1px dashed var(--terrain);background:#f4fbfb;border-radius:8px;padding:8px 12px;margin:10px 0;font-size:14.5px}
+.assume b{color:var(--terrain)}
+.sub{font-size:13px;color:var(--muted);font-weight:500;margin-left:6px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:760px){.two{grid-template-columns:1fr}}
+.chainrow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:10px 0}
+.chainrow .bx{border:1px solid var(--rule);border-radius:10px;padding:8px 12px;background:#fff;text-align:center;min-width:92px}
+.chainrow .bx b{display:block;font-size:20px}
+.chainrow .bx span{font-size:12.5px;color:var(--muted)}
+.chainrow .ar{font-size:13px;color:var(--stain);text-align:center}
+.chainrow .ar b{display:block;font-size:15px}
+</style>
+</head>
+<body>
+<nav class="top" aria-label="섹션 바로가기"><div class="row">
+  <a class="logo" href="index.html">최적화 <i>첫걸음</i> ②</a>
+  <div class="links">
+    <a href="first_step_1.html">← ①</a><a href="#c4">4 공장</a><a href="#c5">5 인공지능</a><a href="#duel">대결</a><a href="#epi">에필로그</a><a href="#sum">정리</a><a href="#kg">색인</a><a href="#export">꾸러미</a>
+  </div>
+</div></nav>
+
+<!-- lab-cover : 표지 그림(fs_cover_02)을 받기 전까지 그림판 표지 -->
+<div class="cover" id="cover" data-img="fs_cover_02"><div class="frame">
+  <canvas id="coverCv" aria-hidden="true"></canvas>
+  <div class="cast4"><img class="s" data-mood="fly_point" alt="" aria-hidden="true"><img data-mood="doc_front" alt="" aria-hidden="true"><img data-mood="moa_sparkle" alt="" aria-hidden="true"><img class="s" data-mood="robo_coin" alt="" aria-hidden="true"></div>
+  <span class="cap">작은 공장, 그리고 두 곡선이 만나는 점</span>
+  <span class="badge">표지 그림 준비 중 · 설명용 그림</span>
+  <span class="cover-chip">최적화 첫걸음 · ② 공장에서 인공지능까지</span>
+</div></div>
+<!-- /lab-cover -->
+
+<header class="hero" id="top"><div class="wrap">
+  <div class="eyebrow">최적화 첫걸음 · 미분편 ② · 미분이 처음인 분께</div>
+  <h1>최적화 첫걸음 ② — 공장에서 인공지능까지</h1>
+  <p class="question">공장을 차렸습니다. 사람과 기계를 얼마나 쓰고, 얼마만큼 생산하면 될까요? 그리고 인공지능은 왜 같은 방법으로 배울까요?</p>
+  <p class="lead"><a href="first_step_1.html">① 편</a>의 빵 공장은 "몇 판 구울까" 하나만 정했습니다. 이번 공장은 <b>사람(노동)</b>과 <b>기계(자본)</b> 두 가지를 쓰고, 사람에게는 <b>임금</b>을, 기계에는 <b>이자(빌린 돈의 값, 사용료)</b>를 냅니다. 변수가 둘이 되면 ①의 편미분이 쓰이고, 목표가 정해지면 라그랑지안이, 시간이 흐르면 미분방정식이 등장합니다. 그리고 그 끝에서 인공지능의 학습이 똑같은 모양으로 나타납니다.</p>
+  <p class="byline">글 · 안상선 ((주)M-Robo 대표) · <a href="https://adminmrobo.github.io/who_am_i/who_am_i.html">저자 소개</a> · 2026-11-16 · v1.0</p>
+  <div class="three"><b>세 줄로 먼저</b><ol>
+    <li>사람은 "한 명 더 써서 늘어나는 매출 = 임금"이 될 때까지 쓴다. ①의 MR = MC와 같은 이야기다.</li>
+    <li>목표 생산량이 정해지면 라그랑지안으로 가장 싼 조합을 찾고, 그 승수 λ가 바로 한계비용이다.</li>
+    <li>인공지능은 기울기 0을 식으로 풀지 못하니 기울기를 따라 조금씩 걸어간다(경사하강). 그 기울기는 연쇄법칙(역전파)으로 잰다.</li></ol></div>
+  <div class="start"><b>처음이라면</b> 4.1 → 4.2 → 5.1 → 5.3 → 대결 순서로 보세요. 4.3·4.4·5.2·5.4는 두 번째 읽을 때 봐도 됩니다. 칸마다 "이 칸의 가정" 상자가 있습니다.</div>
+  <div class="kpis" aria-label="숫자 요약">
+    <div class="kpi g"><b id="k-l">—</b><span>기계 4대일 때 쓸 사람 수<sup>①</sup></span></div>
+    <div class="kpi m"><b id="k-lam">—</b><span>λ = 한계비용 (1톤 더 만드는 비용)<sup>①</sup></span></div>
+    <div class="kpi a"><b id="k-v">—</b><span>교차항을 넣은 모형의 검증 오차<sup>①</sup></span></div>
+    <div class="kpi r"><b>1847</b><span>경사하강이 처음 나온 해</span></div>
+  </div>
+  <p class="muted" style="font-size:13px">① 이 페이지가 직접 계산한 설명용 예시값입니다. 단위: 사람 수, 기계 대수, 하루 생산량(톤), 돈(만 원). 실제 공장 자료가 아닙니다.</p>
+</div></header>
+
+<main>
+<section class="sec" id="cast" aria-labelledby="h-cast"><div class="wrap">
+  <h2 id="h-cast">등장인물과 이어 보기</h2>
+  <div class="cast" id="castgrid"></div>
+  <div class="secret"><button class="bt" id="secretbtn" type="button" aria-expanded="false">방청석 보기 (미공개 식구)</button><div class="row" id="secretrow" hidden></div></div>
+  <div data-dlg="hero"></div>
+</div></section>
+
+<!-- 4장 -->
+<section class="sec" id="c4" aria-labelledby="h-c4"><div class="wrap">
+  <h2 id="h-c4"><span class="hex">4</span>일반화 — 공장 하나 차리기 <span class="sub">모아의 질문</span></h2>
+  <div class="assume"><b>4장 전체의 가정</b> ① 공장의 생산량 Q = 2√(L·K): 사람 L명과 기계 K대를 쓴다(설명용 식). 사람과 기계를 둘 다 두 배로 하면 생산도 정확히 두 배가 된다(규모에 대한 수익 불변). ② 제품 시장과 임금·사용료 시장 모두 완전경쟁: 제품은 톤당 P = 10만 원, 임금 w = 5만 원, 기계 사용료(이자) r = 10만 원으로 정해져 있다.</div>
+
+  <h3 id="s41">4.1 얼마만큼 생산하면 될까요? — 사람 한 명 더</h3>
+  <div data-dlg="s41"></div>
+  <div class="pair">
+    <div><div class="tl">일상으로 치면</div>기계는 이미 4대를 빌려 놓았습니다(당장은 바꿀 수 없음). 남은 결정은 사람을 몇 명 쓰느냐입니다. 한 명 더 쓰면 생산이 조금 늘고, 그만큼 매출이 늡니다. 늘어난 매출이 임금 5만 원보다 크면 쓰고, 작으면 그만 씁니다.</div>
+    <div><div class="tr">수학에서는</div>사람 한 명 더의 생산 증가가 <b>노동의 한계생산</b> MP<sub>L</sub> = ∂Q/∂L(기계 K는 고정한 편미분)입니다. 그 매출은 P × MP<sub>L</sub>. 이것이 임금과 같아지는 곳, <b>P × MP<sub>L</sub> = w</b>에서 이윤이 가장 큽니다. ①의 MR = MC를 사람 쪽에서 본 것입니다.</div>
+  </div>
+  <div class="panel">
+    <div class="ptitle">기계 4대 고정 — 사람 한 명 더의 매출과 임금, 그리고 이윤</div>
+    <div class="two"><div class="cwrap"><canvas id="cv41a" aria-label="사람 한 명 더의 매출 곡선과 임금 직선"></canvas></div><div class="cwrap"><canvas id="cv41b" aria-label="사람 수에 따른 이윤 곡선"></canvas></div></div>
+    <div class="ctrl"><div class="group"><label class="glabel" for="r41l">사람 수 L</label><input type="range" id="r41l" min="1" max="40" step="1" value="9"><span class="val" id="v41l">9명</span></div>
+      <div class="group"><label class="glabel" for="r41w">임금 w</label><input type="range" id="r41w" min="3" max="10" step="0.5" value="5"><span class="val" id="v41w">5.0</span>
+      <label class="glabel" for="r41p">제품 가격 P</label><input type="range" id="r41p" min="6" max="14" step="0.5" value="10"><span class="val" id="v41p">10.0</span></div></div>
+    <div class="eq" id="eq41"></div>
+    <div class="minis"><div class="mini a"><span>생산량 Q</span><b id="m41a">—</b></div><div class="mini g"><span>한 명 더의 매출 P·MP<sub>L</sub></span><b id="m41b">—</b></div><div class="mini m"><span>이윤</span><b id="m41c">—</b></div><div class="mini r"><span>가장 좋은 사람 수</span><b id="m41d">—</b></div></div>
+    <div class="insight" id="i41" aria-live="polite"></div>
+  </div>
+  <div class="assume"><b>이 칸의 가정</b> 단기: 기계 수는 고정. 사람과 기계를 둘 다 마음대로 고르게 하면, 규모수익불변인 이 공장에서는 "가장 좋은 생산량"이 하나로 정해지지 않는다(가격이 한계비용보다 높으면 한없이 키우고 싶어진다 → 4.3).</div>
+
+  <h3 id="s42">4.2 목표가 정해졌을 때 — 라그랑지안과 λ = 한계비용</h3>
+  <div class="pair">
+    <div><div class="tl">일상으로 치면</div>거래처가 "하루 16톤만 납품해 주세요"라고 합니다. 이제 질문이 바뀝니다. 16톤을 만들 수 있는 사람·기계 조합은 많습니다. 그중 <b>가장 싼 조합</b>은?</div>
+    <div><div class="tr">수학에서는</div>"비용 wL + rK를 가장 작게, 단 2√(LK) = 16"처럼 제약이 붙은 최적화입니다. 라그랑주의 방법은 제약에 값 λ를 매겨 목표에 더한 식 ℒ = wL + rK − λ(2√(LK) − 16)의 편미분을 모두 0으로 놓습니다. 답은 <b>MP<sub>L</sub> ÷ w = MP<sub>K</sub> ÷ r</b> — 만 원당 생산이 같아질 때입니다.</div>
+  </div>
+  <div class="panel">
+    <div class="ptitle">같은 생산량 곡선(등량선)과 같은 비용 직선(등비용선)</div>
+    <div class="cwrap tall"><canvas id="cv42" aria-label="16톤 등량선, 비용 직선, 가장 싼 점"></canvas></div>
+    <div class="ctrl"><div class="group"><label class="glabel" for="r42q">목표 생산량</label><input type="range" id="r42q" min="8" max="24" step="1" value="16"><span class="val" id="v42q">16톤</span>
+      <label class="glabel" for="r42c">쓸 돈 C</label><input type="range" id="r42c" min="60" max="220" step="1" value="160"><span class="val" id="v42c">160</span></div>
+      <div class="group"><button class="bt primary" id="b42" type="button">가장 싼 점 찾기</button></div></div>
+    <div class="eq" id="eq42"></div>
+    <div class="minis"><div class="mini a"><span>가장 싼 비용 C*</span><b id="m42a">—</b></div><div class="mini g"><span>사람 L* · 기계 K*</span><b id="m42b" style="font-size:16px">—</b></div><div class="mini m"><span>λ (식)</span><b id="m42c">—</b></div><div class="mini r"><span>1톤 더 만드는 비용 C*(Q + 1) − C*(Q)</span><b id="m42d">—</b></div></div>
+    <div class="insight" id="i42" aria-live="polite"></div>
+  </div>
+  <div class="bridge field"><b>①과 이어지는 곳</b> λ는 "목표를 1톤 올리면 가장 싼 비용이 얼마나 느나" — 곧 <b>한계비용 MC</b>입니다. ①의 빵 공장이 MR = MC에서 멈췄듯, 이 공장도 가격이 λ와 같아지는 곳이 경계입니다. 라그랑주가 이 승수법을 정리한 것은 1788년 『해석역학』입니다 [1].</div>
+  <div class="assume"><b>이 칸의 가정</b> 제약은 "= 16"처럼 등식 하나. "생산능력 20톤 이하"처럼 <b>부등식</b> 제약이 붙으면 KKT 조건이라는 확장판을 쓴다 → 제조업 편</div>
+
+  <h3 id="s43">4.3 다 나눠 주면 남는 것은? — 오일러 정리</h3>
+  <div class="pair">
+    <div><div class="tl">일상으로 치면</div>제품 가격이 경쟁 때문에 한계비용 7.07만 원까지 내려왔습니다. 사람에게 임금을, 기계에 사용료를 주고 나면 사장에게 남는 돈은? 놀랍게도 <b>정확히 0</b>입니다. 매출이 사람과 기계 몫으로 꼭 맞게 나뉩니다.</div>
+    <div><div class="tr">수학에서는</div>사람과 기계를 t배 하면 생산도 t배가 되는 생산함수에서는 <b>Q = MP<sub>L</sub> × L + MP<sub>K</sub> × K</b>가 늘 성립합니다(오일러 정리). 양쪽에 P를 곱하면 매출 = 임금 총액 + 사용료 총액. 1894년 윅스티드가 이 생각을 내놓았고, 플럭스가 그것이 오일러 정리임을 짚었습니다 [2].</div>
+  </div>
+  <div class="panel">
+    <div class="ptitle">규모를 키워 보고, 매출이 어떻게 나뉘는지 보기</div>
+    <div class="cwrap tall"><canvas id="cv43" aria-label="매출 막대와 임금·사용료·이윤 막대"></canvas></div>
+    <div class="ctrl"><div class="group"><label class="glabel" for="r43t">규모 배수 t (사람·기계 모두)</label><input type="range" id="r43t" min="0.5" max="3" step="0.25" value="1"><span class="val" id="v43t">1.00배</span>
+      <label class="glabel" for="r43p">제품 가격 P</label><input type="range" id="r43p" min="6" max="10" step="0.01" value="7.07"><span class="val" id="v43p">7.07</span></div></div>
+    <div class="minis"><div class="mini a"><span>생산량 Q</span><b id="m43a">—</b></div><div class="mini g"><span>매출 P·Q</span><b id="m43b">—</b></div><div class="mini r"><span>임금 + 사용료</span><b id="m43c">—</b></div><div class="mini m"><span>남는 돈 (이윤)</span><b id="m43d">—</b></div></div>
+    <div class="insight" id="i43" aria-live="polite"></div>
+  </div>
+  <div class="assume"><b>이 칸의 가정</b> 규모에 대한 수익 불변 + 장기 경쟁(가격 = 한계비용). 동차함수라는 이름과 정의는 아래 "수식으로 보기"에 두었다. 규모수익이 체증·체감하면 남거나 모자란다.</div>
+  <details class="fold"><summary>수식으로 보기 — 동차함수와 오일러 정리</summary><p>f(tL, tK) = t·f(L, K)이면 f를 1차 동차함수라고 한다. 양변을 t로 미분하고 t = 1을 넣으면 L·∂f/∂L + K·∂f/∂K = f. 이 공장은 Q = 2√(LK)이므로 MP<sub>L</sub>·L = √(LK) = Q/2, MP<sub>K</sub>·K = Q/2 — 사람 몫 절반, 기계 몫 절반.</p></details>
+
+  <h3 id="s44">4.4 미분방정식 — 변화의 규칙</h3>
+  <div class="pair">
+    <div><div class="tl">일상으로 치면</div>뜨거운 커피는 방 온도와 차이가 클수록 빨리 식습니다. "지금 상태가 다음 변화를 정한다" — 이런 규칙을 적은 식이 미분방정식입니다. 공장의 재고, 가마의 온도도 이렇게 움직입니다.</div>
+    <div><div class="tr">수학에서는</div>커피: dT/dt = −k(T − 20). 컴퓨터는 이것을 짧은 시간 Δt마다 "지금 기울기 × Δt만큼 이동"으로 풉니다(오일러 방법). 그리고 놀랍게도 <b>경사하강도 같은 꼴</b>입니다: dw/dt = −L′(w). 기울기를 따라 내려가는 공의 움직임이죠.</div>
+  </div>
+  <div class="panel">
+    <div class="ptitle">정확한 곡선과 계단처럼 따라가는 컴퓨터 풀이</div>
+    <div class="cwrap"><canvas id="cv44" aria-label="정확한 해 곡선과 오일러 방법의 계단"></canvas></div>
+    <div class="ctrl"><div class="group"><span class="glabel">무엇을</span><span id="g44"></span></div>
+      <div class="group"><label class="glabel" for="r44">한 걸음 Δt</label><input type="range" id="r44" min="0" max="5" step="1" value="2"><span class="val" id="v44">—</span></div></div>
+    <div class="minis"><div class="mini a"><span>정확한 끝값</span><b id="m44a">—</b></div><div class="mini g"><span>계단 풀이 끝값</span><b id="m44b">—</b></div><div class="mini r"><span>차이</span><b id="m44c">—</b></div></div>
+    <div class="insight" id="i44" aria-live="polite"></div>
+  </div>
+  <div class="assume"><b>이 칸의 가정</b> 미분방정식 자체는 최적화가 아니라 "어떻게 변해 가나"의 규칙이다. 경사하강은 그 규칙을 "가장 낮은 곳으로 가는 길"로 고른 것이다.</div>
+  <div class="quiz" data-quiz="c4"></div>
+</div></section>
+
+<!-- 5장 -->
+<section class="sec" id="c5" aria-labelledby="h-c5"><div class="wrap">
+  <h2 id="h-c5"><span class="hex">5</span>머신러닝(딥러닝) 모델의 최적화 <span class="sub">셋이 함께</span></h2>
+  <div data-dlg="c5"></div>
+
+  <h3 id="s51">5.1 손실과 경사하강 — 기울기 0을 못 풀면 걸어간다</h3>
+  <div class="pair">
+    <div><div class="tl">일상으로 치면</div>①의 빵 공장은 MR = MC라는 식을 풀어 답을 바로 구했습니다. 인공지능 모델은 손잡이(가중치)가 수백만 개라 그런 식을 풀 수 없습니다. 그래서 짙은 안개 속 산에서처럼 <b>발밑 기울기만 보고 조금씩 내려갑니다</b>.</div>
+    <div><div class="tr">수학에서는</div>틀린 정도를 잰 값이 손실 L(w). 새 w = 지금 w − 학습률 × L′(w). 기울기가 0이 되면 더 이상 움직이지 않습니다 — 1.3의 "기울기 0 = 바닥"을 걸어서 찾는 셈입니다. 1847년 코시가 처음 낸 방법입니다 [3].</div>
+  </div>
+  <div class="panel">
+    <div class="ptitle">손실 L(w) = (w − 3)² + 1 위에서 걸어 내려가기 (출발 w = 0)</div>
+    <div class="cwrap"><canvas id="cv51" aria-label="손실 곡선과 경사하강의 발자국"></canvas></div>
+    <div class="ctrl"><div class="group"><label class="glabel" for="r51">학습률 (보폭)</label><input type="range" id="r51" min="0.05" max="1.1" step="0.05" value="0.1"><span class="val" id="v51">0.10</span>
+      <label class="glabel" for="r51n">걸음 수</label><input type="range" id="r51n" min="1" max="30" step="1" value="10"><span class="val" id="v51n">10</span></div></div>
+    <div class="minis"><div class="mini a"><span>마지막 w</span><b id="m51a">—</b></div><div class="mini g"><span>마지막 손실</span><b id="m51b">—</b></div><div class="mini m"><span>정답 (기울기 0)</span><b>w = 3, L = 1</b></div></div>
+    <div class="insight" id="i51" aria-live="polite"></div>
+  </div>
+  <div class="assume"><b>이 칸의 가정</b> 그릇 하나뿐인 손실. 실제 신경망의 손실은 바닥·안장점이 많은 울퉁불퉁한 땅이다 → <a href="1_math_map.html">좌표축 위의 그릇 1편</a>, 학습률·배치는 <a href="2_experiment_lab.html">2편</a></div>
+
+  <h3 id="s52">5.2 연쇄법칙과 역전파 — 사슬처럼 이어진 기울기</h3>
+  <div class="pair">
+    <div><div class="tl">일상으로 치면</div>밀가루 값이 오르면 빵 원가가, 원가가 오르면 빵값이, 빵값이 오르면 매출이 바뀝니다. 끝의 변화는 <b>고리마다의 변화를 곱한 것</b>입니다.</div>
+    <div><div class="tr">수학에서는</div>y = f(g(h(x)))의 미분은 dy/dx = (dy/dv)(dv/du)(du/dx) — 연쇄법칙입니다. 신경망은 이런 고리가 수십 층 이어진 함수라, 끝(손실)에서부터 거꾸로 곱해 오면 모든 가중치의 기울기를 한 번에 잴 수 있습니다. 이것이 <b>역전파</b>입니다 [4].</div>
+  </div>
+  <div class="panel">
+    <div class="ptitle">x → u = 2x + 1 → v = u² → y = 3v</div>
+    <div class="chainrow" id="chain" aria-live="polite"></div>
+    <div class="ctrl"><div class="group"><label class="glabel" for="r52">입력 x</label><input type="range" id="r52" min="-2" max="2" step="0.25" value="1"><span class="val" id="v52">1.00</span></div></div>
+    <div class="eq" id="eq52"></div>
+    <div class="insight" id="i52" aria-live="polite"></div>
+  </div>
+
+  <h3 id="s53">5.3 특성공학 — 비선형성과 상호작용은 다르다</h3>
+  <div class="pair">
+    <div><div class="tl">일상으로 치면</div>비료(x₁)를 줄 때 수확(y)이 처음엔 많이 늘다 덜 늘거나 더 느는 것은 <b>비선형성</b>입니다. 그런데 물(x₂)을 많이 준 밭에서 비료의 효과가 더 커진다면, 그건 <b>상호작용</b>입니다. 둘은 다릅니다.</div>
+    <div><div class="tr">수학에서는</div>비선형성: 같은 변수로 두 번 미분한 ∂²y/∂x₁² ≠ 0 → x₁² 같은 <b>제곱항</b>이 필요. 상호작용: 서로 다른 변수로 한 번씩 미분한 ∂²y/∂x₁∂x₂ ≠ 0 → x₁·x₂ 같은 <b>교차항</b>이 필요. ①의 1.4에서 본 귀퉁이 dx·dy가 바로 교차항의 씨앗입니다.</div>
+  </div>
+  <div class="panel">
+    <div class="ptitle">x₂(물)를 낮게·높게 두고 x₁(비료)에 따른 y — 모형이 선을 어떻게 그리나</div>
+    <div class="cwrap tall"><canvas id="cv53" aria-label="학습 데이터 점과 x2 두 값에서의 모형 곡선"></canvas></div>
+    <div class="ctrl"><div class="group"><span class="glabel">모형</span><span id="g53"></span></div></div>
+    <div class="minis"><div class="mini a"><span>∂²y/∂x₁² (비선형성)</span><b id="m53a">—</b></div><div class="mini m"><span>∂²y/∂x₁∂x₂ (상호작용)</span><b id="m53b">—</b></div><div class="mini g"><span>검증 오차 (평균제곱)</span><b id="m53c">—</b></div></div>
+    <div class="insight" id="i53" aria-live="polite"></div>
+  </div>
+  <div class="assume"><b>이 칸의 가정</b> 참 모형 y = 1 + x₁ + 0.5x₂ + 0.8x₁² + 1.5x₁x₂ + 잡음(표준편차 0.3)으로 만든 씨앗 고정 예시 데이터(학습 80개, 검증 200개). 실제 농사 자료가 아니다.</div>
+
+  <h3 id="s54">5.4 규제항과 라그랑지안 — 닮은 꼴</h3>
+  <div class="pair">
+    <div><div class="tl">일상으로 치면</div>모형이 학습 데이터에 너무 딱 맞추려고 가중치를 크게 키우면 새 데이터에서 틀립니다. 그래서 "가중치 크기는 이 원 안에서만" 같은 울타리를 치거나, 크기에 벌금을 매깁니다.</div>
+    <div><div class="tr">수학에서는</div>"손실 최소, 단 |w|² ≤ c²"(제약, 4.2의 라그랑지안)과 "손실 + λ|w|² 최소"(벌점, 능형 회귀 [5])는 손실이 그릇 모양(볼록)일 때 <b>같은 답</b>을 줍니다. 벌점의 λ가 라그랑지안의 승수 λ와 같은 역할을 합니다.</div>
+  </div>
+  <div class="panel">
+    <div class="ptitle">가중치 평면 — 손실 등고선, 울타리(원), 벌점 답(●)과 울타리 답(○)</div>
+    <div class="cwrap tall"><canvas id="cv54" aria-label="손실 타원 등고선, 반지름 c의 원, 두 답"></canvas></div>
+    <div class="ctrl"><div class="group"><label class="glabel" for="r54">벌점 세기 λ</label><input type="range" id="r54" min="0" max="40" step="1" value="10"><span class="val" id="v54">—</span></div></div>
+    <div class="minis"><div class="mini a"><span>벌점 답 w(λ)</span><b id="m54a" style="font-size:16px">—</b></div><div class="mini g"><span>그 크기 |w| = 울타리 반지름 c</span><b id="m54b">—</b></div><div class="mini m"><span>울타리 안 손실 최소 답</span><b id="m54c" style="font-size:16px">—</b></div><div class="mini r"><span>두 답의 거리</span><b id="m54d">—</b></div></div>
+    <div class="insight" id="i54" aria-live="polite"></div>
+  </div>
+  <div class="assume"><b>이 칸의 가정</b> 손실이 볼록(그릇 모양)이라서 두 답이 같다. 울퉁불퉁한 신경망 손실에서는 정확히 같다고 할 수 없어 "닮은 꼴"이라고 부른다.</div>
+  <div class="quiz" data-quiz="c5"></div>
+</div></section>
+
+<!-- 대결 -->
+<section class="sec" id="duel" aria-labelledby="h-duel"><div class="wrap">
+  <h2 id="h-duel">대결 — 제곱항만 넣으면 다 될까?</h2>
+  <p class="lead">5.3의 데이터에서 일차항(x₁, x₂)만으로는 모자랍니다. 주판봇은 "휘어진 건 제곱이 해결한다"며 x₁²와 x₂²를 넣고, 초파리 연구원은 "물에 따라 비료 효과가 달라 보인다"며 x₁²와 교차항 x₁·x₂를 넣습니다. 둘 다 특성 5개로 같습니다. 판정은 학습에 쓰지 않은 <b>검증 데이터 200개의 평균제곱오차</b>입니다(작을수록 좋음).</p>
+  <div class="duel">
+    <div class="side l"><div class="head"><img id="d-fly" data-mood="fly_magnify" alt="" aria-hidden="true"><div><b style="color:var(--c-fly)">초파리 연구원</b><br><span class="muted">1, x₁, x₂, x₁², x₁·x₂</span></div></div></div>
+    <div class="vs">VS</div>
+    <div class="side r"><div class="head"><img id="d-robo" data-mood="robo_coin" alt="" aria-hidden="true"><div><b style="color:var(--c-robo)">주판봇</b><br><span class="muted">1, x₁, x₂, x₁², x₂²</span></div></div></div>
+  </div>
+  <div class="panel">
+    <div class="ctrl"><div class="group"><span class="glabel">먼저 맞혀 보기</span><button class="bt" data-pred="fly" type="button" aria-pressed="false">초파리가 이길 것 같다</button><button class="bt" data-pred="robo" type="button" aria-pressed="false">주판봇이 이길 것 같다</button></div>
+      <div class="group"><button class="bt primary" data-go type="button">결과 보기</button><button class="bt" data-close type="button" hidden>다시 닫기</button></div></div>
+    <div class="duel-res" hidden>
+      <div class="tblwrap"><table class="cmp"><thead><tr><th>모형</th><th>특성</th><th>학습 오차</th><th>검증 오차</th></tr></thead><tbody id="d-tbl"></tbody></table></div>
+      <div class="resbars"><div class="resbar"><span style="color:var(--c-fly)">초파리 · 검증 오차</span><div class="bar"><i id="d-bf" style="background:var(--c-fly)"></i></div><b id="d-vf">—</b></div>
+        <div class="resbar"><span style="color:var(--c-robo)">주판봇 · 검증 오차</span><div class="bar"><i id="d-br" style="background:var(--c-robo)"></i></div><b id="d-vr">—</b></div></div>
+      <p class="muted" style="font-size:13px;margin:4px 0 0">막대 = 검증 오차(짧을수록 좋음), 일차항만 쓴 모형의 오차를 꽉 찬 막대로 둠.</p>
+      <div id="d-say"></div>
+      <div class="score"><span id="d-score"></span><span id="d-pred"></span></div>
+    </div>
+  </div>
+  <div class="quiz" data-quiz="duel"></div>
+</div></section>
+
+<!-- 에필로그 -->
+<section class="sec" id="epi" aria-labelledby="h-epi"><div class="wrap">
+  <h2 id="h-epi">에필로그 — "시간"과 "비용"은 제조업 편에서</h2>
+  <div data-dlg="epi"></div>
+  <p>지금까지의 공장은 하루짜리 사진 한 장이었습니다. 실제 공장에서는 가마가 데워지는 데 시간이 걸리고, 멈췄다 다시 켜면 손실이 나고, 연료비는 시간마다 달라집니다. 그러면 최적화의 목표가 이렇게 바뀝니다.</p>
+  <div class="eq">하루 전체 이윤 = Σ<sub>t</sub> [ 수입(t) − 연료비(t) − 정지 손실(t) ] → 가장 크게, 단 가마 온도·생산능력·품질 기준을 넘지 않게</div>
+  <ul>
+    <li><b>시간이 들어간 최적화</b>: 오늘의 결정이 내일의 상태를 바꿉니다(4.4의 미분방정식이 제약이 됨). 이런 문제에서 나오는 조건이 오일러 방정식입니다.</li>
+    <li><b>부등식 제약</b>: "온도는 1,450도 이하", "하루 3,000톤 이하"처럼 넘지 말아야 할 선 — 4.2의 라그랑지안을 넓힌 KKT 조건으로 다룹니다.</li>
+    <li><b>AI의 자리</b>: 측정하기 어려운 품질을 미리 예측하는 모형(5장의 방법)이 이 최적화의 눈이 됩니다.</li>
+  </ul>
+  <div class="next"><a href="https://adminmrobo.github.io/smart_factory_world/cement/"><b>제조업 편 — 시멘트 공장 World →</b><br>가마 37분 재생, 품질 시험실, 연료 절감(준비 중)</a><a href="first_step_1.html"><b>← ① 왜, 언제부터, 어디에</b></a><a href="1_math_map.html"><b>좌표축 위의 그릇 1편</b><br>손실 지형을 3D로</a></div>
+</div></section>
+
+<!-- 정리 -->
+<section class="sec" id="sum" aria-labelledby="h-sum"><div class="wrap">
+  <h2 id="h-sum">정리 — 하나의 조건, 여러 얼굴</h2>
+  <div class="tblwrap"><table class="cmp"><thead><tr><th>칸</th><th>"기울기 0"이 어떤 모양으로 나왔나</th><th>뜻</th><th>이 칸의 가정</th></tr></thead><tbody>
+    <tr><td>① 3.2</td><td>MR = MC</td><td>한 판 더의 수입 = 한 판 더의 비용</td><td>완전경쟁, 단기</td></tr>
+    <tr><td>4.1</td><td>P × MP<sub>L</sub> = w</td><td>한 명 더의 매출 = 임금</td><td>기계 고정(단기), 완전경쟁</td></tr>
+    <tr><td>4.2</td><td>MP<sub>L</sub>/w = MP<sub>K</sub>/r, λ = MC</td><td>만 원당 생산이 같을 때 가장 싸다</td><td>등식 제약 하나</td></tr>
+    <tr><td>4.3</td><td>Q = MP<sub>L</sub>·L + MP<sub>K</sub>·K</td><td>한계생산대로 나누면 꼭 맞다</td><td>규모수익불변, 장기 경쟁</td></tr>
+    <tr><td>5.1</td><td>L′(w) = 0을 걸어서 찾기</td><td>경사하강</td><td>그릇 모양 손실</td></tr>
+    <tr><td>5.4</td><td>∇(손실 + λ|w|²) = 0</td><td>울타리 친 최적화와 닮은 꼴</td><td>볼록 손실</td></tr>
+  </tbody></table></div>
+  <h3>용어 대응 카드</h3>
+  <div class="gloss">
+    <div><b>한계생산 MP<sub>L</sub></b> = 사람 한 명 더의 생산 증가 = ∂Q/∂L.</div>
+    <div><b>라그랑지안</b> = 목표 − λ × (제약). 편미분을 모두 0으로 놓아 제약 있는 최적화를 푼다.</div>
+    <div><b>λ (라그랑주 승수)</b> = 제약을 한 단위 풀어 줄 때 목표가 바뀌는 양. 비용 최소화에서는 한계비용.</div>
+    <div><b>오일러 정리</b> = 규모수익불변이면 한계생산 × 투입량의 합 = 생산량.</div>
+    <div><b>미분방정식</b> = "지금 상태가 변화 속도를 정한다"를 적은 식.</div>
+    <div><b>경사하강</b> = 기울기 반대로 조금씩 걷기. 새 w = w − 학습률 × 기울기.</div>
+    <div><b>연쇄법칙 · 역전파</b> = 고리마다의 기울기를 곱한다. 신경망은 끝에서부터 거꾸로 곱해 온다.</div>
+    <div><b>비선형성 · 상호작용</b> = ∂²y/∂x₁² ≠ 0 (제곱항) · ∂²y/∂x₁∂x₂ ≠ 0 (교차항).</div>
+    <div><b>규제항</b> = 가중치 크기에 매기는 벌점. 볼록 손실에서는 울타리 제약과 같은 답.</div>
+  </div>
+  <div class="next"><a href="first_step_1.html"><b>← ① 왜, 언제부터, 어디에</b></a><a href="1_math_map.html"><b>좌표축 위의 그릇 1편</b><br>기울기·굽음·휨을 3D 오차 지도로</a><a href="index.html"><b>목차</b></a></div>
+</div></section>
+
+<section class="sec" id="outro" aria-labelledby="h-outro"><div class="wrap">
+  <h2 id="h-outro">아웃트로</h2>
+  <div data-dlg="outro"></div>
+</div></section>
+</main>
+
+<footer><div class="wrap">
+  <h3>출처</h3>
+  <table><thead><tr><th>#</th><th>자료</th><th>이 페이지에서 쓴 곳</th></tr></thead><tbody>
+    <tr><td>[1]</td><td>Bussotti, P. (2003). On the Genesis of the Lagrange Multipliers. Journal of Optimization Theory and Applications, 117(3), 453–459.</td><td>4.2 — 라그랑주 승수법의 기원(1788년 『해석역학』)</td></tr>
+    <tr><td>[2]</td><td>Fonseca, G. L. "Euler's Theorem", History of Economic Thought website (hetwebsite.net) / Flux, A. W. (1894). Review of Wicksteed's Essay on the Co-ordination of the Laws of Distribution. The Economic Journal, 4(14), 308–313.</td><td>4.3 — 생산물 소진과 오일러 정리</td></tr>
+    <tr><td>[3]</td><td>Lemaréchal, C. (2012). Cauchy and the Gradient Method. Documenta Mathematica, Extra Volume ISMP, 251–254. (Cauchy, A. (1847). Comptes Rendus, 25, 536–538.)</td><td>5.1 — 경사하강의 기원</td></tr>
+    <tr><td>[4]</td><td>Rumelhart, D. E., Hinton, G. E., Williams, R. J. (1986). Learning representations by back-propagating errors. Nature, 323, 533–536.</td><td>5.2 — 역전파</td></tr>
+    <tr><td>[5]</td><td>Hoerl, A. E., Kennard, R. W. (1970). Ridge Regression: Biased Estimation for Nonorthogonal Problems. Technometrics, 12(1), 55–67.</td><td>5.4 — 능형 회귀(규제항)</td></tr>
+    <tr><td>[6]</td><td>adminmrobo, 「시멘트 제조업 World」 (smart_factory_world/cement, 2026-11-16 확인)</td><td>에필로그 — 시간·비용이 들어간 공정 최적화로 이어지는 곳</td></tr>
+  </tbody></table>
+  <h3>예시값·설명용 모형인 것</h3>
+  <ul><li>공장 생산함수 Q = 2√(LK), 가격 10·임금 5·사용료 10, 커피 식기 k = 0.1, 손실 (w − 3)² + 1, 연쇄 예 x → 2x + 1 → u² → 3v, 특성공학 데이터(씨앗 고정 난수), 규제항 예의 손실 행렬과 그 결과 수치 모두</li><li>표지는 그림 파일을 받기 전까지 그림판으로 그린 설명용 그림</li></ul>
+  <p>캐릭터 이름·설정·그림은 저작권자 안상선의 허락 없이 사용할 수 없습니다.</p>
+  <p>글 · 안상선 ((주)M-Robo 대표) · <a href="index.html">목차</a> · <a href="first_step_1.html">최적화 첫걸음 ①</a> · <a href="1_math_map.html">좌표축 위의 그릇 1편</a> · <a href="https://adminmrobo.github.io/smart_factory_world/cement/">시멘트 제조업 World</a></p>
+</div></footer>
+
+<script>
+/*@@SPRITES@@*/
+/*@@DIFFMATH@@*/
+/*@@COMMON@@*/
+(function(){
+'use strict';
+var $=U.$,fmt=U.fmt,cssv=U.cssv,F=DM.fac;
+function V(cv,draw,anim){var o={dirty:true};U.reg(cv,function(dt){if(anim&&dt>0)anim(dt);if(o.dirty||dt===0){draw();o.dirty=false;}});return o;}
+function rng(id,vid,fmtv,cb){var r=$('#'+id);r.oninput=function(){$('#'+vid).textContent=fmtv(+r.value);cb(+r.value);};return +r.value;}
+function lin(x0,x1,f,n){var o=[];n=n||160;for(var i=0;i<=n;i++){var x=x0+(x1-x0)*i/n;o.push([x,f(x)]);}return o;}
+function dot(P,x,y,c,r){P.g.beginPath();P.g.arc(P.X(x),P.Y(y),r||5,0,7);P.g.fillStyle=c;P.g.fill();}
+
+/* ── 대사 ── */
+var DLG={
+ hero:[["moa","moa_sparkle","① 편에서 빵 공장은 알겠어요. 그럼 사람이랑 기계를 같이 쓰는 공장은요? 얼마만큼 생산하면 될까요?"],["doc","doc_front","좋은 질문이에요. 변수가 둘이 되면 편미분이, 목표가 정해지면 라그랑지안이 나옵니다. 그리고 끝에서 인공지능이 같은 모양으로 나타나요."]],
+ s41:[["asst","asst_report","기계는 4대로 정해져 있대요. 사람을 몇 명 쓸지만 정하면 돼요."],["robo","robo_calc","사람이 많을수록 많이 만드니까 40명! 계산 끝."],["fly","fly_point","한 명 더의 매출이 임금보다 작아지는 순간부터는 손해야. 그래프부터 보자."]],
+ c5:[["asst","asst_spark","드디어 인공지능이에요! 빵 공장이랑 정말 같아요?"],["sia","sia_explain","순서대로: 5.1 경사하강 → 5.2 역전파 → 5.3 특성공학 → 5.4 규제항입니다."],["moa","moa_report","5.3 끝에는 대결이 있어요!"]],
+ epi:[["doc","doc_think","시간이 들어가면 오늘의 결정이 내일을 바꿉니다. 그건 시멘트 가마로 직접 해 보는 게 좋겠어요."],["robo","robo_coin","원가 계산은 내 담당이지! 시멘트 공장에선 단가표도 내가 본다."]],
+ outro:[["doc","doc_magic","오늘의 세 줄입니다.<br>① 사람은 한 명 더의 매출 = 임금이 될 때까지 쓴다 — MR = MC의 다른 얼굴.<br>② 목표가 정해지면 라그랑지안, 그 λ는 한계비용.<br>③ 인공지능은 기울기를 따라 걸으며(경사하강) 연쇄법칙으로 기울기를 잰다. 특성은 미분으로 고른다."],
+        ["fly","fly_arms","제곱항과 교차항은 다른 문제를 푼다. 두 번 미분해 보면 보이지."],
+        ["robo","robo_sigh","x₂²는 헛수고였네… 다음엔 ∂²y/∂x₁∂x₂부터 재 볼게."],
+        ["asst","asst_proud","① 편의 '혹시… 미분 좋아하세요?' 이제 대답할 수 있어요. 네, 좋아해요!"]]
+};
+U.dialogues(DLG);
+var CAST=[["doc","doc_front","박사","해설과 판정."],["asst","asst_smile","조수 하루","경사하강·역전파를 함께 따라가요."],["sia","sia_explain","인턴 시아","순서를 정리해요."],["moa","moa_sparkle","인턴 모아","\"얼마만큼 생산하면 될까요?\""],["fly","fly_magnify","초파리 연구원","의심하는 쪽. 두 번 미분해 봐요."],["robo","robo_coin","주판봇","확신하는 쪽. 원가 계산 담당."]];
+$('#castgrid').innerHTML=CAST.map(function(c){return '<div class="castc" style="--cc:var(--c-'+c[0]+')"><img src="'+U.spr(c[1])+'" alt="" aria-hidden="true"><div><b>'+c[2]+'</b><p>'+c[3]+'</p></div></div>';}).join('');
+$('#secretrow').innerHTML=['x1','x2','x3'].map(function(x,i){return U.say(x,x+'_hint',['(반짝)','(…끄덕)','(짝짝짝)'][i]);}).join('');
+$('#secretbtn').onclick=function(){var r=$('#secretrow');r.hidden=!r.hidden;this.setAttribute('aria-expanded',String(!r.hidden));this.textContent=r.hidden?'방청석 보기 (미공개 식구)':'방청석 닫기';};
+U.fillImgs();
+
+/* ── 숫자 요약 ── */
+var D2=DM.duel2();$('#k-l').textContent=fmt(F.shortRun(10,5,4).L,0)+'명';$('#k-lam').textContent=fmt(F.costMin(16).lam,2)+'만 원';$('#k-v').textContent=fmt(D2.fly.valid,3);
+
+/* ── 표지 그림판: 작은 공장과 두 곡선 ── */
+(function(){var cv=$('#coverCv');if(!cv)return;var t=0,o;o=V(cv,function(){var R=U.setup(cv),g=R.g,w=R.w,h=R.h;g.fillStyle='#f6f8fb';g.fillRect(0,0,w,h);
+  var X=function(x){return w*0.18+x/40*w*0.64;},Y=function(y){return h*0.62-y/20*h*0.5;};
+  g.strokeStyle='rgba(22,33,43,.25)';g.lineWidth=1;g.beginPath();g.moveTo(X(0),Y(0));g.lineTo(X(40),Y(0));g.moveTo(X(0),Y(0));g.lineTo(X(0),Y(20));g.stroke();
+  g.strokeStyle='#d6453a';g.lineWidth=3;g.beginPath();for(var i=1;i<=400;i++){var L=i/10,y=20/Math.sqrt(L);if(y>20)continue;g.lineTo(X(L),Y(y));}g.stroke();
+  g.strokeStyle='#1c8c48';g.beginPath();g.moveTo(X(0),Y(5));g.lineTo(X(40),Y(5));g.stroke();
+  var r=7+3*Math.sin(t*2);g.beginPath();g.arc(X(16),Y(5),r,0,7);g.fillStyle='rgba(255,209,102,.9)';g.fill();
+  for(var k=0;k<5;k++){var bx=X(4+k*7),by=h*0.72;g.fillStyle='#c9b48a';g.fillRect(bx,by,w*0.06,h*0.08);g.fillStyle='#8a6a3a';g.fillRect(bx+w*0.02,by-h*0.05,w*0.015,h*0.05);}},
+  function(dt){if(!U.reduce){t+=dt;o.dirty=true;}});})();
+
+/* ── 4.1 ── */
+var L41=9,w41=5,p41=10,K=F.K0;
+function prof41(L){return p41*F.Q(L,K)-w41*L-F.r*K;}
+var v41=V($('#cv41a'),function(){var Lb=K*Math.pow(p41/w41,2),P=U.plot($('#cv41a'),{xr:[0,40],yr:[0,20],xt:[0,10,20,30,40],yt:[0,5,10,15,20],xl:'사람 수 L',yl:'만 원',series:[{pts:lin(0.5,40,function(L){return p41*F.MPL(L,K);}),color:cssv('--eye'),width:2.4,name:'한 명 더의 매출 P·MP_L',ndy:-12},{pts:[[0,w41],[40,w41]],color:cssv('--gfp'),width:2.2,name:'임금 w',ndy:-10}],stamp:'설명용 예시',aria:'한 명 더의 매출과 임금'});
+  if(Lb<=40)dot(P,Lb,w41,cssv('--stain'),6);dot(P,L41,p41*F.MPL(L41,K),cssv('--amber'),5);
+  var P2=U.plot($('#cv41b'),{xr:[0,40],yr:[-60,80],xt:[0,10,20,30,40],yt:[-60,-30,0,30,60],xl:'사람 수 L',yl:'이윤 (만 원)',hlines:[{y:0,color:'rgba(22,33,43,.3)'}],series:[{pts:lin(0,40,prof41),color:cssv('--stain'),width:2.4,name:'이윤',ndy:-12}],stamp:'설명용 예시',aria:'사람 수에 따른 이윤'});
+  if(Lb<=40)dot(P2,Lb,prof41(Lb),cssv('--stain'),6);dot(P2,L41,prof41(L41),cssv('--amber'),5);});
+U.reg($('#cv41b'),function(dt){if(dt===0)v41.dirty=true;});
+function up41(){var L=L41,Q=F.Q(L,K),vm=p41*F.MPL(L,K),Lb=K*Math.pow(p41/w41,2);$('#m41a').textContent=fmt(Q,1)+'톤';$('#m41b').textContent=fmt(vm,2);$('#m41c').textContent=fmt(prof41(L),1);$('#m41d').textContent=Lb<=40?fmt(Lb,1)+'명':'40명 넘음';
+  $('#eq41').innerHTML='MP<sub>L</sub> = ∂Q/∂L = √(K/L) = √('+K+'/'+L+') = '+fmt(F.MPL(L,K),3)+' → P × MP<sub>L</sub> = '+fmt(p41,1)+' × '+fmt(F.MPL(L,K),3)+' = <b>'+fmt(vm,2)+'</b> vs 임금 <b>'+fmt(w41,1)+'</b>';
+  U.ins($('#i41'),[[Math.abs(vm-w41)<0.15?'g':vm>w41?'a':'r',Math.abs(vm-w41)<0.15?'한 명 더의 매출 = 임금. 여기가 이윤 꼭대기입니다(오른쪽 그래프의 정점).':vm>w41?'한 명 더 쓰면 매출이 '+fmt(vm,2)+' 늘어 임금 '+fmt(w41,1)+'보다 큽니다 → 더 쓰는 게 이득.':'한 명 더의 매출 '+fmt(vm,2)+'이 임금보다 작습니다 → 너무 많이 썼어요.'],['m','임금을 올리면 가장 좋은 사람 수가 줄고, 제품 가격을 올리면 늘어납니다. 슬라이더로 확인해 보세요.']]);v41.dirty=true;}
+rng('r41l','v41l',function(v){return v+'명';},function(v){L41=v;up41();});rng('r41w','v41w',function(v){return v.toFixed(1);},function(v){w41=v;up41();});rng('r41p','v41p',function(v){return v.toFixed(1);},function(v){p41=v;up41();});up41();
+
+/* ── 4.2 ── */
+var Qt=16,C42=160;
+var v42=V($('#cv42'),function(){var cm=F.costMin(Qt),k0=Qt*Qt/4,P=U.plot($('#cv42'),{xr:[0,30],yr:[0,16],xt:[0,5,10,15,20,25,30],yt:[0,4,8,12,16],xl:'사람 L',yl:'기계 K',
+  series:[{pts:lin(k0/16,30,function(L){return k0/L;}),color:cssv('--terrain'),width:2.6,name:Qt+'톤 등량선',ndy:-12},{pts:[[0,C42/F.r],[C42/F.w,0]],color:Math.abs(C42-cm.C)<0.6?cssv('--stain'):cssv('--eye'),width:2.2,dash:[7,4],name:'비용 '+C42,ndy:14}],stamp:'설명용 예시',aria:'등량선과 비용 직선'});
+  dot(P,cm.L,cm.K,cssv('--stain'),6);U.label(P.g,P.X(cm.L)+8,P.Y(cm.K)-10,'가장 싼 점',cssv('--stain'));});
+function up42(){var cm=F.costMin(Qt),mc=F.costMin(Qt+1).C-cm.C;$('#m42a').textContent=fmt(cm.C,2);$('#m42b').textContent=fmt(cm.L,2)+'명 · '+fmt(cm.K,2)+'대';$('#m42c').textContent=fmt(cm.lam,3);$('#m42d').textContent=fmt(mc,3);
+  $('#eq42').innerHTML='가장 싼 점: MP<sub>L</sub>/w = MP<sub>K</sub>/r → K/L = w/r = 5/10 → L = 2K → 2√(2K²) = '+Qt+' → K = '+fmt(cm.K,3)+', L = '+fmt(cm.L,3)+' · λ = √(w·r) = <b>'+fmt(cm.lam,3)+'</b>';
+  var d=C42-cm.C,msg=d<-0.6?[['r','비용 직선이 등량선에 닿지 않습니다: '+C42+'으로는 '+Qt+'톤을 만들 수 없어요. 돈을 늘려 보세요.']]:Math.abs(d)<=0.6?[['g','비용 직선이 등량선에 딱 한 점에서 닿았습니다(접함). 이 점이 '+Qt+'톤을 가장 싸게 만드는 조합입니다.']]:[['a','비용 직선이 등량선을 두 번 자릅니다: 돈이 남아요. 직선을 안쪽으로 당겨(돈을 줄여) 딱 닿는 곳을 찾아보세요.']];
+  msg.push(['m','목표를 1톤 올리면 가장 싼 비용이 '+fmt(mc,3)+' 늡니다 = λ('+fmt(cm.lam,3)+'). λ는 한계비용입니다.']);U.ins($('#i42'),msg);v42.dirty=true;}
+rng('r42q','v42q',function(v){return v+'톤';},function(v){Qt=v;up42();});rng('r42c','v42c',function(v){return String(v);},function(v){C42=v;up42();});
+$('#b42').onclick=function(){C42=Math.round(F.costMin(Qt).C);$('#r42c').value=C42;$('#v42c').textContent=String(C42);up42();};up42();
+
+/* ── 4.3 ── */
+var t43=1,p43=7.07;
+var v43=V($('#cv43'),function(){var cm=F.costMin(16),L=cm.L*t43,Kk=cm.K*t43,Q=F.Q(L,Kk),rev=p43*Q,wage=F.w*L,rent=F.r*Kk,pr=rev-wage-rent;
+  var cv=$('#cv43'),R=U.setup(cv),g=R.g,w=R.w,h=R.h;U.grid24(g,w,h);var mx=520,bw=w*0.22,x1=w*0.18,x2=w*0.58,base=h-34,sc=(h-70)/mx;
+  function bar(x,y0,v,c,lab){if(v<=0)return y0;g.fillStyle=c;g.fillRect(x,y0-v*sc,bw,v*sc);if(v*sc>16)U.label(g,x+bw/2,y0-v*sc/2,lab+' '+fmt(v,1),c,'center');return y0-v*sc;}
+  bar(x1,base,rev,cssv('--terrain'),'매출');var y=bar(x2,base,wage,cssv('--eye'),'임금');y=bar(x2,y,rent,cssv('--amber'),'사용료');if(pr>0.05)bar(x2,y,pr,cssv('--stain'),'이윤');
+  g.fillStyle=cssv('--muted');g.font='13px '+cssv('--font');g.textAlign='center';g.fillText('매출 P·Q',x1+bw/2,base+18);g.fillText('나눈 몫',x2+bw/2,base+18);U.stamp(g,w,'설명용 예시');});
+function up43(){var cm=F.costMin(16),L=cm.L*t43,Kk=cm.K*t43,Q=F.Q(L,Kk),rev=p43*Q,cost=F.w*L+F.r*Kk;$('#m43a').textContent=fmt(Q,2)+'톤';$('#m43b').textContent=fmt(rev,1);$('#m43c').textContent=fmt(cost,1);$('#m43d').textContent=fmt(rev-cost,2);
+  U.ins($('#i43'),[[Math.abs(rev-cost)<0.5?'g':'a',Math.abs(rev-cost)<0.5?'가격 = 한계비용(7.07)이면 매출이 임금과 사용료로 꼭 맞게 나뉘어 이윤 0입니다. 규모를 '+fmt(t43,2)+'배로 바꿔도 그대로예요.':'가격이 한계비용보다 '+(p43>7.07?'높아':'낮아')+' 이윤이 '+fmt(rev-cost,1)+'입니다. 규모를 키우면 이윤도 같은 배수로 '+(p43>7.07?'커져서':'나빠져서')+', 경쟁이 있으면 가격이 7.07로 밀려옵니다.'],['m','사람·기계를 '+fmt(t43,2)+'배 하면 생산도 '+fmt(t43,2)+'배('+fmt(Q,2)+'톤). 사람 몫 = 기계 몫 = 생산의 절반입니다.']]);v43.dirty=true;}
+rng('r43t','v43t',function(v){return v.toFixed(2)+'배';},function(v){t43=v;up43();});rng('r43p','v43p',function(v){return v.toFixed(2);},function(v){p43=v;up43();});up43();
+
+/* ── 4.4 ── */
+var m44='coffee',S44=[[10,5,2,1,0.5,0.1],[0.9,0.6,0.4,0.2,0.1,0.05]],k44=2;
+function sol44(){if(m44==='coffee'){var dt=S44[0][k44];return {dt:dt,ex:DM.cool.exact,st:DM.cool.euler(dt,40),T:40,yr:[15,95],yl:'커피 온도 (℃)',xl:'분'};}
+  var dt2=S44[1][k44],w=0,t=0,st=[[0,0]];while(t<3-1e-9){w=w-dt2*DM.loss.dL(w);t+=dt2;st.push([t,w]);}return {dt:dt2,ex:function(t){return 3-3*Math.exp(-2*t);},st:st,T:3,yr:[-0.5,4],yl:'가중치 w',xl:'시간 (걸음 × 학습률)'};}
+var v44=V($('#cv44'),function(){var s=sol44(),P=U.plot($('#cv44'),{xr:[0,s.T],yr:s.yr,xt:m44==='coffee'?[0,10,20,30,40]:[0,1,2,3],yt:m44==='coffee'?[20,40,60,80]:[0,1,2,3,4],xl:s.xl,yl:s.yl,
+  series:[{pts:lin(0,s.T,s.ex),color:cssv('--terrain'),width:2.6,name:'정확한 곡선',ndy:-12},{pts:s.st,color:cssv('--amber'),width:2,dots:3,name:'계단 풀이',ndy:14}].concat(m44==='gd'?[]:[{pts:[[0,20],[40,20]],color:'rgba(22,33,43,.3)',width:1,dash:[4,4]}]),stamp:'설명용 예시',aria:'미분방정식의 정확한 해와 계단 풀이'});});
+function up44(){var s=sol44(),last=s.st[s.st.length-1],ex=s.ex(last[0]);$('#v44').textContent=m44==='coffee'?s.dt+'분':'학습률 '+s.dt;$('#m44a').textContent=fmt(ex,2);$('#m44b').textContent=fmt(last[1],2);$('#m44c').textContent=fmt(last[1]-ex,2);
+  U.ins($('#i44'),m44==='coffee'?[['g','커피는 방 온도(20℃)와의 차이에 비례해 식습니다. 걸음 Δt를 줄일수록 계단이 정확한 곡선에 붙어요.'],[s.dt>=5?'r':'m',s.dt>=5?'Δt가 크면 계단이 곡선을 크게 벗어납니다(10분이면 방 온도까지 한 번에 떨어짐).':'컴퓨터는 이렇게 짧은 걸음으로 미분방정식을 풉니다.']]:[['g','경사하강의 한 걸음 "w ← w − 학습률 × L′(w)"는 미분방정식 dw/dt = −L′(w)를 계단으로 푼 것입니다. 학습률 = 걸음 Δt.'],[s.dt>=0.6?'r':'m',s.dt>=0.6?'학습률이 크면 계단이 바닥(w = 3)을 넘어갔다 돌아오며 출렁입니다 → 5.1':'학습률이 작으면 정확한 곡선을 잘 따라 바닥 w = 3으로 갑니다.']]);v44.dirty=true;}
+U.btns($('#g44'),[['coffee','커피 식기'],['gd','경사하강']],'coffee',function(v){m44=v;up44();});
+rng('r44','v44',function(v){return '';},function(v){k44=v;up44();});up44();
+
+/* ── 5.1 ── */
+var lr=0.1,n51=10;
+var v51=V($('#cv51'),function(){var run=DM.loss.run(0,lr,n51),P=U.plot($('#cv51'),{xr:[-2,8],yr:[0,30],xt:[-2,0,2,3,4,6,8],yt:[0,10,20,30],xl:'가중치 w',yl:'손실 L',series:[{pts:lin(-2,8,DM.loss.L),color:cssv('--text'),width:2.4},{pts:run.filter(function(w){return w>-2&&w<8;}).map(function(w){return [w,DM.loss.L(w)];}),color:cssv('--amber'),width:1.4,dots:4}],stamp:'설명용 예시',aria:'손실 곡선과 발자국'});
+  dot(P,3,1,cssv('--gfp'),6);U.label(P.g,P.X(3),P.Y(1)+18,'바닥 w = 3',cssv('--gfp'),'center');});
+function up51(){var run=DM.loss.run(0,lr,n51),w=run[run.length-1];$('#m51a').textContent=Math.abs(w)>1e4?'발산':fmt(w,3);$('#m51b').textContent=Math.abs(w)>1e4?'∞':fmt(DM.loss.L(w),3);
+  U.ins($('#i51'),[[lr<0.95?(Math.abs(w-3)<0.05?'g':'a'):'r',lr<0.5?(Math.abs(w-3)<0.05?'바닥 근처에 닿았습니다. 기울기가 0에 가까워지면 걸음도 저절로 작아져요.':'작은 보폭: 안전하지만 걸음이 많이 필요합니다.'):lr<0.95?'보폭이 커서 바닥을 넘어갔다 돌아오며 다가갑니다(지그재그).':lr<1.0001?'보폭 1: 바닥을 사이에 두고 제자리에서 영원히 왕복합니다.':'보폭이 너무 커서 걸을수록 바닥에서 멀어집니다(발산). 이 그릇에서는 학습률이 1보다 작아야 합니다.']]);v51.dirty=true;}
+rng('r51','v51',function(v){return v.toFixed(2);},function(v){lr=v;up51();});rng('r51n','v51n',function(v){return String(v);},function(v){n51=v;up51();});up51();
+
+/* ── 5.2 ── */
+var x52=1;function up52(){var c=DM.chain.links(x52),fd=DM.d(DM.chain.f,x52);
+  $('#chain').innerHTML='<div class="bx"><span>입력</span><b>x = '+fmt(x52,2)+'</b></div><div class="ar">du/dx<b>× 2</b>→</div><div class="bx"><span>u = 2x + 1</span><b>'+fmt(c.u,2)+'</b></div><div class="ar">dv/du = 2u<b>× '+fmt(c.dv,2)+'</b>→</div><div class="bx"><span>v = u²</span><b>'+fmt(c.v,2)+'</b></div><div class="ar">dy/dv<b>× 3</b>→</div><div class="bx"><span>y = 3v</span><b>'+fmt(c.y,2)+'</b></div>';
+  $('#eq52').innerHTML='dy/dx = 3 × '+fmt(c.dv,2)+' × 2 = <b>'+fmt(c.prod,3)+'</b> · 이웃 점으로 직접 잰 값 = <b>'+fmt(fd,3)+'</b>';
+  U.ins($('#i52'),[['g','고리 셋의 기울기를 곱한 값과, x를 아주 조금 움직여 직접 잰 값이 같습니다. 연쇄법칙이에요.'],['m','신경망의 역전파는 이 곱셈을 끝(손실)에서부터 거꾸로 합니다. 앞에서 구한 곱을 다시 쓰니 가중치가 수백만 개여도 한 번 거꾸로 지나가면 됩니다.']]);}
+rng('r52','v52',function(v){return v.toFixed(2);},function(v){x52=v;up52();});up52();
+
+/* ── 5.3 ── */
+var m53='true',FIT={lin:D2.lin.w,robo:D2.robo.w,fly:D2.fly.w};
+function fn53(k){return k==='true'?DM.trueY:function(a,b){return DM.predict(k,FIT[k],a,b);};}
+var v53=V($('#cv53'),function(){var f=fn53(m53),lo=0.25,hi=1.75,P=U.plot($('#cv53'),{xr:[-2,2],yr:[-3,12],xt:[-2,-1,0,1,2],yt:[-3,0,3,6,9,12],xl:'x₁ (비료)',yl:'y (수확)',
+  series:[{pts:lin(-2,2,function(a){return f(a,lo);}),color:cssv('--info'),width:2.6,name:'x₂ = '+lo+' (물 적게)',ndy:14},{pts:lin(-2,2,function(a){return f(a,hi);}),color:cssv('--eye'),width:2.6,name:'x₂ = '+hi+' (물 많이)',ndy:-12}],stamp:'씨앗 고정 예시 데이터',aria:'모형 곡선과 데이터'});
+  DM.TRAIN.forEach(function(r){P.g.beginPath();P.g.arc(P.X(r[0]),P.Y(r[2]),3,0,7);P.g.fillStyle=r[1]<1?'rgba(43,108,176,.45)':'rgba(214,69,58,.45)';P.g.fill();});});
+function up53(){var f=fn53(m53),s=DM.second(f,0,1);$('#m53a').textContent=fmt(s.xx,2);$('#m53b').textContent=fmt(s.xy,2);$('#m53c').textContent=m53==='true'?'(참 모형)':fmt(D2[m53].valid,3);
+  var T={true:[['g','참 모형: 두 곡선이 휘었고(∂²y/∂x₁² = 1.6), 물이 많을수록 기울기가 가팔라집니다(∂²y/∂x₁∂x₂ = 1.5). 비선형성과 상호작용이 둘 다 있어요.']],
+    lin:[['r','일차항만: 두 선이 곧고 나란합니다. 두 번 미분이 모두 0이라 휘지도, 물에 따라 기울기가 바뀌지도 못합니다.']],
+    robo:[['a','제곱항 추가(주판봇): 곡선이 휘어졌지만 두 곡선은 여전히 나란히 위아래로만 움직입니다. ∂²y/∂x₁∂x₂ = 0 — 상호작용을 못 잡아요.']],
+    fly:[['g','교차항 추가(초파리): 휘기도 하고, 물이 많은 쪽 곡선이 더 가팔라집니다. 두 번 미분 값이 참 모형(1.6, 1.5)에 가깝습니다.']]};
+  U.ins($('#i53'),T[m53]);v53.dirty=true;}
+U.btns($('#g53'),[['true','참 모형'],['lin','일차항만'],['robo','+ 제곱항 (주판봇)'],['fly','+ 교차항 (초파리)']],'true',function(v){m53=v;up53();});up53();
+
+/* ── 5.4 ── */
+var LAM=[0,0.05,0.1,0.2,0.3,0.5,0.75,1,1.5,2,3,4,5,7,10,15,20,30,50,100],l54=0.5;
+function ell(k){var A=DM.ridge.A,a=DM.ridge.a,tr=A[0][0]+A[1][1],det=A[0][0]*A[1][1]-A[0][1]*A[1][0],e1=tr/2+Math.sqrt(tr*tr/4-det),e2=tr/2-Math.sqrt(tr*tr/4-det),v1=[A[0][1],e1-A[0][0]],n=Math.hypot(v1[0],v1[1]);v1=[v1[0]/n,v1[1]/n];var v2=[-v1[1],v1[0]],o=[];
+  for(var i=0;i<=120;i++){var t=2*Math.PI*i/120,c=Math.sqrt(k/e1)*Math.cos(t),s=Math.sqrt(k/e2)*Math.sin(t);o.push([a[0]+c*v1[0]+s*v2[0],a[1]+c*v1[1]+s*v2[1]]);}return o;}
+var v54=V($('#cv54'),function(){var w=DM.ridge.w(l54),c=Math.hypot(w[0],w[1]),wc=DM.ridge.constrained(c),circ=[];for(var i=0;i<=120;i++){var t=2*Math.PI*i/120;circ.push([c*Math.cos(t),c*Math.sin(t)]);}
+  var rc=$('#cv54').getBoundingClientRect(),ratio=Math.max(1,((rc.width||900)-60)/((rc.height||380)-54)),ys=5.8,xs=ys*ratio,xc=1.4;
+  var P=U.plot($('#cv54'),{xr:[xc-xs/2,xc+xs/2],yr:[-2.2,3.6],xt:[-6,-5,-4,-3,-2,-1,0,1,2,3,4,5,6,7,8].filter(function(t){return t>=xc-xs/2&&t<=xc+xs/2;}),yt:[-1,0,1,2],xl:'w₁',yl:'w₂',series:[0.3,1,2.5,5].map(function(k){return {pts:ell(k),color:'rgba(15,127,134,.45)',width:1.4};}).concat([{pts:circ,color:cssv('--eye'),width:2.2,dash:[6,4]}]),stamp:'설명용 예시',aria:'손실 등고선과 울타리 원'});
+  dot(P,0,0,'rgba(22,33,43,.5)',3);dot(P,DM.ridge.a[0],DM.ridge.a[1],cssv('--terrain'),5);U.label(P.g,P.X(DM.ridge.a[0])+8,P.Y(DM.ridge.a[1])-8,'벌점 없는 답',cssv('--terrain'));
+  dot(P,w[0],w[1],cssv('--stain'),6);P.g.beginPath();P.g.arc(P.X(wc[0]),P.Y(wc[1]),10,0,7);P.g.strokeStyle=cssv('--amber');P.g.lineWidth=2.4;P.g.stroke();});
+function up54(){var w=DM.ridge.w(l54),c=Math.hypot(w[0],w[1]),wc=DM.ridge.constrained(c),d=Math.hypot(w[0]-wc[0],w[1]-wc[1]);$('#v54').textContent=String(l54);
+  $('#m54a').textContent='('+fmt(w[0],3)+', '+fmt(w[1],3)+')';$('#m54b').textContent=fmt(c,3);$('#m54c').textContent='('+fmt(wc[0],3)+', '+fmt(wc[1],3)+')';$('#m54d').textContent=fmt(d,4);
+  U.ins($('#i54'),[['g','벌점 λ = '+l54+'로 구한 답(●)과, 반지름 '+fmt(c,2)+'의 울타리 안에서 손실을 가장 작게 한 답(○)이 겹칩니다(거리 '+fmt(d,4)+'). 손실 등고선이 원에 딱 닿는 점이에요 — 4.2의 등비용선이 등량선에 닿던 그림과 같습니다.'],['m','λ를 키우면 울타리가 작아져 답이 원점 쪽으로 끌려옵니다(가중치가 작아짐). λ = 0이면 벌점 없는 답 그대로입니다.']]);v54.dirty=true;}
+rng('r54','v54',function(v){return String(LAM[v]);},function(v){l54=LAM[v];up54();});$('#r54').max=LAM.length-1;$('#r54').value=9;l54=LAM[9];up54();
+
+/* ── 대결 ── */
+U.Duel({el:'#duel',run:function(){return DM.duel2();},show:function(r,pred){var N={lin:'일차항만',robo:'주판봇',fly:'초파리'};
+  $('#d-tbl').innerHTML=['lin','robo','fly'].map(function(k){return '<tr><td>'+N[k]+'</td><td>'+DM.FEATS[k].lab.join(', ')+'</td><td>'+fmt(r[k].train,3)+'</td><td><b>'+fmt(r[k].valid,3)+'</b></td></tr>';}).join('');
+  var mx=r.lin.valid;$('#d-bf').style.width=(r.fly.valid/mx*100)+'%';$('#d-br').style.width=(r.robo.valid/mx*100)+'%';$('#d-vf').textContent=fmt(r.fly.valid,3);$('#d-vr').textContent=fmt(r.robo.valid,3);
+  var flyWin=r.fly.valid<r.robo.valid;
+  $('#d-say').innerHTML=U.say('doc','doc_judge','판정합니다. 검증 오차 초파리 '+fmt(r.fly.valid,3)+', 주판봇 '+fmt(r.robo.valid,3)+'. 특성 수는 같았지만 x₂²는 이 데이터에 없는 굽음을 찾느라 헛돌았고, x₁·x₂는 "물에 따라 비료 효과가 달라지는" 상호작용을 잡았습니다. 두 번 미분이 가른 승부예요.')+U.say('robo','robo_blush','휘었다고 다 제곱은 아니었네… 교차 편미분부터 볼게.',true);
+  U.fillImgs();$('#d-score').textContent='이번 판: '+(flyWin?'초파리 연구원 승 (F)':'주판봇 승 (R)');$('#d-pred').textContent=pred?('내 예상: '+(pred==='fly'?'초파리':'주판봇')+' → '+((pred==='fly')===flyWin?'맞힘':'빗나감')):'예상을 고르지 않았어요';
+  U.setMood($('#d-fly'),flyWin?'fly_arms':'fly_coffee');U.setMood($('#d-robo'),flyWin?'robo_sigh':'robo_happy');},
+ reset:function(){U.setMood($('#d-fly'),'fly_magnify');U.setMood($('#d-robo'),'robo_coin');}});
+
+/* ── 용어·퀴즈 ── */
+U.Gloss({
+ '한계생산':['한계생산 (MP)','경제','한 단위 더 투입할 때 늘어나는 생산 = 생산함수의 편미분.'],
+ '라그랑지안':['라그랑지안 ℒ','최적화','목표 − λ × (제약). 편미분을 모두 0으로 놓아 제약 있는 최적화를 푼다.'],
+ '등량선':['등량선','경제','같은 생산량을 내는 사람·기계 조합을 이은 곡선.'],
+ '규모에 대한 수익 불변':['규모에 대한 수익 불변','경제','모든 투입을 t배 하면 생산도 정확히 t배.'],
+ '오일러 정리':['오일러 정리','최적화','1차 동차함수는 (편미분 × 변수)의 합과 같다.'],
+ '미분방정식':['미분방정식','미분','변화 속도를 지금 상태로 적은 식. dT/dt = −k(T − 20).'],
+ '경사하강':['경사하강','학습','w ← w − 학습률 × 기울기. 기울기 반대로 조금씩 걷기.'],
+ '학습률':['학습률','학습','경사하강의 보폭. 너무 크면 발산한다.'],
+ '연쇄법칙':['연쇄법칙','미분','이어진 함수의 미분 = 고리마다 미분의 곱.'],
+ '역전파':['역전파','학습','연쇄법칙의 곱을 손실에서부터 거꾸로 계산해 모든 가중치의 기울기를 구하는 방법.'],
+ '교차항':['교차항 x₁·x₂','특성','상호작용을 잡는 특성. ∂²y/∂x₁∂x₂ ≠ 0일 때 필요.'],
+ '규제항':['규제항 (벌점)','학습','가중치 크기에 매기는 벌점 λ|w|².'],
+ '검증':['검증 데이터','학습','학습에 쓰지 않고 남겨 둔 데이터. 새 데이터에서의 실력을 잰다.'],
+ '완전경쟁':['완전경쟁','경제','파는 사람·사는 사람이 아주 많아 누구도 가격을 정하지 못하는 시장.']
+},['한계생산','라그랑지안','등량선','규모에 대한 수익 불변','오일러 정리','미분방정식','경사하강','학습률','연쇄법칙','역전파','교차항','규제항','검증','완전경쟁']);
+U.Study({quiz:{
+ c4:[{q:'기계 수가 고정일 때 사람을 그만 쓰는 조건은?',o:['사람 한 명 더의 매출 = 임금','생산량이 가장 클 때','임금이 0일 때'],a:0,why:'P × MP_L = w. 한 명 더의 매출이 임금보다 작아지면 더 쓸수록 이윤이 줄어듭니다.',hint:'① 편의 MR = MC를 사람 쪽에서 보면?'},
+     {q:'비용 최소화의 라그랑주 승수 λ가 뜻하는 것은?',o:['임금','목표를 1단위 올릴 때 늘어나는 최소 비용 (한계비용)','기계 수'],a:1,why:'4.2에서 목표를 16 → 17톤으로 올리면 비용이 λ ≈ 7.07만큼 늘었습니다.',hint:'1톤 더 만드는 비용.'},
+     {q:'규모수익불변 공장에서 가격 = 한계비용이면 이윤은?',o:['0','최대','음수'],a:0,why:'오일러 정리: 매출 = 임금 총액 + 사용료 총액, 남는 것이 없습니다.',hint:'매출이 꼭 맞게 나뉩니다.'}],
+ c5:[{q:'손실 (w − 3)² + 1에서 학습률 1.05로 경사하강하면?',o:['빨리 바닥에 닿는다','바닥에서 점점 멀어진다(발산)','멈춘다'],a:1,why:'이 그릇에서는 학습률이 1보다 크면 걸을 때마다 바닥을 더 크게 넘어가 발산합니다.',hint:'5.1에서 보폭을 끝까지 밀어 보세요.'},
+     {q:'y = 3(2x + 1)²의 x = 1에서 dy/dx는?',o:['18','36','27'],a:1,why:'3 × 2u × 2, u = 3 → 3 × 6 × 2 = 36.',hint:'고리 셋의 기울기를 곱하세요.'},
+     {q:'물(x₂)이 많을수록 비료(x₁)의 효과가 커진다면 필요한 특성은?',o:['x₁²','x₂²','x₁·x₂'],a:2,why:'x₁의 기울기가 x₂에 따라 바뀌는 것은 ∂²y/∂x₁∂x₂ ≠ 0, 교차항이 필요합니다.',hint:'상호작용.'}],
+ duel:[{q:'주판봇의 x₂² 모형이 진 이유는?',o:['특성이 더 적어서','데이터에 없는 굽음을 찾고, 있는 상호작용은 못 잡아서','학습 데이터가 달라서'],a:1,why:'두 모형 모두 특성 5개, 같은 데이터. 차이는 교차항의 유무였습니다.',hint:'∂²y/∂x₁∂x₂.'}]
+}});
+U.start();
+})();
+</script>
+</body>
+</html>

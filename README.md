@@ -1,24 +1,26 @@
 # 좌표축 위의 그릇 — 3D 지도로 본 모델 최적화
 
-가중치를 좌표축으로, 오차를 높이로 세운 3D 지도 위에서 모델 최적화를 보는 연구실 해설입니다. 연구실 스킬 ai-lab-explainer v1.14("낮의 연구실", 흰 배경)를 따릅니다. 박사·조수 하루·초파리 연구원·주판봇과 인턴 시아·모아가 진행합니다.
+가중치를 좌표축으로, 오차를 높이로 세운 3D 지도 위에서 모델 최적화를 보는 연구실 해설입니다. 미분이 처음인 분을 위한 입문 두 편 **「최적화 첫걸음」**(ahnboat.xyz SPECIAL 카드에서 `first_step_1.html`로 바로 연결)도 함께 있습니다. 연구실 스킬 ai-lab-explainer v1.14("낮의 연구실", 흰 배경)를 따릅니다. 박사·조수 하루·초파리 연구원·주판봇과 인턴 시아·모아가 진행합니다.
 
 - 사이트: https://adminmrobo.github.io/optimization_3d_map/
 - 글 · 안상선 ((주)M-Robo 대표) · [저자 소개](https://adminmrobo.github.io/who_am_i/who_am_i.html)
 
 | 편 | 파일 | 내용 | 대결 |
 |---|---|---|---|
-| 목차 | `index.html` | 두 편으로 가는 첫 화면 | — |
+| 목차 | `index.html` | 맨 위 "미분이 처음이라면 → 최적화 첫걸음" 띠, 그 아래 그릇 1~3편 | — |
+| 최적화 첫걸음 ① (입문) | `first_step_1.html` | "혹시… 미분 좋아하세요?" 프롤로그 → 기울기 복습 → 1장 왜 쓰나(순간 변화·한계·기울기 0·편미분/전미분) → 2장 역사(연표·극한·한계혁명) → 3장 빵 공장(수입·비용·이윤, MR = MC, 조업중단점) | 많이 구울수록 이익일까? → 초파리 승 (F) |
+| 최적화 첫걸음 ② (입문) | `first_step_2.html` | 4장 공장(사람 한 명 더, 라그랑지안과 λ = 한계비용, 오일러 정리, 미분방정식) → 5장 인공지능(경사하강, 연쇄법칙·역전파, 특성공학의 비선형성 vs 상호작용, 규제항) → 에필로그(시간·비용은 제조업 편) | 제곱항만 넣으면 다 될까? → 초파리 승 (F) |
 | 1편 수학 편 | `1_math_map.html` | ① 단면과 한 걸음 ② 그래디언트와 법선(깃대와 그림자) ③ 헤시안·고유값·보폭 한계 ④ 안장점(감자칩) ⑤ 야코비안과 역전파 | 기울기 0이면 바닥인가? → 초파리 승 (F) |
 | 2편 실험실 편 | `2_experiment_lab.html` | ① 배치 크기(공 세 개 경주) ② 학습률 한계 ③ 가중치 4,416개 신경망의 단면 ④ 에포크와 과적합 | 작은 배치냐, 풀배치냐 → 조건부 (C) |
 | 3편 화살표 밭 편 (입문) | `3_arrow_field.html` | 진짜 x·y·z 세 축 공간에서 ① 편미분(온도계) ② 그래디언트(나침반·등위면) ③ 발산(그물 상자·물감) ④ 회전(바람개비) ⑤ 라플라시안(이웃 여섯 집) | 겉모양으로 바람개비가 도는지 알 수 있나? → 초파리 승 (F) |
 
-네 페이지 모두 흰 배경의 단일 HTML 파일입니다(외부 요청은 글꼴 하나). 3D는 Canvas 2D로 직접 그렸고, 끌거나 시점 버튼·화살표 키로 돌릴 수 있습니다. 페이지 끝에 지식 색인(`#kg`)과 온톨로지·서지 꾸러미(`#export`)가 있습니다.
+여섯 페이지 모두 흰 배경의 단일 HTML 파일입니다(외부 요청은 글꼴 하나). 3D는 Canvas 2D로 직접 그렸고, 끌거나 시점 버튼·화살표 키로 돌릴 수 있습니다. 페이지 끝에 지식 색인(`#kg`)과 온톨로지·서지 꾸러미(`#export`)가 있습니다.
 
 ## 바탕 자료와 저작권
 
 - matharium 인포그래픽 4장(곡면 감자칩의 기하, 벡터 미분 연산자, 나블라(Del) 연산자 — 3편의 바탕, 그래디언트·야코비안·헤시안), matheorems 영상(그래프 곡면의 야코비안과 법선), Machine Learning from Scratch 39편·43편(Facebook 릴스) — 사용자가 제공한 자료입니다. 원본 그림·영상·코드는 이 저장소에 넣지 않았고, 3D와 그래프는 모두 새로 그렸습니다.
 - 39편·43편 설명글의 숫자는 영상 속 코드를 옮겨 실행해 그대로 재현되는 것을 확인했습니다(2편 정리의 검증 상자). 페이지의 실험은 같은 아이디어로 새로 짠 코드라 숫자가 조금 다릅니다.
-- 논문: Dauphin 외(2014), Li 외(2018), Rumelhart·Hinton·Williams(1986), Goodfellow·Bengio·Courville(2016), Goyal 외(2017), He 외(2016), Ioffe·Szegedy(2015), Polyak(1964), Kingma·Ba(2015), Song·Ermon(2019), Gonzalez·Woods(2018), Knott(1911).
+- 논문: Dauphin 외(2014), Li 외(2018), Rumelhart·Hinton·Williams(1986), Goodfellow·Bengio·Courville(2016), Goyal 외(2017), He 외(2016), Ioffe·Szegedy(2015), Polyak(1964), Kingma·Ba(2015), Song·Ermon(2019), Gonzalez·Woods(2018), Knott(1911). 첫걸음 편: Leibniz(1684), Bussotti(2003), Lemaréchal(2012), Hoerl·Kennard(1970), Flux(1894)·HET website, 미적분 역사 자료(Il Giardino di Archimede, Wikipedia).
 - 사용자 제공 자료(인포그래픽·영상)의 원 게시물 주소·게시일은 아직 받지 못해 "미확인"으로 적었습니다.
 - 캐릭터 이름·설정·그림은 저작권자 안상선의 허락 없이 사용할 수 없습니다.
 
@@ -26,11 +28,12 @@
 
 ```
 .
-├─ index.html · 1_math_map.html · 2_experiment_lab.html · 3_arrow_field.html   완성 페이지 (build/에서 만듦)
+├─ index.html · 1_math_map.html · 2_experiment_lab.html · 3_arrow_field.html · first_step_1.html · first_step_2.html   완성 페이지 (build/에서 만듦)
 ├─ build/
-│  ├─ p0/p1/p2/p3.src.html   페이지 원본
+│  ├─ p0~p5.src.html   페이지 원본 (p4·p5 = 최적화 첫걸음 ①·②)
 │  ├─ common.css · common.js   공용 디자인·모듈 (3D 지형 Surf3D, 3편의 x·y·z 공간 Space3D, 그래프, 용어 말풍선, 퀴즈, 대결)
 │  ├─ labmath.js           계산 모듈 (시드 고정 데이터, 미니배치 경사하강, 헤시안, 안장 대결)
+│  ├─ diffmath.js          첫걸음 계산 모듈 (빵 공장 비용, 공장 생산함수·라그랑지안, 커피 식기, 경사하강, 연쇄, 특성공학 데이터·적합, 규제항)
 │  ├─ vecmath.js           3편 계산 모듈 (숫자 밭·화살표 밭, 편미분·그래디언트·발산·회전·라플라시안, 상자 출입·바람개비 고리 셈, 대결)
 │  ├─ deep.json            2편 ③·④ 신경망 실험 결과 (code/deep_slices.py가 만듦)
 │  ├─ kg_defs.py           지식 그래프·참고문헌·페이지 서지 정의 → kg_N / refs_N / meta_N.json
@@ -40,6 +43,7 @@
 │  └─ build.js             조립: node build/build.js
 ├─ code/
 │  ├─ check_numbers.js     페이지 기대 수치 다시 계산 (node code/check_numbers.js)
+│  ├─ check_first_step.js  첫걸음 수치 검증 (node code/check_first_step.js)
 │  ├─ check_numbers3.js    3편 수치 검증 — 상자·고리·이웃 셈이 식과 맞는지 (node code/check_numbers3.js)
 │  └─ deep_slices.py       신경망 단면·학습률·과적합 실험 (python3 code/deep_slices.py, numpy)
 ├─ COVER_PROMPTS_optimization_3d_map.md   표지 네 장의 Genspark 지시문 (밝은 낮 연구실, 3편은 아직 그림판 표지)
@@ -83,4 +87,17 @@
 | 물감 상자 부피, 샘에서 0.5초 뒤 | 4.48배 = e^(3 × 0.5) |
 | 라플라시안: 그릇 · 돔 · 안장 x² + y² − 2z² | 6 · −6 · 0 |
 | 대결 맞힌 수: 초파리(회전 계산) · 주판봇(겉모양) | 4/4 · 2/4 |
+
+## 최적화 첫걸음 주요 수치 (설명용 예시값)
+
+| 실험 | 값 |
+|---|---|
+| ① 빵 공장(가격 2만 원): 최선 생산량 · 이윤 | 10판 · 4만 원 (15판이면 −6만 원) |
+| ① 조업중단점(AVC 최저) · 손익분기점(ATC 최저) | 8.75 · 15.85 (천 원) |
+| ① 대결 세 날 이윤 합: 초파리(MR = MC + 중단) · 주판봇(15판) | −36.8 · −465.0 |
+| ② 공장(기계 4대): 사람 수 · 생산 · 이윤 | 16명 · 16톤 · 40만 원 |
+| ② 16톤 최소 비용 · λ = 한계비용 | 113.14 · 7.07 (1톤 더 비용과 일치) |
+| ② 대결 검증 오차: 일차항 · 주판봇(x₂²) · 초파리(x₁·x₂) | 2.228 · 1.209 · 0.094 |
+
+계획 문서: `plan/최적화첫걸음_구성안_v3.md`, 표지 지시문: `plan/COVER_PROMPTS_optimization_first_step.md`
 
