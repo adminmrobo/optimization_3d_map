@@ -1,6 +1,6 @@
 {
- "title": "최적화 첫걸음 ① 혹시… 미분 좋아하세요? — 왜, 언제부터, 어디에",
- "series": "최적화 첫걸음 — 혹시… 미분 좋아하세요?",
+ "title": "최적화 첫걸음 ① 미분부터 시작하기 — 왜, 언제부터, 어디에",
+ "series": "최적화 첫걸음 — 미분부터 시작하기",
  "number": "4",
  "creator": [
   {
@@ -16,13 +16,14 @@
   }
  ],
  "date": "2026-11-16",
- "version": "1.2",
+ "version": "1.3",
  "language": [
   "ko"
  ],
  "license": "",
  "url": "https://adminmrobo.github.io/optimization_3d_map/first_step_1.html",
  "about": [
+  "lab:concept/iterative-training",
   "lab:concept/derivative",
   "lab:concept/marginal",
   "lab:concept/stationary-point",
@@ -43,5 +44,5 @@
  "educationalLevel": "입문",
  "learningResourceType": "interactive explainer",
  "registry": "KG_00_registry 0.2",
- "suggestedCitation": "안상선 (2026). 최적화 첫걸음 ① 혹시… 미분 좋아하세요? — 왜, 언제부터, 어디에. 최적화 첫걸음 1, v1.2."
+ "suggestedCitation": "안상선 (2026). 최적화 첫걸음 ① 미분부터 시작하기 — 왜, 언제부터, 어디에. 최적화 첫걸음 1, v1.3."
 }

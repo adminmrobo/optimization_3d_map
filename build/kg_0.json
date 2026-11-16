@@ -173,8 +173,8 @@
    "id": "lab:section/first-step-1",
    "type": "Section",
    "label": {
-    "ko": "최적화 첫걸음 ①",
-    "en": "First step to optimization 1"
+    "ko": "최적화 첫걸음 ① — 미분부터 시작하기",
+    "en": "First step to optimization 1: starting from derivatives"
    },
    "page": "index",
    "anchor": "#firststep",
@@ -192,8 +192,8 @@
    "id": "lab:section/first-step-2",
    "type": "Section",
    "label": {
-    "ko": "최적화 첫걸음 ②",
-    "en": "First step to optimization 2"
+    "ko": "최적화 첫걸음 ② — 미분부터 시작하기",
+    "en": "First step to optimization 2: starting from derivatives"
    },
    "page": "index",
    "anchor": "#firststep",

@@ -1,6 +1,6 @@
 {
- "title": "최적화 첫걸음 ② 공장에서 인공지능까지 — 얼마만큼 생산하면 될까요?",
- "series": "최적화 첫걸음 — 혹시… 미분 좋아하세요?",
+ "title": "최적화 첫걸음 ② 미분부터 시작하기 — 공장에서 인공지능까지",
+ "series": "최적화 첫걸음 — 미분부터 시작하기",
  "number": "5",
  "creator": [
   {
@@ -16,7 +16,7 @@
   }
  ],
  "date": "2026-11-16",
- "version": "1.2",
+ "version": "1.3",
  "language": [
   "ko"
  ],
@@ -40,5 +40,5 @@
  "educationalLevel": "입문",
  "learningResourceType": "interactive explainer",
  "registry": "KG_00_registry 0.2",
- "suggestedCitation": "안상선 (2026). 최적화 첫걸음 ② 공장에서 인공지능까지. 최적화 첫걸음 2, v1.2."
+ "suggestedCitation": "안상선 (2026). 최적화 첫걸음 ② 미분부터 시작하기 — 공장에서 인공지능까지. 최적화 첫걸음 2, v1.3."
 }
