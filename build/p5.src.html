@@ -50,7 +50,7 @@
   <h1>최적화 첫걸음 ② — 공장에서 인공지능까지</h1>
   <p class="question">공장을 차렸습니다. 사람과 기계를 얼마나 쓰고, 얼마만큼 생산하면 될까요? 그리고 인공지능은 왜 같은 방법으로 배울까요?</p>
   <p class="lead"><a href="first_step_1.html">① 편</a>의 빵 공장은 "몇 판 구울까" 하나만 정했습니다. 이번 공장은 <b>사람(노동)</b>과 <b>기계(자본)</b> 두 가지를 쓰고, 사람에게는 <b>임금</b>을, 기계에는 <b>이자(빌린 돈의 값, 사용료)</b>를 냅니다. 변수가 둘이 되면 ①의 편미분이 쓰이고, 목표가 정해지면 라그랑지안이, 시간이 흐르면 미분방정식이 등장합니다. 그리고 그 끝에서 인공지능의 학습이 똑같은 모양으로 나타납니다.</p>
-  <p class="byline">글 · 안상선 ((주)M-Robo 대표) · <a href="https://adminmrobo.github.io/who_am_i/who_am_i.html">저자 소개</a> · 2026-11-16 · v1.0</p>
+  <p class="byline">글 · 안상선 ((주)M-Robo 대표) · <a href="https://adminmrobo.github.io/who_am_i/who_am_i.html">저자 소개</a> · 2026-11-16 · v1.1</p>
   <div class="three"><b>세 줄로 먼저</b><ol>
     <li>사람은 "한 명 더 써서 늘어나는 매출 = 임금"이 될 때까지 쓴다. ①의 MR = MC와 같은 이야기다.</li>
     <li>목표 생산량이 정해지면 라그랑지안으로 가장 싼 조합을 찾고, 그 승수 λ가 바로 한계비용이다.</li>
@@ -88,8 +88,8 @@
     <div class="ptitle">기계 4대 고정 — 사람 한 명 더의 매출과 임금, 그리고 이윤</div>
     <div class="two"><div class="cwrap"><canvas id="cv41a" aria-label="사람 한 명 더의 매출 곡선과 임금 직선"></canvas></div><div class="cwrap"><canvas id="cv41b" aria-label="사람 수에 따른 이윤 곡선"></canvas></div></div>
     <div class="ctrl"><div class="group"><label class="glabel" for="r41l">사람 수 L</label><input type="range" id="r41l" min="1" max="40" step="1" value="9"><span class="val" id="v41l">9명</span></div>
-      <div class="group"><label class="glabel" for="r41w">임금 w</label><input type="range" id="r41w" min="3" max="10" step="0.5" value="5"><span class="val" id="v41w">5.0</span>
-      <label class="glabel" for="r41p">제품 가격 P</label><input type="range" id="r41p" min="6" max="14" step="0.5" value="10"><span class="val" id="v41p">10.0</span></div></div>
+      <div class="group"><label class="glabel" for="r41w">임금 w (만 원)</label><input type="range" id="r41w" min="3" max="10" step="0.5" value="5"><span class="val" id="v41w">5.0</span>
+      <label class="glabel" for="r41p">제품 가격 P (만 원)</label><input type="range" id="r41p" min="6" max="14" step="0.5" value="10"><span class="val" id="v41p">10.0</span></div></div>
     <div class="eq" id="eq41"></div>
     <div class="minis"><div class="mini a"><span>생산량 Q</span><b id="m41a">—</b></div><div class="mini g"><span>한 명 더의 매출 P·MP<sub>L</sub></span><b id="m41b">—</b></div><div class="mini m"><span>이윤</span><b id="m41c">—</b></div><div class="mini r"><span>가장 좋은 사람 수</span><b id="m41d">—</b></div></div>
     <div class="insight" id="i41" aria-live="polite"></div>
@@ -105,7 +105,7 @@
     <div class="ptitle">같은 생산량 곡선(등량선)과 같은 비용 직선(등비용선)</div>
     <div class="cwrap tall"><canvas id="cv42" aria-label="16톤 등량선, 비용 직선, 가장 싼 점"></canvas></div>
     <div class="ctrl"><div class="group"><label class="glabel" for="r42q">목표 생산량</label><input type="range" id="r42q" min="8" max="24" step="1" value="16"><span class="val" id="v42q">16톤</span>
-      <label class="glabel" for="r42c">쓸 돈 C</label><input type="range" id="r42c" min="60" max="220" step="1" value="160"><span class="val" id="v42c">160</span></div>
+      <label class="glabel" for="r42c">쓸 돈 C (만 원)</label><input type="range" id="r42c" min="60" max="220" step="1" value="160"><span class="val" id="v42c">160</span></div>
       <div class="group"><button class="bt primary" id="b42" type="button">가장 싼 점 찾기</button></div></div>
     <div class="eq" id="eq42"></div>
     <div class="minis"><div class="mini a"><span>가장 싼 비용 C*</span><b id="m42a">—</b></div><div class="mini g"><span>사람 L* · 기계 K*</span><b id="m42b" style="font-size:16px">—</b></div><div class="mini m"><span>λ (식)</span><b id="m42c">—</b></div><div class="mini r"><span>1톤 더 만드는 비용 C*(Q + 1) − C*(Q)</span><b id="m42d">—</b></div></div>
@@ -123,7 +123,7 @@
     <div class="ptitle">규모를 키워 보고, 매출이 어떻게 나뉘는지 보기</div>
     <div class="cwrap tall"><canvas id="cv43" aria-label="매출 막대와 임금·사용료·이윤 막대"></canvas></div>
     <div class="ctrl"><div class="group"><label class="glabel" for="r43t">규모 배수 t (사람·기계 모두)</label><input type="range" id="r43t" min="0.5" max="3" step="0.25" value="1"><span class="val" id="v43t">1.00배</span>
-      <label class="glabel" for="r43p">제품 가격 P</label><input type="range" id="r43p" min="6" max="10" step="0.01" value="7.07"><span class="val" id="v43p">7.07</span></div></div>
+      <label class="glabel" for="r43p">제품 가격 P (만 원)</label><input type="range" id="r43p" min="6" max="10" step="0.01" value="7.07"><span class="val" id="v43p">7.07</span></div></div>
     <div class="minis"><div class="mini a"><span>생산량 Q</span><b id="m43a">—</b></div><div class="mini g"><span>매출 P·Q</span><b id="m43b">—</b></div><div class="mini r"><span>임금 + 사용료</span><b id="m43c">—</b></div><div class="mini m"><span>남는 돈 (이윤)</span><b id="m43d">—</b></div></div>
     <div class="insight" id="i43" aria-live="polite"></div>
   </div>
@@ -133,7 +133,7 @@
   <h3 id="s44">4.4 미분방정식 — 변화의 규칙</h3>
   <div class="pair">
     <div><div class="tl">일상으로 치면</div>뜨거운 커피는 방 온도와 차이가 클수록 빨리 식습니다. "지금 상태가 다음 변화를 정한다" — 이런 규칙을 적은 식이 미분방정식입니다. 공장의 재고, 가마의 온도도 이렇게 움직입니다.</div>
-    <div><div class="tr">수학에서는</div>커피: dT/dt = −k(T − 20). 컴퓨터는 이것을 짧은 시간 Δt마다 "지금 기울기 × Δt만큼 이동"으로 풉니다(오일러 방법). 그리고 놀랍게도 <b>경사하강도 같은 꼴</b>입니다: dw/dt = −L′(w). 기울기를 따라 내려가는 공의 움직임이죠.</div>
+    <div><div class="tr">수학에서는</div>커피: dT/dt = −k(T − 20). 컴퓨터는 이것을 짧은 시간 Δt마다 "지금 기울기 × Δt만큼 이동"으로 풉니다(오일러 방법). 그리고 놀랍게도 <b>경사하강도 같은 꼴</b>입니다: dw/dt = −L′(w). 기울기를 따라 미끄러져 내려가는 움직임이죠(굴러가는 공과 달리 관성은 없습니다).</div>
   </div>
   <div class="panel">
     <div class="ptitle">정확한 곡선과 계단처럼 따라가는 컴퓨터 풀이</div>
@@ -143,7 +143,7 @@
     <div class="minis"><div class="mini a"><span>정확한 끝값</span><b id="m44a">—</b></div><div class="mini g"><span>계단 풀이 끝값</span><b id="m44b">—</b></div><div class="mini r"><span>차이</span><b id="m44c">—</b></div></div>
     <div class="insight" id="i44" aria-live="polite"></div>
   </div>
-  <div class="assume"><b>이 칸의 가정</b> 미분방정식 자체는 최적화가 아니라 "어떻게 변해 가나"의 규칙이다. 경사하강은 그 규칙을 "가장 낮은 곳으로 가는 길"로 고른 것이다.</div>
+  <div class="assume"><b>이 칸의 가정</b> 미분방정식 자체는 최적화가 아니라 "어떻게 변해 가나"의 규칙이다. 경사하강은 그 규칙을 "가장 낮은 곳으로 가는 길"로 고른 것이다. 덧붙여, 이 편에는 "오일러"가 세 번 나온다. 4.3의 오일러 정리(나눠 주기), 여기의 오일러 방법(계단으로 풀기), 에필로그의 오일러–라그랑주 방정식(시간 전체의 최적화)은 모두 같은 수학자 오일러의 이름이지만 서로 다른 도구다.</div>
   <div class="quiz" data-quiz="c4"></div>
 </div></section>
 
@@ -154,7 +154,7 @@
 
   <h3 id="s51">5.1 손실과 경사하강 — 기울기 0을 못 풀면 걸어간다</h3>
   <div class="pair">
-    <div><div class="tl">일상으로 치면</div>①의 빵 공장은 MR = MC라는 식을 풀어 답을 바로 구했습니다. 인공지능 모델은 손잡이(가중치)가 수백만 개라 그런 식을 풀 수 없습니다. 그래서 짙은 안개 속 산에서처럼 <b>발밑 기울기만 보고 조금씩 내려갑니다</b>.</div>
+    <div><div class="tl">일상으로 치면</div>①의 빵 공장은 MR = MC라는 식을 풀어 답을 바로 구했습니다. 인공지능 모델은 손잡이(가중치)가 수백만 개이고 식이 여러 겹으로 얽혀 있어서, "기울기 = 0"을 한 번에 푸는 공식이 없습니다. 그래서 짙은 안개 속 산에서처럼 <b>발밑 기울기만 보고 조금씩 내려갑니다</b>.</div>
     <div><div class="tr">수학에서는</div>틀린 정도를 잰 값이 손실 L(w). 새 w = 지금 w − 학습률 × L′(w). 기울기가 0이 되면 더 이상 움직이지 않습니다 — 1.3의 "기울기 0 = 바닥"을 걸어서 찾는 셈입니다. 1847년 코시가 처음 낸 방법입니다 [3].</div>
   </div>
   <div class="panel">
@@ -182,7 +182,7 @@
 
   <h3 id="s53">5.3 특성공학 — 비선형성과 상호작용은 다르다</h3>
   <div class="pair">
-    <div><div class="tl">일상으로 치면</div>비료(x₁)를 줄 때 수확(y)이 처음엔 많이 늘다 덜 늘거나 더 느는 것은 <b>비선형성</b>입니다. 그런데 물(x₂)을 많이 준 밭에서 비료의 효과가 더 커진다면, 그건 <b>상호작용</b>입니다. 둘은 다릅니다.</div>
+    <div><div class="tl">일상으로 치면</div>비료(x₁)를 한 포대씩 더 줄 때마다 수확(y)이 늘어나는 양 자체가 달라진다면(점점 덜 늘거나 점점 더 늘면) <b>비선형성</b>입니다. 그런데 물(x₂)을 많이 준 밭에서 비료의 효과가 더 커진다면, 그건 <b>상호작용</b>입니다. 둘은 다릅니다.</div>
     <div><div class="tr">수학에서는</div>비선형성: 같은 변수로 두 번 미분한 ∂²y/∂x₁² ≠ 0 → x₁² 같은 <b>제곱항</b>이 필요. 상호작용: 서로 다른 변수로 한 번씩 미분한 ∂²y/∂x₁∂x₂ ≠ 0 → x₁·x₂ 같은 <b>교차항</b>이 필요. ①의 1.4에서 본 귀퉁이 dx·dy가 바로 교차항의 씨앗입니다.</div>
   </div>
   <div class="panel">
@@ -197,7 +197,7 @@
   <h3 id="s54">5.4 규제항과 라그랑지안 — 닮은 꼴</h3>
   <div class="pair">
     <div><div class="tl">일상으로 치면</div>모형이 학습 데이터에 너무 딱 맞추려고 가중치를 크게 키우면 새 데이터에서 틀립니다. 그래서 "가중치 크기는 이 원 안에서만" 같은 울타리를 치거나, 크기에 벌금을 매깁니다.</div>
-    <div><div class="tr">수학에서는</div>"손실 최소, 단 |w|² ≤ c²"(제약, 4.2의 라그랑지안)과 "손실 + λ|w|² 최소"(벌점, 능형 회귀 [5])는 손실이 그릇 모양(볼록)일 때 <b>같은 답</b>을 줍니다. 벌점의 λ가 라그랑지안의 승수 λ와 같은 역할을 합니다.</div>
+    <div><div class="tr">수학에서는</div>"손실 최소, 단 |w|² ≤ c²"(제약, 4.2의 라그랑지안)과 "손실 + λ|w|² 최소"(벌점, 능형 회귀 [5])는 손실이 그릇 모양(볼록)일 때, λ와 울타리 반지름 c를 알맞게 짝지으면 <b>같은 답</b>을 줍니다. 벌점의 λ가 라그랑지안의 승수 λ와 같은 역할을 합니다(λ가 클수록 짝이 되는 c는 작음).</div>
   </div>
   <div class="panel">
     <div class="ptitle">가중치 평면 — 손실 등고선, 울타리(원), 벌점 답(●)과 울타리 답(○)</div>
@@ -241,7 +241,7 @@
   <p>지금까지의 공장은 하루짜리 사진 한 장이었습니다. 실제 공장에서는 가마가 데워지는 데 시간이 걸리고, 멈췄다 다시 켜면 손실이 나고, 연료비는 시간마다 달라집니다. 그러면 최적화의 목표가 이렇게 바뀝니다.</p>
   <div class="eq">하루 전체 이윤 = Σ<sub>t</sub> [ 수입(t) − 연료비(t) − 정지 손실(t) ] → 가장 크게, 단 가마 온도·생산능력·품질 기준을 넘지 않게</div>
   <ul>
-    <li><b>시간이 들어간 최적화</b>: 오늘의 결정이 내일의 상태를 바꿉니다(4.4의 미분방정식이 제약이 됨). 이런 문제에서 나오는 조건이 오일러 방정식입니다.</li>
+    <li><b>시간이 들어간 최적화</b>: 오늘의 결정이 내일의 상태를 바꿉니다(4.4의 미분방정식이 제약이 됨). 이런 문제는 "기울기 0" 대신 시간 전체를 한꺼번에 보는 조건(변분법의 오일러–라그랑주 방정식, 최적제어의 최대원리)으로 풉니다.</li>
     <li><b>부등식 제약</b>: "온도는 1,450도 이하", "하루 3,000톤 이하"처럼 넘지 말아야 할 선 — 4.2의 라그랑지안을 넓힌 KKT 조건으로 다룹니다.</li>
     <li><b>AI의 자리</b>: 측정하기 어려운 품질을 미리 예측하는 모형(5장의 방법)이 이 최적화의 눈이 됩니다.</li>
   </ul>
@@ -381,7 +381,7 @@ var lr=0.1,n51=10;
 var v51=V($('#cv51'),function(){var run=DM.loss.run(0,lr,n51),P=U.plot($('#cv51'),{xr:[-2,8],yr:[0,30],xt:[-2,0,2,3,4,6,8],yt:[0,10,20,30],xl:'가중치 w',yl:'손실 L',series:[{pts:lin(-2,8,DM.loss.L),color:cssv('--text'),width:2.4},{pts:run.filter(function(w){return w>-2&&w<8;}).map(function(w){return [w,DM.loss.L(w)];}),color:cssv('--amber'),width:1.4,dots:4}],stamp:'설명용 예시',aria:'손실 곡선과 발자국'});
   dot(P,3,1,cssv('--gfp'),6);U.label(P.g,P.X(3),P.Y(1)+18,'바닥 w = 3',cssv('--gfp'),'center');});
 function up51(){var run=DM.loss.run(0,lr,n51),w=run[run.length-1];$('#m51a').textContent=Math.abs(w)>1e4?'발산':fmt(w,3);$('#m51b').textContent=Math.abs(w)>1e4?'∞':fmt(DM.loss.L(w),3);
-  U.ins($('#i51'),[[lr<0.95?(Math.abs(w-3)<0.05?'g':'a'):'r',lr<0.5?(Math.abs(w-3)<0.05?'바닥 근처에 닿았습니다. 기울기가 0에 가까워지면 걸음도 저절로 작아져요.':'작은 보폭: 안전하지만 걸음이 많이 필요합니다.'):lr<0.95?'보폭이 커서 바닥을 넘어갔다 돌아오며 다가갑니다(지그재그).':lr<1.0001?'보폭 1: 바닥을 사이에 두고 제자리에서 영원히 왕복합니다.':'보폭이 너무 커서 걸을수록 바닥에서 멀어집니다(발산). 이 그릇에서는 학습률이 1보다 작아야 합니다.']]);v51.dirty=true;}
+  U.ins($('#i51'),[[lr<0.999?(Math.abs(w-3)<0.05?'g':'a'):'r',lr<0.5?(Math.abs(w-3)<0.05?'바닥 근처에 닿았습니다. 기울기가 0에 가까워지면 걸음도 저절로 작아져요.':'작은 보폭: 안전하지만 걸음이 많이 필요합니다.'):Math.abs(lr-0.5)<1e-9?'보폭 0.5: 이 그릇에서는 첫 걸음에 바로 바닥(w = 3)에 내려앉습니다. 굽음(2)의 역수만큼 걸은 셈이에요.':lr<0.999?'보폭이 커서 바닥을 넘어갔다 돌아오며 다가갑니다(지그재그).':lr<1.0001&&lr>0.999?'보폭 1: 바닥을 사이에 두고 제자리에서 영원히 왕복합니다.':'보폭이 너무 커서 걸을수록 바닥에서 멀어집니다(발산). 이 그릇에서는 학습률이 1보다 작아야 합니다.']]);v51.dirty=true;}
 rng('r51','v51',function(v){return v.toFixed(2);},function(v){lr=v;up51();});rng('r51n','v51n',function(v){return String(v);},function(v){n51=v;up51();});up51();
 
 /* ── 5.2 ── */
@@ -449,7 +449,7 @@ U.Gloss({
 U.Study({quiz:{
  c4:[{q:'기계 수가 고정일 때 사람을 그만 쓰는 조건은?',o:['사람 한 명 더의 매출 = 임금','생산량이 가장 클 때','임금이 0일 때'],a:0,why:'P × MP_L = w. 한 명 더의 매출이 임금보다 작아지면 더 쓸수록 이윤이 줄어듭니다.',hint:'① 편의 MR = MC를 사람 쪽에서 보면?'},
      {q:'비용 최소화의 라그랑주 승수 λ가 뜻하는 것은?',o:['임금','목표를 1단위 올릴 때 늘어나는 최소 비용 (한계비용)','기계 수'],a:1,why:'4.2에서 목표를 16 → 17톤으로 올리면 비용이 λ ≈ 7.07만큼 늘었습니다.',hint:'1톤 더 만드는 비용.'},
-     {q:'규모수익불변 공장에서 가격 = 한계비용이면 이윤은?',o:['0','최대','음수'],a:0,why:'오일러 정리: 매출 = 임금 총액 + 사용료 총액, 남는 것이 없습니다.',hint:'매출이 꼭 맞게 나뉩니다.'}],
+     {q:'규모수익불변 공장에서 가격 = 한계비용이면 이윤은?',o:['최대','음수','0'],a:2,why:'오일러 정리: 매출 = 임금 총액 + 사용료 총액, 남는 것이 없습니다.',hint:'매출이 꼭 맞게 나뉩니다.'}],
  c5:[{q:'손실 (w − 3)² + 1에서 학습률 1.05로 경사하강하면?',o:['빨리 바닥에 닿는다','바닥에서 점점 멀어진다(발산)','멈춘다'],a:1,why:'이 그릇에서는 학습률이 1보다 크면 걸을 때마다 바닥을 더 크게 넘어가 발산합니다.',hint:'5.1에서 보폭을 끝까지 밀어 보세요.'},
      {q:'y = 3(2x + 1)²의 x = 1에서 dy/dx는?',o:['18','36','27'],a:1,why:'3 × 2u × 2, u = 3 → 3 × 6 × 2 = 36.',hint:'고리 셋의 기울기를 곱하세요.'},
      {q:'물(x₂)이 많을수록 비료(x₁)의 효과가 커진다면 필요한 특성은?',o:['x₁²','x₂²','x₁·x₂'],a:2,why:'x₁의 기울기가 x₂에 따라 바뀌는 것은 ∂²y/∂x₁∂x₂ ≠ 0, 교차항이 필요합니다.',hint:'상호작용.'}],
