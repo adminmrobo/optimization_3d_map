@@ -1112,6 +1112,101 @@
    "match": []
   },
   {
+   "id": "lab:work/sciencesnow_gjh",
+   "type": "Work",
+   "label": {
+    "ko": "Sciences Now — Gradient vs Jacobian vs Hessian",
+    "en": "Sciences Now — Gradient vs Jacobian vs Hessian"
+   },
+   "page": "1_math_map",
+   "anchor": "#top",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:work/matharium_hessian",
+   "type": "Work",
+   "label": {
+    "ko": "matharium — Hessian Matrix",
+    "en": "matharium — Hessian Matrix"
+   },
+   "page": "1_math_map",
+   "anchor": "#top",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:work/wiki_hessian",
+   "type": "Work",
+   "label": {
+    "ko": "Wikipedia — Hessian matrix",
+    "en": "Wikipedia — Hessian matrix"
+   },
+   "page": "1_math_map",
+   "anchor": "#top",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:work/nocedal2006numerical",
+   "type": "Work",
+   "label": {
+    "ko": "Nocedal·Wright 2006 Numerical Optimization",
+    "en": "Nocedal & Wright 2006 Numerical Optimization"
+   },
+   "page": "1_math_map",
+   "anchor": "#top",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:work/baydin2018automatic",
+   "type": "Work",
+   "label": {
+    "ko": "Baydin 외 2018 자동미분 개관",
+    "en": "Baydin et al. 2018 AD survey"
+   },
+   "page": "1_math_map",
+   "anchor": "#top",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
    "id": "lab:work/matheorems_graph",
    "type": "Work",
    "label": {
@@ -1508,6 +1603,156 @@
    ]
   },
   {
+   "id": "lab:claim/hessian-symmetric",
+   "type": "Claim",
+   "label": {
+    "ko": "2차 편미분이 연속이면 헤시안은 대칭이다(클레로·슈바르츠)",
+    "en": "The Hessian is symmetric when second partials are continuous"
+   },
+   "page": "1_math_map",
+   "anchor": "#s3",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "source": [
+    {
+     "ref": "sciencesnow_gjh",
+     "loc": "Important Notes"
+    }
+   ]
+  },
+  {
+   "id": "lab:claim/hessian-is-jacobian-of-gradient",
+   "type": "Claim",
+   "label": {
+    "ko": "헤시안은 그래디언트의 야코비안이다",
+    "en": "The Hessian is the Jacobian of the gradient"
+   },
+   "page": "1_math_map",
+   "anchor": "#gjh",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "source": [
+    {
+     "ref": "wiki_hessian",
+     "loc": "Relation to Jacobian"
+    }
+   ]
+  },
+  {
+   "id": "lab:claim/hessian-name-sylvester",
+   "type": "Claim",
+   "label": {
+    "ko": "헤시안은 헤세(1811–1874)의 이름을 따 실베스터가 붙인 이름이다",
+    "en": "Sylvester named the Hessian after Otto Hesse"
+   },
+   "page": "1_math_map",
+   "anchor": "#s3",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "source": [
+    {
+     "ref": "wiki_hessian",
+     "loc": "도입부"
+    }
+   ]
+  },
+  {
+   "id": "lab:claim/newton-one-step-quadratic",
+   "type": "Claim",
+   "label": {
+    "ko": "2차 함수에서 뉴턴 걸음 θ − H⁻¹∇f는 한 번에 기울기 0인 점에 닿고, 큰 모델에서는 헤시안 근사(L-BFGS)를 쓴다",
+    "en": "Newton's step reaches the stationary point of a quadratic in one step; large problems use quasi-Newton approximations"
+   },
+   "page": "1_math_map",
+   "anchor": "#s3",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "source": [
+    {
+     "ref": "nocedal2006numerical",
+     "loc": "3·6·7장"
+    }
+   ]
+  },
+  {
+   "id": "lab:claim/reverse-mode-vjp",
+   "type": "Claim",
+   "label": {
+    "ko": "역방향 자동미분은 벡터-야코비안 곱(VJP)을, 순방향은 야코비안-벡터 곱(JVP)을 구한다",
+    "en": "Reverse mode computes VJPs, forward mode computes JVPs"
+   },
+   "page": "1_math_map",
+   "anchor": "#s5",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "source": [
+    {
+     "ref": "baydin2018automatic",
+     "loc": "3절"
+    }
+   ]
+  },
+  {
+   "id": "lab:claim/hessian-definiteness-examples",
+   "type": "Claim",
+   "label": {
+    "ko": "x² + y², x² − y², −(x² + y²)의 헤시안은 각각 양의 정부호(바닥)·부정부호(안장)·음의 정부호(봉우리)다",
+    "en": "Hessians of x²+y², x²−y², −(x²+y²) are positive definite, indefinite, negative definite"
+   },
+   "page": "1_math_map",
+   "anchor": "#s3",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "source": [
+    {
+     "ref": "matharium_hessian",
+     "loc": "Geometry in two variables"
+    }
+   ]
+  },
+  {
    "id": "lab:claim/hessian-classifies",
    "type": "Claim",
    "label": {
@@ -1733,6 +1978,25 @@
    "label": {
     "ko": "굽음과 보폭 문제 2",
     "en": "Quiz s3-2"
+   },
+   "page": "1_math_map",
+   "anchor": "#s3",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:quiz/p1-s3-3",
+   "type": "QuizItem",
+   "label": {
+    "ko": "굽음과 보폭 문제 3",
+    "en": "Quiz s3-3"
    },
    "page": "1_math_map",
    "anchor": "#s3",
@@ -2439,6 +2703,90 @@
    "confidence": "high"
   },
   {
+   "s": "lab:claim/hessian-symmetric",
+   "p": "lab:supports",
+   "o": "lab:concept/hessian",
+   "anchor": "#s3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/hessian-symmetric",
+   "p": "lab:assertedIn",
+   "o": "lab:work/sciencesnow_gjh",
+   "anchor": "#s3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/hessian-is-jacobian-of-gradient",
+   "p": "lab:supports",
+   "o": "lab:concept/hessian",
+   "anchor": "#gjh",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/hessian-is-jacobian-of-gradient",
+   "p": "lab:assertedIn",
+   "o": "lab:work/wiki_hessian",
+   "anchor": "#gjh",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/hessian-name-sylvester",
+   "p": "lab:supports",
+   "o": "lab:concept/hessian",
+   "anchor": "#s3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/hessian-name-sylvester",
+   "p": "lab:assertedIn",
+   "o": "lab:work/wiki_hessian",
+   "anchor": "#s3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/newton-one-step-quadratic",
+   "p": "lab:supports",
+   "o": "lab:concept/hessian",
+   "anchor": "#s3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/newton-one-step-quadratic",
+   "p": "lab:assertedIn",
+   "o": "lab:work/nocedal2006numerical",
+   "anchor": "#s3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/reverse-mode-vjp",
+   "p": "lab:supports",
+   "o": "lab:method/backpropagation",
+   "anchor": "#s5",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/reverse-mode-vjp",
+   "p": "lab:assertedIn",
+   "o": "lab:work/baydin2018automatic",
+   "anchor": "#s5",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/hessian-definiteness-examples",
+   "p": "lab:supports",
+   "o": "lab:concept/hessian",
+   "anchor": "#s3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/hessian-definiteness-examples",
+   "p": "lab:assertedIn",
+   "o": "lab:work/matharium_hessian",
+   "anchor": "#s3",
+   "confidence": "high"
+  },
+  {
    "s": "lab:claim/hessian-classifies",
    "p": "lab:supports",
    "o": "lab:concept/hessian",
@@ -2554,6 +2902,13 @@
    "s": "lab:quiz/p1-s3-2",
    "p": "lab:assesses",
    "o": "lab:concept/saddle-point",
+   "anchor": "#s3",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:quiz/p1-s3-3",
+   "p": "lab:assesses",
+   "o": "lab:concept/hessian",
    "anchor": "#s3",
    "confidence": "high"
   },

@@ -32,7 +32,7 @@
   <h1>좌표축 위의 그릇 — 기울기·굽음·휨으로 읽는 오차 지도</h1>
   <p class="question">모델은 눈을 가린 채 발밑의 기울기와 굽음만으로 어떻게 골짜기 바닥을 찾을까?</p>
   <p class="lead">신경망이 배우는 일은 <b>가중치</b>라는 숫자들을 고치는 일입니다. 가중치 두 개를 가로·세로 좌표축에 놓고, 그 자리에서 잰 <b>오차</b>를 높이로 세우면 땅 모양의 지도가 생깁니다. 이 페이지는 그 지도 위에서 수학 다섯 가지 — 자르기(단면), 기울기(그래디언트)와 깃대(법선), 굽음(헤시안), 고개(안장점), 휨(야코비안) — 를 하나씩 돌려 봅니다.</p>
-  <p class="byline">글 · 안상선 ((주)M-Robo 대표) · <a href="https://adminmrobo.github.io/who_am_i/who_am_i.html">저자 소개</a> · 2026-11-14 · v1.3</p>
+  <p class="byline">글 · 안상선 ((주)M-Robo 대표) · <a href="https://adminmrobo.github.io/who_am_i/who_am_i.html">저자 소개</a> · 2026-11-16 · v1.4</p>
   <div class="three"><b>세 줄로 먼저</b><ol>
     <li>가중치가 좌표축, 오차가 높이다. 학습은 이 지도에서 낮은 곳으로 걸어가는 일이다.</li>
     <li>한 걸음의 방향은 <b>기울기</b>(1차 미분)가 정하고, 얼마나 크게 디뎌도 되는지는 <b>굽음</b>(2차 미분)이 정한다.</li>
@@ -157,6 +157,7 @@
       <tr><td>∇²f = ∇·∇f</td><td>라플라시안</td><td>평균 굽음. 그릇 x² + y²은 +4, 돔 −(x² + y²)은 −4</td><td>③ 헤시안 고유값의 합</td></tr>
     </tbody></table></div>
     <div class="lim">이름 이야기: 이 미분 연산자는 W. R. 해밀턴이 1837년경 옆으로 누운 ◁ 모양으로 처음 썼고, 지금의 ∇ 모양으로 다듬어 널리 쓴 사람은 P. G. 테이트입니다. "나블라"라는 이름은 1870년 W. R. 스미스가 고대 하프(νάβλα)를 닮았다며 테이트에게 제안했고, 맥스웰은 이 이름을 주로 농담처럼 썼습니다. 영어권에서는 del이라고도 부릅니다 [12][13].</div>
+    <div class="lim">표기 주의: 어떤 자료는 헤시안(2차 편미분 표)을 ∇²f로 적습니다[14]. 이 시리즈의 ∇²f는 라플라시안(숫자 하나)이고, 라플라시안 = 헤시안의 대각선 합 = 헤시안 고유값의 합입니다(③). 표를 뜻하는지 숫자를 뜻하는지 앞뒤를 보고 가려 읽으세요.</div>
     <div class="lim" style="border-left-color:var(--info)">더 쉽게, 진짜 x·y·z 세 축 공간에서 네 연산을 하나씩 돌려 보려면 → <a href="3_arrow_field.html">3편 화살표 밭 편</a></div></div>
   <details class="fold"><summary>수식으로 보기 — 그래디언트의 회전은 0</summary><p>∇f = (f<sub>u</sub>, f<sub>v</sub>, 0)이면 회전의 z 성분은 ∂f<sub>v</sub>/∂u − ∂f<sub>u</sub>/∂v = f<sub>vu</sub> − f<sub>uv</sub> = 0입니다(2차 편미분이 연속이면 순서를 바꿔도 같다). 같은 이유로 회전의 발산도 늘 0입니다. 그래디언트의 발산 ∇·∇f는 라플라시안 ∇²f이고, ③에서 굽음을 재는 데 씁니다.</p></details>
   <div data-dlg="s2"></div>
@@ -179,7 +180,7 @@
       <div class="group"><label class="glabel" for="r-l2">λ₂</label><input type="range" id="r-l2" min="-2" max="6" step="0.1" value="2"><span class="val" id="v-l2">2.0</span></div>
       <div class="group"><label class="glabel" for="r-th">기울인 각</label><input type="range" id="r-th" min="0" max="90" step="1" value="25"><span class="val" id="v-th">25°</span></div>
       <div class="group"><label class="glabel" for="r-lr3">학습률</label><input type="range" id="r-lr3" min="0.02" max="0.6" step="0.01" value="0.1"><span class="val" id="v-lr3">0.10</span></div>
-      <div class="group"><button class="bt primary" id="b-run3" type="button">공 굴리기</button><button class="bt" id="b-ours" type="button">우리 그릇 값으로</button></div>
+      <div class="group"><button class="bt primary" id="b-run3" type="button">공 굴리기</button><button class="bt" id="b-newton" type="button">뉴턴 한 걸음</button><button class="bt" id="b-ours" type="button">우리 그릇 값으로</button></div>
     </div>
     <div class="eq" id="eq3"></div>
     <div class="minis"><div class="mini a"><span>헤시안 H</span><b id="m3-H" style="font-size:16px">—</b></div><div class="mini m"><span>라플라시안 λ₁ + λ₂</span><b id="m3-lap">—</b></div><div class="mini r"><span>보폭 한계 2/λ<sub>max</sub></span><b id="m3-lim">—</b></div><div class="mini g"><span>땅의 이름</span><b id="m3-kind">—</b></div></div>
@@ -190,7 +191,9 @@
     <li>헤시안은 "기울기가 얼마나 빨리 바뀌나"를 방향마다 적은 2×2 표입니다. 표를 돌려 놓고 봐도 변하지 않는 두 숫자가 고유값 λ₁, λ₂입니다.</li>
     <li>둘 다 양수면 <b>그릇</b>(바닥), 둘 다 음수면 <b>봉우리</b>, 부호가 다르면 <b>안장</b>(고개)입니다. 고유값의 합이 라플라시안입니다. 그릇 x² + y²는 4, 안장 x² − y²는 0입니다.</li>
     <li>이 페이지의 그릇(뉴런 하나)은 2차 함수라 헤시안이 어디서나 같습니다. <span id="t-ours">—</span></li>
-    <li>λ<sub>max</sub>와 λ<sub>min</sub>의 비(길쭉함)가 크면 가파른 방향 때문에 보폭을 작게 잡아야 하고, 그러면 완만한 방향으로는 아주 느리게 갑니다. 공이 곧게 내려가지 않고 휘어 들어가는 이유입니다.</li></ol>
+    <li>λ<sub>max</sub>와 λ<sub>min</sub>의 비(길쭉함)가 크면 가파른 방향 때문에 보폭을 작게 잡아야 하고, 그러면 완만한 방향으로는 아주 느리게 갑니다. 공이 곧게 내려가지 않고 휘어 들어가는 이유입니다.</li>
+    <li>헤시안 표는 대각선을 기준으로 접으면 겹칩니다(∂²f/∂w₁∂w₂ = ∂²f/∂w₂∂w₁). 2차 편미분이 연속이면 미분하는 순서를 바꿔도 값이 같다는 클레로·슈바르츠 정리 덕분입니다[14][15]. 위의 H 칸에서도 오른쪽 위와 왼쪽 아래 숫자가 늘 같습니다. 표의 이름은 이 표를 연구한 독일 수학자 오토 헤세(1811–1874)에서 왔고, "헤시안"이라는 이름은 영국 수학자 실베스터가 붙였습니다[16].</li>
+    <li><b>뉴턴 방법</b>: 방향마다 보폭을 1/λᵢ로 맞추면 2차 그릇에서는 한 걸음에 바닥입니다. 식으로는 θ ← θ − H⁻¹∇f. "뉴턴 한 걸음" 단추로 확인해 보세요. 다만 이 걸음은 "기울기 0인 곳"으로 곧장 가기 때문에, 안장이나 봉우리에서도 그 점으로 가서 멈춥니다(λ₂를 음수로 바꿔 눌러 보세요). 또 가중치가 n개면 헤시안은 n × n칸이라, 가중치가 수백만 개인 신경망에서는 저장조차 어렵습니다. 그래서 딥러닝에서는 헤시안을 근사하는 L-BFGS 같은 방법이나 경사하강 계열을 씁니다[17].</li></ol>
     <div class="lim">이 칸의 한계: 2차 근사는 그 점 둘레에서만 맞습니다. 실제 신경망의 지형은 곳곳에서 굽음이 달라, 한 곳의 헤시안으로 학습률 하나를 정할 수는 없습니다. 2편에서 학습률을 실험으로 고르는 이유입니다.</div></div>
   <details class="fold"><summary>수식으로 보기 — 왜 2/λ인가</summary>
     <p>2차 함수 f(θ) = ½ θᵀHθ에서 경사하강 θ ← θ − η Hθ = (I − ηH)θ. 고유 방향마다 거리가 (1 − ηλᵢ)배가 됩니다. 모든 방향에서 |1 − ηλᵢ| &lt; 1이어야 줄어들므로 0 &lt; η &lt; 2/λ<sub>max</sub>. λᵢ &lt; 0인 방향은 어떤 η에서도 거리가 커집니다(그쪽은 내리막이 계속됨).</p>
@@ -256,6 +259,7 @@
     <li>J의 (i, j) 칸 = ∂F<sub>i</sub>/∂x<sub>j</sub>: "입력 j를 조금 움직이면 출력 i가 얼마나 움직이나". tanh 층에서는 J = diag(1 − tanh²(Wx))·W입니다.</li>
     <li>|det J|는 작은 넓이가 몇 배가 되는지입니다. 0에 가까우면 평면이 납작하게 눌려 정보가 뭉개집니다. tanh가 포화된 곳(|Wx|가 큰 곳)에서는 1 − tanh²가 0에 가까워 J가 작아집니다.</li>
     <li>"층 하나 더"를 켜면 두 층을 이어 붙인 지도의 야코비안이 J₂·J₁로 곱해집니다(연쇄 법칙). 역전파는 오차의 기울기에 이 표들을 <b>뒤에서부터</b> 곱해 앞 층까지 전하는 계산입니다.</li>
+    <li>자동미분에는 두 방향이 있습니다. <b>순방향</b>은 입력 쪽의 작은 변화 v를 앞으로 밀어 J·v(야코비안-벡터 곱, JVP)를 구하고, <b>역방향</b>은 출력 쪽에서 u·J(벡터-야코비안 곱, VJP)를 거꾸로 구합니다. 손실은 숫자 하나라 역방향 한 번이면 모든 가중치의 기울기가 나옵니다. 역전파가 역방향 자동미분인 이유입니다[18].</li>
     <li>곡면 z = f(u, v)를 x = u, y = v, z = f로 보는 지도의 야코비안은 3×2 표이고, 두 열이 ②의 접선 t<sub>u</sub>, t<sub>v</sub>입니다. 참고한 영상은 같은 표를 눕혀(2×3, 행이 접선) 썼습니다. 이 페이지는 행 = 출력, 열 = 입력인 표준 표기로 통일했습니다.</li></ol>
     <div class="lim">이 칸의 한계: 야코비안은 1차(직선) 근사라 원이 클수록 실제 모양(주황)과 타원(초록 점선)이 어긋납니다. 학습률이 작아 한 걸음이 작을 때는 대체로 잘 맞지만, 걸음이 크면 어긋남이 커집니다.</div></div>
   <details class="fold"><summary>수식으로 보기 — 역전파는 야코비안의 곱</summary>
@@ -299,13 +303,30 @@
     <tr><td>④</td><td>안장점, 쌍곡포물면</td><td>감자칩 가운데 고개</td><td>∇f = 0, λ₁λ₂ &lt; 0</td><td>층을 지나는 변화는 모름</td></tr>
     <tr><td>⑤</td><td>야코비안 J, 연쇄 법칙</td><td>당겨진 고무판의 모눈</td><td>J<sub>전체</sub> = J₂·J₁</td><td>작은 범위의 직선 근사</td></tr>
   </tbody></table></div>
+  <h3 id="gjh">그래디언트·야코비안·헤시안 한눈에</h3>
+  <div class="tblwrap"><table class="cmp"><thead><tr><th>항목</th><th>그래디언트 ∇f</th><th>야코비안 J<sub>F</sub></th><th>헤시안 H<sub>f</sub></th></tr></thead><tbody>
+    <tr><td>무엇</td><td>1차 편미분을 모은 벡터</td><td>1차 편미분을 모은 표</td><td>2차 편미분을 모은 표</td></tr>
+    <tr><td>어떤 함수</td><td>f: ℝⁿ → ℝ (숫자 하나를 냄)</td><td>F: ℝⁿ → ℝᵐ (벡터를 냄)</td><td>f: ℝⁿ → ℝ (숫자 하나를 냄)</td></tr>
+    <tr><td>크기</td><td>n × 1</td><td>m × n (행 = 출력, 열 = 입력)</td><td>n × n, 대칭</td></tr>
+    <tr><td>칸 하나</td><td>∂f/∂x<sub>i</sub></td><td>∂F<sub>i</sub>/∂x<sub>j</sub></td><td>∂²f/∂x<sub>i</sub>∂x<sub>j</sub></td></tr>
+    <tr><td>지도에서는</td><td>깃대의 그림자, 가장 가파른 오르막</td><td>작은 원을 타원으로 바꾸는 고무판</td><td>그릇의 굽음과 길쭉함</td></tr>
+    <tr><td>이 페이지</td><td>②</td><td>⑤</td><td>③·④</td></tr>
+    <tr><td>AI에서 쓰는 곳</td><td>경사하강, 역전파의 결과</td><td>역전파의 고리(VJP), 순방향 자동미분(JVP), 민감도 분석</td><td>학습률 한계, 뉴턴형 방법, 안장점 판별</td></tr>
+  </tbody></table></div>
+  <div class="bridge gen"><b>셋을 잇는 줄</b><ul style="margin:6px 0 0">
+    <li>숫자 하나를 내는 함수의 야코비안은 1 × n 한 줄이고, 그래디언트는 그 줄을 세운 것(전치)입니다. 놓는 방향만 다를 뿐 칸의 값은 같습니다.</li>
+    <li>헤시안 = 그래디언트의 야코비안. 기울기 벡터가 자리마다 어떻게 바뀌는지 적은 표입니다[16].</li>
+    <li>기울기가 0인 점에서 헤시안 고유값이 모두 양수면 확실한 바닥, 모두 음수면 봉우리, 부호가 섞이면 안장입니다(④). 바닥에서 고유값은 0 이상이어야 하지만, 0이 섞여 있으면 이것만으로는 가릴 수 없습니다.</li>
+    <li>표기: 이 시리즈는 그래디언트를 세로 벡터, 야코비안을 "행 = 출력"으로 적습니다. 가로로 눕혀 적는 자료도 있습니다. ∇²f는 이 시리즈에서 라플라시안입니다(② ∇ 상자).</li></ul></div>
   <h3>용어 대응 카드</h3>
   <div class="gloss">
     <div><b>좌표축</b> = 가중치 하나. 가중치가 n개면 축이 n개인 지도.</div>
     <div><b>오차 지형(손실 지형)</b> = 가중치마다 잰 오차를 높이로 세운 땅.</div>
     <div><b>그래디언트 ∇f</b> = 편미분을 모은 벡터. 가장 가파른 오르막 방향.</div>
     <div><b>법선</b> = 곡면과 직각인 깃대. 바닥 그림자가 −∇f.</div>
-    <div><b>헤시안</b> = 2차 편미분 표. 고유값이 굽음.</div>
+    <div><b>헤시안</b> = 2차 편미분 표 = 그래디언트의 야코비안. 대칭이고, 고유값이 굽음.</div>
+    <div><b>뉴턴 방법</b> = θ ← θ − H⁻¹∇f. 굽음으로 보폭을 맞추는 2차 방법. 기울기 0인 곳이면 안장에도 간다.</div>
+    <div><b>JVP · VJP</b> = 야코비안을 통째로 만들지 않고 J·v(순방향) 또는 u·J(역방향, 역전파)만 구하는 계산.</div>
     <div><b>나블라 ∇</b> = 미분이 든 벡터. ∇f 그래디언트, ∇·F 발산, ∇×F 회전, ∇²f 라플라시안.</div>
     <div><b>라플라시안</b> = 고유값의 합 = ∇·∇f. 그릇이면 양수, 균형 잡힌 안장이면 0.</div>
     <div><b>안장점</b> = 기울기 0, 굽음의 부호가 섞인 곳.</div>
@@ -342,10 +363,15 @@
     <tr><td>[11]</td><td>Ioffe, S., Szegedy, C. (2015). Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift. ICML.</td><td>⑤ 생성 AI 상자의 정규화 층</td></tr>
     <tr><td>[12]</td><td>matharium, 「The Del Operator」 인포그래픽 (사용자 제공 이미지, 원 게시물 주소·게시일 미확인)</td><td>② "∇ 하나, 연산 넷" 상자 — 네 연산의 정의와 그릇·돔 예</td></tr>
     <tr><td>[13]</td><td>Knott, C. G. (1911). Life and Scientific Work of Peter Guthrie Tait. Cambridge University Press. / Wikipedia, "Nabla symbol" (2026-11-16 확인)</td><td>② 나블라 기호와 이름의 내력</td></tr>
+    <tr><td>[14]</td><td>Sciences Now, 「Gradient vs Jacobian vs Hessian」 인포그래픽 (사용자 제공 이미지, 원 게시물 주소·게시일 미확인)</td><td>정리 비교표, ③ 헤시안 대칭, ② ∇² 표기 주의</td></tr>
+    <tr><td>[15]</td><td>matharium, 「Hessian Matrix」 인포그래픽 (사용자 제공 이미지, 원 게시물 주소·게시일 미확인)</td><td>③ 헤시안 대칭과 고유값 분류</td></tr>
+    <tr><td>[16]</td><td>Wikipedia, "Hessian matrix" / MacTutor History of Mathematics, "Ludwig Otto Hesse" (2026-11-16 확인)</td><td>③ 헤세와 이름(실베스터), 정리 "헤시안 = 그래디언트의 야코비안"</td></tr>
+    <tr><td>[17]</td><td>Nocedal, J., Wright, S. J. (2006). Numerical Optimization (2nd ed.). Springer. 3·6·7장</td><td>③ 뉴턴 방법, 헤시안 근사(L-BFGS)</td></tr>
+    <tr><td>[18]</td><td>Baydin, A. G., Pearlmutter, B. A., Radul, A. A., Siskind, J. M. (2018). Automatic Differentiation in Machine Learning: a Survey. Journal of Machine Learning Research, 18(153), 1–43.</td><td>⑤ 순방향(JVP)·역방향(VJP) 자동미분</td></tr>
   </tbody></table>
   <h3>예시값·설명용 모형인 것</h3>
   <ul><li>모든 3D 지도와 그래프의 데이터(직선 주변 점 1,000개, 시드 39)와 그 결과 수치</li><li>③의 2차 곡면, ④의 감자칩 곡면, ⑤의 층 가중치 W, 대결의 땅 (w₁² − 1)² + w₂²</li><li>표지 그림은 연구실 캐릭터로 새로 그린 삽화(실제 장면 아님)</li></ul>
-  <p>저작권: 캐릭터 이름·설정·그림은 저작권자 안상선의 허락 없이 사용할 수 없습니다. 참고한 인포그래픽·영상의 그림은 이 페이지에 넣지 않았습니다.</p>
+  <p>저작권: 캐릭터 이름·설정·그림은 저작권자 안상선의 허락 없이 사용할 수 없습니다. 참고한 인포그래픽·영상의 그림(인물 초상 포함)은 이 페이지에 넣지 않았습니다.</p>
   <p>글 · 안상선 ((주)M-Robo 대표) · <a href="index.html">목차</a> · <a href="2_experiment_lab.html">2편 실험실 편</a> · <a href="3_arrow_field.html">3편 화살표 밭 편</a> · <a href="https://adminmrobo.github.io/fish_market_learning_epoch_etc/">Fish Market 연구실(학습률·에포크)</a> · <a href="https://adminmrobo.github.io/ai_in_3d/">신경망 연구소</a></p>
 </div></footer>
 
@@ -504,6 +530,12 @@ function upd3(){$('#v-l1').textContent=fmt(l1,1);$('#v-l2').textContent=fmt(l2,1
   U.ins($('#i-s3'),it);run3();S3.setF(f3,[-2,2],[-2,2],null);draw3b();}
 [['r-l1',function(v){l1=v;}],['r-l2',function(v){l2=v;}],['r-th',function(v){th=v;}],['r-lr3',function(v){lr3=v;}]].forEach(function(a){$('#'+a[0]).oninput=function(){a[1](+this.value);anim3=0;upd3();};});
 $('#b-run3').onclick=function(){run3();anim3=U.reduce?0:1;if(U.reduce)draw3b();};
+$('#b-newton').onclick=function(){var H=H3(),d=H[0][0]*H[1][1]-H[0][1]*H[1][0],p=[1.6,1.4],G=g3(p[0],p[1]);anim3=0;
+  if(Math.abs(d)<1e-6){U.ins($('#i-s3'),[['r','고유값 하나가 0이라 헤시안을 거꾸로 풀(H⁻¹) 수 없습니다. 굽음이 0인 방향으로는 보폭 1/λ가 끝없이 커져 뉴턴 걸음이 정해지지 않아요.']]);return;}
+  var s=[(H[1][1]*G[0]-H[0][1]*G[1])/d,(-H[1][0]*G[0]+H[0][0]*G[1])/d];run3();var gd=-1,z0=f3(1.6,1.4);for(var k=0;k<path3.length;k++){if(Math.abs(f3(path3[k][0],path3[k][1]))<z0*1e-3){gd=k;break;}}
+  path3=[p.slice(),[p[0]-s[0],p[1]-s[1]]];S3.dirty=true;draw3b();
+  U.ins($('#i-s3'),l1>0&&l2>0?[['g','뉴턴 한 걸음: H⁻¹∇f만큼 걸으니 한 번에 바닥(0, 0)입니다. 같은 땅에서 경사하강(학습률 '+fmt(lr3,2)+')은 높이가 출발의 1/1000 아래로 내려오는 데 '+(gd>0?gd+'걸음':'60걸음으로도 모자랍니다')+(gd>0?'이 걸립니다.':'.')+' 방향마다 굽음에 맞춰 보폭을 바꿨기 때문이에요.']]
+   :[['r','뉴턴 한 걸음도 곧장 (0, 0)으로 갔습니다. 그런데 여기는 '+(l1<0&&l2<0?'봉우리':'고개(안장)')+'예요. 뉴턴 걸음은 "기울기 0인 곳"을 찾을 뿐 바닥인지는 가리지 않습니다. 그래서 실제로는 음의 고유값을 뒤집거나 경사하강과 섞어 씁니다.']]);};
 $('#b-ours').onclick=function(){l1=+HS.lmax.toFixed(1);l2=+HS.lmin.toFixed(1);var a=Math.atan2(HS.lmax-HS.H[0][0],HS.H[0][1])*180/Math.PI;th=Math.round(((a%180)+180)%180);if(th>90){th-=90;var tmp=l1;l1=l2;l2=tmp;}$('#r-l1').value=l1;$('#r-l2').value=l2;$('#r-th').value=th;upd3();};
 $('#t-ours').textContent='헤시안 H = ['+fmt(HS.H[0][0],2)+', '+fmt(HS.H[0][1],2)+'; '+fmt(HS.H[1][0],2)+', '+fmt(HS.H[1][1],2)+'], 고유값 '+fmt(HS.lmin,2)+'와 '+fmt(HS.lmax,2)+'. 그래서 학습률 한계는 2/'+fmt(HS.lmax,2)+' ≈ '+fmt(2/HS.lmax,3)+'이고, 그릇은 한쪽으로 약 '+fmt(HS.lmax/HS.lmin,1)+'배 길쭉합니다. "우리 그릇 값으로" 버튼이 이 값을 넣어 줍니다.';
 upd3();
@@ -606,7 +638,8 @@ U.Study({quiz:{
  s2:[{q:'그래프 곡면 z = f(u, v)의 법선 n은?',o:['(∂f/∂u, ∂f/∂v, 1)','(−∂f/∂u, −∂f/∂v, 1)','(1, 1, −∂f/∂u)'],a:1,why:'t_u × t_v = (1, 0, f_u) × (0, 1, f_v) = (−f_u, −f_v, 1).',hint:'외적의 첫 칸은 0·f_v − f_u·1이에요.'},
      {q:'법선의 바닥 그림자 (−∂f/∂u, −∂f/∂v)는 무엇과 같나요?',o:['그래디언트 ∇f','−∇f, 경사하강이 가는 방향','등고선 방향'],a:1,why:'그래디언트에 마이너스를 붙인 것이고, 가장 가파른 내리막입니다. 등고선과는 직각이에요.',hint:'깃대는 내리막 쪽으로 기울어요.'}],
  s3:[{q:'헤시안 고유값이 6과 2인 그릇에서 경사하강이 바닥으로 줄어들 학습률의 한계는?',o:['2/2 = 1','2/6 ≈ 0.33','6/2 = 3'],a:1,why:'가장 가파른 방향(λ = 6)에서 |1 − 6η| < 1이어야 하므로 η < 2/6.',hint:'가장 큰 고유값이 한계를 정해요.'},
-     {q:'고유값이 +3과 −1이면 이 점은?',o:['그릇(최저점)','봉우리','안장점'],a:2,why:'부호가 섞이면 한 방향은 위로, 한 방향은 아래로 휜 고개입니다.',hint:'두 고유값의 부호를 보세요.'}],
+     {q:'고유값이 +3과 −1이면 이 점은?',o:['그릇(최저점)','봉우리','안장점'],a:2,why:'부호가 섞이면 한 방향은 위로, 한 방향은 아래로 휜 고개입니다.',hint:'두 고유값의 부호를 보세요.'},
+     {q:'고유값이 +2와 −2인 안장 땅에서 뉴턴 한 걸음(θ ← θ − H⁻¹∇f)을 하면?',o:['음의 고유값 방향으로 계속 내려간다','안장점(기울기 0인 곳)으로 곧장 가서 멈춘다','바닥을 찾아 한 걸음에 내려간다'],a:1,why:'2차 땅에서 뉴턴 걸음은 기울기 0인 점으로 바로 갑니다. 그 점이 고개여도 그렇습니다. 그래서 뉴턴 방법은 헤시안을 고쳐 쓰거나 다른 방법과 섞어 씁니다.',hint:'"뉴턴 한 걸음" 단추를 λ₂ = −2로 눌러 보세요.'}],
  s4:[{q:'z = x² − y²의 라플라시안은?',o:['4','0','−2'],a:1,why:'∂²z/∂x² = 2, ∂²z/∂y² = −2, 합은 0. 위로 휜 만큼 아래로 휘었습니다.',hint:'두 방향의 2차 미분을 더하세요.'},
      {q:'쌍곡포물면이 "곧은 선 두 무리"를 품는 이유로 맞는 것은?',o:['x/a − y/b를 묶으면 z가 남은 변수의 1차식이 되어서','곡면이 평평해서','a와 b가 같아서'],a:0,why:'z = (x/a − y/b)(x/a + y/b). 한 괄호를 t로 묶으면 z = t × (다른 괄호), 직선입니다. 다른 괄호를 묶으면 두 번째 무리가 나옵니다.',hint:'z를 두 괄호의 곱으로 써 보세요.'}],
  s5:[{q:'tanh 층 F(x) = tanh(Wx)의 야코비안은?',o:['W','diag(1 − tanh²(Wx)) · W','tanh(W)'],a:1,why:'연쇄 법칙: 안쪽 Wx의 야코비안 W에 바깥 tanh의 기울기 1 − tanh²를 곱합니다.',hint:'tanh의 미분은 1 − tanh²예요.'},

@@ -378,6 +378,216 @@
   }
  },
  {
+  "id": "sciencesnow_gjh",
+  "type": "graphic",
+  "title": "Gradient vs Jacobian vs Hessian",
+  "author": [
+   {
+    "literal": "Sciences Now"
+   }
+  ],
+  "accessed": {
+   "date-parts": [
+    [
+     2026,
+     11,
+     14
+    ]
+   ]
+  },
+  "lab": {
+   "work": "lab:work/sciencesnow_gjh",
+   "role": "primary",
+   "supports": [
+    "lab:concept/hessian",
+    "lab:concept/jacobian",
+    "lab:concept/gradient"
+   ],
+   "locs": [],
+   "verified": {
+    "title": true,
+    "author": true,
+    "year": false,
+    "url": false
+   },
+   "checkedBy": "사용자 제공 자료(이미지·영상)에서 옮김. 원 게시물 주소·게시일은 받지 못함",
+   "note": "그림은 페이지에 넣지 않고 표로 다시 씀"
+  }
+ },
+ {
+  "id": "matharium_hessian",
+  "type": "graphic",
+  "title": "Hessian Matrix",
+  "author": [
+   {
+    "literal": "matharium"
+   }
+  ],
+  "accessed": {
+   "date-parts": [
+    [
+     2026,
+     11,
+     14
+    ]
+   ]
+  },
+  "lab": {
+   "work": "lab:work/matharium_hessian",
+   "role": "primary",
+   "supports": [
+    "lab:concept/hessian"
+   ],
+   "locs": [],
+   "verified": {
+    "title": true,
+    "author": true,
+    "year": false,
+    "url": false
+   },
+   "checkedBy": "사용자 제공 자료(이미지·영상)에서 옮김. 원 게시물 주소·게시일은 받지 못함",
+   "note": "인물 초상과 그림은 넣지 않음. 아래 고유값 그림의 알 모양은 그래프가 아니라 오해 소지가 있어 따르지 않음"
+  }
+ },
+ {
+  "id": "wiki_hessian",
+  "type": "webpage",
+  "title": "Hessian matrix",
+  "author": [
+   {
+    "literal": "Wikipedia"
+   }
+  ],
+  "container-title": "Wikipedia",
+  "URL": "https://en.wikipedia.org/wiki/Hessian_matrix",
+  "accessed": {
+   "date-parts": [
+    [
+     2026,
+     11,
+     14
+    ]
+   ]
+  },
+  "lab": {
+   "work": "lab:work/wiki_hessian",
+   "role": "background",
+   "supports": [
+    "lab:concept/hessian"
+   ],
+   "locs": [],
+   "verified": {
+    "title": true,
+    "url": true
+   },
+   "checkedBy": "웹 검색 2026-11-16 (MacTutor·Encyclopedia.com 교차 확인: 헤세 1811–1874, 이름은 실베스터)"
+  }
+ },
+ {
+  "id": "nocedal2006numerical",
+  "type": "book",
+  "title": "Numerical Optimization",
+  "author": [
+   {
+    "family": "Nocedal",
+    "given": "Jorge"
+   },
+   {
+    "family": "Wright",
+    "given": "Stephen J."
+   }
+  ],
+  "issued": {
+   "date-parts": [
+    [
+     2006
+    ]
+   ]
+  },
+  "publisher": "Springer",
+  "edition": "2",
+  "accessed": {
+   "date-parts": [
+    [
+     2026,
+     11,
+     14
+    ]
+   ]
+  },
+  "lab": {
+   "work": "lab:work/nocedal2006numerical",
+   "role": "background",
+   "supports": [
+    "lab:concept/hessian"
+   ],
+   "locs": [],
+   "verified": {
+    "title": true,
+    "author": true,
+    "year": true
+   },
+   "checkedBy": "서지 정보 확인 2026-11-16"
+  }
+ },
+ {
+  "id": "baydin2018automatic",
+  "type": "article-journal",
+  "title": "Automatic Differentiation in Machine Learning: a Survey",
+  "author": [
+   {
+    "family": "Baydin",
+    "given": "Atılım Güneş"
+   },
+   {
+    "family": "Pearlmutter",
+    "given": "Barak A."
+   },
+   {
+    "family": "Radul",
+    "given": "Alexey Andreyevich"
+   },
+   {
+    "family": "Siskind",
+    "given": "Jeffrey Mark"
+   }
+  ],
+  "issued": {
+   "date-parts": [
+    [
+     2018
+    ]
+   ]
+  },
+  "container-title": "Journal of Machine Learning Research",
+  "volume": "18",
+  "issue": "153",
+  "page": "1-43",
+  "accessed": {
+   "date-parts": [
+    [
+     2026,
+     11,
+     14
+    ]
+   ]
+  },
+  "lab": {
+   "work": "lab:work/baydin2018automatic",
+   "role": "background",
+   "supports": [
+    "lab:method/backpropagation"
+   ],
+   "locs": [],
+   "verified": {
+    "title": true,
+    "author": true,
+    "year": true
+   },
+   "checkedBy": "서지 정보 확인 2026-11-16"
+  }
+ },
+ {
   "id": "matheorems_graph",
   "type": "motion_picture",
   "title": "그래프 곡면 z = f(u, v)의 야코비안과 법선 (z = sin u cos v)",

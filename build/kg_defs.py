@@ -41,6 +41,17 @@ REFS = {
         [{"family": "Dauphin", "given": "Yann N."}, {"family": "Pascanu", "given": "Razvan"}, {"family": "Gulcehre", "given": "Caglar"}, {"family": "Cho", "given": "Kyunghyun"}, {"family": "Ganguli", "given": "Surya"}, {"family": "Bengio", "given": "Yoshua"}],
         2014, "Advances in Neural Information Processing Systems 27", {"page": "2933-2941", "URL": "https://arxiv.org/abs/1406.2572"}, supports=s, locs=[{"claim": "lab:claim/saddles-proliferate-high-dim", "loc": "초록, 2장"}],
         verified={"title": True, "author": True, "year": True, "container": True, "pages": True, "doi": False}, checked="웹 검색 2026-11-14 (NeurIPS 논문 페이지, arXiv 1406.2572, mlanthology)"),
+ "sciencesnow_gjh": lambda s: ref("sciencesnow_gjh", "graphic", "Gradient vs Jacobian vs Hessian", [{"literal": "Sciences Now"}], role="primary", supports=s,
+        verified={"title": True, "author": True, "year": False, "url": False}, checked=USERSRC, note="그림은 페이지에 넣지 않고 표로 다시 씀"),
+ "matharium_hessian": lambda s: ref("matharium_hessian", "graphic", "Hessian Matrix", [{"literal": "matharium"}], role="primary", supports=s,
+        verified={"title": True, "author": True, "year": False, "url": False}, checked=USERSRC, note="인물 초상과 그림은 넣지 않음. 아래 고유값 그림의 알 모양은 그래프가 아니라 오해 소지가 있어 따르지 않음"),
+ "wiki_hessian": lambda s: ref("wiki_hessian", "webpage", "Hessian matrix", [{"literal": "Wikipedia"}], container="Wikipedia", supports=s,
+        extra={"URL": "https://en.wikipedia.org/wiki/Hessian_matrix"}, verified={"title": True, "url": True}, checked="웹 검색 2026-11-16 (MacTutor·Encyclopedia.com 교차 확인: 헤세 1811–1874, 이름은 실베스터)"),
+ "nocedal2006numerical": lambda s: ref("nocedal2006numerical", "book", "Numerical Optimization", [{"family": "Nocedal", "given": "Jorge"}, {"family": "Wright", "given": "Stephen J."}],
+        2006, None, {"publisher": "Springer", "edition": "2"}, supports=s, verified={"title": True, "author": True, "year": True}, checked="서지 정보 확인 2026-11-16"),
+ "baydin2018automatic": lambda s: ref("baydin2018automatic", "article-journal", "Automatic Differentiation in Machine Learning: a Survey",
+        [{"family": "Baydin", "given": "Atılım Güneş"}, {"family": "Pearlmutter", "given": "Barak A."}, {"family": "Radul", "given": "Alexey Andreyevich"}, {"family": "Siskind", "given": "Jeffrey Mark"}],
+        2018, "Journal of Machine Learning Research", {"volume": "18", "issue": "153", "page": "1-43"}, supports=s, verified={"title": True, "author": True, "year": True}, checked="서지 정보 확인 2026-11-16"),
  "goodfellow2016deep": lambda s: ref("goodfellow2016deep", "book", "Deep Learning", [{"family": "Goodfellow", "given": "Ian"}, {"family": "Bengio", "given": "Yoshua"}, {"family": "Courville", "given": "Aaron"}],
         2016, None, {"publisher": "MIT Press", "URL": "https://www.deeplearningbook.org/"}, supports=s, locs=[{"claim": "lab:claim/lr-limit-quadratic", "loc": "4장 수치 계산 (4.3)"}],
         verified={"title": True, "author": True, "year": True, "publisher": True, "pages": False}, checked="제작자 지식 — 장·절 위치는 원문 대조 안 함"),
@@ -80,7 +91,7 @@ REFS = {
         verified={"title": True, "author": True, "year": True, "pages": True}, checked="웹 검색 2026-11-16 (Wikipedia 'Nova Methodus pro Maximis et Minimis', Il Giardino di Archimede)"),
  "archimede_newton_leibniz": lambda s: ref("archimede_newton_leibniz", "webpage", "Newton and Leibniz: the birth of calculus", [{"literal": "Il Giardino di Archimede"}], None, None, {"URL": "https://archimede.dimai.unifi.it/archimede/archimede_NEW_inglese/mostra_calcolo/pannelli/3.html"}, supports=s,
         verified={"title": True, "author": True, "year": False, "url": True}, checked="웹 검색 2026-11-16"),
- "wiki_calculus_controversy": lambda s: ref("wiki_calculus_controversy", "webpage", "Leibniz–Newton calculus controversy", [{"literal": "웹 검색 2026-11-16ikipedia"}], None, None, {"URL": "https://en.wikipedia.org/wiki/Leibniz%E2%80%93Newton_calculus_controversy"}, supports=s,
+ "wiki_calculus_controversy": lambda s: ref("wiki_calculus_controversy", "webpage", "Leibniz–Newton calculus controversy", [{"literal": "Wikipedia"}], None, None, {"URL": "https://en.wikipedia.org/wiki/Leibniz%E2%80%93Newton_calculus_controversy"}, supports=s,
         verified={"title": True, "author": True, "year": False, "url": True}, checked="웹 검색 2026-11-16"),
  "het_neoclassicals": lambda s: ref("het_neoclassicals", "webpage", "The Neoclassicals — Introduction", [{"family": "Fonseca", "given": "Gonçalo L."}], None, "History of Economic Thought website", {"URL": "https://www.hetwebsite.net/het/essays/margrev/ncintro.htm"}, supports=s,
         verified={"title": True, "author": True, "year": False, "url": True}, checked="웹 검색 2026-11-16"),
@@ -198,6 +209,11 @@ W = {k: g.work(k, ko, en) for k, ko, en in [
     ("matharium_del", "matharium — The Del Operator", "matharium — The Del Operator"),
     ("knott1911life", "Knott 1911 Life of P. G. Tait", "Knott 1911 Life and Scientific Work of P. G. Tait"),
     ("matharium_gjh", "matharium — Gradient, Jacobian and Hessian", "matharium — Gradient, Jacobian and Hessian"),
+    ("sciencesnow_gjh", "Sciences Now — Gradient vs Jacobian vs Hessian", "Sciences Now — Gradient vs Jacobian vs Hessian"),
+    ("matharium_hessian", "matharium — Hessian Matrix", "matharium — Hessian Matrix"),
+    ("wiki_hessian", "Wikipedia — Hessian matrix", "Wikipedia — Hessian matrix"),
+    ("nocedal2006numerical", "Nocedal·Wright 2006 Numerical Optimization", "Nocedal & Wright 2006 Numerical Optimization"),
+    ("baydin2018automatic", "Baydin 외 2018 자동미분 개관", "Baydin et al. 2018 AD survey"),
     ("matheorems_graph", "matheorems — 그래프 곡면의 야코비안과 법선", "matheorems — Jacobian and normal of a graph surface"),
     ("mlfs39", "ML from Scratch 39 — 미니배치", "ML from Scratch 39 — mini batch"),
     ("mlfs43", "ML from Scratch 43 — 하이퍼파라미터", "ML from Scratch 43 — hyperparameters"),
@@ -214,6 +230,12 @@ C = [("lab:claim/lr-warmup", "학습 초기에 학습률을 천천히 올리는 
      ("lab:claim/del-four-operations", "∇ 하나가 붙는 방식에 따라 그래디언트·발산·회전·라플라시안을 만든다", "One del operator yields gradient, divergence, curl and Laplacian", "#del-op", delop, "matharium_del", "본문 전체"),
      ("lab:claim/nabla-name-1870", "나블라라는 이름은 1870년 W. R. 스미스가 하프 모양을 보고 테이트에게 제안했다", "The name nabla was suggested to Tait by W. R. Smith in 1870", "#del-op", delop, "knott1911life", "p. 145"),
      ("lab:claim/crisp-doubly-ruled", "쌍곡포물면은 곧은 선 두 무리를 품는다", "A hyperbolic paraboloid is doubly ruled", "#s4", rul, "matharium_crisp", "아래 문구"),
+     ("lab:claim/hessian-symmetric", "2차 편미분이 연속이면 헤시안은 대칭이다(클레로·슈바르츠)", "The Hessian is symmetric when second partials are continuous", "#s3", hes, "sciencesnow_gjh", "Important Notes"),
+     ("lab:claim/hessian-is-jacobian-of-gradient", "헤시안은 그래디언트의 야코비안이다", "The Hessian is the Jacobian of the gradient", "#gjh", hes, "wiki_hessian", "Relation to Jacobian"),
+     ("lab:claim/hessian-name-sylvester", "헤시안은 헤세(1811–1874)의 이름을 따 실베스터가 붙인 이름이다", "Sylvester named the Hessian after Otto Hesse", "#s3", hes, "wiki_hessian", "도입부"),
+     ("lab:claim/newton-one-step-quadratic", "2차 함수에서 뉴턴 걸음 θ − H⁻¹∇f는 한 번에 기울기 0인 점에 닿고, 큰 모델에서는 헤시안 근사(L-BFGS)를 쓴다", "Newton's step reaches the stationary point of a quadratic in one step; large problems use quasi-Newton approximations", "#s3", hes, "nocedal2006numerical", "3·6·7장"),
+     ("lab:claim/reverse-mode-vjp", "역방향 자동미분은 벡터-야코비안 곱(VJP)을, 순방향은 야코비안-벡터 곱(JVP)을 구한다", "Reverse mode computes VJPs, forward mode computes JVPs", "#s5", bp, "baydin2018automatic", "3절"),
+     ("lab:claim/hessian-definiteness-examples", "x² + y², x² − y², −(x² + y²)의 헤시안은 각각 양의 정부호(바닥)·부정부호(안장)·음의 정부호(봉우리)다", "Hessians of x²+y², x²−y², −(x²+y²) are positive definite, indefinite, negative definite", "#s3", hes, "matharium_hessian", "Geometry in two variables"),
      ("lab:claim/hessian-classifies", "헤시안 고유값이 임계점을 분류한다", "Hessian eigenvalues classify critical points", "#s3", hes, "matharium_gjh", "Hessian 칸"),
      ("lab:claim/saddles-proliferate-high-dim", "고차원 비볼록 지형에서는 나쁜 국소 최소보다 안장점이 문제를 일으킨다", "Saddle points, not local minima, proliferate in high dimensions", "#s4", sad, "dauphin2014identifying", "초록, 2장"),
      ("lab:claim/lr-limit-quadratic", "2차 함수에서 경사하강은 학습률이 2/λmax보다 작을 때 줄어든다", "GD converges on a quadratic iff lr < 2/λmax", "#s3", lim, "goodfellow2016deep", "4장"),
@@ -223,12 +245,12 @@ for cid, ko, en, anc, tgt, wk, loc in C:
     g.n(cid, "Claim", ko, en, anc, 2, source=[{"ref": wk, "loc": loc}]); g.e(cid, "supports", tgt, anc); g.e(cid, "assertedIn", W[wk], anc)
 g.e(W["mlfs43"], "relatedTo", lr, "#s1")
 # 퀴즈
-Q = [("s1", 1, gd), ("s1", 2, lim), ("s2", 1, nrm), ("s2", 2, grad), ("s3", 1, lim), ("s3", 2, sad), ("s4", 1, lap), ("s4", 2, rul), ("s5", 1, jac), ("s5", 2, chain), ("duel", 1, sad)]
+Q = [("s1", 1, gd), ("s1", 2, lim), ("s2", 1, nrm), ("s2", 2, grad), ("s3", 1, lim), ("s3", 2, sad), ("s3", 3, hes), ("s4", 1, lap), ("s4", 2, rul), ("s5", 1, jac), ("s5", 2, chain), ("duel", 1, sad)]
 QL = {"s1": "단면 위 한 걸음", "s2": "법선과 그래디언트", "s3": "굽음과 보폭", "s4": "안장과 라플라시안", "s5": "야코비안과 연쇄", "duel": "대결 안장점"}
 for sec, k, tgt in Q:
     qid = f"lab:quiz/p1-{sec}-{k}"; g.n(qid, "QuizItem", f"{QL[sec]} 문제 {k}", f"Quiz {sec}-{k}", "#" + sec, 2); g.e(qid, "assesses", tgt, "#" + sec)
 g.dump(1)
-used1 = {"goyal2017accurate": [lr], "he2016deep": [bp], "ioffe2015batch": [bp], "matharium_crisp": [rul, hyp], "matharium_vecops": [curl0, lap], "matharium_del": [delop, divg, lap], "knott1911life": [delop], "matharium_gjh": [hes, jac, grad], "matheorems_graph": [nrm, tan],
+used1 = {"goyal2017accurate": [lr], "he2016deep": [bp], "ioffe2015batch": [bp], "matharium_crisp": [rul, hyp], "matharium_vecops": [curl0, lap], "matharium_del": [delop, divg, lap], "knott1911life": [delop], "matharium_gjh": [hes, jac, grad], "sciencesnow_gjh": [hes, jac, grad], "matharium_hessian": [hes], "wiki_hessian": [hes], "nocedal2006numerical": [hes], "baydin2018automatic": [bp], "matheorems_graph": [nrm, tan],
          "mlfs39": [neuron], "mlfs43": [lr], "dauphin2014identifying": [sad], "goodfellow2016deep": [lim], "rumelhart1986learning": [bp]}
 (B / "refs_1.json").write_text(json.dumps([REFS[k](v) for k, v in used1.items()], ensure_ascii=False, indent=1))
 
@@ -405,7 +427,7 @@ used3 = {"matharium_del": [delop, grad, divg, curl, lap], "matharium_vecops": [c
 (B / "refs_3.json").write_text(json.dumps([REFS[k](v) for k, v in used3.items()], ensure_ascii=False, indent=1))
 m3 = meta(3, "좌표축 위의 그릇 ③ 화살표 밭 편 — x·y·z 세 축 공간에서 읽는 ∇(나블라)",
     ["lab:concept/del-operator", "lab:concept/gradient", "lab:concept/divergence", "lab:concept/curl", "lab:concept/laplacian"], list(used3), "3_arrow_field.html")
-m3.update({"date": "2026-11-16", "version": "1.0", "educationalLevel": "입문", "suggestedCitation": "안상선 (2026). 좌표축 위의 그릇 ③ 화살표 밭 편 — x·y·z 세 축 공간에서 읽는 ∇(나블라). 좌표축 위의 그릇 — 3D 지도로 본 모델 최적화 3, v1.0."})
+m3.update({"date": "2026-11-16", "version": "1.1", "educationalLevel": "입문", "suggestedCitation": "안상선 (2026). 좌표축 위의 그릇 ③ 화살표 밭 편 — x·y·z 세 축 공간에서 읽는 ∇(나블라). 좌표축 위의 그릇 — 3D 지도로 본 모델 최적화 3, v1.1."})
 (B / "meta_3.json").write_text(json.dumps(m3, ensure_ascii=False, indent=1))
 
 # ══════════════ 최적화 첫걸음 ① ══════════════
@@ -541,7 +563,7 @@ g.dump(5)
 used5 = {"bussotti2003genesis": [lag], "het_euler": [euler], "lemarechal2012cauchy": [gd], "rumelhart1986learning": [bp], "hoerl1970ridge": [reg], "cement_world": [ode]}
 (B / "refs_5.json").write_text(json.dumps([REFS[k](v) for k, v in used5.items()], ensure_ascii=False, indent=1))
 m5 = meta(5, "최적화 첫걸음 ② 공장에서 인공지능까지 — 얼마만큼 생산하면 될까요?", [vmp, lag, euler, gd, inter], list(used5), "first_step_2.html")
-m5.update({"series": FS, "date": "2026-11-16", "version": "1.1", "educationalLevel": "입문", "suggestedCitation": "안상선 (2026). 최적화 첫걸음 ② 공장에서 인공지능까지. 최적화 첫걸음 2, v1.1."})
+m5.update({"series": FS, "date": "2026-11-16", "version": "1.2", "educationalLevel": "입문", "suggestedCitation": "안상선 (2026). 최적화 첫걸음 ② 공장에서 인공지능까지. 최적화 첫걸음 2, v1.2."})
 (B / "meta_5.json").write_text(json.dumps(m5, ensure_ascii=False, indent=1))
 
 # ══════════════ 목차 ══════════════
