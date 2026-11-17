@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>최적화 첫걸음 ⓪ 인공지능 모델에서의 최적화 — 모델은 한 번에 만들어지지 않는다</title>
+<meta name="description" content="최적화 첫걸음의 도입편. 인공지능 모델이 왜 한 번에 정해지지 않고 수백 번 조금씩 고쳐지는지, 뉴런 하나의 계산, 반복 학습 대시보드, 훈련·검증 성적표, 데이터가 바뀌었을 때 다시 정비하기(피봇팅)까지 미분 없이 봅니다.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<!--@@CSS@@-->
+<style>
+.cover .frame{container-type:inline-size}
+.bubtx{position:absolute;display:flex;align-items:center;justify-content:center;text-align:center;font-weight:700;color:#16212b;line-height:1.25;pointer-events:none;padding:0 2%;box-sizing:border-box;word-break:keep-all}
+.cover .bubtx{font-size:clamp(12px,2.7cqw,30px)}
+.cover .bubtx.sm{font-size:clamp(9px,1.35cqw,16px)}
+.panels{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0}
+.panel3{position:relative;border:2px solid var(--text);border-radius:6px;overflow:hidden;aspect-ratio:4/3;container-type:inline-size;background:#fff}
+.panel3 img.art{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.panel3 .bubtx{font-size:clamp(11px,4cqw,18px)}
+.panel3 .who{position:absolute;left:8px;bottom:8px;font-size:12px;background:rgba(255,255,255,.9);border:1px solid var(--rule);border-radius:999px;padding:1px 8px}
+@media(max-width:760px){.panels{grid-template-columns:1fr}}
+.assume{border:1px dashed var(--terrain);background:#f4fbfb;border-radius:8px;padding:8px 12px;margin:10px 0;font-size:14.5px}
+.assume b{color:var(--terrain)}
+.tline{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+.tline button{border:1px solid var(--rule);background:#fff;border-radius:999px;padding:4px 12px;font:inherit;font-size:14px;cursor:pointer}
+.tline button[aria-pressed="true"]{background:var(--terrain);color:#fff;border-color:var(--terrain)}
+.tlcard{border:1px solid var(--rule);border-radius:10px;padding:12px 16px;background:#fff;min-height:110px}
+.tlcard .y{font-weight:700;color:var(--terrain);font-size:20px}
+.tlcard .lk{font-size:13.5px;color:var(--muted);margin-top:6px}
+.sub{font-size:13px;color:var(--muted);font-weight:500;margin-left:6px}
+table.lim-tbl td,table.lim-tbl th{padding:4px 10px;text-align:right}
+</style>
+</head>
+<body>
+<nav class="top" aria-label="섹션 바로가기"><div class="row">
+  <a class="logo" href="index.html">최적화 <i>첫걸음</i> ⓪</a>
+  <div class="links">
+    <a href="#s01">0.1 뉴런</a><a href="#s02">0.2 반복 학습</a><a href="#s03">0.3 성적표</a><a href="#s04">0.4 다시 정비</a><a href="#sum">정리</a><a href="#kg">색인</a><a href="#export">꾸러미</a><a href="first_step_1.html">① →</a>
+  </div>
+</div></nav>
+
+<header class="hero" id="top"><div class="wrap">
+  <div class="eyebrow">최적화 첫걸음 · ⓪ 도입 · 미분을 몰라도 읽을 수 있음</div>
+  <h1>최적화 첫걸음 ⓪ — 인공지능 모델에서의 최적화</h1>
+  <p class="question">인공지능 모델은 어떻게 "배우고", 왜 한 번에 정해지지 않을까?</p>
+  <p class="lead">모델을 학습시킨다는 것은 숫자(가중치) 몇 개에서 수억 개까지를 <b>오차가 가장 작아지도록</b> 고르는 일, 곧 <b>최적화</b>입니다. 이 편은 미분이나 식 없이 뉴런 하나에서 출발해, 모델이 수백 번 조금씩 고쳐지는 모습, 훈련 점수만 믿으면 안 되는 이유, 데이터가 바뀌면 되돌아가 다시 정비하는 일까지 봅니다. 끝에 남는 질문 하나 — "매번 고칠 방향은 누가 알려 주나?" — 가 다음 편 「혹시… 미분 좋아하세요?」로 이어집니다.</p>
+  <p class="byline">글 · 안상선 ((주)M-Robo 대표) · <a href="https://adminmrobo.github.io/who_am_i/who_am_i.html">저자 소개</a> · 2026-11-18 · v1.0</p>
+  <div class="three"><b>세 줄로 먼저</b><ol>
+    <li>모델은 한 번에 정해지지 않는다. 오차를 재고 조금 고치는 <b>한 걸음</b>을 수백 번 되풀이해 만들어진다.</li>
+    <li>모델은 훈련 데이터로 배우지만, 고르는 기준은 <b>처음 보는 데이터(검증)</b>와 여러 측면의 성적이다.</li>
+    <li>데이터가 바뀌면 힘들게 만든 모델도 <b>되돌아가 다시 정비</b>한다. 그리고 매 걸음의 방향은 기울기가 알려 준다.</li></ol></div>
+  <div class="start"><b>처음이라면</b> 0.1 → 0.2 → 0.3 → 0.4 순서로 보세요. 식은 "수식으로 보기"를 펼칠 때만 나오고, 칸마다 "이 칸의 가정" 상자가 있습니다. 미분은 <a href="first_step_1.html">① 편</a>, 경사하강과 역전파는 <a href="first_step_2.html">② 편</a>에서 다룹니다.</div>
+  <div class="kpis" aria-label="숫자 요약">
+    <div class="kpi m"><b id="k-n">4개</b><span>뉴런 하나가 배우는 숫자 (가중치 3 + 편향 1)</span></div>
+    <div class="kpi g"><b id="k-best">—</b><span>검증 오차가 가장 낮은 걸음<sup>①</sup></span></div>
+    <div class="kpi r"><b id="k-rec">—</b><span>검증 재현율: 그 걸음 → 300걸음<sup>①</sup></span></div>
+    <div class="kpi a"><b id="k-b">—</b><span>공장 B에서 그대로 쓸 때 재현율<sup>①</sup></span></div>
+  </div>
+  <p class="muted" style="font-size:13px">① 이 페이지가 직접 계산한 설명용 예시값입니다. 실제 배터리 공장의 자료가 아닙니다.</p>
+</div></header>
+
+<main>
+<section class="sec" id="c0" aria-labelledby="h-c0"><div class="wrap">
+  <h2 id="h-c0"><span class="hex">0</span>모델은 한 번에 만들어지지 않는다 <span class="sub">박사의 이야기</span></h2>
+  <div data-dlg="c0"></div>
+
+  <h3 id="s01">0.1 큰 그림 — 신경망과 뉴런 하나</h3>
+  <div class="pair">
+    <div><div class="tl">일상으로 치면</div>입학 점수를 매길 때 과목마다 비중을 다르게 두고 더한 뒤, 기본 점수를 얹고, 합격선에 얼마나 가까운지 봅니다. 비중을 바꾸면 같은 성적표라도 결과가 달라집니다.</div>
+    <div><div class="tr">신경망에서는</div>뉴런 하나는 <b>입력 × 가중치</b>를 모두 더하고 <b>편향</b>을 더한 뒤, <b>활성화 함수</b>(여기서는 시그모이드)로 0과 1 사이 값으로 바꿉니다. 이런 뉴런을 층층이 이은 것이 신경망이고, 가중치와 편향이 모델이 "배우는" 숫자입니다.</div>
+  </div>
+  <div class="panel">
+    <div class="ptitle">왼쪽: 신경망의 큰 그림 · 오른쪽: 그 안의 뉴런 하나를 계산해 보기</div>
+    <div class="cwrap tall"><canvas id="cv01" aria-label="입력층·은닉층·출력층으로 된 신경망과, 입력 세 개에 가중치를 곱해 더하고 편향을 더한 뒤 시그모이드를 거치는 뉴런 하나"></canvas></div>
+    <div class="ctrl"><div class="group">
+      <label class="glabel" for="r01a">가중치 w₁</label><input type="range" id="r01a" min="-1" max="1" step="0.02" value="0.4"><span class="val" id="v01a">0.40</span>
+      <label class="glabel" for="r01b">가중치 w₂</label><input type="range" id="r01b" min="-1" max="1" step="0.02" value="0.26"><span class="val" id="v01b">0.26</span>
+      <label class="glabel" for="r01c">가중치 w₃</label><input type="range" id="r01c" min="-1" max="1" step="0.02" value="0.3"><span class="val" id="v01c">0.30</span>
+      <label class="glabel" for="r01d">편향 b</label><input type="range" id="r01d" min="-1" max="1" step="0.02" value="0.1"><span class="val" id="v01d">0.10</span></div></div>
+    <div class="minis"><div class="mini a"><span>입력 × 가중치의 합</span><b id="m01a">—</b></div><div class="mini m"><span>편향을 더한 값 z</span><b id="m01b">—</b></div><div class="mini g"><span>출력 = 시그모이드(z)</span><b id="m01c">—</b></div><div class="mini r"><span>바꿀 수 있는 숫자</span><b>4개</b></div></div>
+    <div class="eq" id="eq01"></div>
+    <div class="insight" id="i01" aria-live="polite"></div>
+  </div>
+  <div class="assume"><b>이 칸의 가정</b> 입력 0.2·0.5·0.43과 처음 가중치는 설명용 숫자다. 진짜 신경망은 이런 숫자가 수천에서 수억 개라 사람이 손으로 고를 수 없다. 그림 구성은 공개 인포그래픽 「Mathematics Behind AI」의 순서(입력 → 곱하기 → 더하기 → 활성화 → 출력)만 참고했고, 그림은 새로 그렸다.</div>
+
+  <h3 id="s02">0.2 한 번에 정해지지 않는다 — 반복 학습 대시보드</h3>
+  <div class="pair">
+    <div><div class="tl">일상으로 치면</div>새 자전거의 안장 높이는 한 번에 맞지 않습니다. 타 보고, 조금 올리고, 다시 타 보고, 조금 내립니다. 매번 "어느 쪽으로 얼마나"를 느낌으로 정합니다.</div>
+    <div><div class="tr">모델에서는</div>배터리 셀의 충전 온도 하나를 보고 불량인지 판정하는 뉴런이 있습니다. 숫자는 가중치 w와 편향 b 두 개뿐이라 오차를 3D 지도로 그릴 수 있어요. 아무 값에서 출발해 <b>훈련 데이터</b>로 오차를 재고, 오차가 줄어드는 쪽으로 w와 b를 조금 고칩니다. 이것이 <b>한 걸음</b>이고, 학습은 이 걸음을 수백 번 되풀이하는 일입니다.</div>
+  </div>
+  <div class="panel">
+    <div class="ptitle">걸음마다 바뀌는 w·b와 오차 — 왼쪽은 훈련 오차의 3D 지도, 오른쪽은 걸음에 따른 오차</div>
+    <div class="twin">
+      <div class="cwrap t3"><canvas id="cv02" aria-label="가중치 w와 편향 b 위의 훈련 오차 곡면과 학습 경로"></canvas><span class="hint">끌어서 돌리기</span></div>
+      <div class="cwrap t3"><canvas id="cv02b" aria-label="걸음 수에 따른 훈련 오차와 검증 오차"></canvas></div>
+    </div>
+    <div class="ctrl"><div class="group">
+      <button class="bt" type="button" id="b02s">한 걸음</button><button class="bt" type="button" id="b02p">▶ 재생</button><button class="bt" type="button" id="b02v">검증 오차가 가장 낮은 걸음으로</button><button class="bt" type="button" id="b02e">300걸음 끝으로</button><button class="bt" type="button" id="b02r">처음으로</button></div></div>
+    <div class="minis"><div class="mini m"><span>걸음</span><b id="m02a">—</b></div><div class="mini a"><span>w, b</span><b id="m02b" style="font-size:17px">—</b></div><div class="mini g"><span>훈련 오차</span><b id="m02c">—</b></div><div class="mini r"><span>검증 오차</span><b id="m02d">—</b></div></div>
+    <div class="eq" id="eq02"></div>
+    <div class="insight" id="i02" aria-live="polite"></div>
+  </div>
+  <div class="assume"><b>이 칸의 가정</b> 셀 20개는 설명용 예시 데이터다(훈련 14개, 검증 6개, 온도는 평균 0으로 맞춘 값). 오차는 교차 엔트로피, 학습률 1.0, 매 걸음 훈련 셀 전체를 쓰는 경사하강이다. 진짜 모델은 숫자가 너무 많아 지도를 그릴 수 없지만 걷는 방식은 같다 → <a href="1_math_map.html">좌표축 위의 그릇 1편</a></div>
+
+  <h3 id="s03">0.3 훈련 점수만 믿으면 안 되는 이유 — 여러 측면 성적표</h3>
+  <div class="pair">
+    <div><div class="tl">일상으로 치면</div>기출문제만 외운 학생은 기출 점수가 만점이지만 처음 보는 문제에서 틀립니다. 그래서 선생님은 외운 문제가 아닌 문제로 따로 시험을 봅니다.</div>
+    <div><div class="tr">모델에서는</div>모델은 손에 쥔 데이터로만 만들 수 있습니다. 하지만 목표는 <b>아직 못 본 셀</b>을 잘 맞히는 것입니다. 그래서 손에 쥔 셀을 <b>훈련용</b>과 <b>검증용</b>으로 나누고, 훈련 오차 하나가 아니라 검증 오차, 정확도, <b>재현율</b>(진짜 불량 가운데 잡아낸 비율)을 함께 봅니다.</div>
+  </div>
+  <div class="panel">
+    <div class="ptitle">0.2의 같은 학습에서 두 시점을 골라 비교한 성적표</div>
+    <div class="tblwrap"><table class="cmp"><thead><tr><th>항목</th><th id="t03h1">검증 오차가 가장 낮은 걸음</th><th>300걸음 (훈련 오차가 가장 낮음)</th><th>무엇을 보나</th></tr></thead><tbody id="t03"></tbody></table></div>
+    <div class="insight" id="i03" aria-live="polite"></div>
+  </div>
+  <div class="assume"><b>이 칸의 가정</b> 검증 셀이 6개뿐이라 한 개만 달라져도 비율이 크게 흔들린다. 실무에서는 나누기를 여러 번 바꿔 평균과 흩어짐을 보고, 마지막 <b>시험 데이터</b>는 모델을 다 고를 때까지 봉인한다 → <a href="https://adminmrobo.github.io/how_to_make_ai_model_factory_version/classifier.html">배터리 불량 분류기 공장 편</a>, <a href="https://adminmrobo.github.io/how_to_make_ai_model_factory_version/regression.html">수명 회귀 공장 편</a>, <a href="2_experiment_lab.html">그릇 2편 ④ 에포크와 과적합</a></div>
+
+  <h3 id="s04">0.4 힘들게 만든 모델을 다시 고치기 — 피봇팅</h3>
+  <div class="pair">
+    <div><div class="tl">일상으로 치면</div>잘 맞춰 둔 안장도 다른 자전거로 갈아타면 다시 맞춰야 합니다. 처음부터 다시 맞출 수도 있고, 지금 높이에서 조금만 고칠 수도 있어요.</div>
+    <div><div class="tr">모델에서는</div>공장 B는 재료가 바뀌어 더 낮은 온도에서도 불량이 납니다(<b>분포 이동</b>). 여기서 <b>피봇팅</b>은 사업 방향 전환이 아니라 "<b>되돌아가 다시 정비하기</b>"라는 뜻으로 씁니다. 0.3에서 고른 모델을 ① 그대로 쓰기, ② 처음부터 다시 배우기, ③ 지금 값에서 이어서 고치기(미세조정) 가운데 고릅니다.</div>
+  </div>
+  <div class="panel">
+    <div class="ptitle">공장 B의 검증 셀 위에서 세 가지 방법 비교 — 곡선은 모델이 말하는 불량 확률</div>
+    <div class="cwrap"><canvas id="cv04" aria-label="온도에 따른 불량 확률 곡선과 공장 B 검증 셀"></canvas></div>
+    <div class="ctrl"><div class="group" role="group" aria-label="다시 정비하는 방법">
+      <button class="bt" type="button" data-m04="keep" aria-pressed="true">① 그대로 쓰기</button><button class="bt" type="button" data-m04="scratch" aria-pressed="false">② 처음부터 다시</button><button class="bt" type="button" data-m04="tune" aria-pressed="false">③ 이어서 고치기</button>
+      <label class="glabel" for="r04">공장 B 셀로 고치는 걸음 수</label><input type="range" id="r04" min="0" max="3" step="1" value="1"><span class="val" id="v04">10걸음</span></div></div>
+    <div class="minis"><div class="mini a"><span>방법</span><b id="m04a" style="font-size:16px">—</b></div><div class="mini r"><span>공장 B 검증 오차</span><b id="m04b">—</b></div><div class="mini g"><span>공장 B 재현율</span><b id="m04c">—</b></div><div class="mini m"><span>놓친 불량</span><b id="m04d">—</b></div></div>
+    <div class="insight" id="i04" aria-live="polite"></div>
+  </div>
+  <div class="assume"><b>이 칸의 가정</b> 공장 B 셀 12개(고치기용 6개, 검증용 6개)는 설명용 예시다. 입력이 하나뿐인 작은 뉴런이라 세 방법의 차이가 작다. 큰 모델에서 이어서 고치기·어댑터가 왜 유리한지는 <a href="https://adminmrobo.github.io/how_to_make_ai_model_factory_version/classifier.html">공장 편 정비 ⑨ 개조 공정</a>에서 본다.</div>
+
+  <div class="bridge gen"><b>그래서 다음은 미분입니다</b> 0.2의 매 걸음에서 "어느 쪽으로, 얼마나"를 알려 준 것은 오차의 <b>기울기</b>였습니다. 0.3의 성적표와 0.4의 다시 고치기도 결국 그 걸음을 어디서 멈추고 어디서 다시 시작하느냐의 문제예요. 그런데 기울기는 어떻게 재고, 왜 기울기를 따라가면 바닥에 닿을까요? 그 도구가 미분입니다 → <a href="first_step_1.html">최적화 첫걸음 ① 「혹시… 미분 좋아하세요?」</a></div>
+  <div class="quiz" data-quiz="c0"></div>
+
+<section class="sec" id="sum" aria-labelledby="h-sum"><div class="wrap">
+  <h2 id="h-sum">정리 — 모델이 만들어지는 네 장면</h2>
+  <div class="tblwrap"><table class="cmp"><thead><tr><th>장면</th><th>답 한 줄</th><th>칸</th></tr></thead><tbody>
+    <tr><td>모델은 무엇을 배우나?</td><td>입력에 곱하는 가중치와 더하는 편향. 이 숫자들이 바뀌면 같은 입력에도 출력이 달라진다.</td><td>0.1</td></tr>
+    <tr><td>어떻게 배우나?</td><td>오차를 재고, 오차가 줄어드는 쪽으로 조금 고치는 걸음을 수백 번 되풀이한다.</td><td>0.2</td></tr>
+    <tr><td>언제 멈추나?</td><td>훈련 오차가 아니라 검증 오차와 재현율 같은 여러 측면을 보고 고른다. 시험 데이터는 끝까지 봉인.</td><td>0.3</td></tr>
+    <tr><td>데이터가 바뀌면?</td><td>그대로 쓰기·처음부터 다시·이어서 고치기 가운데 고른다. 판정도 한 숫자로 하지 않는다.</td><td>0.4</td></tr>
+  </tbody></table></div>
+  <h3>용어 대응 카드</h3>
+  <div class="gloss">
+    <div><b>가중치·편향</b> = 모델이 배우는 숫자. 입력에 곱하는 비중과 더하는 기본값.</div>
+    <div><b>최적화</b> = 오차가 가장 작아지는 숫자를 찾는 일.</div>
+    <div><b>한 걸음</b> = 오차를 재고 숫자를 조금 고치는 한 번의 수정.</div>
+    <div><b>훈련·검증·시험</b> = 배우는 몫 · 고르는 몫 · 마지막에 한 번만 여는 몫.</div>
+    <div><b>재현율</b> = 진짜 불량 가운데 잡아낸 비율.</div>
+    <div><b>피봇팅(다시 정비)</b> = 데이터가 바뀌었을 때 되돌아가 모델을 다시 고치는 일.</div>
+  </div>
+  <h3>비유의 한계</h3>
+  <ul>
+    <li>입력이 온도 하나뿐인 뉴런이라 오차를 3D 지도로 그릴 수 있었습니다. 진짜 모델은 축이 수천~수억 개라 지도를 그릴 수 없지만, 걷는 방식은 같습니다.</li>
+    <li>셀 수가 적어(검증 6개) 셀 하나만 바뀌어도 비율이 크게 흔들립니다. 실무에서는 나누기를 여러 번 바꿔 봅니다.</li>
+  </ul>
+  <div class="next"><a href="first_step_1.html"><b>① 혹시… 미분 좋아하세요? →</b><br>기울기 복습, 순간의 변화, 한계, 기울기 0, 편미분, 미분의 역사, 빵 공장의 MR = MC</a><a href="first_step_2.html"><b>② 공장에서 인공지능까지</b><br>라그랑지안, 경사하강, 역전파, 특성공학</a><a href="index.html"><b>목차</b></a></div>
+</div></section>
+
+<section class="sec" id="outro" aria-labelledby="h-outro"><div class="wrap">
+  <h2 id="h-outro">아웃트로</h2>
+  <div data-dlg="outro"></div>
+</div></section>
+</main>
+
+<footer><div class="wrap">
+  <h3>출처</h3>
+  <table><thead><tr><th>#</th><th>자료</th><th>이 페이지에서 쓴 곳</th></tr></thead><tbody>
+    <tr><td>[1]</td><td>ML Tut, 인포그래픽 「Mathematics Behind AI」 (사용자 제공 이미지, 2026-11-16 확인)</td><td>0.1 — 뉴런 계산 순서와 예시 숫자(입력 0.2·0.5·0.43, 가중치 0.4·0.26·0.3, 편향 0.1 → 0.608)만 참고. 그림은 쓰지 않고 새로 그림</td></tr>
+    <tr><td>[2]</td><td>안상선, 「배터리 불량 분류기」·「수명 회귀」 공장 편 (how_to_make_ai_model_factory_version, 2026-11-16 확인)</td><td>0.3 훈련·검증·시험 나누기와 여러 측면 평가, 0.4 정비 ⑨ 개조 공정</td></tr>
+  </tbody></table>
+  <h3>예시값·설명용 모형인 것</h3>
+  <ul><li>배터리 셀 데이터(공장 A 20개, 공장 B 12개), 학습률 1.0, 출발점 (w, b) = (−1.5, 2.0)과 그 결과 수치</li><li>뉴런 하나의 입력·가중치·편향 숫자</li></ul>
+  <p>캐릭터 이름·설정·그림은 저작권자 안상선의 허락 없이 사용할 수 없습니다.</p>
+  <p>글 · 안상선 ((주)M-Robo 대표) · <a href="index.html">목차</a> · <a href="first_step_1.html">최적화 첫걸음 ①</a> · <a href="first_step_2.html">최적화 첫걸음 ②</a> · <a href="1_math_map.html">좌표축 위의 그릇 1편</a></p>
+</div></footer>
+
+<script>
+/*@@SPRITES@@*/
+/*@@DIFFMATH@@*/
+/*@@COMMON@@*/
+(function(){
+'use strict';
+'use strict';
+var $=U.$,fmt=U.fmt,cssv=U.cssv,B=DM.bakery;
+function V(cv,draw,anim){var o={dirty:true};U.reg(cv,function(dt){if(anim&&dt>0)anim(dt);if(o.dirty||dt===0){draw();o.dirty=false;}});return o;}
+function rng(id,vid,fmtv,cb){var r=$('#'+id);r.oninput=function(){$('#'+vid).textContent=fmtv(+r.value);cb(+r.value);};return +r.value;}
+function won(v,d){return fmt(v,d==null?1:d);}
+function lin(x0,x1,f,n){var o=[];n=n||120;for(var i=0;i<=n;i++){var x=x0+(x1-x0)*i/n;o.push([x,f(x)]);}return o;}
+
+/* ── 대사 ── */
+var DLG={
+ c0:[["doc","doc_front","미분 이야기를 하기 전에, 인공지능 모델이 어떻게 \"배우는지\" 큰 그림부터 볼게요. 결론부터 말하면 모델은 한 번에 정해지지 않고, 수백 번 조금씩 고쳐서 만들어집니다."],
+      ["asst","asst_shock","수백 번이요? 그럼 매번 어느 쪽으로 고칠지는 어떻게 알아요?"],
+      ["robo","robo_coin","훈련 점수가 제일 좋은 놈을 고르면 끝 아니야?"],
+      ["fly","fly_magnify","둘 다 이 편에서 확인해 보자. 끝에 가면 왜 미분이 필요한지 보일 거야."]],
+ outro:[["doc","doc_magic","오늘의 세 줄입니다.<br>① 모델은 한 걸음씩 수백 번 고쳐서 만든다.<br>② 고르는 기준은 훈련 점수가 아니라 검증과 여러 측면의 성적.<br>③ 데이터가 바뀌면 되돌아가 다시 정비한다."],
+        ["robo","robo_sigh","훈련 점수 1등이 불량을 놓칠 줄이야… 성적표는 여러 줄로 봐야겠군."],
+        ["fly","fly_point","그런데 매 걸음 \"어느 쪽으로, 얼마나\"는 누가 정했지? 그게 기울기야."],
+        ["asst","asst_smile","그럼 다음 편에서 물어볼게요. 혹시… 미분 좋아하세요?"]]
+};
+U.dialogues(DLG);
+U.fillImgs();
+
+/* ── 0 서론: 뉴런 하나 · 반복 학습 · 성적표 · 다시 정비 (설명용 예시 데이터) ── */
+var NN=(function(){
+  var sig=function(z){return 1/(1+Math.exp(-z));};
+  var TR=[[-2.0,0],[-1.6,0],[-1.3,0],[-1.0,0],[-0.7,0],[-0.4,0],[-0.1,0],[0.2,0],[0.7,1],[1.0,1],[1.3,1],[1.6,1],[1.9,1],[2.2,1]];
+  var VA=[[-1.5,0],[-0.5,0],[0.9,0],[0.3,1],[1.2,1],[1.8,1]];
+  var BT=[[-1.8,0],[-1.2,0],[-0.6,0],[-0.2,1],[0.4,1],[1.0,1]];
+  var BV=[[-1.5,0],[-0.9,0],[-0.4,0],[0.0,1],[-0.1,1],[0.7,1]];
+  function loss(D,w,b){var s=0;D.forEach(function(d){var p=Math.min(Math.max(sig(w*d[0]+b),1e-9),1-1e-9);s-=d[1]*Math.log(p)+(1-d[1])*Math.log(1-p);});return s/D.length;}
+  function grad(D,w,b){var gw=0,gb=0;D.forEach(function(d){var e=sig(w*d[0]+b)-d[1];gw+=e*d[0];gb+=e;});return [gw/D.length,gb/D.length];}
+  function score(D,w,b){var tp=0,fn=0,fp=0,tn=0;D.forEach(function(d){var p=sig(w*d[0]+b)>=0.5;if(d[1]&&p)tp++;else if(d[1])fn++;else if(p)fp++;else tn++;});return {acc:(tp+tn)/D.length,rec:tp/Math.max(tp+fn,1),miss:fn,pos:tp+fn,fp:fp};}
+  var LR=1.0,N=300,T=[],w=-1.5,b=2.0;
+  for(var t=0;t<=N;t++){var g=grad(TR,w,b);T.push({w:w,b:b,tr:loss(TR,w,b),va:loss(VA,w,b),gw:g[0],gb:g[1]});w-=LR*g[0];b-=LR*g[1];}
+  var best=0;T.forEach(function(r,i){if(r.va<T[best].va)best=i;});
+  function run(D,w,b,n){for(var i=0;i<n;i++){var g=grad(D,w,b);w-=LR*g[0];b-=LR*g[1];}return [w,b];}
+  return {sig:sig,TR:TR,VA:VA,BT:BT,BV:BV,loss:loss,score:score,T:T,best:best,run:run,LR:LR,N:N};})();
+
+/* 0.1 뉴런 하나 */
+var X01=[0.2,0.5,0.43],W01=[0.4,0.26,0.3],B01=0.1;
+function z01(){return X01[0]*W01[0]+X01[1]*W01[1]+X01[2]*W01[2];}
+var v01=V($('#cv01'),function(){var R=U.setup($('#cv01')),g=R.g,w=R.w,h=R.h;U.grid24(g,w,h);
+  if(w<640){var zz0=z01()+B01,ys0=[h*0.14,h*0.30,h*0.46],F='600 12px '+cssv('--font');g.font=F;g.textBaseline='middle';
+    ys0.forEach(function(y,i){g.beginPath();g.arc(30,y,17,0,7);g.fillStyle=cssv('--stain');g.fill();g.fillStyle='#fff';g.textAlign='center';g.fillText(String(X01[i]),30,y);U.arrow2(g,50,y,70,y,cssv('--info'),1.4);g.fillStyle=cssv('--info');g.textAlign='left';g.fillText('× '+fmt(W01[i],2)+' = '+fmt(X01[i]*W01[i],3),76,y);});
+    var yb=h*0.72,bx=w*0.2,ax2=w*0.55,ox2=w*0.85;U.arrow2(g,w*0.5,h*0.53,w*0.5,h*0.6,cssv('--text'),1.4);
+    g.strokeStyle=cssv('--text');g.lineWidth=1.6;g.strokeRect(bx-44,yb-34,88,68);g.fillStyle=cssv('--text');g.textAlign='center';g.fillText('합 '+fmt(z01(),3),bx,yb-14);g.fillText('+ b '+fmt(B01,2),bx,yb+2);g.font='700 13px '+cssv('--font');g.fillText('= '+fmt(zz0,3),bx,yb+20);
+    U.arrow2(g,bx+46,yb,ax2-32,yb,cssv('--text'),1.4);g.strokeRect(ax2-28,yb-28,56,56);g.strokeStyle=cssv('--terrain');g.lineWidth=2;g.beginPath();for(var i=0;i<=40;i++){var u=-6+12*i/40,px=ax2-24+48*i/40,py=yb+22-44*NN.sig(u);i?g.lineTo(px,py):g.moveTo(px,py);}g.stroke();
+    U.arrow2(g,ax2+30,yb,ox2-22,yb,cssv('--text'),1.4);g.beginPath();g.arc(ox2,yb,20,0,7);g.fillStyle=cssv('--gfp');g.fill();g.fillStyle='#fff';g.font=F;g.fillText(fmt(NN.sig(zz0),3),ox2,yb);
+    g.fillStyle=cssv('--muted');g.font='11.5px '+cssv('--font');g.fillText('시그모이드',ax2,yb+42);g.fillText('출력',ox2,yb+36);g.textBaseline='alphabetic';U.stamp(g,w,'설명용 예시');return;}
+  var nw=Math.min(w*0.36,360),L=[4,5,5,2],cx=function(k){return 24+k*(nw-48)/3;};
+  var pos=L.map(function(n,k){var a=[];for(var i=0;i<n;i++)a.push([cx(k),h*0.5+(i-(n-1)/2)*Math.min(46,(h-70)/n)]);return a;});
+  g.lineWidth=0.7;g.strokeStyle='rgba(22,33,43,.18)';for(var k=0;k<3;k++)pos[k].forEach(function(p){pos[k+1].forEach(function(q){g.beginPath();g.moveTo(p[0],p[1]);g.lineTo(q[0],q[1]);g.stroke();});});
+  var col=[cssv('--gfp'),cssv('--info'),cssv('--info'),cssv('--eye')];
+  pos.forEach(function(a,k){a.forEach(function(p,i){g.beginPath();g.arc(p[0],p[1],9,0,7);g.fillStyle=col[k];g.fill();if(k===1&&i===1){g.lineWidth=3;g.strokeStyle=cssv('--amber');g.beginPath();g.arc(p[0],p[1],14,0,7);g.stroke();}});});
+  ['입력층','은닉층','은닉층','출력층'].forEach(function(t,k){g.fillStyle=cssv('--muted');g.font='12px '+cssv('--font');g.textAlign='center';g.fillText(t,cx(k),22);});
+  var hp=pos[1][1],x0=nw+28;g.setLineDash([4,4]);g.strokeStyle=cssv('--amber');g.lineWidth=1.4;g.beginPath();g.moveTo(hp[0]+14,hp[1]);g.lineTo(x0,40);g.moveTo(hp[0]+14,hp[1]);g.lineTo(x0,h-30);g.stroke();g.setLineDash([]);
+  g.fillStyle='rgba(163,92,0,.05)';g.fillRect(x0,30,w-x0-12,h-50);g.strokeStyle='rgba(163,92,0,.4)';g.strokeRect(x0+.5,30.5,w-x0-13,h-51);
+  var W=w-x0-12,ix=x0+W*0.09,mx=x0+W*0.30,sx=x0+W*0.53,ax=x0+W*0.72,ox=x0+W*0.92,ys=[h*0.30,h*0.52,h*0.74],yc=h*0.52;
+  ys.forEach(function(y,i){g.beginPath();g.arc(ix,y,16,0,7);g.fillStyle=cssv('--stain');g.fill();g.fillStyle='#fff';g.font='600 12px '+cssv('--font');g.textAlign='center';g.textBaseline='middle';g.fillText(String(X01[i]),ix,y);
+    U.arrow2(g,ix+18,y,mx-30,y,cssv('--info'),1.6);g.fillStyle=cssv('--info');g.textAlign='left';g.fillText('× '+fmt(W01[i],2)+' = '+fmt(X01[i]*W01[i],3),mx-26,y);
+    U.arrow2(g,mx+70,y,sx-34,yc+(y-yc)*0.25,cssv('--info'),1.4);});
+  g.textBaseline='alphabetic';g.strokeStyle=cssv('--text');g.lineWidth=1.6;g.strokeRect(sx-30,yc-34,64,68);g.fillStyle=cssv('--text');g.textAlign='center';g.font='600 12px '+cssv('--font');
+  g.fillText('합 '+fmt(z01(),3),sx+2,yc-12);g.fillText('+ b '+fmt(B01,2),sx+2,yc+4);g.font='700 13px '+cssv('--font');g.fillText('= '+fmt(z01()+B01,3),sx+2,yc+24);
+  U.arrow2(g,sx+36,yc,ax-34,yc,cssv('--text'),1.6);
+  g.strokeStyle=cssv('--text');g.lineWidth=1.2;g.strokeRect(ax-30,yc-30,60,60);g.strokeStyle=cssv('--terrain');g.lineWidth=2;g.beginPath();for(var i=0;i<=40;i++){var u=-6+12*i/40,px=ax-26+52*i/40,py=yc+24-48*NN.sig(u);i?g.lineTo(px,py):g.moveTo(px,py);}g.stroke();
+  var zz=z01()+B01,pz=ax-26+52*(Math.max(-6,Math.min(6,zz))+6)/12;g.beginPath();g.arc(pz,yc+24-48*NN.sig(zz),3.5,0,7);g.fillStyle=cssv('--eye');g.fill();
+  g.fillStyle=cssv('--muted');g.font='11.5px '+cssv('--font');g.fillText('시그모이드',ax,yc+46);
+  U.arrow2(g,ax+34,yc,ox-20,yc,cssv('--text'),1.6);g.beginPath();g.arc(ox,yc,18,0,7);g.fillStyle=cssv('--gfp');g.fill();g.fillStyle='#fff';g.font='600 12px '+cssv('--font');g.textBaseline='middle';g.fillText(fmt(NN.sig(zz),3),ox,yc);g.textBaseline='alphabetic';
+  g.fillStyle=cssv('--muted');g.font='11.5px '+cssv('--font');g.fillText('다음 층으로',ox,yc+34);
+  [['① 입력',ix],['② 가중치 곱하기',mx+18],['③ 더하고 편향',sx],['④ 활성화',ax],['⑤ 출력',ox]].forEach(function(t){g.fillStyle=cssv('--amber');g.font='600 12px '+cssv('--font');g.textAlign='center';g.fillText(t[0],t[1],48);});
+  U.stamp(g,w,'설명용 예시');});
+function up01(){var s=z01(),z=s+B01,o=NN.sig(z);$('#m01a').textContent=fmt(s,3);$('#m01b').textContent=fmt(z,3);$('#m01c').textContent=fmt(o,3);
+  $('#eq01').innerHTML='0.2 × '+fmt(W01[0],2)+' + 0.5 × '+fmt(W01[1],2)+' + 0.43 × '+fmt(W01[2],2)+' + '+fmt(B01,2)+' = '+fmt(z,3)+' → 시그모이드 1 ÷ (1 + e<sup>−'+fmt(z,3)+'</sup>) = <b>'+fmt(o,3)+'</b>';
+  var d=W01[0]===0.4&&W01[1]===0.26&&W01[2]===0.3&&B01===0.1;
+  U.ins($('#i01'),[['m',d?'처음 값에서는 0.080 + 0.130 + 0.129 + 0.100 = 0.439, 시그모이드를 거치면 0.608입니다.':'가중치를 바꾸면 같은 입력에서도 출력이 '+fmt(o,3)+'(으)로 달라집니다.'],['a','그런데 이 네 숫자는 누가 정할까요? 사람이 아닙니다. 데이터를 보며 <b>조금씩 여러 번</b> 고쳐 정합니다 → 0.2']]);v01.dirty=true;}
+[['r01a','v01a',0],['r01b','v01b',1],['r01c','v01c',2]].forEach(function(a){rng(a[0],a[1],function(v){return v.toFixed(2);},function(v){W01[a[2]]=v;up01();});});
+rng('r01d','v01d',function(v){return v.toFixed(2);},function(v){B01=v;up01();});up01();
+
+/* 0.2 반복 학습 */
+var T=NN.T,cur=0,play=false,acc=0,ZC=2.6;
+var sf02=new U.Surf3D($('#cv02'),{f:function(w,b){return Math.min(NN.loss(NN.TR,w,b),ZC);},xr:[-2,7],yr:[-4,3],zr:[0,ZC],n:26,axes:['w','b','훈련 오차'],yaw:-0.55,pitch:0.6,zoom:0.92,views:false,stamp:'설명용 예시'});
+sf02.ov.push(function(g,S){var pts=T.slice(0,cur+1).map(function(r){return [r.w,r.b,Math.min(r.tr,ZC)+0.03];});if(pts.length>1)S.line3(g,pts,cssv('--amber'),2.6);
+  S.dot3(g,T[0].w,T[0].b,Math.min(T[0].tr,ZC),cssv('--eye'),5);var vb=T[NN.best];if(cur>=NN.best)S.dot3(g,vb.w,vb.b,vb.tr+0.03,cssv('--terrain'),5);
+  var r=T[cur];S.dot3(g,r.w,r.b,Math.min(r.tr,ZC)+0.03,cssv('--gfp'),7);});
+var v02=V($('#cv02b'),function(){var A=T.map(function(r,i){return [i+1,r.tr];}),Bv=T.map(function(r,i){return [i+1,r.va];});
+  U.plot($('#cv02b'),{xr:[1,301],yr:[0,2.4],logx:true,xt:[1,2,3,6,11,21,51,101,301],xf:function(t){return String(t-1);},yt:[0,0.5,1,1.5,2],xl:'걸음 (로그 눈금)',yl:'오차',
+    series:[{pts:A,color:'rgba(19,115,58,.18)',width:1.5},{pts:Bv,color:'rgba(201,48,44,.18)',width:1.5},{pts:A.slice(0,cur+1),color:cssv('--gfp'),width:2.6,name:cur>3?'훈련':null},{pts:Bv.slice(0,cur+1),color:cssv('--eye'),width:2.6,name:cur>3?'검증':null,ndy:-14}],
+    vlines:[{x:cur+1,color:cssv('--amber'),label:'지금 '+cur+'걸음',dy:36},{x:NN.best+1,color:cssv('--terrain'),label:'검증 최저 '+NN.best,dy:18}],stamp:'설명용 예시'});},
+  function(dt){if(!play)return;acc+=dt*(cur<20?6:cur<100?30:90);var k=Math.floor(acc);if(k>0){acc-=k;set02(Math.min(NN.N,cur+k));if(cur>=NN.N){play=false;$('#b02p').textContent='▶ 재생';}}});
+function set02(t){cur=t;var r=T[cur],n=T[Math.min(cur+1,NN.N)];$('#m02a').textContent=cur+' / '+NN.N;$('#m02b').textContent=fmt(r.w,2)+', '+fmt(r.b,2);$('#m02c').textContent=fmt(r.tr,3);$('#m02d').textContent=fmt(r.va,3);
+  var pf=function(v){return v<0?'('+fmt(v,3)+')':fmt(v,3);};$('#eq02').innerHTML='이번 걸음의 기울기: ∂오차/∂w = '+fmt(r.gw,3)+', ∂오차/∂b = '+fmt(r.gb,3)+'<br>반대쪽으로 한 걸음: w = '+fmt(r.w,3)+' − 1.0 × '+pf(r.gw)+' = <b>'+fmt(r.w-NN.LR*r.gw,3)+'</b>, b = '+fmt(r.b,3)+' − 1.0 × '+pf(r.gb)+' = <b>'+fmt(r.b-NN.LR*r.gb,3)+'</b>';
+  var it=[];if(cur===0)it.push(['m','출발점(빨간 점)은 아무렇게나 고른 값입니다. 훈련 오차 '+fmt(r.tr,2)+'. "한 걸음"을 눌러 보세요.']);
+  else if(cur<NN.best)it.push(['g',cur+'걸음째: 훈련 오차도 검증 오차도 함께 내려갑니다. 한 걸음에 끝나지 않고, 매 걸음 기울기를 다시 재서 방향을 고칩니다.']);
+  else if(cur===NN.best)it.push(['g','검증 오차가 가장 낮은 걸음('+cur+')입니다. 여기서 멈추면 처음 보는 셀에 가장 강합니다.']);
+  else it.push(['a',cur+'걸음째: 훈련 오차는 계속 내려가지만('+fmt(r.tr,3)+'), 검증 오차는 '+NN.best+'걸음 뒤부터 다시 오릅니다('+fmt(r.va,3)+'). 훈련 셀을 외우기 시작한 것 → 0.3']);
+  U.ins($('#i02'),it);sf02.dirty=true;v02.dirty=true;}
+$('#b02s').onclick=function(){play=false;$('#b02p').textContent='▶ 재생';set02(Math.min(NN.N,cur+1));};
+$('#b02p').onclick=function(){if(cur>=NN.N)set02(0);play=!play;this.textContent=play?'❚❚ 멈춤':'▶ 재생';if(play&&U.reduce){play=false;this.textContent='▶ 재생';set02(NN.N);}};
+$('#b02v').onclick=function(){play=false;$('#b02p').textContent='▶ 재생';set02(NN.best);};
+$('#b02e').onclick=function(){play=false;$('#b02p').textContent='▶ 재생';set02(NN.N);};
+$('#b02r').onclick=function(){play=false;$('#b02p').textContent='▶ 재생';set02(0);};set02(0);
+
+/* 0.3 성적표 */
+(function(){var a=T[NN.best],z=T[NN.N],sa=NN.score(NN.VA,a.w,a.b),sz=NN.score(NN.VA,z.w,z.b),pc=function(v){return Math.round(v*100)+'%';};
+  $('#t03h1').textContent=NN.best+'걸음 (검증 오차가 가장 낮음)';
+  var rows=[['훈련 오차',fmt(a.tr,3),'<b>'+fmt(z.tr,3)+'</b>','훈련 셀을 얼마나 잘 맞히나 (외웠는지 점검용)'],['검증 오차','<b>'+fmt(a.va,3)+'</b>',fmt(z.va,3),'처음 보는 셀에서의 오차 — 순위는 이것으로'],
+    ['검증 정확도','<b>'+pc(sa.acc)+'</b>',pc(sz.acc),'6개 중 맞힌 비율'],['검증 재현율','<b>'+pc(sa.rec)+'</b>',pc(sz.rec),'진짜 불량 '+sa.pos+'개 가운데 잡아낸 비율'],['놓친 불량','<b>'+sa.miss+'개</b>',sz.miss+'개','불량을 양품으로 내보낸 수 — 공장에서 가장 비싼 실수']];
+  $('#t03').innerHTML=rows.map(function(r){return '<tr><td>'+r[0]+'</td><td>'+r[1]+'</td><td>'+r[2]+'</td><td style="text-align:left">'+r[3]+'</td></tr>';}).join('');
+  U.ins($('#i03'),[['a','훈련 오차만 보면 300걸음 모델이 1등입니다('+fmt(z.tr,3)+' < '+fmt(a.tr,3)+'). 그런데 검증에서는 오차가 더 크고 불량을 '+sz.miss+'개 놓쳤습니다.'],['g','그래서 모델은 훈련 데이터로 배우되, 순위는 검증 데이터로 매기고, 오차 하나가 아니라 정확도·재현율처럼 <b>여러 측면</b>을 함께 봅니다. 훈련 오차는 "외웠는지" 점검하는 데 씁니다.']]);})();
+
+/* 0.4 다시 정비 */
+var M04='keep',NS04=[5,10,20,40],ns04=10;
+function model04(){var a=T[NN.best];if(M04==='keep')return [a.w,a.b];if(M04==='scratch')return NN.run(NN.BT,0,0,ns04);return NN.run(NN.BT,a.w,a.b,ns04);}
+var v04=V($('#cv04'),function(){var m=model04(),a=T[NN.best];
+  var cv=function(w,b){var o=[];for(var i=0;i<=120;i++){var x=-2.2+4.6*i/120;o.push([x,NN.sig(w*x+b)]);}return o;};
+  var P=U.plot($('#cv04'),{xr:[-2.2,2.4],yr:[-0.08,1.08],xt:[-2,-1,0,1,2],yt:[0,0.5,1],xl:'충전 온도 (평균 0으로 맞춘 값)',yl:'불량 확률',
+    series:[{pts:cv(a.w,a.b),color:'rgba(22,33,43,.3)',width:1.6,dash:[5,4]},{pts:cv(m[0],m[1]),color:cssv('--stain'),width:2.8}],hlines:[{y:0.5,color:cssv('--muted'),label:'판정선 0.5',left:true}],stamp:'설명용 예시'});
+  NN.BV.forEach(function(d){var p=NN.sig(m[0]*d[0]+m[1])>=0.5,ok=p===!!d[1],x=P.X(d[0]),y=P.Y(d[1]);P.g.beginPath();P.g.arc(x,y,7,0,7);P.g.fillStyle=d[1]?cssv('--eye'):cssv('--info');P.g.fill();if(!ok){P.g.strokeStyle=cssv('--amber');P.g.lineWidth=3;P.g.beginPath();P.g.arc(x,y,12,0,7);P.g.stroke();}});
+  U.label(P.g,P.X(-2.1),P.Y(0.9),'보라 실선: 지금 모델 · 회색 점선: 공장 A 모델',cssv('--stain'));U.label(P.g,P.X(-2.1),P.Y(0.78),'점: 빨강 불량 · 파랑 양품 · 주황 고리는 틀린 판정',cssv('--muted'));});
+function up04(){var m=model04(),s=NN.score(NN.BV,m[0],m[1]),l=NN.loss(NN.BV,m[0],m[1]),k=NN.score(NN.BV,T[NN.best].w,T[NN.best].b);
+  $('#m04a').textContent={keep:'① 그대로',scratch:'② 처음부터 '+ns04+'걸음',tune:'③ 이어서 '+ns04+'걸음'}[M04];$('#m04b').textContent=fmt(l,3);$('#m04c').textContent=Math.round(s.rec*100)+'%';$('#m04d').textContent=s.miss+'개 / '+s.pos+'개';
+  var it=[];if(M04==='keep')it.push(['r','공장 A에서 잘 고른 모델이지만, 공장 B에서는 불량 '+k.pos+'개 가운데 '+k.miss+'개를 놓칩니다. 힘들게 만든 모델이라도 데이터가 바뀌면 되돌아가 다시 정비해야 합니다.']);
+  else{var o=M04==='scratch'?NN.run(NN.BT,T[NN.best].w,T[NN.best].b,ns04):NN.run(NN.BT,0,0,ns04),lo=NN.loss(NN.BV,o[0],o[1]),so=NN.score(NN.BV,o[0],o[1]);
+    it.push(['m',(M04==='scratch'?'처음부터':'이어서')+' '+ns04+'걸음: 검증 오차 '+fmt(l,3)+', 재현율 '+Math.round(s.rec*100)+'%. 같은 걸음 수로 '+(M04==='scratch'?'이어서 고치면':'처음부터 배우면')+' 검증 오차 '+fmt(lo,3)+', 재현율 '+Math.round(so.rec*100)+'%입니다.']);
+    it.push(['a','이 예시에서는 같은 걸음 수라면 이어서 고치기의 검증 오차가 늘 더 낮지만, 5걸음처럼 아주 짧게 고치면 재현율은 처음부터 배운 쪽이 높습니다. 어느 방법이 낫다는 판정도 한 가지 숫자로 하지 않습니다.']);}
+  U.ins($('#i04'),it);v04.dirty=true;}
+U.$$('[data-m04]').forEach(function(b){b.onclick=function(){M04=b.dataset.m04;U.$$('[data-m04]').forEach(function(x){x.setAttribute('aria-pressed',String(x===b));});up04();};});
+rng('r04','v04',function(v){return NS04[v]+'걸음';},function(v){ns04=NS04[v];up04();});up04();
+
+/* ── 숫자 요약 ── */
+(function(){var a=T[NN.best],z=T[NN.N],sa=NN.score(NN.VA,a.w,a.b),sz=NN.score(NN.VA,z.w,z.b),kb=NN.score(NN.BV,a.w,a.b);
+  $('#k-best').textContent=NN.best+'걸음';$('#k-rec').textContent=Math.round(sa.rec*100)+'% → '+Math.round(sz.rec*100)+'%';$('#k-b').textContent=Math.round(kb.rec*100)+'%';})();
+
+/* ── 용어·퀴즈 ── */
+U.Gloss({
+ '훈련 데이터':['훈련 데이터','AI','모델이 가중치를 고칠 때 쓰는 데이터.'],
+ '검증 데이터':['검증 데이터','AI','학습에 쓰지 않고 따로 떼어 두었다가 모델을 고를 때 쓰는 데이터.'],
+ '재현율':['재현율 (recall)','AI','진짜 불량 가운데 모델이 불량이라고 잡아낸 비율.'],
+ '시그모이드':['시그모이드','AI','어떤 수든 0과 1 사이로 접는 S자 함수 1 ÷ (1 + e^−z).'],
+ '미세조정':['미세조정 (fine-tuning)','AI','이미 배운 가중치에서 출발해 새 데이터로 조금 더 고치는 일.'],
+ '기울기':['기울기','미분','올라간 양 ÷ 옆으로 간 거리. 내려가면 음수.'],
+},['훈련 데이터','검증 데이터','재현율','시그모이드','미세조정']);
+U.Study({quiz:{
+ c0:[{q:'0.2에서 매 걸음 w와 b를 고치는 방향을 정한 것은?',o:['오차의 기울기(그 반대쪽으로 간다)','검증 셀의 정답','무작위로 고른 방향'],a:0,why:'w ← w − 학습률 × 기울기. 기울기가 오르막을 가리키니 그 반대로 걸어 오차를 줄입니다.',hint:'0.2의 수식 상자를 보세요.'},
+     {q:'훈련 오차는 계속 줄었는데 검증 오차가 오르고 불량을 놓치기 시작했다. 어느 걸음의 모델을 골라야 하나?',o:['훈련 오차가 가장 낮은 마지막 걸음','검증 오차가 가장 낮은 걸음','걸음 수가 가장 많은 쪽'],a:1,why:'목표는 처음 보는 셀입니다. 순위는 검증으로 매기고 훈련 오차는 외웠는지 점검에 씁니다.',hint:'기출만 외운 학생.'},
+     {q:'재료가 바뀐 공장 B에서 공장 A 모델을 그대로 쓰면?',o:['불량을 더 잘 잡는다','불량 3개 가운데 1개만 잡는다','아무 변화가 없다'],a:1,why:'불량이 더 낮은 온도에서 생겨 판정선이 맞지 않습니다. 되돌아가 다시 정비해야 합니다.',hint:'0.4의 ① 그대로 쓰기.'}],
+}});
+U.start();
+})();
+</script>
+</body>
+</html>

@@ -31,7 +31,7 @@ function attach(H,kg,refs,meta){
   H=H.replace('</head>',bh+'</head>');
   let i=H.lastIndexOf('<footer'),j=H.lastIndexOf('</body>'),p=(i>=0&&i<j)?i:j;H=H.slice(0,p)+body+H.slice(p);
   j=H.lastIndexOf('</body>');H=H.slice(0,j)+sc+H.slice(j);return H;}
-const pages=[['p0.src.html','index.html','0'],['p1.src.html','1_math_map.html','1'],['p2.src.html','2_experiment_lab.html','2'],['p3.src.html','3_arrow_field.html','3'],['p4.src.html','first_step_1.html','4'],['p5.src.html','first_step_2.html','5']];
+const pages=[['p0.src.html','index.html','0'],['p1.src.html','1_math_map.html','1'],['p2.src.html','2_experiment_lab.html','2'],['p3.src.html','3_arrow_field.html','3'],['p4.src.html','first_step_1.html','4'],['p5.src.html','first_step_2.html','5'],['p6.src.html','first_step_0.html','6']];
 for(const [src,out,n] of pages){
   if(!fs.existsSync(path.join(B,src)))continue;
   let H=rd(src).replace('<!--@@CSS@@-->','<style>\n'+css+'\n</style>')

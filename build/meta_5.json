@@ -1,6 +1,6 @@
 {
- "title": "최적화 첫걸음 ② 미분부터 시작하기 — 공장에서 인공지능까지",
- "series": "최적화 첫걸음 — 미분부터 시작하기",
+ "title": "최적화 첫걸음 ② 공장에서 인공지능까지",
+ "series": "최적화 첫걸음",
  "number": "5",
  "creator": [
   {
@@ -40,5 +40,5 @@
  "educationalLevel": "입문",
  "learningResourceType": "interactive explainer",
  "registry": "KG_00_registry 0.2",
- "suggestedCitation": "안상선 (2026). 최적화 첫걸음 ② 미분부터 시작하기 — 공장에서 인공지능까지. 최적화 첫걸음 2, v1.3."
+ "suggestedCitation": "안상선 (2026). 최적화 첫걸음 ② 공장에서 인공지능까지. 최적화 첫걸음 2, v1.3."
 }

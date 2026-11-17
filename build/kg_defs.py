@@ -20,6 +20,10 @@ def ref(id_, type_, title, authors, year=None, container=None, extra=None, role=
 
 USERSRC = "사용자 제공 자료(이미지·영상)에서 옮김. 원 게시물 주소·게시일은 받지 못함"
 REFS = {
+ "mltut_math_behind_ai": lambda s: ref("mltut_math_behind_ai", "graphic", "Mathematics Behind AI", [{"literal": "ML Tut"}], role="background", supports=s,
+        verified={"title": True, "author": True, "year": False, "url": False}, checked=USERSRC, note="계산 순서와 예시 숫자만 참고, 그림은 새로 그림"),
+ "ahn_battery_factory": lambda s: ref("ahn_battery_factory", "webpage", "배터리 불량 분류기·수명 회귀 공장 편", [{"family": "안", "given": "상선"}], 2026, None, {"URL": "https://adminmrobo.github.io/how_to_make_ai_model_factory_version/classifier.html"}, role="background", supports=s,
+        verified={"title": True, "author": True, "year": True, "url": True}, checked="2026-11-16"),
  "matharium_crisp": lambda s: ref("matharium_crisp", "graphic", "The geometry of a curved crisp", [{"literal": "matharium"}], role="primary", supports=s,
         verified={"title": True, "author": True, "year": False, "url": False}, checked=USERSRC, note="그림은 페이지에 넣지 않고 새로 그림"),
  "matheorems_coords": lambda s: ref("matheorems_coords", "graphic", "Gradient in Different Coordinate Systems", [{"literal": "@matheorems"}], role="primary", supports=s,
@@ -468,7 +472,7 @@ m3.update({"date": "2026-11-18", "version": "1.2", "educationalLevel": "입문",
 (B / "meta_3.json").write_text(json.dumps(m3, ensure_ascii=False, indent=1))
 
 # ══════════════ 최적화 첫걸음 ① ══════════════
-FS = "최적화 첫걸음 — 미분부터 시작하기"
+FS = "최적화 첫걸음"
 g = G("first_step_1")
 slope = g.n("lab:concept/slope", "Concept", "기울기", "Slope", "#s0", 1, "올라간 양 ÷ 옆으로 간 거리.")
 deriv = g.n("lab:concept/derivative", "Concept", "미분(도함수)", "Derivative", "#s11", 1, "간격을 0에 가깝게 줄였을 때의 기울기 = 접선의 기울기.", alt=["미분계수", "도함수"])
@@ -526,36 +530,14 @@ for cid, ko, en, anc, tgt, wk, loc in C1:
     g.n(cid, "Claim", ko, en, anc, 2, source=[{"ref": wk, "loc": loc}]); g.e(cid, "supports", tgt, anc); g.e(cid, "assertedIn", W1[wk], anc)
 for wk in ("bussotti2003genesis", "lemarechal2012cauchy", "het_euler", "hoerl1970ridge", "rumelhart1986learning"): g.e(W1[wk], "relatedTo", limit, "#s21")
 for c in (deriv, pdv, tdiff, stat, limit): g.e(c, "broader", T_CALC, "#sum")
-# ── 0 서론: 모델은 한 번에 만들어지지 않는다 ──
-nrn = g.n("lab:concept/artificial-neuron", "Concept", "인공 뉴런", "Artificial neuron", "#s01", 1, "입력 × 가중치의 합에 편향을 더하고 활성화 함수를 거친 값.")
-sigm = g.n("lab:concept/sigmoid", "Concept", "시그모이드", "Sigmoid", "#s01", 1, "어떤 수든 0과 1 사이로 접는 S자 함수.")
-itr = g.n("lab:concept/iterative-training", "Concept", "반복 학습(한 걸음씩 고치기)", "Iterative training", "#s02", 1, "오차의 기울기 반대쪽으로 가중치를 조금씩 고치는 일을 여러 번 되풀이한다.")
-gd0 = g.n("lab:method/gradient-descent", "Method", "경사하강", "Gradient descent", "#s02", 1, "기울기의 반대 방향으로 조금씩 걸어 오차를 줄이는 방법.")
-tvs = g.n("lab:concept/train-validation-split", "Concept", "훈련·검증 나누기", "Train/validation split", "#s03", 1, "손에 쥔 데이터를 배우는 몫과 점검하는 몫으로 나눈다. 시험 몫은 끝까지 봉인.")
-rec = g.n("lab:concept/recall", "Concept", "재현율", "Recall", "#s03", 1, "진짜 불량 가운데 모델이 잡아낸 비율.")
-ovf = g.n("lab:concept/overfitting", "Concept", "과적합(외우기)", "Overfitting", "#s03", 1, "훈련 오차는 계속 줄지만 처음 보는 데이터에서는 나빠지는 상태.")
-piv = g.n("lab:method/re-tuning", "Method", "되돌아가 다시 정비하기(피봇팅)", "Going back and re-tuning (pivoting)", "#s04", 1, "데이터가 바뀌면 그대로 쓰기·처음부터 다시 배우기·이어서 고치기(미세조정) 가운데 고른다.")
-shift = g.n("lab:concept/distribution-shift", "Concept", "분포 이동", "Distribution shift", "#s04", 1, "재료·공정이 바뀌어 새 데이터가 훈련 때와 다르게 생긴 상황.")
-L0 = g.n("lab:limitation/train-loss-only", "Limitation", "훈련 오차만 보고 고르기", "Choosing by training loss only", "#s03", 2)
-g.e(nrn, "relatedTo", sigm, "#s01"); g.e(itr, "relatedTo", gd0, "#s02"); g.e(gd0, "relatedTo", slope, "#s02"); g.e(itr, "prerequisiteOf", tvs, "#s03")
-g.e(ovf, "relatedTo", tvs, "#s03"); g.e(rec, "partOf", tvs, "#s03"); g.e(gd0, "hasLimitation", L0, "#s03"); g.e(L0, "addressedBy", tvs, "#s03")
-g.e(shift, "relatedTo", piv, "#s04"); g.e(itr, "prerequisiteOf", piv, "#s04")
-for sid, ko, en, anc, tgt in [("fs1-neuron", "뉴런 하나 계산", "One neuron calculator", "#s01", nrn), ("fs1-train", "반복 학습 대시보드", "Iterative training dashboard", "#s02", itr),
-                              ("fs1-scorecard", "여러 측면 성적표", "Multi-metric scorecard", "#s03", ovf), ("fs1-pivot", "공장 B에서 다시 정비", "Re-tuning for factory B", "#s04", piv)]:
-    g.n("lab:sim/" + sid, "Simulation", ko, en, anc, 1); g.e(tgt, "demonstratedBy", "lab:sim/" + sid, anc)
-q0 = g.n("lab:question/fs-intro", "Question", "고칠 방향은 누가 알려 주나?", "Who tells the model which way to adjust?", "#c0", 1)
-g.e(itr, "raises", q0, "#c0"); g.e(q0, "relatedTo", deriv, "#c0")
-g.e(gd0, "broader", T_GD, "#s02"); g.e(tvs, "broader", "lab:topic/data-splitting", "#s03"); g.e(rec, "broader", "lab:topic/precision-recall", "#s03")
-g.e(ovf, "broader", "lab:topic/generalization", "#s03"); g.e(piv, "broader", "lab:topic/transfer-learning", "#s04"); g.e(shift, "broader", "lab:topic/distribution-shift", "#s04")
-g.e(nrn, "broader", "lab:topic/perceptron", "#s01"); g.e(sigm, "broader", "lab:topic/activation-function", "#s01")
-Q1 = [("c0", 1, itr), ("c0", 2, tvs), ("c0", 3, piv), ("s0", 1, slope), ("c1", 1, deriv), ("c1", 2, stat), ("c1", 3, pdv), ("c2", 1, deriv), ("c2", 2, mrev), ("c3", 1, mrmc), ("c3", 2, shut), ("duel", 1, shut)]
+Q1 = [("s0", 1, slope), ("c1", 1, deriv), ("c1", 2, stat), ("c1", 3, pdv), ("c2", 1, deriv), ("c2", 2, mrev), ("c3", 1, mrmc), ("c3", 2, shut), ("duel", 1, shut)]
 for sec, k, tgt in Q1:
     qid = f"lab:quiz/fs1-{sec}-{k}"; g.n(qid, "QuizItem", f"{sec} 문제 {k}", f"Quiz {sec}-{k}", "#" + sec, 1); g.e(qid, "assesses", tgt, "#" + sec)
 g.dump(4)
 used4 = {"leibniz1684nova": [deriv], "archimede_newton_leibniz": [deriv], "wiki_calculus_controversy": [deriv], "het_neoclassicals": [mrev], "bussotti2003genesis": [limit], "lemarechal2012cauchy": [limit], "het_euler": [limit], "hoerl1970ridge": [limit], "rumelhart1986learning": [limit]}
 (B / "refs_4.json").write_text(json.dumps([REFS[k](v) for k, v in used4.items()], ensure_ascii=False, indent=1))
-m4 = meta(4, "최적화 첫걸음 ① 미분부터 시작하기 — 왜, 언제부터, 어디에", [itr, deriv, marg, stat, mrmc, shut], list(used4), "first_step_1.html")
-m4.update({"series": FS, "date": "2026-11-16", "version": "1.3", "educationalLevel": "입문", "suggestedCitation": "안상선 (2026). 최적화 첫걸음 ① 미분부터 시작하기 — 왜, 언제부터, 어디에. 최적화 첫걸음 1, v1.3."})
+m4 = meta(4, "최적화 첫걸음 ① 혹시… 미분 좋아하세요? — 왜, 언제부터, 어디에", [deriv, marg, stat, mrmc, shut], list(used4), "first_step_1.html")
+m4.update({"series": FS, "date": "2026-11-18", "version": "1.4", "educationalLevel": "입문", "suggestedCitation": "안상선 (2026). 최적화 첫걸음 ① 혹시… 미분 좋아하세요? — 왜, 언제부터, 어디에. 최적화 첫걸음 1, v1.4."})
 (B / "meta_4.json").write_text(json.dumps(m4, ensure_ascii=False, indent=1))
 
 # ══════════════ 최적화 첫걸음 ② ══════════════
@@ -621,9 +603,47 @@ for sec, k, tgt in Q2:
 g.dump(5)
 used5 = {"bussotti2003genesis": [lag], "het_euler": [euler], "lemarechal2012cauchy": [gd], "rumelhart1986learning": [bp], "hoerl1970ridge": [reg], "cement_world": [ode]}
 (B / "refs_5.json").write_text(json.dumps([REFS[k](v) for k, v in used5.items()], ensure_ascii=False, indent=1))
-m5 = meta(5, "최적화 첫걸음 ② 미분부터 시작하기 — 공장에서 인공지능까지", [vmp, lag, euler, gd, inter], list(used5), "first_step_2.html")
-m5.update({"series": FS, "date": "2026-11-16", "version": "1.3", "educationalLevel": "입문", "suggestedCitation": "안상선 (2026). 최적화 첫걸음 ② 미분부터 시작하기 — 공장에서 인공지능까지. 최적화 첫걸음 2, v1.3."})
+m5 = meta(5, "최적화 첫걸음 ② 공장에서 인공지능까지", [vmp, lag, euler, gd, inter], list(used5), "first_step_2.html")
+m5.update({"series": FS, "date": "2026-11-16", "version": "1.3", "educationalLevel": "입문", "suggestedCitation": "안상선 (2026). 최적화 첫걸음 ② 공장에서 인공지능까지. 최적화 첫걸음 2, v1.3."})
 (B / "meta_5.json").write_text(json.dumps(m5, ensure_ascii=False, indent=1))
+
+
+# ══════════════ 최적화 첫걸음 ⓪ ══════════════
+g = G("first_step_0")
+# ── 0 서론: 모델은 한 번에 만들어지지 않는다 ──
+nrn = g.n("lab:concept/artificial-neuron", "Concept", "인공 뉴런", "Artificial neuron", "#s01", 1, "입력 × 가중치의 합에 편향을 더하고 활성화 함수를 거친 값.")
+sigm = g.n("lab:concept/sigmoid", "Concept", "시그모이드", "Sigmoid", "#s01", 1, "어떤 수든 0과 1 사이로 접는 S자 함수.")
+itr = g.n("lab:concept/iterative-training", "Concept", "반복 학습(한 걸음씩 고치기)", "Iterative training", "#s02", 1, "오차의 기울기 반대쪽으로 가중치를 조금씩 고치는 일을 여러 번 되풀이한다.")
+gd0 = g.n("lab:method/gradient-descent", "Method", "경사하강", "Gradient descent", "#s02", 1, "기울기의 반대 방향으로 조금씩 걸어 오차를 줄이는 방법.")
+tvs = g.n("lab:concept/train-validation-split", "Concept", "훈련·검증 나누기", "Train/validation split", "#s03", 1, "손에 쥔 데이터를 배우는 몫과 점검하는 몫으로 나눈다. 시험 몫은 끝까지 봉인.")
+rec = g.n("lab:concept/recall", "Concept", "재현율", "Recall", "#s03", 1, "진짜 불량 가운데 모델이 잡아낸 비율.")
+ovf = g.n("lab:concept/overfitting", "Concept", "과적합(외우기)", "Overfitting", "#s03", 1, "훈련 오차는 계속 줄지만 처음 보는 데이터에서는 나빠지는 상태.")
+piv = g.n("lab:method/re-tuning", "Method", "되돌아가 다시 정비하기(피봇팅)", "Going back and re-tuning (pivoting)", "#s04", 1, "데이터가 바뀌면 그대로 쓰기·처음부터 다시 배우기·이어서 고치기(미세조정) 가운데 고른다.")
+shift = g.n("lab:concept/distribution-shift", "Concept", "분포 이동", "Distribution shift", "#s04", 1, "재료·공정이 바뀌어 새 데이터가 훈련 때와 다르게 생긴 상황.")
+L0 = g.n("lab:limitation/train-loss-only", "Limitation", "훈련 오차만 보고 고르기", "Choosing by training loss only", "#s03", 2)
+g.e(nrn, "relatedTo", sigm, "#s01"); g.e(itr, "relatedTo", gd0, "#s02"); g.e(itr, "prerequisiteOf", tvs, "#s03")
+g.e(ovf, "relatedTo", tvs, "#s03"); g.e(rec, "partOf", tvs, "#s03"); g.e(gd0, "hasLimitation", L0, "#s03"); g.e(L0, "addressedBy", tvs, "#s03")
+g.e(shift, "relatedTo", piv, "#s04"); g.e(itr, "prerequisiteOf", piv, "#s04")
+for sid, ko, en, anc, tgt in [("fs0-neuron", "뉴런 하나 계산", "One neuron calculator", "#s01", nrn), ("fs0-train", "반복 학습 대시보드", "Iterative training dashboard", "#s02", itr),
+                              ("fs0-scorecard", "여러 측면 성적표", "Multi-metric scorecard", "#s03", ovf), ("fs0-pivot", "공장 B에서 다시 정비", "Re-tuning for factory B", "#s04", piv)]:
+    g.n("lab:sim/" + sid, "Simulation", ko, en, anc, 1); g.e(tgt, "demonstratedBy", "lab:sim/" + sid, anc)
+q0 = g.n("lab:question/fs-intro", "Question", "고칠 방향은 누가 알려 주나?", "Who tells the model which way to adjust?", "#c0", 1)
+g.e(itr, "raises", q0, "#c0"); g.e(gd0, "relatedTo", q0, "#c0")
+nxt = g.n("lab:section/first-step-1", "Section", "다음 편: 혹시… 미분 좋아하세요?", "Next: Do you like derivatives?", "#sum", 1)
+g.e(q0, "explainedIn", nxt, "#sum")
+g.e(gd0, "broader", T_GD, "#s02"); g.e(tvs, "broader", "lab:topic/data-splitting", "#s03"); g.e(rec, "broader", "lab:topic/precision-recall", "#s03")
+g.e(ovf, "broader", "lab:topic/generalization", "#s03"); g.e(piv, "broader", "lab:topic/transfer-learning", "#s04"); g.e(shift, "broader", "lab:topic/distribution-shift", "#s04")
+g.e(nrn, "broader", "lab:topic/perceptron", "#s01"); g.e(sigm, "broader", "lab:topic/activation-function", "#s01")
+W0 = {k: g.work(k, ko, en) for k, ko, en in [("mltut_math_behind_ai", "ML Tut: Mathematics Behind AI", "ML Tut: Mathematics Behind AI"), ("ahn_battery_factory", "배터리 불량 분류기 공장 편", "Battery defect classifier factory")]}
+g.e(W0["mltut_math_behind_ai"], "relatedTo", nrn, "#s01"); g.e(W0["ahn_battery_factory"], "relatedTo", tvs, "#s03"); g.e(W0["ahn_battery_factory"], "relatedTo", piv, "#s04")
+for k, tgt in [(1, itr), (2, tvs), (3, piv)]:
+    qid = f"lab:quiz/fs0-c0-{k}"; g.n(qid, "QuizItem", f"c0 문제 {k}", f"Quiz c0-{k}", "#c0", 1); g.e(qid, "assesses", tgt, "#c0")
+g.dump(6)
+used6 = {"mltut_math_behind_ai": [nrn], "ahn_battery_factory": [tvs, piv]}
+(B / "refs_6.json").write_text(json.dumps([REFS[k](v) for k, v in used6.items()], ensure_ascii=False, indent=1))
+m6 = meta(6, "최적화 첫걸음 ⓪ 인공지능 모델에서의 최적화 — 모델은 한 번에 만들어지지 않는다", [itr, tvs, piv], list(used6), "first_step_0.html")
+m6.update({"series": FS, "number": "0", "date": "2026-11-18", "version": "1.0", "educationalLevel": "입문", "suggestedCitation": "안상선 (2026). 최적화 첫걸음 ⓪ 인공지능 모델에서의 최적화 — 모델은 한 번에 만들어지지 않는다. 최적화 첫걸음 0, v1.0."})
+(B / "meta_6.json").write_text(json.dumps(m6, ensure_ascii=False, indent=1))
 
 # ══════════════ 목차 ══════════════
 g = G("index")
@@ -636,10 +656,11 @@ p2 = g.n("lab:section/series-part-2", "Section", "2편 실험실 편", "Part 2: 
 p3 = g.n("lab:section/series-part-3", "Section", "3편 화살표 밭 편", "Part 3: vector fields and del", "#chapters", 1)
 delop0 = g.n("lab:concept/del-operator", "Concept", "나블라(∇) 연산자", "Del (nabla) operator", "#chapters", 1, "(∂/∂x, ∂/∂y, ∂/∂z). 그래디언트·발산·회전·라플라시안을 만드는 도구 묶음.")
 g.e(delop0, "explainedIn", p3, "#chapters");
-fs1 = g.n("lab:section/first-step-1", "Section", "최적화 첫걸음 ① — 미분부터 시작하기", "First step to optimization 1: starting from derivatives", "#firststep", 1)
-fs2 = g.n("lab:section/first-step-2", "Section", "최적화 첫걸음 ② — 미분부터 시작하기", "First step to optimization 2: starting from derivatives", "#firststep", 1)
+fs0 = g.n("lab:section/first-step-0", "Section", "최적화 첫걸음 ⓪ — 인공지능 모델에서의 최적화", "First step to optimization 0: optimization in AI models", "#firststep", 1)
+fs1 = g.n("lab:section/first-step-1", "Section", "최적화 첫걸음 ① — 혹시… 미분 좋아하세요?", "First step to optimization 1: do you like derivatives?", "#firststep", 1)
+fs2 = g.n("lab:section/first-step-2", "Section", "최적화 첫걸음 ② — 공장에서 인공지능까지", "First step to optimization 2: from factories to AI", "#firststep", 1)
 der0 = g.n("lab:concept/derivative", "Concept", "미분", "Derivative", "#firststep", 1, "아주 짧은 순간의 기울기.")
-g.e(der0, "explainedIn", fs1, "#firststep"); g.e(fs1, "prerequisiteOf", fs2, "#firststep"); g.e(fs2, "prerequisiteOf", p1, "#firststep"); g.e(der0, "broader", T_CALC, "#firststep"); g.e(p1, "relatedTo", p3, "#chapters"); g.e(delop0, "broader", T_CALC, "#chapters")
+g.e(der0, "explainedIn", fs1, "#firststep"); g.e(fs0, "prerequisiteOf", fs1, "#firststep"); g.e(fs1, "prerequisiteOf", fs2, "#firststep"); g.e(fs2, "prerequisiteOf", p1, "#firststep"); g.e(der0, "broader", T_CALC, "#firststep"); g.e(p1, "relatedTo", p3, "#chapters"); g.e(delop0, "broader", T_CALC, "#chapters")
 q = g.n("lab:question/series", "Question", "학습을 오차 지도 위의 걷기로 볼 수 있을까?", "Can learning be read as walking on a loss map?", "#top", 1)
 w = g.work("goodfellow2016deep", "Goodfellow 외 2016 Deep Learning", "Goodfellow et al. 2016 Deep Learning")
 c = g.n("lab:claim/gd-on-loss", "Claim", "경사하강은 오차 함수의 기울기 반대 방향으로 가중치를 고친다", "Gradient descent moves weights against the loss gradient", "#top", 1, source=[{"ref": "goodfellow2016deep", "loc": "4.3"}])
@@ -650,7 +671,7 @@ g.dump(0)
 m0 = meta(0, "좌표축 위의 그릇 — 3D 지도로 본 모델 최적화 (목차)", ["lab:concept/loss-landscape", "lab:method/gradient-descent", "lab:concept/hyperparameter"], ["goodfellow2016deep"], "")
 (B / "meta_0.json").write_text(json.dumps(m0, ensure_ascii=False, indent=1))
 
-for n in (0, 1, 2, 3, 4, 5):
+for n in (0, 1, 2, 3, 4, 5, 6):
     k = json.loads((B / f"kg_{n}.json").read_text()); ids = {x["id"] for x in k["nodes"]}
     deg = {i: 0 for i in ids}; rel = 0; bad = []
     for e in k["edges"]:

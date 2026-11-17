@@ -1,0 +1,81 @@
+[
+ {
+  "id": "mltut_math_behind_ai",
+  "type": "graphic",
+  "title": "Mathematics Behind AI",
+  "author": [
+   {
+    "literal": "ML Tut"
+   }
+  ],
+  "accessed": {
+   "date-parts": [
+    [
+     2026,
+     11,
+     14
+    ]
+   ]
+  },
+  "lab": {
+   "work": "lab:work/mltut_math_behind_ai",
+   "role": "background",
+   "supports": [
+    "lab:concept/artificial-neuron"
+   ],
+   "locs": [],
+   "verified": {
+    "title": true,
+    "author": true,
+    "year": false,
+    "url": false
+   },
+   "checkedBy": "사용자 제공 자료(이미지·영상)에서 옮김. 원 게시물 주소·게시일은 받지 못함",
+   "note": "계산 순서와 예시 숫자만 참고, 그림은 새로 그림"
+  }
+ },
+ {
+  "id": "ahn_battery_factory",
+  "type": "webpage",
+  "title": "배터리 불량 분류기·수명 회귀 공장 편",
+  "author": [
+   {
+    "family": "안",
+    "given": "상선"
+   }
+  ],
+  "issued": {
+   "date-parts": [
+    [
+     2026
+    ]
+   ]
+  },
+  "URL": "https://adminmrobo.github.io/how_to_make_ai_model_factory_version/classifier.html",
+  "accessed": {
+   "date-parts": [
+    [
+     2026,
+     11,
+     14
+    ]
+   ]
+  },
+  "lab": {
+   "work": "lab:work/ahn_battery_factory",
+   "role": "background",
+   "supports": [
+    "lab:concept/train-validation-split",
+    "lab:method/re-tuning"
+   ],
+   "locs": [],
+   "verified": {
+    "title": true,
+    "author": true,
+    "year": true,
+    "url": true
+   },
+   "checkedBy": "2026-11-16"
+  }
+ }
+]

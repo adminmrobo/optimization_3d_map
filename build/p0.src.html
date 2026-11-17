@@ -57,8 +57,8 @@
 
 <main>
 <section class="sec" id="firststep" aria-labelledby="h-fs"><div class="wrap">
-  <h2 id="h-fs">미분이 처음이라면 → 최적화 첫걸음 — 미분부터 시작하기</h2>
-  <p class="lead">"혹시… 미분 좋아하세요?" — 미분을 처음 만나는 분을 위한 두 편입니다. 인공지능 모델이 왜 한 번에 정해지지 않고 여러 번 고쳐지는지(서론)에서 출발해 기울기 복습, 빵 공장의 MR = MC, 공장의 고용과 라그랑지안, 그리고 인공지능의 경사하강·역전파·특성공학까지 이어집니다. 다 보고 나면 아래 그릇 1~3편이 훨씬 쉬워집니다.</p>
+  <h2 id="h-fs">미분이 처음이라면 → 최적화 첫걸음</h2>
+  <p class="lead">미분을 처음 만나는 분을 위한 세 편입니다. ⓪ 편에서 인공지능 모델이 왜 한 번에 정해지지 않고 여러 번 고쳐지는지 보고, ① 편 "혹시… 미분 좋아하세요?"에서 기울기 복습, 빵 공장의 MR = MC, 공장의 고용과 라그랑지안, 그리고 인공지능의 경사하강·역전파·특성공학까지 이어집니다. 다 보고 나면 아래 그릇 1~3편이 훨씬 쉬워집니다.</p>
   <div class="diffkey" aria-label="얼굴로 보는 난이도">
     <div><img src="img/diff_haru_1.webp" alt="웃는 하루"><span><b>1 · 산책</b>미분을 몰라도 OK</span></div>
     <div><img src="img/diff_haru_2.webp" alt="고민하는 하루"><span><b>2 · 오르막</b>기울기를 알면 OK</span></div>
@@ -67,8 +67,10 @@
   </div>
   <p class="muted" style="font-size:13px;margin:0 0 6px">카드 왼쪽 위의 하루 얼굴이 난이도입니다. 단계가 오를수록 하루의 표정이 굳어 갑니다. 그 위에 하나 더 — <span class="hellgate" style="font-size:13px"><img src="img/diff_haru_5.webp" alt="눈물 흘리는 하루" width="34" height="34">헬게이트</span> 3편 ⑥장(원통·구면 좌표의 ∇)은 시리즈에서 가장 어려운 심화 장입니다.</p>
   <div class="chap">
-    <a href="first_step_1.html"><span class="diff" aria-label="난이도 1단계 산책"><img src="img/diff_haru_1.webp" alt="" width="44" height="44" loading="lazy"><span><b>산책</b><span class="pip">●○○○</span></span></span><canvas id="cvF1" aria-label="첫걸음 ① 미리보기: 언덕 모양 3D 곡면 위의 접선과 기울기 0인 꼭대기"></canvas><div class="t"><b>최적화 첫걸음 ① · 왜, 언제부터, 어디에</b><span>모델은 한 번에 만들어지지 않는다 · 하루·시아·모아의 세 질문 · 입문</span>
-      <ol><li>서론: 반복해서 고치는 모델 — 훈련·검증, 다시 정비하기</li><li>준비운동: 그래프와 기울기 1분 복습</li><li>미분은 왜 쓰나 — 순간의 변화, 한계, 기울기 0, 편미분·전미분</li><li>미분의 역사 — 뉴턴·라이프니츠, 극한, 한계혁명</li><li>경제학의 최적화 — MR = MC, 조업중단점</li><li>대결: 많이 구울수록 이익일까?</li></ol></div></a>
+    <a href="first_step_0.html"><span class="diff" aria-label="난이도 1단계 산책"><img src="img/diff_haru_1.webp" alt="" width="44" height="44" loading="lazy"><span><b>산책</b><span class="pip">●○○○</span></span></span><canvas id="cvF0" aria-label="첫걸음 ⓪ 미리보기: 가중치 w와 편향 b 위의 훈련 오차 3D 지도와 한 걸음씩 내려가는 학습 경로"></canvas><div class="t"><b>최적화 첫걸음 ⓪ · 인공지능 모델에서의 최적화</b><span>모델은 한 번에 만들어지지 않는다 · 도입 · 미분 없이</span>
+      <ol><li>큰 그림 — 신경망과 뉴런 하나</li><li>반복 학습 대시보드 — 한 걸음씩 고치기</li><li>여러 측면 성적표 — 훈련 점수만 믿으면 안 되는 이유</li><li>다시 정비하기(피봇팅) — 데이터가 바뀌었을 때</li></ol></div></a>
+    <a href="first_step_1.html"><span class="diff" aria-label="난이도 1단계 산책"><img src="img/diff_haru_1.webp" alt="" width="44" height="44" loading="lazy"><span><b>산책</b><span class="pip">●○○○</span></span></span><canvas id="cvF1" aria-label="첫걸음 ① 미리보기: 언덕 모양 3D 곡면 위의 접선과 기울기 0인 꼭대기"></canvas><div class="t"><b>최적화 첫걸음 ① · 혹시… 미분 좋아하세요?</b><span>왜, 언제부터, 어디에 · 하루·시아·모아의 세 질문 · 입문</span>
+      <ol><li>준비운동: 그래프와 기울기 1분 복습</li><li>미분은 왜 쓰나 — 순간의 변화, 한계, 기울기 0, 편미분·전미분</li><li>미분의 역사 — 뉴턴·라이프니츠, 극한, 한계혁명</li><li>경제학의 최적화 — MR = MC, 조업중단점</li><li>대결: 많이 구울수록 이익일까?</li></ol></div></a>
     <a href="first_step_2.html"><span class="diff" aria-label="난이도 2단계 오르막"><img src="img/diff_haru_2.webp" alt="" width="44" height="44" loading="lazy"><span><b>오르막</b><span class="pip">●●○○</span></span></span><canvas id="cvF2" aria-label="첫걸음 ② 미리보기: 노동과 자본에 따른 생산량 3D 곡면, 기계 4대일 때 가장 좋은 고용 16명"></canvas><div class="t"><b>최적화 첫걸음 ② · 공장에서 인공지능까지</b><span>얼마만큼 생산하면 될까요? · 입문</span>
       <ol><li>공장 하나 — 사람 한 명 더, 라그랑지안과 λ = 한계비용</li><li>오일러 정리, 미분방정식</li><li>경사하강, 연쇄법칙과 역전파</li><li>특성공학: 비선형성 vs 상호작용, 규제항</li><li>대결: 제곱항만 넣으면 다 될까?</li></ol></div></a>
   </div>
@@ -117,6 +119,11 @@ U.fillImgs();
 var D=LM.makeLine(39,1000),O=LM.ols(D);
 (function(){var cv=$('#coverCv');if(!cv)return;U.reg(cv,function(){var R=U.setup(cv),g=R.g,w=R.w,h=R.h;for(var k=16;k>0;k--){g.beginPath();g.ellipse(w*.5,h*.38,w*.045*k,h*.02*k,-.3,0,7);g.strokeStyle=U.cmap(k/16,.32);g.lineWidth=2;g.stroke();}g.beginPath();g.arc(w*.5,h*.38,6,0,7);g.fillStyle=U.cssv('--gfp');g.fill();});})();
 /* 첫걸음 미리보기 (1~3편과 같은 3D 지도) */
+(function(){var sig=function(z){return 1/(1+Math.exp(-z));},TR=[[-2.0,0],[-1.6,0],[-1.3,0],[-1.0,0],[-0.7,0],[-0.4,0],[-0.1,0],[0.2,0],[0.7,1],[1.0,1],[1.3,1],[1.6,1],[1.9,1],[2.2,1]];
+  var loss=function(w,b){var s=0;TR.forEach(function(d){var q=Math.min(Math.max(sig(w*d[0]+b),1e-9),1-1e-9);s-=d[1]*Math.log(q)+(1-d[1])*Math.log(1-q);});return Math.min(s/TR.length,2.6);};
+  var path=[],w=-1.5,b=2.0;for(var t=0;t<=300;t++){if(t%4===0||t<12)path.push([w,b,loss(w,b)+0.03]);var gw=0,gb=0;TR.forEach(function(d){var e=sig(w*d[0]+b)-d[1];gw+=e*d[0];gb+=e;});w-=gw/TR.length;b-=gb/TR.length;}
+  var S=new U.Surf3D($('#cvF0'),{f:loss,xr:[-2,7],yr:[-4,3],zr:[0,2.6],n:22,axes:['w','b','훈련 오차'],contours:false,views:false,yaw:-0.6,pitch:0.55,zoom:0.85,stamp:'설명용 예시'});
+  S.ov.push(function(g,S){S.line3(g,path,'#f1b646',2.6);S.dot3(g,path[0][0],path[0][1],path[0][2],'#e8607a',5);var e=path[path.length-1],q=S.dot3(g,e[0],e[1],e[2],'#9be2b0',6);U.label(g,q[0]+10,q[1]-10,'300걸음',U.cssv('--gfp'));});})();
 (function(){var hill=function(x,y){return Math.exp(-(x*x+y*y)/1.6);};
   var S=new U.Surf3D($('#cvF1'),{f:hill,xr:[-2.2,2.2],yr:[-2.2,2.2],n:22,axes:['x₁','x₂','y'],contours:false,views:false,yaw:-0.45,pitch:0.5,zoom:0.95,stamp:'설명용 모형'});
   S.ov.push(function(g,S){var x0=1.0,d=-2*x0/1.6*hill(x0,0),ln=[];for(var i=0;i<=40;i++){var x=-2.2+4.4*i/40;ln.push([x,0,hill(x,0)+0.01]);}S.line3(g,ln,'rgba(255,255,255,.85)',2);
