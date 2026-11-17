@@ -234,6 +234,15 @@ footer td,footer th{border:1px solid var(--rule);padding:6px 8px;text-align:left
 
 .hellgate{display:inline-flex;align-items:center;gap:6px;margin-left:10px;padding:2px 10px 2px 3px;border:2px solid #b3261e;border-radius:8px;background:#fff1ef;color:#b3261e;font-size:15px;font-weight:700;vertical-align:middle;letter-spacing:.02em}
 .hellgate img{width:34px;height:34px;border-radius:5px;display:block}
+/* 5.1 미니 게임 (첫걸음 ②) */
+.gtitle{margin:26px 0 6px;font-size:18px;color:var(--c-asst)}
+.panel.game{border:2px solid var(--amber)}
+.gstar{margin-left:auto;font-weight:700;color:var(--amber);font-variant-numeric:tabular-nums}
+.gmis .say{max-width:none;margin:4px 0 10px}
+.glog{margin-top:10px;padding:8px 12px;background:var(--panel2);border-radius:8px;font-size:14px;line-height:1.7;font-variant-numeric:tabular-nums;overflow-x:auto}
+.glbl{display:inline-block;min-width:4.5em;color:var(--muted);font-size:12.5px}
+.bt:disabled{opacity:.45;cursor:not-allowed}
+@media (max-width:640px){.panel.game .minis{grid-template-columns:repeat(2,1fr)}}
 
 </style>
 <style>
@@ -403,6 +412,21 @@ footer td,footer th{border:1px solid var(--rule);padding:6px 8px;text-align:left
       <label class="glabel" for="r51n">걸음 수</label><input type="range" id="r51n" min="1" max="30" step="1" value="10"><span class="val" id="v51n">10</span></div></div>
     <div class="minis"><div class="mini a"><span>마지막 w</span><b id="m51a">—</b></div><div class="mini g"><span>마지막 손실</span><b id="m51b">—</b></div><div class="mini m"><span>정답 (기울기 0)</span><b>w = 3, L = 1</b></div></div>
     <div class="insight" id="i51" aria-live="polite"></div>
+  </div>
+  <h4 class="gtitle" id="s51g">미니 게임 — 보폭 하나로 공을 그릇 바닥에 넣어라</h4>
+  <p>위 실험을 게임으로 해 봅니다. 규칙은 경사하강의 식 <b>θ ← θ − η∇L(θ)</b> 그대로입니다(θ는 가중치 w₁·w₂를 묶은 것). 플레이어가 고르는 것은 <b>보폭 η 하나</b>뿐이고(4판만 관성 β도), 나머지는 기울기가 정합니다. 정해진 걸음 안에 공을 바닥 구멍에 넣으면 성공, 걸음이 떨어지면 실패, 그릇 밖으로 튀어 나가면 실패입니다.</p>
+  <div class="panel game" id="g51">
+    <div class="ctrl"><div class="group" id="g51st" role="group" aria-label="스테이지 고르기"></div><span class="gstar" id="g51tot">모은 별 0 / 12</span></div>
+    <div class="gmis" id="g51mis"></div>
+    <div class="cwrap t3"><canvas id="cv51g" aria-label="손실 그릇 위를 굴러가는 공"></canvas><span class="hint">끌어서 돌려 보기</span></div>
+    <div class="ctrl">
+      <div class="group"><label class="glabel" for="g51eta">보폭 η</label><input type="range" id="g51eta" min="0.05" max="1.2" step="0.05" value="0.25"><span class="val" id="g51etav">0.25</span></div>
+      <div class="group" id="g51bw" style="display:none"><label class="glabel" for="g51beta">관성 β</label><input type="range" id="g51beta" min="0" max="0.9" step="0.1" value="0"><span class="val" id="g51betav">0.0</span></div>
+      <div class="group"><button type="button" class="bt primary" id="g51go">굴리기 ▶</button><button type="button" class="bt" id="g51one">한 걸음</button><button type="button" class="bt" id="g51re">다시</button></div>
+    </div>
+    <div class="minis"><div class="mini a"><span>걸음</span><b id="g51k">—</b></div><div class="mini g"><span>바닥까지 거리</span><b id="g51d">—</b></div><div class="mini m"><span>손실 L</span><b id="g51l">—</b></div><div class="mini"><span>이번 판</span><b id="g51s">☆☆☆</b></div></div>
+    <div class="glog" id="g51log" aria-live="polite"></div>
+    <div id="g51say" aria-live="polite"></div>
   </div>
   <div class="assume"><b>이 칸의 가정</b> 그릇 하나뿐인 손실. 실제 신경망의 손실은 바닥·안장점이 많은 울퉁불퉁한 땅이다 → <a href="1_math_map.html">좌표축 위의 그릇 1편</a>, 학습률·배치는 <a href="2_experiment_lab.html">2편</a></div>
 
@@ -921,6 +945,99 @@ function up51(){var run=DM.loss.run(0,lr,n51),w=run[run.length-1];$('#m51a').tex
   U.ins($('#i51'),[[lr<0.999?(Math.abs(w-3)<0.05?'g':'a'):'r',lr<0.5?(Math.abs(w-3)<0.05?'바닥 근처에 닿았습니다. 기울기가 0에 가까워지면 걸음도 저절로 작아져요.':'작은 보폭: 안전하지만 걸음이 많이 필요합니다.'):Math.abs(lr-0.5)<1e-9?'보폭 0.5: 이 그릇에서는 첫 걸음에 바로 바닥(w = 3)에 내려앉습니다. 굽음(2)의 역수만큼 걸은 셈이에요.':lr<0.999?'보폭이 커서 바닥을 넘어갔다 돌아오며 다가갑니다(지그재그).':lr<1.0001&&lr>0.999?'보폭 1: 바닥을 사이에 두고 제자리에서 영원히 왕복합니다.':'보폭이 너무 커서 걸을수록 바닥에서 멀어집니다(발산). 이 그릇에서는 학습률이 1보다 작아야 합니다.']]);v51.dirty=true;}
 rng('r51','v51',function(v){return v.toFixed(2);},function(v){lr=v;up51();});rng('r51n','v51n',function(v){return String(v);},function(v){n51=v;up51();});up51();
 
+/* ── 5.1 미니 게임: 그릇에 공 넣기 ──
+   손실 L = a·w₁² + b·w₂², 바닥 (0, 0). 한 걸음: v ← β·v − η·∇L, θ ← θ + v (β = 0이면 보통 경사하강).
+   성공: 바닥까지 거리 < 0.15 · 실패: 걸음 소진, 손실 > 가장자리 높이 25(그릇 밖). 수치는 code/check_game51.js로 검산 */
+var G=(function(){
+  var RIM=25,HOLE=0.15,ST=[
+    {nm:'1 둥근 그릇',a:1,b:1,s:[3.2,2.4],N:10,star:[2,5],eta:[0.05,1.2,0.05,0.25],beta:false,fog:false,
+     mis:'둥근 그릇 L = w₁² + w₂². 출발점은 바닥에서 4만큼 떨어져 있어요. 매 걸음 거리가 <b>(1 − 2η)배</b>가 됩니다 — η = 0.25이면 4 → 2 → 1 → 0.5처럼 매번 절반이 돼요. <b>10걸음</b> 안에 넣으세요. 별 3개는 2걸음 이내.'},
+    {nm:'2 길쭉한 그릇',a:0.5,b:4,s:[-4,1.5],N:25,star:[15,20],eta:[0.01,0.4,0.01,0.1],beta:false,fog:false,
+     mis:'길쭉한 그릇 L = 0.5w₁² + 4w₂². w₁ 쪽은 완만해서 (1 − η)배, w₂ 쪽은 가팔라서 (1 − 8η)배씩 줄어요. η 하나로 두 방향을 함께 맞춰야 합니다. <b>25걸음</b> 안에, 별 3개는 15걸음 이내.'},
+    {nm:'3 안개',a:0.5,b:4,s:[3.5,-1.8],N:25,star:[15,20],eta:[0.01,0.4,0.01,0.1],beta:false,fog:true,
+     mis:'2판과 같은 그릇이지만 <b>안개</b>가 꼈어요. 그릇도 바닥 구멍도 안 보이고, 발밑 기울기 화살표(−∇L)와 손실 값만 보입니다. 실제 모델 학습이 이 상황이에요. 이 판만은 <b>걸음 도중에 η를 바꿀 수 있어요</b>. 화살표가 매번 뒤집히면 무슨 뜻일까요?'},
+    {nm:'4 모멘텀 공',a:0.5,b:12.5,s:[-4.5,1],N:20,star:[13,17],eta:[0.01,0.12,0.01,0.05],beta:true,fog:false,
+     mis:'더 길쭉한 그릇 L = 0.5w₁² + 12.5w₂². 가파른 쪽 때문에 η는 0.08 아래로 묶이고, 그러면 완만한 쪽이 너무 느려요. <b>관성 β</b>를 켜 보세요: 지난 걸음의 움직임을 β만큼 이어 갑니다. <b>20걸음</b> 안에, 별 3개는 13걸음 이내.'}];
+  var cur=0,best=[0,0,0,0],g={};
+  try{var sv=JSON.parse(localStorage.getItem('o3d_first_step_g51')||'null');if(sv&&sv.length===4)best=sv;}catch(e){}
+  function S(){return ST[cur];}
+  function Lf(x,y){var s=S();return s.a*x*x+s.b*y*y;}
+  function grad(x,y){var s=S();return [2*s.a*x,2*s.b*y];}
+  function reset(){var s=S();g={p:[s.s.slice()],v:[0,0],k:0,st:'ready',auto:false,t:1,etas:[]};render();}
+  function stars(k){var s=S();return k<=s.star[0]?3:k<=s.star[1]?2:1;}
+  function star3(n){return '★★★'.slice(0,n)+'☆☆☆'.slice(0,3-n);}
+  function step(){if(g.st!=='ready'&&g.st!=='play')return;var s=S(),eta=+$('#g51eta').value,be=s.beta?+$('#g51beta').value:0,q=g.p[g.p.length-1],d=grad(q[0],q[1]);
+    g.v=[be*g.v[0]-eta*d[0],be*g.v[1]-eta*d[1]];var n=[q[0]+g.v[0],q[1]+g.v[1]];g.p.push(n);g.k++;g.etas.push(eta);g.st='play';g.t=U.reduce?1:0;g.last={q:q,d:d,eta:eta,be:be,n:n};
+    var L=Lf(n[0],n[1]),r=Math.hypot(n[0],n[1]);
+    if(!(L<=RIM))g.st='out';else if(r<HOLE)g.st='win';else if(g.k>=s.N)g.st='tired';
+    if(g.st==='win'){var st=stars(g.k);if(st>best[cur]){best[cur]=st;try{localStorage.setItem('o3d_first_step_g51',JSON.stringify(best));}catch(e){}}}
+    if(g.st!=='play')g.auto=false;render();}
+  /* 판정 해설: 축마다 줄어드는 비율 1 − 2·(굽음/2)·η (β = 0일 때 정확) */
+  function why(){var s=S(),eta=g.etas.length?g.etas[g.etas.length-1]:+$('#g51eta').value,be=s.beta?+$('#g51beta').value:0,f1=1-2*s.a*eta,f2=1-2*s.b*eta,F=function(x){return fmt(x,2);};
+    var lim=fmt(1/s.b,3),one=cur===0;
+    if(g.st==='win'){
+      if(one){if(Math.abs(eta-0.5)<1e-9)return [['doc','doc_magic','1 − 2η = 0. 첫 걸음에 바로 바닥입니다! 이 그릇의 굽음(2)의 역수만큼 걸은 셈이에요. 굽음을 알면 최고의 보폭을 알 수 있어요.']];
+        return [['doc','doc_front','매 걸음 거리가 (1 − 2η) = '+F(f1)+'배가 됐어요.'+(f1<0?' 음수라서 바닥을 넘었다 돌아오는 지그재그였죠. 그래도 크기가 1보다 작으니 결국 들어갑니다.':' 보폭을 0.5에 가깝게 할수록 걸음이 줄어요.')]];}
+      if(be>0)return [['doc','doc_front','관성이 완만한 w₁ 방향의 움직임을 모아 속도를 붙여 주고, 가파른 w₂ 방향의 지그재그는 앞뒤로 상쇄됐어요. 이것이 <b>모멘텀</b>입니다. SGD·모멘텀·Adam처럼 널리 쓰는 방법들도 모두 θ ← θ − η∇L 한 줄을 이렇게 고친 것이에요.']];
+      if(s.fog)return [['doc','doc_front','안개 속에서 발밑 기울기만 보고 해냈어요. 화살표가 매번 반대로 뒤집히면 바닥을 넘나들고 있다는 신호예요 → η를 줄이면 됩니다. 실제 학습에서 "학습률 줄이기(스케줄)"가 하는 일이에요.']];
+      return [['doc','doc_front','w₁은 (1 − η) = '+F(f1)+'배, w₂는 (1 − 8η) = '+F(f2)+'배씩 줄었어요. 둘 중 <b>1에 가까운 쪽</b>이 걸음 수를 정합니다. 가장 빠른 η는 두 크기가 같아지는 곳, 약 0.22예요.']];}
+    if(g.st==='out'){
+      if(be>0)return [['doc','doc_think','관성까지 실려 그릇 밖으로 날아갔어요. β가 크면 브레이크가 약해져요. η나 β를 조금 줄여 보세요.']];
+      if(one)return [['doc','doc_think','1 − 2η = '+F(f1)+'. 크기가 1보다 커서 걸을 때마다 바닥을 더 크게 넘어갔어요(발산). 이 그릇에서는 η < 1이어야 해요.']];
+      return [['doc','doc_think','가파른 w₂ 방향의 비율 1 − '+fmt(2*s.b,0)+'η = '+F(f2)+'. 크기가 1을 넘어 튀어 나갔어요. 보폭의 한계는 <b>가장 가파른 방향</b>이 정해요: η < '+lim+'.']];}
+    if(g.st==='tired'){
+      if(one)return [['doc','doc_board',Math.abs(f1)>=0.999?'1 − 2η = '+F(f1)+'. 바닥을 사이에 두고 제자리에서 왕복만 했어요.':Math.abs(f1)>0.6?(f1>0?'보폭이 작아서':'보폭이 커서 좌우로 튕기느라')+' 거리가 매번 '+F(Math.abs(f1))+'배밖에 안 줄었어요. 10걸음으로는 모자라요.':'아깝다! 조금만 더.']];
+      if(s.beta&&be===0)return [['doc','doc_board','관성 없이는(β = 0) 이 그릇에서 20걸음 안에 못 들어가요. 가파른 w₂ 때문에 η < 0.08로 묶이면 완만한 w₁은 (1 − η) ≥ 0.92배씩만 줄거든요. <b>β를 올려 보세요.</b>']];
+      if(be>0)return [['doc','doc_board','관성이 너무 약하거나 너무 세서 출렁임이 오래 갔어요. β는 0.6~0.7, η는 0.06~0.08 근처를 찾아보세요.']];
+      return [['doc','doc_board',Math.abs(f2)>Math.abs(f1)?'가파른 w₂ 방향이 (1 − 8η) = '+F(f2)+'배로 튕기며 거의 안 줄었어요. η를 조금 줄여 보세요.':'완만한 w₁ 방향이 (1 − η) = '+F(f1)+'배씩만 줄어 너무 느렸어요. 튀어 나가지 않는 한도에서 η를 키워 보세요.']];}
+    return null;}
+  function render(){var s=S(),q=g.p[g.p.length-1],L=Lf(q[0],q[1]),r=Math.hypot(q[0],q[1]);
+    $('#g51k').textContent=g.k+' / '+s.N;$('#g51d').textContent=s.fog&&g.st!=='win'?'안개':(g.st==='out'?'밖':fmt(r,2));$('#g51l').textContent=g.st==='out'?'> '+RIM:fmt(L,2);
+    $('#g51s').textContent=g.st==='win'?star3(stars(g.k)):'☆☆☆';
+    var tot=best.reduce(function(a,b){return a+b;},0);$('#g51tot').textContent='모은 별 '+tot+' / 12'+(tot===12?' — 모두 모았어요!':'');
+    U.$$('#g51st .bt').forEach(function(b,i){b.textContent=ST[i].nm+(best[i]?' '+star3(best[i]):'');});
+    /* 기록 줄: 지나온 거리(안개면 손실) + 마지막 한 걸음의 식 */
+    var seq=g.p.map(function(p){var v=s.fog?Lf(p[0],p[1]):Math.hypot(p[0],p[1]);return v>99?'…':fmt(v,2);});if(seq.length>9)seq=seq.slice(0,4).concat(['…']).concat(seq.slice(-4));
+    var h='<span class="glbl">'+(s.fog?'손실':'거리')+'</span> '+seq.join(' → ');
+    if(g.last){var o=g.last,P=function(a){return '('+fmt(a[0],2)+', '+fmt(a[1],2)+')';};
+      h+='<br><span class="glbl">한 걸음</span> '+(o.be>0?'v ← '+fmt(o.be,1)+'·v − '+fmt(o.eta,2)+' × ∇L'+P(o.d)+', θ ← θ + v = '+P(o.n):'θ ← '+P(o.q)+' − '+fmt(o.eta,2)+' × ∇L'+P(o.d)+' = '+P(o.n));}
+    $('#g51log').innerHTML=h;
+    var w=why(),SAY=U.say;
+    if(g.st==='win')w=[['asst','asst_proud','들어갔어요! '+g.k+'걸음, '+star3(stars(g.k))]].concat(w);
+    else if(g.st==='out')w=[['asst','asst_shock','공이 그릇 밖으로 튀어 나갔어요!']].concat(w);
+    else if(g.st==='tired')w=[['moa','moa_tea','걸음이 다 떨어졌어요… 바닥까지 아직 '+(s.fog?'남았대요.':fmt(r,2)+' 남았어요.')]].concat(w);
+    $('#g51say').innerHTML=w?w.map(function(x,i){return SAY(x[0],x[1],x[2],i%2===1);}).join(''):'';
+    $('#g51go').disabled=$('#g51one').disabled=!(g.st==='ready'||g.st==='play');
+    $('#cv51g').setAttribute('aria-label','손실 그릇 3D 그림. '+(s.fog?'안개 모드. ':'')+'걸음 '+g.k+', 손실 '+fmt(L,2)+(g.st==='win'?', 성공':g.st==='out'?', 그릇 밖':g.st==='tired'?', 걸음 소진':''));
+    sf.dirty=true;}
+  var sf=new U.Surf3D($('#cv51g'),{f:function(x,y){var v=Lf(x,y);return v<=RIM?v:NaN;},xr:[-5,5],yr:[-5,5],zr:[0,RIM],n:56,levels:10,cpow:1.4,axes:['w₁','w₂','손실 L'],stamp:'설명용 예시',
+    onTick:function(dt){if(dt<=0)return;if(g.t<1){g.t=Math.min(1,g.t+dt/0.3);sf.dirty=true;if(g.t>=1&&g.auto&&g.st==='play'){g.wait=0.08;}}else if(g.auto&&g.st==='play'){g.wait=(g.wait||0)-dt;if(g.wait<=0)step();}}});
+  function hz(x,y){return Math.min(Lf(x,y),RIM);}
+  sf.ov.push(function(c,S3){var s=S(),n=g.p.length,A=g.p[n-2]||g.p[0],B=g.p[n-1],t=g.t,bx=A[0]+(B[0]-A[0])*t,by=A[1]+(B[1]-A[1])*t,cl=function(v){return U.clamp(v,-7,7);};bx=cl(bx);by=cl(by);
+    if(s.fog){c.save();c.fillStyle='rgba(244,246,248,.55)';c.fillRect(0,0,S3.w,S3.h);c.restore();U.label(c,14,S3.h-18,'안개 — 발밑 기울기만 보여요','rgba(22,33,43,.7)');}
+    else{S3.dot3(c,0,0,0,cssv('--gfp'),7);U.label(c,S3.P(0,0,0)[0],S3.P(0,0,0)[1]+18,'바닥 구멍',cssv('--gfp'),'center');}
+    /* 지나온 발자국 */
+    var tr=g.p.slice(0,n-1).map(function(p){return [cl(p[0]),cl(p[1]),hz(p[0],p[1])];});tr.push([bx,by,hz(bx,by)]);
+    if(tr.length>1)S3.line3(c,tr,cssv('--amber'),2.2);tr.slice(0,-1).forEach(function(p,i){S3.dot3(c,p[0],p[1],p[2],i===0?'rgba(22,33,43,.7)':cssv('--amber'),i===0?5:3.5,false);});
+    if(tr.length)U.label(c,S3.P(tr[0][0],tr[0][1],tr[0][2])[0]+8,S3.P(tr[0][0],tr[0][1],tr[0][2])[1]-12,'출발',cssv('--text'));
+    /* 발밑 기울기 화살표: −∇L 방향, 길이 고정 */
+    if(t>=1&&g.st!=='out'&&g.st!=='win'){var d=grad(B[0],B[1]),m=Math.hypot(d[0],d[1]);if(m>1e-9){var z=hz(B[0],B[1]);S3.arrow3(c,[B[0],B[1],z],[B[0]-d[0]/m*3.2,B[1]-d[1]/m*3.2,z],cssv('--stain'),3);
+      var e=S3.P(B[0],B[1],z);U.label(c,e[0],e[1]+24,'−∇L (내려가는 쪽)',cssv('--stain'),'center');}}
+    var bz=g.st==='out'&&t>=1?RIM*1.08:hz(bx,by);S3.dot3(c,bx,by,bz,g.st==='out'&&t>=1?cssv('--eye'):cssv('--amber'),8);
+    if(t>=1&&g.st!=='play'&&g.st!=='ready'){var bq=S3.P(bx,by,bz);U.label(c,bq[0],bq[1]-20,g.st==='win'?'골인!':g.st==='out'?'튀어 나감!':'걸음 소진',g.st==='win'?cssv('--gfp'):g.st==='out'?cssv('--eye'):cssv('--amber'),'center');}});
+  function setStage(i){cur=i;var s=S(),r=$('#g51eta');r.min=s.eta[0];r.max=s.eta[1];r.step=s.eta[2];r.value=s.eta[3];$('#g51etav').textContent=(+r.value).toFixed(2);
+    $('#g51bw').style.display=s.beta?'':'none';$('#g51beta').value=0;$('#g51betav').textContent='0.0';
+    sf.o.surface=sf.o.floor=!s.fog;if(s.fog)sf.view(0,1.5);else sf.view(-0.75,0.62);sf.setF(sf.f,[-5,5],[-5,5],[0,RIM]);
+    $('#g51mis').innerHTML=U.say('doc','doc_board',s.mis);reset();}
+  U.btns($('#g51st'),ST.map(function(s,i){return [i,s.nm];}),0,setStage);
+  $('#g51eta').oninput=function(){$('#g51etav').textContent=(+this.value).toFixed(2);if(!S().fog&&g.k>0)reset();};
+  $('#g51beta').oninput=function(){$('#g51betav').textContent=(+this.value).toFixed(1);if(g.k>0)reset();};
+  $('#g51go').onclick=function(){if(g.st==='ready'||g.st==='play'){g.auto=true;if(g.t>=1)step();}};
+  $('#g51one').onclick=function(){g.auto=false;if(g.t>=1||U.reduce)step();};
+  $('#g51re').onclick=reset;
+  setStage(0);
+  return {ST:ST};})();
+
 /* ── 5.2 ── */
 var x52=1;function up52(){var c=DM.chain.links(x52),fd=DM.d(DM.chain.f,x52);
   $('#chain').innerHTML='<div class="bx"><span>입력</span><b>x = '+fmt(x52,2)+'</b></div><div class="ar">du/dx<b>× 2</b>→</div><div class="bx"><span>u = 2x + 1</span><b>'+fmt(c.u,2)+'</b></div><div class="ar">dv/du = 2u<b>× '+fmt(c.dv,2)+'</b>→</div><div class="bx"><span>v = u²</span><b>'+fmt(c.v,2)+'</b></div><div class="ar">dy/dv<b>× 3</b>→</div><div class="bx"><span>y = 3v</span><b>'+fmt(c.y,2)+'</b></div>';
@@ -988,6 +1105,7 @@ U.Study({quiz:{
      {q:'비용 최소화의 라그랑주 승수 λ가 뜻하는 것은?',o:['임금','목표를 1단위 올릴 때 늘어나는 최소 비용 (한계비용)','기계 수'],a:1,why:'4.2에서 목표를 16 → 17톤으로 올리면 비용이 λ ≈ 7.07만큼 늘었습니다.',hint:'1톤 더 만드는 비용.'},
      {q:'규모수익불변 공장에서 가격 = 한계비용이면 이윤은?',o:['최대','음수','0'],a:2,why:'오일러 정리: 매출 = 임금 총액 + 사용료 총액, 남는 것이 없습니다.',hint:'매출이 꼭 맞게 나뉩니다.'}],
  c5:[{q:'손실 (w − 3)² + 1에서 학습률 1.05로 경사하강하면?',o:['빨리 바닥에 닿는다','바닥에서 점점 멀어진다(발산)','멈춘다'],a:1,why:'이 그릇에서는 학습률이 1보다 크면 걸을 때마다 바닥을 더 크게 넘어가 발산합니다.',hint:'5.1에서 보폭을 끝까지 밀어 보세요.'},
+     {q:'5.1 게임의 길쭉한 그릇에서 보폭 η의 한계(넘으면 튀어 나감)를 정하는 것은?',o:['완만한 w₁ 방향','가장 가파른 w₂ 방향','출발점의 위치'],a:1,why:'가파른 w₂ 방향의 비율 1 − 8η의 크기가 1을 넘으면 발산합니다. 그래서 η < 0.25. 완만한 방향은 걸음 수를 정합니다.',hint:'2판에서 η를 0.26 넘게 올려 보세요.'},
      {q:'y = 3(2x + 1)²의 x = 1에서 dy/dx는?',o:['18','36','27'],a:1,why:'3 × 2u × 2, u = 3 → 3 × 6 × 2 = 36.',hint:'고리 셋의 기울기를 곱하세요.'},
      {q:'물(x₂)이 많을수록 비료(x₁)의 효과가 커진다면 필요한 특성은?',o:['x₁²','x₂²','x₁·x₂'],a:2,why:'x₁의 기울기가 x₂에 따라 바뀌는 것은 ∂²y/∂x₁∂x₂ ≠ 0, 교차항이 필요합니다.',hint:'상호작용.'}],
  duel:[{q:'주판봇의 x₂² 모형이 진 이유는?',o:['특성이 더 적어서','데이터에 없는 굽음을 찾고, 있는 상호작용은 못 잡아서','학습 데이터가 달라서'],a:1,why:'두 모형 모두 특성 5개, 같은 데이터. 차이는 교차항의 유무였습니다.',hint:'∂²y/∂x₁∂x₂.'}]
