@@ -11,4 +11,10 @@ for(const k in V.SF){for(const p of pts){const S=V.SF[k];const g=V.grad(S.f,p),G
 let C=V.corners([0.5,0.5,0.5],0.6),v0=V.vol(C);for(let i=0;i<50;i++)C=C.map(q=>V.step(V.VF.source.F,q,0.01));ok('물감 부피 샘 0.5초',V.vol(C)/v0,Math.exp(1.5));
 const D=V.duel();ok('대결 초파리 맞힌 수',D.filter(x=>x.flyOk).length,4,0);ok('대결 주판봇 맞힌 수',D.filter(x=>x.roboOk).length,2,0);
 ok('배수구 소용돌이 (1,0,0) 바람개비',V.circ(V.VF.vortex.F,[1,0,0],[0,0,1],0.06).omega,0);
+// ⑥ 헬게이트: 원통·구면 식으로 만든 화살표 = 직교좌표 ∇V, 배율을 빼먹으면 틀어지는 각도
+{const F=V.SF.tilt.f,p=[1.2,0.6,1],h=1e-5,G=V.grad(F,p),x=p[0],y=p[1],z=p[2];
+ const rc=Math.hypot(x,y),ph=Math.atan2(y,x),C=(r,t,zz)=>F(r*Math.cos(t),r*Math.sin(t),zz),d=[(C(rc+h,ph,z)-C(rc-h,ph,z))/(2*h),(C(rc,ph+h,z)-C(rc,ph-h,z))/(2*h),(C(rc,ph,z+h)-C(rc,ph,z-h))/(2*h)];
+ const E=[[Math.cos(ph),Math.sin(ph),0],[-Math.sin(ph),Math.cos(ph),0],[0,0,1]],mk=s=>[0,1,2].map(k=>E.reduce((a,e,i)=>a+d[i]/s[i]*e[k],0));
+ const ang=(a,b)=>Math.acos((a[0]*b[0]+a[1]*b[1]+a[2]*b[2])/Math.hypot(...a)/Math.hypot(...b))*180/Math.PI;
+ const Vg=mk([1,rc,1]),W=mk([1,1,1]);ok('⑥ 원통 배율 맞춘 화살표 = ∇V (각도)',ang(Vg,G),0,1e-3);console.log('⑥ 원통: 배율 맞춤 %s vs ∇V %s 차이 %s° · 빼먹으면 %s°',Vg.map(v=>v.toFixed(3)),G.map(v=>v.toFixed(3)),ang(Vg,G).toFixed(3),ang(W,G).toFixed(1));}
 console.log(bad?`\n${bad}개 실패`:'\n모두 통과');process.exit(bad?1:0);

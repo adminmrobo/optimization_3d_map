@@ -22,6 +22,8 @@ USERSRC = "사용자 제공 자료(이미지·영상)에서 옮김. 원 게시�
 REFS = {
  "matharium_crisp": lambda s: ref("matharium_crisp", "graphic", "The geometry of a curved crisp", [{"literal": "matharium"}], role="primary", supports=s,
         verified={"title": True, "author": True, "year": False, "url": False}, checked=USERSRC, note="그림은 페이지에 넣지 않고 새로 그림"),
+ "matheorems_coords": lambda s: ref("matheorems_coords", "graphic", "Gradient in Different Coordinate Systems", [{"literal": "@matheorems"}], role="primary", supports=s,
+        verified={"title": True, "author": True, "year": False, "url": False}, checked=USERSRC),
  "matharium_vecops": lambda s: ref("matharium_vecops", "graphic", "The Vector Differential Operators", [{"literal": "matharium"}], role="primary", supports=s,
         verified={"title": True, "author": True, "year": False, "url": False}, checked=USERSRC),
  "matharium_del": lambda s: ref("matharium_del", "graphic", "The Del Operator", [{"literal": "matharium"}], role="primary", supports=s,
@@ -424,6 +426,7 @@ q2 = g.n("lab:question/p3-look-vs-curl", "Question", "화살표 겉모양으로 
 g.e(delop, "raises", q1, "#top"); g.e(curl, "raises", q2, "#duel")
 W = {k: g.work(k, ko, en) for k, ko, en in [
     ("matharium_del", "matharium — The Del Operator", "matharium — The Del Operator"),
+    ("matheorems_coords", "@matheorems — Gradient in Different Coordinate Systems", "@matheorems — Gradient in Different Coordinate Systems"),
     ("matharium_vecops", "matharium — The Vector Differential Operators", "matharium — The Vector Differential Operators"),
     ("knott1911life", "Knott 1911 Life of P. G. Tait", "Knott 1911 Life and Scientific Work of P. G. Tait"),
     ("song2019generative", "Song·Ermon 2019", "Song & Ermon 2019"),
@@ -437,16 +440,31 @@ for cid, ko, en, anc, tgt, wk, loc in C:
     g.n(cid, "Claim", ko, en, anc, 2, source=[{"ref": wk, "loc": loc}]); g.e(cid, "supports", tgt, anc); g.e(cid, "assertedIn", W[wk], anc)
 for c in (pdv, grad, divg, curl, lap, delop): g.e(c, "broader", T_CALC, "#sum")
 g.e(gd, "broader", T_GD, "#s2")
-Q = [("s1", 1, pdv), ("s1", 2, pdv), ("s2", 1, lvl), ("s2", 2, gd), ("s3", 1, divg), ("s3", 2, divg), ("s4", 1, curl), ("s4", 2, curl0), ("s5", 1, lap), ("s5", 2, lap), ("duel", 1, curl)]
-QL = {"s1": "편미분", "s2": "그래디언트", "s3": "발산", "s4": "회전", "s5": "라플라시안", "duel": "대결 바람개비"}
+# ── ⑥ 헬게이트: 원통·구면 좌표의 ∇ ──
+cyl = g.n("lab:concept/cylindrical-coordinates", "Concept", "원통좌표", "Cylindrical coordinates", "#s6", 3, "(r, θ, z) — 바닥 거리, 방위각, 높이.")
+sph = g.n("lab:concept/spherical-coordinates", "Concept", "구면좌표", "Spherical coordinates", "#s6", 3, "(r, θ, φ) — 원점 거리, 극각, 방위각. 책에 따라 θ·φ를 바꿔 씀.")
+scf = g.n("lab:concept/scale-factor", "Concept", "배율(스케일 인자)", "Scale factor", "#s6", 3, "좌표 1만큼이 실제 거리 몇인가. 원통 (1, r, 1), 구면 (1, r, r sin θ).")
+inv = g.n("lab:concept/gradient-invariance", "Concept", "좌표에 따라 변하지 않는 그래디언트", "Coordinate-invariant gradient", "#s6", 3, "가장 가파른 오르막은 하나 — 좌표계는 성분과 단위벡터만 바꾼다.")
+g.e(grad, "prerequisiteOf", inv, "#s6"); g.e(cyl, "relatedTo", scf, "#s6"); g.e(sph, "relatedTo", scf, "#s6"); g.e(scf, "partOf", inv, "#s6")
+g.n("lab:analogy/globe-degree", "Analogy", "적도와 극지방의 경도 1도", "One degree of longitude at the equator vs near the pole", "#s6", 2); g.e("lab:analogy/globe-degree", "analogyOf", scf, "#s6")
+L6 = g.n("lab:limitation/coordinate-singularity", "Limitation", "r = 0, sin θ = 0에서 정의되지 않음", "Undefined at r = 0 and sin θ = 0", "#s6", 3); g.e(scf, "hasLimitation", L6, "#s6")
+for sid, ko, en, anc, tgt in [("lab:sim/p3-coord-gradient", "같은 화살표, 다른 자 — 좌표계별 ∇V", "Same arrow, different rulers", "#s6", inv), ("lab:sim/p3-arc-length", "같은 각도, 다른 거리 — r·Δθ", "Same angle, different arc length", "#s6", scf)]:
+    g.n(sid, "Simulation", ko, en, anc, 3); g.e(tgt, "demonstratedBy", sid, anc)
+for cid, ko, en, tgt in [("lab:claim/grad-cylindrical", "원통좌표에서 ∇V = r̂ ∂V/∂r + θ̂ (1/r) ∂V/∂θ + ẑ ∂V/∂z", "Gradient in cylindrical coordinates", cyl),
+                         ("lab:claim/grad-spherical", "구면좌표에서 ∇V = r̂ ∂V/∂r + θ̂ (1/r) ∂V/∂θ + φ̂ (1/(r sin θ)) ∂V/∂φ", "Gradient in spherical coordinates", sph)]:
+    g.n(cid, "Claim", ko, en, "#s6", 3, source=[{"ref": "matheorems_coords", "loc": "인포그래픽 본문"}]); g.e(cid, "supports", tgt, "#s6"); g.e(cid, "assertedIn", W["matheorems_coords"], "#s6")
+g.e(scf, "relatedTo", "lab:topic/feature-scaling", "#s6") if False else None
+for c in (cyl, sph, scf, inv): g.e(c, "broader", T_CALC, "#s6")
+Q = [("s6", 1, scf), ("s6", 2, inv), ("s1", 1, pdv), ("s1", 2, pdv), ("s2", 1, lvl), ("s2", 2, gd), ("s3", 1, divg), ("s3", 2, divg), ("s4", 1, curl), ("s4", 2, curl0), ("s5", 1, lap), ("s5", 2, lap), ("duel", 1, curl)]
+QL = {"s1": "편미분", "s2": "그래디언트", "s3": "발산", "s4": "회전", "s5": "라플라시안", "s6": "헬게이트 좌표계", "duel": "대결 바람개비"}
 for sec, k, tgt in Q:
     qid = f"lab:quiz/p3-{sec}-{k}"; g.n(qid, "QuizItem", f"{QL[sec]} 문제 {k}", f"Quiz {sec}-{k}", "#" + sec, 2); g.e(qid, "assesses", tgt, "#" + sec)
 g.dump(3)
-used3 = {"matharium_del": [delop, grad, divg, curl, lap], "matharium_vecops": [curl0, divcurl0], "knott1911life": [delop], "song2019generative": [grad], "gonzalez2018digital": [lap]}
+used3 = {"matharium_del": [delop, grad, divg, curl, lap], "matharium_vecops": [curl0, divcurl0], "knott1911life": [delop], "song2019generative": [grad], "gonzalez2018digital": [lap], "matheorems_coords": [cyl, sph, scf]}
 (B / "refs_3.json").write_text(json.dumps([REFS[k](v) for k, v in used3.items()], ensure_ascii=False, indent=1))
 m3 = meta(3, "좌표축 위의 그릇 ③ 화살표 밭 편 — x·y·z 세 축 공간에서 읽는 ∇(나블라)",
-    ["lab:concept/del-operator", "lab:concept/gradient", "lab:concept/divergence", "lab:concept/curl", "lab:concept/laplacian"], list(used3), "3_arrow_field.html")
-m3.update({"date": "2026-11-16", "version": "1.1", "educationalLevel": "입문", "suggestedCitation": "안상선 (2026). 좌표축 위의 그릇 ③ 화살표 밭 편 — x·y·z 세 축 공간에서 읽는 ∇(나블라). 좌표축 위의 그릇 — 3D 지도로 본 모델 최적화 3, v1.1."})
+    ["lab:concept/del-operator", "lab:concept/gradient", "lab:concept/divergence", "lab:concept/curl", "lab:concept/laplacian", "lab:concept/scale-factor"], list(used3), "3_arrow_field.html")
+m3.update({"date": "2026-11-18", "version": "1.2", "educationalLevel": "입문", "suggestedCitation": "안상선 (2026). 좌표축 위의 그릇 ③ 화살표 밭 편 — x·y·z 세 축 공간에서 읽는 ∇(나블라). 좌표축 위의 그릇 — 3D 지도로 본 모델 최적화 3, v1.1."})
 (B / "meta_3.json").write_text(json.dumps(m3, ensure_ascii=False, indent=1))
 
 # ══════════════ 최적화 첫걸음 ① ══════════════

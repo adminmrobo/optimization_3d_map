@@ -13,7 +13,7 @@
 <nav class="top" aria-label="섹션 바로가기"><div class="row">
   <a class="logo" href="index.html">좌표축 위의 <i>그릇</i> ③</a>
   <div class="links">
-    <a href="#map">세 축</a><a href="#s1">① 편미분</a><a href="#s2">② 그래디언트</a><a href="#s3">③ 발산</a><a href="#s4">④ 회전</a><a href="#s5">⑤ 라플라시안</a><a href="#duel">대결</a><a href="#sum">정리</a><a href="#kg">색인</a><a href="#export">꾸러미</a><a href="1_math_map.html">← 1편</a>
+    <a href="#map">세 축</a><a href="#s1">① 편미분</a><a href="#s2">② 그래디언트</a><a href="#s3">③ 발산</a><a href="#s4">④ 회전</a><a href="#s5">⑤ 라플라시안</a><a href="#s6">⑥ 헬게이트</a><a href="#duel">대결</a><a href="#sum">정리</a><a href="#kg">색인</a><a href="#export">꾸러미</a><a href="1_math_map.html">← 1편</a>
   </div>
 </div></nav>
 
@@ -32,7 +32,7 @@
   <h1>좌표축 위의 그릇 ③ — x·y·z 세 축 공간에서 읽는 ∇(나블라)</h1>
   <p class="question">기호 ∇ 하나가 어떻게 "오르막", "샘", "소용돌이", "움푹함"을 모두 잴까?</p>
   <p class="lead">1편과 2편의 3D 지도에서 높이(z)는 <b>오차</b>였습니다. 이번 편의 z는 진짜 공간의 <b>세 번째 방향</b>입니다. 방 안처럼 앞뒤(x)·좌우(y)·위아래(z)가 모두 있는 상자 속에서, 점마다 숫자가 붙은 <b>숫자 밭</b>(온도 같은 것)과 점마다 화살표가 붙은 <b>화살표 밭</b>(바람·물 흐름 같은 것)을 다룹니다. 그리고 ∇ 하나로 만드는 네 가지 연산을 난로, 물감, 바람개비로 하나씩 돌려 봅니다.</p>
-  <p class="byline">글 · 안상선 ((주)M-Robo 대표) · <a href="https://adminmrobo.github.io/who_am_i/who_am_i.html">저자 소개</a> · 2026-11-16 · v1.1</p>
+  <p class="byline">글 · 안상선 ((주)M-Robo 대표) · <a href="https://adminmrobo.github.io/who_am_i/who_am_i.html">저자 소개</a> · 2026-11-18 · v1.2</p>
   <div class="three"><b>세 줄로 먼저</b><ol>
     <li>∇는 "x·y·z 세 방향으로 조금씩 움직여 보고 얼마나 바뀌는지 재는 도구"를 한데 묶은 것이다.</li>
     <li>숫자 밭에 쓰면 <b>그래디언트</b>(가장 가파른 오르막), 화살표 밭에 쓰면 <b>발산</b>(퍼져 나감)과 <b>회전</b>(소용돌이)이 된다.</li>
@@ -253,6 +253,48 @@
 </div></section>
 
 <!-- 대결 -->
+<section class="sec" id="s6" aria-labelledby="h-s6"><div class="wrap">
+  <h2 id="h-s6"><span class="hex">6</span>자가 휘는 좌표 — 원통·구면에서의 ∇ <span class="hellgate"><img src="img/diff_haru_5.webp" alt="" width="34" height="34">헬게이트</span></h2>
+  <div class="tags"><span class="tag nn">수학: 원통 (r, θ, z) · 구면 (r, θ, φ)의 그래디언트</span><span class="tag fly">일상: 지구본 위의 1도는 적도와 극지방에서 길이가 다르다</span></div>
+  <p class="muted" style="font-size:14px">이 시리즈에서 가장 어려운 장입니다. ①~⑤, 특히 ② 그래디언트를 읽은 뒤에 보세요. 건너뛰어도 1·2편과 첫걸음을 읽는 데는 지장이 없습니다.</p>
+  <div class="pair">
+    <div><div class="tl">일상으로 치면</div>지구본에서 경도 1도는 적도에서는 약 111 km지만, 위도 60도에서는 그 절반쯤입니다. "경도로 1도 갔더니 온도가 2도 올랐다"는 말만으로는 얼마나 가파른지 알 수 없어요. 실제로 걸은 거리로 나눠야 합니다.</div>
+    <div><div class="tr">수학에서는</div>직교좌표(x, y, z)는 자가 어디서나 같은 길이·같은 방향이라 편미분을 그대로 더하면 ∇V가 됩니다. 원통·구면좌표에서는 각도 좌표 1만큼이 실제 거리로 r배(또는 r sin θ배)라서, 각도 편미분을 그만큼 <b>나눠 줘야</b> 같은 화살표가 나옵니다.</div>
+  </div>
+  <div class="panel">
+    <div class="ptitle">같은 화살표, 다른 자 — 점의 단위벡터(빨강)와 ∇V(보라), 배율을 빼먹은 화살표(주황 점선)</div>
+    <div class="cwrap t3"><canvas id="cvS6" aria-label="x·y·z 공간의 한 점에서 좌표계별 단위벡터 세 개와 그래디언트 화살표, 배율을 빼먹은 화살표"></canvas><span class="hint">끌어서 돌리기</span></div>
+    <div class="ctrl">
+      <div class="group"><span class="glabel">좌표계</span><span id="g-cs6"></span></div>
+      <div class="group"><span class="glabel">숫자 밭</span><span id="g-f6"></span></div>
+      <div class="group" data-xyz="p6" data-v="1.2,0.6,1"></div>
+      <div class="group"><button class="bt" type="button" id="b-wrong6" aria-pressed="false">배율(1/r) 빼먹은 화살표 보기</button></div>
+    </div>
+    <div class="eq" id="eq6"></div>
+    <div class="minis"><div class="mini r"><span id="m6-l1">성분 1</span><b id="m6-c1">—</b></div><div class="mini m"><span id="m6-l2">성분 2</span><b id="m6-c2">—</b></div><div class="mini g"><span id="m6-l3">성분 3</span><b id="m6-c3">—</b></div><div class="mini a"><span>빼먹으면 틀어지는 각도</span><b id="m6-err">—</b></div></div>
+    <div class="insight" id="i-s6" aria-live="polite"></div>
+  </div>
+  <p class="gut">한 줄 직관: 화살표(가장 가파른 오르막)는 하나뿐이고, 좌표계는 그 화살표를 재는 자만 바꾼다. 자의 눈금 간격이 r배면 성분을 r로 나눈다.</p>
+  <div class="panel">
+    <div class="ptitle">왜 1/r인가 — 같은 각도, 다른 거리</div>
+    <div class="cwrap"><canvas id="cvS6b" aria-label="원점에서 같은 각도만큼 벌어진 두 반직선과 반지름 1, r의 호 길이 비교"></canvas></div>
+    <div class="ctrl"><div class="group"><label class="glabel" for="r-r6">반지름 r</label><input type="range" id="r-r6" min="0.5" max="3" step="0.1" value="2"><span class="val" id="v-r6">2.0</span>
+      <label class="glabel" for="r-d6">각도 Δθ</label><input type="range" id="r-d6" min="5" max="60" step="1" value="30"><span class="val" id="v-d6">30°</span></div></div>
+    <div class="minis"><div class="mini m"><span>각도 Δθ (라디안)</span><b id="m6-dt">—</b></div><div class="mini a"><span>반지름 1에서 걷는 거리</span><b id="m6-a1">—</b></div><div class="mini r"><span>반지름 r에서 걷는 거리 r·Δθ</span><b id="m6-ar">—</b></div><div class="mini g"><span>배율 (스케일 인자)</span><b id="m6-h">—</b></div></div>
+    <div class="insight" id="i-s6b" aria-live="polite"></div>
+  </div>
+  <div class="explain"><h4>풀이</h4><ol>
+    <li><b>직교좌표</b> ∇V = x̂ ∂V/∂x + ŷ ∂V/∂y + ẑ ∂V/∂z. 단위벡터 x̂, ŷ, ẑ는 어느 점에서나 같은 방향이고, 좌표 1만큼이 거리 1입니다. 그래서 배율이 모두 1입니다.</li>
+    <li><b>원통좌표 (r, θ, z)</b> ∇V = r̂ ∂V/∂r + θ̂ (1/r) ∂V/∂θ + ẑ ∂V/∂z. θ를 dθ만큼 돌면 실제로는 호 길이 r·dθ를 걷습니다. "거리당 변화"로 맞추려면 ∂V/∂θ를 r로 나눠야 합니다.</li>
+    <li><b>구면좌표 (r, θ, φ)</b> ∇V = r̂ ∂V/∂r + θ̂ (1/r) ∂V/∂θ + φ̂ (1/(r sin θ)) ∂V/∂φ. θ(극각) 방향의 호는 반지름 r의 원 위에 있고, φ(방위각) 방향의 호는 반지름 r sin θ인 위도 원 위에 있습니다.</li>
+    <li>한 줄로 묶으면: 성분 = (1 ÷ 배율) × (그 좌표로의 편미분). 배율(스케일 인자)은 직교 (1, 1, 1), 원통 (1, r, 1), 구면 (1, r, r sin θ)입니다. 단위벡터의 방향이 점마다 바뀌어도, 성분 × 단위벡터를 더한 화살표는 직교좌표의 ∇V와 <b>똑같습니다</b>. 실험의 "직교좌표와의 차이"가 늘 0°인 이유입니다.</li></ol>
+    <div class="lim" style="border-left-color:var(--info)">표기 주의: 원통좌표의 θ는 바닥에서 도는 <b>방위각</b>이고, 구면좌표의 θ는 z축에서 내려온 <b>극각</b>입니다(물리학 관례, 이 장의 방식). 수학책 가운데는 구면좌표의 θ와 φ를 서로 바꿔 쓰는 책도 있으니, 식을 옮길 때 어느 각이 어느 쪽인지 먼저 확인하세요.</div>
+    <div class="lim">이 칸의 가정: 원통좌표는 z축 위(r = 0)에서, 구면좌표는 원점(r = 0)과 z축 위(sin θ = 0)에서 각도가 정해지지 않아 이 식을 쓸 수 없습니다. 실험에서도 그 근처로 점을 옮기면 배율이 아주 작아져 숫자가 흔들립니다. 숫자 밭은 매끄럽다고 가정합니다.</div></div>
+  <div class="bridge field"><b>모델 최적화와 이어지는 곳</b> 경사하강은 보통 매개변수마다 편미분을 그대로 씁니다. 매개변수의 자가 서로 다르면(한 특성은 0~1, 다른 특성은 0~10000) 배율을 빼먹은 화살표처럼 방향이 틀어지고, 그릇이 길쭉해 지그재그로 걷습니다 → <a href="1_math_map.html#s3">1편 ③ 땅의 굽음</a>, <a href="2_experiment_lab.html">2편 학습률 실험</a>. 특성 스케일링은 자를 맞추는 일입니다. 더 나아가 "공간의 자" 자체를 계산에 넣는 경사하강(자연 그래디언트, natural gradient)도 있습니다 — 이 시리즈에서는 이름만 소개합니다.</div>
+  <div data-dlg="s6"></div>
+  <div class="quiz" data-quiz="s6"></div>
+</div></section>
+
 <section class="sec" id="duel" aria-labelledby="h-duel"><div class="wrap">
   <h2 id="h-duel">대결 — 겉모양으로 알 수 있나, 바람개비가 도는 곳은?</h2>
   <p class="lead">네 곳에 바람개비를 z축으로 꽂습니다. 주판봇은 화살표 <b>모양</b>을 보고 맞히고, 초파리 연구원은 회전 ∇×F의 z 성분을 <b>계산</b>해서 맞힙니다. 판정은 실제로 바람개비 둘레의 물살을 더해 돌려 본 결과이고, 기준은 <b>네 곳 중 맞힌 수</b>입니다.</p>
@@ -286,6 +328,7 @@
     <tr><td>③</td><td>발산 ∇·F</td><td>화살표 밭 → 숫자</td><td>그물 상자의 출입, 물감 퍼짐</td><td>소용돌이는 못 봄</td></tr>
     <tr><td>④</td><td>회전 ∇×F</td><td>화살표 밭 → 화살표</td><td>개울의 바람개비</td><td>아주 작은 바람개비 가정</td></tr>
     <tr><td>⑤</td><td>라플라시안 ∇²f = ∇·∇f</td><td>숫자 밭 → 숫자</td><td>이웃 여섯 집과 비교</td><td>h가 크면 근사가 어긋남</td></tr>
+    <tr><td>⑥ 헬게이트</td><td>원통·구면 좌표의 ∇V</td><td>숫자 밭 → 화살표 (같은 화살표, 다른 자)</td><td>성분 = (1 ÷ 배율) × 편미분</td><td>r = 0, sin θ = 0에서 정의 안 됨 · θ 표기가 책마다 다름</td></tr>
   </tbody></table></div>
   <h3>용어 대응 카드</h3>
   <div class="gloss">
@@ -326,6 +369,7 @@
     <tr><td>[3]</td><td>Knott, C. G. (1911). Life and Scientific Work of Peter Guthrie Tait. Cambridge University Press. / Wikipedia, "Nabla symbol" (2026-11-16 확인)</td><td>나블라 이름의 내력(1편 ② 상자와 같은 내용)</td></tr>
     <tr><td>[4]</td><td>Song, Y., Ermon, S. (2019). Generative Modeling by Estimating Gradients of the Data Distribution. NeurIPS 32. arXiv:1907.05600.</td><td>② 생성 AI 상자 — 점수(그래디언트) 기반 생성</td></tr>
     <tr><td>[5]</td><td>Gonzalez, R. C., Woods, R. E. (2018). Digital Image Processing, 4th ed. Pearson. 3장 공간 필터링</td><td>⑤ 그림 처리 상자 — 라플라시안 필터</td></tr>
+    <tr><td>[6]</td><td>@matheorems, 인포그래픽 「Gradient in Different Coordinate Systems」 (사용자 제공 이미지, 원 게시물 주소·게시일 미확인)</td><td>⑥ — 세 좌표계의 그래디언트 식과 단위벡터 그림의 구성만 참고. 그림은 쓰지 않고 새로 그림. 표기 주의(θ의 두 뜻)·정의되지 않는 곳·배율 빼먹은 화살표 비교는 이 페이지에서 덧붙임</td></tr>
   </tbody></table>
   <h3>예시값·설명용 모형인 것</h3>
   <ul><li>모든 숫자 밭(난로 20 + 30·e<sup>−r²/2</sup>, 그릇, 돔, 기울어진 판, 안장)과 화살표 밭(샘, 빨아들임, 균일한 흐름, 빨라지는 흐름, 소용돌이, 옆으로 누운 소용돌이, 층밀림, 비틀린 밭, 배수구 소용돌이)과 그 결과 수치</li><li>표지는 그림 파일을 받기 전까지 그림판으로 그린 설명용 그림</li></ul>
@@ -370,6 +414,10 @@ var DLG={
  s3:[["moa","moa_sparkle","샘에서 물감 상자가 점점 커져요! 소용돌이에서는 빙글 돌기만 하고 크기는 그대로예요."],
      ["asst","asst_spark","빨라지는 흐름은 화살표가 다 나란한데도 발산이 1이에요. 모양만 보면 놓쳐요."]],
  s4:[["doc","doc_think","바람개비를 어느 축에 꽂느냐가 중요합니다. 가장 빨리 도는 축이 회전 화살표의 방향이에요."]],
+ s6:[["asst","asst_shock","r̂, θ̂, φ̂… 화살표가 점마다 돌아가요! 이게 같은 그래디언트라고요?"],
+      ["doc","doc_front","화살표는 하나예요. 바뀌는 건 재는 자뿐입니다. 각도 1만큼이 실제 거리로 r배라서, 그만큼 나눠 줘야 같은 화살표가 나와요."],
+      ["robo","robo_calc","편미분만 더하면 끝 아니었어? 배율을 빼먹으니 화살표가 틀어지는군."],
+      ["fly","fly_magnify","신경망도 같아. 특성마다 자가 다르면 경사하강이 엉뚱한 쪽으로 걸어. 그래서 스케일을 맞추지."]],
  s5:[["robo","robo_calc","이웃 여섯 평균 빼기 가운데, 곱하기 6, 나누기 h². 그릇은 언제나 6. 숫자는 거짓말을 안 하거든."],
      ["fly","fly_clip","난로 한가운데는 −90이야. 가장 뜨거운 꼭대기니까 식는 쪽이지."]],
  dfly:[["fly","fly_magnify","겉모양 말고 이웃 점의 물살 차이를 잴게. 그게 회전이야."]],
@@ -543,6 +591,59 @@ U.btns($('#g-f5'),sfList(['bowl','dome','saddle','heater']),'bowl',function(v){f
 $('#r-h5').oninput=function(){h5=+this.value;$('#v-h5').textContent=h5.toFixed(2);S5.dirty=true;up5();};
 up5();
 
+/* ── ⑥ 원통·구면 좌표의 ∇ (헬게이트) ── */
+var cs6='cyl',f6='tilt',wrong6=false;
+var CSN={cart:'직교 (x, y, z)',cyl:'원통 (r, θ, z)',sph:'구면 (r, θ, φ)'};
+function coords6(p){var x=p[0],y=p[1],z=p[2],F=SF[f6].f,h=1e-4,rc=Math.hypot(x,y),ph=Math.atan2(y,x),G=VM.grad(F,p);
+  if(cs6==='cart')return {G:G,e:[[1,0,0],[0,1,0],[0,0,1]],d:G.slice(),hs:[1,1,1],q:[x,y,z],nm:['x̂','ŷ','ẑ'],dn:['∂V/∂x','∂V/∂y','∂V/∂z'],sn:['1','1','1']};
+  if(cs6==='cyl'){var M=function(r,t,zz){return F(r*Math.cos(t),r*Math.sin(t),zz);},q=[rc,ph,z],d=[(M(rc+h,ph,z)-M(rc-h,ph,z))/(2*h),(M(rc,ph+h,z)-M(rc,ph-h,z))/(2*h),(M(rc,ph,z+h)-M(rc,ph,z-h))/(2*h)];
+    return {G:G,e:[[Math.cos(ph),Math.sin(ph),0],[-Math.sin(ph),Math.cos(ph),0],[0,0,1]],d:d,hs:[1,rc,1],q:q,nm:['r̂','θ̂','ẑ'],dn:['∂V/∂r','∂V/∂θ','∂V/∂z'],sn:['1','r','1']};}
+  var rs=n3(p),th=Math.acos(Math.max(-1,Math.min(1,z/rs))),N=function(r,t,f){return F(r*Math.sin(t)*Math.cos(f),r*Math.sin(t)*Math.sin(f),r*Math.cos(t));},
+    d2=[(N(rs+h,th,ph)-N(rs-h,th,ph))/(2*h),(N(rs,th+h,ph)-N(rs,th-h,ph))/(2*h),(N(rs,th,ph+h)-N(rs,th,ph-h))/(2*h)];
+  return {G:G,e:[[Math.sin(th)*Math.cos(ph),Math.sin(th)*Math.sin(ph),Math.cos(th)],[Math.cos(th)*Math.cos(ph),Math.cos(th)*Math.sin(ph),-Math.sin(th)],[-Math.sin(ph),Math.cos(ph),0]],d:d2,hs:[1,rs,rs*Math.sin(th)],q:[rs,th,ph],nm:['r̂','θ̂','φ̂'],dn:['∂V/∂r','∂V/∂θ','∂V/∂φ'],sn:['1','r','r sin θ']};}
+function comb6(C,scaled){var v=[0,0,0];for(var i=0;i<3;i++){var c=C.d[i]/(scaled?C.hs[i]:1);for(var k=0;k<3;k++)v[k]+=c*C.e[i][k];}return v;}
+function ang6(a,b){var d=(a[0]*b[0]+a[1]*b[1]+a[2]*b[2])/(n3(a)*n3(b));return Math.acos(Math.max(-1,Math.min(1,d)))*180/Math.PI;}
+var S6=new U.Space3D($('#cvS6'),{L:2,zoom:1.3,stamp:'설명용 모형',aria:'좌표계별 단위벡터와 그래디언트'});
+var P6=xyz('p6',function(){S6.dirty=true;up6();});
+S6.ov.push(function(g,S){var p=P6,C=coords6(p),blue=cssv('--info'),green=cssv('--terrain'),red=cssv('--eye'),i,k;
+  if(cs6==='cart'){S.line3(g,[[0,0,0],[p[0],0,0],[p[0],p[1],0],p],'rgba(22,33,43,.35)',1.4,[4,4]);}
+  else if(cs6==='cyl'){var rc=C.q[0],ph=C.q[1],arc=[];S.line3(g,[[0,0,p[2]],p],blue,2.4);S.line3(g,[p,[p[0],p[1],0],[0,0,0]],'rgba(22,33,43,.35)',1.4,[4,4]);
+    for(i=0;i<=24;i++){var t=ph*i/24;arc.push([0.55*Math.cos(t),0.55*Math.sin(t),0]);}S.line3(g,arc,blue,2);var qa=S.P(0.7*Math.cos(ph/2),0.7*Math.sin(ph/2),0);U.label(g,qa[0],qa[1],'θ',blue);var qr=S.P(p[0]/2,p[1]/2,p[2]);U.label(g,qr[0],qr[1]-12,'r',blue);}
+  else{var th=C.q[1],ph2=C.q[2],a1=[],a2=[];S.line3(g,[[0,0,0],p],blue,2.4);S.line3(g,[p,[p[0],p[1],0],[0,0,0]],'rgba(22,33,43,.35)',1.4,[4,4]);
+    for(i=0;i<=24;i++){var t1=th*i/24;a1.push([0.6*Math.sin(t1)*Math.cos(ph2),0.6*Math.sin(t1)*Math.sin(ph2),0.6*Math.cos(t1)]);var t2=ph2*i/24;a2.push([0.5*Math.cos(t2),0.5*Math.sin(t2),0]);}
+    S.line3(g,a1,blue,2);S.line3(g,a2,green,2);var q1=S.P(0.75*Math.sin(th/2)*Math.cos(ph2),0.75*Math.sin(th/2)*Math.sin(ph2),0.75*Math.cos(th/2));U.label(g,q1[0],q1[1],'θ',blue);var q2=S.P(0.65*Math.cos(ph2/2),0.65*Math.sin(ph2/2),0);U.label(g,q2[0],q2[1],'φ',green);}
+  for(i=0;i<3;i++){var e=[p[0]+0.55*C.e[i][0],p[1]+0.55*C.e[i][1],p[2]+0.55*C.e[i][2]],q=S.arrow3(g,p,e,red,2.6);U.label(g,q[0]+6,q[1]-6,C.nm[i],red);}
+  var G=C.G,m=n3(G)||1,tip=[p[0]+1.1*G[0]/m,p[1]+1.1*G[1]/m,p[2]+1.1*G[2]/m],qg=S.arrow3(g,p,tip,cssv('--stain'),3.6);U.label(g,qg[0]+8,qg[1]+12,'∇V',cssv('--stain'));
+  if(wrong6&&cs6!=='cart'){var W=comb6(C,false),mw=n3(W)||1,tw=[p[0]+1.1*W[0]/mw,p[1]+1.1*W[1]/mw,p[2]+1.1*W[2]/mw],mid=[p[0]+0.85*W[0]/mw,p[1]+0.85*W[1]/mw,p[2]+0.85*W[2]/mw];
+    S.line3(g,[p,mid],cssv('--amber'),2.6,[6,4]);var qw=S.arrow3(g,mid,tw,cssv('--amber'),2.6);U.label(g,qw[0]+8,qw[1]-10,'배율 빼먹음',cssv('--amber'));}
+  S.dot3(g,p[0],p[1],p[2],cssv('--amber'),6);});
+function up6(){var p=P6,C=coords6(p),V=comb6(C,true),W=comb6(C,false),eg=ang6(V,C.G),ew=ang6(W,C.G),qn=cs6==='cart'?['x','y','z']:cs6==='cyl'?['r','θ','z']:['r','θ','φ'];
+  for(var i=0;i<3;i++){$('#m6-l'+(i+1)).textContent=C.nm[i]+' 성분 = '+(C.sn[i]==='1'?'':'(1/'+C.sn[i]+') ')+C.dn[i];$('#m6-c'+(i+1)).textContent=fmt(C.d[i]/C.hs[i],3);}
+  $('#m6-err').textContent=cs6==='cart'?'— (배율 1)':fmt(ew,1)+'°';
+  var qs=cs6==='cart'?'':' · 이 점의 좌표 ('+qn[0]+', '+qn[1]+', '+qn[2]+') = ('+fmt(C.q[0],3)+', '+fmt(C.q[1]*(cs6==='cart'?1:180/Math.PI)*(cs6==='cart'?1:1),1)+'°'+(cs6==='cyl'?', '+fmt(C.q[2],2):', '+fmt(C.q[2]*180/Math.PI,1)+'°')+')';
+  if(cs6==='cyl')qs=' · 이 점의 원통좌표 (r, θ, z) = ('+fmt(C.q[0],3)+', '+fmt(C.q[1]*180/Math.PI,1)+'°, '+fmt(C.q[2],2)+')';
+  if(cs6==='sph')qs=' · 이 점의 구면좌표 (r, θ, φ) = ('+fmt(C.q[0],3)+', '+fmt(C.q[1]*180/Math.PI,1)+'°, '+fmt(C.q[2]*180/Math.PI,1)+'°)';
+  $('#eq6').innerHTML=CSN[cs6]+qs+'<br>배율 = ('+C.sn.join(', ')+') = ('+C.hs.map(function(v){return fmt(v,3);}).join(', ')+') · 편미분 ('+C.dn.join(', ')+') = '+vf(C.d,3)+'<br>성분 × 단위벡터를 더한 화살표 = '+vf(V,3)+' · 직교좌표 ∇V = '+vf(C.G,3)+' → 차이 <b>'+fmt(eg,1)+'°</b>';
+  var it=[['g','좌표계를 바꿔도 보라 화살표 ∇V는 그대로입니다(직교좌표와 차이 '+fmt(eg,1)+'°). 바뀌는 것은 빨간 단위벡터와 그것으로 잰 성분 숫자뿐이에요.']];
+  if(cs6!=='cart')it.push(['a','배율을 빼먹고 편미분을 그대로 쓰면 화살표가 '+fmt(ew,1)+'° 틀어집니다. '+(cs6==='cyl'?'r = '+fmt(C.q[0],2):'r = '+fmt(C.q[0],2)+', r sin θ = '+fmt(C.hs[2],2))+'라 각도 성분이 그만큼 부풀거나 줄어든 탓입니다. 점을 원점에서 멀리 옮기면 더 틀어지는지 확인해 보세요.']);
+  else it.push(['m','직교좌표는 배율이 (1, 1, 1)이라 빼먹을 것이 없습니다. 원통이나 구면을 골라 보세요.']);
+  U.ins($('#i-s6'),it);}
+U.btns($('#g-cs6'),[['cart','직교'],['cyl','원통'],['sph','구면']],cs6,function(v){cs6=v;S6.dirty=true;up6();});
+U.btns($('#g-f6'),sfList(['tilt','saddle','heater']),f6,function(v){f6=v;S6.dirty=true;up6();});
+$('#b-wrong6').onclick=function(){wrong6=!wrong6;this.setAttribute('aria-pressed',String(wrong6));S6.dirty=true;};
+up6();
+var r6=2,d6=30;
+function draw6b(){var cv=$('#cvS6b'),R=U.setup(cv),g=R.g,w=R.w,h=R.h,ox=60,oy=h-40,sc=Math.min((w-120)/3.2,(h-70)/3.2),t=d6*Math.PI/180;U.grid24(g,w,h);
+  g.strokeStyle='rgba(22,33,43,.5)';g.lineWidth=1.4;g.beginPath();g.moveTo(ox,oy);g.lineTo(ox+3.3*sc,oy);g.moveTo(ox,oy);g.lineTo(ox+3.3*sc*Math.cos(t),oy-3.3*sc*Math.sin(t));g.stroke();
+  [[1,cssv('--muted'),2.4],[r6,cssv('--eye'),3.4]].forEach(function(a){g.strokeStyle=a[1];g.lineWidth=a[2];g.beginPath();g.arc(ox,oy,a[0]*sc,-t,0);g.stroke();});
+  g.strokeStyle=cssv('--info');g.lineWidth=1.8;g.beginPath();g.arc(ox,oy,0.35*sc,-t,0);g.stroke();U.label(g,ox+0.42*sc*Math.cos(t/2),oy-0.42*sc*Math.sin(t/2),'Δθ',cssv('--info'));
+  U.label(g,ox+1*sc*Math.cos(t/2)+6,oy-1*sc*Math.sin(t/2),'1 × Δθ',cssv('--muted'));U.label(g,ox+r6*sc*Math.cos(t/2)+8,oy-r6*sc*Math.sin(t/2),'r × Δθ = '+fmt(r6*t,3),cssv('--eye'));
+  U.label(g,ox+r6*sc/2,oy+16,'r = '+fmt(r6,1),cssv('--eye'),'center');U.stamp(g,w,'설명용 모형');}
+U.reg($('#cvS6b'),function(dt){if(dt===0)draw6b();});
+function up6b(){var t=d6*Math.PI/180;$('#m6-dt').textContent=fmt(t,3);$('#m6-a1').textContent=fmt(t,3);$('#m6-ar').textContent=fmt(r6*t,3);$('#m6-h').textContent=fmt(r6,1)+'배';
+  U.ins($('#i-s6b'),[['g','같은 Δθ = '+d6+'°를 돌아도 반지름 '+fmt(r6,1)+'에서는 '+fmt(r6,1)+'배 먼 거리를 걷습니다. 그래서 "θ로 1만큼 갈 때 V가 얼마나 바뀌나"(∂V/∂θ)를 실제 거리로 바꾸려면 r로 나눕니다 — 원통·구면 식의 (1/r).'],['m','구면좌표의 φ 방향은 반지름이 r sin θ인 위도 원 위를 돕니다. 그래서 (1/(r sin θ))가 붙고, 극지방(sin θ → 0)에서는 같은 1도가 아주 짧아집니다.']]);draw6b();}
+(function(){var a=$('#r-r6'),b=$('#r-d6');a.oninput=function(){r6=+a.value;$('#v-r6').textContent=r6.toFixed(1);up6b();};b.oninput=function(){d6=+b.value;$('#v-d6').textContent=d6+'°';up6b();};})();up6b();
+
 /* ── 대결 ── */
 var DC=VM.DUEL,cs=0,shown=false,thD=0,DR=null;
 var CN={swirl:'소용돌이 (−y, x, 0)',shear:'층밀림 (y, 0, 0)',vortex:'배수구 소용돌이 (−y, x, 0)/(x² + y²)',source:'샘 (x, y, z)'};
@@ -579,8 +680,12 @@ U.Gloss({
  '열방정식':['열방정식','물리','∂T/∂t = k∇²T. 이웃 평균보다 낮은 곳은 데워지고 높은 곳은 식는다.'],
  '경사하강':['경사하강 (gradient descent)','학습','−∇f 쪽으로 조금씩 걸어 값을 줄이는 방법. 1편의 학습.'],
  '∇':['∇ (나블라, del)','기호','(∂/∂x, ∂/∂y, ∂/∂z). 세 방향으로 조금씩 재는 도구 묶음.'],
- '∂':['∂ (편미분 기호)','기호','"다른 좌표는 고정하고"라는 뜻의 둥근 d.']
-},['숫자 밭','화살표 밭','편미분','그래디언트','등위면','발산','회전','라플라시안','∇','오른손']);
+ '∂':['∂ (편미분 기호)','기호','"다른 좌표는 고정하고"라는 뜻의 둥근 d.'],
+ '원통좌표':['원통좌표 (r, θ, z)','좌표','바닥에서 원점까지 거리 r, 바닥에서 도는 각 θ, 높이 z로 점을 나타내는 방법.'],
+ '구면좌표':['구면좌표 (r, θ, φ)','좌표','원점까지 거리 r, z축에서 내려온 각 θ(극각), 바닥에서 도는 각 φ(방위각)로 점을 나타내는 방법. 책에 따라 θ와 φ를 바꿔 쓴다.'],
+ '배율':['배율 (스케일 인자)','좌표','좌표 1만큼 움직일 때 실제로 움직이는 거리. 원통 (1, r, 1), 구면 (1, r, r sin θ).'],
+ '단위벡터':['단위벡터','벡터','길이가 1인 방향 화살표. 직교좌표에서는 어디서나 같고, 원통·구면좌표에서는 점마다 방향이 바뀐다.'],
+},['숫자 밭','화살표 밭','원통좌표','구면좌표','배율','편미분','그래디언트','등위면','발산','회전','라플라시안','∇','오른손']);
 U.Study({quiz:{
  s1:[{q:'f(x, y, z)에서 ∂f/∂y를 잴 때 움직이는 것은?',o:['y만 조금 움직인다','x·y·z를 모두 조금 움직인다','y는 고정하고 x·z를 움직인다'],a:0,why:'편미분은 한 좌표만 움직이고 나머지 둘은 고정합니다.',hint:'∂는 "다른 건 고정"이라는 표시예요.'},
      {q:'그릇 밭 f = x² + y² + z²의 점 (1, −2, 0.5)에서 ∂f/∂y는?',o:['−2','−4','4'],a:1,why:'∂f/∂y = 2y = 2 × (−2) = −4. y가 커질수록(−2에서 0 쪽으로) 값이 줄어든다는 뜻입니다.',hint:'∂(y²)/∂y = 2y.'}],
@@ -590,6 +695,8 @@ U.Study({quiz:{
      {q:'화살표가 모두 x 방향으로 나란한 F = (x, 0, 0)의 발산은?',o:['0 (나란하니까)','1','−1'],a:1,why:'∂(x)/∂x = 1. 앞쪽 면에서 나가는 물이 뒤쪽 면으로 들어오는 물보다 많습니다.',hint:'화살표 길이가 x에 따라 달라져요.'}],
  s4:[{q:'소용돌이 F = (−y, x, 0)의 회전 ∇×F는?',o:['(0, 0, 2)','(2, 0, 0)','(0, 0, 0)'],a:0,why:'z 성분 ∂Fy/∂x − ∂Fx/∂y = 1 − (−1) = 2. 나머지는 0. z축에 꽂은 바람개비만 돕니다.',hint:'∂Fy/∂x − ∂Fx/∂y를 계산하세요.'},
      {q:'비틀린 밭 F = (y, x, 0)에 z축 바람개비를 꽂으면?',o:['반시계로 돈다','시계로 돈다','안 돈다'],a:2,why:'∂Fy/∂x − ∂Fx/∂y = 1 − 1 = 0. 이 밭은 숫자 밭 xy의 그래디언트라서 회전이 0입니다.',hint:'그래디언트의 회전은 늘 0이에요.'}],
+ s6:[{q:'원통좌표 그래디언트의 θ̂ 성분에 1/r이 붙는 이유는?',o:['각도 dθ만큼 돌 때 실제로 걷는 거리가 r·dθ라서','r이 클수록 V가 작아져서','단위벡터 θ̂의 길이가 r이라서'],a:0,why:'∂V/∂θ는 "각도 1만큼" 당 변화입니다. 거리당 변화로 바꾸려면 호 길이 r로 나눕니다. 단위벡터의 길이는 늘 1입니다.',hint:'⑥ 아래쪽 호 길이 실험.'},
+     {q:'같은 점에서 직교좌표로 구한 ∇V와 구면좌표 식으로 구한 ∇V는?',o:['같은 화살표다 (성분 숫자만 다르다)','방향이 다르다','길이가 다르다'],a:0,why:'가장 가파른 오르막은 하나뿐입니다. 좌표계는 그 화살표를 재는 단위벡터와 성분만 바꿉니다.',hint:'⑥ 실험의 "직교좌표와의 차이" 각도.'}],
  s5:[{q:'이웃 여섯 평균이 가운데보다 높으면 라플라시안은?',o:['양수 (움푹)','음수 (볼록)','0'],a:0,why:'∇²f ≈ 6 × (평균 − 가운데) ÷ h². 평균이 크면 양수, 가운데가 움푹한 곳입니다.',hint:'평균 − 가운데의 부호를 보세요.'},
      {q:'f = x² + y² − 2z²의 라플라시안은?',o:['6','−2','0'],a:2,why:'2 + 2 − 4 = 0. x·y로 위로 휜 만큼 z로 아래로 휘었습니다.',hint:'∂²/∂x², ∂²/∂y², ∂²/∂z²를 더하세요.'}],
  duel:[{q:'층밀림 F = (y, 0, 0)은 화살표가 모두 나란한데 z축 바람개비가 도는 이유는?',o:['위쪽(y가 큰 쪽) 물살이 아래쪽보다 빨라 날개 한쪽만 더 밀려서','화살표가 원을 그려서','발산이 커서'],a:0,why:'∂Fy/∂x − ∂Fx/∂y = 0 − 1 = −1. 날개 양쪽이 받는 물살이 달라 시계 방향으로 돕니다.',hint:'y에 따라 화살표 길이가 달라요.'}]

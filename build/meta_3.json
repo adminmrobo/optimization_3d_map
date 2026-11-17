@@ -15,8 +15,8 @@
    "role": "assistant"
   }
  ],
- "date": "2026-11-16",
- "version": "1.1",
+ "date": "2026-11-18",
+ "version": "1.2",
  "language": [
   "ko"
  ],
@@ -27,14 +27,16 @@
   "lab:concept/gradient",
   "lab:concept/divergence",
   "lab:concept/curl",
-  "lab:concept/laplacian"
+  "lab:concept/laplacian",
+  "lab:concept/scale-factor"
  ],
  "basedOn": [
   "matharium_del",
   "matharium_vecops",
   "knott1911life",
   "song2019generative",
-  "gonzalez2018digital"
+  "gonzalez2018digital",
+  "matheorems_coords"
  ],
  "educationalLevel": "입문",
  "learningResourceType": "interactive explainer",

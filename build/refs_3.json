@@ -230,5 +230,41 @@
    },
    "checkedBy": "웹 검색 2026-11-16 (Pearson·MathWorks 도서 페이지) — 절 번호는 원문 대조 안 함"
   }
+ },
+ {
+  "id": "matheorems_coords",
+  "type": "graphic",
+  "title": "Gradient in Different Coordinate Systems",
+  "author": [
+   {
+    "literal": "@matheorems"
+   }
+  ],
+  "accessed": {
+   "date-parts": [
+    [
+     2026,
+     11,
+     14
+    ]
+   ]
+  },
+  "lab": {
+   "work": "lab:work/matheorems_coords",
+   "role": "primary",
+   "supports": [
+    "lab:concept/cylindrical-coordinates",
+    "lab:concept/spherical-coordinates",
+    "lab:concept/scale-factor"
+   ],
+   "locs": [],
+   "verified": {
+    "title": true,
+    "author": true,
+    "year": false,
+    "url": false
+   },
+   "checkedBy": "사용자 제공 자료(이미지·영상)에서 옮김. 원 게시물 주소·게시일은 받지 못함"
+  }
  }
 ]

@@ -887,6 +887,25 @@
    "match": []
   },
   {
+   "id": "lab:work/matheorems_coords",
+   "type": "Work",
+   "label": {
+    "ko": "@matheorems — Gradient in Different Coordinate Systems",
+    "en": "@matheorems — Gradient in Different Coordinate Systems"
+   },
+   "page": "3_arrow_field",
+   "anchor": "#top",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
    "id": "lab:work/matharium_vecops",
    "type": "Work",
    "label": {
@@ -1086,6 +1105,258 @@
      "loc": "3장"
     }
    ]
+  },
+  {
+   "id": "lab:concept/cylindrical-coordinates",
+   "type": "Concept",
+   "label": {
+    "ko": "원통좌표",
+    "en": "Cylindrical coordinates"
+   },
+   "page": "3_arrow_field",
+   "anchor": "#s6",
+   "level": 3,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "(r, θ, z) — 바닥 거리, 방위각, 높이."
+   }
+  },
+  {
+   "id": "lab:concept/spherical-coordinates",
+   "type": "Concept",
+   "label": {
+    "ko": "구면좌표",
+    "en": "Spherical coordinates"
+   },
+   "page": "3_arrow_field",
+   "anchor": "#s6",
+   "level": 3,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "(r, θ, φ) — 원점 거리, 극각, 방위각. 책에 따라 θ·φ를 바꿔 씀."
+   }
+  },
+  {
+   "id": "lab:concept/scale-factor",
+   "type": "Concept",
+   "label": {
+    "ko": "배율(스케일 인자)",
+    "en": "Scale factor"
+   },
+   "page": "3_arrow_field",
+   "anchor": "#s6",
+   "level": 3,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "좌표 1만큼이 실제 거리 몇인가. 원통 (1, r, 1), 구면 (1, r, r sin θ)."
+   }
+  },
+  {
+   "id": "lab:concept/gradient-invariance",
+   "type": "Concept",
+   "label": {
+    "ko": "좌표에 따라 변하지 않는 그래디언트",
+    "en": "Coordinate-invariant gradient"
+   },
+   "page": "3_arrow_field",
+   "anchor": "#s6",
+   "level": 3,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "가장 가파른 오르막은 하나 — 좌표계는 성분과 단위벡터만 바꾼다."
+   }
+  },
+  {
+   "id": "lab:analogy/globe-degree",
+   "type": "Analogy",
+   "label": {
+    "ko": "적도와 극지방의 경도 1도",
+    "en": "One degree of longitude at the equator vs near the pole"
+   },
+   "page": "3_arrow_field",
+   "anchor": "#s6",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:limitation/coordinate-singularity",
+   "type": "Limitation",
+   "label": {
+    "ko": "r = 0, sin θ = 0에서 정의되지 않음",
+    "en": "Undefined at r = 0 and sin θ = 0"
+   },
+   "page": "3_arrow_field",
+   "anchor": "#s6",
+   "level": 3,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:sim/p3-coord-gradient",
+   "type": "Simulation",
+   "label": {
+    "ko": "같은 화살표, 다른 자 — 좌표계별 ∇V",
+    "en": "Same arrow, different rulers"
+   },
+   "page": "3_arrow_field",
+   "anchor": "#s6",
+   "level": 3,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:sim/p3-arc-length",
+   "type": "Simulation",
+   "label": {
+    "ko": "같은 각도, 다른 거리 — r·Δθ",
+    "en": "Same angle, different arc length"
+   },
+   "page": "3_arrow_field",
+   "anchor": "#s6",
+   "level": 3,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:claim/grad-cylindrical",
+   "type": "Claim",
+   "label": {
+    "ko": "원통좌표에서 ∇V = r̂ ∂V/∂r + θ̂ (1/r) ∂V/∂θ + ẑ ∂V/∂z",
+    "en": "Gradient in cylindrical coordinates"
+   },
+   "page": "3_arrow_field",
+   "anchor": "#s6",
+   "level": 3,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "source": [
+    {
+     "ref": "matheorems_coords",
+     "loc": "인포그래픽 본문"
+    }
+   ]
+  },
+  {
+   "id": "lab:claim/grad-spherical",
+   "type": "Claim",
+   "label": {
+    "ko": "구면좌표에서 ∇V = r̂ ∂V/∂r + θ̂ (1/r) ∂V/∂θ + φ̂ (1/(r sin θ)) ∂V/∂φ",
+    "en": "Gradient in spherical coordinates"
+   },
+   "page": "3_arrow_field",
+   "anchor": "#s6",
+   "level": 3,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "source": [
+    {
+     "ref": "matheorems_coords",
+     "loc": "인포그래픽 본문"
+    }
+   ]
+  },
+  {
+   "id": "lab:quiz/p3-s6-1",
+   "type": "QuizItem",
+   "label": {
+    "ko": "헬게이트 좌표계 문제 1",
+    "en": "Quiz s6-1"
+   },
+   "page": "3_arrow_field",
+   "anchor": "#s6",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
+  },
+  {
+   "id": "lab:quiz/p3-s6-2",
+   "type": "QuizItem",
+   "label": {
+    "ko": "헬게이트 좌표계 문제 2",
+    "en": "Quiz s6-2"
+   },
+   "page": "3_arrow_field",
+   "anchor": "#s6",
+   "level": 2,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": []
   },
   {
    "id": "lab:quiz/p3-s1-1",
@@ -1814,6 +2085,132 @@
    "p": "lab:broader",
    "o": "lab:topic/gradient-descent",
    "anchor": "#s2",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/gradient",
+   "p": "lab:prerequisiteOf",
+   "o": "lab:concept/gradient-invariance",
+   "anchor": "#s6",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/cylindrical-coordinates",
+   "p": "lab:relatedTo",
+   "o": "lab:concept/scale-factor",
+   "anchor": "#s6",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/spherical-coordinates",
+   "p": "lab:relatedTo",
+   "o": "lab:concept/scale-factor",
+   "anchor": "#s6",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/scale-factor",
+   "p": "lab:partOf",
+   "o": "lab:concept/gradient-invariance",
+   "anchor": "#s6",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:analogy/globe-degree",
+   "p": "lab:analogyOf",
+   "o": "lab:concept/scale-factor",
+   "anchor": "#s6",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/scale-factor",
+   "p": "lab:hasLimitation",
+   "o": "lab:limitation/coordinate-singularity",
+   "anchor": "#s6",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/gradient-invariance",
+   "p": "lab:demonstratedBy",
+   "o": "lab:sim/p3-coord-gradient",
+   "anchor": "#s6",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/scale-factor",
+   "p": "lab:demonstratedBy",
+   "o": "lab:sim/p3-arc-length",
+   "anchor": "#s6",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/grad-cylindrical",
+   "p": "lab:supports",
+   "o": "lab:concept/cylindrical-coordinates",
+   "anchor": "#s6",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/grad-cylindrical",
+   "p": "lab:assertedIn",
+   "o": "lab:work/matheorems_coords",
+   "anchor": "#s6",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/grad-spherical",
+   "p": "lab:supports",
+   "o": "lab:concept/spherical-coordinates",
+   "anchor": "#s6",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:claim/grad-spherical",
+   "p": "lab:assertedIn",
+   "o": "lab:work/matheorems_coords",
+   "anchor": "#s6",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/cylindrical-coordinates",
+   "p": "lab:broader",
+   "o": "lab:topic/calculus-optimization-math",
+   "anchor": "#s6",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/spherical-coordinates",
+   "p": "lab:broader",
+   "o": "lab:topic/calculus-optimization-math",
+   "anchor": "#s6",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/scale-factor",
+   "p": "lab:broader",
+   "o": "lab:topic/calculus-optimization-math",
+   "anchor": "#s6",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/gradient-invariance",
+   "p": "lab:broader",
+   "o": "lab:topic/calculus-optimization-math",
+   "anchor": "#s6",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:quiz/p3-s6-1",
+   "p": "lab:assesses",
+   "o": "lab:concept/scale-factor",
+   "anchor": "#s6",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:quiz/p3-s6-2",
+   "p": "lab:assesses",
+   "o": "lab:concept/gradient-invariance",
+   "anchor": "#s6",
    "confidence": "high"
   },
   {
