@@ -12,6 +12,7 @@
 
 | 키 | 쓰는 곳 | 판 |
 |---|---|---|
+| fs_cover_00 | 최적화 첫걸음 ⓪ 표지 (first_step_0.html) — **아직 없음 (2026-11-19 추가)** | 16:9 |
 | fs_cover_01 | 최적화 첫걸음 ① 표지 (first_step_1.html) | 16:9 |
 | fs_cover_02 | 최적화 첫걸음 ② 표지 (first_step_2.html) | 16:9 |
 | fs_prologue_1~3 | 프롤로그 세 컷 (하루·시아·모아) | 4:3 |
@@ -110,3 +111,33 @@ Right side: a girl researcher with long pink hair in two round buns and a navy s
 Keep the characters and props in the right 45% of the image; keep the lower-left area plain.
 No text, no letters, no numbers, no logos.
 ```
+
+---
+
+## 0. fs_cover_00 — 최적화 첫걸음 ⓪ 표지 (2026-11-19 추가)
+
+| 항목 | 내용 |
+|---|---|
+| 장면 | 낮의 연구실 큰 탁자 위에 떠 있는 반투명 3D 지형(오차 지도). 비탈 위 출발점(빨간 점)에서 바닥(초록 점)까지 작은 발자국이 굽이치며 이어짐 |
+| 주제 은유 | 발자국 = 한 걸음씩 고치는 학습, 발자국마다 작은 화살표(방향) / 탁자 옆 작은 자전거 안장 모형(조금씩 맞추기) |
+| 네 캐릭터 | 박사: 가운데 뒤에서 지형을 가리키며 설명 / 하루: 앞쪽에서 "매번 어느 쪽으로?" 묻는 표정(빈 말풍선 하나) / 주판봇: 오른쪽, 금메달을 단 성적표 한 장을 자랑스럽게 들고 있음 / 초파리 연구원: 왼쪽, 돋보기로 다른 성적표 여러 장을 비교함 |
+| 대체 글 | 연구실 탁자 위 오차 지형에서 발자국이 바닥까지 이어지고, 하루가 매번 어느 쪽으로 고치는지 묻는 장면 |
+| 붙일 곳 | first_step_0.html 머리(그림 표지 자리, `cover-chip` "최적화 첫걸음 · ⓪ 인공지능 모델에서의 최적화") |
+
+**영어 프롬프트**
+```
+Website top cover illustration, wide 16:9.
+Match the art style, proportions and colors of the attached reference images exactly
+(if there are no reference images: 16-bit RPG style pixel art, bold dark outline, 2-3 tone shading, small highlights).
+Bright daytime laboratory mood, soft natural sunlight, clean white walls, light lavender, mint and pink accents.
+Scene: above a large lab table floats a translucent 3D terrain shaped like a tilted valley. A trail of tiny footprints winds from a red dot high on the slope down to a green dot at the bottom; each footprint has a tiny arrow showing its direction.
+Center back: an older male professor in a white lab coat pointing at the terrain, explaining kindly.
+Front: girl researcher, long pink hair with two round buns and a navy streak, blue eyes, white lab coat over lavender hoodie, looking up with a curious question face, one EMPTY speech bubble beside her (no text inside).
+Right: a small boxy robot holding up one single report sheet with a gold medal sticker, looking proud.
+Left: a small fruit-fly researcher with a magnifying glass comparing several report sheets spread on the table.
+Small detail on the table: a miniature bicycle saddle on a post.
+Composition: keep every face and hand inside the central safe area (12% margin left and right, 10% top, 18% bottom); keep the bottom-left corner plain and bright.
+Mood: curious, step-by-step, calm.
+No text, no letters, no numbers, no logos, no school uniform, no weapons, no real brands.
+```
+

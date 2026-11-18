@@ -537,7 +537,7 @@ g.dump(4)
 used4 = {"leibniz1684nova": [deriv], "archimede_newton_leibniz": [deriv], "wiki_calculus_controversy": [deriv], "het_neoclassicals": [mrev], "bussotti2003genesis": [limit], "lemarechal2012cauchy": [limit], "het_euler": [limit], "hoerl1970ridge": [limit], "rumelhart1986learning": [limit]}
 (B / "refs_4.json").write_text(json.dumps([REFS[k](v) for k, v in used4.items()], ensure_ascii=False, indent=1))
 m4 = meta(4, "최적화 첫걸음 ① 혹시… 미분 좋아하세요? — 왜, 언제부터, 어디에", [deriv, marg, stat, mrmc, shut], list(used4), "first_step_1.html")
-m4.update({"series": FS, "date": "2026-11-18", "version": "1.4", "educationalLevel": "입문", "suggestedCitation": "안상선 (2026). 최적화 첫걸음 ① 혹시… 미분 좋아하세요? — 왜, 언제부터, 어디에. 최적화 첫걸음 1, v1.4."})
+m4.update({"series": FS, "date": "2026-11-19", "version": "1.5", "educationalLevel": "입문", "suggestedCitation": "안상선 (2026). 최적화 첫걸음 ① 혹시… 미분 좋아하세요? — 왜, 언제부터, 어디에. 최적화 첫걸음 1, v1.5."})
 (B / "meta_4.json").write_text(json.dumps(m4, ensure_ascii=False, indent=1))
 
 # ══════════════ 최적화 첫걸음 ② ══════════════
@@ -617,6 +617,10 @@ itr = g.n("lab:concept/iterative-training", "Concept", "반복 학습(한 걸음
 gd0 = g.n("lab:method/gradient-descent", "Method", "경사하강", "Gradient descent", "#s02", 1, "기울기의 반대 방향으로 조금씩 걸어 오차를 줄이는 방법.")
 tvs = g.n("lab:concept/train-validation-split", "Concept", "훈련·검증 나누기", "Train/validation split", "#s03", 1, "손에 쥔 데이터를 배우는 몫과 점검하는 몫으로 나눈다. 시험 몫은 끝까지 봉인.")
 rec = g.n("lab:concept/recall", "Concept", "재현율", "Recall", "#s03", 1, "진짜 불량 가운데 모델이 잡아낸 비율.")
+fpos = g.n("lab:concept/false-positive", "Concept", "오경보", "False positive", "#s03", 1, "양품을 불량으로 잘못 판정한 경우. 재현율과 맞바꾸는 비용.")
+g.e(fpos, "contrastsWith", rec, "#s03")
+selb = g.n("lab:limitation/selection-bias-validation", "Limitation", "검증으로 고른 점수는 낙관적", "Selected-on-validation score is optimistic", "#s03", 1, "검증 오차를 보고 고른 시점의 검증 점수는 실제보다 좋게 나오기 쉬워 시험 데이터로 다시 잰다.")
+g.e(tvs, "hasLimitation", selb, "#s03")
 ovf = g.n("lab:concept/overfitting", "Concept", "과적합(외우기)", "Overfitting", "#s03", 1, "훈련 오차는 계속 줄지만 처음 보는 데이터에서는 나빠지는 상태.")
 piv = g.n("lab:method/re-tuning", "Method", "되돌아가 다시 정비하기(피봇팅)", "Going back and re-tuning (pivoting)", "#s04", 1, "데이터가 바뀌면 그대로 쓰기·처음부터 다시 배우기·이어서 고치기(미세조정) 가운데 고른다.")
 shift = g.n("lab:concept/distribution-shift", "Concept", "분포 이동", "Distribution shift", "#s04", 1, "재료·공정이 바뀌어 새 데이터가 훈련 때와 다르게 생긴 상황.")
@@ -642,7 +646,7 @@ g.dump(6)
 used6 = {"mltut_math_behind_ai": [nrn], "ahn_battery_factory": [tvs, piv]}
 (B / "refs_6.json").write_text(json.dumps([REFS[k](v) for k, v in used6.items()], ensure_ascii=False, indent=1))
 m6 = meta(6, "최적화 첫걸음 ⓪ 인공지능 모델에서의 최적화 — 모델은 한 번에 만들어지지 않는다", [itr, tvs, piv], list(used6), "first_step_0.html")
-m6.update({"series": FS, "number": "0", "date": "2026-11-18", "version": "1.0", "educationalLevel": "입문", "suggestedCitation": "안상선 (2026). 최적화 첫걸음 ⓪ 인공지능 모델에서의 최적화 — 모델은 한 번에 만들어지지 않는다. 최적화 첫걸음 0, v1.0."})
+m6.update({"series": FS, "number": "0", "date": "2026-11-19", "version": "1.1", "educationalLevel": "입문", "suggestedCitation": "안상선 (2026). 최적화 첫걸음 ⓪ 인공지능 모델에서의 최적화 — 모델은 한 번에 만들어지지 않는다. 최적화 첫걸음 0, v1.1."})
 (B / "meta_6.json").write_text(json.dumps(m6, ensure_ascii=False, indent=1))
 
 # ══════════════ 목차 ══════════════

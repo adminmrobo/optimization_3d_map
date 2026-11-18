@@ -135,6 +135,50 @@
    }
   },
   {
+   "id": "lab:concept/false-positive",
+   "type": "Concept",
+   "label": {
+    "ko": "오경보",
+    "en": "False positive"
+   },
+   "page": "first_step_0",
+   "anchor": "#s03",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "양품을 불량으로 잘못 판정한 경우. 재현율과 맞바꾸는 비용."
+   }
+  },
+  {
+   "id": "lab:limitation/selection-bias-validation",
+   "type": "Limitation",
+   "label": {
+    "ko": "검증으로 고른 점수는 낙관적",
+    "en": "Selected-on-validation score is optimistic"
+   },
+   "page": "first_step_0",
+   "anchor": "#s03",
+   "level": 1,
+   "status": "known",
+   "confidence": "high",
+   "coverage": "explained",
+   "family": "optimization",
+   "domain": [
+    "ai"
+   ],
+   "match": [],
+   "definition": {
+    "ko": "검증 오차를 보고 고른 시점의 검증 점수는 실제보다 좋게 나오기 쉬워 시험 데이터로 다시 잰다."
+   }
+  },
+  {
    "id": "lab:concept/overfitting",
    "type": "Concept",
    "label": {
@@ -430,6 +474,20 @@
   }
  ],
  "edges": [
+  {
+   "s": "lab:concept/false-positive",
+   "p": "lab:contrastsWith",
+   "o": "lab:concept/recall",
+   "anchor": "#s03",
+   "confidence": "high"
+  },
+  {
+   "s": "lab:concept/train-validation-split",
+   "p": "lab:hasLimitation",
+   "o": "lab:limitation/selection-bias-validation",
+   "anchor": "#s03",
+   "confidence": "high"
+  },
   {
    "s": "lab:concept/artificial-neuron",
    "p": "lab:relatedTo",
