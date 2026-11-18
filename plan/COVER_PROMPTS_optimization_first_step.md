@@ -131,10 +131,10 @@ Match the art style, proportions and colors of the attached reference images exa
 (if there are no reference images: 16-bit RPG style pixel art, bold dark outline, 2-3 tone shading, small highlights).
 Bright daytime laboratory mood, soft natural sunlight, clean white walls, light lavender, mint and pink accents.
 Scene: above a large lab table floats a translucent 3D terrain shaped like a tilted valley. A trail of tiny footprints winds from a red dot high on the slope down to a green dot at the bottom; each footprint has a tiny arrow showing its direction.
-Center back: an older male professor in a white lab coat pointing at the terrain, explaining kindly.
+Center back: chibi scientist, thin teal rectangular glasses, spiky black hair with one white streak, small ponytail at the back, white lab coat over black vest and tie, pointing at the terrain, explaining kindly.
 Front: girl researcher, long pink hair with two round buns and a navy streak, blue eyes, white lab coat over lavender hoodie, looking up with a curious question face, one EMPTY speech bubble beside her (no text inside).
-Right: a small boxy robot holding up one single report sheet with a gold medal sticker, looking proud.
-Left: a small fruit-fly researcher with a magnifying glass comparing several report sheets spread on the table.
+Right, facing left: boxy beige retro CRT-monitor robot, dark green screen face with mint pixel eyes and mouth, short antenna topped with a red-brown abacus bead, gray segmented arms, two small tank treads, proudly holding up one single report sheet with a gold medal sticker.
+Left, facing right: anthropomorphic fruit fly researcher, black body, big red compound eyes, blue helmet with a gold stripe and pink and blue cables, white lab coat over a black vest, black gloves, transparent wings, holding a magnifying glass over several report sheets spread on the table.
 Small detail on the table: a miniature bicycle saddle on a post.
 Composition: keep every face and hand inside the central safe area (12% margin left and right, 10% top, 18% bottom); keep the bottom-left corner plain and bright.
 Mood: curious, step-by-step, calm.
