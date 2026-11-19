@@ -120,6 +120,7 @@
     <li>"기울어진 판"을 고르면 어디서 재도 세 화살표가 똑같습니다. 판은 어디서나 같은 정도로 기울었기 때문이에요.</li></ol>
     <div class="lim">이 칸의 한계: 편미분은 축 방향 세 개만 봅니다. 비스듬한 방향 중 어디가 가장 가파른지는 세 개를 합쳐야 알 수 있습니다 → ②</div></div>
   <details class="fold"><summary>수식으로 보기</summary><p>∂f/∂x = lim<sub>h→0</sub> [f(x + h, y, z) − f(x − h, y, z)] / (2h). 이 페이지는 h = 0.001로 계산하고, 화면의 식은 이해를 돕기 위해 h = 0.1로 보여 줍니다. 난로 밭 f = 20 + 30·e<sup>−(x² + y² + z²)/2</sup>의 정확한 편미분은 ∂f/∂x = −30x·e<sup>−(x² + y² + z²)/2</sup>입니다.</p></details>
+  <div class="bridge spc"><b>원자료 요약 · ④ Del Operator(@askwhyvalley)</b><ol><li>∇는 방향 자 x̂·ŷ·ẑ와 방향별 기울기 ∂를 짝지어 한 줄로 묶은 도구입니다.</li><li>도구 자체는 계산하지 않고, 무엇에 어떻게 붙이느냐에 따라 네 연산이 됩니다.</li><li>자세히는 <a href="https://adminmrobo.github.io/vector_calculus_lab/01_differential.html#room-1">∇ 특별편 ①편 방 1 — ∇ 도구상자 →</a></li></ol></div>
   <div data-dlg="s1"></div>
   <div class="quiz" data-quiz="s1"></div>
 </div></section>
@@ -152,6 +153,7 @@
     <div class="lim">이 칸의 한계: 그래디언트는 숫자 밭에만 씁니다. 바람·물처럼 이미 화살표가 붙어 있는 밭에서는 "퍼짐"과 "돎"을 따로 재야 합니다 → ③·④</div></div>
   <div class="bridge gen"><b>생성 AI로 치면</b> 그림을 만드는 확산 모델의 한 갈래(점수 기반 생성 모델)는 <b>데이터가 많은 쪽으로 가는 그래디언트</b>를 신경망으로 배웁니다. 이 방법을 낸 논문은 잡음을 여러 세기로 섞은 데이터마다 그 그래디언트 밭(점수)을 함께 추정하고, 그림을 만들 때는 잡음이 줄어드는 차례대로 그 화살표를 따라간다고 설명합니다 [4]. 잡음 그림을 그 화살표를 따라 조금씩 옮기면 그림이 나옵니다. 축이 x·y·z 셋이 아니라 픽셀 수만큼 많다는 것만 다릅니다.</div>
   <details class="fold"><summary>수식으로 보기 — 왜 껍질과 직각인가</summary><p>껍질 위의 아주 짧은 이동 d = (dx, dy, dz)에서는 값이 변하지 않으므로 df = ∂f/∂x·dx + ∂f/∂y·dy + ∂f/∂z·dz = ∇f · d = 0입니다. 점곱이 0이니 ∇f는 껍질 위의 모든 방향과 직각입니다. 방향 u(길이 1)로 가는 변화율은 ∇f · u = |∇f| cos θ라서 θ = 0, 곧 ∇f 방향일 때 가장 큽니다.</p></details>
+  <div class="bridge spc"><b>원자료 요약 · ⑤ Gradient, Divergence & Curl · ① Vector Differential Operator</b><ol><li>숫자 밭 f에 ∇를 붙이면 가장 가파른 오르막 화살표가 됩니다. 예: f = x² + y², 점 (1, 2)에서 (2, 4).</li><li>학습은 이 화살표의 반대로 갑니다(경사 하강).</li><li>자세히는 <a href="https://adminmrobo.github.io/vector_calculus_lab/01_differential.html#room-2">∇ 특별편 ①편 방 2 — 그래디언트, ③편 방 10 — 경사 하강 →</a></li></ol></div>
   <div data-dlg="s2"></div>
   <div class="quiz" data-quiz="s2"></div>
 </div></section>
@@ -184,6 +186,7 @@
     <li><b>소용돌이</b>와 <b>균일한 흐름</b>은 들어온 만큼 나가서 0입니다. 물감 상자는 돌거나 밀려가기만 하고 부피는 1 그대로입니다.</li></ol>
     <div class="lim">이 칸의 한계: 발산은 "얼마나 퍼지나"만 셉니다. 물이 상자 둘레를 빙빙 도는지는 알려 주지 않습니다(소용돌이도 0) → ④</div></div>
   <details class="fold"><summary>수식으로 보기 — 상자 셈과 식이 같은 이유</summary><p>x 방향의 두 면(넓이 a²)만 보면, 앞면에서 나간 양 − 뒷면에서 들어온 양 ≈ [F<sub>x</sub>(x + a/2) − F<sub>x</sub>(x − a/2)]·a² ≈ (∂F<sub>x</sub>/∂x)·a³. y, z 면도 같아서 모두 더하고 부피 a³로 나누면 ∂F<sub>x</sub>/∂x + ∂F<sub>y</sub>/∂y + ∂F<sub>z</sub>/∂z = ∇·F. 물감 부피 V는 dV/dt = (∇·F)·V로 바뀌므로, 샘에서는 시간 t 뒤 e<sup>3t</sup>배가 됩니다.</p></details>
+  <div class="bridge spc"><b>원자료 요약 · ⑤ Gradient, Divergence & Curl</b><ol><li>작은 상자에서 나가는 양 − 들어오는 양이 발산입니다. 예: F = (x, y, z)이면 3.</li><li>상자 안 발산을 모두 더하면 겉면으로 나간 양과 같습니다(발산 정리).</li><li>자세히는 <a href="https://adminmrobo.github.io/vector_calculus_lab/01_differential.html#room-3">∇ 특별편 ①편 방 3 — 발산, ②편 방 8 — 발산 정리, ⑥편 방 20 — 공장 물질 수지 →</a></li></ol></div>
   <div data-dlg="s3"></div>
   <div class="quiz" data-quiz="s3"></div>
 </div></section>
@@ -215,6 +218,7 @@
     <li><b>비틀린 밭 (y, x, 0)</b>은 화살표가 휘어 보이지만 어느 축으로 꽂아도 안 돕니다. 이 밭은 숫자 밭 xy의 그래디언트라서, 1편 ②에서 본 대로 회전이 늘 0입니다.</li></ol>
     <div class="lim">이 칸의 한계: 바람개비는 아주 작다고 가정합니다. 큰 바람개비는 여러 곳의 물살을 평균 내므로 한 점의 회전과 다를 수 있습니다.</div></div>
   <details class="fold"><summary>수식으로 보기 — 행렬식으로 쓰는 회전</summary><p>∇×F = (∂F<sub>z</sub>/∂y − ∂F<sub>y</sub>/∂z, ∂F<sub>x</sub>/∂z − ∂F<sub>z</sub>/∂x, ∂F<sub>y</sub>/∂x − ∂F<sub>x</sub>/∂y). 첫 줄에 단위 벡터 î, ĵ, k̂, 둘째 줄에 ∂/∂x, ∂/∂y, ∂/∂z, 셋째 줄에 F<sub>x</sub>, F<sub>y</sub>, F<sub>z</sub>를 놓은 3×3 행렬식을 펼친 것과 같습니다. 이 페이지의 바람개비는 축 n에 수직인 작은 고리(반지름 0.06)를 따라 물살을 더한 값 ÷ 고리 넓이로 (∇×F)·n을 재고, 그 절반을 빠르기로 씁니다.</p></details>
+  <div class="bridge spc"><b>원자료 요약 · ⑤ Gradient, Divergence & Curl · ④ Del Operator</b><ol><li>작은 바람개비가 도는 빠르기가 회전입니다. 예: F = (−y, x, 0)이면 (0, 0, 2).</li><li>두 모델이 겨루는 GAN 학습의 화살표 밭이 바로 이 소용돌이입니다.</li><li>자세히는 <a href="https://adminmrobo.github.io/vector_calculus_lab/01_differential.html#room-4">∇ 특별편 ①편 방 4 — 회전, ④편 방 15 — 도는 학습(GAN) →</a></li></ol></div>
   <div data-dlg="s4"></div>
   <div class="quiz" data-quiz="s4"></div>
 </div></section>
@@ -248,6 +252,7 @@
     <div class="lim">이 칸의 한계: 이웃까지 거리 h가 크면 값이 식과 조금 달라집니다. h를 줄이면 가까워집니다. 그릇·돔·안장처럼 2차식이면 h와 상관없이 딱 맞습니다.</div></div>
   <div class="bridge gen"><b>그림 처리로 치면</b> 사진에서 경계선을 찾을 때 쓰는 라플라시안 필터는 이 실험의 2차원판입니다. 픽셀 하나를 가운데로, 위·아래·왼쪽·오른쪽 네 이웃을 더하고 가운데의 4배를 빼면 됩니다. 밝기가 갑자기 바뀌는 곳에서 값이 크게 튀어 경계가 드러납니다 [5]. CNN의 첫 층이 배우는 필터 가운데에도 비슷한 모양이 자주 보입니다.</div>
   <details class="fold"><summary>수식으로 보기 — 이웃 평균과 라플라시안</summary><p>테일러 전개로 f(x + h) + f(x − h) = 2f(x) + h²·∂²f/∂x² + … 세 축을 모두 더하면 (이웃 여섯의 합) − 6f = h²·∇²f + …, 곧 ∇²f ≈ 6·(이웃 평균 − 가운데)/h². 열방정식 ∂T/∂t = k∇²T는 "이웃 평균보다 낮으면 오른다"를 그대로 적은 식입니다. 난로 밭의 정확한 값은 ∇²f = 30·e<sup>−r²/2</sup>(r² − 3), r² = x² + y² + z².</p></details>
+  <div class="bridge spc"><b>원자료 요약 · ① Vector Differential Operator (스칼라 ↔ 벡터 순환도)</b><ol><li>숫자 밭 →(그래디언트)→ 화살표 밭 →(발산)→ 숫자 밭으로 돌아오면 라플라시안입니다.</li><li>예: f = x² + y²이면 어디서나 4. 가마 온도가 퍼지는 속도가 이 값에 비례합니다.</li><li>자세히는 <a href="https://adminmrobo.github.io/vector_calculus_lab/01_differential.html#room-5">∇ 특별편 ①편 방 5 — 라플라시안, ⑥편 방 19 — 가마 온도 →</a></li></ol></div>
   <div data-dlg="s5"></div>
   <div class="quiz" data-quiz="s5"></div>
 </div></section>
@@ -291,6 +296,7 @@
     <div class="lim" style="border-left-color:var(--info)">표기 주의: 원통좌표의 θ는 바닥에서 도는 <b>방위각</b>이고, 구면좌표의 θ는 z축에서 내려온 <b>극각</b>입니다(물리학 관례, 이 장의 방식). 수학책 가운데는 구면좌표의 θ와 φ를 서로 바꿔 쓰는 책도 있으니, 식을 옮길 때 어느 각이 어느 쪽인지 먼저 확인하세요.</div>
     <div class="lim">이 칸의 가정: 원통좌표는 z축 위(r = 0)에서, 구면좌표는 원점(r = 0)과 z축 위(sin θ = 0)에서 각도가 정해지지 않아 이 식을 쓸 수 없습니다. 실험에서도 그 근처로 점을 옮기면 배율이 아주 작아져 숫자가 흔들립니다. 숫자 밭은 매끄럽다고 가정합니다.</div></div>
   <div class="bridge field"><b>모델 최적화와 이어지는 곳</b> 경사하강은 보통 매개변수마다 편미분을 그대로 씁니다. 매개변수의 자가 서로 다르면(한 특성은 0~1, 다른 특성은 0~10000) 배율을 빼먹은 화살표처럼 방향이 틀어지고, 그릇이 길쭉해 지그재그로 걷습니다 → <a href="1_math_map.html#s3">1편 ③ 땅의 굽음</a>, <a href="2_experiment_lab.html">2편 학습률 실험</a>. 특성 스케일링은 자를 맞추는 일입니다. 더 나아가 "공간의 자" 자체를 계산에 넣는 경사하강(자연 그래디언트, natural gradient)도 있습니다 — 이 시리즈에서는 이름만 소개합니다.</div>
+  <div class="bridge spc"><b>원자료 요약 · ② Cartesian, Cylindrical and Spherical Coordinates (matharium) · ③ Gradient in Different Coordinate Systems (@matheorems)</b><ol><li>같은 점을 직교·원통·구 좌표로 읽습니다. 예: (1, 1, √2) → 원통 (√2, 45°, √2), 구 (2, 45°, 45°).</li><li>원자료 ②는 원통을 (ρ, φ, z), ③은 (r, θ, z)로 적습니다. 특별편은 원통 (ρ, φ, z), 구 (r, θ, φ)로 통일합니다.</li><li>자세히는 <a href="https://adminmrobo.github.io/vector_calculus_lab/01_differential.html#room-6">∇ 특별편 ①편 방 6 — 좌표 바꿔 보기 →</a></li></ol></div>
   <div data-dlg="s6"></div>
   <div class="quiz" data-quiz="s6"></div>
 </div></section>
@@ -346,6 +352,7 @@
     <li><b>그래디언트의 회전은 늘 0</b> — 숫자 밭의 오르막 화살표들은 소용돌이를 만들지 않습니다. 1편의 공이 오차 지도에서 빙빙 돌지 않는 이유입니다(④의 비틀린 밭).</li>
     <li><b>회전의 발산은 늘 0</b> — 회전 화살표들로 만든 밭에는 샘도 구멍도 없습니다.</li>
   </ul>
+  <div class="bridge spc"><b>∇ 특별편으로 이어 보기</b> 이 편의 네 연산을 한 점이 아니라 영역 전체로 더하면 세 정리가 되고, 같은 화살표가 학습·그림·공장·선별대에서 쓰입니다. <a href="https://adminmrobo.github.io/vector_calculus_lab/">목차</a> · <a href="https://adminmrobo.github.io/vector_calculus_lab/02_integral.html">②편 적분 쪽(세 정리)</a> · <a href="https://adminmrobo.github.io/vector_calculus_lab/03_machine_learning.html">③편 머신러닝</a> · <a href="https://adminmrobo.github.io/vector_calculus_lab/04_deep_learning.html">④편 딥러닝</a> · <a href="https://adminmrobo.github.io/vector_calculus_lab/05_rendering.html">⑤편 렌더링</a> · <a href="https://adminmrobo.github.io/vector_calculus_lab/06_factory.html">⑥편 공장 최적화</a> · <a href="https://adminmrobo.github.io/vector_calculus_lab/07_fish_market.html">⑦편 생선 분류(정확도·시간·비용)</a></div>
   <h3>비유의 한계</h3>
   <ul>
     <li>신경망의 오차 지도는 축이 수천~수십억 개라 상자로 그릴 수 없습니다. 그래도 ∇는 축 수만큼 칸이 늘어날 뿐 뜻은 같습니다.</li>
