@@ -13,7 +13,7 @@
 <nav class="top" aria-label="섹션 바로가기"><div class="row">
   <a class="logo" href="index.html">좌표축 위의 <i>그릇</i> ①</a>
   <div class="links">
-    <a href="#map">지도</a><a href="#s1">① 자르기</a><a href="#s2">② 깃대</a><a href="#s3">③ 굽음</a><a href="#s4">④ 고개</a><a href="#s5">⑤ 휨</a><a href="#s6">⑥ 울타리</a><a href="#duel">대결</a><a href="#sum">정리</a><a href="#kg">색인</a><a href="#export">꾸러미</a><a href="2_experiment_lab.html">2편 →</a><a href="3_arrow_field.html">3편 →</a>
+    <a href="#map">지도</a><a href="#s1">① 자르기</a><a href="#s2">② 깃대</a><a href="#s3">③ 굽음</a><a href="#s4">④ 고개</a><a href="#s5">⑤ 휨</a><a href="#s6">⑥ 울타리</a><a href="#duel">대결</a><a href="#aicheck">AI 판단</a><a href="#sum">정리</a><a href="#kg">색인</a><a href="#export">꾸러미</a><a href="2_experiment_lab.html">2편 →</a><a href="3_arrow_field.html">3편 →</a>
   </div>
 </div></nav>
 
@@ -354,6 +354,15 @@
 </div></section>
 
 <!-- 정리 -->
+<section class="sec" id="aicheck" aria-labelledby="h-aicheck"><div class="wrap">
+  <h2 id="h-aicheck">AI 판단 코너 — 이 답을 그대로 믿어도 될까?</h2>
+  <p class="lead">계산은 AI와 프로그램이 1초 만에 해 줍니다. 우리에게 남는 일은 <b>그 답이 맞는지 확인하는 것</b>입니다. 아래는 생성형 AI에게 이 페이지의 실험을 물었을 때 나올 법한 답(설명용으로 꾸민 예시)입니다. 이 페이지에서 배운 것으로 하나씩 따져 보세요.</p>
+  <div class="aibox"><div class="aihead"><span class="aitag">AI 답변 (예시)</span>"이 뉴런은 학습률 0.5로 학습하면 빨리 끝납니다. 기울기가 0이 된 곳에서 멈추면 그곳이 오차가 가장 작은 바닥이고, 헤시안 고유값 중 하나가 음수여도 기울기만 0이면 바닥이라고 보면 됩니다."</div><ol><li>학습률 0.5면 빨리 끝난다.</li><li>기울기가 0인 곳에서 멈추면 그곳이 바닥이다.</li><li>고유값 하나가 음수여도 기울기가 0이면 바닥이다.</li></ol></div>
+  <div class="aiq"><b>먼저 스스로 판단해 보기</b> 세 문장 각각 "맞다 / 틀리다 / 조건이 붙는다" 중 무엇일까요? 위 실험을 다시 눌러 확인해도 좋습니다.</div>
+  <details class="fold aians"><summary>확인해 보기 — 박사의 판정</summary><ol><li><b>틀리다.</b> 이 페이지의 그릇은 가장 큰 굽음이 약 5.99라서 보폭 한계는 2 ÷ 5.99 ≈ <b>0.334</b>입니다(③). 0.5면 가파른 방향의 배율이 1 − 0.5 × 5.99 ≈ <b>−2.0</b>이라 걸음마다 두 배씩 멀어집니다. 빨라지는 게 아니라 튀어 나갑니다.</li><li><b>조건이 붙는다.</b> 기울기 0은 바닥의 <b>후보</b>일 뿐입니다. 감자칩 가운데(④)와 대결의 고개도 기울기가 0입니다. 바닥인지는 굽음(헤시안 고유값)으로 따로 확인해야 합니다.</li><li><b>틀리다.</b> 고유값이 음수인 방향은 아래로 굽은 방향, 곧 내리막이 계속되는 방향입니다. 그곳은 바닥이 아니라 안장(부호가 섞임)이나 봉우리입니다(③·④).</li></ol><p class="aiverdict"><b>정리</b> AI 답에서 숫자가 나오면 이 페이지의 한계(2 ÷ 가장 큰 굽음)와 견줘 보고, "기울기 0"이라는 말이 나오면 "그래서 굽음은?"을 되물으세요.</p></details>
+  <p class="muted" style="font-size:13px">AI 답변은 실제 서비스의 응답을 옮긴 것이 아니라, 흔히 나오는 틀린 추론을 모아 만든 설명용 예시입니다.</p>
+</div></section>
+
 <section class="sec" id="sum" aria-labelledby="h-sum"><div class="wrap">
   <h2 id="h-sum">정리 — 지도 말과 수학 말</h2>
   <div class="tblwrap"><table class="cmp"><thead><tr><th>단계</th><th>수학 이름</th><th>지도에서는</th><th>한 줄 식 (몰라도 됨)</th><th>이 단계의 한계</th></tr></thead><tbody>

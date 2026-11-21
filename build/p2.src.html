@@ -23,7 +23,7 @@
 <nav class="top" aria-label="섹션 바로가기"><div class="row">
   <a class="logo" href="index.html">좌표축 위의 <i>그릇</i> ②</a>
   <div class="links">
-    <a href="1_math_map.html">← 1편</a><a href="#map">다이얼</a><a href="#s1">① 배치</a><a href="#s2">② 학습률</a><a href="#s3">③ 단면</a><a href="#s4">④ 에포크</a><a href="#duel">대결</a><a href="#sum">정리</a><a href="#kg">색인</a><a href="#export">꾸러미</a><a href="3_arrow_field.html">3편 →</a>
+    <a href="1_math_map.html">← 1편</a><a href="#map">다이얼</a><a href="#s1">① 배치</a><a href="#s2">② 학습률</a><a href="#s3">③ 단면</a><a href="#s4">④ 에포크</a><a href="#duel">대결</a><a href="#aicheck">AI 판단</a><a href="#sum">정리</a><a href="#kg">색인</a><a href="#export">꾸러미</a><a href="3_arrow_field.html">3편 →</a>
   </div>
 </div></nav>
 
@@ -233,6 +233,15 @@
 </div></section>
 
 <!-- 정리 -->
+<section class="sec" id="aicheck" aria-labelledby="h-aicheck"><div class="wrap">
+  <h2 id="h-aicheck">AI 판단 코너 — 이 답을 그대로 믿어도 될까?</h2>
+  <p class="lead">계산은 AI와 프로그램이 1초 만에 해 줍니다. 우리에게 남는 일은 <b>그 답이 맞는지 확인하는 것</b>입니다. 아래는 생성형 AI에게 이 페이지의 실험을 물었을 때 나올 법한 답(설명용으로 꾸민 예시)입니다. 이 페이지에서 배운 것으로 하나씩 따져 보세요.</p>
+  <div class="aibox"><div class="aihead"><span class="aitag">AI 답변 (예시)</span>"훈련 오차가 1,500 에포크 끝까지 계속 줄었으니 마지막 모델이 가장 좋습니다. 배치는 클수록 기울기가 정확하니 무조건 큰 게 낫고, 학습률은 보통 0.1을 쓰니 이 모델에도 0.1이 안전합니다."</div><ol><li>훈련 오차가 끝까지 줄었으니 마지막 모델이 가장 좋다.</li><li>배치는 클수록 무조건 낫다.</li><li>학습률 0.1은 어디서나 안전하다.</li></ol></div>
+  <div class="aiq"><b>먼저 스스로 판단해 보기</b> 세 문장 각각 "맞다 / 틀리다 / 조건이 붙는다" 중 무엇일까요? 위 실험을 다시 눌러 확인해도 좋습니다.</div>
+  <details class="fold aians"><summary>확인해 보기 — 박사의 판정</summary><ol><li><b>틀리다.</b> ④ 에포크 실험에서 훈련 오차는 끝까지 줄지만, 학습에 쓰지 않은 검증 데이터의 오차는 일찍 바닥을 찍고 다시 오릅니다(과적합). 고를 모델은 <b>검증 오차가 가장 낮은 에포크</b>의 것입니다(조기 종료). 그리고 그 점수도 마지막에 따로 둔 시험 데이터로 다시 재야 합니다.</li><li><b>조건이 붙는다.</b> 배치가 크면 기울기는 덜 흔들리지만, 한 번 걸을 때 드는 계산이 커져 같은 계산량으로 걷는 걸음 수가 줄어듭니다(① 배치 실험). "같은 계산량에서 무엇이 더 내려갔나"로 비교해야 합니다.</li><li><b>조건이 붙는다.</b> 안전한 학습률은 지형의 가장 큰 굽음이 정합니다(한계 2 ÷ 가장 큰 굽음, ② 학습률 실험). 이 그릇의 한계는 약 0.33이라 0.1은 안전하지만, 굽음이 20보다 큰 지형이라면 0.1도 한계를 넘습니다. "보통 쓰는 값"은 근거가 아닙니다.</li></ol><p class="aiverdict"><b>정리</b> AI가 "가장 좋다", "무조건", "보통"이라고 말하면 무엇과 비교했는지, 어떤 데이터로 쟀는지를 되물으세요.</p></details>
+  <p class="muted" style="font-size:13px">AI 답변은 실제 서비스의 응답을 옮긴 것이 아니라, 흔히 나오는 틀린 추론을 모아 만든 설명용 예시입니다.</p>
+</div></section>
+
 <section class="sec" id="sum" aria-labelledby="h-sum"><div class="wrap">
   <h2 id="h-sum">정리 — 다이얼 네 개</h2>
   <div class="prac"><b>실무에서는 — 이 페이지가 다루지 않은 것</b>

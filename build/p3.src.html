@@ -13,7 +13,7 @@
 <nav class="top" aria-label="섹션 바로가기"><div class="row">
   <a class="logo" href="index.html">좌표축 위의 <i>그릇</i> ③</a>
   <div class="links">
-    <a href="#map">세 축</a><a href="#s1">① 편미분</a><a href="#s2">② 그래디언트</a><a href="#s3">③ 발산</a><a href="#s4">④ 회전</a><a href="#s5">⑤ 라플라시안</a><a href="#s6">⑥ 헬게이트</a><a href="#duel">대결</a><a href="#sum">정리</a><a href="#kg">색인</a><a href="#export">꾸러미</a><a href="1_math_map.html">← 1편</a>
+    <a href="#map">세 축</a><a href="#s1">① 편미분</a><a href="#s2">② 그래디언트</a><a href="#s3">③ 발산</a><a href="#s4">④ 회전</a><a href="#s5">⑤ 라플라시안</a><a href="#s6">⑥ 헬게이트</a><a href="#duel">대결</a><a href="#aicheck">AI 판단</a><a href="#sum">정리</a><a href="#kg">색인</a><a href="#export">꾸러미</a><a href="1_math_map.html">← 1편</a>
   </div>
 </div></nav>
 
@@ -335,6 +335,15 @@
 </div></section>
 
 <!-- 정리 -->
+<section class="sec" id="aicheck" aria-labelledby="h-aicheck"><div class="wrap">
+  <h2 id="h-aicheck">AI 판단 코너 — 이 답을 그대로 믿어도 될까?</h2>
+  <p class="lead">계산은 AI와 프로그램이 1초 만에 해 줍니다. 우리에게 남는 일은 <b>그 답이 맞는지 확인하는 것</b>입니다. 아래는 생성형 AI에게 이 페이지의 실험을 물었을 때 나올 법한 답(설명용으로 꾸민 예시)입니다. 이 페이지에서 배운 것으로 하나씩 따져 보세요.</p>
+  <div class="aibox"><div class="aihead"><span class="aitag">AI 답변 (예시)</span>"(y, x, 0) 바람은 화살표가 휘어 도는 것처럼 보이니 바람개비가 돕니다. 샘 바람 (x, y, z)의 발산은 x쪽만 보면 1이고, 원통 좌표에서는 각도 쪽 기울기를 그대로 써서 화살표를 만들면 됩니다."</div><ol><li>(y, x, 0) 바람에서는 바람개비가 돈다.</li><li>샘 바람 (x, y, z)의 발산은 1이다.</li><li>원통 좌표에서는 각도 쪽 기울기를 그대로 쓰면 된다.</li></ol></div>
+  <div class="aiq"><b>먼저 스스로 판단해 보기</b> 세 문장 각각 "맞다 / 틀리다 / 조건이 붙는다" 중 무엇일까요? 위 실험을 다시 눌러 확인해도 좋습니다.</div>
+  <details class="fold aians"><summary>확인해 보기 — 박사의 판정</summary><ol><li><b>틀리다.</b> 네 날개를 보면 오른쪽 날개는 시계 반대로, 위 날개는 시계 방향으로 밀려 서로 상쇄됩니다. 이 밭은 숫자 밭 xy의 그래디언트라 회전이 늘 0입니다(④, 대결에서 주판봇이 틀리는 바로 그 경우).</li><li><b>틀리다.</b> 발산은 세 방향을 모두 더합니다. x·y·z쪽이 각각 1씩 퍼지니 1 + 1 + 1 = <b>3</b>입니다(③ 상자 셈: 0.024 ÷ 0.008 = 3).</li><li><b>틀리다.</b> 각도로 같은 만큼 돌아도 중심에서 멀수록 더 많이 걷습니다. 각도 쪽 기울기는 실제로 걸은 거리(반지름 × 각도)로 <b>나눠야</b> 합니다. 중심에서 2 m와 0.5 m에서는 같은 "각도당 0.4도"가 1 m당 2도와 8도로 4배 차이 납니다(⑥).</li></ol><p class="aiverdict"><b>정리</b> 겉모양으로 내린 판단(돈다/안 돈다)은 계산으로, 한 방향만 본 계산은 세 방향 모두로, 각도로 잰 값은 실제 거리로 바꿔 다시 확인하세요.</p></details>
+  <p class="muted" style="font-size:13px">AI 답변은 실제 서비스의 응답을 옮긴 것이 아니라, 흔히 나오는 틀린 추론을 모아 만든 설명용 예시입니다.</p>
+</div></section>
+
 <section class="sec" id="sum" aria-labelledby="h-sum"><div class="wrap">
   <h2 id="h-sum">정리 — ∇ 하나, 연산 넷</h2>
   <div class="tblwrap"><table class="cmp"><thead><tr><th>단계</th><th>이름과 식</th><th>들어가는 것 → 나오는 것</th><th>생활 장면</th><th>이 단계의 한계</th></tr></thead><tbody>
