@@ -314,17 +314,51 @@ details.eqx[open] summary{margin-bottom:6px}
 .chap{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;margin:18px 0}
 .chap a{display:block;background:var(--panel);border:1px solid var(--rule);border-radius:14px;overflow:hidden;text-decoration:none;color:var(--text)}
 .chap a:hover{border-color:var(--terrain)}
-.chap canvas{display:block;width:100%;height:220px;background:#151726}
+.chap .thumb{display:block;aspect-ratio:16/9;overflow:hidden;background:#f3f1f7;border-bottom:1px solid var(--rule)}
+.chap .thumb img{display:block;width:100%;height:100%;object-fit:cover;image-rendering:pixelated;transition:transform .35s}
+.chap a:hover .thumb img{transform:scale(1.04)}
+.chap .thumb.crop-b img{transform:scale(1.3);transform-origin:50% 100%}
+.chap a:hover .thumb.crop-b img{transform:scale(1.34)}
+.hg-mini{display:inline-flex;align-items:center;gap:4px;padding:0 7px 0 2px;border:1.5px solid #b3261e;border-radius:6px;background:#fff1ef;color:#b3261e;font-size:12.5px;font-weight:700;vertical-align:1px}
+.hg-mini img{width:20px;height:20px;border-radius:4px;display:block}
 .chap .t{padding:12px 16px 16px}
 .chap .t b{display:block;font-size:19px;margin-bottom:4px}
 .chap .t span{color:var(--muted);font-size:14.5px}
 .chap ol{margin:8px 0 0;padding-left:20px;color:var(--muted);font-size:14.5px}
 @media(max-width:760px){.chap{grid-template-columns:1fr}}
+/* 3D 지도 전시실 */
+.gal{border:1px solid var(--rule);border-radius:14px;background:var(--panel);padding:14px;margin:16px 0}
+.gal-tabs{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-bottom:12px}
+.gal-tabs button{font:inherit;display:flex;align-items:center;gap:8px;text-align:left;background:#fff;border:1px solid var(--rule);border-radius:10px;padding:5px 8px 5px 5px;cursor:pointer;color:var(--text);line-height:1.25;font-size:12.5px}
+.gal-tabs button img{width:28px;height:28px;border-radius:5px;flex:none}
+.gal-tabs button b{display:block;font-size:13.5px}
+.gal-tabs button span{color:var(--muted)}.gal-tabs button b{color:var(--text)}
+.gal-tabs button:hover{border-color:var(--terrain)}
+.gal-tabs button[aria-selected="true"]{border-color:var(--terrain);box-shadow:inset 0 0 0 1px var(--terrain);background:#eef8f8}
+.gal-body{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:16px;align-items:start}
+.gal-cv canvas{display:block;width:100%;height:440px;background:#fff;border:1px solid var(--rule);border-radius:10px;touch-action:pan-y;cursor:grab}
+.gal-cv canvas[hidden]{display:none}
+.gal-cv canvas:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+.gal-ctrl{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:8px}
+.gal-ctrl .bt{font-size:13px;padding:3px 10px}
+.gal-sep{width:1px;height:20px;background:var(--rule);margin:0 4px}
+.gal-tip{font-size:12.5px;color:var(--muted);margin:6px 0 0}
+.gal-info{background:#fff;border:1px solid var(--rule);border-radius:10px;padding:14px 16px}
+.gal-info h3{margin:6px 0 6px;font-size:19px;line-height:1.4}
+.gal-info p{margin:0 0 10px;font-size:14.5px}
+.gal-tag{display:inline-block;font-size:12px;font-weight:700;color:var(--terrain);background:#eef8f8;border-radius:6px;padding:1px 8px}
+.gal-sub{display:block;font-size:13.5px;color:var(--gfp);margin-bottom:2px}
+.gal-info ol{margin:0 0 10px;padding-left:20px;font-size:14.5px;display:flex;flex-direction:column;gap:6px}
+.gal-now{min-height:1.6em;font-size:13.5px;color:var(--amber);font-weight:700}
+.gal-go{display:inline-block;text-decoration:none}
+@media(max-width:900px){.gal-tabs{grid-template-columns:repeat(3,1fr)}.gal-body{grid-template-columns:1fr}.gal-cv canvas{height:340px}}
+@media(max-width:520px){.gal-tabs{grid-template-columns:repeat(2,1fr)}.gal-cv canvas{height:300px}}
+
 .chap a{position:relative}
-.diff{position:absolute;left:10px;top:10px;display:flex;align-items:center;gap:8px;background:rgba(21,23,38,.88);border:2px solid #c9a227;border-radius:8px;padding:3px 10px 3px 3px;color:#fff;font-size:12.5px;line-height:1.25;z-index:2}
-.diff img{width:44px;height:44px;border-radius:5px;display:block;image-rendering:auto;background:#d9d9d9}
-.diff b{display:block;font-size:13.5px;letter-spacing:.02em}
-.diff .pip{letter-spacing:2px;color:#f1c40f}
+.diff{position:absolute;left:8px;top:8px;display:flex;align-items:center;gap:7px;background:rgba(255,255,255,.93);border:2px solid #c9a227;border-radius:8px;padding:2px 9px 2px 2px;color:var(--text);font-size:12px;line-height:1.2;z-index:2;box-shadow:0 1px 4px rgba(22,33,43,.18)}
+.diff img{width:34px;height:34px;border-radius:5px;display:block;image-rendering:auto;background:#d9d9d9}
+.diff b{display:block;font-size:12.5px;letter-spacing:.02em}
+.diff .pip{letter-spacing:2px;color:#c99a00}
 .diffkey{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0 4px}
 .diffkey div{display:flex;align-items:center;gap:10px;background:var(--panel);border:1px solid var(--rule);border-radius:10px;padding:6px 10px 6px 6px;font-size:13.5px}
 .diffkey img{width:52px;height:52px;border-radius:6px;border:2px solid #c9a227}
@@ -344,7 +378,7 @@ details.eqx[open] summary{margin-bottom:6px}
 <body>
 <nav class="top" aria-label="바로가기"><div class="row">
   <a class="logo" href="index.html">좌표축 위의 <i>그릇</i></a>
-  <div class="links"><a href="#firststep">첫걸음</a><a href="#chapters">목차</a><a href="1_math_map.html">1편 수학</a><a href="2_experiment_lab.html">2편 실험실</a><a href="3_arrow_field.html">3편 화살표 밭</a><a href="#kg">색인</a><a href="#export">꾸러미</a></div>
+  <div class="links"><a href="#firststep">첫걸음</a><a href="#gallery">3D 전시실</a><a href="#chapters">목차</a><a href="1_math_map.html">1편 수학</a><a href="2_experiment_lab.html">2편 실험실</a><a href="3_arrow_field.html">3편 화살표 밭</a><a href="#kg">색인</a><a href="#export">꾸러미</a></div>
 </div></nav>
 
 <!-- lab-cover -->
@@ -376,26 +410,68 @@ details.eqx[open] summary{margin-bottom:6px}
     <div><img src="img/diff_haru_3.webp" alt="식은땀 흘리는 하루"><span><b>3 · 등산</b>그래디언트를 알면 OK</span></div>
     <div><img src="img/diff_haru_4.webp" alt="깜짝 놀란 하루"><span><b>4 · 암벽</b>편미분·벡터가 익숙하면 OK</span></div>
   </div>
-  <p class="muted" style="font-size:13px;margin:0 0 6px">카드 왼쪽 위의 하루 얼굴이 난이도입니다. 단계가 오를수록 하루의 표정이 굳어 갑니다. 그 위에 하나 더 — <span class="hellgate" style="font-size:13px"><img src="img/diff_haru_5.webp" alt="눈물 흘리는 하루" width="34" height="34">헬게이트</span> 3편 ⑥장(원통·구면 좌표의 ∇)은 시리즈에서 가장 어려운 심화 장입니다.</p>
+  <p class="muted" style="font-size:13px;margin:0 0 6px">카드 왼쪽 위의 하루 얼굴이 난이도입니다. 카드 속 3D 지도는 아래 <a href="#gallery">3D 지도 전시실</a>에서 크게 돌려 볼 수 있습니다. 단계가 오를수록 하루의 표정이 굳어 갑니다. 그 위에 하나 더 — <span class="hellgate" style="font-size:13px"><img src="img/diff_haru_5.webp" alt="눈물 흘리는 하루" width="34" height="34">헬게이트</span> 3편 ⑥장(원통·구면 좌표의 ∇)은 시리즈에서 가장 어려운 심화 장입니다.</p>
   <div class="chap">
-    <a href="first_step_0.html"><span class="diff" aria-label="난이도 1단계 산책"><img src="img/diff_haru_1.webp" alt="" width="44" height="44" loading="lazy"><span><b>산책</b><span class="pip">●○○○</span></span></span><canvas id="cvF0" aria-label="첫걸음 ⓪ 미리보기: 가중치 w와 편향 b 위의 훈련 오차 3D 지도와 한 걸음씩 내려가는 학습 경로"></canvas><div class="t"><b>최적화 첫걸음 ⓪ · 인공지능 모델에서의 최적화</b><span>모델은 한 번에 만들어지지 않는다 · 도입 · 미분 없이</span>
+    <a href="first_step_0.html"><span class="diff" aria-label="난이도 1단계 산책"><img src="img/diff_haru_1.webp" alt="" width="44" height="44" loading="lazy"><span><b>산책</b><span class="pip">●○○○</span></span></span><span class="thumb"><img src="img/fs_cover_00_960.webp" alt="연구실 탁자 위 오차 지형에서 발자국이 바닥까지 이어지고, 연구실 식구들이 함께 살펴보는 장면" width="960" height="540" loading="lazy" decoding="async"></span><div class="t"><b>최적화 첫걸음 ⓪ · 인공지능 모델에서의 최적화</b><span>모델은 한 번에 만들어지지 않는다 · 도입 · 미분 없이</span>
       <ol><li>큰 그림 — 신경망과 뉴런 하나</li><li>반복 학습 대시보드 — 한 걸음씩 고치기</li><li>여러 측면 성적표 — 훈련 점수만 믿으면 안 되는 이유</li><li>다시 정비하기(피봇팅) — 데이터가 바뀌었을 때</li></ol></div></a>
-    <a href="first_step_1.html"><span class="diff" aria-label="난이도 1단계 산책"><img src="img/diff_haru_1.webp" alt="" width="44" height="44" loading="lazy"><span><b>산책</b><span class="pip">●○○○</span></span></span><canvas id="cvF1" aria-label="첫걸음 ① 미리보기: 언덕 모양 3D 곡면 위의 접선과 기울기 0인 꼭대기"></canvas><div class="t"><b>최적화 첫걸음 ① · 혹시… 미분 좋아하세요?</b><span>왜, 언제부터, 어디에 · 하루·시아·모아의 세 질문 · 입문</span>
+    <a href="first_step_1.html"><span class="diff" aria-label="난이도 1단계 산책"><img src="img/diff_haru_1.webp" alt="" width="44" height="44" loading="lazy"><span><b>산책</b><span class="pip">●○○○</span></span></span><span class="thumb crop-b"><img src="img/fs_cover_01_960.webp" alt="칠판의 언덕 곡선 앞에서 조수 하루가 수줍게 묻고, 인턴 시아와 모아가 양옆에서 함께 서 있는 장면" width="960" height="540" loading="lazy" decoding="async"></span><div class="t"><b>최적화 첫걸음 ① · 혹시… 미분 좋아하세요?</b><span>왜, 언제부터, 어디에 · 하루·시아·모아의 세 질문 · 입문</span>
       <ol><li>준비운동: 그래프와 기울기 1분 복습</li><li>미분은 왜 쓰나 — 순간의 변화, 한계, 기울기 0, 편미분·전미분</li><li>미분의 역사 — 뉴턴·라이프니츠, 극한, 한계혁명</li><li>경제학의 최적화 — MR = MC, 조업중단점</li><li>대결: 많이 구울수록 이익일까?</li></ol></div></a>
-    <a href="first_step_2.html"><span class="diff" aria-label="난이도 2단계 오르막"><img src="img/diff_haru_2.webp" alt="" width="44" height="44" loading="lazy"><span><b>오르막</b><span class="pip">●●○○</span></span></span><canvas id="cvF2" aria-label="첫걸음 ② 미리보기: 노동과 자본에 따른 생산량 3D 곡면, 기계 4대일 때 가장 좋은 고용 16명"></canvas><div class="t"><b>최적화 첫걸음 ② · 공장에서 인공지능까지</b><span>얼마만큼 생산하면 될까요? · 입문</span>
+    <a href="first_step_2.html"><span class="diff" aria-label="난이도 2단계 오르막"><img src="img/diff_haru_2.webp" alt="" width="44" height="44" loading="lazy"><span><b>오르막</b><span class="pip">●●○○</span></span></span><span class="thumb"><img src="img/fs_cover_02_960.webp" alt="실험대 위 작은 공장 모형 앞에서 박사·모아·초파리 연구원·주판봇이 빛나는 점을 살펴보는 장면" width="960" height="540" loading="lazy" decoding="async"></span><div class="t"><b>최적화 첫걸음 ② · 공장에서 인공지능까지</b><span>얼마만큼 생산하면 될까요? · 입문</span>
       <ol><li>공장 하나 — 사람 한 명 더, 라그랑지안과 λ = 한계비용</li><li>오일러 정리, 미분방정식</li><li>경사하강, 연쇄법칙과 역전파</li><li>특성공학: 비선형성 vs 상호작용, 규제항</li><li>대결: 제곱항만 넣으면 다 될까?</li></ol></div></a>
+  </div>
+</div></section>
+
+<section class="sec" id="gallery" aria-labelledby="h-gal"><div class="wrap">
+  <h2 id="h-gal">3D 지도 전시실 — 카드 속 지도를 크게 보기</h2>
+  <p class="lead">각 편이 다루는 3D 지도를 한 화면에 모았습니다. 위에서 지도를 고르고, 그림을 끌어 돌려 보고, <b>▶ 한 걸음씩 보기</b>를 눌러 점이 움직이는 모습을 지켜보세요.</p>
+  <div class="gal">
+    <div class="gal-tabs" role="tablist" aria-label="전시할 지도 고르기">
+      <button type="button" role="tab" data-k="0" aria-selected="true"><img src="img/diff_haru_1.webp" alt="" width="28" height="28"><span><b>첫걸음 ⓪</b>훈련 오차 지도</span></button>
+      <button type="button" role="tab" data-k="1" aria-selected="false"><img src="img/diff_haru_1.webp" alt="" width="28" height="28"><span><b>첫걸음 ①</b>언덕과 기울기 0</span></button>
+      <button type="button" role="tab" data-k="2" aria-selected="false"><img src="img/diff_haru_2.webp" alt="" width="28" height="28"><span><b>첫걸음 ②</b>공장의 생산량</span></button>
+      <button type="button" role="tab" data-k="3" aria-selected="false"><img src="img/diff_haru_2.webp" alt="" width="28" height="28"><span><b>1편</b>그릇 모양 오차</span></button>
+      <button type="button" role="tab" data-k="4" aria-selected="false"><img src="img/diff_haru_3.webp" alt="" width="28" height="28"><span><b>2편</b>신경망 지형 단면</span></button>
+      <button type="button" role="tab" data-k="5" aria-selected="false"><img src="img/diff_haru_4.webp" alt="" width="28" height="28"><span><b>3편</b>소용돌이 화살표 밭</span></button>
+    </div>
+    <div class="gal-body">
+      <div class="gal-stage">
+        <div class="gal-cv">
+          <canvas id="gv0"></canvas><canvas id="gv1" hidden></canvas><canvas id="gv2" hidden></canvas><canvas id="gv3" hidden></canvas><canvas id="gv4" hidden></canvas><canvas id="gv5" hidden></canvas>
+        </div>
+        <div class="gal-ctrl" role="group" aria-label="전시실 조작">
+          <button type="button" class="bt primary" id="gPlay">▶ 한 걸음씩 보기</button>
+          <button type="button" class="bt" id="gReset">처음으로</button>
+          <span class="gal-sep"></span>
+          <button type="button" class="bt" data-v="slant">비스듬히</button>
+          <button type="button" class="bt" data-v="top">하늘에서</button>
+          <button type="button" class="bt" data-v="low">낮게</button>
+          <button type="button" class="bt" data-v="L" aria-label="왼쪽으로 돌리기">↺</button>
+          <button type="button" class="bt" data-v="R" aria-label="오른쪽으로 돌리기">↻</button>
+        </div>
+        <p class="gal-tip">그림을 끌면 돌아갑니다. 그림을 누른 뒤 화살표 키로도 돌릴 수 있어요.</p>
+      </div>
+      <aside class="gal-info" aria-live="polite">
+        <span class="gal-tag" id="gTag"></span>
+        <h3 id="gTitle"></h3>
+        <p id="gLead"></p>
+        <b class="gal-sub">이 지도에서 볼 것</b>
+        <ol id="gList"></ol>
+        <p class="gal-now" id="gNow"></p>
+        <a class="bt primary gal-go" id="gGo" href="#">이 편 읽으러 가기 →</a>
+      </aside>
+    </div>
   </div>
 </div></section>
 
 <section class="sec" id="chapters" aria-labelledby="h-ch"><div class="wrap">
   <h2 id="h-ch">목차</h2>
   <div class="chap">
-    <a href="1_math_map.html"><span class="diff" aria-label="난이도 2단계 오르막"><img src="img/diff_haru_2.webp" alt="" width="44" height="44" loading="lazy"><span><b>오르막</b><span class="pip">●●○○</span></span></span><canvas id="cv1" aria-label="1편 미리보기: 그릇 모양 오차 지도"></canvas><div class="t"><b>1편 · 수학 편</b><span>기울기·굽음·휨으로 읽는 3D 오차 지도</span>
+    <a href="1_math_map.html"><span class="diff" aria-label="난이도 2단계 오르막"><img src="img/diff_haru_2.webp" alt="" width="44" height="44" loading="lazy"><span><b>오르막</b><span class="pip">●●○○</span></span></span><span class="thumb"><img src="img/cover_01_960.webp" alt="탁자 위 물결 모양 지형 모형에 꽂힌 깃대를 연구실 식구 넷이 살펴보는 장면" width="960" height="540" loading="lazy" decoding="async"></span><div class="t"><b>1편 · 수학 편</b><span>기울기·굽음·휨으로 읽는 3D 오차 지도</span>
       <ol><li>칼로 자르기 — 단면과 한 걸음</li><li>깃대와 그림자 — 그래디언트와 법선</li><li>땅의 굽음 — 헤시안과 보폭 한계</li><li>감자칩 고개 — 안장점</li><li>휘는 지도 — 야코비안과 역전파</li><li>울타리를 따라 걷기 — 라그랑주 승수</li><li>대결: 기울기 0이면 바닥인가?</li></ol></div></a>
-    <a href="2_experiment_lab.html"><span class="diff" aria-label="난이도 3단계 등산"><img src="img/diff_haru_3.webp" alt="" width="44" height="44" loading="lazy"><span><b>등산</b><span class="pip">●●●○</span></span></span><canvas id="cv2" aria-label="2편 미리보기: 신경망 오차 지형의 단면"></canvas><div class="t"><b>2편 · 실험실 편</b><span>배치·학습률·에포크를 지도 위에서 고르기</span>
+    <a href="2_experiment_lab.html"><span class="diff" aria-label="난이도 3단계 등산"><img src="img/diff_haru_3.webp" alt="" width="44" height="44" loading="lazy"><span><b>등산</b><span class="pip">●●●○</span></span></span><span class="thumb"><img src="img/cover_02_960.webp" alt="실험대 위 그릇 모형에 공 세 개가 굴러 내려가고 연구실 식구들이 결과를 기다리는 장면" width="960" height="540" loading="lazy" decoding="async"></span><div class="t"><b>2편 · 실험실 편</b><span>배치·학습률·에포크를 지도 위에서 고르기</span>
       <ol><li>같은 그릇, 공 세 개 — 배치 크기</li><li>보폭의 한계 — 학습률</li><li>축이 4,416개일 때 — 단면</li><li>언제 멈출까 — 에포크와 과적합</li><li>대결: 작은 배치냐, 풀배치냐</li></ol></div></a>
-    <a href="3_arrow_field.html"><span class="diff" style="top:62px;border-color:#b3261e" aria-label="심화 장 헬게이트"><img src="img/diff_haru_5.webp" alt="" width="44" height="44" loading="lazy"><span><b>헬게이트</b><span class="pip" style="color:#ff8a80">⑥장 심화</span></span></span><span class="diff" aria-label="난이도 4단계 암벽"><img src="img/diff_haru_4.webp" alt="" width="44" height="44" loading="lazy"><span><b>암벽</b><span class="pip">●●●●</span></span></span><canvas id="cv3" aria-label="3편 미리보기: x·y·z 상자 안의 소용돌이 화살표 밭"></canvas><div class="t"><b>3편 · 화살표 밭 편</b><span>x·y·z 세 축 공간에서 읽는 ∇(나블라)</span>
-      <ol><li>한 방향씩 재 보기 — 편미분</li><li>가장 가파른 오르막 — 그래디언트</li><li>퍼지는가, 모이는가 — 발산</li><li>바람개비가 도는가 — 회전</li><li>이웃보다 움푹한가 — 라플라시안</li><li>헬게이트: 자가 휘는 좌표 — 원통·구면에서의 ∇</li><li>대결: 겉모양으로 알 수 있나?</li></ol></div></a>
+    <a href="3_arrow_field.html"><span class="diff" aria-label="난이도 4단계 암벽"><img src="img/diff_haru_4.webp" alt="" width="44" height="44" loading="lazy"><span><b>암벽</b><span class="pip">●●●●</span></span></span><span class="thumb"><img src="img/cover_03_960.webp" onerror="this.onerror=null;this.src='img/cover_index_960.webp'" alt="3편 화살표 밭 편 표지 — 연구실 식구들이 공간에 떠 있는 화살표 밭을 살펴보는 장면" width="960" height="540" loading="lazy" decoding="async"></span><div class="t"><b>3편 · 화살표 밭 편</b><span>x·y·z 세 축 공간에서 읽는 ∇(나블라)</span>
+      <ol><li>한 방향씩 재 보기 — 편미분</li><li>가장 가파른 오르막 — 그래디언트</li><li>퍼지는가, 모이는가 — 발산</li><li>바람개비가 도는가 — 회전</li><li>이웃보다 움푹한가 — 라플라시안</li><li><span class="hg-mini"><img src="img/diff_haru_5.webp" alt="" width="22" height="22">헬게이트</span> 자가 휘는 좌표 — 원통·구면에서의 ∇</li><li>대결: 겉모양으로 알 수 있나?</li></ol></div></a>
   </div>
   <div class="steps">
     <div class="step"><b>이런 분께</b>경사하강법은 들어 봤지만 그래디언트·헤시안·야코비안이 지도에서 무엇인지 그림으로 보고 싶은 분.</div>
@@ -640,9 +716,9 @@ function Study(o){Q=o.quiz||{};nQ=0;Object.keys(Q).forEach(function(k){nQ+=Q[k].
   function upd(){var h=document.documentElement,p=h.scrollTop/Math.max(1,h.scrollHeight-h.clientHeight);pr.style.width=(p*100).toFixed(1)+'%';$('#st-t').textContent='읽은 곳 '+Math.round(p*100)+'% · 퀴즈 '+Object.keys(got).length+'/'+nQ;}
   window.addEventListener('scroll',upd,{passive:true});upd();}
 
-/* ── 색: 낮은 곳 남청 → 청록 → 연두 → 노랑 → 빨강 ── */
-var STOPS=[[0,[29,59,107]],[.25,[47,143,166]],[.45,[79,195,201]],[.65,[155,226,176]],[.82,[241,182,70]],[1,[240,96,77]]];
-function cmap(t,a){t=clamp(t,0,1);for(var i=1;i<STOPS.length;i++){if(t<=STOPS[i][0]){var s0=STOPS[i-1],s1=STOPS[i],u=(t-s0[0])/(s1[0]-s0[0]);var c=s0[1].map(function(v,j){return Math.round(v+(s1[1][j]-v)*u);});return 'rgba('+c[0]+','+c[1]+','+c[2]+','+(a==null?1:a)+')';}}return 'rgb(240,96,77)';}
+/* ── 색: 낮은 곳 청남 → 청록 → 연두 → 노랑 (목차 페이지는 빨강 없이 부드럽게) ── */
+var STOPS=[[0,[44,98,140]],[.28,[47,143,166]],[.52,[94,196,190]],[.76,[176,226,168]],[1,[246,206,104]]];
+function cmap(t,a){t=clamp(t,0,1);for(var i=1;i<STOPS.length;i++){if(t<=STOPS[i][0]){var s0=STOPS[i-1],s1=STOPS[i],u=(t-s0[0])/(s1[0]-s0[0]);var c=s0[1].map(function(v,j){return Math.round(v+(s1[1][j]-v)*u);});return 'rgba('+c[0]+','+c[1]+','+c[2]+','+(a==null?1:a)+')';}}return 'rgb(246,206,104)';}
 
 /* ── 3D 지형 (Canvas 2D, 외부 라이브러리 없음) ──
    좌표: 가로축 x(=w₁), 세로축 y(=w₂), 높이 z(=오차). 화면은 끌어서 돌린다. */
@@ -773,23 +849,97 @@ U.dialogues({hero:[["doc","doc_front","오늘의 지도는 땅이 아니라 오�
 U.fillImgs();
 var D=LM.makeLine(39,1000),O=LM.ols(D);
 (function(){var cv=$('#coverCv');if(!cv)return;U.reg(cv,function(){var R=U.setup(cv),g=R.g,w=R.w,h=R.h;for(var k=16;k>0;k--){g.beginPath();g.ellipse(w*.5,h*.38,w*.045*k,h*.02*k,-.3,0,7);g.strokeStyle=U.cmap(k/16,.32);g.lineWidth=2;g.stroke();}g.beginPath();g.arc(w*.5,h*.38,6,0,7);g.fillStyle=U.cssv('--gfp');g.fill();});})();
-/* 첫걸음 미리보기 (1~3편과 같은 3D 지도) */
-(function(){var sig=function(z){return 1/(1+Math.exp(-z));},TR=[[-2.0,0],[-1.6,0],[-1.3,0],[-1.0,0],[-0.7,0],[-0.4,0],[-0.1,0],[0.2,0],[0.7,1],[1.0,1],[1.3,1],[1.6,1],[1.9,1],[2.2,1]];
-  var loss=function(w,b){var s=0;TR.forEach(function(d){var q=Math.min(Math.max(sig(w*d[0]+b),1e-9),1-1e-9);s-=d[1]*Math.log(q)+(1-d[1])*Math.log(1-q);});return Math.min(s/TR.length,2.6);};
-  var path=[],w=-1.5,b=2.0;for(var t=0;t<=300;t++){if(t%4===0||t<12)path.push([w,b,loss(w,b)+0.03]);var gw=0,gb=0;TR.forEach(function(d){var e=sig(w*d[0]+b)-d[1];gw+=e*d[0];gb+=e;});w-=gw/TR.length;b-=gb/TR.length;}
-  var S=new U.Surf3D($('#cvF0'),{f:loss,xr:[-2,7],yr:[-4,3],zr:[0,2.6],n:22,axes:['w','b','훈련 오차'],contours:false,views:false,yaw:-0.6,pitch:0.55,zoom:0.85,stamp:'설명용 예시'});
-  S.ov.push(function(g,S){S.line3(g,path,'#f1b646',2.6);S.dot3(g,path[0][0],path[0][1],path[0][2],'#e8607a',5);var e=path[path.length-1],q=S.dot3(g,e[0],e[1],e[2],'#9be2b0',6);U.label(g,q[0]+10,q[1]-10,'300걸음',U.cssv('--gfp'));});})();
-(function(){var hill=function(x,y){return Math.exp(-(x*x+y*y)/1.6);};
-  var S=new U.Surf3D($('#cvF1'),{f:hill,xr:[-2.2,2.2],yr:[-2.2,2.2],n:22,axes:['x₁','x₂','y'],contours:false,views:false,yaw:-0.45,pitch:0.5,zoom:0.95,stamp:'설명용 모형'});
-  S.ov.push(function(g,S){var x0=1.0,d=-2*x0/1.6*hill(x0,0),ln=[];for(var i=0;i<=40;i++){var x=-2.2+4.4*i/40;ln.push([x,0,hill(x,0)+0.01]);}S.line3(g,ln,'rgba(255,255,255,.85)',2);
-    S.line3(g,[[x0-0.9,0,hill(x0,0)-0.9*d],[x0+0.7,0,hill(x0,0)+0.7*d]],'#4fc3c9',2.6);S.line3(g,[[-0.9,0,1.0],[0.9,0,1.0]],'#9be2b0',2.8);
-    S.dot3(g,x0,0,hill(x0,0),'#f1b646',5);var q=S.dot3(g,0,0,1,'#9be2b0',6);U.label(g,q[0]+12,q[1]-12,'기울기 0',U.cssv('--gfp'));});})();
-(function(){var Qf=function(L,K){return 2*Math.sqrt(L*K);};
-  var S=new U.Surf3D($('#cvF2'),{f:Qf,xr:[0,24],yr:[0,8],n:22,axes:['노동 L','자본 K','생산량 Q'],contours:false,views:false,yaw:-0.7,pitch:0.55,zoom:0.85,stamp:'설명용 모형'});
-  S.ov.push(function(g,S){var ln=[];for(var i=0;i<=40;i++){var L=24*i/40;ln.push([L,4,Qf(L,4)+0.1]);}S.line3(g,ln,'#f1b646',2.8);var q=S.dot3(g,16,4,Qf(16,4)+0.1,'#9be2b0',6);U.label(g,q[0]+10,q[1]+18,'L = 16명',U.cssv('--gfp'));});})();
-new U.Surf3D($('#cv1'),{f:function(w,b){return LM.loss(D,w,b);},xr:[-1.5,5.5],yr:[-2.5,4.5],n:20,axes:['w','b','오차'],contours:false,views:false,yaw:-0.9,pitch:0.55,zoom:0.85,stamp:'설명용 모형'});
-var SL=DEEP.slice2d,n=SL.n;new U.Surf3D($('#cv2'),{f:function(a,b){var i=Math.round((a+1)/2*(n-1)),j=Math.round((b+1)/2*(n-1));return SL.z[j][i];},xr:[-1,1],yr:[-1,1],n:30,axes:['방향 1','방향 2','검증 오차'],contours:false,views:false,yaw:-0.6,pitch:0.55,zoom:0.85,stamp:'단면 · 설명용 모형'});
-new U.Space3D($('#cv3'),{L:2,views:false,ticks:false,dark:true,floor:false,zoom:0.95,yaw:-0.5,pitch:0.4,stamp:'설명용 모형'}).ov.push(function(g,S){S.field(g,VM.VF.swirl.F,{n:4,scale:0.32,color:function(m,a){return 'rgba(120,220,225,'+a.toFixed(2)+')';}});});
+/* ── 3D 지도 전시실: 카드에 있던 지도 여섯 장을 크게, 흰 바탕에서 ── */
+(function(){
+  var clamp=U.clamp,GOLD='#e0a526',START='#e8607a',END='#2e9e5b',TEAL='#0f7f86';
+  /* 공통: 정해진 보폭으로 기울기 반대쪽으로 걷기 (막히면 보폭을 반으로) */
+  function walk(f,x,y,xr,yr,steps){var hx=(xr[1]-xr[0])*0.03,hy=(yr[1]-yr[0])*0.03,P=[[x,y,f(x,y)]],ex=(xr[1]-xr[0])*1e-3,ey=(yr[1]-yr[0])*1e-3;
+    for(var t=0;t<(steps||400)&&hx>(xr[1]-xr[0])*2e-4;t++){var z=f(x,y),gx=(f(x+ex,y)-f(x-ex,y))/(2*ex)*(xr[1]-xr[0]),gy=(f(x,y+ey)-f(x,y-ey))/(2*ey)*(yr[1]-yr[0]),m=Math.hypot(gx,gy);if(m<1e-12)break;
+      var nx=clamp(x-hx*gx/m,xr[0],xr[1]),ny=clamp(y-hy*gy/m,yr[0],yr[1]);if(f(nx,ny)<z){x=nx;y=ny;P.push([x,y,f(x,y)]);}else{hx/=2;hy/=2;}}
+    return P;}
+  function at(P,p){var k=Math.min(P.length-1,Math.floor(clamp(p,0,1)*(P.length-1)));return {k:k,pt:P[k],sub:P.slice(0,k+1)};}
+  function lab(g,q,t,dx,dy){U.label(g,q[0]+(dx||10),q[1]+(dy||-12),t,U.cssv('--gfp'));}
+
+  /* ⓪ 로지스틱 훈련 오차 */
+  var sig=function(z){return 1/(1+Math.exp(-z));},TR=[[-2.0,0],[-1.6,0],[-1.3,0],[-1.0,0],[-0.7,0],[-0.4,0],[-0.1,0],[0.2,0],[0.7,1],[1.0,1],[1.3,1],[1.6,1],[1.9,1],[2.2,1]];
+  var loss0=function(w,b){var s=0;TR.forEach(function(d){var q=Math.min(Math.max(sig(w*d[0]+b),1e-9),1-1e-9);s-=d[1]*Math.log(q)+(1-d[1])*Math.log(1-q);});return Math.min(s/TR.length,2.6);};
+  var path0=[],w=-1.5,b=2.0;for(var t=0;t<=300;t++){if(t%3===0||t<12)path0.push([w,b,loss0(w,b)+0.03]);var gw=0,gb=0;TR.forEach(function(d){var e=sig(w*d[0]+b)-d[1];gw+=e*d[0];gb+=e;});w-=gw/TR.length;b-=gb/TR.length;}
+  /* ① 언덕 */
+  var hill=function(x,y){return Math.exp(-(x*x+y*y)/1.6);};
+  /* ② 생산량 */
+  var Qf=function(L,K){return 2*Math.sqrt(L*K);};
+  /* 1편 직선 모델 오차 */
+  var f1=function(w,b){return LM.loss(D,w,b);},XR1=[-1.5,5.5],YR1=[-2.5,4.5];
+  var c1=[[XR1[0],YR1[0]],[XR1[1],YR1[0]],[XR1[0],YR1[1]],[XR1[1],YR1[1]]].map(function(c){return [f1(c[0],c[1]),c];}).sort(function(a,b){return b[0]-a[0];})[0][1];
+  var path1=walk(f1,c1[0]*0.9+0.1*(XR1[0]+XR1[1])/2,c1[1]*0.9+0.1*(YR1[0]+YR1[1])/2,XR1,YR1,500);
+  /* 2편 신경망 단면 (격자 값을 부드럽게 이어 읽기) */
+  var SL=DEEP.slice2d,n=SL.n;
+  var f2=function(a,c){var u=clamp((a+1)/2*(n-1),0,n-1),v=clamp((c+1)/2*(n-1),0,n-1),i=Math.min(n-2,Math.floor(u)),j=Math.min(n-2,Math.floor(v)),s=u-i,r=v-j;
+    return SL.z[j][i]*(1-s)*(1-r)+SL.z[j][i+1]*s*(1-r)+SL.z[j+1][i]*(1-s)*r+SL.z[j+1][i+1]*s*r;};
+  var path2=walk(f2,0.85,0.8,[-1,1],[-1,1],500);
+  /* 3편 소용돌이를 따라 흐르는 공 */
+  var VF=VM.VF.swirl.F,flow=[],px=1.3,py=0,pz=-0.6;for(var t=0;t<=380;t++){flow.push([px,py,pz]);var v=VF(px,py,pz),dt=0.026;px+=v[0]*dt;py+=v[1]*dt;pz+=0.005;}
+
+  var M=[
+   {tag:'최적화 첫걸음 ⓪',href:'first_step_0.html',title:'훈련 오차 지도와 300번의 고침',
+    lead:'모델이 고치는 두 숫자 w(가중치)와 b(편향)를 바닥의 두 축으로, 훈련 오차를 높이로 세운 지도입니다.',
+    list:['바닥의 한 점 = 모델 하나. 점마다 오차가 다릅니다.','노란 길은 모델을 300번 고친 발자국입니다. 한 번에 바닥으로 가지 않습니다.','▶를 누르면 분홍 점(출발)에서 초록 점(도착)까지 한 걸음씩 내려갑니다.'],
+    dur:5,make:function(cv){return new U.Surf3D(cv,{f:loss0,xr:[-2,7],yr:[-4,3],zr:[0,2.6],n:30,axes:['w','b','훈련 오차'],views:false,yaw:-0.6,pitch:0.55,zoom:0.95,stamp:'설명용 예시'});},
+    ov:function(g,S,p){var A=at(path0,p);S.line3(g,path0,'rgba(224,165,38,.28)',2,[4,4]);S.line3(g,A.sub,GOLD,3);S.dot3(g,path0[0][0],path0[0][1],path0[0][2],START,5);var q=S.dot3(g,A.pt[0],A.pt[1],A.pt[2],p>=1?END:GOLD,7);
+      var step=Math.round(p*300);lab(g,q,p>=1?'300걸음 — 거의 바닥':step+'걸음째');return '고친 횟수 '+step+'번 · 훈련 오차 '+A.pt[2].toFixed(2);}},
+   {tag:'최적화 첫걸음 ①',href:'first_step_1.html',title:'언덕 꼭대기에서 기울기는 0',
+    lead:'두 입력 x₁, x₂에 따라 결과 y가 정해지는 언덕입니다. 미분은 "이 자리의 기울기"를 재는 도구입니다.',
+    list:['흰 선은 x₂ = 0으로 자른 단면입니다.','청록 선은 지금 서 있는 자리의 접선, 곧 기울기입니다.','▶를 누르면 꼭대기로 다가갈수록 접선이 눕고, 꼭대기에서 기울기 0이 됩니다.'],
+    dur:4,make:function(cv){return new U.Surf3D(cv,{f:hill,xr:[-2.2,2.2],yr:[-2.2,2.2],n:30,axes:['x₁','x₂','y'],views:false,yaw:-0.45,pitch:0.5,zoom:1.0,stamp:'설명용 모형'});},
+    ov:function(g,S,p){var ln=[];for(var i=0;i<=50;i++){var x=-2.2+4.4*i/50;ln.push([x,0,hill(x,0)+0.01]);}S.line3(g,ln,'rgba(255,255,255,.95)',2.2);
+      var x0=1.8*(1-clamp(p,0,1)),y0=hill(x0,0),d=-2*x0/1.6*y0;S.line3(g,[[x0-0.8,0,y0-0.8*d],[x0+0.8,0,y0+0.8*d]],TEAL,3);var q=S.dot3(g,x0,0,y0,p>=1?END:GOLD,7);
+      lab(g,q,p>=1?'기울기 0 — 꼭대기':'기울기 '+d.toFixed(2));return 'x₁ = '+x0.toFixed(2)+' · 기울기 '+d.toFixed(2);}},
+   {tag:'최적화 첫걸음 ②',href:'first_step_2.html',title:'사람을 한 명씩 늘리면',
+    lead:'노동 L(사람 수)과 자본 K(기계 대수)에 따라 생산량 Q가 정해지는 곡면입니다.',
+    list:['L이나 K가 늘면 Q가 오릅니다.','노란 선은 기계를 4대(K = 4)로 묶어 둔 단면입니다.','▶를 누르면 한 명씩 늘어날 때마다 더해지는 생산량이 점점 줄어드는 것이 보입니다. 16명에서 멈추는 이유는 ②편에서.'],
+    dur:5,make:function(cv){return new U.Surf3D(cv,{f:Qf,xr:[0,24],yr:[0,8],n:30,axes:['노동 L','자본 K','생산량 Q'],views:false,yaw:-0.7,pitch:0.55,zoom:0.95,stamp:'설명용 모형'});},
+    ov:function(g,S,p){var ln=[];for(var i=0;i<=48;i++){var L=24*i/48;ln.push([L,4,Qf(L,4)+0.1]);}S.line3(g,ln,GOLD,3);
+      var L=Math.max(1,Math.round(1+15*clamp(p,0,1))),q=S.dot3(g,L,4,Qf(L,4)+0.1,L>=16?END:GOLD,7),add=Qf(L,4)-Qf(L-1,4);
+      lab(g,q,'L = '+L+'명',10,18);return L+'번째 사람이 더한 생산량 +'+add.toFixed(2)+' (총 '+Qf(L,4).toFixed(1)+')';}},
+   {tag:'1편 · 수학 편',href:'1_math_map.html',title:'그릇 모양 오차 지도',
+    lead:'직선 모델의 기울기 w와 절편 b를 두 축으로, 오차를 높이로 세우면 그릇이 됩니다.',
+    list:['그릇의 바닥이 오차가 가장 작은 (w, b)입니다.','바닥 근처는 완만하고, 가장자리는 가파릅니다. 그 정도가 "굽음"입니다.','▶를 누르면 공이 기울기의 반대 방향으로 한 걸음씩 걸어 바닥에 닿습니다(경사하강).'],
+    dur:4.5,make:function(cv){return new U.Surf3D(cv,{f:f1,xr:XR1,yr:YR1,n:30,axes:['w','b','오차'],views:false,yaw:-0.9,pitch:0.55,zoom:0.95,stamp:'설명용 모형'});},
+    ov:function(g,S,p){var A=at(path1,p);S.line3(g,path1.map(function(e){return [e[0],e[1],e[2]];}),'rgba(224,165,38,.28)',2,[4,4]);S.line3(g,A.sub,GOLD,3);S.dot3(g,path1[0][0],path1[0][1],path1[0][2],START,5);
+      var q=S.dot3(g,A.pt[0],A.pt[1],A.pt[2],p>=1?END:GOLD,7);lab(g,q,p>=1?'그릇의 바닥':(A.k)+'걸음째');return 'w = '+A.pt[0].toFixed(2)+', b = '+A.pt[1].toFixed(2)+' · 오차 '+A.pt[2].toFixed(3);}},
+   {tag:'2편 · 실험실 편',href:'2_experiment_lab.html',title:'신경망 오차 지형의 단면',
+    lead:'실험 신경망의 가중치는 4,416개입니다. 그중 두 방향으로만 잘라 본 검증 오차 단면입니다.',
+    list:['그릇 하나가 아니라 굴곡이 있는 땅입니다.','같은 땅에서도 출발점·보폭(학습률)·배치에 따라 도착하는 곳이 달라집니다.','▶를 누르면 공 하나가 내려가는 길을 보여 줍니다(설명용 걸음).'],
+    dur:4.5,make:function(cv){return new U.Surf3D(cv,{f:f2,xr:[-1,1],yr:[-1,1],n:34,axes:['방향 1','방향 2','검증 오차'],views:false,yaw:-0.6,pitch:0.55,zoom:0.95,stamp:'단면 · 설명용 모형'});},
+    ov:function(g,S,p){var A=at(path2,p);S.line3(g,path2,'rgba(224,165,38,.28)',2,[4,4]);S.line3(g,A.sub,GOLD,3);S.dot3(g,path2[0][0],path2[0][1],path2[0][2],START,5);
+      var q=S.dot3(g,A.pt[0],A.pt[1],A.pt[2],p>=1?END:GOLD,7);lab(g,q,p>=1?'움푹한 곳에 도착':(A.k)+'걸음째');return '검증 오차 '+A.pt[2].toFixed(4);}},
+   {tag:'3편 · 화살표 밭 편',href:'3_arrow_field.html',title:'소용돌이 화살표 밭',
+    lead:'x·y·z 공간의 점마다 화살표가 하나씩 꽂혀 있습니다. 이 화살표 묶음을 벡터장이라고 부릅니다.',
+    list:['이 밭의 화살표는 F = (−y, x, 0) — z축을 중심으로 원을 그립니다.','어디서도 퍼지거나 모이지 않으니 발산은 0, 바람개비는 돌므로 회전이 있습니다.','▶를 누르면 가벼운 공이 화살표를 따라 흘러갑니다.'],
+    dur:6,make:function(cv){return new U.Space3D(cv,{L:2,views:false,ticks:false,floor:true,zoom:1.0,yaw:-0.5,pitch:0.4,stamp:'설명용 모형'});},
+    ov:function(g,S,p){S.field(g,VF,{n:4,scale:0.32,color:function(m,a){return 'rgba(15,127,134,'+a.toFixed(2)+')';}});var A=at(flow,p);if(p>0)S.line3(g,A.sub,GOLD,3);
+      var q=S.dot3(g,A.pt[0],A.pt[1],A.pt[2],GOLD,7);var turns=(A.k*0.026/(2*Math.PI));lab(g,q,turns>=1?turns.toFixed(1)+'바퀴':'공');return '공이 z축을 돈 바퀴 수 '+turns.toFixed(2);}}
+  ];
+
+  var tabs=U.$$('.gal-tabs button'),cur=0,state=M.map(function(){return {p:0,play:false,S:null};});
+  var bPlay=U.$('#gPlay'),bReset=U.$('#gReset');
+  M.forEach(function(m,k){var cv=U.$('#gv'+k),st=state[k];cv.setAttribute('aria-label',m.tag+' 3D 지도: '+m.title);
+    m.make=m.make(cv);st.S=m.make;st.S.o.onTick=function(dt){if(st.play){st.p=Math.min(1,st.p+dt/m.dur);st.S.dirty=true;if(st.p>=1){st.play=false;sync();}}};
+    st.S.ov.push(function(g,S){var t=m.ov(g,S,st.p);if(k===cur)U.$('#gNow').textContent=t;});});
+  function sync(){var st=state[cur];bPlay.textContent=st.play?'❚❚ 멈춤':(st.p>=1?'▶ 다시 보기':'▶ 한 걸음씩 보기');}
+  function show(k){state[cur].play=false;cur=k;tabs.forEach(function(b,i){b.setAttribute('aria-selected',i===k?'true':'false');});
+    M.forEach(function(m,i){U.$('#gv'+i).hidden=i!==k;});var m=M[k];
+    U.$('#gTag').textContent=m.tag;U.$('#gTitle').textContent=m.title;U.$('#gLead').textContent=m.lead;U.$('#gList').innerHTML=m.list.map(function(t){return '<li>'+U.esc(t)+'</li>';}).join('');
+    var go=U.$('#gGo');go.href=m.href;go.textContent=m.tag+' 읽으러 가기 →';state[k].S.draw();state[k].S.dirty=true;sync();}
+  tabs.forEach(function(b,i){b.addEventListener('click',function(){show(i);});
+    b.addEventListener('keydown',function(e){var d=e.key==='ArrowRight'?1:e.key==='ArrowLeft'?-1:0;if(!d)return;e.preventDefault();var j=(cur+d+M.length)%M.length;show(j);tabs[j].focus();});});
+  bPlay.addEventListener('click',function(){var st=state[cur];if(st.play){st.play=false;}else{if(st.p>=1)st.p=0;if(U.reduce){st.p=1;}else st.play=true;}st.S.dirty=true;sync();});
+  bReset.addEventListener('click',function(){var st=state[cur];st.play=false;st.p=0;st.S.dirty=true;sync();});
+  U.$$('.gal-ctrl [data-v]').forEach(function(b){b.addEventListener('click',function(){var S=state[cur].S,v=b.dataset.v,sp=cur===5;
+    if(v==='L')S.yaw-=0.35;else if(v==='R')S.yaw+=0.35;else if(v==='slant'){S.yaw=sp?-0.5:-0.7;S.pitch=sp?0.4:0.55;}else if(v==='top'){S.yaw=0;S.pitch=1.5;}else{S.yaw=-0.9;S.pitch=sp?0.05:0.22;}S.dirty=true;});});
+  show(0);
+})();
+
 U.start();
 })();
 </script>
