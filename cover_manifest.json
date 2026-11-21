@@ -136,6 +136,27 @@
       "received": null
     },
     {
+      "id": "fs_cover_00",
+      "role": "cover",
+      "path": "img/fs_cover_00.webp",
+      "size": [
+        1600,
+        900
+      ],
+      "characters": [
+        "doc",
+        "asst",
+        "fly",
+        "jupanbot"
+      ],
+      "robot": "jupanbot-v2",
+      "prompt_en": "전체: plan/COVER_PROMPTS_optimization_first_step.md (0. fs_cover_00)",
+      "source_of": "Genspark (사용자 제공 OPT zip, 픽셀풍)",
+      "status": "ok",
+      "received": "2026-11-22",
+      "page": "first_step_0.html"
+    },
+    {
       "id": "fs_cover_01",
       "role": "cover",
       "path": "img/fs_cover_01.webp",

@@ -44,7 +44,7 @@ for(const [src,out,n] of pages){
       const at=(id,tag,ins)=>{const i=H.indexOf('id="'+id+'"');if(i<0)throw new Error('extend: no id '+id);const j=H.indexOf(tag,i);if(j<0)throw new Error('extend: no '+tag+' after '+id);H=H.slice(0,j)+ins+'\n  '+H.slice(j);};
       Object.keys(X.ez).forEach(id=>at(id,'<div class="pair">',X.ez[id]));
       X.talk.forEach(id=>at(id,'<div class="panel">','<div class="dialog lvtalk" data-dlg="ext_'+id+'"></div>'));
-      const k=H.lastIndexOf('U.start();');H=H.slice(0,k)+'U.dialogues('+JSON.stringify(X.dlg)+');U.fillImgs();\n'+H.slice(k);}}
+      const k=H.lastIndexOf('U.start();');H=H.slice(0,k)+'U.dialogues('+JSON.stringify(X.dlg)+');U.fillImgs();\nif(window.matchMedia&&matchMedia("(max-width:760px)").matches)U.$$("details.ez-why").forEach(function(d){d.open=false;});\n'+H.slice(k);}}
   const kf=path.join(B,'kg_'+n+'.json');
   if(fs.existsSync(kf))H=attach(H,JSON.parse(fs.readFileSync(kf,'utf8')),JSON.parse(rd('refs_'+n+'.json')),JSON.parse(rd('meta_'+n+'.json')));
   fs.writeFileSync(path.join(R,out),H);console.log(out,(Buffer.byteLength(H)/1024).toFixed(0)+' KB');}

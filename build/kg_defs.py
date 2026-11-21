@@ -537,7 +537,7 @@ g.dump(4)
 used4 = {"leibniz1684nova": [deriv], "archimede_newton_leibniz": [deriv], "wiki_calculus_controversy": [deriv], "het_neoclassicals": [mrev], "bussotti2003genesis": [limit], "lemarechal2012cauchy": [limit], "het_euler": [limit], "hoerl1970ridge": [limit], "rumelhart1986learning": [limit]}
 (B / "refs_4.json").write_text(json.dumps([REFS[k](v) for k, v in used4.items()], ensure_ascii=False, indent=1))
 m4 = meta(4, "최적화 첫걸음 ① 혹시… 미분 좋아하세요? — 왜, 언제부터, 어디에", [deriv, marg, stat, mrmc, shut], list(used4), "first_step_1.html")
-m4.update({"series": FS, "date": "2026-11-22", "version": "1.6", "educationalLevel": "입문", "suggestedCitation": "안상선 (2026). 최적화 첫걸음 ① 혹시… 미분 좋아하세요? — 왜, 언제부터, 어디에. 최적화 첫걸음 1, v1.6."})
+m4.update({"series": FS, "date": "2026-11-22", "version": "1.7", "educationalLevel": "입문", "suggestedCitation": "안상선 (2026). 최적화 첫걸음 ① 혹시… 미분 좋아하세요? — 왜, 언제부터, 어디에. 최적화 첫걸음 1, v1.7."})
 (B / "meta_4.json").write_text(json.dumps(m4, ensure_ascii=False, indent=1))
 
 # ══════════════ 최적화 첫걸음 ② ══════════════
@@ -604,7 +604,7 @@ g.dump(5)
 used5 = {"bussotti2003genesis": [lag], "het_euler": [euler], "lemarechal2012cauchy": [gd], "rumelhart1986learning": [bp], "hoerl1970ridge": [reg], "cement_world": [ode]}
 (B / "refs_5.json").write_text(json.dumps([REFS[k](v) for k, v in used5.items()], ensure_ascii=False, indent=1))
 m5 = meta(5, "최적화 첫걸음 ② 공장에서 인공지능까지", [vmp, lag, euler, gd, inter], list(used5), "first_step_2.html")
-m5.update({"series": FS, "date": "2026-11-22", "version": "1.4", "educationalLevel": "입문", "suggestedCitation": "안상선 (2026). 최적화 첫걸음 ② 공장에서 인공지능까지. 최적화 첫걸음 2, v1.4."})
+m5.update({"series": FS, "date": "2026-11-22", "version": "1.5", "educationalLevel": "입문", "suggestedCitation": "안상선 (2026). 최적화 첫걸음 ② 공장에서 인공지능까지. 최적화 첫걸음 2, v1.5."})
 (B / "meta_5.json").write_text(json.dumps(m5, ensure_ascii=False, indent=1))
 
 
@@ -646,7 +646,7 @@ g.dump(6)
 used6 = {"mltut_math_behind_ai": [nrn], "ahn_battery_factory": [tvs, piv]}
 (B / "refs_6.json").write_text(json.dumps([REFS[k](v) for k, v in used6.items()], ensure_ascii=False, indent=1))
 m6 = meta(6, "최적화 첫걸음 ⓪ 인공지능 모델에서의 최적화 — 모델은 한 번에 만들어지지 않는다", [itr, tvs, piv], list(used6), "first_step_0.html")
-m6.update({"series": FS, "number": "0", "date": "2026-11-22", "version": "1.2", "educationalLevel": "입문", "suggestedCitation": "안상선 (2026). 최적화 첫걸음 ⓪ 인공지능 모델에서의 최적화 — 모델은 한 번에 만들어지지 않는다. 최적화 첫걸음 0, v1.2."})
+m6.update({"series": FS, "number": "0", "date": "2026-11-22", "version": "1.3", "educationalLevel": "입문", "suggestedCitation": "안상선 (2026). 최적화 첫걸음 ⓪ 인공지능 모델에서의 최적화 — 모델은 한 번에 만들어지지 않는다. 최적화 첫걸음 0, v1.3."})
 (B / "meta_6.json").write_text(json.dumps(m6, ensure_ascii=False, indent=1))
 
 # ══════════════ 목차 ══════════════

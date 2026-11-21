@@ -16,7 +16,7 @@
   }
  ],
  "date": "2026-11-22",
- "version": "1.6",
+ "version": "1.7",
  "language": [
   "ko"
  ],
@@ -43,5 +43,5 @@
  "educationalLevel": "입문",
  "learningResourceType": "interactive explainer",
  "registry": "KG_00_registry 0.2",
- "suggestedCitation": "안상선 (2026). 최적화 첫걸음 ① 혹시… 미분 좋아하세요? — 왜, 언제부터, 어디에. 최적화 첫걸음 1, v1.6."
+ "suggestedCitation": "안상선 (2026). 최적화 첫걸음 ① 혹시… 미분 좋아하세요? — 왜, 언제부터, 어디에. 최적화 첫걸음 1, v1.7."
 }

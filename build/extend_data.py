@@ -55,8 +55,9 @@ pen = 2*(1.589**2+0.853**2)
 # ── 블록 만들기 ───────────────────────────────────
 def why(kind, items, easy):
     li = ''.join(f'<li>{t}</li>' for t in items)
-    return (f'<div class="ez-why"><div class="ez-t">왜 이 {kind}을 쓰나</div><ol>{li}</ol>'
-            f'<p class="ez-easy"><b>쉽게 말하면</b> {easy}</p></div>')
+    # 휴대폰(760px 이하)에서는 build.js가 넣는 스크립트가 닫아 둔다 — 단계 길이를 줄이려고(2026-11-22 페르소나 재검사)
+    return (f'<details class="ez-why" open><summary>왜 이 {kind}을 쓰나</summary><ol>{li}</ol>'
+            f'<p class="ez-easy"><b>쉽게 말하면</b> {easy}</p></details>')
 
 def ask(q, school, rows, nums, cmt):
     tr = ''.join(f'<tr><td>{a}</td><td>{b}</td></tr>' for a, b in rows)

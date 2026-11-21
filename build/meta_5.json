@@ -16,7 +16,7 @@
   }
  ],
  "date": "2026-11-22",
- "version": "1.4",
+ "version": "1.5",
  "language": [
   "ko"
  ],
@@ -40,5 +40,5 @@
  "educationalLevel": "입문",
  "learningResourceType": "interactive explainer",
  "registry": "KG_00_registry 0.2",
- "suggestedCitation": "안상선 (2026). 최적화 첫걸음 ② 공장에서 인공지능까지. 최적화 첫걸음 2, v1.4."
+ "suggestedCitation": "안상선 (2026). 최적화 첫걸음 ② 공장에서 인공지능까지. 최적화 첫걸음 2, v1.5."
 }

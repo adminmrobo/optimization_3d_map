@@ -56,7 +56,7 @@ table.lim-tbl td,table.lim-tbl th{padding:4px 10px;text-align:right}
   <h1>최적화 첫걸음 ① — 혹시… 미분 좋아하세요?</h1>
   <p class="question">미분은 왜 쓰고, 언제부터 있었고, 그걸로 무엇을 할 수 있을까?</p>
   <p class="lead">인공지능 모델을 학습시키는 일도, 공장의 생산량을 정하는 일도 결국 "가장 좋은 값 찾기", 곧 <b>최적화</b>입니다. 그리고 최적화의 첫 신호는 언제나 <b>기울기</b>에서 나옵니다. 이 편은 미분을 처음 만나는 분을 위해 직선의 기울기에서 출발해, 빵 공장이 하루에 빵을 얼마나 구워야 이익이 가장 큰지까지 함께 걸어갑니다.</p>
-  <p class="byline">글 · 안상선 ((주)M-Robo 대표) · <a href="https://adminmrobo.github.io/who_am_i/who_am_i.html">저자 소개</a> · 2026-11-22 · v1.6</p>
+  <p class="byline">글 · 안상선 ((주)M-Robo 대표) · <a href="https://adminmrobo.github.io/who_am_i/who_am_i.html">저자 소개</a> · 2026-11-22 · v1.7</p>
   <div class="start"><b>지난 편 한 줄</b> <a href="first_step_0.html">⓪ 인공지능 모델에서의 최적화</a>에서 본 것처럼, 모델은 오차를 재고 조금 고치는 걸음을 수백 번 되풀이해 만들어지고, 매 걸음 "어느 쪽으로 얼마나"를 알려 주는 것이 <b>기울기</b>입니다. 이 편은 그 기울기, 곧 미분을 다룹니다.<br><b>처음이라면</b> 이 편은 프롤로그 → 준비운동(기울기 복습) → 1장 → 3장 순서로 보세요. 2장 역사는 쉬어 가는 단계입니다. 식은 "수식으로 보기"를 펼칠 때만 나오고, 단계마다 "이 단계의 가정" 상자가 있습니다. 공장과 인공지능은 <a href="first_step_2.html">② 편</a>에서 이어집니다.</div>
   <div class="kpis" aria-label="숫자 요약">
     <div class="kpi g"><b id="k-q">—</b><span>빵 가격 2만 원일 때 가장 좋은 생산량<sup>①</sup></span></div>
@@ -254,6 +254,7 @@ table.lim-tbl td,table.lim-tbl th{padding:4px 10px;text-align:right}
     <div class="insight" id="i33" aria-live="polite"></div>
   </div>
   <div class="assume"><b>이 단계의 가정</b> 조업중단점은 <b>단기</b> 이야기다. 길게 보면 임대 계약을 끝낼 수 있으므로, 가격이 손익분기점 밑에 오래 머물면 가게 자체를 접는다.</div>
+  <div class="biz"><b>업무에서는 — 비수기에 라인을 돌릴까</b> 공장의 성수기·비수기 라인 가동 판단이 같은 계산입니다. 비수기 납품 단가가 "라인을 돌릴 때만 드는 비용"(재료·전기·시간제 인건비)의 단위당 최저보다 높으면 라인을 돌리고, 낮으면 세웁니다. 감가상각·임대료·정규직 기본급처럼 세워도 나가는 돈은 이 판단에서 뺍니다. 단, 비수기가 길게 이어지면 라인 자체를 줄일지(장기 판단)를 따로 봅니다.</div>
   <details class="fold"><summary>수식으로 보기</summary><p>VC(Q) = 20Q − 3Q² + 0.2Q³, FC = 60. MC = VC′(Q) = 20 − 6Q + 0.6Q², AVC = VC/Q = 20 − 3Q + 0.2Q². AVC 최저점은 Q = 7.5에서 8.75(= 조업중단점), ATC 최저점은 Q ≈ 9.25에서 약 15.85(= 손익분기점). 이윤 최대의 2계 조건: π″(Q) = −MC′(Q) &lt; 0, 곧 MC가 오르는 구간의 교점.</p></details>
   <div class="quiz" data-quiz="c3"></div>
 </div></section>
