@@ -283,6 +283,25 @@ details.ez-why>summary::after{content:" ▾";color:var(--muted)}
 details.ez-why:not([open])>summary::after{content:" ▸ 펼치기"}
 details.ez-why:not([open]){align-self:start}
 
+/* ── 연구실 확장 2차(그릇 1~3편): 말 먼저 · 식 접기 · 주황 조수 수식 상자 · 30초 복습 ── */
+body{line-height:1.8}
+.explain{padding:20px 22px}
+.explain ol,.explain ul{display:flex;flex-direction:column;gap:8px}
+details.eqx{background:#fbfcfd;border:1px dashed var(--rule);border-radius:10px;padding:8px 14px;margin:12px 0 4px;font-size:14.5px}
+details.eqx summary{cursor:pointer;font-weight:700;color:var(--muted);font-size:13.5px}
+details.eqx[open] summary{margin-bottom:6px}
+.ezm{border:1px solid var(--rule);border-top:4px solid #e8892b;border-radius:12px;background:#fffdf8;padding:18px 20px;margin:18px 0;display:flex;flex-direction:column;gap:10px}
+.ezm h4{margin:0;font-size:15px;color:#9a5a12}
+.ezm .ask{display:flex;gap:10px;align-items:flex-start}
+.ezm .ask img{width:44px;height:44px;flex:none;border-radius:50%;background:#fff;border:1px solid var(--rule);object-fit:cover;object-position:top;image-rendering:pixelated}
+.ezm .ask p{margin:0;background:#fff;border:1px solid var(--rule);border-radius:10px;padding:8px 12px}
+.ezm .ask p b{display:block;font-size:12.5px;color:var(--muted)}
+.ezm p.saywords,.ezm p.school{margin:0}
+.ezm .try{background:#fff;border:1px dashed #e8b67a;border-radius:10px;padding:10px 14px}
+.ezm .try ol{margin:6px 0 0;padding-left:22px;display:flex;flex-direction:column;gap:6px}
+.eqt td.m{font-family:ui-monospace,Menlo,Consolas,monospace;white-space:nowrap}
+.review30{background:var(--panel);border:1px solid var(--rule);border-left:4px solid #e8892b;border-radius:10px;padding:12px 16px;margin:14px 0}
+
 </style>
 <style>
 .cards{display:grid;grid-template-columns:repeat(100,1fr);gap:1px;margin:8px 0}
@@ -331,7 +350,7 @@ details.ez-why:not([open]){align-self:start}
   <div class="three"><b>세 줄로 먼저</b><ol>
     <li>배치가 작으면 걸음은 싸지만 흔들리고, 크면 정확하지만 비싸다. 같은 계산량이면 작은 배치가 훨씬 멀리 간다.</li>
     <li>학습률은 지형의 굽음이 정한 한계(2/λ<sub>max</sub>)를 넘으면 공이 튀어 나간다.</li>
-    <li>오래 배울수록 훈련 오차는 계속 줄지만, 처음 보는 데이터의 오차는 어느 순간부터 다시 오른다. 멈출 때는 검증 데이터가 정한다.</li></ol></div>
+    <li>오래 배울수록 훈련 오차는 계속 줄지만, 처음 보는 데이터의 오차는 어느 순간부터 다시 오른다. 멈출 때는 검증 데이터가 정한다.</li></ol><p style="margin:8px 0 0"><b>수식을 몰라도 됩니다.</b> 본문은 말과 숫자로 먼저 설명하고, 식은 접기 상자에 넣었습니다. 학습률 한계(2 ÷ 가장 큰 굽음)가 어디서 나오는지는 <a href="1_math_map.html#s3">1편 ③</a>의 주황색 상자에서 숫자로 볼 수 있습니다.</p></div>
   <div class="kpis" aria-label="숫자 요약">
     <div class="kpi r"><b id="k-full">—</b><span>풀배치 · 1걸음 뒤 (카드 1,000장)<sup>①</sup></span></div>
     <div class="kpi g"><b id="k-ten">—</b><span>배치 10 · 100걸음 뒤 (카드 1,000장)<sup>①</sup></span></div>
@@ -416,7 +435,7 @@ details.ez-why:not([open]){align-self:start}
 <!-- ② 학습률 -->
 <section class="sec" id="s2" aria-labelledby="h-s2"><div class="wrap">
   <h2 id="h-s2"><span class="hex">2</span>보폭의 한계 — 학습률</h2>
-  <div class="tags"><span class="tag nn">모델: 학습률 η · 발산</span><span class="tag fly">연구실: 실험 조건의 안전 범위</span></div>
+  <div class="tags"><span class="tag nn">모델: 학습률(η, 보폭) · 발산</span><span class="tag fly">연구실: 실험 조건의 안전 범위</span></div>
   <div class="pair">
     <div><div class="tl">연구실에서는</div>가열 온도를 올리면 반응이 빨라지지만, 넘으면 안 되는 안전 범위가 있습니다. 그 범위는 감이 아니라 재료의 성질이 정합니다.</div>
     <div><div class="tr">신경망에서는</div>학습률을 키우면 빨리 내려가지만, 지형의 가장 가파른 굽음 λ<sub>max</sub>가 정한 한계 2/λ<sub>max</sub>를 넘으면 공이 골짜기를 건너뛰며 점점 멀어집니다(발산).</div>
@@ -429,7 +448,7 @@ details.ez-why:not([open]){align-self:start}
       <div class="group"><span class="glabel">바로 가기</span><span id="g-lr"></span></div>
     </div>
     <div class="eq" id="eq2"></div>
-    <div class="minis"><div class="mini a"><span>학습률</span><b id="m2-lr">—</b></div><div class="mini r"><span>한계 2/λ<sub>max</sub></span><b id="m2-lim">—</b></div><div class="mini g"><span>100걸음 뒤 오차</span><b id="m2-L">—</b></div><div class="mini m"><span>바닥 오차</span><b id="m2-bot">—</b></div></div>
+    <div class="minis"><div class="mini a"><span>학습률</span><b id="m2-lr">—</b></div><div class="mini r"><span>보폭 한계 (2 ÷ 가장 큰 굽음)</span><b id="m2-lim">—</b></div><div class="mini g"><span>100걸음 뒤 오차</span><b id="m2-L">—</b></div><div class="mini m"><span>바닥 오차</span><b id="m2-bot">—</b></div></div>
     <div class="insight" id="i-s2" aria-live="polite"></div>
   </div>
   <div class="explain"><h4>풀이</h4><ol>

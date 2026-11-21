@@ -283,6 +283,25 @@ details.ez-why>summary::after{content:" ▾";color:var(--muted)}
 details.ez-why:not([open])>summary::after{content:" ▸ 펼치기"}
 details.ez-why:not([open]){align-self:start}
 
+/* ── 연구실 확장 2차(그릇 1~3편): 말 먼저 · 식 접기 · 주황 조수 수식 상자 · 30초 복습 ── */
+body{line-height:1.8}
+.explain{padding:20px 22px}
+.explain ol,.explain ul{display:flex;flex-direction:column;gap:8px}
+details.eqx{background:#fbfcfd;border:1px dashed var(--rule);border-radius:10px;padding:8px 14px;margin:12px 0 4px;font-size:14.5px}
+details.eqx summary{cursor:pointer;font-weight:700;color:var(--muted);font-size:13.5px}
+details.eqx[open] summary{margin-bottom:6px}
+.ezm{border:1px solid var(--rule);border-top:4px solid #e8892b;border-radius:12px;background:#fffdf8;padding:18px 20px;margin:18px 0;display:flex;flex-direction:column;gap:10px}
+.ezm h4{margin:0;font-size:15px;color:#9a5a12}
+.ezm .ask{display:flex;gap:10px;align-items:flex-start}
+.ezm .ask img{width:44px;height:44px;flex:none;border-radius:50%;background:#fff;border:1px solid var(--rule);object-fit:cover;object-position:top;image-rendering:pixelated}
+.ezm .ask p{margin:0;background:#fff;border:1px solid var(--rule);border-radius:10px;padding:8px 12px}
+.ezm .ask p b{display:block;font-size:12.5px;color:var(--muted)}
+.ezm p.saywords,.ezm p.school{margin:0}
+.ezm .try{background:#fff;border:1px dashed #e8b67a;border-radius:10px;padding:10px 14px}
+.ezm .try ol{margin:6px 0 0;padding-left:22px;display:flex;flex-direction:column;gap:6px}
+.eqt td.m{font-family:ui-monospace,Menlo,Consolas,monospace;white-space:nowrap}
+.review30{background:var(--panel);border:1px solid var(--rule);border-left:4px solid #e8892b;border-radius:10px;padding:12px 16px;margin:14px 0}
+
 </style>
 <!-- lab-kg:head -->
 <meta name="citation_title" content="좌표축 위의 그릇 ① 수학 편 — 기울기·굽음·휨으로 읽는 3D 오차 지도">
@@ -323,7 +342,7 @@ details.ez-why:not([open]){align-self:start}
     <li>가중치가 좌표축, 오차가 높이다. 학습은 이 지도에서 낮은 곳으로 걸어가는 일이다.</li>
     <li>한 걸음의 방향은 <b>기울기</b>(1차 미분)가 정하고, 얼마나 크게 디뎌도 되는지는 <b>굽음</b>(2차 미분)이 정한다.</li>
     <li>기울기가 0이어도 바닥이 아닐 수 있다(안장점). 층을 지날 때 지도가 휘는 정도(야코비안)를 곱해 가는 것이 역전파다.</li></ol></div>
-  <div class="start"><b>처음이라면</b> 큰 그림 → ① 자르기 → ② 깃대 → 대결 → 정리 순서로 먼저 보세요. ③ 굽음·⑤ 휨은 두 번째 읽을 때 봐도 됩니다. 수식은 "수식으로 보기"를 펼칠 때만 나옵니다.</div>
+  <div class="start"><b>처음이라면</b> 큰 그림 → ① 자르기 → ② 깃대 → 대결 → 정리 순서로 먼저 보세요. ③ 굽음·⑤ 휨은 두 번째 읽을 때 봐도 됩니다. 수식은 "수식으로 보기"·"식으로 보면"을 펼칠 때만 나옵니다. <b>수식을 몰라도 됩니다</b> — 막히면 주황색 상자에서 조수 하루가 대신 물어봅니다.</div><div class="review30"><b>30초 복습 — 이 편에 필요한 것 두 가지</b> ① <b>기울기</b>: 오른쪽으로 조금 갈 때 높이가 얼마나 바뀌나(가로 1에 세로 2 오르면 기울기 2). ② <b>편미분</b>: 축이 둘일 때 하나만 움직이고 다른 하나는 그대로 둔 기울기. 처음 보셔도 괜찮습니다. ⓪·①편 <a href="first_step_0.html">최적화 첫걸음</a>에서 천천히 다룹니다.</div>
   <div class="kpis" aria-label="숫자 요약">
     <div class="kpi g"><b>2개</b><span>지도의 좌표축 (w, b)<sup>①</sup></span></div>
     <div class="kpi m"><b id="k-bot">—</b><span>그릇 바닥의 오차<sup>①</sup></span></div>
@@ -402,6 +421,7 @@ details.ez-why:not([open]){align-self:start}
     <li>그래서 새 위치 = 옛 위치 − 학습률 × 기울기. 빼기가 "내리막 쪽으로"라는 뜻입니다.</li>
     <li>w 방향 단면과 b 방향 단면은 굽은 정도가 다릅니다. 그래서 보폭 한계(위 표의 빨간 자리)도 다릅니다. 이 차이가 ③에서 헤시안으로 이어집니다.</li></ol>
     <div class="lim">이 단계의 한계: 한 번에 축 하나만 움직입니다. 두 축을 함께 움직이려면 "어느 방향이 가장 가파른가"를 알아야 합니다 → ②</div></div>
+  <div class="ezm"><h4>수학 수식을 어려워하는 조수가 대신 물어봅니다</h4><div class="ask"><img data-mood="asst_shock" alt="" aria-hidden="true"><p><b>조수 하루</b>"새 위치 = 옛 위치 − 학습률 × 기울기"까지는 알겠는데, 보폭 한계는 어디서 나와요?</p></div><p class="saywords"><b>말로 먼저</b> 오차 곡선이 그릇(포물선) 모양이면, 한 걸음마다 바닥까지 남은 거리가 <b>일정한 배율</b>로 바뀝니다. 그 배율이 1보다 작으면 가까워지고, 1보다 크면(반대편으로 튀어서) 멀어집니다. 보폭이 크면 배율이 커지니 한계가 생깁니다.</p><p class="school"><b>학교 수학으로 보면</b> 이차함수 y = ax²의 꼭짓점, 그리고 등비수열 — 매번 같은 배율을 곱합니다.</p><div class="try"><b>숫자로 한 번 해 보기</b><ol><li>굽음이 2인 단면에서 바닥까지 거리 4. 보폭 0.25 → 배율 1 − 2 × 0.25 = <b>0.5</b> → 4 → 2 → 1, 반씩 줄어듦</li><li>보폭 0.75 → 배율 <b>−0.5</b> → 4 → −2 → 1. 반대편으로 튀지만 그래도 줄어듦</li><li>보폭 1.1 → 배율 <b>−1.2</b> → 4 → −4.8 → 5.76. 튈 때마다 더 멀어짐 → 이 단면의 한계는 보폭 1</li></ol></div><div class="ask"><img data-mood="asst_spark" alt="" aria-hidden="true"><p><b>조수 하루</b>배율이 −1과 1 사이면 성공, 밖이면 실패. 등비수열이었네요!</p></div></div>
   <details class="fold"><summary>수식으로 보기 (전문가용)</summary><p>오차 <i>L</i>(w, b) = (1/n) Σ (w·xᵢ + b − yᵢ)². b를 b₀에 묶으면 L(w) = A·w² + B·w + C 꼴의 포물선이고, A = mean(x²). 한 걸음 w ← w − η·L′(w)는 바닥과의 거리를 (1 − 2Aη)배로 줄입니다. |1 − 2Aη| &lt; 1, 곧 η &lt; 1/A = 2/L″이면 줄어듭니다.</p></details>
   <div data-dlg="s1"></div>
   <div class="quiz" data-quiz="s1"></div>
@@ -413,7 +433,7 @@ details.ez-why:not([open]){align-self:start}
   <div class="tags"><span class="tag nn">모델: 그래디언트 ∇f</span><span class="tag fly">일상: 비탈에 꽂은 깃대</span></div>
   <div class="pair">
     <div><div class="tl">일상으로 치면</div>비탈에 깃대를 땅과 직각으로 꽂으면 깃대는 내리막 쪽으로 기웁니다. 해가 머리 위에 있을 때 깃대 그림자가 가리키는 쪽이 가장 가파른 내리막입니다.</div>
-    <div><div class="tr">신경망에서는</div>곡면 위 한 점의 법선은 n = (−∂f/∂w₁, −∂f/∂w₂, 1)입니다. 바닥에 비친 부분 (−∂f/∂w₁, −∂f/∂w₂)가 바로 −∇f, 경사하강이 가는 방향입니다.</div>
+    <div><div class="tr">신경망에서는</div>오차 지형 위 한 점에 직각으로 세운 깃대(법선)를 바닥에 비추면, 그 그림자가 <b>가장 가파른 내리막</b>을 가리킵니다. 경사하강이 가는 방향이 바로 이 그림자입니다. 반대쪽, 가장 가파른 오르막을 가리키는 화살표를 <b>그래디언트</b>(∇f, 나블라 에프)라고 부릅니다.<details class="fold eqx"><summary>식으로 보면 (몰라도 됩니다)</summary><p>법선 n = (−∂f/∂w₁, −∂f/∂w₂, 1). 바닥에 비친 부분 (−∂f/∂w₁, −∂f/∂w₂) = −∇f.</p></details></div>
   </div>
   <div class="panel">
     <div class="ptitle">깃대 실험 — 한 점의 접선 두 개, 법선, 바닥 그림자</div>
@@ -424,23 +444,27 @@ details.ez-why:not([open]){align-self:start}
       <div class="group"><label class="glabel" for="r-v">v (세로)</label><input type="range" id="r-v" min="-3" max="3" step="0.05" value="0.6"><span class="val" id="v-v">0.60</span></div>
     </div>
     <div class="eq" id="eq2"></div>
-    <div class="minis"><div class="mini r"><span>∂f/∂u (빨강 접선의 경사)</span><b id="m2-fu">—</b></div><div class="mini m"><span>∂f/∂v (청록 접선의 경사)</span><b id="m2-fv">—</b></div><div class="mini g"><span>|∇f| 가장 가파른 경사</span><b id="m2-gn">—</b></div><div class="mini a"><span>법선 n</span><b id="m2-n">—</b></div></div>
+    <div class="minis"><div class="mini r"><span>u 쪽 경사 (빨강 접선)</span><b id="m2-fu">—</b></div><div class="mini m"><span>v 쪽 경사 (청록 접선)</span><b id="m2-fv">—</b></div><div class="mini g"><span>가장 가파른 경사의 크기</span><b id="m2-gn">—</b></div><div class="mini a"><span>법선 n</span><b id="m2-n">—</b></div></div>
     <div class="insight" id="i-s2" aria-live="polite"></div>
   </div>
   <p class="gut">한 줄 직관: 땅에 직각으로 꽂은 깃대는 내리막 쪽으로 기울고, 그 그림자가 공이 굴러갈 방향이다.</p>
   <div class="explain"><h4>풀이</h4><ol>
-    <li>곡면을 그래프 x = u, y = v, z = f(u, v)로 쓰면, u 격자선 방향의 접선은 t<sub>u</sub> = (1, 0, ∂f/∂u), v 격자선 방향은 t<sub>v</sub> = (0, 1, ∂f/∂v)입니다.</li>
+    <li>땅의 두 방향(w₁ 쪽, w₂ 쪽) 기울기를 각각 잽니다. 깃대는 이 두 기울기 쪽으로 기울어 서 있습니다.</li>
+    <li>깃대를 바닥에 비추면 그림자의 가로·세로가 "두 기울기에 마이너스를 붙인 것"과 같습니다. 그래서 <b>깃대의 그림자 = 내리막 방향 = −∇f</b>.</li>
+    <li><details class="fold eqx"><summary>식으로 보면 — 접선 두 개의 외적이 법선 (몰라도 됩니다)</summary><ol style="margin:0;padding-left:20px">    <li>곡면을 그래프 x = u, y = v, z = f(u, v)로 쓰면, u 격자선 방향의 접선은 t<sub>u</sub> = (1, 0, ∂f/∂u), v 격자선 방향은 t<sub>v</sub> = (0, 1, ∂f/∂v)입니다.</li>
     <li>두 접선의 외적이 법선입니다: t<sub>u</sub> × t<sub>v</sub> = (−∂f/∂u, −∂f/∂v, 1). 직접 곱해 보면 맞습니다.</li>
     <li>법선의 앞 두 자리는 그래디언트 ∇f = (∂f/∂u, ∂f/∂v)에 마이너스를 붙인 것입니다. 그래서 <b>깃대의 그림자 = 내리막 방향 = −∇f</b>.</li>
+</ol></details></li>
     <li>오른쪽 그림처럼 기울기 화살표는 언제나 <b>등고선과 직각</b>입니다. 그리고 그래디언트로 만든 화살표 밭은 회전(curl)이 0이라 소용돌이가 없습니다. 내리막을 따라가는 공은 제자리를 빙빙 돌지 않습니다.</li></ol>
     <div class="lim">이 단계의 한계: 기울기는 "지금 여기서" 어느 쪽이 내리막인지만 알려 줍니다. 그 방향으로 얼마나 멀리 가도 되는지는 땅이 얼마나 굽었는지 알아야 합니다 → ③</div></div>
   <div class="bridge field"><b>그림 그릴 때 주의</b> 기울기 화살표를 곡면 위에 세워 그린 그림이 많습니다. 그래디언트는 입력 평면(바닥)의 벡터라서, 정확히 그리려면 화살표는 바닥(등고선 지도)에 두고 곡면 위에는 그 방향의 경사로만 표시합니다. 이 페이지의 3D는 바닥 그림자를 초록 화살표로 그렸습니다.<div class="lim">3D 화면의 화살표 길이는 축 눈금에 맞춰 줄인 것입니다. 방향은 가로·세로 눈금이 같을 때만 그대로 맞으므로, 이 실험의 두 땅은 가로·세로 범위를 같게 잡았습니다.</div></div>
-  <div class="bridge gen" id="del-op"><b>∇ 하나, 연산 넷</b> 나블라 ∇ = (∂/∂x, ∂/∂y, ∂/∂z)는 자리마다 미분이 들어 있는 벡터입니다. 무엇과 어떻게 붙느냐에 따라 재는 것이 달라집니다.
+  <div class="ezm"><h4>수학 수식을 어려워하는 조수가 대신 물어봅니다</h4><div class="ask"><img data-mood="asst_shock" alt="" aria-hidden="true"><p><b>조수 하루</b>그래디언트, 법선, 그림자… 숫자로 한 번만 보여 주세요.</p></div><p class="saywords"><b>말로 먼저</b> 두 방향의 기울기를 재서 화살표 하나로 묶으면 그래디언트입니다. 그 반대가 내리막이고, 그쪽으로 조금 가면 오차가 실제로 줄어드는지 확인하면 됩니다.</p><p class="school"><b>학교 수학으로 보면</b> 좌표평면의 점과 화살표(벡터), 그리고 이차함수.</p><div class="try"><b>숫자로 한 번 해 보기</b><ol><li>땅 높이 = w₁² + 2 × w₂², 지금 자리 (1, 1), 높이 <b>3</b></li><li>w₁ 쪽 기울기 2 × 1 = 2, w₂ 쪽 기울기 4 × 1 = 4 → 그래디언트 (2, 4). 내리막(그림자)은 <b>(−2, −4)</b></li><li>그쪽으로 0.1배만 가면 (0.8, 0.6), 높이 0.64 + 0.72 = <b>1.36</b>. 3에서 1.36으로 내려갔습니다</li></ol></div><details class="fold eqx"><summary>식으로 보면 (몰라도 됩니다)</summary><div class="tblwrap"><table class="cmp eqt"><thead><tr><th>식 조각</th><th>읽는 법</th><th>뜻</th></tr></thead><tbody><tr><td class="m">∇f</td><td>나블라 에프</td><td>가장 가파른 오르막 화살표(그래디언트)</td></tr><tr><td class="m">∂f/∂w₁</td><td>에프를 더블유 원으로 편미분</td><td>w₂는 그대로, w₁ 쪽 기울기</td></tr><tr><td class="m">−∇f</td><td>마이너스 나블라 에프</td><td>가장 가파른 내리막 — 경사하강의 방향</td></tr></tbody></table></div></details><div class="ask"><img data-mood="asst_spark" alt="" aria-hidden="true"><p><b>조수 하루</b>기울기 두 개를 묶어 뒤집으면 내리막! 깃대 그림자가 그걸 보여 주는 거고요.</p></div></div>
+  <div class="bridge gen" id="del-op"><b>∇ 하나, 연산 넷</b> 나블라 ∇는 "축마다 기울기를 재는 도구"를 한 기호로 묶은 것입니다(식으로는 (∂/∂x, ∂/∂y, ∂/∂z), 자리마다 미분이 들어 있는 벡터). 무엇과 어떻게 붙느냐에 따라 재는 것이 달라집니다. 처음이라면 "이름"과 "재는 것" 두 열만 읽어도 충분합니다.
     <div class="tblwrap"><table class="cmp"><thead><tr><th>붙는 방식</th><th>이름</th><th>재는 것</th><th>이 지도에서는</th></tr></thead><tbody>
-      <tr><td>∇f (숫자 땅에 그대로)</td><td>그래디언트</td><td>가장 가파른 오르막, 등위면과 직각</td><td>② 깃대 그림자의 반대 방향. 경사하강은 −∇f로 간다</td></tr>
-      <tr><td>∇·F (화살표 밭과 내적)</td><td>발산</td><td>한 점에서 나가는 양 − 들어오는 양. 양수면 샘, 음수면 빨아들이는 곳</td><td>내리막 화살표 밭 −∇f의 발산은 −∇²f. 바닥 둘레에서는 화살표가 모여들어 음수</td></tr>
-      <tr><td>∇×F (화살표 밭과 외적)</td><td>회전</td><td>제자리 소용돌이의 축과 세기(오른손 법칙)</td><td>그래디언트 밭은 늘 0 — 공은 빙빙 돌지 않는다</td></tr>
-      <tr><td>∇²f = ∇·∇f</td><td>라플라시안</td><td>평균 굽음. 그릇 x² + y²은 +4, 돔 −(x² + y²)은 −4</td><td>③ 헤시안 고유값의 합</td></tr>
+      <tr><td>숫자 땅에 그대로 붙이기 (∇f)</td><td>그래디언트</td><td>가장 가파른 오르막, 등위면과 직각</td><td>② 깃대 그림자의 반대 방향. 경사하강은 −∇f로 간다</td></tr>
+      <tr><td>화살표 밭과 내적 (∇·F)</td><td>발산</td><td>한 점에서 나가는 양 − 들어오는 양. 양수면 샘, 음수면 빨아들이는 곳</td><td>내리막 화살표 밭 −∇f의 발산은 −∇²f. 바닥 둘레에서는 화살표가 모여들어 음수</td></tr>
+      <tr><td>화살표 밭과 외적 (∇×F)</td><td>회전</td><td>제자리 소용돌이의 축과 세기(오른손 법칙)</td><td>그래디언트 밭은 늘 0 — 공은 빙빙 돌지 않는다</td></tr>
+      <tr><td>기울기 밭의 발산 (∇²f)</td><td>라플라시안</td><td>평균 굽음. 그릇 x² + y²은 +4, 돔 −(x² + y²)은 −4</td><td>③ 헤시안 고유값의 합</td></tr>
     </tbody></table></div>
     <div class="lim">이름 이야기: 이 미분 연산자는 W. R. 해밀턴이 1837년경 옆으로 누운 ◁ 모양으로 처음 썼고, 지금의 ∇ 모양으로 다듬어 널리 쓴 사람은 P. G. 테이트입니다. "나블라"라는 이름은 1870년 W. R. 스미스가 고대 하프(νάβλα)를 닮았다며 테이트에게 제안했고, 맥스웰은 이 이름을 주로 농담처럼 썼습니다. 영어권에서는 del이라고도 부릅니다 [12][13].</div>
     <div class="lim">표기 주의: 어떤 자료는 헤시안(2차 편미분 표)을 ∇²f로 적습니다[14]. 이 시리즈의 ∇²f는 라플라시안(숫자 하나)이고, 라플라시안 = 헤시안의 대각선 합 = 헤시안 고유값의 합입니다(③). 표를 뜻하는지 숫자를 뜻하는지 앞뒤를 보고 가려 읽으세요.</div>
@@ -456,20 +480,20 @@ details.ez-why:not([open]){align-self:start}
   <div class="tags"><span class="tag nn">모델: 헤시안 H</span><span class="tag fly">일상: 그릇의 길쭉함</span></div>
   <div class="pair">
     <div><div class="tl">일상으로 치면</div>둥근 그릇은 어느 쪽에서 굴려도 바닥으로 곧장 갑니다. 길쭉한 그릇에서는 가파른 옆벽을 오가며 지그재그로 내려갑니다. 벽이 가파를수록 발을 작게 디뎌야 넘어가지 않습니다.</div>
-    <div><div class="tr">신경망에서는</div>2차 편미분을 모은 표가 헤시안입니다. 고유값 λ는 "가장 많이 굽은 방향과 가장 덜 굽은 방향의 굽음"입니다. 보폭(학습률)이 2/λ<sub>max</sub>를 넘으면 공은 바닥을 지나쳐 점점 멀어집니다.</div>
+    <div><div class="tr">신경망에서는</div>"기울기가 얼마나 빨리 바뀌나"(굽음)를 방향마다 적은 표가 <b>헤시안</b>입니다. 그 표에서 가장 많이 굽은 방향과 가장 덜 굽은 방향의 굽음 두 숫자를 <b>고유값</b>(λ, 람다)이라 부릅니다. 보폭(학습률)이 "2 ÷ 가장 큰 굽음"을 넘으면 공은 바닥을 지나쳐 점점 멀어집니다.<details class="fold eqx"><summary>식으로 보면 (몰라도 됩니다)</summary><p>헤시안 H = 2차 편미분 표. 고유값 λ<sub>max</sub>, λ<sub>min</sub>. 보폭 한계 η &lt; 2/λ<sub>max</sub>.</p></details></div>
   </div>
   <div class="panel">
     <div class="ptitle">굽음 실험 — 고유값 두 개로 땅 만들기</div>
     <div class="twin"><div class="cwrap tall"><canvas id="cvS3a" aria-label="고유값 두 개로 만든 2차 곡면과 경사하강 경로"></canvas><span class="hint">끌어서 돌리기</span></div><div class="cwrap tall"><canvas id="cvS3b" aria-label="걸음마다의 높이 그래프"></canvas></div></div>
     <div class="ctrl">
-      <div class="group"><label class="glabel" for="r-l1">λ₁</label><input type="range" id="r-l1" min="-2" max="6" step="0.1" value="6"><span class="val" id="v-l1">6.0</span></div>
-      <div class="group"><label class="glabel" for="r-l2">λ₂</label><input type="range" id="r-l2" min="-2" max="6" step="0.1" value="2"><span class="val" id="v-l2">2.0</span></div>
+      <div class="group"><label class="glabel" for="r-l1">굽음 1 (λ₁)</label><input type="range" id="r-l1" min="-2" max="6" step="0.1" value="6"><span class="val" id="v-l1">6.0</span></div>
+      <div class="group"><label class="glabel" for="r-l2">굽음 2 (λ₂)</label><input type="range" id="r-l2" min="-2" max="6" step="0.1" value="2"><span class="val" id="v-l2">2.0</span></div>
       <div class="group"><label class="glabel" for="r-th">기울인 각</label><input type="range" id="r-th" min="0" max="90" step="1" value="25"><span class="val" id="v-th">25°</span></div>
       <div class="group"><label class="glabel" for="r-lr3">학습률</label><input type="range" id="r-lr3" min="0.02" max="0.6" step="0.01" value="0.1"><span class="val" id="v-lr3">0.10</span></div>
       <div class="group"><button class="bt primary" id="b-run3" type="button">공 굴리기</button><button class="bt" id="b-newton" type="button">뉴턴 한 걸음</button><button class="bt" id="b-ours" type="button">우리 그릇 값으로</button></div>
     </div>
     <div class="eq" id="eq3"></div>
-    <div class="minis"><div class="mini a"><span>헤시안 H</span><b id="m3-H" style="font-size:16px">—</b></div><div class="mini m"><span>라플라시안 λ₁ + λ₂</span><b id="m3-lap">—</b></div><div class="mini r"><span>보폭 한계 2/λ<sub>max</sub></span><b id="m3-lim">—</b></div><div class="mini g"><span>땅의 이름</span><b id="m3-kind">—</b></div></div>
+    <div class="minis"><div class="mini a"><span>헤시안 H</span><b id="m3-H" style="font-size:16px">—</b></div><div class="mini m"><span>두 굽음의 합 (라플라시안)</span><b id="m3-lap">—</b></div><div class="mini r"><span>보폭 한계 (2 ÷ 가장 큰 굽음)</span><b id="m3-lim">—</b></div><div class="mini g"><span>땅의 이름</span><b id="m3-kind">—</b></div></div>
     <div class="insight" id="i-s3" aria-live="polite"></div>
   </div>
   <p class="gut">한 줄 직관: 그릇 벽이 가파를수록 한 걸음을 작게 디뎌야 반대쪽 벽으로 튀어 나가지 않는다.</p>
@@ -478,9 +502,10 @@ details.ez-why:not([open]){align-self:start}
     <li>둘 다 양수면 <b>그릇</b>(바닥), 둘 다 음수면 <b>봉우리</b>, 부호가 다르면 <b>안장</b>(고개)입니다. 고유값의 합이 라플라시안입니다. 그릇 x² + y²는 4, 안장 x² − y²는 0입니다.</li>
     <li>이 페이지의 그릇(뉴런 하나)은 2차 함수라 헤시안이 어디서나 같습니다. <span id="t-ours">—</span></li>
     <li>λ<sub>max</sub>와 λ<sub>min</sub>의 비(길쭉함)가 크면 가파른 방향 때문에 보폭을 작게 잡아야 하고, 그러면 완만한 방향으로는 아주 느리게 갑니다. 공이 곧게 내려가지 않고 휘어 들어가는 이유입니다.</li>
-    <li>헤시안 표는 대각선을 기준으로 접으면 겹칩니다(∂²f/∂w₁∂w₂ = ∂²f/∂w₂∂w₁). 2차 편미분이 연속이면 미분하는 순서를 바꿔도 값이 같다는 클레로·슈바르츠 정리 덕분입니다[14][15]. 위의 H 표에서도 오른쪽 위와 왼쪽 아래 숫자가 늘 같습니다. 표의 이름은 이 표를 연구한 독일 수학자 오토 헤세(1811–1874)에서 왔고, "헤시안"이라는 이름은 영국 수학자 실베스터가 붙였습니다[16].</li>
-    <li><b>뉴턴 방법</b>: 방향마다 보폭을 1/λᵢ로 맞추면 2차 그릇에서는 한 걸음에 바닥입니다. 식으로는 θ ← θ − H⁻¹∇f. "뉴턴 한 걸음" 단추로 확인해 보세요. 다만 이 걸음은 "기울기 0인 곳"으로 곧장 가기 때문에, 안장이나 봉우리에서도 그 점으로 가서 멈춥니다(λ₂를 음수로 바꿔 눌러 보세요). 또 가중치가 n개면 헤시안은 n × n개 자리의 표라, 가중치가 수백만 개인 신경망에서는 저장조차 어렵습니다. 그래서 딥러닝에서는 헤시안을 근사하는 L-BFGS 같은 방법이나 경사하강 계열을 씁니다[17].</li></ol>
+    <li>헤시안 표는 대각선을 기준으로 접으면 겹칩니다. "w₁ 쪽 기울기가 w₂를 따라 바뀌는 정도"와 "w₂ 쪽 기울기가 w₁을 따라 바뀌는 정도"가 늘 같기 때문입니다(클레로·슈바르츠 정리[14][15], 식으로는 ∂²f/∂w₁∂w₂ = ∂²f/∂w₂∂w₁). 위의 H 표에서도 오른쪽 위와 왼쪽 아래 숫자가 늘 같습니다. 표의 이름은 이 표를 연구한 독일 수학자 오토 헤세(1811–1874)에서 왔고, "헤시안"이라는 이름은 영국 수학자 실베스터가 붙였습니다[16].</li>
+    <li><b>뉴턴 방법</b>: 방향마다 보폭을 "1 ÷ 그 방향의 굽음"으로 맞추면 2차 그릇에서는 한 걸음에 바닥입니다(식으로는 θ ← θ − H⁻¹∇f). "뉴턴 한 걸음" 단추로 확인해 보세요. 다만 이 걸음은 "기울기 0인 곳"으로 곧장 가기 때문에, 안장이나 봉우리에서도 그 점으로 가서 멈춥니다(λ₂를 음수로 바꿔 눌러 보세요). 또 가중치가 n개면 헤시안은 n × n개 자리의 표라, 가중치가 수백만 개인 신경망에서는 저장조차 어렵습니다. 그래서 딥러닝에서는 헤시안을 근사하는 L-BFGS 같은 방법이나 경사하강 계열을 씁니다[17].</li></ol>
     <div class="lim">이 단계의 한계: 2차 근사는 그 점 둘레에서만 맞습니다. 실제 신경망의 지형은 곳곳에서 굽음이 달라, 한 곳의 헤시안으로 학습률 하나를 정할 수는 없습니다. 2편에서 학습률을 실험으로 고르는 이유입니다.</div></div>
+<div class="ezm"><h4>수학 수식을 어려워하는 조수가 대신 물어봅니다</h4><div class="ask"><img data-mood="asst_shock" alt="" aria-hidden="true"><p><b>조수 하루</b>고유값이니 2/λ<sub>max</sub>니… 길쭉한 그릇에서 왜 보폭이 문제예요?</p></div><p class="saywords"><b>말로 먼저</b> 길쭉한 그릇에는 가파른 방향과 완만한 방향이 있습니다. 보폭 하나로 둘을 동시에 맞춰야 하는데, 가파른 방향이 먼저 한계에 걸립니다. 그 한계가 "2 ÷ 가장 큰 굽음"입니다.</p><p class="school"><b>학교 수학으로 보면</b> ①에서 본 등비수열 배율을 방향마다 따로 계산하면 됩니다.</p><div class="try"><b>숫자로 한 번 해 보기</b><ol><li>굽음이 완만한 방향 1, 가파른 방향 10인 그릇 → 보폭 한계 2 ÷ 10 = <b>0.2</b></li><li>보폭 0.15: 가파른 방향 배율 1 − 1.5 = −0.5(튀며 줄어듦), 완만한 방향 배율 1 − 0.15 = <b>0.85</b>(아주 느리게 줄어듦) → 지그재그로 천천히 내려감</li><li>보폭 0.25: 가파른 방향 배율 1 − 2.5 = <b>−1.5</b> → 거리 1 → −1.5 → 2.25 … 튀어 나감</li></ol></div><details class="fold eqx"><summary>식으로 보면 (몰라도 됩니다)</summary><div class="tblwrap"><table class="cmp eqt"><thead><tr><th>식 조각</th><th>읽는 법</th><th>뜻</th></tr></thead><tbody><tr><td class="m">λ</td><td>람다</td><td>한 방향의 굽음(헤시안 고유값)</td></tr><tr><td class="m">λ<sub>max</sub></td><td>람다 맥스</td><td>가장 가파르게 굽은 방향의 굽음</td></tr><tr><td class="m">2/λ<sub>max</sub></td><td></td><td>보폭(학습률) 한계</td></tr></tbody></table></div></details><div class="ask"><img data-mood="asst_spark" alt="" aria-hidden="true"><p><b>조수 하루</b>가파른 쪽 때문에 보폭을 줄이면 완만한 쪽이 느려지는군요. 그래서 공이 휘어 들어가는 거예요.</p></div></div>
   <details class="fold"><summary>수식으로 보기 — 왜 2/λ인가</summary>
     <p>2차 함수 f(θ) = ½ θᵀHθ에서 경사하강 θ ← θ − η Hθ = (I − ηH)θ. 고유 방향마다 거리가 (1 − ηλᵢ)배가 됩니다. 모든 방향에서 |1 − ηλᵢ| &lt; 1이어야 줄어들므로 0 &lt; η &lt; 2/λ<sub>max</sub>. λᵢ &lt; 0인 방향은 어떤 η에서도 거리가 커집니다(그쪽은 내리막이 계속됨).</p>
     <p style="margin:0"><math display="block" aria-label="헤시안 행렬은 2차 편미분 네 개를 모은 2행 2열 행렬"><mi>H</mi><mo>=</mo><mrow><mo>[</mo><mtable><mtr><mtd><mfrac><mrow><msup><mo>∂</mo><mn>2</mn></msup><mi>f</mi></mrow><mrow><mo>∂</mo><msubsup><mi>w</mi><mn>1</mn><mn>2</mn></msubsup></mrow></mfrac></mtd><mtd><mfrac><mrow><msup><mo>∂</mo><mn>2</mn></msup><mi>f</mi></mrow><mrow><mo>∂</mo><msub><mi>w</mi><mn>1</mn></msub><mo>∂</mo><msub><mi>w</mi><mn>2</mn></msub></mrow></mfrac></mtd></mtr><mtr><mtd><mfrac><mrow><msup><mo>∂</mo><mn>2</mn></msup><mi>f</mi></mrow><mrow><mo>∂</mo><msub><mi>w</mi><mn>2</mn></msub><mo>∂</mo><msub><mi>w</mi><mn>1</mn></msub></mrow></mfrac></mtd><mtd><mfrac><mrow><msup><mo>∂</mo><mn>2</mn></msup><mi>f</mi></mrow><mrow><mo>∂</mo><msubsup><mi>w</mi><mn>2</mn><mn>2</mn></msubsup></mrow></mfrac></mtd></mtr></mtable><mo>]</mo></mrow></math></p></details>
@@ -495,7 +520,7 @@ details.ez-why:not([open]){align-self:start}
   <div class="tags"><span class="tag nn">모델: 안장점 · 쌍곡포물면</span><span class="tag fly">일상: 통에 포개 담는 곡면 감자칩</span></div>
   <div class="pair">
     <div><div class="tl">일상으로 치면</div>통에 겹겹이 담는 감자칩은 가로로 보면 위로 휘고, 세로로 보면 아래로 휩니다. 가운데는 말안장처럼 생겼고, 그 한가운데는 평평합니다.</div>
-    <div><div class="tr">신경망에서는</div>z = x²/a² − y²/b²의 가운데 (0, 0)은 기울기가 0이지만 바닥이 아닙니다. 한 방향으로는 최저점, 다른 방향으로는 최고점인 <b>안장점</b>입니다. 가중치가 많은 신경망의 지형에는 이런 곳이 많다고 알려져 있습니다.</div>
+    <div><div class="tr">신경망에서는</div>감자칩 모양 땅의 가운데는 기울기가 0이지만 바닥이 아닙니다. 한 방향으로는 최저점, 다른 방향으로는 최고점인 <b>안장점</b>입니다. 가중치가 많은 신경망의 지형에는 이런 곳이 많다고 알려져 있습니다.<details class="fold eqx"><summary>식으로 보면 (몰라도 됩니다)</summary><p>z = x²/a² − y²/b², 가운데 (0, 0)에서 기울기 0.</p></details></div>
   </div>
   <div class="panel">
     <div class="ptitle">고개 실험 — 두 단면과 곧은 선</div>
@@ -506,15 +531,16 @@ details.ez-why:not([open]){align-self:start}
       <div class="group"><span class="glabel">보이기</span><button class="bt" id="t-cx" type="button" aria-pressed="true">x 방향 단면</button><button class="bt" id="t-cy" type="button" aria-pressed="true">y 방향 단면</button><button class="bt" id="t-ra" type="button" aria-pressed="false">곧은 선 무리 A</button><button class="bt" id="t-rb" type="button" aria-pressed="false">곧은 선 무리 B</button></div>
     </div>
     <div class="eq" id="eq4"></div>
-    <div class="minis"><div class="mini r"><span>x 방향 굽음 2/a²</span><b id="m4-hx">—</b></div><div class="mini m"><span>y 방향 굽음 −2/b²</span><b id="m4-hy">—</b></div><div class="mini a"><span>라플라시안</span><b id="m4-lap">—</b></div><div class="mini g"><span>가운데 기울기</span><b>(0, 0)</b></div></div>
+    <div class="minis"><div class="mini r"><span>가로 방향 굽음</span><b id="m4-hx">—</b></div><div class="mini m"><span>세로 방향 굽음</span><b id="m4-hy">—</b></div><div class="mini a"><span>라플라시안</span><b id="m4-lap">—</b></div><div class="mini g"><span>가운데 기울기</span><b>(0, 0)</b></div></div>
     <div class="insight" id="i-s4" aria-live="polite"></div>
   </div>
   <div class="explain"><h4>풀이</h4><ol>
-    <li>y = 0으로 고정하면 z = x²/a², 위로 열린 포물선. x = 0으로 고정하면 z = −y²/b², 아래로 열린 포물선. ①에서 한 "칼로 자르기"를 두 번 한 것입니다.</li>
-    <li>z = (x/a − y/b)(x/a + y/b)로 쓸 수 있습니다. x/a − y/b를 한 값 t로 묶으면 z = t·(x/a + y/b)가 되어 남은 변수에 대해 <b>직선</b>입니다. 그래서 휘어 보이는 곡면에 곧은 선이 두 무리나 들어 있습니다(이중 선직면). 곧은 보로 얇고 단단한 지붕을 짓는 데 이 모양을 씁니다.</li>
+    <li>가로 방향으로 자르면 위로 열린 포물선(골짜기), 세로 방향으로 자르면 아래로 열린 포물선(능선)입니다. ①에서 한 "칼로 자르기"를 두 번 한 것입니다(식: y = 0이면 z = x²/a², x = 0이면 z = −y²/b²).</li>
+    <li>휘어 보이는 이 곡면에는 신기하게도 <b>곧은 선이 두 무리</b> 들어 있습니다(이중 선직면). 그래서 곧은 보만으로 얇고 단단한 지붕을 짓는 데 이 모양을 씁니다.<details class="fold eqx"><summary>식으로 보면 (몰라도 됩니다)</summary><p>z = (x/a − y/b)(x/a + y/b). x/a − y/b를 한 값 t로 묶으면 z = t·(x/a + y/b)가 되어 남은 변수에 대해 직선입니다.</p></details></li>
     <li>a = b이면 라플라시안이 정확히 0입니다. 위로 휜 만큼 아래로 휘어 상쇄됩니다.</li>
     <li>경사하강은 기울기만 봅니다. 공이 정확히 능선 위에서 출발하면 안장점으로 굴러가 기울기 0에서 멈춥니다. 이 장면이 아래 <a href="#duel">대결</a>입니다.</li></ol>
     <div class="lim">이 단계의 한계: 여기까지는 지도가 "입력 → 오차" 하나였습니다. 실제 신경망은 층을 여러 번 지나며 입력 자체가 바뀝니다. 층이 지도를 어떻게 휘는지 알아야 기울기를 앞 층까지 전할 수 있습니다 → ⑤</div></div>
+<div class="ezm"><h4>수학 수식을 어려워하는 조수가 대신 물어봅니다</h4><div class="ask"><img data-mood="asst_shock" alt="" aria-hidden="true"><p><b>조수 하루</b>기울기가 0인데 바닥이 아니라는 게 잘 안 와닿아요.</p></div><p class="saywords"><b>말로 먼저</b> 가운데 점에서 가로로 한 발 가면 올라가고, 세로로 한 발 가면 내려갑니다. 그러니 발밑은 평평해도(기울기 0) 가장 낮은 곳은 아닙니다.</p><p class="school"><b>학교 수학으로 보면</b> 이차함수 y = x²(위로 열림)과 y = −x²(아래로 열림)을 한 그림에 겹친 것.</p><div class="try"><b>숫자로 한 번 해 보기</b><ol><li>땅 높이 = x² − y², 가운데 (0, 0) 높이 <b>0</b></li><li>가로로 0.1: (0.1, 0) 높이 <b>+0.01</b> — 올라감 / 세로로 0.1: (0, 0.1) 높이 <b>−0.01</b> — 내려감</li><li>위로 휜 정도 +2와 아래로 휜 정도 −2를 더하면 0 → 라플라시안 0</li></ol></div><div class="ask"><img data-mood="asst_spark" alt="" aria-hidden="true"><p><b>조수 하루</b>한쪽은 오르막, 한쪽은 내리막이니 고개 마루였군요. 공이 능선 위에서만 출발하면 거기 멈추고요.</p></div></div>
   <div data-dlg="s4"></div>
   <div class="quiz" data-quiz="s4"></div>
 </div></section>
@@ -525,7 +551,7 @@ details.ez-why:not([open]){align-self:start}
   <div class="tags"><span class="tag nn">모델: 야코비안 J · 연쇄 법칙</span><span class="tag fly">일상: 고무판에 그린 모눈</span></div>
   <div class="pair">
     <div><div class="tl">일상으로 치면</div>고무판에 모눈과 작은 동그라미를 그리고 잡아당기면, 동그라미는 기울어진 타원이 됩니다. 아주 작은 동그라미라면 어디를 당기든 늘 타원입니다.</div>
-    <div><div class="tr">신경망에서는</div>층 하나 F(x) = tanh(Wx)는 입력 평면을 출력 평면으로 휘는 지도입니다. 한 점 둘레의 작은 원이 어떤 타원이 되는지 적은 표가 야코비안 J이고, F(x + Δx) ≈ F(x) + JΔx입니다.</div>
+    <div><div class="tr">신경망에서는</div>층 하나는 입력 평면을 출력 평면으로 휘는 지도입니다. 한 점 둘레의 작은 원이 어떤 타원이 되는지, 곧 "입력을 조금 움직이면 출력이 어느 쪽으로 얼마나 움직이나"를 적은 표가 <b>야코비안</b>(J)입니다.<details class="fold eqx"><summary>식으로 보면 (몰라도 됩니다)</summary><p>층 F(x) = tanh(Wx). F(x + Δx) ≈ F(x) + JΔx.</p></details></div>
   </div>
   <div class="panel">
     <div class="ptitle">고무판 실험 — 원이 타원이 되는 모습</div>
@@ -537,17 +563,18 @@ details.ez-why:not([open]){align-self:start}
       <div class="group"><button class="bt" id="t-l2" type="button" aria-pressed="false">층 하나 더 (연쇄)</button></div>
     </div>
     <div class="eq" id="eq5"></div>
-    <div class="minis"><div class="mini a"><span>야코비안 J</span><b id="m5-J" style="font-size:16px">—</b></div><div class="mini m"><span>넓이 배율 |det J|</span><b id="m5-det">—</b></div><div class="mini g"><span>점 x</span><b id="m5-x">—</b></div><div class="mini r"><span>tanh 기울기 (1 − tanh²)</span><b id="m5-s">—</b></div></div>
+    <div class="minis"><div class="mini a"><span>야코비안 J</span><b id="m5-J" style="font-size:16px">—</b></div><div class="mini m"><span>넓이 배율 (행렬식)</span><b id="m5-det">—</b></div><div class="mini g"><span>점 x</span><b id="m5-x">—</b></div><div class="mini r"><span>층의 기울기 (포화되면 0)</span><b id="m5-s">—</b></div></div>
     <div class="insight" id="i-s5" aria-live="polite"></div>
   </div>
   <p class="gut">한 줄 직관: 층 하나는 고무판을 당기는 손이고, 야코비안은 작은 동그라미가 어떤 타원이 되는지 적은 표다.</p>
   <div class="explain"><h4>풀이</h4><ol>
-    <li>J의 (i, j) 자리 = ∂F<sub>i</sub>/∂x<sub>j</sub>: "입력 j를 조금 움직이면 출력 i가 얼마나 움직이나". tanh 층에서는 J = diag(1 − tanh²(Wx))·W입니다.</li>
-    <li>|det J|는 작은 넓이가 몇 배가 되는지입니다. 0에 가까우면 평면이 납작하게 눌려 정보가 뭉개집니다. tanh가 포화된 곳(|Wx|가 큰 곳)에서는 1 − tanh²가 0에 가까워 J가 작아집니다.</li>
+    <li>J의 (i, j) 자리에는 "입력 j를 조금 움직이면 출력 i가 얼마나 움직이나"를 적습니다(식으로는 ∂F<sub>i</sub>/∂x<sub>j</sub>, tanh 층에서는 J = diag(1 − tanh²(Wx))·W).</li>
+    <li>표의 행렬식(|det J|)은 작은 넓이가 몇 배가 되는지입니다. 0에 가까우면 평면이 납작하게 눌려 정보가 뭉개집니다. tanh가 포화된 곳(|Wx|가 큰 곳)에서는 1 − tanh²가 0에 가까워 J가 작아집니다.</li>
     <li>"층 하나 더"를 켜면 두 층을 이어 붙인 지도의 야코비안이 J₂·J₁로 곱해집니다(연쇄 법칙). 역전파는 오차의 기울기에 이 표들을 <b>뒤에서부터</b> 곱해 앞 층까지 전하는 계산입니다.</li>
     <li>자동미분에는 두 방향이 있습니다. <b>순방향</b>은 입력 쪽의 작은 변화 v를 앞으로 밀어 J·v(야코비안-벡터 곱, JVP)를 구하고, <b>역방향</b>은 출력 쪽에서 u·J(벡터-야코비안 곱, VJP)를 거꾸로 구합니다. 손실은 숫자 하나라 역방향 한 번이면 모든 가중치의 기울기가 나옵니다. 역전파가 역방향 자동미분인 이유입니다[18].</li>
     <li>곡면 z = f(u, v)를 x = u, y = v, z = f로 보는 지도의 야코비안은 3×2 표이고, 두 열이 ②의 접선 t<sub>u</sub>, t<sub>v</sub>입니다. 참고한 영상은 같은 표를 눕혀(2×3, 행이 접선) 썼습니다. 이 페이지는 행 = 출력, 열 = 입력인 표준 표기로 통일했습니다.</li></ol>
     <div class="lim">이 단계의 한계: 야코비안은 1차(직선) 근사라 원이 클수록 실제 모양(주황)과 타원(초록 점선)이 어긋납니다. 학습률이 작아 한 걸음이 작을 때는 대체로 잘 맞지만, 걸음이 크면 어긋남이 커집니다.</div></div>
+<div class="ezm"><h4>수학 수식을 어려워하는 조수가 대신 물어봅니다</h4><div class="ask"><img data-mood="asst_shock" alt="" aria-hidden="true"><p><b>조수 하루</b>야코비안 표는 숫자로 어떻게 채워요? det은 또 뭐예요?</p></div><p class="saywords"><b>말로 먼저</b> 입력을 한 방향으로만 조금 움직여 보고, 출력이 얼마나 움직였는지를 적으면 표의 한 열이 됩니다. 두 방향을 다 해 보면 표가 완성됩니다. det(행렬식)은 작은 정사각형 넓이가 몇 배가 되는지입니다.</p><p class="school"><b>학교 수학으로 보면</b> 일차함수(곱하고 더하기), 그리고 평행사변형의 넓이.</p><div class="try"><b>숫자로 한 번 해 보기</b><ol><li>간단한 층: 출력 = (2x, x + y). 입력 x만 0.1 움직이면 출력은 (0.2, 0.1) 움직임 → 첫 열 <b>(2, 1)</b></li><li>y만 0.1 움직이면 출력은 (0, 0.1) → 둘째 열 <b>(0, 1)</b>. 표는 [[2, 0], [1, 1]]</li><li>넓이 배율 = 2 × 1 − 0 × 1 = <b>2</b>. 넓이 0.01인 작은 정사각형이 넓이 0.02인 평행사변형이 됩니다. 층 둘을 지나면 두 표를 곱합니다(연쇄 법칙)</li></ol></div><details class="fold eqx"><summary>식으로 보면 (몰라도 됩니다)</summary><div class="tblwrap"><table class="cmp eqt"><thead><tr><th>식 조각</th><th>읽는 법</th><th>뜻</th></tr></thead><tbody><tr><td class="m">J</td><td>제이</td><td>야코비안 — 입력 변화 → 출력 변화를 적은 표</td></tr><tr><td class="m">∂F<sub>i</sub>/∂x<sub>j</sub></td><td></td><td>입력 j를 조금 움직일 때 출력 i의 변화율</td></tr><tr><td class="m">det J</td><td>디터미넌트 제이</td><td>작은 넓이가 몇 배가 되나</td></tr><tr><td class="m">J₂·J₁</td><td></td><td>두 층을 지날 때: 표끼리 곱함</td></tr></tbody></table></div></details><div class="ask"><img data-mood="asst_spark" alt="" aria-hidden="true"><p><b>조수 하루</b>한 방향씩 조금 움직여 보고 받아 적으면 표가 되는군요. 역전파는 이 표들을 뒤에서부터 곱하는 거고요.</p></div></div>
   <details class="fold"><summary>수식으로 보기 — 역전파는 야코비안의 곱</summary>
     <p>오차 L이 출력 h₂ = F₂(h₁), h₁ = F₁(x)를 거쳐 나올 때 ∂L/∂x = (∂L/∂h₂)·J₂·J₁. 가중치에 대한 기울기도 같은 사슬에 마지막 고리만 바꿔 얻습니다. 실제 계산은 큰 J를 만들지 않고 "벡터 × J"만 차례로 구해(벡터-야코비안 곱) 비용을 줄입니다.</p>
     <p style="margin:0"><math display="block" aria-label="야코비안 J는 출력 F i를 입력 x j로 편미분한 값을 모은 m행 n열 행렬"><msub><mi>J</mi><mi>F</mi></msub><mo>(</mo><mi mathvariant="bold">x</mi><mo>)</mo><mo>=</mo><msub><mrow><mo>[</mo><mfrac><mrow><mo>∂</mo><msub><mi>F</mi><mi>i</mi></msub></mrow><mrow><mo>∂</mo><msub><mi>x</mi><mi>j</mi></msub></mrow></mfrac><mo>]</mo></mrow><mrow><mi>m</mi><mo>×</mo><mi>n</mi></mrow></msub></math></p></details>
@@ -559,31 +586,32 @@ details.ez-why:not([open]){align-self:start}
 <!-- 대결 -->
 <section class="sec" id="s6" aria-labelledby="h-s6"><div class="wrap">
   <h2 id="h-s6"><span class="hex">6</span>울타리를 따라 걷기 — 라그랑주 승수</h2>
-  <div class="tags"><span class="tag nn">모델: 제약 있는 최적화 ℒ = f − λg</span><span class="tag fly">일상: 정상에 못 오르는 둘레길</span></div>
+  <div class="tags"><span class="tag nn">모델: 제약 있는 최적화(라그랑주 승수)</span><span class="tag fly">일상: 정상에 못 오르는 둘레길</span></div>
   <p class="muted" style="font-size:14px">②장(그래디언트와 등고선)을 읽었다면 ③~⑤를 건너뛰고 바로 읽어도 됩니다.</p>
   <div class="pair">
     <div><div class="tl">일상으로 치면</div>산 정상은 출입 금지라 둘레길(울타리)로만 걸을 수 있습니다. 둘레길에서 가장 높은 곳은 어디일까요? 등고선이 둘레길을 <b>가로지르는</b> 곳이라면 한쪽으로 조금 더 가면 더 높아집니다. 등고선이 둘레길에 <b>스치듯 닿기만</b> 하는 곳에서 더는 오를 수 없습니다.</div>
-    <div><div class="tr">수학에서는</div>제약 g(x) = 0을 지키면서 f(x)를 가장 크게(또는 작게) 하는 문제입니다. 라그랑주의 방법은 둘을 한 식 <b>ℒ(x, λ) = f(x) − λ g(x)</b>로 묶고, 모든 변수와 λ로 편미분한 값을 0으로 놓습니다. 그 결과가 "∇f = λ∇g, 그리고 g(x) = 0"입니다.</div>
+    <div><div class="tr">말로 하면</div>울타리(제약)를 지키면서 높이(목표)를 가장 크게 하는 문제입니다. 답이 되는 자리에서는 <b>목표의 오르막 화살표와 울타리의 깃대 화살표가 나란</b>합니다. 라그랑주의 방법은 목표와 울타리를 한 식으로 묶어, 이 "나란함"과 "울타리 위에 있음"을 한꺼번에 푸는 계산법입니다.<details class="fold eqx"><summary>식으로 보면 (몰라도 됩니다)</summary><p>제약 g(x) = 0, 목표 f(x). <b>ℒ(x, λ) = f(x) − λ g(x)</b>를 모든 변수와 λ로 편미분해 0으로 놓으면 "∇f = λ∇g, 그리고 g(x) = 0".</p></details></div>
   </div>
   <div class="panel">
     <div class="ptitle">울타리 실험 — 왼쪽: 땅 위에 올린 울타리(빨강), 오른쪽: 위에서 본 등고선과 두 화살표</div>
     <div class="twin"><div class="cwrap tall"><canvas id="cvS6a" aria-label="곡면 z = f(x, y) 위에 원 모양 제약 곡선을 올리고, 지금 점과 제약 위의 최적점을 표시한 3D 그림"></canvas><span class="hint">끌어서 돌리기</span></div><div class="cwrap tall"><canvas id="cvS6b" aria-label="위에서 본 등고선 지도, 원 모양 울타리, 지금 점에서의 ∇f와 ∇g 화살표"></canvas></div></div>
     <div class="ctrl">
       <div class="group" role="group" aria-label="땅 고르기"><span class="glabel">땅</span><button class="bt" type="button" data-s6="curved" aria-pressed="true">굽은 땅</button><button class="bt" type="button" data-s6="plane" aria-pressed="false">예제: f = x + y</button></div>
-      <div class="group"><label class="glabel" for="r-th6">울타리 위 위치 θ</label><input type="range" id="r-th6" min="0" max="359" step="1" value="120"><span class="val" id="v-th6">120°</span></div>
+      <div class="group"><label class="glabel" for="r-th6">울타리 위 위치 (각도)</label><input type="range" id="r-th6" min="0" max="359" step="1" value="120"><span class="val" id="v-th6">120°</span></div>
       <div class="group"><button class="bt" type="button" id="b6max">가장 높은 점으로</button><button class="bt" type="button" id="b6min">가장 낮은 점으로</button></div>
     </div>
     <div class="eq" id="eq6"></div>
-    <div class="minis"><div class="mini a"><span>지금 점의 높이 f</span><b id="m6-f">—</b></div><div class="mini m"><span>∇f와 ∇g 사이 각도</span><b id="m6-ang">—</b></div><div class="mini g"><span>울타리 따라 경사 (0이면 후보)</span><b id="m6-t">—</b></div><div class="mini r"><span>λ = ∇f를 ∇g로 맞춘 배수</span><b id="m6-lam">—</b></div></div>
+    <div class="minis"><div class="mini a"><span>지금 점의 높이 f</span><b id="m6-f">—</b></div><div class="mini m"><span>두 화살표 사이 각도</span><b id="m6-ang">—</b></div><div class="mini g"><span>울타리 따라 경사 (0이면 후보)</span><b id="m6-t">—</b></div><div class="mini r"><span>두 화살표 길이 비율 (λ)</span><b id="m6-lam">—</b></div></div>
     <div class="insight" id="i-s6" aria-live="polite"></div>
   </div>
   <p class="gut">한 줄 직관: 울타리 위의 최적점에서는 f의 등고선이 울타리에 스치듯 닿고, 그래서 두 곡선의 깃대(법선) 방향이 나란해진다.</p>
   <div class="explain"><h4>풀이</h4><ol>
     <li>울타리 위에서 조금 움직이는 방향은 울타리의 접선 방향뿐입니다. 그 방향으로 f가 변하지 않아야(경사 0) 더 오를 곳이 없습니다.</li>
-    <li>f가 접선 방향으로 변하지 않으려면 ∇f가 접선과 직각, 곧 울타리의 법선 방향이어야 합니다. 울타리의 법선은 ∇g이므로 <b>∇f = λ∇g</b>. 같은 방향이면 λ > 0, 정반대면 λ &lt; 0입니다.</li>
+    <li>높이가 울타리 방향으로 변하지 않으려면, 높이의 오르막 화살표(∇f)가 울타리와 직각, 곧 울타리의 깃대 방향(∇g)이어야 합니다. 두 화살표가 나란하다는 뜻이고, 길이 비율이 λ(람다)입니다(<b>∇f = λ∇g</b>). 같은 방향이면 λ가 양수, 정반대면 음수입니다.</li>
     <li>이것은 ②에서 본 "∇f는 등고선과 직각"과 같은 말입니다. 두 곡선(f의 등고선과 울타리)이 접하면 접선을 함께 쓰고, 그러면 법선도 나란합니다.</li>
-    <li>식으로 쓰면 ∇f − λ∇g = 0 (n개)와 g(x) = 0 (1개), 모두 <b>n + 1개의 식</b>으로 n개의 좌표와 λ를 구합니다. 이 식들은 ℒ = f − λg를 모든 변수와 λ로 편미분해 0으로 놓은 것과 똑같습니다.</li></ol>
-    <div class="lim" style="border-left-color:var(--gfp)"><b>예제</b> 원 x² + y² = 1 위에서 f = x + y를 가장 크게.<br>
+    <li>"화살표가 나란함" 조건이 좌표 수만큼, "울타리 위에 있음"이 하나 — 모르는 값(좌표들과 λ)과 식의 수가 같아서 풀 수 있습니다.<details class="fold eqx"><summary>식으로 보면 (몰라도 됩니다)</summary><p>∇f − λ∇g = 0 (n개)와 g(x) = 0 (1개), 모두 n + 1개의 식으로 n개의 좌표와 λ를 구합니다. ℒ = f − λg를 모든 변수와 λ로 편미분해 0으로 놓은 것과 같습니다.</p></details></li></ol>
+    <div class="ezm"><h4>수학 수식을 어려워하는 조수가 대신 물어봅니다</h4><div class="ask"><img data-mood="asst_shock" alt="" aria-hidden="true"><p><b>조수 하루</b>∇f = λ∇g… 화살표가 나란하다는 게 숫자로는 어떻게 보여요?</p></div><p class="saywords"><b>말로 먼저</b> 원 모양 울타리 위의 점 몇 개에서 높이를 직접 재 보면 됩니다. 가장 높은 점에서 두 화살표가 정말 같은 쪽을 가리키는지 확인합니다.</p><p class="school"><b>학교 수학으로 보면</b> 원의 방정식 x² + y² = 1, 그리고 피타고라스 정리.</p><div class="try"><b>숫자로 한 번 해 보기</b><ol><li>울타리: 반지름 1인 원. 높이 = x + y. 점 (1, 0) → <b>1</b>, (0.6, 0.8) → <b>1.4</b>, (0.8, 0.6) → <b>1.4</b></li><li>가운데 (0.707, 0.707) → <b>1.414</b>로 가장 높음. 이 점에서 높이의 오르막 화살표는 (1, 1), 울타리의 깃대 화살표는 (1.414, 1.414) → 같은 방향, 길이 비율 λ = <b>0.707</b></li><li>울타리를 넓혀 반지름²을 1 → 1.01로 늘리면 가장 높은 값은 1.4142 → 1.4213, 곧 0.01당 <b>0.00707</b> → 다시 λ = 0.707(그림자 가격)</li></ol></div><div class="ask"><img data-mood="asst_spark" alt="" aria-hidden="true"><p><b>조수 하루</b>가장 높은 점에서 두 화살표가 같은 쪽! 그리고 λ는 울타리를 넓힐 때 얻는 이득의 속도였어요.</p></div></div>
+    <div class="lim" style="border-left-color:var(--gfp)"><b>예제 (식으로)</b> 원 x² + y² = 1 위에서 f = x + y를 가장 크게.<br>
       ∇f = (1, 1), g = x² + y² − 1, ∇g = (2x, 2y). ∇f = λ∇g에서 1 = 2λx, 1 = 2λy → x = y.<br>
       제약에 넣으면 2x² = 1 → x = y = ±1/√2. 후보가 <b>두 개</b>입니다.<br>
       (1/√2, 1/√2): f = √2 ≈ 1.414, λ = 1/√2 ≈ 0.707 → <b>최대</b> · (−1/√2, −1/√2): f = −√2, λ = −1/√2 → <b>최소</b><br>
@@ -594,13 +622,13 @@ details.ez-why:not([open]){align-self:start}
   <h3 id="s6-shadow">λ의 두 번째 얼굴 — 그림자 가격</h3>
   <div class="pair">
     <div><div class="tl">일상으로 치면</div>둘레길을 조금 바깥으로 넓혀 준다면, 둘레길의 가장 높은 곳은 얼마나 더 높아질까요? 그 "넓혀 준 만큼 얻는 이득의 속도"가 λ입니다.</div>
-    <div><div class="tr">수학에서는</div>제약을 g(x) = x² + y² − c로 쓰고 c를 조금 늘리면, 최적값 f*(c)가 변하는 빠르기가 df*/dc = λ입니다. 제약 한 단위의 값어치라서 경제학자는 λ를 <b>그림자 가격</b>(잠재가격, shadow price)이라 부릅니다.</div>
+    <div><div class="tr">말로 하면</div>울타리를 조금 넓혀 줄 때 가장 높은 값이 늘어나는 빠르기가 바로 λ입니다. 제약 한 단위의 값어치라서 경제학자는 λ를 <b>그림자 가격</b>(잠재가격, shadow price)이라 부릅니다.<details class="fold eqx"><summary>식으로 보면 (몰라도 됩니다)</summary><p>제약 g(x) = x² + y² − c, c를 조금 늘리면 df*/dc = λ.</p></details></div>
   </div>
   <div class="panel">
     <div class="ptitle">울타리를 넓히면 — 최적값 f*(c)와 기울기 λ인 접선</div>
     <div class="cwrap"><canvas id="cvS6c" aria-label="울타리 크기 c에 따른 최적값 곡선과 c = 1에서 기울기 λ인 접선"></canvas></div>
     <div class="ctrl"><div class="group"><label class="glabel" for="r-eps6">울타리 넓히기 ε (c = 1 + ε)</label><input type="range" id="r-eps6" min="-0.5" max="0.8" step="0.05" value="0.2"><span class="val" id="v-eps6">0.20</span></div></div>
-    <div class="minis"><div class="mini a"><span>실제 최적값 f*(1 + ε)</span><b id="m6-v">—</b></div><div class="mini g"><span>λ로 어림 f*(1) + λ·ε</span><b id="m6-p">—</b></div><div class="mini m"><span>차이</span><b id="m6-d">—</b></div><div class="mini r"><span>c = 1에서의 λ</span><b id="m6-l1">—</b></div></div>
+    <div class="minis"><div class="mini a"><span>실제 최적값 f*(1 + ε)</span><b id="m6-v">—</b></div><div class="mini g"><span>λ로 어림한 새 최적값</span><b id="m6-p">—</b></div><div class="mini m"><span>차이</span><b id="m6-d">—</b></div><div class="mini r"><span>그림자 가격 λ (울타리 1에서)</span><b id="m6-l1">—</b></div></div>
     <div class="insight" id="i-s6c" aria-live="polite"></div>
   </div>
   <div class="bridge field"><b>다른 장과 이어지는 곳</b> 경제학: <a href="first_step_2.html#s42">최적화 첫걸음 ② 4.2</a>에서 "16톤을 가장 싸게"의 λ = 한계비용이 바로 이 그림자 가격입니다(목표를 1톤 올릴 때 늘어나는 최소 비용). 신경망: <a href="first_step_2.html#s54">첫걸음 ② 5.4</a>의 "가중치 크기 울타리"와 규제항 λ|w|²이 같은 그림입니다. 부등식 울타리(KKT)는 제조업 편에서 다룹니다.</div>
@@ -610,7 +638,7 @@ details.ez-why:not([open]){align-self:start}
 
 <section class="sec" id="duel" aria-labelledby="h-duel"><div class="wrap">
   <h2 id="h-duel">대결 — 기울기 0이면 바닥인가?</h2>
-  <p class="lead">땅: f(w₁, w₂) = (w₁² − 1)² + w₂². 바닥은 (±1, 0) 두 곳(오차 0), 가운데 (0, 0)은 고개(오차 1)입니다. 공은 능선 위 (0, 1.5)에서 출발하고 학습률 0.05로 내려갑니다. 판정 기준은 <b>멈춘 곳의 오차</b>(낮을수록 좋음)입니다.</p>
+  <p class="lead">땅: 바닥이 왼쪽·오른쪽 두 곳(오차 0)이고 가운데는 고개(오차 1)인 지형입니다(식으로는 f(w₁, w₂) = (w₁² − 1)² + w₂², 바닥 (±1, 0)). 공은 능선 위 (0, 1.5)에서 출발하고 학습률 0.05로 내려갑니다. 판정 기준은 <b>멈춘 곳의 오차</b>(낮을수록 좋음)입니다.</p>
   <div class="duel">
     <div class="side l"><div class="head"><img id="d-fly" data-mood="fly_point" alt="" aria-hidden="true"><div><b style="color:var(--c-fly)">초파리 연구원</b><br><span class="muted">기울기가 0에 가까우면 헤시안 고유값을 본다. 음수가 있으면 가장 작은 고유값의 고유벡터 방향으로 한 발 비켜 선다.</span></div></div><div data-dlg="dfly"></div></div>
     <div class="vs">VS</div>
@@ -633,7 +661,7 @@ details.ez-why:not([open]){align-self:start}
 <!-- 정리 -->
 <section class="sec" id="sum" aria-labelledby="h-sum"><div class="wrap">
   <h2 id="h-sum">정리 — 지도 말과 수학 말</h2>
-  <div class="tblwrap"><table class="cmp"><thead><tr><th>단계</th><th>수학 이름</th><th>지도에서는</th><th>한 줄 식</th><th>이 단계의 한계</th></tr></thead><tbody>
+  <div class="tblwrap"><table class="cmp"><thead><tr><th>단계</th><th>수학 이름</th><th>지도에서는</th><th>한 줄 식 (몰라도 됨)</th><th>이 단계의 한계</th></tr></thead><tbody>
     <tr><td>①</td><td>단면, 1차원 경사하강</td><td>산을 칼로 자른 선</td><td>w ← w − η·L′(w)</td><td>축 하나씩만 움직임</td></tr>
     <tr><td>②</td><td>그래디언트 ∇f, 법선 n</td><td>깃대와 그 그림자</td><td>n = (−∇f, 1)</td><td>멀리 가도 되는지 모름</td></tr>
     <tr><td>③</td><td>헤시안 H, 고유값 λ, 라플라시안</td><td>그릇의 길쭉함과 가파름</td><td>η &lt; 2/λ<sub>max</sub></td><td>그 점 둘레에서만 맞음</td></tr>
@@ -1315,7 +1343,7 @@ U.Study({quiz:{
  s4:[{q:'z = x² − y²의 라플라시안은?',o:['4','0','−2'],a:1,why:'∂²z/∂x² = 2, ∂²z/∂y² = −2, 합은 0. 위로 휜 만큼 아래로 휘었습니다.',hint:'두 방향의 2차 미분을 더하세요.'},
      {q:'쌍곡포물면이 "곧은 선 두 무리"를 품는 이유로 맞는 것은?',o:['x/a − y/b를 묶으면 z가 남은 변수의 1차식이 되어서','곡면이 평평해서','a와 b가 같아서'],a:0,why:'z = (x/a − y/b)(x/a + y/b). 한 괄호를 t로 묶으면 z = t × (다른 괄호), 직선입니다. 다른 괄호를 묶으면 두 번째 무리가 나옵니다.',hint:'z를 두 괄호의 곱으로 써 보세요.'}],
  s6:[{q:'원 x² + y² = 1 위에서 f = x + y를 가장 크게 하는 점에서 ∇f와 ∇g는?',o:['서로 직각이다','같은 방향으로 나란하다','둘 다 0이다'],a:1,why:'최적점에서는 f의 등고선이 울타리에 접해 두 법선이 나란합니다. (1/√2, 1/√2)에서 ∇f = (1, 1), ∇g = (√2, √2) — λ = 1/√2.',hint:'⑥ 실험에서 각도가 몇 도일 때 멈췄나요?'},
-     {q:'라그랑주 승수 λ = 0.7이면, 제약을 c = 1에서 1.1로 조금 풀어 줄 때 최적값은 대략?',o:['0.07쯤 늘어난다','0.7쯤 늘어난다','변하지 않는다'],a:0,why:'df*/dc = λ이므로 Δf* ≈ λ·Δc = 0.7 × 0.1 = 0.07. 그래서 λ를 그림자 가격이라 부릅니다.',hint:'그림자 가격 실험의 "λ로 어림" 항목.'}],
+     {q:'라그랑주 승수 λ = 0.7이면, 제약을 c = 1에서 1.1로 조금 풀어 줄 때 최적값은 대략?',o:['0.07쯤 늘어난다','0.7쯤 늘어난다','변하지 않는다'],a:0,why:'df*/dc = λ이므로 Δf* ≈ λ·Δc = 0.7 × 0.1 = 0.07. 그래서 λ를 그림자 가격이라 부릅니다.',hint:'그림자 가격 실험의 "λ로 어림한 새 최적값" 항목.'}],
  s5:[{q:'tanh 층 F(x) = tanh(Wx)의 야코비안은?',o:['W','diag(1 − tanh²(Wx)) · W','tanh(W)'],a:1,why:'연쇄 법칙: 안쪽 Wx의 야코비안 W에 바깥 tanh의 기울기 1 − tanh²를 곱합니다.',hint:'tanh의 미분은 1 − tanh²예요.'},
      {q:'두 층을 이어 붙인 지도의 야코비안은?',o:['J₁ + J₂','J₂ · J₁','J₁ · J₂ · J₁'],a:1,why:'나중 층의 표를 앞에 곱합니다(연쇄 법칙). 역전파는 이 곱을 뒤에서부터 계산해요.',hint:'함수를 이어 붙이면 미분은 곱해져요.'}],
  duel:[{q:'대결에서 주판봇 공이 멈춘 (0, 0)의 헤시안 고유값은 −4와 2입니다. 이 점은?',o:['바닥','안장점','봉우리'],a:1,why:'고유값 부호가 섞였으니 안장점입니다. 기울기 0만으로는 바닥인지 알 수 없어요.',hint:'③에서 본 분류표를 떠올려 보세요.'}]

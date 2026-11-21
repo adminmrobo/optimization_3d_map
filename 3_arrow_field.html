@@ -283,6 +283,25 @@ details.ez-why>summary::after{content:" ▾";color:var(--muted)}
 details.ez-why:not([open])>summary::after{content:" ▸ 펼치기"}
 details.ez-why:not([open]){align-self:start}
 
+/* ── 연구실 확장 2차(그릇 1~3편): 말 먼저 · 식 접기 · 주황 조수 수식 상자 · 30초 복습 ── */
+body{line-height:1.8}
+.explain{padding:20px 22px}
+.explain ol,.explain ul{display:flex;flex-direction:column;gap:8px}
+details.eqx{background:#fbfcfd;border:1px dashed var(--rule);border-radius:10px;padding:8px 14px;margin:12px 0 4px;font-size:14.5px}
+details.eqx summary{cursor:pointer;font-weight:700;color:var(--muted);font-size:13.5px}
+details.eqx[open] summary{margin-bottom:6px}
+.ezm{border:1px solid var(--rule);border-top:4px solid #e8892b;border-radius:12px;background:#fffdf8;padding:18px 20px;margin:18px 0;display:flex;flex-direction:column;gap:10px}
+.ezm h4{margin:0;font-size:15px;color:#9a5a12}
+.ezm .ask{display:flex;gap:10px;align-items:flex-start}
+.ezm .ask img{width:44px;height:44px;flex:none;border-radius:50%;background:#fff;border:1px solid var(--rule);object-fit:cover;object-position:top;image-rendering:pixelated}
+.ezm .ask p{margin:0;background:#fff;border:1px solid var(--rule);border-radius:10px;padding:8px 12px}
+.ezm .ask p b{display:block;font-size:12.5px;color:var(--muted)}
+.ezm p.saywords,.ezm p.school{margin:0}
+.ezm .try{background:#fff;border:1px dashed #e8b67a;border-radius:10px;padding:10px 14px}
+.ezm .try ol{margin:6px 0 0;padding-left:22px;display:flex;flex-direction:column;gap:6px}
+.eqt td.m{font-family:ui-monospace,Menlo,Consolas,monospace;white-space:nowrap}
+.review30{background:var(--panel);border:1px solid var(--rule);border-left:4px solid #e8892b;border-radius:10px;padding:12px 16px;margin:14px 0}
+
 </style>
 <!-- lab-kg:head -->
 <meta name="citation_title" content="좌표축 위의 그릇 ③ 화살표 밭 편 — x·y·z 세 축 공간에서 읽는 ∇(나블라)">
@@ -322,7 +341,7 @@ details.ez-why:not([open]){align-self:start}
     <li>∇는 "x·y·z 세 방향으로 조금씩 움직여 보고 얼마나 바뀌는지 재는 도구"를 한데 묶은 것이다.</li>
     <li>숫자 밭에 쓰면 <b>그래디언트</b>(가장 가파른 오르막), 화살표 밭에 쓰면 <b>발산</b>(퍼져 나감)과 <b>회전</b>(소용돌이)이 된다.</li>
     <li>그래디언트에 한 번 더 발산을 쓰면 <b>라플라시안</b> — "이웃 평균보다 내가 얼마나 낮은가"가 된다.</li></ol></div>
-  <div class="start"><b>처음이라면</b> 세 축 → ① 편미분 → ② 그래디언트 → ③ 발산 → ④ 회전 → 대결 → 정리 순서로 보세요. ⑤ 라플라시안은 두 번째 읽을 때 봐도 됩니다. 식은 "수식으로 보기"를 펼칠 때만 나옵니다. 1편 ②의 "∇ 하나, 연산 넷" 상자를 넓힌 편입니다.</div>
+  <div class="start"><b>처음이라면</b> 세 축 → ① 편미분 → ② 그래디언트 → ③ 발산 → ④ 회전 → 대결 → 정리 순서로 보세요. ⑤ 라플라시안은 두 번째 읽을 때 봐도 됩니다. 식은 "수식으로 보기"·"식으로 보면"을 펼칠 때만 나옵니다. <b>수식을 몰라도 됩니다</b> — 막히면 주황색 상자에서 조수 하루가 대신 물어봅니다. 1편 ②의 "∇ 하나, 연산 넷" 상자를 넓힌 편입니다.</div><div class="review30"><b>30초 복습 — 기호 두 개만</b> ① <b>∇</b>(나블라): "x·y·z 세 방향으로 조금씩 움직여 보고 얼마나 바뀌는지 재는 도구". ② <b>∂</b>(라운드 디): "다른 방향은 그대로 두고"라는 표시. 이 두 기호를 몰라도 본문은 말과 숫자로 읽을 수 있습니다.</div>
   <div class="kpis" aria-label="숫자 요약">
     <div class="kpi g"><b>3개</b><span>진짜 공간 축 x·y·z</span></div>
     <div class="kpi m"><b>4가지</b><span>∇로 만드는 연산</span></div>
@@ -371,10 +390,10 @@ details.ez-why:not([open]){align-self:start}
     <div class="insight" id="i-map" aria-live="polite"></div>
   </div>
   <div class="tblwrap"><table class="cmp"><thead><tr><th>붙이는 방식</th><th>이름</th><th>무엇이 나오나</th><th>생활 장면</th><th>단계</th></tr></thead><tbody>
-    <tr><td>∇f — 숫자 밭에 그대로</td><td>그래디언트</td><td>화살표 (가장 가파른 오르막)</td><td>난로 쪽으로 가면 따뜻해진다</td><td>②</td></tr>
-    <tr><td>∇·F — 화살표 밭과 점곱</td><td>발산</td><td>숫자 (퍼져 나가는 양)</td><td>욕조에 푼 물감이 퍼진다</td><td>③</td></tr>
-    <tr><td>∇×F — 화살표 밭과 가위곱</td><td>회전</td><td>화살표 (소용돌이의 축과 세기)</td><td>개울에 띄운 바람개비가 돈다</td><td>④</td></tr>
-    <tr><td>∇²f = ∇·∇f</td><td>라플라시안</td><td>숫자 (이웃보다 얼마나 움푹한가)</td><td>차가운 구석이 데워진다</td><td>⑤</td></tr>
+    <tr><td>숫자 밭에 그대로 (∇f)</td><td>그래디언트</td><td>화살표 (가장 가파른 오르막)</td><td>난로 쪽으로 가면 따뜻해진다</td><td>②</td></tr>
+    <tr><td>화살표 밭과 점곱 (∇·F)</td><td>발산</td><td>숫자 (퍼져 나가는 양)</td><td>욕조에 푼 물감이 퍼진다</td><td>③</td></tr>
+    <tr><td>화살표 밭과 가위곱 (∇×F)</td><td>회전</td><td>화살표 (소용돌이의 축과 세기)</td><td>개울에 띄운 바람개비가 돈다</td><td>④</td></tr>
+    <tr><td>기울기 밭의 발산 (∇²f)</td><td>라플라시안</td><td>숫자 (이웃보다 얼마나 움푹한가)</td><td>차가운 구석이 데워진다</td><td>⑤</td></tr>
   </tbody></table></div>
   <div data-dlg="map"></div>
 </div></section>
@@ -382,10 +401,10 @@ details.ez-why:not([open]){align-self:start}
 <!-- ① 편미분 -->
 <section class="sec" id="s1" aria-labelledby="h-s1"><div class="wrap">
   <h2 id="h-s1"><span class="hex">1</span>한 방향씩 재 보기 — 편미분</h2>
-  <div class="tags"><span class="tag nn">수학: 편미분 ∂f/∂x, ∂f/∂y, ∂f/∂z</span><span class="tag fly">일상: 온도계를 한 방향으로만 옮겨 보기</span></div>
+  <div class="tags"><span class="tag nn">수학: 편미분 (한 방향씩 기울기)</span><span class="tag fly">일상: 온도계를 한 방향으로만 옮겨 보기</span></div>
   <div class="pair">
     <div><div class="tl">일상으로 치면</div>방 안에 난로가 있습니다. 온도계를 들고 지금 자리에서 <b>앞으로만</b> 반 뼘 옮기면 온도가 조금 바뀝니다. 같은 일을 <b>옆으로만</b>, <b>위로만</b> 해 보면 방향마다 바뀌는 정도가 다릅니다.</div>
-    <div><div class="tr">수학에서는</div>다른 두 좌표는 그대로 두고 한 좌표만 아주 조금 움직였을 때의 변화율이 편미분입니다. 세 방향이니 편미분도 셋: ∂f/∂x, ∂f/∂y, ∂f/∂z. ∂는 "다른 건 고정하고"라는 표시예요.</div>
+    <div><div class="tr">말로 하면</div>다른 두 방향은 그대로 두고 한 방향만 아주 조금 움직였을 때 값이 바뀌는 빠르기가 <b>편미분</b>입니다. 세 방향이니 편미분도 셋입니다.<details class="fold eqx"><summary>식으로 보면 (몰라도 됩니다)</summary><p>∂f/∂x, ∂f/∂y, ∂f/∂z. ∂(라운드 디)는 "다른 건 고정하고"라는 표시.</p></details></div>
   </div>
   <div class="panel">
     <div class="ptitle">온도계 실험 — 한 점에서 x·y·z로 한 걸음씩 찍어 보기</div>
@@ -395,15 +414,16 @@ details.ez-why:not([open]){align-self:start}
       <div class="group" data-xyz="p1" data-v="1,0.5,0.8"></div>
     </div>
     <div class="eq" id="eq1"></div>
-    <div class="minis"><div class="mini a"><span>이 점의 값 f</span><b id="m1-f">—</b></div><div class="mini r"><span>∂f/∂x (빨강, x로만)</span><b id="m1-x">—</b></div><div class="mini g"><span>∂f/∂y (청록, y로만)</span><b id="m1-y" style="color:var(--terrain)">—</b></div><div class="mini m"><span>∂f/∂z (검정, z로만)</span><b id="m1-z" style="color:var(--ink)">—</b></div></div>
+    <div class="minis"><div class="mini a"><span>이 점의 값 f</span><b id="m1-f">—</b></div><div class="mini r"><span>x 쪽 기울기 (빨강)</span><b id="m1-x">—</b></div><div class="mini g"><span>y 쪽 기울기 (청록)</span><b id="m1-y" style="color:var(--terrain)">—</b></div><div class="mini m"><span>z 쪽 기울기 (검정)</span><b id="m1-z" style="color:var(--ink)">—</b></div></div>
     <div class="insight" id="i-s1" aria-live="polite"></div>
   </div>
   <p class="gut">한 줄 직관: 편미분은 "한 방향으로만 반 뼘 옮겼을 때 얼마나 바뀌나"이고, 세 방향이라 세 개다.</p>
   <div class="explain"><h4>풀이</h4><ol>
-    <li>점 (x, y, z)에서 x만 0.1 늘린 점과 0.1 줄인 점의 값을 잽니다. 그 차이를 움직인 거리 0.2로 나누면 ∂f/∂x에 아주 가까워집니다. y, z도 똑같이 합니다.</li>
+    <li>지금 자리에서 앞(x)으로만 0.1 옮긴 점과 뒤로 0.1 옮긴 점의 값을 잽니다. 그 차이를 움직인 거리 0.2로 나누면 x 쪽 편미분에 아주 가까워집니다. y, z도 똑같이 합니다.</li>
     <li>화살표 세 개(빨강·청록·검정)는 각 편미분의 크기와 부호입니다. 화살표가 축의 + 쪽이면 그 방향으로 갈수록 값이 커집니다.</li>
     <li>"기울어진 판"을 고르면 어디서 재도 세 화살표가 똑같습니다. 판은 어디서나 같은 정도로 기울었기 때문이에요.</li></ol>
     <div class="lim">이 단계의 한계: 편미분은 축 방향 세 개만 봅니다. 비스듬한 방향 중 어디가 가장 가파른지는 세 개를 합쳐야 알 수 있습니다 → ②</div></div>
+<div class="ezm"><h4>수학 수식을 어려워하는 조수가 대신 물어봅니다</h4><div class="ask"><img data-mood="asst_shock" alt="" aria-hidden="true"><p><b>조수 하루</b>∂f/∂x, ∂f/∂y, ∂f/∂z… 세 개를 다 따로 계산해요?</p></div><p class="saywords"><b>말로 먼저</b> 네, 방향마다 한 번씩, 같은 방법으로 잽니다. 앞뒤로 조금 옮겨 값의 차이를 거리로 나누는 것이 전부입니다.</p><p class="school"><b>학교 수학으로 보면</b> 일차함수의 기울기(세로 변화 ÷ 가로 변화)를 세 번.</p><div class="try"><b>숫자로 한 번 해 보기</b><ol><li>그릇 밭(값 = x² + y² + z²), 점 (1, 2, 0)</li><li>x 쪽: (1.1, 2, 0)은 5.21, (0.9, 2, 0)은 4.81 → 0.4 ÷ 0.2 = <b>2</b> / y 쪽: 5.41과 4.61 → 0.8 ÷ 0.2 = <b>4</b></li><li>z 쪽: 위·아래 모두 5.01 → 차이 0 → <b>0</b>. 세 편미분 (2, 4, 0)을 묶으면 ②의 그래디언트 화살표가 됩니다</li></ol></div><details class="fold eqx"><summary>식으로 보면 (몰라도 됩니다)</summary><div class="tblwrap"><table class="cmp eqt"><thead><tr><th>식 조각</th><th>읽는 법</th><th>뜻</th></tr></thead><tbody><tr><td class="m">∂f/∂x</td><td>에프를 엑스로 편미분</td><td>y·z는 그대로, x 쪽으로만 바뀌는 빠르기</td></tr></tbody></table></div></details><div class="ask"><img data-mood="asst_spark" alt="" aria-hidden="true"><p><b>조수 하루</b>앞뒤로 옮겨 차이 ÷ 거리, 세 번! 그리고 그 셋을 묶으면 화살표군요.</p></div></div>
   <details class="fold"><summary>수식으로 보기</summary><p>∂f/∂x = lim<sub>h→0</sub> [f(x + h, y, z) − f(x − h, y, z)] / (2h). 이 페이지는 h = 0.001로 계산하고, 화면의 식은 이해를 돕기 위해 h = 0.1로 보여 줍니다. 난로 밭 f = 20 + 30·e<sup>−(x² + y² + z²)/2</sup>의 정확한 편미분은 ∂f/∂x = −30x·e<sup>−(x² + y² + z²)/2</sup>입니다.</p></details>
   <div class="bridge spc"><b>원자료 요약 · ④ Del Operator(@askwhyvalley)</b><ol><li>∇는 방향 자 x̂·ŷ·ẑ와 방향별 기울기 ∂를 짝지어 한 줄로 묶은 도구입니다.</li><li>도구 자체는 계산하지 않고, 무엇에 어떻게 붙이느냐에 따라 네 연산이 됩니다.</li><li>자세히는 <a href="https://adminmrobo.github.io/vector_calculus_lab/01_differential.html#room-1">∇ 특별편 ①편 방 1 — ∇ 도구상자 →</a></li></ol></div>
   <div data-dlg="s1"></div>
@@ -413,10 +433,10 @@ details.ez-why:not([open]){align-self:start}
 <!-- ② 그래디언트 -->
 <section class="sec" id="s2" aria-labelledby="h-s2"><div class="wrap">
   <h2 id="h-s2"><span class="hex">2</span>가장 가파른 오르막 — 그래디언트 ∇f</h2>
-  <div class="tags"><span class="tag nn">수학: ∇f = (∂f/∂x, ∂f/∂y, ∂f/∂z)</span><span class="tag fly">일상: 따뜻해지는 쪽을 가리키는 나침반</span></div>
+  <div class="tags"><span class="tag nn">수학: 그래디언트 (편미분 셋을 묶은 화살표)</span><span class="tag fly">일상: 따뜻해지는 쪽을 가리키는 나침반</span></div>
   <div class="pair">
     <div><div class="tl">일상으로 치면</div>추운 방에서 눈을 감고도 난로 쪽을 알 수 있습니다. 조금씩 움직여 보고 가장 빨리 따뜻해지는 쪽으로 가면 되니까요. 그 쪽을 가리키는 나침반이 그래디언트입니다.</div>
-    <div><div class="tr">수학에서는</div>①의 편미분 세 개를 한 화살표로 묶은 것이 ∇f입니다. 이 화살표는 값이 가장 빨리 커지는 방향을 가리키고, 길이는 그 빠르기입니다. −∇f는 가장 빠른 내리막 — 1편의 경사하강이 가는 방향입니다.</div>
+    <div><div class="tr">말로 하면</div>①의 편미분 세 개를 한 화살표로 묶은 것이 <b>그래디언트</b>(∇f)입니다. 이 화살표는 값이 가장 빨리 커지는 방향을 가리키고, 길이는 그 빠르기입니다. 화살표를 뒤집으면 가장 빠른 내리막 — 1편의 경사하강이 가는 방향입니다.</div>
   </div>
   <div class="panel">
     <div class="ptitle">나침반 실험 — 같은 값 껍질(등위면)과 그래디언트 화살표</div>
@@ -427,14 +447,14 @@ details.ez-why:not([open]){align-self:start}
       <div class="group"><span class="glabel">걷는 쪽</span><span id="g-dir2"></span><button class="bt primary" id="b-walk2" type="button">걷기</button><button class="bt" id="b-reset2" type="button">처음으로</button></div>
     </div>
     <div class="eq" id="eq2"></div>
-    <div class="minis"><div class="mini a"><span>이 점의 값 (껍질의 값)</span><b id="m2-f">—</b></div><div class="mini m"><span>∇f (오르막 화살표)</span><b id="m2-g" style="font-size:16px">—</b></div><div class="mini m"><span>|∇f| 가장 가파른 빠르기</span><b id="m2-n">—</b></div><div class="mini g"><span>걸은 뒤 값</span><b id="m2-w">—</b></div></div>
+    <div class="minis"><div class="mini a"><span>이 점의 값 (껍질의 값)</span><b id="m2-f">—</b></div><div class="mini m"><span>오르막 화살표 (그래디언트)</span><b id="m2-g" style="font-size:16px">—</b></div><div class="mini m"><span>가장 가파른 빠르기</span><b id="m2-n">—</b></div><div class="mini g"><span>걸은 뒤 값</span><b id="m2-w">—</b></div></div>
     <div class="insight" id="i-s2" aria-live="polite"></div>
   </div>
   <p class="gut">한 줄 직관: 같은 값끼리 이은 껍질에 늘 직각으로 꽂힌 화살표가 그래디언트다.</p>
   <div class="explain"><h4>풀이</h4><ol>
     <li>점이 지나가는 <b>같은 값 껍질</b>(회색 점들)이 보입니다. 난로나 그릇이면 공 모양, 기울어진 판이면 평평한 판, 안장이면 모래시계처럼 휜 면입니다.</li>
-    <li>껍질 위를 따라 걸으면 값이 그대로입니다. 그래서 값이 가장 빨리 바뀌는 쪽은 껍질과 <b>직각</b>인 쪽, 곧 ∇f(보라)입니다.</li>
-    <li>"내리막"으로 걸으면 공이 −∇f(초록)를 따라 내려갑니다. 그릇 밭에서는 원점(가장 낮은 곳)에 모입니다. 1편 오차 지도의 경사하강과 같은 움직임이에요.</li></ol>
+    <li>껍질 위를 따라 걸으면 값이 그대로입니다. 그래서 값이 가장 빨리 바뀌는 쪽은 껍질과 <b>직각</b>인 쪽, 곧 그래디언트(보라)입니다.</li>
+    <li>"내리막"으로 걸으면 공이 뒤집은 화살표(초록)를 따라 내려갑니다. 그릇 밭에서는 원점(가장 낮은 곳)에 모입니다. 1편 오차 지도의 경사하강과 같은 움직임이에요.</li></ol>
     <div class="lim">이 단계의 한계: 그래디언트는 숫자 밭에만 씁니다. 바람·물처럼 이미 화살표가 붙어 있는 밭에서는 "퍼짐"과 "돎"을 따로 재야 합니다 → ③·④</div></div>
   <div class="bridge gen"><b>생성 AI로 치면</b> 그림을 만드는 확산 모델의 한 갈래(점수 기반 생성 모델)는 <b>데이터가 많은 쪽으로 가는 그래디언트</b>를 신경망으로 배웁니다. 이 방법을 낸 논문은 잡음을 여러 세기로 섞은 데이터마다 그 그래디언트 밭(점수)을 함께 추정하고, 그림을 만들 때는 잡음이 줄어드는 차례대로 그 화살표를 따라간다고 설명합니다 [4]. 잡음 그림을 그 화살표를 따라 조금씩 옮기면 그림이 나옵니다. 축이 x·y·z 셋이 아니라 픽셀 수만큼 많다는 것만 다릅니다.</div>
   <details class="fold"><summary>수식으로 보기 — 왜 껍질과 직각인가</summary><p>껍질 위의 아주 짧은 이동 d = (dx, dy, dz)에서는 값이 변하지 않으므로 df = ∂f/∂x·dx + ∂f/∂y·dy + ∂f/∂z·dz = ∇f · d = 0입니다. 점곱이 0이니 ∇f는 껍질 위의 모든 방향과 직각입니다. 방향 u(길이 1)로 가는 변화율은 ∇f · u = |∇f| cos θ라서 θ = 0, 곧 ∇f 방향일 때 가장 큽니다.</p></details>
@@ -446,10 +466,10 @@ details.ez-why:not([open]){align-self:start}
 <!-- ③ 발산 -->
 <section class="sec" id="s3" aria-labelledby="h-s3"><div class="wrap">
   <h2 id="h-s3"><span class="hex">3</span>퍼지는가, 모이는가 — 발산 ∇·F</h2>
-  <div class="tags"><span class="tag nn">수학: ∇·F = ∂F<sub>x</sub>/∂x + ∂F<sub>y</sub>/∂y + ∂F<sub>z</sub>/∂z</span><span class="tag fly">일상: 물속에 띄운 투명 상자와 물감</span></div>
+  <div class="tags"><span class="tag nn">수학: 발산 (나간 양 − 들어온 양)</span><span class="tag fly">일상: 물속에 띄운 투명 상자와 물감</span></div>
   <div class="pair">
     <div><div class="tl">일상으로 치면</div>흐르는 물속에 그물로 된 작은 상자를 띄웁니다. 여섯 면으로 <b>나가는 물</b>과 <b>들어오는 물</b>을 세어 봅니다. 나가는 게 더 많으면 상자 안 어딘가에 물이 솟는 샘이 있는 것이고, 들어오는 게 더 많으면 빠지는 구멍이 있는 것입니다.</div>
-    <div><div class="tr">수학에서는</div>상자를 아주 작게 줄였을 때 "나간 양 − 들어온 양"을 상자 부피로 나눈 값이 발산 ∇·F입니다. 결과는 화살표가 아니라 <b>숫자 하나</b>입니다. 양수면 샘, 음수면 빨아들이는 곳, 0이면 들어온 만큼 나갑니다.</div>
+    <div><div class="tr">말로 하면</div>상자를 아주 작게 줄였을 때 "나간 양 − 들어온 양"을 상자 부피로 나눈 값이 <b>발산</b>입니다(기호 ∇·F). 결과는 화살표가 아니라 <b>숫자 하나</b>입니다. 양수면 샘, 음수면 빨아들이는 곳, 0이면 들어온 만큼 나갑니다.</div>
   </div>
   <div class="panel">
     <div class="ptitle">그물 상자 실험 — 여섯 면의 출입을 세고, 물감을 풀어 보기</div>
@@ -470,6 +490,7 @@ details.ez-why:not([open]){align-self:start}
     <li><b>빨라지는 흐름</b>은 화살표가 모두 나란한데도 발산이 1입니다. 뒤쪽 면보다 앞쪽 면에서 물이 더 빨리 나가기 때문입니다. 나란해 보여도 퍼질 수 있어요.</li>
     <li><b>소용돌이</b>와 <b>균일한 흐름</b>은 들어온 만큼 나가서 0입니다. 물감 상자는 돌거나 밀려가기만 하고 부피는 1 그대로입니다.</li></ol>
     <div class="lim">이 단계의 한계: 발산은 "얼마나 퍼지나"만 셉니다. 물이 상자 둘레를 빙빙 도는지는 알려 주지 않습니다(소용돌이도 0) → ④</div></div>
+<div class="ezm"><h4>수학 수식을 어려워하는 조수가 대신 물어봅니다</h4><div class="ask"><img data-mood="asst_shock" alt="" aria-hidden="true"><p><b>조수 하루</b>"나간 양 − 들어온 양"을 실제로 세어 볼 수 있어요?</p></div><p class="saywords"><b>말로 먼저</b> 상자의 여섯 면마다 "물살 세기 × 면 넓이"를 계산해 나가는 쪽은 더하고 들어오는 쪽은 빼면 됩니다. 마지막에 상자 부피로 나눕니다.</p><p class="school"><b>학교 수학으로 보면</b> 직육면체의 겉넓이와 부피.</p><div class="try"><b>숫자로 한 번 해 보기</b><ol><li>샘 밭(물살 = 그 자리의 좌표 (x, y, z)), 점 (1, 0, 0)에 한 변 0.2인 상자. 면 하나 넓이 0.04, 부피 0.008</li><li>앞면(x = 1.1)으로 나감 1.1 × 0.04 = 0.044, 뒷면(x = 0.9)으로 들어옴 0.9 × 0.04 = 0.036 → x 쪽 순수하게 나감 <b>0.008</b></li><li>y 쪽, z 쪽도 각각 0.008 → 모두 0.024 ÷ 부피 0.008 = <b>3</b>. 실험의 샘 값 3과 같습니다</li></ol></div><div class="ask"><img data-mood="asst_spark" alt="" aria-hidden="true"><p><b>조수 하루</b>면마다 세어서 부피로 나누니 정말 3이 나오네요. 발산은 "부피당 솟는 양"이었어요.</p></div></div>
   <details class="fold"><summary>수식으로 보기 — 상자 셈과 식이 같은 이유</summary><p>x 방향의 두 면(넓이 a²)만 보면, 앞면에서 나간 양 − 뒷면에서 들어온 양 ≈ [F<sub>x</sub>(x + a/2) − F<sub>x</sub>(x − a/2)]·a² ≈ (∂F<sub>x</sub>/∂x)·a³. y, z 면도 같아서 모두 더하고 부피 a³로 나누면 ∂F<sub>x</sub>/∂x + ∂F<sub>y</sub>/∂y + ∂F<sub>z</sub>/∂z = ∇·F. 물감 부피 V는 dV/dt = (∇·F)·V로 바뀌므로, 샘에서는 시간 t 뒤 e<sup>3t</sup>배가 됩니다.</p></details>
   <div class="bridge spc"><b>원자료 요약 · ⑤ Gradient, Divergence & Curl</b><ol><li>작은 상자에서 나가는 양 − 들어오는 양이 발산입니다. 예: F = (x, y, z)이면 3.</li><li>상자 안 발산을 모두 더하면 겉면으로 나간 양과 같습니다(발산 정리).</li><li>자세히는 <a href="https://adminmrobo.github.io/vector_calculus_lab/01_differential.html#room-3">∇ 특별편 ①편 방 3 — 발산, ②편 방 8 — 발산 정리, ⑥편 방 20 — 공장 물질 수지 →</a></li></ol></div>
   <div data-dlg="s3"></div>
@@ -479,10 +500,10 @@ details.ez-why:not([open]){align-self:start}
 <!-- ④ 회전 -->
 <section class="sec" id="s4" aria-labelledby="h-s4"><div class="wrap">
   <h2 id="h-s4"><span class="hex">4</span>바람개비가 도는가 — 회전 ∇×F</h2>
-  <div class="tags"><span class="tag nn">수학: ∇×F (회전, curl)</span><span class="tag fly">일상: 개울에 띄운 작은 바람개비</span></div>
+  <div class="tags"><span class="tag nn">수학: 회전 (curl, 소용돌이의 축과 세기)</span><span class="tag fly">일상: 개울에 띄운 작은 바람개비</span></div>
   <div class="pair">
     <div><div class="tl">일상으로 치면</div>흐르는 물에 날개 네 개짜리 작은 바람개비를 꽂습니다. 날개마다 받는 물살이 다르면 바람개비가 돕니다. 어느 축으로 꽂느냐에 따라 돌기도 하고 안 돌기도 합니다.</div>
-    <div><div class="tr">수학에서는</div>회전 ∇×F는 <b>화살표</b>입니다. 화살표의 방향은 바람개비가 가장 빨리 도는 축, 길이는 도는 세기(바람개비 빠르기의 두 배)입니다. 오른손 네 손가락을 도는 쪽으로 감으면 엄지가 화살표 방향입니다.</div>
+    <div><div class="tr">말로 하면</div>회전(기호 ∇×F)은 <b>화살표</b>입니다. 화살표의 방향은 바람개비가 가장 빨리 도는 축, 길이는 도는 세기(바람개비 빠르기의 두 배)입니다. 오른손 네 손가락을 도는 쪽으로 감으면 엄지가 화살표 방향입니다.</div>
   </div>
   <div class="panel">
     <div class="ptitle">바람개비 실험 — 축을 골라 꽂고 도는 빠르기 재기</div>
@@ -493,15 +514,16 @@ details.ez-why:not([open]){align-self:start}
       <div class="group" data-xyz="p4" data-v="0.8,0.4,0.2"></div>
     </div>
     <div class="eq" id="eq4"></div>
-    <div class="minis"><div class="mini a"><span>바람개비 빠르기 (초당 라디안)</span><b id="m4-w">—</b></div><div class="mini g"><span>도는 쪽 (축 끝에서 볼 때)</span><b id="m4-s" style="font-size:16px">—</b></div><div class="mini m"><span>∇×F (회전 화살표)</span><b id="m4-c" style="font-size:16px">—</b></div><div class="mini r"><span>|∇×F| 소용돌이 세기</span><b id="m4-n">—</b></div></div>
+    <div class="minis"><div class="mini a"><span>바람개비 빠르기 (초당 라디안)</span><b id="m4-w">—</b></div><div class="mini g"><span>도는 쪽 (축 끝에서 볼 때)</span><b id="m4-s" style="font-size:16px">—</b></div><div class="mini m"><span>회전 화살표</span><b id="m4-c" style="font-size:16px">—</b></div><div class="mini r"><span>소용돌이 세기</span><b id="m4-n">—</b></div></div>
     <div class="insight" id="i-s4" aria-live="polite"></div>
   </div>
   <p class="gut">한 줄 직관: 회전은 바람개비가 가장 빨리 도는 축을 가리키는 화살표다.</p>
   <div class="explain"><h4>풀이</h4><ol>
-    <li><b>소용돌이 (−y, x, 0)</b>는 z축에 꽂은 바람개비만 돕니다(빠르기 1). x축이나 y축에 꽂으면 날개 양쪽이 같은 물살을 받아 서 있습니다. 회전 화살표가 z축을 가리키는 이유예요.</li>
-    <li><b>옆으로 누운 소용돌이 (0, −z, y)</b>는 x축에 꽂아야 돕니다. 회전 화살표도 x축을 가리킵니다. 회전은 "얼마나"뿐 아니라 "어느 축으로"를 함께 알려 주는 화살표입니다.</li>
-    <li><b>비틀린 밭 (y, x, 0)</b>은 화살표가 휘어 보이지만 어느 축으로 꽂아도 안 돕니다. 이 밭은 숫자 밭 xy의 그래디언트라서, 1편 ②에서 본 대로 회전이 늘 0입니다.</li></ol>
+    <li><b>소용돌이</b>(원을 그리며 도는 물, 식으로는 (−y, x, 0))는 z축에 꽂은 바람개비만 돕니다(빠르기 1). x축이나 y축에 꽂으면 날개 양쪽이 같은 물살을 받아 서 있습니다. 회전 화살표가 z축을 가리키는 이유예요.</li>
+    <li><b>옆으로 누운 소용돌이</b>(식으로는 (0, −z, y))는 x축에 꽂아야 돕니다. 회전 화살표도 x축을 가리킵니다. 회전은 "얼마나"뿐 아니라 "어느 축으로"를 함께 알려 주는 화살표입니다.</li>
+    <li><b>비틀린 밭</b>(식으로는 (y, x, 0))은 화살표가 휘어 보이지만 어느 축으로 꽂아도 안 돕니다. 이 밭은 숫자 밭 xy의 그래디언트라서, 1편 ②에서 본 대로 회전이 늘 0입니다.</li></ol>
     <div class="lim">이 단계의 한계: 바람개비는 아주 작다고 가정합니다. 큰 바람개비는 여러 곳의 물살을 평균 내므로 한 점의 회전과 다를 수 있습니다.</div></div>
+<div class="ezm"><h4>수학 수식을 어려워하는 조수가 대신 물어봅니다</h4><div class="ask"><img data-mood="asst_shock" alt="" aria-hidden="true"><p><b>조수 하루</b>화살표가 돌아 보이는데 회전이 0일 수도 있다니, 숫자로는 어떻게 가려요?</p></div><p class="saywords"><b>말로 먼저</b> 바람개비의 네 날개 끝에서 물살 방향만 확인하면 됩니다. 네 날개를 모두 같은 쪽(예: 시계 반대)으로 밀면 돌고, 서로 반대로 밀면 서 있습니다.</p><p class="school"><b>학교 수학으로 보면</b> 좌표평면의 점과 화살표, 그리고 원의 둘레.</p><div class="try"><b>숫자로 한 번 해 보기</b><ol><li>소용돌이 밭, 원점에 반지름 0.1 바람개비. 오른쪽 날개 (0.1, 0)의 물살은 위쪽 (0, 0.1), 위 날개 (0, 0.1)의 물살은 왼쪽 (−0.1, 0)</li><li>네 날개 모두 시계 반대 방향으로 밂 → <b>돈다</b>. 날개 끝 빠르기 0.1 ÷ 반지름 0.1 = 빠르기 <b>1</b>, 회전 화살표 길이는 그 두 배 <b>2</b></li><li>비틀린 밭: 오른쪽 날개 물살은 위쪽(시계 반대로 밂), 위 날개 물살은 오른쪽(시계 방향으로 밂) → 서로 상쇄 → <b>안 돈다</b></li></ol></div><div class="ask"><img data-mood="asst_spark" alt="" aria-hidden="true"><p><b>조수 하루</b>겉모양 말고 날개마다 미는 방향을 보면 되는군요. 대결에서 초파리가 하는 방법이에요!</p></div></div>
   <details class="fold"><summary>수식으로 보기 — 행렬식으로 쓰는 회전</summary><p>∇×F = (∂F<sub>z</sub>/∂y − ∂F<sub>y</sub>/∂z, ∂F<sub>x</sub>/∂z − ∂F<sub>z</sub>/∂x, ∂F<sub>y</sub>/∂x − ∂F<sub>x</sub>/∂y). 첫 줄에 단위 벡터 î, ĵ, k̂, 둘째 줄에 ∂/∂x, ∂/∂y, ∂/∂z, 셋째 줄에 F<sub>x</sub>, F<sub>y</sub>, F<sub>z</sub>를 놓은 3×3 행렬식을 펼친 것과 같습니다. 이 페이지의 바람개비는 축 n에 수직인 작은 고리(반지름 0.06)를 따라 물살을 더한 값 ÷ 고리 넓이로 (∇×F)·n을 재고, 그 절반을 빠르기로 씁니다.</p></details>
   <div class="bridge spc"><b>원자료 요약 · ⑤ Gradient, Divergence & Curl · ④ Del Operator</b><ol><li>작은 바람개비가 도는 빠르기가 회전입니다. 예: F = (−y, x, 0)이면 (0, 0, 2).</li><li>두 모델이 겨루는 GAN 학습의 화살표 밭이 바로 이 소용돌이입니다.</li><li>자세히는 <a href="https://adminmrobo.github.io/vector_calculus_lab/01_differential.html#room-4">∇ 특별편 ①편 방 4 — 회전, ④편 방 15 — 도는 학습(GAN) →</a></li></ol></div>
   <div data-dlg="s4"></div>
@@ -511,10 +533,10 @@ details.ez-why:not([open]){align-self:start}
 <!-- ⑤ 라플라시안 -->
 <section class="sec" id="s5" aria-labelledby="h-s5"><div class="wrap">
   <h2 id="h-s5"><span class="hex">5</span>이웃보다 움푹한가 — 라플라시안 ∇²f</h2>
-  <div class="tags"><span class="tag nn">수학: ∇²f = ∇·∇f</span><span class="tag fly">일상: 이웃 여섯 집과 우리 집 온도 비교</span></div>
+  <div class="tags"><span class="tag nn">수학: 라플라시안 (이웃 평균과의 차이)</span><span class="tag fly">일상: 이웃 여섯 집과 우리 집 온도 비교</span></div>
   <div class="pair">
     <div><div class="tl">일상으로 치면</div>우리 집 앞·뒤·좌·우·위·아래 여섯 집의 온도를 재서 평균을 냅니다. 평균이 우리 집보다 따뜻하면 우리 집은 "움푹 들어간 차가운 곳"이라 곧 데워지고, 평균이 더 차가우면 식습니다.</div>
-    <div><div class="tr">수학에서는</div>"이웃 여섯의 평균 − 가운데"를 거리로 맞춘 것이 라플라시안입니다. ②의 그래디언트 화살표 밭에 ③의 발산을 쓴 것과 같아서 ∇·∇f, 줄여 ∇²f라고 씁니다. 1편 ③에서는 헤시안 고유값의 합으로 만났습니다.</div>
+    <div><div class="tr">말로 하면</div>"이웃 여섯의 평균 − 가운데"를 거리로 맞춘 것이 <b>라플라시안</b>입니다. ②의 그래디언트 화살표 밭에 ③의 발산을 쓴 것과 같아서 기호로는 ∇²f(나블라 제곱 에프)라고 씁니다. 1편 ③에서는 헤시안 고유값의 합으로 만났습니다.</div>
   </div>
   <div class="panel">
     <div class="ptitle">이웃 여섯 집 실험 — 가운데와 이웃 평균 비교</div>
@@ -525,7 +547,7 @@ details.ez-why:not([open]){align-self:start}
       <div class="group"><label class="glabel" for="r-h5">이웃까지 거리 h</label><input type="range" id="r-h5" min="0.2" max="1" step="0.05" value="0.5"><span class="val" id="v-h5">0.50</span></div>
     </div>
     <div class="eq" id="eq5"></div>
-    <div class="minis"><div class="mini a"><span>가운데 값</span><b id="m5-c">—</b></div><div class="mini g"><span>이웃 여섯 평균</span><b id="m5-a">—</b></div><div class="mini m"><span>6 × (평균 − 가운데) ÷ h² ≈ ∇²f</span><b id="m5-e">—</b></div><div class="mini r"><span>식으로 구한 ∇²f</span><b id="m5-x">—</b></div></div>
+    <div class="minis"><div class="mini a"><span>가운데 값</span><b id="m5-c">—</b></div><div class="mini g"><span>이웃 여섯 평균</span><b id="m5-a">—</b></div><div class="mini m"><span>이웃 평균으로 잰 값</span><b id="m5-e">—</b></div><div class="mini r"><span>식으로 구한 값</span><b id="m5-x">—</b></div></div>
     <div class="insight" id="i-s5" aria-live="polite"></div>
   </div>
   <p class="gut">한 줄 직관: 라플라시안이 양수면 "이웃보다 내가 낮다(움푹)", 음수면 "이웃보다 내가 높다(볼록)".</p>
@@ -536,6 +558,7 @@ details.ez-why:not([open]){align-self:start}
     <div class="lim">표기 주의: 어떤 자료는 2차 편미분을 모은 표(헤시안)를 ∇²f로 적습니다. 이 페이지의 ∇²f는 그 표의 대각선 자리를 더한 숫자 하나, 라플라시안입니다. 표 자체는 <a href="1_math_map.html#gjh">1편 정리의 비교표</a>에 있습니다.</div>
     <div class="lim">이 단계의 한계: 이웃까지 거리 h가 크면 값이 식과 조금 달라집니다. h를 줄이면 가까워집니다. 그릇·돔·안장처럼 2차식이면 h와 상관없이 딱 맞습니다.</div></div>
   <div class="bridge gen"><b>그림 처리로 치면</b> 사진에서 경계선을 찾을 때 쓰는 라플라시안 필터는 이 실험의 2차원판입니다. 픽셀 하나를 가운데로, 위·아래·왼쪽·오른쪽 네 이웃을 더하고 가운데의 4배를 빼면 됩니다. 밝기가 갑자기 바뀌는 곳에서 값이 크게 튀어 경계가 드러납니다 [5]. CNN의 첫 층이 배우는 필터 가운데에도 비슷한 모양이 자주 보입니다.</div>
+<div class="ezm"><h4>수학 수식을 어려워하는 조수가 대신 물어봅니다</h4><div class="ask"><img data-mood="asst_shock" alt="" aria-hidden="true"><p><b>조수 하루</b>∇²f는 제곱이에요? 6 × (평균 − 가운데) ÷ h²는 왜 6이에요?</p></div><p class="saywords"><b>말로 먼저</b> 제곱이 아니라 "기울기를 한 번 더 잰다"는 표시입니다. 이웃이 앞·뒤·좌·우·위·아래 여섯이라 6을 곱하고, 이웃까지의 거리를 맞추려고 거리²로 나눕니다.</p><p class="school"><b>학교 수학으로 보면</b> 평균 구하기, 그리고 이차함수 y = x²의 굽음 2.</p><div class="try"><b>숫자로 한 번 해 보기</b><ol><li>그릇 밭(값 = x² + y² + z²), 가운데 원점 값 <b>0</b></li><li>거리 1인 이웃 여섯 (±1, 0, 0), (0, ±1, 0), (0, 0, ±1)의 값은 모두 1 → 평균 <b>1</b></li><li>6 × (1 − 0) ÷ 1² = <b>6</b>. 풀이의 "그릇은 어디서나 +6"과 같습니다. 이웃이 더 높으니(양수) 가운데는 움푹합니다</li></ol></div><div class="ask"><img data-mood="asst_spark" alt="" aria-hidden="true"><p><b>조수 하루</b>제곱이 아니라 "이웃과 비교"였군요. 양수면 움푹, 음수면 볼록!</p></div></div>
   <details class="fold"><summary>수식으로 보기 — 이웃 평균과 라플라시안</summary><p>테일러 전개로 f(x + h) + f(x − h) = 2f(x) + h²·∂²f/∂x² + … 세 축을 모두 더하면 (이웃 여섯의 합) − 6f = h²·∇²f + …, 곧 ∇²f ≈ 6·(이웃 평균 − 가운데)/h². 열방정식 ∂T/∂t = k∇²T는 "이웃 평균보다 낮으면 오른다"를 그대로 적은 식입니다. 난로 밭의 정확한 값은 ∇²f = 30·e<sup>−r²/2</sup>(r² − 3), r² = x² + y² + z².</p></details>
   <div class="bridge spc"><b>원자료 요약 · ① Vector Differential Operator (스칼라 ↔ 벡터 순환도)</b><ol><li>숫자 밭 →(그래디언트)→ 화살표 밭 →(발산)→ 숫자 밭으로 돌아오면 라플라시안입니다.</li><li>예: f = x² + y²이면 어디서나 4. 가마 온도가 퍼지는 속도가 이 값에 비례합니다.</li><li>자세히는 <a href="https://adminmrobo.github.io/vector_calculus_lab/01_differential.html#room-5">∇ 특별편 ①편 방 5 — 라플라시안, ⑥편 방 19 — 가마 온도 →</a></li></ol></div>
   <div data-dlg="s5"></div>
@@ -545,11 +568,11 @@ details.ez-why:not([open]){align-self:start}
 <!-- 대결 -->
 <section class="sec" id="s6" aria-labelledby="h-s6"><div class="wrap">
   <h2 id="h-s6"><span class="hex">6</span>자가 휘는 좌표 — 원통·구면에서의 ∇ <span class="hellgate"><img src="img/diff_haru_5.webp" alt="" width="34" height="34">헬게이트</span></h2>
-  <div class="tags"><span class="tag nn">수학: 원통 (r, θ, z) · 구면 (r, θ, φ)의 그래디언트</span><span class="tag fly">일상: 지구본 위의 1도는 적도와 극지방에서 길이가 다르다</span></div>
+  <div class="tags"><span class="tag nn">수학: 원통·구면 좌표에서의 그래디언트</span><span class="tag fly">일상: 지구본 위의 1도는 적도와 극지방에서 길이가 다르다</span></div>
   <p class="muted" style="font-size:14px">이 시리즈에서 가장 어려운 장입니다. ①~⑤, 특히 ② 그래디언트를 읽은 뒤에 보세요. 건너뛰어도 1·2편과 첫걸음을 읽는 데는 지장이 없습니다.</p>
   <div class="pair">
     <div><div class="tl">일상으로 치면</div>지구본에서 경도 1도는 적도에서는 약 111 km지만, 위도 60도에서는 그 절반쯤입니다. "경도로 1도 갔더니 온도가 2도 올랐다"는 말만으로는 얼마나 가파른지 알 수 없어요. 실제로 걸은 거리로 나눠야 합니다.</div>
-    <div><div class="tr">수학에서는</div>직교좌표(x, y, z)는 자가 어디서나 같은 길이·같은 방향이라 편미분을 그대로 더하면 ∇V가 됩니다. 원통·구면좌표에서는 각도 좌표 1만큼이 실제 거리로 r배(또는 r sin θ배)라서, 각도 편미분을 그만큼 <b>나눠 줘야</b> 같은 화살표가 나옵니다.</div>
+    <div><div class="tr">말로 하면</div>보통의 x·y·z 좌표는 자의 눈금이 어디서나 같은 길이라 편미분을 그대로 쓰면 됩니다. 각도로 위치를 부르는 원통·구면 좌표에서는 "각도 1만큼"이 중심에서 멀수록 더 긴 거리입니다. 그래서 각도 쪽 변화는 <b>실제로 걸은 거리로 나눠 줘야</b> 같은 화살표가 나옵니다.<details class="fold eqx"><summary>식으로 보면 (몰라도 됩니다)</summary><p>각도 좌표 1만큼 = 실제 거리 r배(구면의 방위각은 r sin θ배). 그 방향 성분 = (1 ÷ 배율) × 각도 편미분.</p></details></div>
   </div>
   <div class="panel">
     <div class="ptitle">같은 화살표, 다른 자 — 점의 단위벡터(빨강)와 ∇V(보라), 배율을 빼먹은 화살표(주황 점선)</div>
@@ -569,16 +592,21 @@ details.ez-why:not([open]){align-self:start}
     <div class="ptitle">왜 1/r인가 — 같은 각도, 다른 거리</div>
     <div class="cwrap"><canvas id="cvS6b" aria-label="원점에서 같은 각도만큼 벌어진 두 반직선과 반지름 1, r의 호 길이 비교"></canvas></div>
     <div class="ctrl"><div class="group"><label class="glabel" for="r-r6">반지름 r</label><input type="range" id="r-r6" min="0.5" max="3" step="0.1" value="2"><span class="val" id="v-r6">2.0</span>
-      <label class="glabel" for="r-d6">각도 Δθ</label><input type="range" id="r-d6" min="5" max="60" step="1" value="30"><span class="val" id="v-d6">30°</span></div></div>
-    <div class="minis"><div class="mini m"><span>각도 Δθ (라디안)</span><b id="m6-dt">—</b></div><div class="mini a"><span>반지름 1에서 걷는 거리</span><b id="m6-a1">—</b></div><div class="mini r"><span>반지름 r에서 걷는 거리 r·Δθ</span><b id="m6-ar">—</b></div><div class="mini g"><span>배율 (스케일 인자)</span><b id="m6-h">—</b></div></div>
+      <label class="glabel" for="r-d6">돌린 각도</label><input type="range" id="r-d6" min="5" max="60" step="1" value="30"><span class="val" id="v-d6">30°</span></div></div>
+    <div class="minis"><div class="mini m"><span>돌린 각도 (라디안)</span><b id="m6-dt">—</b></div><div class="mini a"><span>반지름 1에서 걷는 거리</span><b id="m6-a1">—</b></div><div class="mini r"><span>실제로 걷는 거리 (반지름 × 각도)</span><b id="m6-ar">—</b></div><div class="mini g"><span>배율 (스케일 인자)</span><b id="m6-h">—</b></div></div>
     <div class="insight" id="i-s6b" aria-live="polite"></div>
   </div>
   <div class="explain"><h4>풀이</h4><ol>
-    <li><b>직교좌표</b> ∇V = x̂ ∂V/∂x + ŷ ∂V/∂y + ẑ ∂V/∂z. 단위벡터 x̂, ŷ, ẑ는 어느 점에서나 같은 방향이고, 좌표 1만큼이 거리 1입니다. 그래서 배율이 모두 1입니다.</li>
+    <li><b>보통 좌표(직교좌표)</b>: 자의 눈금이 어디서나 같고 방향도 같습니다. 배율은 모두 1, 편미분을 그대로 씁니다.</li>
+    <li><b>원통좌표</b>(중심에서 거리, 도는 각도, 높이): 도는 각도로 조금 돌면 실제로는 "거리 × 각도"만큼 걷습니다. 그래서 각도 쪽 변화를 중심에서의 거리로 나눕니다.</li>
+    <li><b>구면좌표</b>(중심에서 거리, 위아래 각도, 도는 각도): 위아래 각도 쪽은 거리로, 도는 각도 쪽은 "그 위도 원의 반지름"으로 나눕니다. 지구본에서 극지방으로 갈수록 경도 1도가 짧아지는 것과 같습니다.</li>
+    <li><details class="fold eqx"><summary>식으로 보면 — 세 좌표계의 그래디언트 (몰라도 됩니다)</summary><ol style="margin:0;padding-left:20px">    <li><b>직교좌표</b> ∇V = x̂ ∂V/∂x + ŷ ∂V/∂y + ẑ ∂V/∂z. 단위벡터 x̂, ŷ, ẑ는 어느 점에서나 같은 방향이고, 좌표 1만큼이 거리 1입니다. 그래서 배율이 모두 1입니다.</li>
     <li><b>원통좌표 (r, θ, z)</b> ∇V = r̂ ∂V/∂r + θ̂ (1/r) ∂V/∂θ + ẑ ∂V/∂z. θ를 dθ만큼 돌면 실제로는 호 길이 r·dθ를 걷습니다. "거리당 변화"로 맞추려면 ∂V/∂θ를 r로 나눠야 합니다.</li>
     <li><b>구면좌표 (r, θ, φ)</b> ∇V = r̂ ∂V/∂r + θ̂ (1/r) ∂V/∂θ + φ̂ (1/(r sin θ)) ∂V/∂φ. θ(극각) 방향의 호는 반지름 r의 원 위에 있고, φ(방위각) 방향의 호는 반지름 r sin θ인 위도 원 위에 있습니다.</li>
+</ol></details></li>
     <li>한 줄로 묶으면: 성분 = (1 ÷ 배율) × (그 좌표로의 편미분). 배율(스케일 인자)은 직교 (1, 1, 1), 원통 (1, r, 1), 구면 (1, r, r sin θ)입니다. 단위벡터의 방향이 점마다 바뀌어도, 성분 × 단위벡터를 더한 화살표는 직교좌표의 ∇V와 <b>똑같습니다</b>. 실험의 "직교좌표와의 차이"가 늘 0°인 이유입니다.</li></ol>
     <div class="lim" style="border-left-color:var(--info)">표기 주의: 원통좌표의 θ는 바닥에서 도는 <b>방위각</b>이고, 구면좌표의 θ는 z축에서 내려온 <b>극각</b>입니다(물리학 관례, 이 장의 방식). 수학책 가운데는 구면좌표의 θ와 φ를 서로 바꿔 쓰는 책도 있으니, 식을 옮길 때 어느 각이 어느 쪽인지 먼저 확인하세요.</div>
+    <div class="ezm"><h4>수학 수식을 어려워하는 조수가 대신 물어봅니다</h4><div class="ask"><img data-mood="asst_shock" alt="" aria-hidden="true"><p><b>조수 하루</b>1/r, 1/(r sin θ)… 왜 자꾸 나눠요?</p></div><p class="saywords"><b>말로 먼저</b> 기울기는 "실제로 1 m 갈 때 얼마나 바뀌나"입니다. 각도로 같은 만큼 돌아도 중심에서 멀면 더 많이 걷습니다. 그러니 각도당 변화를 걸은 거리로 나눠 줘야 진짜 기울기가 됩니다.</p><p class="school"><b>학교 수학으로 보면</b> 부채꼴의 호 길이 = 반지름 × 각도(라디안).</p><div class="try"><b>숫자로 한 번 해 보기</b><ol><li>각도를 0.1만큼 돌았더니 온도가 0.4도 올랐다고 합시다</li><li>중심에서 2 m인 곳: 실제로 걸은 거리 2 × 0.1 = 0.2 m → 기울기 0.4 ÷ 0.2 = <b>1 m당 2도</b></li><li>중심에서 0.5 m인 곳: 걸은 거리 0.05 m → 0.4 ÷ 0.05 = <b>1 m당 8도</b>. 같은 "각도당 0.4도"인데 진짜 가파름은 4배 차이</li></ol></div><details class="fold eqx"><summary>식으로 보면 (몰라도 됩니다)</summary><div class="tblwrap"><table class="cmp eqt"><thead><tr><th>식 조각</th><th>읽는 법</th><th>뜻</th></tr></thead><tbody><tr><td class="m">(1/r) ∂V/∂θ</td><td>알 분의 일, 브이를 세타로 편미분</td><td>도는 각도 쪽 변화를 실제 거리로 나눈 기울기</td></tr><tr><td class="m">r sin θ</td><td>알 사인 세타</td><td>구면에서 그 위도 원의 반지름</td></tr></tbody></table></div></details><div class="ask"><img data-mood="asst_spark" alt="" aria-hidden="true"><p><b>조수 하루</b>각도만 보면 속는군요. 걸은 거리로 나눠야 진짜 가파름이에요!</p></div></div>
     <div class="lim">이 단계의 가정: 원통좌표는 z축 위(r = 0)에서, 구면좌표는 원점(r = 0)과 z축 위(sin θ = 0)에서 각도가 정해지지 않아 이 식을 쓸 수 없습니다. 실험에서도 그 근처로 점을 옮기면 배율이 아주 작아져 숫자가 흔들립니다. 숫자 밭은 매끄럽다고 가정합니다.</div></div>
   <div class="bridge field"><b>모델 최적화와 이어지는 곳</b> 경사하강은 보통 매개변수마다 편미분을 그대로 씁니다. 매개변수의 자가 서로 다르면(한 특성은 0~1, 다른 특성은 0~10000) 배율을 빼먹은 화살표처럼 방향이 틀어지고, 그릇이 길쭉해 지그재그로 걷습니다 → <a href="1_math_map.html#s3">1편 ③ 땅의 굽음</a>, <a href="2_experiment_lab.html">2편 학습률 실험</a>. 특성 스케일링은 자를 맞추는 일입니다. 더 나아가 "공간의 자" 자체를 계산에 넣는 경사하강(자연 그래디언트, natural gradient)도 있습니다 — 이 시리즈에서는 이름만 소개합니다.</div>
   <div class="bridge spc"><b>원자료 요약 · ② Cartesian, Cylindrical and Spherical Coordinates (matharium) · ③ Gradient in Different Coordinate Systems (@matheorems)</b><ol><li>같은 점을 직교·원통·구 좌표로 읽습니다. 예: (1, 1, √2) → 원통 (√2, 45°, √2), 구 (2, 45°, 45°).</li><li>원자료 ②는 원통을 (ρ, φ, z), ③은 (r, θ, z)로 적습니다. 특별편은 원통 (ρ, φ, z), 구 (r, θ, φ)로 통일합니다.</li><li>자세히는 <a href="https://adminmrobo.github.io/vector_calculus_lab/01_differential.html#room-6">∇ 특별편 ①편 방 6 — 좌표 바꿔 보기 →</a></li></ol></div>
@@ -588,9 +616,9 @@ details.ez-why:not([open]){align-self:start}
 
 <section class="sec" id="duel" aria-labelledby="h-duel"><div class="wrap">
   <h2 id="h-duel">대결 — 겉모양으로 알 수 있나, 바람개비가 도는 곳은?</h2>
-  <p class="lead">네 곳에 바람개비를 z축으로 꽂습니다. 주판봇은 화살표 <b>모양</b>을 보고 맞히고, 초파리 연구원은 회전 ∇×F의 z 성분을 <b>계산</b>해서 맞힙니다. 판정은 실제로 바람개비 둘레의 물살을 더해 돌려 본 결과이고, 기준은 <b>네 곳 중 맞힌 수</b>입니다.</p>
+  <p class="lead">네 곳에 바람개비를 z축으로 꽂습니다. 주판봇은 화살표 <b>모양</b>을 보고 맞히고, 초파리 연구원은 회전(바람개비를 미는 정도)을 <b>계산</b>해서 맞힙니다. 판정은 실제로 바람개비 둘레의 물살을 더해 돌려 본 결과이고, 기준은 <b>네 곳 중 맞힌 수</b>입니다.</p>
   <div class="duel">
-    <div class="side l"><div class="head"><img id="d-fly" data-mood="fly_magnify" alt="" aria-hidden="true"><div><b style="color:var(--c-fly)">초파리 연구원</b><br><span class="muted">∂F<sub>y</sub>/∂x − ∂F<sub>x</sub>/∂y를 이웃 점으로 재서 0이 아니면 "돈다".</span></div></div><div data-dlg="dfly"></div></div>
+    <div class="side l"><div class="head"><img id="d-fly" data-mood="fly_magnify" alt="" aria-hidden="true"><div><b style="color:var(--c-fly)">초파리 연구원</b><br><span class="muted">이웃 점의 물살로 바람개비를 미는 정도(회전의 z 성분)를 계산해 0이 아니면 "돈다".</span></div></div><div data-dlg="dfly"></div></div>
     <div class="vs">VS</div>
     <div class="side r"><div class="head"><img id="d-robo" data-mood="robo_coin" alt="" aria-hidden="true"><div><b style="color:var(--c-robo)">주판봇</b><br><span class="muted">화살표가 원을 그리며 돌면 "돈다", 나란하거나 뻗어 나가면 "안 돈다".</span></div></div><div data-dlg="drobo"></div></div>
   </div>
