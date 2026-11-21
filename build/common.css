@@ -236,3 +236,32 @@ footer td,footer th{border:1px solid var(--rule);padding:6px 8px;text-align:left
 .glbl{display:inline-block;min-width:4.5em;color:var(--muted);font-size:12.5px}
 .bt:disabled{opacity:.45;cursor:not-allowed}
 @media (max-width:640px){.panel.game .minis{grid-template-columns:repeat(2,1fr)}}
+
+/* ── 연구실 확장(ai-lab-extend): 3줄 상자·왜/수식 상자·단계 대화·여백 ── */
+#plain{padding:28px 0 8px;border:0}
+#plain .plain3{display:flex;flex-direction:column;gap:10px;padding-left:22px;margin:10px 0}
+#plain .plain3 b{color:var(--eye);margin-right:6px}
+#plain .plain-note{background:var(--panel);border:1px solid var(--rule);border-radius:10px;padding:10px 14px;font-size:15px}
+details.abbr{margin:12px 0;border:1px solid var(--rule);border-radius:10px;padding:10px 14px;background:var(--panel)}
+details.abbr summary{cursor:pointer;font-weight:700;color:var(--muted)}
+.abbr-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:8px 18px;margin-top:10px;font-size:14.5px}
+.abbr-list span{color:var(--muted)}
+.easy{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:18px 0}
+.ez-why,.ez-math{background:var(--panel);border:1px solid var(--rule);border-radius:12px;padding:18px 20px;font-size:15px;min-width:0}
+.ez-why{border-top:3px solid var(--eye)}.ez-math{border-top:3px solid var(--c-asst)}
+.ez-t{font-weight:700;font-size:14px;margin-bottom:8px}
+.ez-why ol{display:flex;flex-direction:column;gap:8px;padding-left:20px;margin:0 0 10px}
+.ez-easy{margin:0;padding:8px 12px;border-radius:8px;background:var(--panel2)}
+.ez-math p{margin:10px 0}
+.ez-q{display:flex;gap:10px;align-items:flex-start}
+.ez-q img{width:48px;height:48px;flex:none;border-radius:10px;border:2px solid var(--c-asst);background:#fff}
+.ez-q p{margin:0;padding:8px 12px;border:1px solid var(--c-asst);border-radius:4px 12px 12px 12px;background:#fff}
+.ez-c p{font-weight:600}
+.ez-tb{width:100%;border-collapse:collapse;font-size:14px;margin:6px 0}
+.ez-tb th,.ez-tb td{border-bottom:1px solid var(--rule);padding:6px 8px;text-align:left;vertical-align:top}
+.ez-tb td:first-child{white-space:nowrap;font-weight:600}
+.dialog.lvtalk{display:flex;flex-direction:column;gap:14px;padding:18px 20px;border-radius:12px;border:1px dashed var(--rule);margin:16px 0}
+.pair{gap:20px}.pair>div{padding:18px 20px}
+.panel{padding:22px}
+@media(max-width:860px){.easy{grid-template-columns:1fr}.ez-tb td:first-child{white-space:normal}}
+footer table{width:100%;table-layout:fixed}footer td,footer th{overflow-wrap:anywhere}footer td:first-child,footer th:first-child{width:3em}

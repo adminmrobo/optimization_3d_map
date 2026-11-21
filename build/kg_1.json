@@ -296,7 +296,7 @@
    ],
    "match": [],
    "definition": {
-    "ko": "칸마다 편미분이 든 벡터 (∂/∂x, ∂/∂y, ∂/∂z). 붙는 방식에 따라 그래디언트·발산·회전·라플라시안이 된다."
+    "ko": "자리마다 편미분이 든 벡터 (∂/∂x, ∂/∂y, ∂/∂z). 붙는 방식에 따라 그래디언트·발산·회전·라플라시안이 된다."
    },
    "altLabel": {
     "ko": [
@@ -1542,7 +1542,7 @@
    "source": [
     {
      "ref": "matharium_vecops",
-     "loc": "Laplacian 칸"
+     "loc": "Laplacian 항목"
     }
    ]
   },
@@ -1792,7 +1792,7 @@
    "source": [
     {
      "ref": "matharium_gjh",
-     "loc": "Hessian 칸"
+     "loc": "Hessian 항목"
     }
    ]
   },

@@ -56,12 +56,8 @@ table.lim-tbl td,table.lim-tbl th{padding:4px 10px;text-align:right}
   <h1>최적화 첫걸음 ① — 혹시… 미분 좋아하세요?</h1>
   <p class="question">미분은 왜 쓰고, 언제부터 있었고, 그걸로 무엇을 할 수 있을까?</p>
   <p class="lead">인공지능 모델을 학습시키는 일도, 공장의 생산량을 정하는 일도 결국 "가장 좋은 값 찾기", 곧 <b>최적화</b>입니다. 그리고 최적화의 첫 신호는 언제나 <b>기울기</b>에서 나옵니다. 이 편은 미분을 처음 만나는 분을 위해 직선의 기울기에서 출발해, 빵 공장이 하루에 빵을 얼마나 구워야 이익이 가장 큰지까지 함께 걸어갑니다.</p>
-  <p class="byline">글 · 안상선 ((주)M-Robo 대표) · <a href="https://adminmrobo.github.io/who_am_i/who_am_i.html">저자 소개</a> · 2026-11-19 · v1.5</p>
-  <div class="three"><b>세 줄로 먼저</b><ol>
-    <li>미분은 "아주 짧은 순간의 기울기"다. 경제학에서는 이것을 <b>한계</b>라고 부른다.</li>
-    <li>꼭대기와 바닥에서는 기울기가 0이다. 그래서 최적화는 기울기 0을 찾는 일에서 시작한다.</li>
-    <li>빵 공장은 "하나 더 팔아 버는 돈(MR) = 하나 더 만드는 비용(MC)"인 곳에서 멈춘다.</li></ol></div>
-  <div class="start"><b>지난 편 한 줄</b> <a href="first_step_0.html">⓪ 인공지능 모델에서의 최적화</a>에서 본 것처럼, 모델은 오차를 재고 조금 고치는 걸음을 수백 번 되풀이해 만들어지고, 매 걸음 "어느 쪽으로 얼마나"를 알려 주는 것이 <b>기울기</b>입니다. 이 편은 그 기울기, 곧 미분을 다룹니다.<br><b>처음이라면</b> 이 편은 프롤로그 → 준비운동(기울기 복습) → 1장 → 3장 순서로 보세요. 2장 역사는 쉬어 가는 칸입니다. 식은 "수식으로 보기"를 펼칠 때만 나오고, 칸마다 "이 칸의 가정" 상자가 있습니다. 공장과 인공지능은 <a href="first_step_2.html">② 편</a>에서 이어집니다.</div>
+  <p class="byline">글 · 안상선 ((주)M-Robo 대표) · <a href="https://adminmrobo.github.io/who_am_i/who_am_i.html">저자 소개</a> · 2026-11-22 · v1.6</p>
+  <div class="start"><b>지난 편 한 줄</b> <a href="first_step_0.html">⓪ 인공지능 모델에서의 최적화</a>에서 본 것처럼, 모델은 오차를 재고 조금 고치는 걸음을 수백 번 되풀이해 만들어지고, 매 걸음 "어느 쪽으로 얼마나"를 알려 주는 것이 <b>기울기</b>입니다. 이 편은 그 기울기, 곧 미분을 다룹니다.<br><b>처음이라면</b> 이 편은 프롤로그 → 준비운동(기울기 복습) → 1장 → 3장 순서로 보세요. 2장 역사는 쉬어 가는 단계입니다. 식은 "수식으로 보기"를 펼칠 때만 나오고, 단계마다 "이 단계의 가정" 상자가 있습니다. 공장과 인공지능은 <a href="first_step_2.html">② 편</a>에서 이어집니다.</div>
   <div class="kpis" aria-label="숫자 요약">
     <div class="kpi g"><b id="k-q">—</b><span>빵 가격 2만 원일 때 가장 좋은 생산량<sup>①</sup></span></div>
     <div class="kpi m"><b id="k-pi">—</b><span>그때 하루 이윤<sup>①</sup></span></div>
@@ -128,7 +124,7 @@ table.lim-tbl td,table.lim-tbl th{padding:4px 10px;text-align:right}
     <div class="minis"><div class="mini r"><span>평균 속도 (할선 기울기)</span><b id="m11a">—</b></div><div class="mini g"><span>순간 속도 (접선 기울기 = 미분)</span><b id="m11b">—</b></div><div class="mini a"><span>둘의 차이</span><b id="m11c">—</b></div></div>
     <div class="insight" id="i11" aria-live="polite"></div>
   </div>
-  <div class="assume"><b>이 칸의 가정</b> 곡선이 끊기거나 뾰족하게 꺾이지 않고 매끄럽다. 뾰족한 점(예: |x|의 꼭짓점)에서는 접선이 하나로 정해지지 않아 미분할 수 없다.</div>
+  <div class="assume"><b>이 단계의 가정</b> 곡선이 끊기거나 뾰족하게 꺾이지 않고 매끄럽다. 뾰족한 점(예: |x|의 꼭짓점)에서는 접선이 하나로 정해지지 않아 미분할 수 없다.</div>
 
   <h3 id="s12">1.2 기울기 = '한계' — 하나 더 했을 때 늘어나는 양</h3>
   <div class="pair">
@@ -142,7 +138,7 @@ table.lim-tbl td,table.lim-tbl th{padding:4px 10px;text-align:right}
     <div class="minis"><div class="mini a"><span>총비용 C(Q)</span><b id="m12a">—</b></div><div class="mini r"><span>한 판 더: C(Q + 1) − C(Q)</span><b id="m12b">—</b></div><div class="mini g"><span>미분 C′(Q) = 한계비용</span><b id="m12c">—</b></div></div>
     <div class="insight" id="i12" aria-live="polite"></div>
   </div>
-  <div class="assume"><b>이 칸의 가정</b> 생산량을 잘게 쪼갤 수 있다고 본다(실제로는 빵 반 판을 팔기 어렵다). 그래서 "한 판 더"와 미분은 비슷하지만 똑같지는 않다.</div>
+  <div class="assume"><b>이 단계의 가정</b> 생산량을 잘게 쪼갤 수 있다고 본다(실제로는 빵 반 판을 팔기 어렵다). 그래서 "한 판 더"와 미분은 비슷하지만 똑같지는 않다.</div>
 
   <h3 id="s13">1.3 기울기 0 = 꼭대기 또는 바닥</h3>
   <div class="pair">
@@ -156,7 +152,7 @@ table.lim-tbl td,table.lim-tbl th{padding:4px 10px;text-align:right}
     <div class="minis"><div class="mini a"><span>이윤 π(Q)</span><b id="m13a">—</b></div><div class="mini g"><span>접선 기울기 π′(Q)</span><b id="m13b">—</b></div><div class="mini m"><span>판정</span><b id="m13c" style="font-size:16px">—</b></div></div>
     <div class="insight" id="i13" aria-live="polite"></div>
   </div>
-  <div class="assume"><b>이 칸의 가정</b> 기울기 0은 "후보"일 뿐이다. 꼭대기인지 바닥인지는 그 옆이 어떻게 휘었는지 보고 가린다(3.2). 둘 다 아닌 평평한 곳(안장점)도 있다 → <a href="1_math_map.html#s4">좌표축 위의 그릇 1편 ④</a></div>
+  <div class="assume"><b>이 단계의 가정</b> 기울기 0은 "후보"일 뿐이다. 꼭대기인지 바닥인지는 그 옆이 어떻게 휘었는지 보고 가린다(3.2). 둘 다 아닌 평평한 곳(안장점)도 있다 → <a href="1_math_map.html#s4">좌표축 위의 그릇 1편 ④</a></div>
 
   <h3 id="s14">1.4 편미분과 전미분 — 하나만 움직이기, 다 같이 움직이기</h3>
   <div class="pair">
@@ -173,7 +169,7 @@ table.lim-tbl td,table.lim-tbl th{padding:4px 10px;text-align:right}
     <div class="minis"><div class="mini r"><span>가로 띠 y·dx (∂A/∂x × dx)</span><b id="m14a">—</b></div><div class="mini g"><span>세로 띠 x·dy (∂A/∂y × dy)</span><b id="m14b">—</b></div><div class="mini m"><span>귀퉁이 dx·dy</span><b id="m14c">—</b></div><div class="mini a"><span>실제로 늘어난 넓이</span><b id="m14d">—</b></div></div>
     <div class="insight" id="i14" aria-live="polite"></div>
   </div>
-  <div class="assume"><b>이 칸의 가정</b> 전미분은 "아주 조금" 움직일 때의 근사다. 귀퉁이 dx·dy는 dx, dy가 작으면 거의 0이 되어 빠진다. 이 귀퉁이가 바로 ② 편 5.3의 <b>상호작용</b>(x와 y가 함께 움직일 때만 생기는 몫)의 씨앗이다.</div>
+  <div class="assume"><b>이 단계의 가정</b> 전미분은 "아주 조금" 움직일 때의 근사다. 귀퉁이 dx·dy는 dx, dy가 작으면 거의 0이 되어 빠진다. 이 귀퉁이가 바로 ② 편 5.3의 <b>상호작용</b>(x와 y가 함께 움직일 때만 생기는 몫)의 씨앗이다.</div>
   <details class="fold"><summary>수식으로 보기</summary><p>f′(x) = lim<sub>h→0</sub> [f(x + h) − f(x)] / h. 자전거 s(t) = t²이면 [ (t + h)² − t² ] / h = 2t + h → 2t. 넓이 A = xy이면 ∂A/∂x = y, ∂A/∂y = x, 실제 증가 = y·dx + x·dy + dx·dy, 전미분 dA = y·dx + x·dy.</p></details>
   <div class="quiz" data-quiz="c1"></div>
 </div></section>
@@ -186,7 +182,7 @@ table.lim-tbl td,table.lim-tbl th{padding:4px 10px;text-align:right}
   <p>미분은 17세기에 두 사람이 따로 만들었습니다. 뉴턴은 움직이는 물체의 속도에서, 라이프니츠는 곡선에 닿는 접선에서 출발했습니다. 뉴턴이 먼저 만들었지만 출판은 라이프니츠가 먼저 했고(1684년 학술지 논문), 오늘 우리가 쓰는 dy/dx 표기도 라이프니츠의 것입니다 [1][2]. 연표의 해를 눌러 보세요. 오른쪽 아래에 그 일이 이 시리즈 어디에 나오는지 적었습니다.</p>
   <div class="tline" id="tl" role="group" aria-label="미분과 최적화의 연표"></div>
   <div class="tlcard" id="tlcard" aria-live="polite"></div>
-  <div class="assume"><b>이 칸의 가정</b> 누가 먼저냐는 당시 큰 다툼이 있었다. 지금은 두 사람이 따로 만들었다고 보는 견해가 널리 받아들여진다 [3]. 연도는 출처에 적힌 해를 그대로 옮겼다.</div>
+  <div class="assume"><b>이 단계의 가정</b> 누가 먼저냐는 당시 큰 다툼이 있었다. 지금은 두 사람이 따로 만들었다고 보는 견해가 널리 받아들여진다 [3]. 연도는 출처에 적힌 해를 그대로 옮겼다.</div>
 
   <h3 id="s22">2.2 극한으로 다듬기 — "아주 작게"를 정확히 말하는 법</h3>
   <p>뉴턴과 라이프니츠는 "아주 작은 양"을 쓰면서도 그것이 0인지 아닌지 분명히 말하지 못했습니다. 19세기에 코시와 바이어슈트라스 같은 수학자들이 <b>극한</b>이라는 말로 이를 다듬었습니다. "h를 0에 원하는 만큼 가깝게 하면 할선 기울기가 어떤 값에 원하는 만큼 가까워진다"는 뜻입니다. 1.1의 자전거로 확인해 봅니다.</p>
@@ -208,7 +204,7 @@ table.lim-tbl td,table.lim-tbl th{padding:4px 10px;text-align:right}
     <div class="ctrl"><div class="group"><label class="glabel" for="r23">마신 잔 수 n</label><input type="range" id="r23" min="1" max="10" step="1" value="3"><span class="val" id="v23">3잔</span></div></div>
     <div class="minis"><div class="mini a"><span>전체 만족 U(n)</span><b id="m23a">—</b></div><div class="mini g"><span>이번 잔의 만족 (한계효용)</span><b id="m23b">—</b></div><div class="mini m"><span>미분 U′(n) = 10 ÷ (1 + n)</span><b id="m23c">—</b></div></div>
   </div>
-  <div class="assume"><b>이 칸의 가정</b> 만족을 숫자로 잴 수 있다고 본 설명용 식이다. 만족을 정말 숫자로 잴 수 있는지는 경제학 안에서도 오래 논쟁이 있었다.</div>
+  <div class="assume"><b>이 단계의 가정</b> 만족을 숫자로 잴 수 있다고 본 설명용 식이다. 만족을 정말 숫자로 잴 수 있는지는 경제학 안에서도 오래 논쟁이 있었다.</div>
   <div class="quiz" data-quiz="c2"></div>
 </div></section>
 
@@ -235,7 +231,7 @@ table.lim-tbl td,table.lim-tbl th{padding:4px 10px;text-align:right}
   <h3 id="s32">3.2 MR = MC — 하나 더 팔아 버는 돈 = 하나 더 만드는 비용</h3>
   <div class="pair">
     <div><div class="tl">일상으로 치면</div>한 판 더 구워 2만 원을 받는데 그 한 판에 1만 5천 원이 든다면 더 굽는 게 이득입니다. 2만 5천 원이 든다면 손해예요. 그러니 "버는 돈 = 드는 돈"이 되는 곳까지만 굽습니다.</div>
-    <div><div class="tr">수학에서는</div>이윤의 기울기 π′(Q) = MR − MC. 1.3에서 본 대로 꼭대기에서는 기울기가 0이니 <b>MR = MC</b>. 단, 교점이 두 개일 수 있습니다. MC가 MR을 <b>아래에서 뚫고 올라가는</b> 교점이 꼭대기(이윤 최대), 위에서 내려오는 교점은 바닥입니다.</div>
+    <div><div class="tr">수학에서는</div>이윤의 기울기 π′(Q) = MR − MC. 1.3에서 본 대로 꼭대기에서는 기울기가 0이니 <b>MR = MC</b>. 단, 교점이 두 개일 수 있습니다. MC가 MR을 <b>아래에서 올라와 위로 넘어가는</b> 교점이 꼭대기(이윤 최대), 위에서 내려오는 교점은 바닥입니다.</div>
   </div>
   <div class="panel">
     <div class="ptitle">한계비용(MC) 곡선과 가격(= MR) 직선</div>
@@ -257,7 +253,7 @@ table.lim-tbl td,table.lim-tbl th{padding:4px 10px;text-align:right}
     <div class="minis"><div class="mini g"><span>열면 (MR = MC에서) 이윤</span><b id="m33a">—</b></div><div class="mini r"><span>닫으면 이윤 (= −고정비)</span><b id="m33b">−60.0</b></div><div class="mini m"><span>판정</span><b id="m33c" style="font-size:16px">—</b></div></div>
     <div class="insight" id="i33" aria-live="polite"></div>
   </div>
-  <div class="assume"><b>이 칸의 가정</b> 조업중단점은 <b>단기</b> 이야기다. 길게 보면 임대 계약을 끝낼 수 있으므로, 가격이 손익분기점 밑에 오래 머물면 가게 자체를 접는다.</div>
+  <div class="assume"><b>이 단계의 가정</b> 조업중단점은 <b>단기</b> 이야기다. 길게 보면 임대 계약을 끝낼 수 있으므로, 가격이 손익분기점 밑에 오래 머물면 가게 자체를 접는다.</div>
   <details class="fold"><summary>수식으로 보기</summary><p>VC(Q) = 20Q − 3Q² + 0.2Q³, FC = 60. MC = VC′(Q) = 20 − 6Q + 0.6Q², AVC = VC/Q = 20 − 3Q + 0.2Q². AVC 최저점은 Q = 7.5에서 8.75(= 조업중단점), ATC 최저점은 Q ≈ 9.25에서 약 15.85(= 손익분기점). 이윤 최대의 2계 조건: π″(Q) = −MC′(Q) &lt; 0, 곧 MC가 오르는 구간의 교점.</p></details>
   <div class="quiz" data-quiz="c3"></div>
 </div></section>
@@ -289,7 +285,7 @@ table.lim-tbl td,table.lim-tbl th{padding:4px 10px;text-align:right}
 <!-- 정리 -->
 <section class="sec" id="sum" aria-labelledby="h-sum"><div class="wrap">
   <h2 id="h-sum">정리 — 세 질문의 답</h2>
-  <div class="tblwrap"><table class="cmp"><thead><tr><th>질문</th><th>답 한 줄</th><th>칸</th></tr></thead><tbody>
+  <div class="tblwrap"><table class="cmp"><thead><tr><th>질문</th><th>답 한 줄</th><th>단계</th></tr></thead><tbody>
     <tr><td>미분은 왜 쓰나요? (하루)</td><td>아주 짧은 순간의 기울기로 "지금 얼마나 빨리 변하나"를 잰다. 경제학에서는 '한계', 최적화에서는 "기울기 0 = 꼭대기·바닥의 후보".</td><td>1.1~1.4</td></tr>
     <tr><td>언제부터요? (시아)</td><td>1660년대 뉴턴, 1684년 라이프니츠의 첫 출판. 19세기에 극한으로 다듬어졌고, 1870년대 한계혁명으로 경제학의 도구가 됐다.</td><td>2.1~2.3</td></tr>
     <tr><td>뭘 할 수 있어요? (모아)</td><td>빵 공장의 생산량을 MR = MC로 정하고, 조업중단점으로 문을 열지 닫을지 정한다. 공장의 고용과 인공지능 학습은 ② 편에서.</td><td>3.1~3.3, ②</td></tr>
@@ -357,7 +353,7 @@ var DLG={
       ["fly","fly_magnify","정말 그럴까? 3장 끝에서 빵 공장으로 겨뤄 보자."]],
  c1:[["asst","asst_smile","미분은 왜 쓰나요? 그냥 기울기 아니에요?"],["doc","doc_think","맞아요, 기울기예요. 다만 \"아주 짧은 순간\"의 기울기입니다. 그 순간의 기울기가 있어야 꼭대기와 바닥을 찾을 수 있어요."]],
  c2:[["sia","sia_think","미분은 언제부터 있었어요? 누가 만들었어요?"],["doc","doc_board","1660년대 영국의 뉴턴, 1670년대 독일의 라이프니츠가 따로 만들었어요. 경제학에 들어온 건 200년쯤 뒤입니다."],
-     ["moa","moa_report","연표에 오른쪽 아래 링크가 있어요. 오늘 배울 칸과 이어져요!"]],
+     ["moa","moa_report","연표에 오른쪽 아래 링크가 있어요. 오늘 배울 단계와 이어져요!"]],
  c3:[["moa","moa_sparkle","그걸로 뭘 할 수 있어요?"],["doc","doc_front","예를 들어 빵집 사장님이 \"오늘 빵을 몇 판 구울까?\"를 정할 수 있어요. 경제학을 처음 듣는 분도 따라올 수 있게 빵 공장으로 해 볼게요."]],
  c31:[["sia","sia_think","어? 슬라이더를 15판까지 밀어 봤는데요. 10판일 땐 4만 원이 남았는데, 15판을 다 팔았더니 6만 원 손해예요."],
       ["moa","moa_report","수입은 30만 원까지 늘었는데… 많이 팔았는데 왜 우리가 가져가는 돈은 적어지죠?"],
@@ -472,7 +468,7 @@ var v32=V($('#cv32'),function(){var x=B.cross(p32),P=U.plot($('#cv32'),{xr:[0,15
   if(x)x.forEach(function(q,i){if(q<0||q>15)return;P.g.beginPath();P.g.arc(P.X(q),P.Y(p32),6,0,7);P.g.fillStyle=i?cssv('--stain'):'rgba(214,69,58,.8)';P.g.fill();U.label(P.g,P.X(q)+(i?8:8),P.Y(p32)+18,i?'꼭대기 '+fmt(q,2)+'판':'바닥 '+fmt(q,2)+'판',i?cssv('--stain'):cssv('--eye'));});});
 function up32(){var x=B.cross(p32);if(!x){$('#m32a').textContent='교점 없음';$('#m32b').textContent='—';$('#m32c').textContent='—';U.ins($('#i32'),[['r','가격이 한계비용의 가장 낮은 값(5)보다 낮아 교점이 없습니다. 어떤 생산량에서도 한 판 더 만드는 비용이 가격보다 큽니다.']]);v32.dirty=true;return;}
   $('#m32a').textContent=fmt(x[1],2)+'판';$('#m32b').textContent=fmt(B.profit(x[1],p32),1);$('#m32c').textContent=x[0]>=0?fmt(x[0],2)+'판':'(음수 — 없음)';
-  U.ins($('#i32'),[['g','오른쪽 교점 '+fmt(x[1],2)+'판에서 MC가 가격 직선을 아래에서 뚫고 올라갑니다: 그 앞에서는 한 판 더가 이득, 그 뒤에서는 손해 → 이윤 꼭대기.'],['r','왼쪽 교점에서는 MC가 위에서 내려옵니다. 기울기는 0이지만 이윤이 가장 작은 바닥이에요(1.3의 바닥과 같은 곳).']].concat(B.profit(x[1],p32)<0?[['a','이 가격에서는 꼭대기 이윤도 음수입니다. 그래도 문을 여는 게 나을까요? → 3.3']]:[]));v32.dirty=true;}
+  U.ins($('#i32'),[['g','오른쪽 교점 '+fmt(x[1],2)+'판에서 MC가 가격 직선을 아래에서 위로 넘어갑니다: 그 앞에서는 한 판 더가 이득, 그 뒤에서는 손해 → 이윤 꼭대기.'],['r','왼쪽 교점에서는 MC가 위에서 내려옵니다. 기울기는 0이지만 이윤이 가장 작은 바닥이에요(1.3의 바닥과 같은 곳).']].concat(B.profit(x[1],p32)<0?[['a','이 가격에서는 꼭대기 이윤도 음수입니다. 그래도 문을 여는 게 나을까요? → 3.3']]:[]));v32.dirty=true;}
 rng('r32','v32',function(v){return String(v);},function(v){p32=v;up32();});up32();
 
 /* ── 3.3 조업중단점 ── */
@@ -521,7 +517,7 @@ U.Study({quiz:{
      {q:'넓이 A = x·y에서 ∂A/∂x는?',o:['y','x','x·y'],a:0,why:'y를 고정하고 x만 늘리면 넓이는 y만큼씩 늡니다.',hint:'가로만 늘리면 붙는 띠의 높이는?'}],
  c2:[{q:'미분을 다룬 첫 출판물을 낸 사람과 해는?',o:['뉴턴, 1665년','코시, 1847년','라이프니츠, 1684년'],a:2,why:'뉴턴은 1665–66년에 먼저 만들었지만 출판은 늦었고, 1684년 라이프니츠의 논문이 첫 출판입니다.',hint:'연표에서 "첫 출판"을 찾아보세요.'},
      {q:'한계혁명이 경제학에 가져온 생각은?',o:['값어치는 "하나 더"의 쓸모에서 나온다','값어치는 들어간 노동 시간으로 정해진다','가격은 정부가 정한다'],a:0,why:'제번스·멩거·왈라스는 한계효용으로 값어치를 설명했습니다.',hint:'물 한 잔 더의 만족.'}],
- c3:[{q:'완전경쟁 빵집의 이윤이 가장 큰 생산량의 조건은?',o:['수입 = 비용','가격(MR) = 한계비용(MC), MC가 오르는 구간','평균비용이 가장 낮은 곳'],a:1,why:'이윤의 기울기 MR − MC = 0이고, MC가 MR을 아래에서 뚫고 올라가는 교점이 꼭대기입니다.',hint:'한 판 더 팔아 버는 돈과 드는 돈.'},
+ c3:[{q:'완전경쟁 빵집의 이윤이 가장 큰 생산량의 조건은?',o:['수입 = 비용','가격(MR) = 한계비용(MC), MC가 오르는 구간','평균비용이 가장 낮은 곳'],a:1,why:'이윤의 기울기 MR − MC = 0이고, MC가 MR을 아래에서 위로 넘어가는 교점이 꼭대기입니다.',hint:'한 판 더 팔아 버는 돈과 드는 돈.'},
      {q:'빵 가격이 1만 2천 원(조업중단점 8.75와 손익분기점 15.85 사이)이면?',o:['이익이 난다','바로 문을 닫는다','손해지만 문을 여는 편이 낫다'],a:2,why:'재료비를 빼고 남는 돈이 고정비 일부를 메워, 닫을 때(−60)보다 손해가 작습니다.',hint:'닫아도 고정비 60은 나갑니다.'}],
  duel:[{q:'3일째(7천 원)에 주판봇이 초파리보다 손해가 컸던 이유는?',o:['빵을 너무 적게 구워서','가격이 조업중단점(8.75) 밑인데 문을 열어서','고정비가 더 많아서'],a:1,why:'7천 원은 평균가변비용의 최저점보다 낮아 빵을 팔아도 가변비조차 못 건집니다. 열면 고정비 60에 가변비 손해까지 더해집니다.',hint:'닫아도 나가는 돈은 얼마일까요?'}]
 }});

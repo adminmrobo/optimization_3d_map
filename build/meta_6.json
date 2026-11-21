@@ -15,8 +15,8 @@
    "role": "assistant"
   }
  ],
- "date": "2026-11-19",
- "version": "1.1",
+ "date": "2026-11-22",
+ "version": "1.2",
  "language": [
   "ko"
  ],
@@ -34,5 +34,5 @@
  "educationalLevel": "입문",
  "learningResourceType": "interactive explainer",
  "registry": "KG_00_registry 0.2",
- "suggestedCitation": "안상선 (2026). 최적화 첫걸음 ⓪ 인공지능 모델에서의 최적화 — 모델은 한 번에 만들어지지 않는다. 최적화 첫걸음 0, v1.1."
+ "suggestedCitation": "안상선 (2026). 최적화 첫걸음 ⓪ 인공지능 모델에서의 최적화 — 모델은 한 번에 만들어지지 않는다. 최적화 첫걸음 0, v1.2."
 }

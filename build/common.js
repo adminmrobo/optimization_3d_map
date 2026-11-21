@@ -109,7 +109,7 @@ Surf3D.prototype.draw=function(){var S=this,R=setup(S.cv),g=R.g,w=R.w,h=R.h;S.w=
   /* 축 */
   var ax=S.o.axes||['w₁','w₂','오차'],o0=S.P(S.xr[0],S.yr[0],S.zr[0]),ex=S.P(S.xr[1],S.yr[0],S.zr[0]),ey=S.P(S.xr[0],S.yr[1],S.zr[0]),ez=S.P(S.xr[0],S.yr[0],S.zr[1]);
   arrow2(g,o0[0],o0[1],ex[0],ex[1],cssv('--eye'),1.5);arrow2(g,o0[0],o0[1],ey[0],ey[1],cssv('--terrain'),1.5);arrow2(g,o0[0],o0[1],ez[0],ez[1],'rgba(22,33,43,.6)',1.5);
-  /* 곡면: 먼 칸부터 */
+  /* 곡면: 먼 격자부터 */
   if(S.o.surface!==false){var quads=[];for(j=0;j<n;j++)for(i=0;i<n;i++){var A=pts[j][i],B=pts[j][i+1],C=pts[j+1][i+1],D=pts[j+1][i];if(!A||!B||!C||!D)continue;var z4=(Z[j][i]+Z[j][i+1]+Z[j+1][i+1]+Z[j+1][i])/4;quads.push([(A[2]+B[2]+C[2]+D[2])/4,A,B,C,D,z4]);}
     quads.sort(function(a,b){return b[0]-a[0];});var al=S.o.alpha==null?0.86:S.o.alpha;g.lineWidth=0.6;
     quads.forEach(function(q){g.beginPath();g.moveTo(q[1][0],q[1][1]);g.lineTo(q[2][0],q[2][1]);g.lineTo(q[3][0],q[3][1]);g.lineTo(q[4][0],q[4][1]);g.closePath();g.fillStyle=cmap(S.nz(q[5]),al);g.fill();g.strokeStyle='rgba(22,33,43,.22)';g.stroke();});}

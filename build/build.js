@@ -37,6 +37,14 @@ for(const [src,out,n] of pages){
   let H=rd(src).replace('<!--@@CSS@@-->','<style>\n'+css+'\n</style>')
     .replace('/*@@SPRITES@@*/',()=>n==='0'?rd('sprites_index.js'):sprites).replace('/*@@LABMATH@@*/',()=>labmath).replace('/*@@VECMATH@@*/',()=>vecmath).replace('/*@@DIFFMATH@@*/',()=>diffmath).replace('/*@@COMMON@@*/',()=>common)
     .replace('/*@@DEEP@@*/',()=>fs.existsSync(path.join(B,'deep.json'))?rd('deep.json'):'null');
+  // 연구실 확장(ai-lab-extend): build/extend.json의 3줄 상자·왜/수식 상자·단계 대화를 끼운다
+  const XF=path.join(B,'extend.json');
+  if(fs.existsSync(XF)){const X=JSON.parse(fs.readFileSync(XF,'utf8'))[n];
+    if(X){H=H.replace('</header>',()=>'</header>\n'+X.plain);
+      const at=(id,tag,ins)=>{const i=H.indexOf('id="'+id+'"');if(i<0)throw new Error('extend: no id '+id);const j=H.indexOf(tag,i);if(j<0)throw new Error('extend: no '+tag+' after '+id);H=H.slice(0,j)+ins+'\n  '+H.slice(j);};
+      Object.keys(X.ez).forEach(id=>at(id,'<div class="pair">',X.ez[id]));
+      X.talk.forEach(id=>at(id,'<div class="panel">','<div class="dialog lvtalk" data-dlg="ext_'+id+'"></div>'));
+      const k=H.lastIndexOf('U.start();');H=H.slice(0,k)+'U.dialogues('+JSON.stringify(X.dlg)+');U.fillImgs();\n'+H.slice(k);}}
   const kf=path.join(B,'kg_'+n+'.json');
   if(fs.existsSync(kf))H=attach(H,JSON.parse(fs.readFileSync(kf,'utf8')),JSON.parse(rd('refs_'+n+'.json')),JSON.parse(rd('meta_'+n+'.json')));
   fs.writeFileSync(path.join(R,out),H);console.log(out,(Buffer.byteLength(H)/1024).toFixed(0)+' KB');}

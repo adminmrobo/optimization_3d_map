@@ -147,7 +147,7 @@ curl0 = g.n("lab:concept/curl-free-gradient", "Concept", "그래디언트의 회
 hes = g.n("lab:concept/hessian", "Concept", "헤시안", "Hessian matrix", "#s3", 3, "2차 편미분을 모은 정사각 표. 방향마다의 굽음을 적는다.")
 eig = g.n("lab:concept/curvature-eigenvalue", "Concept", "고유값(굽음)", "Curvature eigenvalue", "#s3", 3, "헤시안을 어느 방향으로 봐도 변하지 않는 굽음 숫자.")
 lap = g.n("lab:concept/laplacian", "Concept", "라플라시안", "Laplacian", "#s3", 3, "2차 편미분의 합 = 헤시안 고유값의 합 = ∇·∇f.")
-delop = g.n("lab:concept/del-operator", "Concept", "나블라(∇) 연산자", "Del (nabla) operator", "#del-op", 2, "칸마다 편미분이 든 벡터 (∂/∂x, ∂/∂y, ∂/∂z). 붙는 방식에 따라 그래디언트·발산·회전·라플라시안이 된다.", alt=["델", "del", "∇"])
+delop = g.n("lab:concept/del-operator", "Concept", "나블라(∇) 연산자", "Del (nabla) operator", "#del-op", 2, "자리마다 편미분이 든 벡터 (∂/∂x, ∂/∂y, ∂/∂z). 붙는 방식에 따라 그래디언트·발산·회전·라플라시안이 된다.", alt=["델", "del", "∇"])
 divg = g.n("lab:concept/divergence", "Concept", "발산", "Divergence", "#del-op", 2, "∇·F. 한 점에서 나가는 양과 들어오는 양의 차. 양수면 샘, 음수면 빨아들이는 곳.")
 g.e(delop, "relatedTo", grad, "#del-op"); g.e(delop, "relatedTo", divg, "#del-op"); g.e(delop, "relatedTo", lap, "#del-op"); g.e(delop, "relatedTo", curl0, "#del-op"); g.e(lap, "relatedTo", divg, "#del-op")
 lim = g.n("lab:concept/step-size-limit", "Concept", "보폭 한계 2/λmax", "Step-size stability limit", "#s3", 3, "2차 근사에서 경사하강이 줄어드는 학습률의 상한.")
@@ -165,7 +165,7 @@ L2 = g.n("lab:limitation/gradient-no-step-size", "Limitation", "기울기만으�
 L3 = g.n("lab:limitation/quadratic-local", "Limitation", "2차 근사는 그 점 둘레에서만 맞음", "Quadratic model is local", "#s3", 3)
 L4 = g.n("lab:limitation/single-map-only", "Limitation", "층을 지나는 변화는 모름", "Ignores layer-to-layer mapping", "#s4", 3)
 L5 = g.n("lab:limitation/linear-approx", "Limitation", "야코비안은 작은 범위의 직선 근사", "Jacobian is a local linear approximation", "#s5", 3)
-# 사다리 칸 = 방법 (K1·K2): 칸마다 한계 → 다음 칸이 해결
+# 단계 = 방법 (K1·K2): 단계마다 한계 → 다음 단계가 해결
 M1 = g.n("lab:method/slice-descent", "Method", "① 단면 위 한 걸음", "Step on a 1D slice", "#s1", 1, "다른 축을 묶어 둔 단면 곡선의 기울기로 한 축만 옮긴다.")
 M3 = g.n("lab:method/curvature-step-limit", "Method", "③ 굽음으로 보폭 한계 정하기", "Curvature-based step limit", "#s3", 3, "헤시안의 가장 큰 고유값으로 학습률의 상한 2/λmax를 정한다.")
 M4 = g.n("lab:method/second-order-critical-test", "Method", "④ 헤시안 부호로 임계점 판별", "Second-order critical-point test", "#s4", 3, "기울기 0인 곳에서 고유값 부호로 바닥·봉우리·안장을 가린다.")
@@ -235,7 +235,7 @@ C = [("lab:claim/lr-warmup", "학습 초기에 학습률을 천천히 올리는 
      ("lab:claim/batch-normalization", "정규화 층이 깊은 신경망 학습을 빠르고 안정되게 한다", "Normalization layers speed up and stabilize training", "#s5", bp, "ioffe2015batch", "본문"),
      ("lab:claim/normal-is-neg-gradient-lift", "그래프 곡면의 법선은 (−∂f/∂u, −∂f/∂v, 1)이다", "Normal of a graph surface is (−f_u, −f_v, 1)", "#s2", nrm, "matheorems_graph", "영상 수식"),
      ("lab:claim/curl-grad-zero", "그래디언트의 회전과 회전의 발산은 늘 0이다", "Curl of gradient and divergence of curl vanish", "#s2", curl0, "matharium_vecops", "How they connect"),
-     ("lab:claim/laplacian-examples", "∇²(x² + y²) = 4, ∇²(x² − y²) = 0", "Laplacian examples", "#s3", lap, "matharium_vecops", "Laplacian 칸"),
+     ("lab:claim/laplacian-examples", "∇²(x² + y²) = 4, ∇²(x² − y²) = 0", "Laplacian examples", "#s3", lap, "matharium_vecops", "Laplacian 항목"),
      ("lab:claim/del-four-operations", "∇ 하나가 붙는 방식에 따라 그래디언트·발산·회전·라플라시안을 만든다", "One del operator yields gradient, divergence, curl and Laplacian", "#del-op", delop, "matharium_del", "본문 전체"),
      ("lab:claim/nabla-name-1870", "나블라라는 이름은 1870년 W. R. 스미스가 하프 모양을 보고 테이트에게 제안했다", "The name nabla was suggested to Tait by W. R. Smith in 1870", "#del-op", delop, "knott1911life", "p. 145"),
      ("lab:claim/crisp-doubly-ruled", "쌍곡포물면은 곧은 선 두 무리를 품는다", "A hyperbolic paraboloid is doubly ruled", "#s4", rul, "matharium_crisp", "아래 문구"),
@@ -245,7 +245,7 @@ C = [("lab:claim/lr-warmup", "학습 초기에 학습률을 천천히 올리는 
      ("lab:claim/newton-one-step-quadratic", "2차 함수에서 뉴턴 걸음 θ − H⁻¹∇f는 한 번에 기울기 0인 점에 닿고, 큰 모델에서는 헤시안 근사(L-BFGS)를 쓴다", "Newton's step reaches the stationary point of a quadratic in one step; large problems use quasi-Newton approximations", "#s3", hes, "nocedal2006numerical", "3·6·7장"),
      ("lab:claim/reverse-mode-vjp", "역방향 자동미분은 벡터-야코비안 곱(VJP)을, 순방향은 야코비안-벡터 곱(JVP)을 구한다", "Reverse mode computes VJPs, forward mode computes JVPs", "#s5", bp, "baydin2018automatic", "3절"),
      ("lab:claim/hessian-definiteness-examples", "x² + y², x² − y², −(x² + y²)의 헤시안은 각각 양의 정부호(바닥)·부정부호(안장)·음의 정부호(봉우리)다", "Hessians of x²+y², x²−y², −(x²+y²) are positive definite, indefinite, negative definite", "#s3", hes, "matharium_hessian", "Geometry in two variables"),
-     ("lab:claim/hessian-classifies", "헤시안 고유값이 임계점을 분류한다", "Hessian eigenvalues classify critical points", "#s3", hes, "matharium_gjh", "Hessian 칸"),
+     ("lab:claim/hessian-classifies", "헤시안 고유값이 임계점을 분류한다", "Hessian eigenvalues classify critical points", "#s3", hes, "matharium_gjh", "Hessian 항목"),
      ("lab:claim/saddles-proliferate-high-dim", "고차원 비볼록 지형에서는 나쁜 국소 최소보다 안장점이 문제를 일으킨다", "Saddle points, not local minima, proliferate in high dimensions", "#s4", sad, "dauphin2014identifying", "초록, 2장"),
      ("lab:claim/lr-limit-quadratic", "2차 함수에서 경사하강은 학습률이 2/λmax보다 작을 때 줄어든다", "GD converges on a quadratic iff lr < 2/λmax", "#s3", lim, "goodfellow2016deep", "4장"),
      ("lab:claim/backprop-1986", "역전파는 층마다의 기울기를 뒤에서부터 전해 가중치를 고친다", "Backpropagation adjusts weights by propagating error gradients", "#s5", bp, "rumelhart1986learning", "본문"),
@@ -351,7 +351,7 @@ C = [("lab:claim/linear-scaling-warmup", "배치를 키우면 학습률도 비�
      ("lab:claim/random-direction-slices", "고차원 오차 지형은 무작위 방향으로 자른 1·2차원 단면으로 본다", "High-D landscapes are viewed through random-direction slices", "#s3", rd, "li2018visualizing", "3장"),
      ("lab:claim/lr-limit-quadratic", "2차 함수에서 경사하강은 학습률이 2/λmax보다 작을 때 줄어든다", "GD converges on a quadratic iff lr < 2/λmax", "#s2", lim, "goodfellow2016deep", "4장"),
      ("lab:claim/early-stopping-validation", "검증 오차로 멈출 시점을 고르고 최종 성능은 따로 둔 데이터로 잰다", "Early stopping uses validation; report on held-out test", "#s4", es, "goodfellow2016deep", "7장(조기 종료)"),
-     ("lab:claim/hessian-curvature", "헤시안은 기울기가 바뀌는 정도, 곧 굽음을 적는다", "Hessian captures how the gradient changes", "#s2", hes, "matharium_gjh", "Hessian 칸")]
+     ("lab:claim/hessian-curvature", "헤시안은 기울기가 바뀌는 정도, 곧 굽음을 적는다", "Hessian captures how the gradient changes", "#s2", hes, "matharium_gjh", "Hessian 항목")]
 for cid, ko, en, anc, tgt, wk, loc in C:
     g.n(cid, "Claim", ko, en, anc, 2, source=[{"ref": wk, "loc": loc}]); g.e(cid, "supports", tgt, anc); g.e(cid, "assertedIn", W[wk], anc)
 Q = [("s1", 1, ep), ("s1", 2, mb), ("s2", 1, lim), ("s2", 2, lr), ("s3", 1, sl), ("s3", 2, rd), ("s4", 1, of), ("s4", 2, test), ("duel", 1, bs)]
@@ -488,7 +488,7 @@ tdiff = g.n("lab:concept/total-differential", "Concept", "전미분", "Total dif
 mu = g.n("lab:concept/marginal-utility", "Concept", "한계효용", "Marginal utility", "#s23", 1, "하나 더 쓸 때 늘어나는 만족.")
 mrev = g.n("lab:concept/marginal-revolution", "Concept", "한계혁명", "Marginal revolution", "#s23", 2, "1871–74년 제번스·멩거·왈라스가 한계효용으로 값어치를 설명한 일.")
 fcvc = g.n("lab:concept/fixed-variable-cost", "Concept", "고정비·가변비", "Fixed and variable cost", "#s31", 1, "생산량과 무관한 비용과 생산량 따라 느는 비용.")
-mrmc = g.n("lab:concept/mr-equals-mc", "Concept", "MR = MC", "MR equals MC", "#s32", 1, "이윤 최대의 1계 조건. MC가 MR을 아래에서 뚫고 올라가는 교점.")
+mrmc = g.n("lab:concept/mr-equals-mc", "Concept", "MR = MC", "MR equals MC", "#s32", 1, "이윤 최대의 1계 조건. MC가 MR을 아래에서 올라와 위로 넘어가는 교점.")
 shut = g.n("lab:concept/shutdown-point", "Concept", "조업중단점", "Shutdown point", "#s33", 1, "평균가변비용의 최저점. 가격이 이 밑이면 단기에도 문을 닫는다.")
 beven = g.n("lab:concept/break-even-point", "Concept", "손익분기점", "Break-even point", "#s33", 1, "평균총비용의 최저점. 이윤 0.")
 pc = g.n("lab:concept/perfect-competition", "Concept", "완전경쟁", "Perfect competition", "#c3", 1, "누구도 가격을 정하지 못하는 시장. MR = P.")
@@ -537,7 +537,7 @@ g.dump(4)
 used4 = {"leibniz1684nova": [deriv], "archimede_newton_leibniz": [deriv], "wiki_calculus_controversy": [deriv], "het_neoclassicals": [mrev], "bussotti2003genesis": [limit], "lemarechal2012cauchy": [limit], "het_euler": [limit], "hoerl1970ridge": [limit], "rumelhart1986learning": [limit]}
 (B / "refs_4.json").write_text(json.dumps([REFS[k](v) for k, v in used4.items()], ensure_ascii=False, indent=1))
 m4 = meta(4, "최적화 첫걸음 ① 혹시… 미분 좋아하세요? — 왜, 언제부터, 어디에", [deriv, marg, stat, mrmc, shut], list(used4), "first_step_1.html")
-m4.update({"series": FS, "date": "2026-11-19", "version": "1.5", "educationalLevel": "입문", "suggestedCitation": "안상선 (2026). 최적화 첫걸음 ① 혹시… 미분 좋아하세요? — 왜, 언제부터, 어디에. 최적화 첫걸음 1, v1.5."})
+m4.update({"series": FS, "date": "2026-11-22", "version": "1.6", "educationalLevel": "입문", "suggestedCitation": "안상선 (2026). 최적화 첫걸음 ① 혹시… 미분 좋아하세요? — 왜, 언제부터, 어디에. 최적화 첫걸음 1, v1.6."})
 (B / "meta_4.json").write_text(json.dumps(m4, ensure_ascii=False, indent=1))
 
 # ══════════════ 최적화 첫걸음 ② ══════════════
@@ -604,7 +604,7 @@ g.dump(5)
 used5 = {"bussotti2003genesis": [lag], "het_euler": [euler], "lemarechal2012cauchy": [gd], "rumelhart1986learning": [bp], "hoerl1970ridge": [reg], "cement_world": [ode]}
 (B / "refs_5.json").write_text(json.dumps([REFS[k](v) for k, v in used5.items()], ensure_ascii=False, indent=1))
 m5 = meta(5, "최적화 첫걸음 ② 공장에서 인공지능까지", [vmp, lag, euler, gd, inter], list(used5), "first_step_2.html")
-m5.update({"series": FS, "date": "2026-11-16", "version": "1.3", "educationalLevel": "입문", "suggestedCitation": "안상선 (2026). 최적화 첫걸음 ② 공장에서 인공지능까지. 최적화 첫걸음 2, v1.3."})
+m5.update({"series": FS, "date": "2026-11-22", "version": "1.4", "educationalLevel": "입문", "suggestedCitation": "안상선 (2026). 최적화 첫걸음 ② 공장에서 인공지능까지. 최적화 첫걸음 2, v1.4."})
 (B / "meta_5.json").write_text(json.dumps(m5, ensure_ascii=False, indent=1))
 
 
@@ -646,7 +646,7 @@ g.dump(6)
 used6 = {"mltut_math_behind_ai": [nrn], "ahn_battery_factory": [tvs, piv]}
 (B / "refs_6.json").write_text(json.dumps([REFS[k](v) for k, v in used6.items()], ensure_ascii=False, indent=1))
 m6 = meta(6, "최적화 첫걸음 ⓪ 인공지능 모델에서의 최적화 — 모델은 한 번에 만들어지지 않는다", [itr, tvs, piv], list(used6), "first_step_0.html")
-m6.update({"series": FS, "number": "0", "date": "2026-11-19", "version": "1.1", "educationalLevel": "입문", "suggestedCitation": "안상선 (2026). 최적화 첫걸음 ⓪ 인공지능 모델에서의 최적화 — 모델은 한 번에 만들어지지 않는다. 최적화 첫걸음 0, v1.1."})
+m6.update({"series": FS, "number": "0", "date": "2026-11-22", "version": "1.2", "educationalLevel": "입문", "suggestedCitation": "안상선 (2026). 최적화 첫걸음 ⓪ 인공지능 모델에서의 최적화 — 모델은 한 번에 만들어지지 않는다. 최적화 첫걸음 0, v1.2."})
 (B / "meta_6.json").write_text(json.dumps(m6, ensure_ascii=False, indent=1))
 
 # ══════════════ 목차 ══════════════
