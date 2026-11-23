@@ -381,6 +381,40 @@ details.eqx[open] summary{margin-bottom:6px}
   <div class="links"><a href="#firststep">첫걸음</a><a href="#gallery">3D 전시실</a><a href="#chapters">목차</a><a href="1_math_map.html">1편 수학</a><a href="2_experiment_lab.html">2편 실험실</a><a href="3_arrow_field.html">3편 화살표 밭</a><a href="#kg">색인</a><a href="#export">꾸러미</a></div>
 </div></nav>
 
+<!-- dizzy-guide -->
+<style>
+.dizzy{max-width:1080px;margin:14px auto 0;padding:0 18px}
+.dizzy .box{position:relative;border:1px solid var(--rule);border-radius:14px;background:#fffaf0;padding:12px 44px 12px 16px}
+.dizzy .hd{margin:0 0 10px;font-size:15px;color:var(--text)}
+.dizzy .hd b{color:var(--c-asst)}
+.dizzy .opts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.dizzy .opt{display:flex;gap:10px;align-items:center;padding:8px 10px;border:1px solid var(--rule);border-radius:12px;background:#fff;text-decoration:none;color:var(--text);transition:border-color .15s,transform .15s}
+.dizzy .opt:hover,.dizzy .opt:focus-visible{border-color:var(--c-asst);transform:translateY(-1px)}
+.dizzy .opt img{width:48px;height:48px;flex:0 0 48px;image-rendering:pixelated;border-radius:10px;background:var(--panel)}
+.dizzy .opt .who{display:block;font-size:12px;font-weight:700;line-height:1.3}
+.dizzy .opt .say{display:block;font-size:13.5px;line-height:1.45}
+.dizzy .opt .go{display:block;font-size:12.5px;color:var(--muted);margin-top:2px}
+.dizzy .moa .who{color:var(--c-moa)} .dizzy .sia .who{color:var(--c-sia)}
+.dizzy .sub{margin:8px 0 0;font-size:12.5px;color:var(--muted)}
+.dizzy .sub a{color:var(--muted)}
+.dizzy .x{position:absolute;top:8px;right:8px;width:30px;height:30px;border:0;border-radius:8px;background:transparent;color:var(--muted);font-size:18px;cursor:pointer}
+.dizzy .x:hover,.dizzy .x:focus-visible{background:var(--panel)}
+@media(max-width:760px){.dizzy .opts{grid-template-columns:1fr}}
+</style>
+<aside class="dizzy" id="dizzy" aria-label="어려우면 여기부터"><div class="box">
+<p class="hd">😵‍💫 혹시 여기 들어오자마자 <b>현기증</b>을 느끼신다면 얼른 이쪽으로 오세요!</p>
+<div class="opts">
+<a class="opt moa" href="https://adminmrobo.github.io/math_for_ai_lab/part3.html"><img src="img/guide_moa_e09.webp" alt="모아" width="48" height="48" loading="lazy"><span><span class="who">모아</span><span class="say">“저도 처음엔 어지러웠어요. 수학부터 차근차근 같이 가요.”</span><span class="go">수학부터 차근차근 → 인공지능을 위한 수학 3부(미분·그래디언트·최적화)</span></span></a>
+<a class="opt sia" href="first_step_0.html"><img src="img/guide_sia_e19.webp" alt="시아" width="48" height="48" loading="lazy"><span><span class="who">시아</span><span class="say">“수식은 나중에! 그릇 감각부터 먼저 잡고 와요.”</span><span class="go">그릇 감각만 먼저 → 최적화 첫걸음</span></span></a>
+</div>
+<p class="sub">함수·행렬부터 보고 싶다면 <a href="https://adminmrobo.github.io/math_for_ai_lab/">인공지능을 위한 수학 1부부터</a></p>
+<button type="button" class="x" aria-label="안내 닫기">×</button>
+</div></aside>
+<script>(function(){var K="o3d_dizzy_closed",b=document.getElementById("dizzy");if(!b)return;
+try{if(localStorage.getItem(K)==="1"){b.hidden=true;return;}}catch(e){}
+b.querySelector(".x").addEventListener("click",function(){b.hidden=true;try{localStorage.setItem(K,"1");}catch(e){}});})();</script>
+<!-- /dizzy-guide -->
+
 <!-- lab-cover -->
 <div class="cover" id="cover" data-img="cover_index"><div class="frame">
   <picture>
