@@ -1,0 +1,534 @@
+{
+ "version": "1.0",
+ "made": "2026-11-24",
+ "via": "rehang-2026-11-24",
+ "domains": [
+  "math",
+  "dl"
+ ],
+ "note": "분야 뼈대 주제에 다시 걸기(ai-lab-retrofit 15장). links는 자동 후보이며 틀린 줄은 지우면 된다. 빌드 스크립트가 있는 저장소는 빌드 끝에 rehang.apply_overlay()가 이 파일을 적용한다.",
+ "topics": {
+  "lab:topic/activation-function": {
+   "ko": "활성화 함수",
+   "en": "Activation function",
+   "domain": [
+    "ai",
+    "dl"
+   ],
+   "level": 2
+  },
+  "lab:topic/backpropagation": {
+   "ko": "역전파",
+   "en": "Backpropagation",
+   "domain": [
+    "ai",
+    "dl"
+   ],
+   "level": 2
+  },
+  "lab:topic/chain-rule-multivar": {
+   "ko": "다변수 연쇄법칙",
+   "en": "Multivariable chain rule",
+   "domain": [
+    "math"
+   ],
+   "level": 2
+  },
+  "lab:topic/coordinates": {
+   "ko": "좌표계",
+   "en": "Coordinate systems",
+   "domain": [
+    "geom"
+   ],
+   "level": 1
+  },
+  "lab:topic/curves-surfaces": {
+   "ko": "곡선과 곡면",
+   "en": "Curves and surfaces",
+   "domain": [
+    "geom"
+   ],
+   "level": 4
+  },
+  "lab:topic/data-splitting": {
+   "ko": "훈련·검증·시험 분리",
+   "en": "Train/validation/test split",
+   "domain": [
+    "ai",
+    "ml"
+   ],
+   "level": 1
+  },
+  "lab:topic/divergence-curl": {
+   "ko": "발산과 회전",
+   "en": "Divergence and curl",
+   "domain": [
+    "math"
+   ],
+   "level": 2
+  },
+  "lab:topic/duality-optimization": {
+   "ko": "쌍대성",
+   "en": "Duality",
+   "domain": [
+    "math"
+   ],
+   "level": 2
+  },
+  "lab:topic/early-stopping": {
+   "ko": "조기 종료",
+   "en": "Early stopping",
+   "domain": [
+    "ai",
+    "dl"
+   ],
+   "level": 3
+  },
+  "lab:topic/eigenvalues": {
+   "ko": "고유값과 고유벡터",
+   "en": "Eigenvalues and eigenvectors",
+   "domain": [
+    "math"
+   ],
+   "level": 1
+  },
+  "lab:topic/generalization": {
+   "ko": "일반화·과적합",
+   "en": "Generalization and overfitting",
+   "domain": [
+    "ai",
+    "ml"
+   ],
+   "level": 1
+  },
+  "lab:topic/gradient": {
+   "ko": "그래디언트(∇)",
+   "en": "Gradient (nabla)",
+   "domain": [
+    "math"
+   ],
+   "level": 2
+  },
+  "lab:topic/gradient-descent": {
+   "ko": "경사하강법",
+   "en": "Gradient descent",
+   "domain": [
+    "ai",
+    "dl"
+   ],
+   "level": 2
+  },
+  "lab:topic/integral-theorems": {
+   "ko": "선적분과 적분 정리",
+   "en": "Line integrals and integral theorems",
+   "domain": [
+    "math"
+   ],
+   "level": 2
+  },
+  "lab:topic/jacobian-hessian": {
+   "ko": "야코비안·헤시안",
+   "en": "Jacobian and Hessian",
+   "domain": [
+    "math"
+   ],
+   "level": 2
+  },
+  "lab:topic/lagrange-multipliers": {
+   "ko": "라그랑주 승수",
+   "en": "Lagrange multipliers",
+   "domain": [
+    "math"
+   ],
+   "level": 2
+  },
+  "lab:topic/lagrangian-mechanics": {
+   "ko": "라그랑지안",
+   "en": "Lagrangian formulation",
+   "domain": [
+    "math"
+   ],
+   "level": 4
+  },
+  "lab:topic/learning-rate-schedule": {
+   "ko": "학습률 조정",
+   "en": "Learning-rate schedules",
+   "domain": [
+    "ai",
+    "dl"
+   ],
+   "level": 2
+  },
+  "lab:topic/momentum-adam": {
+   "ko": "모멘텀·Adam",
+   "en": "Momentum and Adam",
+   "domain": [
+    "ai",
+    "dl"
+   ],
+   "level": 2
+  },
+  "lab:topic/numerical-error": {
+   "ko": "근사와 오차",
+   "en": "Approximation and error",
+   "domain": [
+    "math"
+   ],
+   "level": 3
+  },
+  "lab:topic/numerical-integration": {
+   "ko": "수치 적분·미분방정식 풀이",
+   "en": "Numerical integration and ODE solvers",
+   "domain": [
+    "math"
+   ],
+   "level": 3
+  },
+  "lab:topic/partial-derivatives": {
+   "ko": "편미분",
+   "en": "Partial derivatives",
+   "domain": [
+    "math"
+   ],
+   "level": 2
+  },
+  "lab:topic/pde": {
+   "ko": "편미분방정식",
+   "en": "Partial differential equations",
+   "domain": [
+    "math"
+   ],
+   "level": 3
+  },
+  "lab:topic/perceptron": {
+   "ko": "퍼셉트론",
+   "en": "Perceptron",
+   "domain": [
+    "ai",
+    "dl"
+   ],
+   "level": 2
+  },
+  "lab:topic/sgd-minibatch": {
+   "ko": "확률적 경사하강·미니배치",
+   "en": "SGD and mini-batches",
+   "domain": [
+    "ai",
+    "dl"
+   ],
+   "level": 2
+  },
+  "lab:topic/tangent-space": {
+   "ko": "접공간",
+   "en": "Tangent space",
+   "domain": [
+    "geom"
+   ],
+   "level": 4
+  },
+  "lab:topic/unconstrained-optimization": {
+   "ko": "제약 없는 최적화(1·2계 조건)",
+   "en": "Unconstrained optimization (first- and second-order conditions)",
+   "domain": [
+    "math"
+   ],
+   "level": 2
+  }
+ },
+ "links": {
+  "lab:concept/artificial-neuron": {
+   "topic": "lab:topic/perceptron",
+   "score": 3,
+   "why": "사람이 고름",
+   "ko": "인공 뉴런"
+  },
+  "lab:concept/batch-size": {
+   "topic": "lab:topic/sgd-minibatch",
+   "score": 3,
+   "why": "사람이 고름",
+   "ko": "배치 크기"
+  },
+  "lab:concept/chain-rule": {
+   "topic": "lab:topic/chain-rule-multivar",
+   "score": 3,
+   "why": "사람이 고름",
+   "ko": "연쇄 법칙"
+  },
+  "lab:concept/constrained-optimization": {
+   "topic": "lab:topic/lagrange-multipliers",
+   "score": 3,
+   "why": "사람이 고름",
+   "ko": "제약 있는 최적화"
+  },
+  "lab:concept/curl": {
+   "topic": "lab:topic/divergence-curl",
+   "score": 3,
+   "why": "사람이 고름",
+   "ko": "회전"
+  },
+  "lab:concept/curl-free-gradient": {
+   "topic": "lab:topic/gradient",
+   "score": 2,
+   "why": "주제 이름이 개념 이름에 들어 있음",
+   "ko": "그래디언트의 회전은 0"
+  },
+  "lab:concept/curvature-eigenvalue": {
+   "topic": "lab:topic/eigenvalues",
+   "score": 3,
+   "why": "사람이 고름",
+   "ko": "고유값(굽음)"
+  },
+  "lab:concept/cylindrical-coordinates": {
+   "topic": "lab:topic/coordinates",
+   "score": 3,
+   "why": "사람이 고름",
+   "ko": "원통좌표"
+  },
+  "lab:concept/del-operator": {
+   "topic": "lab:topic/gradient",
+   "score": 3,
+   "why": "사람이 고름",
+   "ko": "나블라(∇) 연산자"
+  },
+  "lab:concept/divergence": {
+   "topic": "lab:topic/divergence-curl",
+   "score": 3,
+   "why": "사람이 고름",
+   "ko": "발산"
+  },
+  "lab:concept/epoch": {
+   "topic": "lab:topic/sgd-minibatch",
+   "score": 3,
+   "why": "사람이 고름",
+   "ko": "에포크"
+  },
+  "lab:concept/gradient": {
+   "topic": "lab:topic/gradient",
+   "score": 3,
+   "why": "사람이 고름",
+   "ko": "그래디언트"
+  },
+  "lab:concept/heat-equation": {
+   "topic": "lab:topic/pde",
+   "score": 3,
+   "why": "사람이 고름",
+   "ko": "열방정식"
+  },
+  "lab:concept/hessian": {
+   "topic": "lab:topic/jacobian-hessian",
+   "score": 3,
+   "why": "사람이 고름",
+   "ko": "헤시안"
+  },
+  "lab:concept/hyperbolic-paraboloid": {
+   "topic": "lab:topic/curves-surfaces",
+   "score": 3,
+   "why": "사람이 고름",
+   "ko": "쌍곡포물면"
+  },
+  "lab:concept/ill-conditioning": {
+   "topic": "lab:topic/numerical-error",
+   "score": 3,
+   "why": "사람이 고름",
+   "ko": "길쭉함(조건수)"
+  },
+  "lab:concept/jacobian": {
+   "topic": "lab:topic/jacobian-hessian",
+   "score": 3,
+   "why": "사람이 고름",
+   "ko": "야코비안"
+  },
+  "lab:concept/lagrange-multiplier": {
+   "topic": "lab:topic/lagrange-multipliers",
+   "score": 3,
+   "why": "이름 같음",
+   "ko": "라그랑주 승수"
+  },
+  "lab:concept/lagrangian": {
+   "topic": "lab:topic/lagrangian-mechanics",
+   "score": 3,
+   "why": "이름 같음",
+   "ko": "라그랑지안"
+  },
+  "lab:concept/laplacian": {
+   "topic": "lab:topic/divergence-curl",
+   "score": 3,
+   "why": "사람이 고름",
+   "ko": "라플라시안"
+  },
+  "lab:concept/learning-rate": {
+   "topic": "lab:topic/learning-rate-schedule",
+   "score": 2,
+   "why": "개념 이름이 주제 이름에 들어 있음",
+   "ko": "학습률"
+  },
+  "lab:concept/level-surface": {
+   "topic": "lab:topic/gradient",
+   "score": 3,
+   "why": "사람이 고름",
+   "ko": "등위면(같은 값 껍질)"
+  },
+  "lab:concept/loss-landscape": {
+   "topic": "lab:topic/unconstrained-optimization",
+   "score": 3,
+   "why": "사람이 고름",
+   "ko": "오차 지형"
+  },
+  "lab:concept/overfitting": {
+   "topic": "lab:topic/generalization",
+   "score": 3,
+   "why": "사람이 고름",
+   "ko": "과적합(외우기)"
+  },
+  "lab:concept/partial-derivative": {
+   "topic": "lab:topic/partial-derivatives",
+   "score": 3,
+   "why": "사람이 고름",
+   "ko": "편미분"
+  },
+  "lab:concept/saddle-point": {
+   "topic": "lab:topic/unconstrained-optimization",
+   "score": 3,
+   "why": "사람이 고름",
+   "ko": "안장점"
+  },
+  "lab:concept/scalar-field": {
+   "topic": "lab:topic/gradient",
+   "score": 3,
+   "why": "사람이 고름",
+   "ko": "숫자 밭(스칼라장)"
+  },
+  "lab:concept/shadow-price": {
+   "topic": "lab:topic/duality-optimization",
+   "score": 3,
+   "why": "사람이 고름",
+   "ko": "그림자 가격"
+  },
+  "lab:concept/sigmoid": {
+   "topic": "lab:topic/activation-function",
+   "score": 3,
+   "why": "사람이 고름",
+   "ko": "시그모이드"
+  },
+  "lab:concept/spherical-coordinates": {
+   "topic": "lab:topic/coordinates",
+   "score": 3,
+   "why": "사람이 고름",
+   "ko": "구면좌표"
+  },
+  "lab:concept/step-size-limit": {
+   "topic": "lab:topic/learning-rate-schedule",
+   "score": 3,
+   "why": "사람이 고름",
+   "ko": "보폭 한계 2/λmax"
+  },
+  "lab:concept/surface-normal": {
+   "topic": "lab:topic/curves-surfaces",
+   "score": 3,
+   "why": "사람이 고름",
+   "ko": "법선"
+  },
+  "lab:concept/tangent-vector": {
+   "topic": "lab:topic/tangent-space",
+   "score": 3,
+   "why": "사람이 고름",
+   "ko": "접선 벡터"
+  },
+  "lab:concept/test-set": {
+   "topic": "lab:topic/data-splitting",
+   "score": 3,
+   "why": "사람이 고름",
+   "ko": "시험 데이터"
+  },
+  "lab:concept/train-validation-split": {
+   "topic": "lab:topic/data-splitting",
+   "score": 3,
+   "why": "사람이 고름",
+   "ko": "훈련·검증 나누기"
+  },
+  "lab:concept/validation-set": {
+   "topic": "lab:topic/data-splitting",
+   "score": 3,
+   "why": "사람이 고름",
+   "ko": "검증 데이터"
+  },
+  "lab:concept/vector-field": {
+   "topic": "lab:topic/divergence-curl",
+   "score": 3,
+   "why": "사람이 고름",
+   "ko": "화살표 밭(벡터장)"
+  },
+  "lab:method/adam": {
+   "topic": "lab:topic/momentum-adam",
+   "score": 3,
+   "why": "사람이 고름",
+   "ko": "Adam"
+  },
+  "lab:method/backpropagation": {
+   "topic": "lab:topic/backpropagation",
+   "score": 3,
+   "why": "사람이 고름",
+   "ko": "역전파"
+  },
+  "lab:method/early-stopping": {
+   "topic": "lab:topic/early-stopping",
+   "score": 3,
+   "why": "이름 같음",
+   "ko": "조기 종료"
+  },
+  "lab:method/finite-difference": {
+   "topic": "lab:topic/numerical-integration",
+   "score": 3,
+   "why": "사람이 고름",
+   "ko": "이웃 점 찍어 보기(차분)"
+  },
+  "lab:method/flux-box": {
+   "topic": "lab:topic/integral-theorems",
+   "score": 3,
+   "why": "사람이 고름",
+   "ko": "그물 상자 출입 세기"
+  },
+  "lab:method/full-batch-gd": {
+   "topic": "lab:topic/gradient-descent",
+   "score": 3,
+   "why": "사람이 고름",
+   "ko": "풀배치 경사하강"
+  },
+  "lab:method/gradient-descent": {
+   "topic": "lab:topic/gradient-descent",
+   "score": 3,
+   "why": "사람이 고름",
+   "ko": "경사하강"
+  },
+  "lab:method/learning-rate-schedule": {
+   "topic": "lab:topic/learning-rate-schedule",
+   "score": 3,
+   "why": "사람이 고름",
+   "ko": "학습률 일정(워밍업·감소)"
+  },
+  "lab:method/minibatch-sgd": {
+   "topic": "lab:topic/sgd-minibatch",
+   "score": 3,
+   "why": "사람이 고름",
+   "ko": "미니배치 경사하강"
+  },
+  "lab:method/momentum": {
+   "topic": "lab:topic/momentum-adam",
+   "score": 3,
+   "why": "사람이 고름",
+   "ko": "모멘텀"
+  },
+  "lab:method/paddle-wheel": {
+   "topic": "lab:topic/integral-theorems",
+   "score": 3,
+   "why": "사람이 고름",
+   "ko": "바람개비 고리 셈(순환)"
+  },
+  "lab:method/second-order-critical-test": {
+   "topic": "lab:topic/unconstrained-optimization",
+   "score": 3,
+   "why": "사람이 고름",
+   "ko": "④ 헤시안 부호로 임계점 판별"
+  }
+ }
+}

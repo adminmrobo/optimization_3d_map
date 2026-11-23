@@ -48,3 +48,11 @@ for(const [src,out,n] of pages){
   const kf=path.join(B,'kg_'+n+'.json');
   if(fs.existsSync(kf))H=attach(H,JSON.parse(fs.readFileSync(kf,'utf8')),JSON.parse(rd('refs_'+n+'.json')),JSON.parse(rd('meta_'+n+'.json')));
   fs.writeFileSync(path.join(R,out),H);console.log(out,(Buffer.byteLength(H)/1024).toFixed(0)+' KB');}
+
+
+// ── 분야 뼈대 다시 걸기 (kg/rehang.json, ai-lab-retrofit 15장) ──
+// 빌드가 페이지를 다시 쓴 뒤, 덧씌우기를 kg-raw·kg-ld에 다시 적용한다. 파일이 없으면 아무것도 하지 않는다.
+{const _p=require('path'),_f=require('fs');let _r=__dirname;
+ for(let i=0;i<3&&!_f.existsSync(_p.join(_r,'kg','rehang.json'));i++)_r=_p.dirname(_r);
+ if(_f.existsSync(_p.join(_r,'kg','rehang.json'))){try{require('child_process').execFileSync('python3',[_p.join(_r,'kg','rehang.py'),'apply',_r],{stdio:'inherit'});}
+ catch(e){console.log('다시 걸기 적용 실패 — python3 kg/rehang.py apply . 를 따로 실행하세요');}}}
